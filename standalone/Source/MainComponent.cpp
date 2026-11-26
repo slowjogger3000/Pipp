@@ -1608,11 +1608,15 @@ void MainComponent::paintHeader(juce::Graphics& g)
         g.setColour(colour::inkSoft);
         g.drawText(e->number, r.removeFromLeft(18), juce::Justification::centredLeft, false);
         r.removeFromLeft(8);
+        // The name stays whole; a long name leaves the Latin name less room.
+        const auto name = e->name(strings.norwegian());
+        const auto nameFont = mono(12.0f, 500);
+        const int nameW = juce::roundToInt(std::ceil(juce::GlyphArrangement::getStringWidth(nameFont, name)));
         g.setFont(mono(11.0f, 400));
-        g.drawText(e->latin, r, juce::Justification::centredRight, false);
-        g.setFont(mono(12.0f, 500));
+        g.drawText(e->latin, r.withTrimmedLeft(juce::jmin(r.getWidth(), nameW + 12)), juce::Justification::centredRight, true);
+        g.setFont(nameFont);
         g.setColour(colour::ink);
-        g.drawText(e->name(strings.norwegian()), r, juce::Justification::centredLeft, false);
+        g.drawText(name, r, juce::Justification::centredLeft, true);
     }
 
     draw::fieldLabel(g, langLabelArea, strings("header.language"));

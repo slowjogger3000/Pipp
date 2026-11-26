@@ -214,9 +214,29 @@ SNL also names two old folk readings of the song, «kyss meg, kyss meg» and «f
 
 To verify: calls and alarm call (not in the article), bill colour, any sex or age difference, singing months beyond "spring", time of day for song, broods per season, autumn departure month, wingspan, whether females sing.
 
+### Løvsanger (folder `lovsanger`), snl.no/løvsanger, Tom Schandy, updated 2026-08-04
+
+| Field | Value |
+|---|---|
+| Length, weight | About 11 cm, about 7 to 11 g. One of the smallest birds in Norway |
+| Appearance | Grey-green upperparts, grey-white underparts |
+| Sex and age | No difference stated |
+| Song | A melodic, slightly melancholy row of notes. Different from the chiffchaff's |
+| Habitat | From the skerries to the bare mountain. More than a third of all breeding birds in mountain birch forest. Found up to about 1250 m on Dovrefjell |
+| Range in Norway | Counted as Norway's most common bird, 4,5 to 11 million pairs (BirdLife Norge). Breeds from Central Europe to the Arctic coast |
+| Food | Mostly insects and spiders, some berries in autumn |
+| Nest | On the ground |
+| Eggs | 6 to 8, about 1,2 g each, incubated about two weeks |
+| Young | Leave the nest after about two weeks |
+| Migration | Arrives at the turn of April and May; leaves mainly in August. Northern birds winter in East Africa, southern birds in West Africa |
+| Status | LC on the Norwegian red list, and globally |
+| Versus chiffchaff | Looks confusingly like the chiffchaff (gransanger); the song is different |
+
+To verify: calls and alarm call, how the song is built (length, pitch, ending), singing months and time of day, bill and leg colour, any sex or age difference, broods, wingspan, whether females sing.
+
 ## All other birds
 
-Nothing is verified for the 11 other birds outside the garden group. Collect facts per bird with the same fields as the blackbird table before writing `bird.json`.
+Nothing is verified for the 10 other birds outside the garden group. Collect facts per bird with the same fields as the blackbird table before writing `bird.json`.
 
 ## Dawn chorus
 

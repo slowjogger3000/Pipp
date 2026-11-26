@@ -1,0 +1,107 @@
+{
+ "_note": "Field guide text for the willow warbler, both languages. Facts from birds.md (SNL, checked 2026-11-26). Norwegian wording is mine, Eirik to check. calendar: one letter per month from January, y yes, n no, ? not known.",
+ "xeno_canto": "https://xeno-canto.org/species/phylloscopus-trochilus",
+ "facts": {
+  "length": {
+   "en": "About 11 cm, 7 to 11 g",
+   "no": "Omtrent 11 cm, 7 til 11 g",
+   "verified": true
+  },
+  "broods": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "range": {
+   "en": "Norway's most common bird, 4,5 to 11 million pairs",
+   "no": "Norges vanligste fugl, 4,5 til 11 millioner par",
+   "verified": true
+  },
+  "habitat": {
+   "en": "Skerries to bare mountain, most in mountain birch",
+   "no": "Fra skjærgården til snaufjellet, mest i fjellbjørkeskog",
+   "verified": true
+  },
+  "food": {
+   "en": "Insects and spiders, some berries in autumn",
+   "no": "Insekter og edderkopper, litt bær om høsten",
+   "verified": true
+  },
+  "status": {
+   "en": "LC, viable, Norwegian red list",
+   "no": "LC, livskraftig, norsk rødliste",
+   "verified": true
+  },
+  "nest": {
+   "en": "On the ground, 6 to 8 eggs",
+   "no": "På bakken, 6 til 8 egg",
+   "verified": true
+  }
+ },
+ "sings": {
+  "male": {
+   "en": "Sings",
+   "no": "Synger",
+   "verified": false
+  },
+  "female": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "song_notes": {
+  "en": "A melodic, slightly melancholy row of notes, different from the chiffchaff's. One of the smallest birds in Norway, and counted as the most common. [TO VERIFY] how the row is built.",
+  "no": "En melodisk, litt vemodig tonerekke, ulik gransangerens. En av de minste fuglene i Norge, og regnet som den vanligste. [TO VERIFY] hvordan rekken er bygd.",
+  "verified": true
+ },
+ "mnemonic": {
+  "en": "",
+  "no": "",
+  "verified": false
+ },
+ "types": {
+  "song": {
+   "en": "A melodic, slightly melancholy row of notes.",
+   "no": "En melodisk, litt vemodig tonerekke.",
+   "verified": true
+  },
+  "call": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "alarm": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "flight": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "calendar": {
+  "present": "???yyyyy????",
+  "sings": "????????????",
+  "note": {
+   "en": "Arrives at the turn of April and May, leaves mainly in August. Northern birds winter in East Africa, southern birds in West Africa. [TO VERIFY] singing months.",
+   "no": "Kommer i overgangen april–mai og drar hovedsakelig i august. Fugler fra nord overvintrer i Øst-Afrika, fra sør i Vest-Afrika. [TO VERIFY] sangmånedene.",
+   "verified": true
+  }
+ },
+ "lookalikes": [
+  {
+   "name": {
+    "en": "Chiffchaff",
+    "no": "Gransanger"
+   },
+   "text": {
+    "en": "Looks confusingly alike; the song is different.",
+    "no": "Ligner til forveksling; sangen er ulik.",
+    "verified": true
+   }
+  }
+ ]
+}
