@@ -1,13 +1,14 @@
 // The desktop shell, 1280x800 scaled to the window: header, tabs, body and
 // status bar, as in design-handover.md "Shared layout, desktop". PLAY, FIELD
-// GUIDE, QUIZ and CHORUS are built; LOG and COLLECTION are hatched until
-// their screens exist. Same tab rules as MainComponent::setTab().
+// GUIDE, QUIZ, CHORUS and LOG are built; COLLECTION is hatched until its
+// screen exists. Same tab rules as MainComponent::setTab().
 
 import type { AudioHost } from '../audio/host.ts';
 import { index, hasSound, type IndexBird } from '../data.ts';
 import { Btn, box, canvases, el, number, MINUS } from './dom.ts';
 import { ChorusScreen } from './chorus.ts';
 import { GuideScreen } from './guide.ts';
+import { LogScreen } from './log.ts';
 import { PlayScreen, kSceneKeys, kSceneOptions } from './play.ts';
 import { QuizScreen } from './quiz.ts';
 import { initialState, type State } from './state.ts';
@@ -15,7 +16,7 @@ import { Strings, upper, type Lang } from './strings.ts';
 
 const kTabKeys = ['play', 'guide', 'quiz', 'chorus', 'log', 'collection'] as const;
 const kLangKey = 'tipp.lang';
-const kBuiltTabs = 4;
+const kBuiltTabs = 5;
 
 export class App {
   readonly s = new Strings();
@@ -40,6 +41,9 @@ export class App {
   private guide: GuideScreen;
   private quiz: QuizScreen;
   private chorus: ChorusScreen;
+  private log: LogScreen;
+  private transportRow: HTMLDivElement;
+  private outGroup: HTMLDivElement;
   private aside: HTMLDivElement;
   private status: HTMLDivElement;
   private tab = 0;
@@ -63,6 +67,7 @@ export class App {
     const bar = el('i', '', mark);
     for (const c of ['clay', 'khaki', 'sage', 'plum']) el('b', '', bar).style.background = `var(--${c})`;
     const transport = el('div', 'joined', header);
+    this.transportRow = transport;
     this.playBtn = new Btn(transport, '', () => this.transport(true), { width: '44px', height: '32px' }).glyph('play', 'Play');
     this.stopBtn = new Btn(transport, '', () => this.transport(false), { width: '44px', height: '32px' }).glyph('stop', 'Stop');
     const stepper = box(header, { display: 'flex', alignItems: 'center' });
@@ -76,6 +81,7 @@ export class App {
     this.enBtn = new Btn(langRow, '', () => this.setLanguage('en'), { width: '36px', height: '24px' });
     this.noBtn = new Btn(langRow, '', () => this.setLanguage('no'), { width: '36px', height: '24px' });
     const out = el('div', 'hgroup', header);
+    this.outGroup = out;
     this.outLabel = el('div', 'field', out);
     const outRow = el('div', 'row', out);
     this.outVal = el('div', 'out well', outRow);
@@ -123,7 +129,13 @@ export class App {
       refresh: () => this.refresh(),
       playBird: () => this.st.bird,
     });
-    for (const r of [this.quiz.root, this.chorus.root]) r.style.pointerEvents = 'auto';
+    this.log = new LogScreen(full, this.s, {
+      refresh: () => this.refresh(),
+      openBird: (id) => { this.setTab(1); this.selectBird(id); },
+      playBird: () => this.st.bird,
+      playType: () => this.st.type,
+    });
+    for (const r of [this.quiz.root, this.chorus.root, this.log.root]) r.style.pointerEvents = 'auto';
     this.status = el('div', 'status', stage);
 
     window.addEventListener('resize', () => this.fit());
@@ -270,15 +282,26 @@ export class App {
     this.guide.show(i === 1);
     this.quiz.show(i === 2);
     this.chorus.show(i === 3);
+    this.log.show(i === 4);
+    // The log has no transport (Log.dc.html), so the Play bird stops there.
+    if (i === 4 && this.st.playing) this.setPlaying(false);
     this.aside.style.visibility = i < 2 ? '' : 'hidden';
     if (i === 2) this.quiz.enter();
     if (i === 3) this.chorus.enter();
+    if (i === 4) this.log.enter();
+    if (i !== 4 && document.activeElement instanceof HTMLElement) document.activeElement.blur();
     this.refresh();
   }
 
   private key(e: KeyboardEvent) {
-    const fn = ['F1', 'F2', 'F3', 'F4'].indexOf(e.key);
+    const fn = ['F1', 'F2', 'F3', 'F4', 'F5'].indexOf(e.key);
     if (fn >= 0) { this.setTab(fn); e.preventDefault(); return; }
+    if (this.tab === 4) {
+      // Log: Up and Down move through the entries, Enter opens the bird.
+      if (e.key === 'ArrowUp' || e.key === 'ArrowDown') { this.log.step(e.key === 'ArrowUp' ? -1 : 1); e.preventDefault(); }
+      else if (e.key === 'Enter') { this.log.open(); e.preventDefault(); }
+      return;
+    }
     const digit = e.key >= '1' && e.key <= '4' && !e.metaKey && !e.ctrlKey ? Number(e.key) - 1 : -1;
     if (this.tab === 3) {
       // Chorus: 1 to 4 mute a lane, Space plays and stops.
@@ -314,12 +337,15 @@ export class App {
     this.guide.applyStrings();
     this.quiz.applyStrings();
     this.chorus.applyStrings();
+    this.log.applyStrings();
     this.refresh();
   }
 
   refresh() {
     const st = this.st, s = this.s, tab = this.tab;
     const on = tab === 2 ? this.quiz.playing : tab === 3 ? this.chorus.playing : st.playing;
+    this.transportRow.style.display = tab === 4 ? 'none' : '';
+    this.outGroup.style.display = tab === 4 ? 'none' : '';
     this.playBtn.on(on);
     this.stopBtn.on(!on);
     // Play and the field guide have the list and stepper.
@@ -328,7 +354,7 @@ export class App {
     this.nextBtn.show(ownBird).disabled(this.neighbour(1) === null);
     const b = this.birdEntry(st.bird);
     // The header readout: none in the chorus, in the quiz only once answered.
-    const shown = tab === 3 ? undefined : tab === 2 ? this.birdEntry(this.quiz.headerBird() ?? '') : b;
+    const shown = tab >= 3 ? undefined : tab === 2 ? this.birdEntry(this.quiz.headerBird() ?? '') : b;
     this.readout.replaceChildren();
     this.readout.classList.toggle('empty', !shown);
     if (shown) {
@@ -347,6 +373,12 @@ export class App {
     // Status bar: state, summary, keys.
     this.status.replaceChildren();
     const audio = this.host.error ? `AUDIO: ${this.host.error}` : '';
+    if (tab === 4) {
+      el('span', '', this.status, s.t('tab.log'));
+      el('span', 'summary', this.status, audio || this.log.statusText());
+      for (const k of ['log.keys_entry', 'log.keys_open']) el('span', 'keys', this.status, s.t(k));
+      return;
+    }
     if (tab === 3) {
       el('span', '', this.status, s.t(this.chorus.playing ? 'status.playing' : 'status.stopped'));
       el('span', 'summary', this.status, audio || this.chorus.statusText());
@@ -366,7 +398,7 @@ export class App {
     let summary = this.play.error || audio || parts.join(', ');
     if (other && b && !this.play.error && !audio) summary = s.t('status.comparing', { a: upper(this.name(b)), b: upper(this.name(other)) });
     el('span', 'summary', this.status, summary);
-    for (const k of ['status.keys_play', 'status.keys_bird', 'status.keys_screen']) el('span', 'keys', this.status, s.t(k));
+    for (const k of ['status.keys_play', 'status.keys_bird', 'status.keys_screen_web']) el('span', 'keys', this.status, s.t(k));
   }
 
   private renderList() {

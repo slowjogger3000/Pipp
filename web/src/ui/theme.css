@@ -153,3 +153,20 @@ canvas { display: block; }
 .lane .chip { position: absolute; left: 8px; top: 33px; width: 28px; height: 28px; border: 1px solid var(--ink); display: flex; align-items: center; justify-content: center; font: 600 12px var(--mono); }
 .lane .lanename { position: absolute; left: 46px; top: 23px; height: 22px; font: 400 22px/22px var(--serif); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .lane .lanedist { position: absolute; right: 8px; top: 40px; height: 14px; font: 500 10px/14px var(--mono); letter-spacing: 0.06em; white-space: nowrap; }
+
+/* Heard-it log: form fields and the list. */
+.input { height: 24px; width: 100%; padding: 0 8px; border: 1px solid var(--ink); border-radius: 0; background: var(--face); box-shadow: var(--inset); font: 500 12px var(--mono); color: var(--ink); margin: 0; -webkit-user-select: text; user-select: text; outline: none; }
+.input::placeholder { color: var(--inkSoft); opacity: 0.7; }
+.input:focus { outline: 1px solid var(--ink); outline-offset: -2px; }
+select.input { -webkit-appearance: none; appearance: none; cursor: pointer; }
+a.btn { color: var(--ink); }
+.logsheet { font: 400 13px/20px var(--mono); }
+.logrow { height: 24px; flex: none; display: grid; column-gap: 12px; align-items: center; padding: 0 8px; cursor: pointer; }
+.logrow span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.logrow:hover { background: rgb(34 28 20 / 0.06); }
+.logrow.sel { background: var(--ink); color: var(--onInk); }
+.logrow.blank { color: var(--faint); cursor: default; }
+.logrow.blank:hover { background: none; }
+.loghead { background: var(--panel); border-bottom: 1px solid var(--ink); font: 600 9px var(--mono); letter-spacing: 0.14em; color: var(--inkSoft); cursor: default; }
+.loghead:hover { background: var(--panel); }
+.logrows { scrollbar-width: thin; }
