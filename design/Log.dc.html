@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Tipp, heard-it log</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+button,input{font:inherit;color:inherit;margin:0}
+button{cursor:pointer}
+a{color:#221c14;text-decoration:none}a:hover{color:#4f4634}
+</style>
+</helmet>
+<div style="width: 1280px; height: 800px; box-sizing: border-box; border: 1px solid #221c14; display: flex; flex-direction: column; overflow: hidden; background: #ddd3bd; color: #221c14; font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: 11px; line-height: 16px">
+
+<header style="height: 56px; flex: none; box-sizing: border-box; display: flex; align-items: center; gap: 12px; padding: 0 12px; border-bottom: 1px solid #221c14">
+<div style="display: flex; flex-direction: column; gap: 3px">
+<span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 32px; line-height: 1; letter-spacing: 0.02em">Tipp</span>
+<span style="display: flex; gap: 1px; width: 56px; height: 5px; background: #221c14; border: 1px solid #221c14">
+<span style="flex: 1; background: #936255"></span><span style="flex: 1; background: #b5a37a"></span><span style="flex: 1; background: #809a8c"></span><span style="flex: 1; background: #5e4458"></span>
+</span>
+</div>
+<div style="flex: 1"></div>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 9px; line-height: 12px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">LANGUAGE</span>
+<div style="display: flex">
+<button style="width: 36px; height: 24px; padding: 0; border: 1px solid #221c14; background: #221c14; color: #ddd3bd; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">EN</button>
+<button style="width: 36px; height: 24px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">NO</button>
+</div>
+</div>
+</header>
+
+<nav style="height: 36px; flex: none; box-sizing: border-box; display: flex; align-items: flex-end; padding: 0 8px; background: #cec2a6; border-bottom: 1px solid #221c14">
+<a href="Main.dc.html" style="height: 26px; box-sizing: border-box; display: flex; align-items: center; gap: 8px; padding: 0 16px; border: 1px solid #221c14; border-bottom: 0; background: #cec2a6; font-size: 10px; font-weight: 600; letter-spacing: 0.14em">PLAY <span style="color: #4f4634; font-weight: 400">F1</span></a>
+<a href="Guide.dc.html" style="height: 26px; margin-left: -1px; box-sizing: border-box; display: flex; align-items: center; gap: 8px; padding: 0 16px; border: 1px solid #221c14; border-bottom: 0; background: #cec2a6; font-size: 10px; font-weight: 600; letter-spacing: 0.14em">FIELD GUIDE <span style="color: #4f4634; font-weight: 400">F2</span></a>
+<a href="Quiz.dc.html" style="height: 26px; margin-left: -1px; box-sizing: border-box; display: flex; align-items: center; gap: 8px; padding: 0 16px; border: 1px solid #221c14; border-bottom: 0; background: #cec2a6; font-size: 10px; font-weight: 600; letter-spacing: 0.14em">QUIZ <span style="color: #4f4634; font-weight: 400">F3</span></a>
+<a href="Chorus.dc.html" style="height: 26px; margin-left: -1px; box-sizing: border-box; display: flex; align-items: center; gap: 8px; padding: 0 16px; border: 1px solid #221c14; border-bottom: 0; background: #cec2a6; font-size: 10px; font-weight: 600; letter-spacing: 0.14em">CHORUS <span style="color: #4f4634; font-weight: 400">F4</span></a>
+<a href="Log.dc.html" style="height: 30px; margin-left: -1px; margin-bottom: -1px; box-sizing: border-box; display: flex; align-items: center; gap: 8px; padding: 0 16px; border: 1px solid #221c14; border-bottom-color: #ddd3bd; background: #ddd3bd; font-size: 10px; font-weight: 600; letter-spacing: 0.14em">LOG <span style="color: #4f4634; font-weight: 400">F5</span></a>
+<a href="DeskCollection.dc.html" style="height: 26px; margin-left: -1px; box-sizing: border-box; display: flex; align-items: center; gap: 8px; padding: 0 16px; border: 1px solid #221c14; border-bottom: 0; background: #cec2a6; font-size: 10px; font-weight: 600; letter-spacing: 0.14em">COLLECTION <span style="color: #4f4634; font-weight: 400">F6</span></a>
+</nav>
+
+<main style="flex: 1; min-height: 0; box-sizing: border-box; display: flex; gap: 12px; padding: 8px">
+
+<div style="width: 360px; flex: none; display: flex; flex-direction: column; gap: 12px">
+<section style="display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; align-items: center; gap: 6px; height: 14px"><span style="font-size: 10px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">I HEARD IT</span><span style="flex: 1; height: 1px; background: #221c14"></span></div>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<label for="log-bird" style="font-size: 9px; line-height: 12px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">BIRD</label>
+<input id="log-bird" value="03 Blackbird" style="height: 24px; box-sizing: border-box; padding: 0 8px; border: 1px solid #221c14; border-radius: 0; background: #efe8d6; box-shadow: inset 1px 1px 0 #a3967a; font-size: 12px; font-weight: 500">
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+<div style="display: flex; flex-direction: column; gap: 2px">
+<label for="log-date" style="font-size: 9px; line-height: 12px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">DATE</label>
+<input id="log-date" value="2026-11-26" style="height: 24px; box-sizing: border-box; padding: 0 8px; border: 1px solid #221c14; border-radius: 0; background: #efe8d6; box-shadow: inset 1px 1px 0 #a3967a; font-size: 12px; font-weight: 500">
+</div>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<label for="log-time" style="font-size: 9px; line-height: 12px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">TIME</label>
+<input id="log-time" value="08:40" style="height: 24px; box-sizing: border-box; padding: 0 8px; border: 1px solid #221c14; border-radius: 0; background: #efe8d6; box-shadow: inset 1px 1px 0 #a3967a; font-size: 12px; font-weight: 500">
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<label for="log-place" style="font-size: 9px; line-height: 12px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">PLACE</label>
+<input id="log-place" placeholder="Where were you?" style="height: 24px; box-sizing: border-box; padding: 0 8px; border: 1px solid #221c14; border-radius: 0; background: #efe8d6; box-shadow: inset 1px 1px 0 #a3967a; font-size: 12px; font-weight: 500">
+</div>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 9px; line-height: 12px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">HEARD</span>
+<div style="display: flex">
+<button aria-pressed="false" style="flex: 1 1 0; height: 24px; padding: 0; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">SONG</button>
+<button aria-pressed="true" style="flex: 1 1 0; height: 24px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #221c14; color: #ddd3bd; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">CALL</button>
+<button aria-pressed="false" style="flex: 1 1 0; height: 24px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">ALARM</button>
+<button aria-pressed="false" style="flex: 1 1 0; height: 24px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">FLIGHT</button>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 9px; line-height: 12px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">SAW</span>
+<div style="display: flex">
+<button aria-pressed="true" style="flex: 1 1 0; height: 24px; padding: 0; border: 1px solid #221c14; background: #221c14; color: #ddd3bd; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">MALE</button>
+<button aria-pressed="false" style="flex: 1 1 0; height: 24px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">FEMALE</button>
+<button aria-pressed="false" style="flex: 1 1 0; height: 24px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">JUVENILE</button>
+<button aria-pressed="false" style="flex: 1 1 0; height: 24px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">ONLY HEARD</button>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<label for="log-note" style="font-size: 9px; line-height: 12px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">NOTE</label>
+<input id="log-note" placeholder="Anything worth remembering" style="height: 24px; box-sizing: border-box; padding: 0 8px; border: 1px solid #221c14; border-radius: 0; background: #efe8d6; box-shadow: inset 1px 1px 0 #a3967a; font-size: 12px; font-weight: 500">
+</div>
+<div style="display: flex; gap: 6px">
+<button style="flex: 1; height: 32px; padding: 0; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 11px; font-weight: 500; letter-spacing: 0.06em">ADD TO LOG</button>
+<a href="#" style="flex: 1; height: 32px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">REPORT AT ARTSOBSERVASJONER</a>
+</div>
+</section>
+
+<section style="display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; align-items: center; gap: 6px; height: 14px"><span style="font-size: 10px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">FIELD MANNERS</span><span style="flex: 1; height: 1px; background: #221c14"></span></div>
+<p style="margin: 0">Use Tipp to learn, then go out and listen. Playing song outdoors to draw birds in stresses them, most of all in the breeding season. Keep the volume down outside and never play near a nest.</p>
+</section>
+</div>
+
+<div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; align-items: center; gap: 6px; height: 14px"><span style="font-size: 10px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">LOG</span><span style="flex: 1; height: 1px; background: #221c14"></span><span style="font-size: 10px; font-weight: 500; letter-spacing: 0.06em">4 OF 18 BIRDS HEARD</span></div>
+<div style="flex: 1; min-height: 0; display: flex; flex-direction: column; border: 1px solid #221c14; background: #e3d9c2; box-shadow: inset 1px 1px 0 #a3967a; font-size: 13px; line-height: 20px">
+<div style="height: 24px; flex: none; box-sizing: border-box; display: grid; grid-template-columns: 110px 60px 200px 80px 90px minmax(0, 1fr); column-gap: 12px; align-items: center; padding: 0 8px; background: #cec2a6; border-bottom: 1px solid #221c14; font-size: 9px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">
+<span>DATE</span><span>TIME</span><span>BIRD</span><span>HEARD</span><span>SAW</span><span>PLACE AND NOTE</span>
+</div>
+<div style="height: 24px; flex: none; display: grid; grid-template-columns: 110px 60px 200px 80px 90px minmax(0, 1fr); column-gap: 12px; align-items: center; padding: 0 8px; background: #221c14; color: #ddd3bd">
+<span>2026-11-22</span><span>15:10</span><span>Blackbird</span><span>CALL</span><span>MALE</span><span>[SAMPLE] Garden, at dusk</span>
+</div>
+<div style="height: 24px; flex: none; display: grid; grid-template-columns: 110px 60px 200px 80px 90px minmax(0, 1fr); column-gap: 12px; align-items: center; padding: 0 8px">
+<span>2026-11-15</span><span>09:30</span><span>Great tit</span><span>CALL</span><span>---</span><span>[SAMPLE] Park</span>
+</div>
+<div style="height: 24px; flex: none; display: grid; grid-template-columns: 110px 60px 200px 80px 90px minmax(0, 1fr); column-gap: 12px; align-items: center; padding: 0 8px">
+<span>2026-11-15</span><span>09:20</span><span>Robin</span><span>SONG</span><span>---</span><span>[SAMPLE] Park</span>
+</div>
+<div style="height: 24px; flex: none; display: grid; grid-template-columns: 110px 60px 200px 80px 90px minmax(0, 1fr); column-gap: 12px; align-items: center; padding: 0 8px; background: rgb(34 28 20 / 0.06)">
+<span>2026-10-03</span><span>07:45</span><span>Herring gull</span><span>CALL</span><span>JUVENILE</span><span>[SAMPLE] Harbour</span>
+</div>
+<div style="height: 24px; flex: none; display: grid; grid-template-columns: 110px 60px 200px 80px 90px minmax(0, 1fr); column-gap: 12px; align-items: center; padding: 0 8px">
+<span>2026-10-03</span><span>07:30</span><span>Blackbird</span><span>ALARM</span><span>FEMALE</span><span>[SAMPLE] Garden</span>
+</div>
+<div style="height: 24px; flex: none; display: grid; grid-template-columns: 110px 60px 200px 80px 90px minmax(0, 1fr); column-gap: 12px; align-items: center; padding: 0 8px; color: #b5a98b">
+<span>----------</span><span>-----</span><span>---</span><span>---</span><span>---</span><span>---</span>
+</div>
+</div>
+<div style="display: flex; gap: 6px">
+<button style="height: 24px; padding: 0 10px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">OPEN BIRD</button>
+<button style="height: 24px; padding: 0 10px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">DELETE ENTRY</button>
+<button style="height: 24px; padding: 0 10px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">EXPORT CSV</button>
+</div>
+</div>
+
+</main>
+
+<footer style="height: 28px; flex: none; box-sizing: border-box; display: flex; align-items: center; gap: 16px; padding: 0 12px; background: #cec2a6; border-top: 1px solid #221c14; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">
+<span>LOG</span>
+<span style="color: #4f4634">5 ENTRIES, KEPT ON THIS DEVICE</span>
+<span style="flex: 1"></span>
+<span style="color: #4f4634">UP DOWN ENTRY</span>
+<span style="color: #4f4634">ENTER OPEN BIRD</span>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":800}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

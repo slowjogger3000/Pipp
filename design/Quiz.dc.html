@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Tipp, quiz</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+button{font:inherit;color:inherit;margin:0;cursor:pointer}
+a{color:#221c14;text-decoration:none}a:hover{color:#4f4634}
+</style>
+</helmet>
+<div style="width: 1280px; height: 800px; box-sizing: border-box; border: 1px solid #221c14; display: flex; flex-direction: column; overflow: hidden; background: #ddd3bd; color: #221c14; font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: 11px; line-height: 16px">
+
+<header style="height: 56px; flex: none; box-sizing: border-box; display: flex; align-items: center; gap: 12px; padding: 0 12px; border-bottom: 1px solid #221c14">
+<div style="display: flex; flex-direction: column; gap: 3px">
+<span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 32px; line-height: 1; letter-spacing: 0.02em">Tipp</span>
+<span style="display: flex; gap: 1px; width: 56px; height: 5px; background: #221c14; border: 1px solid #221c14">
+<span style="flex: 1; background: #936255"></span><span style="flex: 1; background: #b5a37a"></span><span style="flex: 1; background: #809a8c"></span><span style="flex: 1; background: #5e4458"></span>
+</span>
+</div>
+<div style="display: flex; margin-left: 12px">
+<button aria-label="Play" style="width: 44px; height: 32px; padding: 0; display: flex; align-items: center; justify-content: center; border: 1px solid #221c14; background: #221c14; color: #ddd3bd"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2l9 6-9 6z" fill="currentColor"></path></svg></button>
+<button aria-label="Stop" style="width: 44px; height: 32px; padding: 0; margin-left: -1px; display: flex; align-items: center; justify-content: center; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3h10v10H3z" fill="currentColor"></path></svg></button>
+</div>
+<div style="flex: 1"></div>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 9px; line-height: 12px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">LANGUAGE</span>
+<div style="display: flex">
+<button style="width: 36px; height: 24px; padding: 0; border: 1px solid #221c14; background: #221c14; color: #ddd3bd; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">EN</button>
+<button style="width: 36px; height: 24px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">NO</button>
+</div>
+</div>
+</header>
+
+<nav style="height: 36px; flex: none; box-sizing: border-box; display: flex; align-items: flex-end; padding: 0 8px; background: #cec2a6; border-bottom: 1px solid #221c14">
+<a href="Main.dc.html" style="height: 26px; box-sizing: border-box; display: flex; align-items: center; gap: 8px; padding: 0 16px; border: 1px solid #221c14; border-bottom: 0; background: #cec2a6; font-size: 10px; font-weight: 600; letter-spacing: 0.14em">PLAY <span style="color: #4f4634; font-weight: 400">F1</span></a>
+<a href="Guide.dc.html" style="height: 26px; margin-left: -1px; box-sizing: border-box; display: flex; align-items: center; gap: 8px; padding: 0 16px; border: 1px solid #221c14; border-bottom: 0; background: #cec2a6; font-size: 10px; font-weight: 600; letter-spacing: 0.14em">FIELD GUIDE <span style="color: #4f4634; font-weight: 400">F2</span></a>
+<a href="Quiz.dc.html" style="height: 30px; margin-left: -1px; margin-bottom: -1px; box-sizing: border-box; display: flex; align-items: center; gap: 8px; padding: 0 16px; border: 1px solid #221c14; border-bottom-color: #ddd3bd; background: #ddd3bd; font-size: 10px; font-weight: 600; letter-spacing: 0.14em">QUIZ <span style="color: #4f4634; font-weight: 400">F3</span></a>
+<a href="Chorus.dc.html" style="height: 26px; margin-left: -1px; box-sizing: border-box; display: flex; align-items: center; gap: 8px; padding: 0 16px; border: 1px solid #221c14; border-bottom: 0; background: #cec2a6; font-size: 10px; font-weight: 600; letter-spacing: 0.14em">CHORUS <span style="color: #4f4634; font-weight: 400">F4</span></a>
+<a href="Log.dc.html" style="height: 26px; margin-left: -1px; box-sizing: border-box; display: flex; align-items: center; gap: 8px; padding: 0 16px; border: 1px solid #221c14; border-bottom: 0; background: #cec2a6; font-size: 10px; font-weight: 600; letter-spacing: 0.14em">LOG <span style="color: #4f4634; font-weight: 400">F5</span></a>
+<a href="DeskCollection.dc.html" style="height: 26px; margin-left: -1px; box-sizing: border-box; display: flex; align-items: center; gap: 8px; padding: 0 16px; border: 1px solid #221c14; border-bottom: 0; background: #cec2a6; font-size: 10px; font-weight: 600; letter-spacing: 0.14em">COLLECTION <span style="color: #4f4634; font-weight: 400">F6</span></a>
+</nav>
+
+<main style="flex: 1; min-height: 0; box-sizing: border-box; display: flex; gap: 12px; padding: 8px">
+
+<div style="width: 950px; flex: none; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; align-items: center; gap: 6px; height: 14px"><span style="font-size: 10px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">QUESTION 4 OF 10</span><span style="flex: 1; height: 1px; background: #221c14"></span></div>
+
+<section style="display: flex; flex-direction: column; border: 1px solid #221c14">
+<div style="height: 28px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; padding: 0 8px; background: #cec2a6; border-bottom: 1px solid #221c14">
+<span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 22px; line-height: 1">Who is singing?</span>
+<div style="display: flex; gap: 6px">
+<button style="height: 20px; padding: 0 8px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">PLAY AGAIN</button>
+<button style="height: 20px; padding: 0 8px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">HALF SPEED</button>
+<button style="height: 20px; padding: 0 8px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">HINT</button>
+</div>
+</div>
+<div style="height: 240px; display: flex">
+<div style="width: 28px; flex: none; position: relative; font-size: 9px; line-height: 12px; color: #4f4634">
+<span style="position: absolute; right: 4px; top: 2px">8k</span>
+<span style="position: absolute; right: 4px; top: 122px">4k</span>
+<span style="position: absolute; right: 4px; bottom: 2px">0</span>
+</div>
+<div style="width: 920px; height: 240px; flex: none; border-left: 1px solid #221c14; margin-left: -1px; background-color: #efe8d6; background-image: linear-gradient(#c4b796 1px, transparent 1px), linear-gradient(90deg, #c4b796 1px, transparent 1px), linear-gradient(#d8ccb0 1px, transparent 1px), linear-gradient(90deg, #d8ccb0 1px, transparent 1px); background-size: 40px 40px, 40px 40px, 8px 8px, 8px 8px; box-shadow: inset 1px 1px 0 #a3967a">
+<svg width="920" height="240" viewBox="0 0 920 240" role="img" aria-label="Sonogram of the mystery song: two phrases of low fluted motifs, each ending in a high twitter" style="display: block">
+<g transform="translate(20 -70) scale(1.6 1)" fill="none" stroke="#221c14">
+<path d="M28 250 q16 -34 34 -26 M70 222 l30 0 M108 232 q14 20 32 6 M148 214 q12 -26 30 -10 M186 240 l26 -8" stroke-width="3" vector-effect="non-scaling-stroke"></path>
+<path d="M218 150 l4 -46 M226 110 l3 -40 M232 160 l4 -70 M238 96 l3 34 M244 130 l4 -60" stroke-width="2" vector-effect="non-scaling-stroke"></path>
+</g>
+<g transform="translate(500 -70) scale(1.6 1)" fill="none" stroke="#221c14">
+<path d="M28 236 l28 -4 M64 246 q14 -30 32 -16 M104 222 q12 22 30 6 M142 240 l26 -10 M176 220 q14 -12 30 0" stroke-width="3" vector-effect="non-scaling-stroke"></path>
+<path d="M214 144 l4 -50 M222 100 l3 -44 M228 156 l4 -66 M235 90 l3 30" stroke-width="2" vector-effect="non-scaling-stroke"></path>
+</g>
+</svg>
+</div>
+</div>
+<div style="height: 18px; box-sizing: border-box; display: flex; align-items: center; gap: 8px; padding: 0 8px; border-top: 1px solid #221c14; font-size: 9px; line-height: 12px"><span style="font-weight: 600; letter-spacing: 0.14em">FIG. 1</span><span>Mystery song, spring, dawn, in kHz. The plate and the bird name stay hidden until you answer.</span></div>
+</section>
+
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+<button aria-pressed="false" style="height: 44px; padding: 0 12px; display: flex; align-items: center; justify-content: space-between; border: 1px solid #221c14; background: #221c14; color: #ddd3bd; text-align: left"><span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 22px; line-height: 1">Blackbird</span><span style="font-size: 10px; font-weight: 500; letter-spacing: 0.06em">CORRECT</span></button>
+<button aria-pressed="true" style="height: 44px; padding: 0 12px; display: flex; align-items: center; justify-content: space-between; border: 1px solid #221c14; background: #efe8d6 repeating-linear-gradient(135deg, rgb(34 28 20 / 0.10) 0 1px, transparent 1px 7px); text-align: left"><span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 22px; line-height: 1">Song thrush</span><span style="font-size: 10px; font-weight: 500; letter-spacing: 0.06em">YOUR ANSWER</span></button>
+<button style="height: 44px; padding: 0 12px; display: flex; align-items: center; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; text-align: left"><span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 22px; line-height: 1">Mistle thrush</span></button>
+<button style="height: 44px; padding: 0 12px; display: flex; align-items: center; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; text-align: left"><span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 22px; line-height: 1">Robin</span></button>
+</div>
+
+<section style="box-sizing: border-box; display: flex; align-items: center; gap: 16px; padding: 10px 12px; border: 1px solid #221c14; background: #cec2a6">
+<p style="margin: 0; flex: 1; min-width: 0">Blackbird. It moves from phrase to phrase without repeating. A song thrush sings each phrase several times over.</p>
+<button style="height: 24px; padding: 0 10px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">COMPARE BOTH</button>
+<button style="height: 24px; padding: 0 10px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">OPEN IN FIELD GUIDE</button>
+<button style="height: 24px; padding: 0 14px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">NEXT</button>
+</section>
+</div>
+
+<div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 12px">
+
+<section style="display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; align-items: center; gap: 6px; height: 14px"><span style="font-size: 10px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">BIRDS IN THE QUIZ</span><span style="flex: 1; height: 1px; background: #221c14"></span></div>
+<div style="display: flex; flex-direction: column">
+<button aria-pressed="true" style="height: 24px; padding: 0 10px; border: 1px solid #221c14; background: #221c14; color: #ddd3bd; font-size: 10px; font-weight: 500; letter-spacing: 0.06em; text-align: left">LOOKALIKE PAIRS</button>
+<button style="height: 24px; padding: 0 10px; margin-top: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em; text-align: left">GARDEN</button>
+<button style="height: 24px; padding: 0 10px; margin-top: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em; text-align: left">FOREST</button>
+<button style="height: 24px; padding: 0 10px; margin-top: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em; text-align: left">COAST AND WATER</button>
+<button style="height: 24px; padding: 0 10px; margin-top: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em; text-align: left">NIGHT</button>
+<button style="height: 24px; padding: 0 10px; margin-top: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em; text-align: left">ALL 18 BIRDS</button>
+</div>
+</section>
+
+<section style="display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; align-items: center; gap: 6px; height: 14px"><span style="font-size: 10px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">ASK FOR</span><span style="flex: 1; height: 1px; background: #221c14"></span></div>
+<div style="display: flex">
+<button aria-pressed="true" style="flex: 1 1 0; height: 24px; padding: 0; border: 1px solid #221c14; background: #221c14; color: #ddd3bd; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">SONG</button>
+<button style="flex: 1 1 0; height: 24px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">CALL</button>
+<button style="flex: 1 1 0; height: 24px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">BOTH</button>
+</div>
+</section>
+
+<section style="display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; align-items: center; gap: 6px; height: 14px"><span style="font-size: 10px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">HINTS</span><span style="flex: 1; height: 1px; background: #221c14"></span></div>
+<div style="display: flex">
+<button aria-pressed="true" style="flex: 1 1 0; height: 24px; padding: 0; border: 1px solid #221c14; background: #221c14; color: #ddd3bd; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">MNEMONIC</button>
+<button style="flex: 1 1 0; height: 24px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">SEASON</button>
+<button style="flex: 1 1 0; height: 24px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">NONE</button>
+</div>
+</section>
+
+<section style="display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; align-items: center; gap: 6px; height: 14px"><span style="font-size: 10px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">SCORE</span><span style="flex: 1; height: 1px; background: #221c14"></span></div>
+<div style="display: grid; grid-template-columns: minmax(0, 1fr) 56px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #a3967a">
+<span style="height: 22px; box-sizing: border-box; display: flex; align-items: center; padding: 0 8px; border-bottom: 1px solid #bdb093; font-size: 9px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">CORRECT</span><span style="height: 22px; box-sizing: border-box; display: flex; align-items: center; justify-content: flex-end; padding: 0 8px; border-bottom: 1px solid #bdb093; font-size: 12px; font-weight: 500">2</span>
+<span style="height: 22px; box-sizing: border-box; display: flex; align-items: center; padding: 0 8px; border-bottom: 1px solid #bdb093; font-size: 9px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">MISSED</span><span style="height: 22px; box-sizing: border-box; display: flex; align-items: center; justify-content: flex-end; padding: 0 8px; border-bottom: 1px solid #bdb093; font-size: 12px; font-weight: 500">2</span>
+<span style="height: 22px; box-sizing: border-box; display: flex; align-items: center; padding: 0 8px; font-size: 9px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">LEFT</span><span style="height: 22px; box-sizing: border-box; display: flex; align-items: center; justify-content: flex-end; padding: 0 8px; font-size: 12px; font-weight: 500">6</span>
+</div>
+<p style="margin: 0; color: #4f4634">Missed birds come back sooner. Practise next: blackbird and song thrush.</p>
+</section>
+
+</div>
+</main>
+
+<footer style="height: 28px; flex: none; box-sizing: border-box; display: flex; align-items: center; gap: 16px; padding: 0 12px; background: #cec2a6; border-top: 1px solid #221c14; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">
+<span>QUIZ</span>
+<span style="color: #4f4634">LOOKALIKE PAIRS, SONG</span>
+<span style="flex: 1"></span>
+<span style="color: #4f4634">1 2 3 4 ANSWER</span>
+<span style="color: #4f4634">SPACE PLAY AGAIN</span>
+<span style="color: #4f4634">ENTER NEXT</span>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":800}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

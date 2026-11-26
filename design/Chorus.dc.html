@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Tipp, dawn chorus</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+button{font:inherit;color:inherit;margin:0;cursor:pointer}
+a{color:#221c14;text-decoration:none}a:hover{color:#4f4634}
+</style>
+</helmet>
+<div style="width: 1280px; height: 800px; box-sizing: border-box; border: 1px solid #221c14; display: flex; flex-direction: column; overflow: hidden; background: #ddd3bd; color: #221c14; font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: 11px; line-height: 16px">
+
+<header style="height: 56px; flex: none; box-sizing: border-box; display: flex; align-items: center; gap: 12px; padding: 0 12px; border-bottom: 1px solid #221c14">
+<div style="display: flex; flex-direction: column; gap: 3px">
+<span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 32px; line-height: 1; letter-spacing: 0.02em">Tipp</span>
+<span style="display: flex; gap: 1px; width: 56px; height: 5px; background: #221c14; border: 1px solid #221c14">
+<span style="flex: 1; background: #936255"></span><span style="flex: 1; background: #b5a37a"></span><span style="flex: 1; background: #809a8c"></span><span style="flex: 1; background: #5e4458"></span>
+</span>
+</div>
+<div style="display: flex; margin-left: 12px">
+<button aria-label="Play" style="width: 44px; height: 32px; padding: 0; display: flex; align-items: center; justify-content: center; border: 1px solid #221c14; background: #221c14; color: #ddd3bd"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2l9 6-9 6z" fill="currentColor"></path></svg></button>
+<button aria-label="Stop" style="width: 44px; height: 32px; padding: 0; margin-left: -1px; display: flex; align-items: center; justify-content: center; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3h10v10H3z" fill="currentColor"></path></svg></button>
+</div>
+<div style="flex: 1"></div>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 9px; line-height: 12px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">LANGUAGE</span>
+<div style="display: flex">
+<button style="width: 36px; height: 24px; padding: 0; border: 1px solid #221c14; background: #221c14; color: #ddd3bd; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">EN</button>
+<button style="width: 36px; height: 24px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">NO</button>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 9px; line-height: 12px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">OUT</span>
+<div style="display: flex">
+<div style="width: 72px; height: 24px; box-sizing: border-box; display: flex; align-items: center; justify-content: flex-end; padding: 0 6px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #a3967a; font-size: 12px; font-weight: 500">−9.0 dB</div>
+<div style="width: 96px; height: 24px; margin-left: -1px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; gap: 2px; padding: 0 4px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #a3967a">
+<span style="height: 6px; width: 54%; background: #221c14"></span>
+<span style="height: 6px; width: 49%; background: #221c14"></span>
+</div>
+</div>
+</div>
+</header>
+
+<nav style="height: 36px; flex: none; box-sizing: border-box; display: flex; align-items: flex-end; padding: 0 8px; background: #cec2a6; border-bottom: 1px solid #221c14">
+<a href="Main.dc.html" style="height: 26px; box-sizing: border-box; display: flex; align-items: center; gap: 8px; padding: 0 16px; border: 1px solid #221c14; border-bottom: 0; background: #cec2a6; font-size: 10px; font-weight: 600; letter-spacing: 0.14em">PLAY <span style="color: #4f4634; font-weight: 400">F1</span></a>
+<a href="Guide.dc.html" style="height: 26px; margin-left: -1px; box-sizing: border-box; display: flex; align-items: center; gap: 8px; padding: 0 16px; border: 1px solid #221c14; border-bottom: 0; background: #cec2a6; font-size: 10px; font-weight: 600; letter-spacing: 0.14em">FIELD GUIDE <span style="color: #4f4634; font-weight: 400">F2</span></a>
+<a href="Quiz.dc.html" style="height: 26px; margin-left: -1px; box-sizing: border-box; display: flex; align-items: center; gap: 8px; padding: 0 16px; border: 1px solid #221c14; border-bottom: 0; background: #cec2a6; font-size: 10px; font-weight: 600; letter-spacing: 0.14em">QUIZ <span style="color: #4f4634; font-weight: 400">F3</span></a>
+<a href="Chorus.dc.html" style="height: 30px; margin-left: -1px; margin-bottom: -1px; box-sizing: border-box; display: flex; align-items: center; gap: 8px; padding: 0 16px; border: 1px solid #221c14; border-bottom-color: #ddd3bd; background: #ddd3bd; font-size: 10px; font-weight: 600; letter-spacing: 0.14em">CHORUS <span style="color: #4f4634; font-weight: 400">F4</span></a>
+<a href="Log.dc.html" style="height: 26px; margin-left: -1px; box-sizing: border-box; display: flex; align-items: center; gap: 8px; padding: 0 16px; border: 1px solid #221c14; border-bottom: 0; background: #cec2a6; font-size: 10px; font-weight: 600; letter-spacing: 0.14em">LOG <span style="color: #4f4634; font-weight: 400">F5</span></a>
+<a href="DeskCollection.dc.html" style="height: 26px; margin-left: -1px; box-sizing: border-box; display: flex; align-items: center; gap: 8px; padding: 0 16px; border: 1px solid #221c14; border-bottom: 0; background: #cec2a6; font-size: 10px; font-weight: 600; letter-spacing: 0.14em">COLLECTION <span style="color: #4f4634; font-weight: 400">F6</span></a>
+</nav>
+
+<main style="flex: 1; min-height: 0; box-sizing: border-box; display: flex; flex-direction: column; gap: 12px; padding: 8px">
+
+<section style="display: flex; flex-direction: column; gap: 4px">
+<div style="display: flex; align-items: center; gap: 6px; height: 14px"><span style="font-size: 10px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">MORNING</span><span style="flex: 1; height: 1px; background: #221c14"></span></div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 9px; line-height: 12px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">SEASON</span>
+<div style="display: flex">
+<button style="flex: 1 1 0; height: 24px; padding: 0; border: 1px solid #221c14; background: #221c14; color: #ddd3bd; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">SPRING</button>
+<button style="flex: 1 1 0; height: 24px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">SUMMER</button>
+<button style="flex: 1 1 0; height: 24px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">AUTUMN</button>
+<button style="flex: 1 1 0; height: 24px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">WINTER</button>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 9px; line-height: 12px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">PLACE</span>
+<div style="display: flex">
+<button style="flex: 1 1 0; height: 24px; padding: 0; border: 1px solid #221c14; background: #221c14; color: #ddd3bd; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">GARDEN</button>
+<button style="flex: 1 1 0; height: 24px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">FOREST</button>
+<button style="flex: 1 1 0; height: 24px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">OPEN</button>
+<button style="flex: 1 1 0; height: 24px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">SHORE</button>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 9px; line-height: 12px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">DAWN SPEED</span>
+<div style="display: flex">
+<button style="flex: 1 1 0; height: 24px; padding: 0; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">REAL TIME</button>
+<button style="flex: 1 1 0; height: 24px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #221c14; color: #ddd3bd; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">10×</button>
+<button style="flex: 1 1 0; height: 24px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">60×</button>
+<button style="flex: 1 1 0; height: 24px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">LOOP</button>
+</div>
+</div>
+</div>
+</section>
+
+<section style="display: flex; flex-direction: column; border: 1px solid #221c14">
+<div style="height: 28px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; padding: 0 8px; background: #cec2a6; border-bottom: 1px solid #221c14">
+<span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 22px; line-height: 1">Dawn chorus</span>
+<span style="display: flex; gap: 12px; font-size: 10px; font-weight: 500; letter-spacing: 0.06em"><span style="color: #4f4634">NOW</span><span>38 min before sunrise</span><span style="color: #4f4634">SINGING</span><span>3 of 4</span></span>
+</div>
+
+<div style="display: flex">
+<div style="width: 302px; flex: none; display: flex; flex-direction: column; border-right: 1px solid #221c14">
+<div style="height: 96px; box-sizing: border-box; display: flex; align-items: center; gap: 10px; padding: 0 8px; border-bottom: 1px solid #221c14">
+<span style="width: 28px; height: 28px; flex: none; display: flex; align-items: center; justify-content: center; border: 1px solid #221c14; background: #936255; color: #fff8ec; font-size: 12px; font-weight: 600">1</span>
+<div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+<span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 22px; line-height: 1">Robin</span>
+<div style="display: flex; gap: 6px">
+<button style="height: 20px; padding: 0 8px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">MUTE</button>
+<button style="height: 20px; padding: 0 8px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">SOLO</button>
+<button style="height: 20px; padding: 0 8px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">CHANGE BIRD</button>
+</div>
+</div>
+<span style="font-size: 10px; font-weight: 500; letter-spacing: 0.06em">20 m</span>
+</div>
+<div style="height: 96px; box-sizing: border-box; display: flex; align-items: center; gap: 10px; padding: 0 8px; border-bottom: 1px solid #221c14">
+<span style="width: 28px; height: 28px; flex: none; display: flex; align-items: center; justify-content: center; border: 1px solid #221c14; background: #b5a37a; color: #221c14; font-size: 12px; font-weight: 600">2</span>
+<div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+<span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 22px; line-height: 1">Blackbird</span>
+<div style="display: flex; gap: 6px">
+<button style="height: 20px; padding: 0 8px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">MUTE</button>
+<button style="height: 20px; padding: 0 8px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">SOLO</button>
+<button style="height: 20px; padding: 0 8px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">CHANGE BIRD</button>
+</div>
+</div>
+<span style="font-size: 10px; font-weight: 500; letter-spacing: 0.06em">12 m</span>
+</div>
+<div style="height: 96px; box-sizing: border-box; display: flex; align-items: center; gap: 10px; padding: 0 8px; border-bottom: 1px solid #221c14">
+<span style="width: 28px; height: 28px; flex: none; display: flex; align-items: center; justify-content: center; border: 1px solid #221c14; background: #809a8c; color: #221c14; font-size: 12px; font-weight: 600">3</span>
+<div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+<span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 22px; line-height: 1">Song thrush</span>
+<div style="display: flex; gap: 6px">
+<button style="height: 20px; padding: 0 8px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">MUTE</button>
+<button style="height: 20px; padding: 0 8px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">SOLO</button>
+<button style="height: 20px; padding: 0 8px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">CHANGE BIRD</button>
+</div>
+</div>
+<span style="font-size: 10px; font-weight: 500; letter-spacing: 0.06em">45 m</span>
+</div>
+<div style="height: 96px; box-sizing: border-box; display: flex; align-items: center; gap: 10px; padding: 0 8px; background: repeating-linear-gradient(135deg, rgb(34 28 20 / 0.10) 0 1px, transparent 1px 7px)">
+<span style="width: 28px; height: 28px; flex: none; display: flex; align-items: center; justify-content: center; border: 1px solid #221c14; background: #5e4458; color: #fff8ec; font-size: 12px; font-weight: 600">4</span>
+<div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+<span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 22px; line-height: 1">Great tit</span>
+<div style="display: flex; gap: 6px">
+<button aria-pressed="true" style="height: 20px; padding: 0 8px; border: 1px solid #221c14; background: #221c14; color: #ddd3bd; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">MUTE</button>
+<button style="height: 20px; padding: 0 8px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">SOLO</button>
+<button style="height: 20px; padding: 0 8px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">CHANGE BIRD</button>
+</div>
+</div>
+<span style="font-size: 10px; font-weight: 500; letter-spacing: 0.06em">MUTED</span>
+</div>
+</div>
+
+<div style="width: 960px; height: 384px; flex: none; position: relative; background-color: #efe8d6; background-image: linear-gradient(#c4b796 1px, transparent 1px), linear-gradient(90deg, #c4b796 1px, transparent 1px), linear-gradient(#d8ccb0 1px, transparent 1px), linear-gradient(90deg, #d8ccb0 1px, transparent 1px); background-size: 40px 40px, 40px 40px, 8px 8px, 8px 8px; box-shadow: inset 1px 1px 0 #a3967a">
+<div style="position: absolute; left: 160px; right: 0; top: 34px; height: 28px; border: 1px solid #221c14; border-right: 0; background: repeating-linear-gradient(90deg, #936255 0 12px, transparent 12px 26px)"></div>
+<div style="position: absolute; left: 240px; right: 0; top: 130px; height: 28px; border: 1px solid #221c14; border-right: 0; background: repeating-linear-gradient(90deg, #b5a37a 0 22px, transparent 22px 54px)"></div>
+<div style="position: absolute; left: 320px; right: 0; top: 226px; height: 28px; border: 1px solid #221c14; border-right: 0; background: repeating-linear-gradient(90deg, #809a8c 0 8px, transparent 8px 12px, #809a8c 12px 20px, transparent 20px 24px, #809a8c 24px 32px, transparent 32px 56px)"></div>
+<div style="position: absolute; left: 520px; right: 0; top: 322px; height: 28px; border: 1px solid #221c14; border-right: 0; background: repeating-linear-gradient(90deg, #5e4458 0 6px, transparent 6px 12px)"></div>
+<div style="position: absolute; left: 0; right: 0; top: 288px; height: 96px; background: repeating-linear-gradient(135deg, rgb(34 28 20 / 0.10) 0 1px, transparent 1px 7px)"></div>
+<div style="position: absolute; left: 0; right: 0; top: 96px; height: 1px; background: #221c14"></div>
+<div style="position: absolute; left: 0; right: 0; top: 192px; height: 1px; background: #221c14"></div>
+<div style="position: absolute; left: 0; right: 0; top: 288px; height: 1px; background: #221c14"></div>
+<div style="position: absolute; left: 720px; top: 0; bottom: 0; width: 1px; background: #221c14"></div>
+<span style="position: absolute; left: 724px; top: 2px; padding: 0 3px; background: #221c14; color: #ddd3bd; font-size: 8px; line-height: 10px; font-weight: 600; letter-spacing: 0.06em">SUNRISE</span>
+<div style="position: absolute; left: 416px; top: 0; bottom: 0; width: 1px; background: #5e4458"></div>
+<span style="position: absolute; left: 417px; top: 0; padding: 0 4px; background: #5e4458; color: #fff8ec; font-size: 8px; line-height: 12px; font-weight: 600; letter-spacing: 0.06em">NOW</span>
+</div>
+</div>
+
+<div style="height: 16px; display: flex; margin-left: 302px; border-top: 1px solid #221c14; font-size: 9px; line-height: 14px; color: #4f4634">
+<span style="width: 240px; padding-left: 2px; box-sizing: border-box">−90 min</span><span style="width: 240px; padding-left: 2px; box-sizing: border-box">−60</span><span style="width: 240px; padding-left: 2px; box-sizing: border-box">−30</span><span style="width: 240px; padding-left: 2px; box-sizing: border-box">0</span>
+</div>
+<div style="height: 18px; box-sizing: border-box; display: flex; align-items: center; gap: 8px; padding: 0 8px; border-top: 1px solid #221c14; font-size: 9px; line-height: 12px"><span style="font-weight: 600; letter-spacing: 0.14em">FIG. 1</span><span>Who starts when, in minutes from sunrise. [TO VERIFY] entry order and times for each bird.</span></div>
+</section>
+
+<p style="margin: 0; color: #4f4634">Up to 4 birds, one per track colour. Each bird keeps the voice and phrasing you set on the Play screen. The right-hand figure is the distance to the listener.</p>
+
+</main>
+
+<footer style="height: 28px; flex: none; box-sizing: border-box; display: flex; align-items: center; gap: 16px; padding: 0 12px; background: #cec2a6; border-top: 1px solid #221c14; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">
+<span>PLAYING</span>
+<span style="color: #4f4634">DAWN CHORUS, SPRING, GARDEN, 10×</span>
+<span style="flex: 1"></span>
+<span style="color: #4f4634">SPACE PLAY</span>
+<span style="color: #4f4634">1 2 3 4 MUTE</span>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":800}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

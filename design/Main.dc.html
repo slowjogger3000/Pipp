@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Tipp, play screen</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+button{font:inherit;color:inherit;margin:0;cursor:pointer}
+a{color:#221c14;text-decoration:none}a:hover{color:#4f4634}
+@keyframes tipp-up{0%,46%,100%{transform:rotate(0deg)}4%{transform:rotate(-14deg)}9%{transform:rotate(-4deg)}14%{transform:rotate(-16deg)}19%{transform:rotate(-3deg)}24%{transform:rotate(-13deg)}29%{transform:rotate(-5deg)}34%{transform:rotate(-16deg)}40%{transform:rotate(-9deg)}}
+@keyframes tipp-low{0%,46%,100%{transform:rotate(0deg)}4%{transform:rotate(8deg)}9%{transform:rotate(2deg)}14%{transform:rotate(10deg)}19%{transform:rotate(2deg)}24%{transform:rotate(8deg)}29%{transform:rotate(3deg)}34%{transform:rotate(10deg)}40%{transform:rotate(5deg)}}
+@keyframes tipp-tail{0%,46%,100%{transform:rotate(0deg)}14%{transform:rotate(-4deg)}24%{transform:rotate(-1deg)}34%{transform:rotate(-5deg)}}
+@keyframes tipp-arc{0%,46%,100%{opacity:0}4%,40%{opacity:1}}
+@media (prefers-reduced-motion:reduce){.tipp-anim{animation:none!important}}
+</style>
+</helmet>
+<div style="width: 1280px; height: 800px; box-sizing: border-box; border: 1px solid #221c14; display: flex; flex-direction: column; overflow: hidden; background: #ddd3bd; color: #221c14; font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: 11px; line-height: 16px">
+
+<header style="height: 56px; flex: none; box-sizing: border-box; display: flex; align-items: center; gap: 12px; padding: 0 12px; border-bottom: 1px solid #221c14">
+<div style="display: flex; flex-direction: column; gap: 3px">
+<span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 32px; line-height: 1; letter-spacing: 0.02em">Tipp</span>
+<span style="display: flex; gap: 1px; width: 56px; height: 5px; background: #221c14; border: 1px solid #221c14">
+<span style="flex: 1; background: #936255"></span><span style="flex: 1; background: #b5a37a"></span><span style="flex: 1; background: #809a8c"></span><span style="flex: 1; background: #5e4458"></span>
+</span>
+</div>
+<div style="display: flex; margin-left: 12px">
+<button aria-label="Play" style="width: 44px; height: 32px; padding: 0; display: flex; align-items: center; justify-content: center; border: 1px solid #221c14; background: #221c14; color: #ddd3bd"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2l9 6-9 6z" fill="currentColor"></path></svg></button>
+<button aria-label="Stop" style="width: 44px; height: 32px; padding: 0; margin-left: -1px; display: flex; align-items: center; justify-content: center; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3h10v10H3z" fill="currentColor"></path></svg></button>
+</div>
+<div style="display: flex; align-items: center">
+<button aria-label="Previous bird" style="width: 32px; height: 32px; padding: 0; display: flex; align-items: center; justify-content: center; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M11 3L4 8l7 5z" fill="currentColor"></path></svg></button>
+<div style="width: 280px; height: 32px; margin-left: -1px; box-sizing: border-box; display: flex; align-items: center; gap: 8px; padding: 0 10px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #a3967a">
+<span style="font-size: 12px; color: #4f4634">03</span>
+<span style="font-size: 12px; font-weight: 500">Blackbird</span>
+<span style="margin-left: auto; color: #4f4634">Turdus merula</span>
+</div>
+<button aria-label="Next bird" style="width: 32px; height: 32px; padding: 0; margin-left: -1px; display: flex; align-items: center; justify-content: center; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3l7 5-7 5z" fill="currentColor"></path></svg></button>
+</div>
+<div style="flex: 1"></div>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 9px; line-height: 12px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">LANGUAGE</span>
+<div style="display: flex">
+<button style="width: 36px; height: 24px; padding: 0; border: 1px solid #221c14; background: #221c14; color: #ddd3bd; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">EN</button>
+<button style="width: 36px; height: 24px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">NO</button>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 9px; line-height: 12px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">OUT</span>
+<div style="display: flex">
+<div style="width: 72px; height: 24px; box-sizing: border-box; display: flex; align-items: center; justify-content: flex-end; padding: 0 6px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #a3967a; font-size: 12px; font-weight: 500">−6.0 dB</div>
+<div style="width: 96px; height: 24px; margin-left: -1px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; gap: 2px; padding: 0 4px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #a3967a">
+<span style="height: 6px; width: 62%; background: #221c14"></span>
+<span style="height: 6px; width: 57%; background: #221c14"></span>
+</div>
+</div>
+</div>
+</header>
+
+<nav style="height: 36px; flex: none; box-sizing: border-box; display: flex; align-items: flex-end; padding: 0 8px; background: #cec2a6; border-bottom: 1px solid #221c14">
+<a href="Main.dc.html" style="height: 30px; margin-bottom: -1px; box-sizing: border-box; display: flex; align-items: center; gap: 8px; padding: 0 16px; border: 1px solid #221c14; border-bottom-color: #ddd3bd; background: #ddd3bd; font-size: 10px; font-weight: 600; letter-spacing: 0.14em">PLAY <span style="color: #4f4634; font-weight: 400">F1</span></a>
+<a href="Guide.dc.html" style="height: 26px; margin-left: -1px; box-sizing: border-box; display: flex; align-items: center; gap: 8px; padding: 0 16px; border: 1px solid #221c14; border-bottom: 0; background: #cec2a6; font-size: 10px; font-weight: 600; letter-spacing: 0.14em">FIELD GUIDE <span style="color: #4f4634; font-weight: 400">F2</span></a>
+<a href="Quiz.dc.html" style="height: 26px; margin-left: -1px; box-sizing: border-box; display: flex; align-items: center; gap: 8px; padding: 0 16px; border: 1px solid #221c14; border-bottom: 0; background: #cec2a6; font-size: 10px; font-weight: 600; letter-spacing: 0.14em">QUIZ <span style="color: #4f4634; font-weight: 400">F3</span></a>
+<a href="Chorus.dc.html" style="height: 26px; margin-left: -1px; box-sizing: border-box; display: flex; align-items: center; gap: 8px; padding: 0 16px; border: 1px solid #221c14; border-bottom: 0; background: #cec2a6; font-size: 10px; font-weight: 600; letter-spacing: 0.14em">CHORUS <span style="color: #4f4634; font-weight: 400">F4</span></a>
+<a href="Log.dc.html" style="height: 26px; margin-left: -1px; box-sizing: border-box; display: flex; align-items: center; gap: 8px; padding: 0 16px; border: 1px solid #221c14; border-bottom: 0; background: #cec2a6; font-size: 10px; font-weight: 600; letter-spacing: 0.14em">LOG <span style="color: #4f4634; font-weight: 400">F5</span></a>
+<a href="DeskCollection.dc.html" style="height: 26px; margin-left: -1px; box-sizing: border-box; display: flex; align-items: center; gap: 8px; padding: 0 16px; border: 1px solid #221c14; border-bottom: 0; background: #cec2a6; font-size: 10px; font-weight: 600; letter-spacing: 0.14em">COLLECTION <span style="color: #4f4634; font-weight: 400">F6</span></a>
+</nav>
+
+<div style="flex: 1; min-height: 0; display: flex">
+
+<aside style="width: 240px; flex: none; box-sizing: border-box; display: flex; flex-direction: column; gap: 6px; padding: 8px; background: #cec2a6; border-right: 1px solid #221c14">
+<div style="display: flex; align-items: center; gap: 6px; height: 14px"><span style="font-size: 10px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">BIRDS</span><span style="flex: 1; height: 1px; background: #221c14"></span></div>
+<div style="flex: 1; min-height: 0; display: flex; flex-direction: column; border: 1px solid #221c14; background: #e3d9c2; box-shadow: inset 1px 1px 0 #a3967a; font-size: 13px; line-height: 20px">
+<div style="height: 24px; flex: none; box-sizing: border-box; display: flex; align-items: center; padding: 0 8px; background: #cec2a6; border-bottom: 1px solid #bdb093; font-size: 9px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">GARDEN</div>
+<button style="display: flex; align-items: center; gap: 8px; width: 100%; height: 24px; flex: none; padding: 0 8px; border: 0; background: transparent; text-align: left"><span style="color: #4f4634">01</span><span>Great tit</span></button>
+<button style="display: flex; align-items: center; gap: 8px; width: 100%; height: 24px; flex: none; padding: 0 8px; border: 0; background: transparent; text-align: left"><span style="color: #4f4634">02</span><span>Blue tit</span></button>
+<button aria-current="true" style="display: flex; align-items: center; gap: 8px; width: 100%; height: 24px; flex: none; padding: 0 8px; border: 0; background: #221c14; color: #ddd3bd; text-align: left"><span>03</span><span>Blackbird</span></button>
+<button style="display: flex; align-items: center; gap: 8px; width: 100%; height: 24px; flex: none; padding: 0 8px; border: 0; background: transparent; text-align: left"><span style="color: #4f4634">04</span><span>Robin</span></button>
+<button style="display: flex; align-items: center; gap: 8px; width: 100%; height: 24px; flex: none; padding: 0 8px; border: 0; background: transparent; text-align: left"><span style="color: #4f4634">05</span><span>Chaffinch</span></button>
+<button style="display: flex; align-items: center; gap: 8px; width: 100%; height: 24px; flex: none; padding: 0 8px; border: 0; background: transparent; text-align: left"><span style="color: #4f4634">06</span><span>House sparrow</span></button>
+<div style="height: 24px; flex: none; box-sizing: border-box; display: flex; align-items: center; padding: 0 8px; background: #cec2a6; border-top: 1px solid #bdb093; border-bottom: 1px solid #bdb093; font-size: 9px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">FOREST</div>
+<button style="display: flex; align-items: center; gap: 8px; width: 100%; height: 24px; flex: none; padding: 0 8px; border: 0; background: transparent; text-align: left"><span style="color: #4f4634">07</span><span>Willow warbler</span></button>
+<button style="display: flex; align-items: center; gap: 8px; width: 100%; height: 24px; flex: none; padding: 0 8px; border: 0; background: transparent; text-align: left"><span style="color: #4f4634">08</span><span>Song thrush</span></button>
+<button style="display: flex; align-items: center; gap: 8px; width: 100%; height: 24px; flex: none; padding: 0 8px; border: 0; background: transparent; text-align: left"><span style="color: #4f4634">09</span><span>Cuckoo</span></button>
+<button style="display: flex; align-items: center; gap: 8px; width: 100%; height: 24px; flex: none; padding: 0 8px; border: 0; background: transparent; text-align: left"><span style="color: #4f4634">10</span><span style="white-space: nowrap">Great spotted woodpecker</span></button>
+<button style="display: flex; align-items: center; gap: 8px; width: 100%; height: 24px; flex: none; padding: 0 8px; border: 0; background: transparent; text-align: left"><span style="color: #4f4634">11</span><span>Wren</span></button>
+<div style="height: 24px; flex: none; box-sizing: border-box; display: flex; align-items: center; padding: 0 8px; background: #cec2a6; border-top: 1px solid #bdb093; border-bottom: 1px solid #bdb093; font-size: 9px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">COAST AND WATER</div>
+<button style="display: flex; align-items: center; gap: 8px; width: 100%; height: 24px; flex: none; padding: 0 8px; border: 0; background: transparent; text-align: left"><span style="color: #4f4634">12</span><span>Herring gull</span></button>
+<button style="display: flex; align-items: center; gap: 8px; width: 100%; height: 24px; flex: none; padding: 0 8px; border: 0; background: transparent; text-align: left"><span style="color: #4f4634">13</span><span>Oystercatcher</span></button>
+<button style="display: flex; align-items: center; gap: 8px; width: 100%; height: 24px; flex: none; padding: 0 8px; border: 0; background: transparent; text-align: left"><span style="color: #4f4634">14</span><span>Eider</span></button>
+<button style="display: flex; align-items: center; gap: 8px; width: 100%; height: 24px; flex: none; padding: 0 8px; border: 0; background: transparent; text-align: left"><span style="color: #4f4634">15</span><span>Curlew</span></button>
+<div style="height: 24px; flex: none; box-sizing: border-box; display: flex; align-items: center; padding: 0 8px; background: #cec2a6; border-top: 1px solid #bdb093; border-bottom: 1px solid #bdb093; font-size: 9px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">NIGHT</div>
+<button style="display: flex; align-items: center; gap: 8px; width: 100%; height: 24px; flex: none; padding: 0 8px; border: 0; background: transparent; text-align: left"><span style="color: #4f4634">16</span><span>Tawny owl</span></button>
+<button style="display: flex; align-items: center; gap: 8px; width: 100%; height: 24px; flex: none; padding: 0 8px; border: 0; background: transparent; text-align: left"><span style="color: #4f4634">17</span><span>Woodcock</span></button>
+<button style="display: flex; align-items: center; gap: 8px; width: 100%; height: 24px; flex: none; padding: 0 8px; border: 0; background: transparent; text-align: left"><span style="color: #4f4634">18</span><span>Thrush nightingale</span></button>
+</div>
+</aside>
+
+<main style="flex: 1; min-width: 0; box-sizing: border-box; display: flex; flex-direction: column; gap: 8px; padding: 8px">
+
+<div style="height: 384px; flex: none; display: flex; gap: 8px">
+
+<section style="flex: 1; min-width: 0; box-sizing: border-box; display: flex; flex-direction: column; border: 1px solid #221c14">
+<div style="height: 28px; flex: none; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; padding: 0 8px; background: #cec2a6; border-bottom: 1px solid #221c14">
+<span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 22px; line-height: 1">Blackbird</span>
+<sc-if value="{{ isMale }}" hint-placeholder-val="{{ true }}"><div style="display: flex">
+<button aria-pressed="true" style="width: 56px; height: 20px; padding: 0; border: 1px solid #221c14; background: #221c14; color: #ddd3bd; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">MALE</button>
+<button aria-pressed="false" onClick="{{ setFemale }}" style="width: 56px; height: 20px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">FEMALE</button>
+</div></sc-if>
+<sc-if value="{{ isFemale }}" hint-placeholder-val="{{ false }}"><div style="display: flex">
+<button aria-pressed="false" onClick="{{ setMale }}" style="width: 56px; height: 20px; padding: 0; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">MALE</button>
+<button aria-pressed="true" style="width: 56px; height: 20px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #221c14; color: #ddd3bd; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">FEMALE</button>
+</div></sc-if>
+<sc-if value="{{ isAdult }}" hint-placeholder-val="{{ true }}"><div style="display: flex">
+<button aria-pressed="true" style="width: 44px; height: 20px; padding: 0; border: 1px solid #221c14; background: #221c14; color: #ddd3bd; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">ADULT</button>
+<button aria-pressed="false" aria-label="Juvenile" onClick="{{ setJuv }}" style="width: 36px; height: 20px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">JUV</button>
+</div></sc-if>
+<sc-if value="{{ isJuv }}" hint-placeholder-val="{{ false }}"><div style="display: flex">
+<button aria-pressed="false" onClick="{{ setAdult }}" style="width: 44px; height: 20px; padding: 0; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">ADULT</button>
+<button aria-pressed="true" aria-label="Juvenile" style="width: 36px; height: 20px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #221c14; color: #ddd3bd; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">JUV</button>
+</div></sc-if>
+</div>
+<div style="flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; background-color: #efe8d6; background-image: linear-gradient(#c4b796 1px, transparent 1px), linear-gradient(90deg, #c4b796 1px, transparent 1px), linear-gradient(#d8ccb0 1px, transparent 1px), linear-gradient(90deg, #d8ccb0 1px, transparent 1px); background-size: 40px 40px, 40px 40px, 8px 8px, 8px 8px; box-shadow: inset 1px 1px 0 #a3967a">
+<svg viewBox="0 0 280 240" width="100%" role="img" aria-label="Ink drawing of a male blackbird singing on a branch">
+<defs>
+<clipPath id="tipp-main-body"><path d="M190 60 C184 44 158 42 150 62 C134 80 104 106 90 136 C92 146 98 154 106 158 C128 180 162 178 178 152 C192 130 198 104 192 80 C194 74 194 66 190 60 Z"></path></clipPath>
+<clipPath id="tipp-main-wing"><path d="M152 90 C156 118 136 146 98 152 C106 136 118 110 152 90 Z"></path></clipPath>
+</defs>
+<path d="M14 211 C80 205 150 201 268 193" fill="none" stroke="#221c14" stroke-width="4"></path>
+<path d="M214 196 l20 -20 M224 186 l16 3" fill="none" stroke="#221c14" stroke-width="1.5"></path>
+<path d="M234 176 q10 -10 18 -2 q-9 8 -18 2 Z M240 189 q11 -5 16 3 q-10 4 -16 -3 Z" fill="#efe8d6" stroke="#221c14" stroke-width="1"></path>
+<g class="tipp-anim" style="transform-origin: 98px 147px; animation: tipp-tail 6s ease-in-out infinite">
+<path d="M90 136 L42 194 L54 206 L106 158 Z" fill="#efe8d6" stroke="#221c14" stroke-width="1.5"></path>
+<path d="M94 142 L46 198 M98 147 L49 202 M102 153 L52 205" fill="none" stroke="#221c14" stroke-width="1"></path>
+</g>
+<path d="M136 172 L139 199 M152 173 L157 198 M131 201 L139 199 L148 202 M149 200 L157 198 L166 201" fill="none" stroke="#221c14" stroke-width="1.5"></path>
+<path d="M190 60 C184 44 158 42 150 62 C134 80 104 106 90 136 C92 146 98 154 106 158 C128 180 162 178 178 152 C192 130 198 104 192 80 C194 74 194 66 190 60 Z" fill="#efe8d6" stroke="#221c14" stroke-width="1.5"></path>
+<path d="{{ hatchBody }}" fill="none" stroke="#221c14" stroke-width="1" clip-path="url(#tipp-main-body)"></path>
+<path d="{{ hatchWing }}" fill="none" stroke="#221c14" stroke-width="1" clip-path="url(#tipp-main-wing)"></path>
+<path d="M152 90 C156 118 136 146 98 152 C106 136 118 110 152 90 Z" fill="none" stroke="#221c14" stroke-width="1.5"></path>
+<path d="{{ throat }}" fill="#efe8d6" clip-path="url(#tipp-main-body)"></path>
+<path d="{{ spots }}" fill="none" stroke="#221c14" stroke-width="1.5" clip-path="url(#tipp-main-body)"></path>
+<circle cx="177" cy="65" r="{{ ringR }}" fill="#efe8d6" stroke="#221c14" stroke-width="1"></circle>
+<circle cx="177" cy="65" r="2.4" fill="#221c14"></circle>
+<g class="tipp-anim" style="transform-origin: 192px 67px; animation: tipp-up 6s linear infinite"><path d="M190 60 L220 66 L193 70 Z" fill="{{ bill }}" stroke="#221c14" stroke-width="1.5" stroke-linejoin="round"></path></g>
+<g class="tipp-anim" style="transform-origin: 192px 72px; animation: tipp-low 6s linear infinite"><path d="M193 70 L216 69 L191 79 Z" fill="{{ bill }}" stroke="#221c14" stroke-width="1.5" stroke-linejoin="round"></path></g>
+<g class="tipp-anim" style="animation: tipp-arc 6s linear infinite"><path d="M230 52 A16 16 0 0 1 230 76 M237 44 A26 26 0 0 1 237 84 M243 36 A36 36 0 0 1 243 92" fill="none" stroke="#221c14" stroke-width="1.5"></path></g>
+<path d="M200 58 L200 23 M172 62 L122 36 M120 112 L72 86 M192 116 L236 142" fill="none" stroke="#4f4634" stroke-width="1"></path>
+<g font-size="8" letter-spacing="0.5">
+<text x="200" y="10" text-anchor="middle" font-weight="600" fill="#4f4634">BILL</text><text x="200" y="20" text-anchor="middle" font-weight="500" fill="#221c14">{{ dBill }}</text>
+<text x="120" y="30" text-anchor="end" font-weight="600" fill="#4f4634">EYE-RING</text><text x="120" y="40" text-anchor="end" font-weight="500" fill="#221c14">{{ dRing }}</text>
+<text x="70" y="80" text-anchor="end" font-weight="600" fill="#4f4634">PLUMAGE</text><text x="70" y="90" text-anchor="end" font-weight="500" fill="#221c14">{{ dPlumage }}</text>
+<text x="276" y="150" text-anchor="end" font-weight="600" fill="#4f4634">THROAT</text><text x="276" y="160" text-anchor="end" font-weight="500" fill="#221c14">{{ dThroat }}</text>
+</g>
+</svg>
+</div>
+<div style="height: 18px; flex: none; box-sizing: border-box; display: flex; align-items: center; gap: 8px; padding: 0 8px; border-top: 1px solid #221c14; font-size: 9px; line-height: 12px"><span style="font-weight: 600; letter-spacing: 0.14em">FIG. 1</span><span>{{ caption }}</span></div>
+</section>
+
+<section style="width: 710px; flex: none; box-sizing: border-box; display: flex; flex-direction: column; border: 1px solid #221c14">
+<div style="height: 28px; flex: none; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; padding: 0 8px; background: #cec2a6; border-bottom: 1px solid #221c14">
+<span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 22px; line-height: 1">Song</span>
+<div style="display: flex; align-items: center; gap: 12px; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">
+<button aria-pressed="false" style="height: 20px; padding: 0 8px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">DRAW</button>
+<span style="color: #4f4634">SPEED</span>
+<div style="display: flex">
+<button aria-pressed="true" style="width: 32px; height: 20px; padding: 0; border: 1px solid #221c14; background: #221c14; color: #ddd3bd; font-size: 10px; font-weight: 500">1×</button>
+<button aria-pressed="false" style="width: 32px; height: 20px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500">½×</button>
+<button aria-pressed="false" style="width: 32px; height: 20px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500">¼×</button>
+</div>
+<span style="color: #4f4634">HEARING SHIFT</span>
+<div style="display: flex">
+<button aria-pressed="true" style="width: 40px; height: 20px; padding: 0; border: 1px solid #221c14; background: #221c14; color: #ddd3bd; font-size: 10px; font-weight: 500">OFF</button>
+<button aria-pressed="false" style="width: 56px; height: 20px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500">−1 OCT</button>
+</div>
+<span style="color: #4f4634">PHRASE</span><span>14</span><span style="color: #4f4634">LENGTH</span><span>2.6 s</span>
+</div>
+</div>
+<div style="height: 320px; flex: none; display: flex">
+<div style="width: 28px; flex: none; position: relative; font-size: 9px; line-height: 12px; color: #4f4634">
+<span style="position: absolute; right: 4px; top: 2px">8k</span>
+<span style="position: absolute; right: 4px; top: 82px">6k</span>
+<span style="position: absolute; right: 4px; top: 162px">4k</span>
+<span style="position: absolute; right: 4px; top: 242px">2k</span>
+<span style="position: absolute; right: 4px; bottom: 2px">0</span>
+</div>
+<div style="width: 680px; height: 320px; flex: none; border-left: 1px solid #221c14; margin-left: -1px; background-color: #efe8d6; background-image: linear-gradient(#c4b796 1px, transparent 1px), linear-gradient(90deg, #c4b796 1px, transparent 1px), linear-gradient(#d8ccb0 1px, transparent 1px), linear-gradient(90deg, #d8ccb0 1px, transparent 1px); background-size: 40px 40px, 40px 40px, 8px 8px, 8px 8px; box-shadow: inset 1px 1px 0 #a3967a">
+<svg width="680" height="320" viewBox="0 0 680 320" role="img" aria-label="Sonogram: phrase 13 already sung, phrase 14 being sung, playhead at 5.7 seconds" style="display: block">
+<path d="M28 250 q16 -34 34 -26 M70 222 l30 0 M108 232 q14 20 32 6 M148 214 q12 -26 30 -10 M186 240 l26 -8" fill="none" stroke="#221c14" stroke-width="3"></path>
+<path d="M218 150 l4 -46 M226 110 l3 -40 M232 160 l4 -70 M238 96 l3 34 M244 130 l4 -60 M250 70 l2 30" fill="none" stroke="#221c14" stroke-width="2"></path>
+<path d="M404 254 q14 -36 36 -30 M446 226 l10 0" fill="none" stroke="#221c14" stroke-width="3"></path>
+<path d="M456 226 l22 0 M486 238 q14 -30 32 -16 M526 216 q12 22 30 6 M564 236 l26 -10" fill="none" stroke="#a3967a" stroke-width="3"></path>
+<path d="M596 144 l4 -50 M604 100 l3 -44 M610 156 l4 -66 M617 90 l3 30 M623 126 l4 -56" fill="none" stroke="#a3967a" stroke-width="2"></path>
+<rect x="420" y="4" width="36" height="4" fill="#221c14"></rect>
+<text x="414" y="10" text-anchor="end" font-size="8" font-weight="600" letter-spacing="0.5" fill="#221c14">PITCH BY HAND</text>
+<line x1="456.5" y1="0" x2="456.5" y2="320" stroke="#5e4458" stroke-width="1"></line>
+<rect x="457" y="0" width="26" height="12" fill="#5e4458"></rect>
+<text x="461" y="9" font-size="8" font-weight="600" letter-spacing="0.5" fill="#fff8ec">NOW</text>
+</svg>
+</div>
+</div>
+<div style="height: 16px; flex: none; display: flex; margin-left: 28px; border-top: 1px solid #221c14; font-size: 9px; line-height: 14px; color: #4f4634">
+<span style="width: 80px; padding-left: 2px; box-sizing: border-box">0 s</span><span style="width: 80px; padding-left: 2px; box-sizing: border-box">1</span><span style="width: 80px; padding-left: 2px; box-sizing: border-box">2</span><span style="width: 80px; padding-left: 2px; box-sizing: border-box">3</span><span style="width: 80px; padding-left: 2px; box-sizing: border-box">4</span><span style="width: 80px; padding-left: 2px; box-sizing: border-box">5</span><span style="width: 80px; padding-left: 2px; box-sizing: border-box">6</span><span style="width: 80px; padding-left: 2px; box-sizing: border-box">7</span><span style="padding-left: 2px">8</span>
+</div>
+<div style="flex: 1; min-height: 0; box-sizing: border-box; display: flex; align-items: center; gap: 8px; padding: 0 8px; border-top: 1px solid #221c14; font-size: 9px; line-height: 12px"><span style="font-weight: 600; letter-spacing: 0.14em">FIG. 2</span><span>Blackbird song, spring, dawn, in kHz. Ink is sung. Grey is what autoplay sings next.</span></div>
+</section>
+
+</div>
+
+<section style="height: 56px; flex: none; display: flex; flex-direction: column; gap: 4px">
+<div style="display: flex; align-items: center; gap: 6px; height: 14px"><span style="font-size: 10px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">SCENE</span><span style="flex: 1; height: 1px; background: #221c14"></span></div>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)) 92px 92px; gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 9px; line-height: 12px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">SEASON</span>
+<div style="display: flex">
+<button style="flex: 1 1 0; min-width: 0; height: 24px; padding: 0; border: 1px solid #221c14; background: #221c14; color: #ddd3bd; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">SPRING</button>
+<button style="flex: 1 1 0; min-width: 0; height: 24px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">SUMMER</button>
+<button style="flex: 1 1 0; min-width: 0; height: 24px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">AUTUMN</button>
+<button style="flex: 1 1 0; min-width: 0; height: 24px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">WINTER</button>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 9px; line-height: 12px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">TIME OF DAY</span>
+<div style="display: flex">
+<button style="flex: 1 1 0; min-width: 0; height: 24px; padding: 0; border: 1px solid #221c14; background: #221c14; color: #ddd3bd; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">DAWN</button>
+<button style="flex: 1 1 0; min-width: 0; height: 24px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">DAY</button>
+<button style="flex: 1 1 0; min-width: 0; height: 24px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">DUSK</button>
+<button style="flex: 1 1 0; min-width: 0; height: 24px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">NIGHT</button>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 9px; line-height: 12px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">SONG TYPE</span>
+<div style="display: flex">
+<button style="flex: 1 1 0; min-width: 0; height: 24px; padding: 0; border: 1px solid #221c14; background: #221c14; color: #ddd3bd; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">SONG</button>
+<button style="flex: 1 1 0; min-width: 0; height: 24px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">CALL</button>
+<button style="flex: 1 1 0; min-width: 0; height: 24px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">ALARM</button>
+<button style="flex: 1 1 0; min-width: 0; height: 24px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">FLIGHT</button>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 9px; line-height: 12px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">PLACE</span>
+<div style="display: flex">
+<button style="flex: 1 1 0; min-width: 0; height: 24px; padding: 0; border: 1px solid #221c14; background: #221c14; color: #ddd3bd; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">GARDEN</button>
+<button style="flex: 1 1 0; min-width: 0; height: 24px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">FOREST</button>
+<button style="flex: 1 1 0; min-width: 0; height: 24px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">OPEN</button>
+<button style="flex: 1 1 0; min-width: 0; height: 24px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">SHORE</button>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 9px; line-height: 12px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">DIALECT</span>
+<button disabled aria-label="Dialect: none for this bird" style="height: 24px; padding: 0; border: 1px solid #221c14; background: #efe8d6 repeating-linear-gradient(135deg, rgb(34 28 20 / 0.10) 0 1px, transparent 1px 7px); color: #4f4634; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">NONE</button>
+</div>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 9px; line-height: 12px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">MIMICS</span>
+<button disabled aria-label="Mimics: not a mimic" style="height: 24px; padding: 0; border: 1px solid #221c14; background: #efe8d6 repeating-linear-gradient(135deg, rgb(34 28 20 / 0.10) 0 1px, transparent 1px 7px); color: #4f4634; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">NO ONE</button>
+</div>
+</div>
+</section>
+
+<div style="height: 128px; flex: none; display: flex; justify-content: space-between; gap: 24px">
+
+<section style="width: 400px; flex: none; display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; align-items: center; gap: 6px; height: 14px"><span style="font-size: 10px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">VOICE</span><span style="flex: 1; height: 1px; background: #221c14"></span></div>
+<div style="display: flex; gap: 10px">
+<sc-for list="{{ voice }}" as="k" hint-placeholder-count="5">
+<div style="position: relative; width: 72px; flex: none; display: flex; flex-direction: column; align-items: center; gap: 2px">
+<span style="font-size: 10px; line-height: 14px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">{{ k.label }}</span>
+<svg width="72" height="72" viewBox="0 0 72 72" role="img" aria-label="{{ k.aria }}" style="display: block">
+<circle cx="36" cy="36" r="32" fill="none" stroke="#4f4634" stroke-width="4" stroke-dasharray="{{ k.ticks }}" transform="rotate(135 36 36)"></circle>
+<circle cx="36" cy="36" r="26.5" fill="none" stroke="#b5a98b" stroke-width="3" stroke-dasharray="124.9 200" transform="rotate(135 36 36)"></circle>
+<circle cx="36" cy="36" r="26.5" fill="none" stroke="{{ k.ring }}" stroke-width="3" stroke-dasharray="{{ k.dash }}" transform="rotate(135 36 36)"></circle>
+<circle cx="36" cy="36" r="22" fill="#efe8d6" stroke="#221c14"></circle>
+<line x1="36" y1="30" x2="36" y2="17" stroke="#221c14" stroke-width="2" transform="{{ k.rot }}"></line>
+</svg>
+<span style="font-size: 10px; line-height: 14px; font-weight: 500; letter-spacing: 0.06em">{{ k.value }}</span>
+<sc-if value="{{ k.hand }}" hint-placeholder-val="{{ false }}"><span style="position: absolute; top: 12px; right: -6px; padding: 0 3px; background: #221c14; color: #ddd3bd; font-size: 8px; line-height: 10px; font-weight: 600; letter-spacing: 0.06em">HAND</span></sc-if>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section style="width: 318px; flex: none; display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; align-items: center; gap: 6px; height: 14px"><span style="font-size: 10px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">PHRASING</span><span style="flex: 1; height: 1px; background: #221c14"></span></div>
+<div style="display: flex; gap: 10px">
+<sc-for list="{{ phrasing }}" as="k" hint-placeholder-count="4">
+<div style="position: relative; width: 72px; flex: none; display: flex; flex-direction: column; align-items: center; gap: 2px">
+<span style="font-size: 10px; line-height: 14px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">{{ k.label }}</span>
+<svg width="72" height="72" viewBox="0 0 72 72" role="img" aria-label="{{ k.aria }}" style="display: block">
+<circle cx="36" cy="36" r="32" fill="none" stroke="#4f4634" stroke-width="4" stroke-dasharray="{{ k.ticks }}" transform="rotate(135 36 36)"></circle>
+<circle cx="36" cy="36" r="26.5" fill="none" stroke="#b5a98b" stroke-width="3" stroke-dasharray="124.9 200" transform="rotate(135 36 36)"></circle>
+<circle cx="36" cy="36" r="26.5" fill="none" stroke="{{ k.ring }}" stroke-width="3" stroke-dasharray="{{ k.dash }}" transform="rotate(135 36 36)"></circle>
+<circle cx="36" cy="36" r="22" fill="#efe8d6" stroke="#221c14"></circle>
+<line x1="36" y1="30" x2="36" y2="17" stroke="#221c14" stroke-width="2" transform="{{ k.rot }}"></line>
+</svg>
+<span style="font-size: 10px; line-height: 14px; font-weight: 500; letter-spacing: 0.06em">{{ k.value }}</span>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section style="width: 236px; flex: none; display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; align-items: center; gap: 6px; height: 14px"><span style="font-size: 10px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">SURROUNDINGS</span><span style="flex: 1; height: 1px; background: #221c14"></span></div>
+<div style="display: flex; gap: 10px">
+<sc-for list="{{ surroundings }}" as="k" hint-placeholder-count="3">
+<div style="position: relative; width: 72px; flex: none; display: flex; flex-direction: column; align-items: center; gap: 2px">
+<span style="font-size: 10px; line-height: 14px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">{{ k.label }}</span>
+<svg width="72" height="72" viewBox="0 0 72 72" role="img" aria-label="{{ k.aria }}" style="display: block">
+<circle cx="36" cy="36" r="32" fill="none" stroke="#4f4634" stroke-width="4" stroke-dasharray="{{ k.ticks }}" transform="rotate(135 36 36)"></circle>
+<circle cx="36" cy="36" r="26.5" fill="none" stroke="#b5a98b" stroke-width="3" stroke-dasharray="124.9 200" transform="rotate(135 36 36)"></circle>
+<circle cx="36" cy="36" r="26.5" fill="none" stroke="{{ k.ring }}" stroke-width="3" stroke-dasharray="{{ k.dash }}" transform="rotate(135 36 36)"></circle>
+<circle cx="36" cy="36" r="22" fill="#efe8d6" stroke="#221c14"></circle>
+<line x1="36" y1="30" x2="36" y2="17" stroke="#221c14" stroke-width="2" transform="{{ k.rot }}"></line>
+</svg>
+<span style="font-size: 10px; line-height: 14px; font-weight: 500; letter-spacing: 0.06em">{{ k.value }}</span>
+</div>
+</sc-for>
+</div>
+</section>
+
+</div>
+
+<section style="height: 64px; flex: none; box-sizing: border-box; display: flex; align-items: center; gap: 16px; padding: 0 12px; border: 1px solid #221c14; background: #cec2a6">
+<span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 22px; line-height: 1">Autoplay</span>
+<button aria-pressed="true" style="height: 32px; padding: 0 14px; border: 1px solid #221c14; background: #221c14; color: #ddd3bd; font-size: 11px; font-weight: 500; letter-spacing: 0.06em">AUTOPLAY ON</button>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 9px; line-height: 12px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">HOLD AFTER RELEASE</span>
+<div style="display: flex">
+<div style="width: 64px; height: 24px; box-sizing: border-box; display: flex; align-items: center; justify-content: flex-end; padding: 0 6px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #a3967a; font-size: 12px; font-weight: 500">3.0 s</div>
+<button aria-label="Shorter hold" style="width: 24px; height: 24px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 12px">−</button>
+<button aria-label="Longer hold" style="width: 24px; height: 24px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 12px">+</button>
+</div>
+</div>
+<div style="display: flex; gap: 6px; align-self: flex-end; margin-bottom: 11px">
+<button style="height: 24px; padding: 0 10px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">LATCH</button>
+<button style="height: 24px; padding: 0 10px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">RETURN ALL</button>
+<button style="height: 24px; padding: 0 10px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">SING ONCE</button>
+<button style="height: 24px; padding: 0 10px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">REROLL</button>
+</div>
+<div style="flex: 1"></div>
+<div style="display: flex; flex-direction: column; gap: 6px; font-size: 10px; line-height: 14px; font-weight: 500; letter-spacing: 0.06em">
+<div style="display: flex; align-items: center; gap: 8px"><span style="width: 18px; height: 3px; background: #5e4458"></span><span>SUNG BY AUTOPLAY</span></div>
+<div style="display: flex; align-items: center; gap: 8px"><span style="width: 18px; height: 3px; background: #221c14"></span><span>PITCH HELD BY HAND</span>
+<span style="width: 72px; height: 8px; box-sizing: border-box; display: flex; border: 1px solid #221c14; background: #efe8d6"><span style="width: 80%; background: #221c14"></span></span><span>2.4 s</span></div>
+</div>
+</section>
+
+</main>
+</div>
+
+<footer style="height: 28px; flex: none; box-sizing: border-box; display: flex; align-items: center; gap: 16px; padding: 0 12px; background: #cec2a6; border-top: 1px solid #221c14; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">
+<span>PLAYING</span>
+<span style="color: #4f4634">BLACKBIRD, SPRING, DAWN, SONG, GARDEN</span>
+<span style="flex: 1"></span>
+<span style="color: #4f4634">SPACE PLAY</span>
+<span style="color: #4f4634">UP DOWN BIRD</span>
+<span style="color: #4f4634">F1 F2 SCREEN</span>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":800}}'>
+class Component extends DCLogic {
+hatch(x0, y0, x1, y1, step, up) {
+var d = '';
+var h = y1 - y0;
+for (var x = x0 - h; x < x1; x += step) {
+d += up ? 'M' + x + ' ' + y1 + 'L' + (x + h) + ' ' + y0 : 'M' + x + ' ' + y0 + 'L' + (x + h) + ' ' + y1;
+}
+return d;
+}
+knob(label, value, v, hand) {
+var ticks = '1 14.08 1 14.08 1 14.08 1 14.08 1 14.08 1 14.08 1 14.08 1 14.08 1 14.08 1 14.08 1 60';
+return {
+label: label,
+value: value,
+aria: label + ' ' + value,
+ring: hand ? '#221c14' : '#5e4458',
+dash: (Math.round(v * 1249) / 10) + ' 200',
+rot: 'rotate(' + (Math.round((v * 270 - 135) * 10) / 10) + ' 36 36)',
+hand: !!hand,
+ticks: ticks
+};
+}
+renderVals() {
+var self = this;
+var male = (this.state || {}).sex !== 'female';
+var juv = (this.state || {}).age === 'juv';
+return {
+isMale: male,
+isFemale: !male,
+setMale: function () { self.setState({ sex: 'male' }); },
+setFemale: function () { self.setState({ sex: 'female' }); },
+isAdult: !juv,
+isJuv: juv,
+setAdult: function () { self.setState({ age: 'adult' }); },
+setJuv: function () { self.setState({ age: 'juv' }); },
+ringR: male && !juv ? 5 : 0,
+bill: male && !juv ? '#efe8d6' : '#a3967a',
+throat: male ? 'M0 0' : 'M186 80 C176 96 174 118 182 136 C194 122 198 100 194 80 Z',
+spots: male ? 'M0 0' : 'M183 96 l2 3 M188 104 l2 3 M181 108 l2 3 M186 116 l2 3 M182 124 l2 3 M189 92 l1 3',
+dBill: juv ? 'DARK' : male ? 'ORANGE-YELLOW' : 'DARKER, DULL',
+dRing: male && !juv ? 'YELLOW' : 'NONE',
+dPlumage: juv ? 'BROWN-BLACK' : male ? 'BLACK' : 'DARK BROWN',
+dThroat: male ? 'BLACK' : 'PALER, SPOTTED',
+caption: juv ? 'Juvenile. Brown-black, dark bill, no eye-ring. Sings a practice song.' : male ? 'Male, singing. Beak and tail follow the sound.' : 'Female. Dark brown, paler spotted throat and breast.',
+hatchBody: this.hatch(86, 42, 200, 182, juv ? 7 : male ? 5 : 10, true),
+hatchWing: this.hatch(96, 88, 158, 154, male ? 4 : 8, false),
+voice: [
+this.knob('PITCH', '2.4 kHz', 0.5, true),
+this.knob('BREATH', '68 %', 0.68),
+this.knob('TENSION', '55 %', 0.55),
+this.knob('TRILL', '9 Hz', 0.2),
+this.knob('ROUGH', '12 %', 0.12)
+],
+phrasing: [
+this.knob('TEMPO', '80 %', 0.4),
+this.knob('PAUSE', '4.5 s', 0.6),
+this.knob('LENGTH', '2.6 s', 0.5),
+this.knob('VARIATION', '72 %', 0.72)
+],
+surroundings: [
+this.knob('DISTANCE', '12 m', 0.3),
+this.knob('WIND', '2 m/s', 0.15),
+this.knob('SPACE', '45 %', 0.45)
+]
+};
+}
+}
+</script>
+</body>
+</html>

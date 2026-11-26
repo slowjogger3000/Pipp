@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<title>Tipp, nettapp på telefon</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+button{font:inherit;color:inherit;margin:0;cursor:pointer}
+a{color:#221c14;text-decoration:none}a:hover{color:#4f4634}
+@keyframes tipp-up{0%,30%,100%{transform:rotate(0deg)}5%{transform:rotate(-14deg)}10%{transform:rotate(-2deg)}16%{transform:rotate(-14deg)}22%{transform:rotate(-2deg)}}
+@keyframes tipp-low{0%,30%,100%{transform:rotate(0deg)}5%{transform:rotate(8deg)}10%{transform:rotate(1deg)}16%{transform:rotate(8deg)}22%{transform:rotate(1deg)}}
+@keyframes tipp-tail{0%,30%,100%{transform:rotate(0deg)}5%{transform:rotate(-5deg)}10%{transform:rotate(-1deg)}16%{transform:rotate(-5deg)}}
+@keyframes tipp-arc{0%,30%,100%{opacity:0}4%,24%{opacity:1}}
+@media (prefers-reduced-motion:reduce){.tipp-anim{animation:none!important}}
+</style>
+</helmet>
+<div style="width: 390px; min-height: 1740px; box-sizing: border-box; display: flex; flex-direction: column; background: #ddd3bd; color: #221c14; font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: 11px; line-height: 16px">
+
+<header style="height: 60px; flex: none; box-sizing: border-box; display: flex; align-items: center; gap: 12px; padding: 0 16px; border-bottom: 1px solid #221c14">
+<div style="display: flex; flex-direction: column; gap: 3px">
+<span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 32px; line-height: 1; letter-spacing: 0.02em">Tipp</span>
+<span style="display: flex; gap: 1px; width: 56px; height: 5px; background: #221c14; border: 1px solid #221c14">
+<span style="flex: 1; background: #936255"></span><span style="flex: 1; background: #b5a37a"></span><span style="flex: 1; background: #809a8c"></span><span style="flex: 1; background: #5e4458"></span>
+</span>
+</div>
+<div style="flex: 1"></div>
+<div style="display: flex">
+<button aria-label="Norsk" style="width: 44px; height: 44px; padding: 0; border: 1px solid #221c14; background: #221c14; color: #ddd3bd; font-size: 11px; font-weight: 500; letter-spacing: 0.06em">NO</button>
+<button aria-label="English" style="width: 44px; height: 44px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 11px; font-weight: 500; letter-spacing: 0.06em">EN</button>
+</div>
+<div style="display: flex">
+<button aria-label="Spill" style="width: 44px; height: 44px; padding: 0; display: flex; align-items: center; justify-content: center; border: 1px solid #221c14; background: #221c14; color: #ddd3bd"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2l9 6-9 6z" fill="currentColor"></path></svg></button>
+<button aria-label="Stopp" style="width: 44px; height: 44px; padding: 0; margin-left: -1px; display: flex; align-items: center; justify-content: center; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3h10v10H3z" fill="currentColor"></path></svg></button>
+</div>
+</header>
+
+<nav style="height: 44px; flex: none; box-sizing: border-box; display: flex; align-items: flex-end; padding: 0 16px; background: #cec2a6; border-bottom: 1px solid #221c14">
+<a href="Phone.dc.html" style="flex: 1; height: 38px; margin-bottom: -1px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 1px solid #221c14; border-bottom-color: #ddd3bd; background: #ddd3bd; font-size: 10px; font-weight: 600; letter-spacing: 0.14em">SPILL</a>
+<a href="PhoneGuide.dc.html" style="flex: 1; height: 34px; margin-left: -1px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 1px solid #221c14; border-bottom: 0; background: #cec2a6; font-size: 10px; font-weight: 600; letter-spacing: 0.14em">BOK</a>
+<a href="Listen.dc.html" style="flex: 1; height: 34px; margin-left: -1px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 1px solid #221c14; border-bottom: 0; background: #cec2a6; font-size: 10px; font-weight: 600; letter-spacing: 0.14em">LYTT</a>
+<a href="PhoneQuiz.dc.html" style="flex: 1; height: 34px; margin-left: -1px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 1px solid #221c14; border-bottom: 0; background: #cec2a6; font-size: 10px; font-weight: 600; letter-spacing: 0.14em">QUIZ</a>
+<a href="PhoneChorus.dc.html" style="flex: 1; height: 34px; margin-left: -1px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 1px solid #221c14; border-bottom: 0; background: #cec2a6; font-size: 10px; font-weight: 600; letter-spacing: 0.14em">KOR</a>
+<a href="Collection.dc.html" style="flex: 1.3; height: 34px; margin-left: -1px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 1px solid #221c14; border-bottom: 0; background: #cec2a6; font-size: 10px; font-weight: 600; letter-spacing: 0.14em">SAMLING</a>
+</nav>
+
+<main style="flex: none; display: flex; flex-direction: column; gap: 12px; padding: 12px 16px">
+
+<div style="display: flex; align-items: center">
+<button aria-label="Forrige fugl" style="width: 44px; height: 44px; flex: none; padding: 0; display: flex; align-items: center; justify-content: center; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M11 3L4 8l7 5z" fill="currentColor"></path></svg></button>
+<a href="PhoneBirds.dc.html" aria-label="Velg fugl, åpner fuglelisten" style="flex: 1; min-width: 0; height: 44px; margin-left: -1px; box-sizing: border-box; display: flex; align-items: center; gap: 8px; padding: 0 10px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #a3967a; text-align: left">
+<span style="font-size: 12px; color: #4f4634">03</span>
+<span style="font-size: 13px; font-weight: 500">Svarttrost</span>
+<span style="margin-left: auto; color: #4f4634">Turdus merula</span>
+</a>
+<button aria-label="Neste fugl" style="width: 44px; height: 44px; flex: none; padding: 0; margin-left: -1px; display: flex; align-items: center; justify-content: center; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3l7 5-7 5z" fill="currentColor"></path></svg></button>
+</div>
+
+<section style="display: flex; flex-direction: column; border: 1px solid #221c14">
+<div style="height: 28px; flex: none; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; padding: 0 8px; background: #cec2a6; border-bottom: 1px solid #221c14">
+<span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 22px; line-height: 1">Svarttrost</span>
+<sc-if value="{{ isMale }}" hint-placeholder-val="{{ true }}"><div style="display: flex">
+<button aria-pressed="true" style="width: 56px; height: 22px; padding: 0; border: 1px solid #221c14; background: #221c14; color: #ddd3bd; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">HANN</button>
+<button aria-pressed="false" onClick="{{ setFemale }}" style="width: 56px; height: 22px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">HUNN</button>
+</div></sc-if>
+<sc-if value="{{ isFemale }}" hint-placeholder-val="{{ false }}"><div style="display: flex">
+<button aria-pressed="false" onClick="{{ setMale }}" style="width: 56px; height: 22px; padding: 0; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">HANN</button>
+<button aria-pressed="true" style="width: 56px; height: 22px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #221c14; color: #ddd3bd; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">HUNN</button>
+</div></sc-if>
+<sc-if value="{{ isAdult }}" hint-placeholder-val="{{ true }}"><div style="display: flex">
+<button aria-pressed="true" style="width: 56px; height: 22px; padding: 0; border: 1px solid #221c14; background: #221c14; color: #ddd3bd; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">VOKSEN</button>
+<button aria-pressed="false" onClick="{{ setJuv }}" style="width: 40px; height: 22px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">UNG</button>
+</div></sc-if>
+<sc-if value="{{ isJuv }}" hint-placeholder-val="{{ false }}"><div style="display: flex">
+<button aria-pressed="false" onClick="{{ setAdult }}" style="width: 56px; height: 22px; padding: 0; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">VOKSEN</button>
+<button aria-pressed="true" style="width: 40px; height: 22px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #221c14; color: #ddd3bd; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">UNG</button>
+</div></sc-if>
+</div>
+<div style="height: 216px; flex: none; display: flex; align-items: center; justify-content: center; background-color: #efe8d6; background-image: linear-gradient(#c4b796 1px, transparent 1px), linear-gradient(90deg, #c4b796 1px, transparent 1px), linear-gradient(#d8ccb0 1px, transparent 1px), linear-gradient(90deg, #d8ccb0 1px, transparent 1px); background-size: 40px 40px, 40px 40px, 8px 8px, 8px 8px; box-shadow: inset 1px 1px 0 #a3967a">
+<svg viewBox="0 0 280 240" height="216" role="img" aria-label="Strektegning av en svarttrosthann som lokker fra en grein">
+<defs>
+<clipPath id="tipp-phone-body"><path d="M190 60 C184 44 158 42 150 62 C134 80 104 106 90 136 C92 146 98 154 106 158 C128 180 162 178 178 152 C192 130 198 104 192 80 C194 74 194 66 190 60 Z"></path></clipPath>
+<clipPath id="tipp-phone-wing"><path d="M152 90 C156 118 136 146 98 152 C106 136 118 110 152 90 Z"></path></clipPath>
+</defs>
+<path d="M14 211 C80 205 150 201 268 193" fill="none" stroke="#221c14" stroke-width="4"></path>
+<path d="M214 196 l20 -20 M224 186 l16 3" fill="none" stroke="#221c14" stroke-width="1.5"></path>
+<g class="tipp-anim" style="transform-origin: 98px 147px; animation: tipp-tail 4s ease-in-out infinite">
+<path d="M90 136 L42 194 L54 206 L106 158 Z" fill="#efe8d6" stroke="#221c14" stroke-width="1.5"></path>
+<path d="M94 142 L46 198 M98 147 L49 202 M102 153 L52 205" fill="none" stroke="#221c14" stroke-width="1"></path>
+</g>
+<path d="M136 172 L139 199 M152 173 L157 198 M131 201 L139 199 L148 202 M149 200 L157 198 L166 201" fill="none" stroke="#221c14" stroke-width="1.5"></path>
+<path d="M190 60 C184 44 158 42 150 62 C134 80 104 106 90 136 C92 146 98 154 106 158 C128 180 162 178 178 152 C192 130 198 104 192 80 C194 74 194 66 190 60 Z" fill="#efe8d6" stroke="#221c14" stroke-width="1.5"></path>
+<path d="{{ hatchBody }}" fill="none" stroke="#221c14" stroke-width="1" clip-path="url(#tipp-phone-body)"></path>
+<path d="{{ hatchWing }}" fill="none" stroke="#221c14" stroke-width="1" clip-path="url(#tipp-phone-wing)"></path>
+<path d="M152 90 C156 118 136 146 98 152 C106 136 118 110 152 90 Z" fill="none" stroke="#221c14" stroke-width="1.5"></path>
+<path d="{{ throat }}" fill="#efe8d6" clip-path="url(#tipp-phone-body)"></path>
+<path d="{{ spots }}" fill="none" stroke="#221c14" stroke-width="1.5" clip-path="url(#tipp-phone-body)"></path>
+<circle cx="177" cy="65" r="{{ ringR }}" fill="#efe8d6" stroke="#221c14" stroke-width="1"></circle>
+<circle cx="177" cy="65" r="2.4" fill="#221c14"></circle>
+<g class="tipp-anim" style="transform-origin: 192px 67px; animation: tipp-up 4s linear infinite"><path d="M190 60 L220 66 L193 70 Z" fill="{{ bill }}" stroke="#221c14" stroke-width="1.5" stroke-linejoin="round"></path></g>
+<g class="tipp-anim" style="transform-origin: 192px 72px; animation: tipp-low 4s linear infinite"><path d="M193 70 L216 69 L191 79 Z" fill="{{ bill }}" stroke="#221c14" stroke-width="1.5" stroke-linejoin="round"></path></g>
+<g class="tipp-anim" style="animation: tipp-arc 4s linear infinite"><path d="M230 52 A16 16 0 0 1 230 76 M237 44 A26 26 0 0 1 237 84" fill="none" stroke="#221c14" stroke-width="1.5"></path></g>
+<path d="M200 58 L200 23 M172 62 L122 36 M120 112 L72 86 M192 116 L236 142" fill="none" stroke="#4f4634" stroke-width="1"></path>
+<g font-size="8" letter-spacing="0.5">
+<text x="200" y="10" text-anchor="middle" font-weight="600" fill="#4f4634">NEBB</text><text x="200" y="20" text-anchor="middle" font-weight="500" fill="#221c14">{{ dBill }}</text>
+<text x="120" y="30" text-anchor="end" font-weight="600" fill="#4f4634">ØYERING</text><text x="120" y="40" text-anchor="end" font-weight="500" fill="#221c14">{{ dRing }}</text>
+<text x="70" y="80" text-anchor="end" font-weight="600" fill="#4f4634">DRAKT</text><text x="70" y="90" text-anchor="end" font-weight="500" fill="#221c14">{{ dPlumage }}</text>
+<text x="276" y="150" text-anchor="end" font-weight="600" fill="#4f4634">STRUPE</text><text x="276" y="160" text-anchor="end" font-weight="500" fill="#221c14">{{ dThroat }}</text>
+</g>
+</svg>
+</div>
+<div style="height: 18px; flex: none; box-sizing: border-box; display: flex; align-items: center; gap: 8px; padding: 0 8px; border-top: 1px solid #221c14; font-size: 9px; line-height: 12px"><span style="font-weight: 600; letter-spacing: 0.14em">FIG. 1</span><span>{{ caption }}</span></div>
+</section>
+
+<section style="display: flex; flex-direction: column; border: 1px solid #221c14">
+<div style="height: 28px; flex: none; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; padding: 0 8px; background: #cec2a6; border-bottom: 1px solid #221c14">
+<span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 22px; line-height: 1">Lokk</span>
+<span style="display: flex; gap: 8px; font-size: 10px; font-weight: 500; letter-spacing: 0.06em"><span style="color: #4f4634">LENGDE</span><span>0,4 s</span></span>
+</div>
+<div style="height: 160px; flex: none; display: flex">
+<div style="flex: 1; min-width: 0; position: relative; font-size: 9px; line-height: 12px; color: #4f4634">
+<span style="position: absolute; right: 4px; top: 2px">8k</span>
+<span style="position: absolute; right: 4px; top: 82px">4k</span>
+<span style="position: absolute; right: 4px; bottom: 2px">0</span>
+</div>
+<div style="width: 320px; height: 160px; flex: none; border-left: 1px solid #221c14; background-color: #efe8d6; background-image: linear-gradient(#c4b796 1px, transparent 1px), linear-gradient(90deg, #c4b796 1px, transparent 1px), linear-gradient(#d8ccb0 1px, transparent 1px), linear-gradient(90deg, #d8ccb0 1px, transparent 1px); background-size: 40px 40px, 40px 40px, 8px 8px, 8px 8px; box-shadow: inset 1px 1px 0 #a3967a">
+<svg width="320" height="160" viewBox="0 0 320 160" role="img" aria-label="Sonogram: to lokkelyder sunget, én kommer" style="display: block">
+<path d="M44 132 l4 -34 M54 136 l4 -30 M140 132 l4 -34 M150 136 l4 -30" fill="none" stroke="#221c14" stroke-width="3"></path>
+<path d="M248 132 l4 -34 M258 136 l4 -30" fill="none" stroke="#a3967a" stroke-width="3"></path>
+<rect x="164" y="4" width="36" height="4" fill="#221c14"></rect>
+<text x="158" y="10" text-anchor="end" font-size="8" font-weight="600" letter-spacing="0.5" fill="#221c14">TONE FOR HÅND</text>
+<line x1="200.5" y1="0" x2="200.5" y2="160" stroke="#5e4458" stroke-width="1"></line>
+<rect x="201" y="0" width="22" height="12" fill="#5e4458"></rect>
+<text x="205" y="9" font-size="8" font-weight="600" letter-spacing="0.5" fill="#fff8ec">NÅ</text>
+</svg>
+</div>
+</div>
+<div style="height: 16px; flex: none; display: flex; justify-content: flex-end; border-top: 1px solid #221c14; font-size: 9px; line-height: 14px; color: #4f4634">
+<span style="width: 80px; padding-left: 2px; box-sizing: border-box">0 s</span><span style="width: 80px; padding-left: 2px; box-sizing: border-box">1</span><span style="width: 80px; padding-left: 2px; box-sizing: border-box">2</span><span style="width: 80px; padding-left: 2px; box-sizing: border-box">3</span>
+</div>
+<div style="height: 18px; flex: none; box-sizing: border-box; display: flex; align-items: center; gap: 8px; padding: 0 8px; border-top: 1px solid #221c14; font-size: 9px; line-height: 12px"><span style="font-weight: 600; letter-spacing: 0.14em">FIG. 2</span><span>Lokk, vinter, dag. Blekk er sunget, grått kommer.</span></div>
+<div style="display: flex; border-top: 1px solid #221c14">
+<button aria-pressed="false" style="flex: 1.4 1 0; height: 44px; padding: 0; border: 0; border-right: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">TEGN</button>
+<button aria-pressed="true" aria-label="Normal fart" style="flex: 1 1 0; height: 44px; padding: 0; border: 0; border-right: 1px solid #221c14; background: #221c14; color: #ddd3bd; font-size: 11px; font-weight: 500">1×</button>
+<button aria-pressed="false" aria-label="Halv fart" style="flex: 1 1 0; height: 44px; padding: 0; border: 0; border-right: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 11px; font-weight: 500">½×</button>
+<button aria-pressed="false" aria-label="Kvart fart" style="flex: 1 1 0; height: 44px; padding: 0; border: 0; border-right: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 11px; font-weight: 500">¼×</button>
+<button aria-pressed="false" aria-label="Hørselsskift, en oktav ned" style="flex: 1.6 1 0; height: 44px; padding: 0; border: 0; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">−1 OKT</button>
+</div>
+</section>
+
+<section style="display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; align-items: center; gap: 6px; height: 14px"><span style="font-size: 10px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">SCENE</span><span style="flex: 1; height: 1px; background: #221c14"></span></div>
+<div style="display: grid; grid-template-columns: 60px repeat(4, minmax(0, 1fr)); row-gap: 4px; align-items: center">
+<span style="font-size: 9px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">ÅRSTID</span>
+<button style="height: 44px; padding: 0; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">VÅR</button>
+<button style="height: 44px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">SOMMER</button>
+<button style="height: 44px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">HØST</button>
+<button style="height: 44px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #221c14; color: #ddd3bd; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">VINTER</button>
+
+<span style="font-size: 9px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">TID</span>
+<button style="height: 44px; padding: 0; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">GRY</button>
+<button style="height: 44px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #221c14; color: #ddd3bd; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">DAG</button>
+<button style="height: 44px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">SKUMRING</button>
+<button style="height: 44px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">NATT</button>
+
+<span style="font-size: 9px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">TYPE</span>
+<button disabled style="height: 44px; padding: 0; border: 1px solid #221c14; background: #efe8d6 repeating-linear-gradient(135deg, rgb(34 28 20 / 0.10) 0 1px, transparent 1px 7px); color: #4f4634; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">SANG</button>
+<button style="height: 44px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #221c14; color: #ddd3bd; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">LOKK</button>
+<button style="height: 44px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">VARSEL</button>
+<button style="height: 44px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">FLUKT</button>
+
+<span style="font-size: 9px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">STED</span>
+<button style="height: 44px; padding: 0; border: 1px solid #221c14; background: #221c14; color: #ddd3bd; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">HAGE</button>
+<button style="height: 44px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">SKOG</button>
+<button style="height: 44px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">ÅPENT</button>
+<button style="height: 44px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">KYST</button>
+
+<span style="font-size: 9px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">DIALEKT</span>
+<button disabled style="grid-column: span 4; height: 44px; padding: 0; border: 1px solid #221c14; background: #efe8d6 repeating-linear-gradient(135deg, rgb(34 28 20 / 0.10) 0 1px, transparent 1px 7px); color: #4f4634; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">INGEN</button>
+
+<span style="font-size: 9px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">HERMER</span>
+<button disabled style="grid-column: span 4; height: 44px; padding: 0; border: 1px solid #221c14; background: #efe8d6 repeating-linear-gradient(135deg, rgb(34 28 20 / 0.10) 0 1px, transparent 1px 7px); color: #4f4634; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">INGEN</button>
+</div>
+<span style="font-size: 9px; line-height: 12px; color: #4f4634">Skravert: svarttrosten synger sjelden før februar.</span>
+</section>
+
+<section style="box-sizing: border-box; display: flex; flex-direction: column; gap: 6px; padding: 8px; border: 1px solid #221c14; background: #cec2a6">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
+<span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 22px; line-height: 1">Autospill</span>
+<button aria-pressed="true" style="height: 44px; padding: 0 16px; border: 1px solid #221c14; background: #221c14; color: #ddd3bd; font-size: 11px; font-weight: 500; letter-spacing: 0.06em">AUTOSPILL PÅ</button>
+</div>
+<div style="display: flex; align-items: center; gap: 8px">
+<span style="font-size: 9px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">HOLD</span>
+<div style="display: flex; flex: 1; min-width: 0">
+<div style="flex: 1; min-width: 0; height: 44px; box-sizing: border-box; display: flex; align-items: center; justify-content: flex-end; padding: 0 8px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #a3967a; font-size: 12px; font-weight: 500">3,0 s</div>
+<button aria-label="Kortere hold" style="width: 44px; height: 44px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 14px">−</button>
+<button aria-label="Lengre hold" style="width: 44px; height: 44px; padding: 0; margin-left: -1px; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 14px">+</button>
+</div>
+<button style="width: 64px; height: 44px; padding: 0; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">LÅS</button>
+</div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px">
+<button style="height: 44px; padding: 0; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">SLIPP ALLE</button>
+<button style="height: 44px; padding: 0; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">SYNG ÉN GANG</button>
+<button style="height: 44px; padding: 0; border: 1px solid #221c14; background: #efe8d6; box-shadow: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">NYTT KAST</button>
+</div>
+<div style="display: flex; align-items: center; gap: 8px; font-size: 10px; line-height: 14px; font-weight: 500; letter-spacing: 0.06em">
+<span style="width: 18px; height: 3px; flex: none; background: #221c14"></span><span>TONE HOLDT FOR HÅND</span>
+<span style="flex: 1; min-width: 0; height: 8px; box-sizing: border-box; display: flex; border: 1px solid #221c14; background: #efe8d6"><span style="width: 80%; background: #221c14"></span></span><span>2,4 s</span>
+</div>
+</section>
+
+<section style="display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; align-items: center; gap: 6px; height: 14px"><span style="font-size: 10px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">STEMME</span><span style="flex: 1; height: 1px; background: #221c14"></span></div>
+<div style="display: flex; justify-content: space-between">
+<sc-for list="{{ voice }}" as="k" hint-placeholder-count="5">
+<div style="position: relative; width: 64px; flex: none; display: flex; flex-direction: column; align-items: center; gap: 2px">
+<span style="font-size: 9px; line-height: 12px; font-weight: 600; letter-spacing: 0.1em; color: #4f4634">{{ k.label }}</span>
+<svg width="64" height="64" viewBox="0 0 72 72" role="img" aria-label="{{ k.aria }}" style="display: block">
+<circle cx="36" cy="36" r="32" fill="none" stroke="#4f4634" stroke-width="4" stroke-dasharray="{{ k.ticks }}" transform="rotate(135 36 36)"></circle>
+<circle cx="36" cy="36" r="26.5" fill="none" stroke="#b5a98b" stroke-width="3" stroke-dasharray="124.9 200" transform="rotate(135 36 36)"></circle>
+<circle cx="36" cy="36" r="26.5" fill="none" stroke="{{ k.ring }}" stroke-width="3" stroke-dasharray="{{ k.dash }}" transform="rotate(135 36 36)"></circle>
+<circle cx="36" cy="36" r="22" fill="#efe8d6" stroke="#221c14"></circle>
+<line x1="36" y1="30" x2="36" y2="17" stroke="#221c14" stroke-width="2" transform="{{ k.rot }}"></line>
+</svg>
+<span style="font-size: 10px; line-height: 14px; font-weight: 500; letter-spacing: 0.06em">{{ k.value }}</span>
+<sc-if value="{{ k.hand }}" hint-placeholder-val="{{ false }}"><span style="position: absolute; top: 10px; right: -6px; padding: 0 3px; background: #221c14; color: #ddd3bd; font-size: 8px; line-height: 10px; font-weight: 600; letter-spacing: 0.06em">HÅND</span></sc-if>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section style="display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; align-items: center; gap: 6px; height: 14px"><span style="font-size: 10px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">FRASERING</span><span style="flex: 1; height: 1px; background: #221c14"></span></div>
+<div style="display: flex; justify-content: space-between">
+<sc-for list="{{ phrasing }}" as="k" hint-placeholder-count="4">
+<div style="position: relative; width: 64px; flex: none; display: flex; flex-direction: column; align-items: center; gap: 2px">
+<span style="font-size: 9px; line-height: 12px; font-weight: 600; letter-spacing: 0.1em; color: #4f4634">{{ k.label }}</span>
+<svg width="64" height="64" viewBox="0 0 72 72" role="img" aria-label="{{ k.aria }}" style="display: block">
+<circle cx="36" cy="36" r="32" fill="none" stroke="#4f4634" stroke-width="4" stroke-dasharray="{{ k.ticks }}" transform="rotate(135 36 36)"></circle>
+<circle cx="36" cy="36" r="26.5" fill="none" stroke="#b5a98b" stroke-width="3" stroke-dasharray="124.9 200" transform="rotate(135 36 36)"></circle>
+<circle cx="36" cy="36" r="26.5" fill="none" stroke="{{ k.ring }}" stroke-width="3" stroke-dasharray="{{ k.dash }}" transform="rotate(135 36 36)"></circle>
+<circle cx="36" cy="36" r="22" fill="#efe8d6" stroke="#221c14"></circle>
+<line x1="36" y1="30" x2="36" y2="17" stroke="#221c14" stroke-width="2" transform="{{ k.rot }}"></line>
+</svg>
+<span style="font-size: 10px; line-height: 14px; font-weight: 500; letter-spacing: 0.06em">{{ k.value }}</span>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section style="display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; align-items: center; gap: 6px; height: 14px"><span style="font-size: 10px; font-weight: 600; letter-spacing: 0.14em; color: #4f4634">OMGIVELSER</span><span style="flex: 1; height: 1px; background: #221c14"></span></div>
+<div style="display: flex; gap: 34px">
+<sc-for list="{{ surroundings }}" as="k" hint-placeholder-count="3">
+<div style="position: relative; width: 64px; flex: none; display: flex; flex-direction: column; align-items: center; gap: 2px">
+<span style="font-size: 9px; line-height: 12px; font-weight: 600; letter-spacing: 0.1em; color: #4f4634">{{ k.label }}</span>
+<svg width="64" height="64" viewBox="0 0 72 72" role="img" aria-label="{{ k.aria }}" style="display: block">
+<circle cx="36" cy="36" r="32" fill="none" stroke="#4f4634" stroke-width="4" stroke-dasharray="{{ k.ticks }}" transform="rotate(135 36 36)"></circle>
+<circle cx="36" cy="36" r="26.5" fill="none" stroke="#b5a98b" stroke-width="3" stroke-dasharray="124.9 200" transform="rotate(135 36 36)"></circle>
+<circle cx="36" cy="36" r="26.5" fill="none" stroke="{{ k.ring }}" stroke-width="3" stroke-dasharray="{{ k.dash }}" transform="rotate(135 36 36)"></circle>
+<circle cx="36" cy="36" r="22" fill="#efe8d6" stroke="#221c14"></circle>
+<line x1="36" y1="30" x2="36" y2="17" stroke="#221c14" stroke-width="2" transform="{{ k.rot }}"></line>
+</svg>
+<span style="font-size: 10px; line-height: 14px; font-weight: 500; letter-spacing: 0.06em">{{ k.value }}</span>
+</div>
+</sc-for>
+</div>
+</section>
+
+</main>
+
+<footer style="height: 28px; flex: none; margin-top: auto; box-sizing: border-box; display: flex; align-items: center; gap: 16px; padding: 0 16px; background: #cec2a6; border-top: 1px solid #221c14; font-size: 10px; font-weight: 500; letter-spacing: 0.06em">
+<span>SPILLER</span>
+<span style="color: #4f4634">SVARTTROST, VINTER, DAG, LOKK, HAGE</span>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1740}}'>
+class Component extends DCLogic {
+hatch(x0, y0, x1, y1, step, up) {
+var d = '';
+var h = y1 - y0;
+for (var x = x0 - h; x < x1; x += step) {
+d += up ? 'M' + x + ' ' + y1 + 'L' + (x + h) + ' ' + y0 : 'M' + x + ' ' + y0 + 'L' + (x + h) + ' ' + y1;
+}
+return d;
+}
+knob(label, value, v, hand) {
+var ticks = '1 14.08 1 14.08 1 14.08 1 14.08 1 14.08 1 14.08 1 14.08 1 14.08 1 14.08 1 14.08 1 60';
+return {
+label: label,
+value: value,
+aria: label + ' ' + value,
+ring: hand ? '#221c14' : '#5e4458',
+dash: (Math.round(v * 1249) / 10) + ' 200',
+rot: 'rotate(' + (Math.round((v * 270 - 135) * 10) / 10) + ' 36 36)',
+hand: !!hand,
+ticks: ticks
+};
+}
+renderVals() {
+var self = this;
+var male = (this.state || {}).sex !== 'female';
+var juv = (this.state || {}).age === 'juv';
+return {
+isMale: male,
+isFemale: !male,
+setMale: function () { self.setState({ sex: 'male' }); },
+setFemale: function () { self.setState({ sex: 'female' }); },
+isAdult: !juv,
+isJuv: juv,
+setAdult: function () { self.setState({ age: 'adult' }); },
+setJuv: function () { self.setState({ age: 'juv' }); },
+ringR: male && !juv ? 5 : 0,
+bill: male && !juv ? '#efe8d6' : '#a3967a',
+throat: male ? 'M0 0' : 'M186 80 C176 96 174 118 182 136 C194 122 198 100 194 80 Z',
+spots: male ? 'M0 0' : 'M183 96 l2 3 M188 104 l2 3 M181 108 l2 3 M186 116 l2 3 M182 124 l2 3 M189 92 l1 3',
+dBill: juv ? 'MØRKT' : male ? 'ORANSJEGULT' : 'MØRKERE',
+dRing: male && !juv ? 'GUL' : 'INGEN',
+dPlumage: juv ? 'BRUNSVART' : male ? 'SVART' : 'MØRKEBRUN',
+dThroat: male ? 'SVART' : 'LYSERE, FLEKKET',
+caption: juv ? 'Ungfugl. Brunsvart, mørkt nebb, ingen øyering.' : male ? 'Hann. Svart, med oransjegult nebb og gul øyering.' : 'Hunn. Mørkebrun, lysere flekket strupe og bryst.',
+hatchBody: this.hatch(86, 42, 200, 182, juv ? 7 : male ? 5 : 10, true),
+hatchWing: this.hatch(96, 88, 158, 154, male ? 4 : 8, false),
+voice: [
+this.knob('TONE', '1,6 kHz', 0.3, true),
+this.knob('PUST', '40 %', 0.4),
+this.knob('SPENN', '50 %', 0.5),
+this.knob('TRILLE', '2 Hz', 0.05),
+this.knob('RUHET', '30 %', 0.3)
+],
+phrasing: [
+this.knob('TEMPO', '100 %', 0.5),
+this.knob('PAUSE', '6,0 s', 0.7),
+this.knob('LENGDE', '0,4 s', 0.1),
+this.knob('VARIASJON', '35 %', 0.35)
+],
+surroundings: [
+this.knob('AVSTAND', '8 m', 0.2),
+this.knob('VIND', '4 m/s', 0.3),
+this.knob('ROM', '30 %', 0.3)
+]
+};
+}
+}
+</script>
+</body>
+</html>
