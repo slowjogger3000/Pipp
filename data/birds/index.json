@@ -1,0 +1,192 @@
+{
+ "_note": "The 18 birds in list order, from birds.md. Names and Latin names are not checked against Artsdatabanken, so verified is false. Ids with æ, ø, å get no folder until M3 settles how they are written on disk.",
+ "verified_names": false,
+ "groups": [
+  "garden",
+  "forest",
+  "coast",
+  "night"
+ ],
+ "birds": [
+  {
+   "id": "kjøttmeis",
+   "number": "01",
+   "group": "garden",
+   "name": {
+    "no": "Kjøttmeis",
+    "en": "Great tit"
+   },
+   "latin": "Parus major"
+  },
+  {
+   "id": "blåmeis",
+   "number": "02",
+   "group": "garden",
+   "name": {
+    "no": "Blåmeis",
+    "en": "Blue tit"
+   },
+   "latin": "Cyanistes caeruleus"
+  },
+  {
+   "id": "svarttrost",
+   "number": "03",
+   "group": "garden",
+   "name": {
+    "no": "Svarttrost",
+    "en": "Blackbird"
+   },
+   "latin": "Turdus merula"
+  },
+  {
+   "id": "rødstrupe",
+   "number": "04",
+   "group": "garden",
+   "name": {
+    "no": "Rødstrupe",
+    "en": "Robin"
+   },
+   "latin": "Erithacus rubecula"
+  },
+  {
+   "id": "bokfink",
+   "number": "05",
+   "group": "garden",
+   "name": {
+    "no": "Bokfink",
+    "en": "Chaffinch"
+   },
+   "latin": "Fringilla coelebs"
+  },
+  {
+   "id": "gråspurv",
+   "number": "06",
+   "group": "garden",
+   "name": {
+    "no": "Gråspurv",
+    "en": "House sparrow"
+   },
+   "latin": "Passer domesticus"
+  },
+  {
+   "id": "løvsanger",
+   "number": "07",
+   "group": "forest",
+   "name": {
+    "no": "Løvsanger",
+    "en": "Willow warbler"
+   },
+   "latin": "Phylloscopus trochilus"
+  },
+  {
+   "id": "måltrost",
+   "number": "08",
+   "group": "forest",
+   "name": {
+    "no": "Måltrost",
+    "en": "Song thrush"
+   },
+   "latin": "Turdus philomelos"
+  },
+  {
+   "id": "gjøk",
+   "number": "09",
+   "group": "forest",
+   "name": {
+    "no": "Gjøk",
+    "en": "Cuckoo"
+   },
+   "latin": "Cuculus canorus"
+  },
+  {
+   "id": "flaggspett",
+   "number": "10",
+   "group": "forest",
+   "name": {
+    "no": "Flaggspett",
+    "en": "Great spotted woodpecker"
+   },
+   "latin": "Dendrocopos major"
+  },
+  {
+   "id": "gjerdesmett",
+   "number": "11",
+   "group": "forest",
+   "name": {
+    "no": "Gjerdesmett",
+    "en": "Wren"
+   },
+   "latin": "Troglodytes troglodytes"
+  },
+  {
+   "id": "gråmåke",
+   "number": "12",
+   "group": "coast",
+   "name": {
+    "no": "Gråmåke",
+    "en": "Herring gull"
+   },
+   "latin": "Larus argentatus"
+  },
+  {
+   "id": "tjeld",
+   "number": "13",
+   "group": "coast",
+   "name": {
+    "no": "Tjeld",
+    "en": "Oystercatcher"
+   },
+   "latin": "Haematopus ostralegus"
+  },
+  {
+   "id": "ærfugl",
+   "number": "14",
+   "group": "coast",
+   "name": {
+    "no": "Ærfugl",
+    "en": "Eider"
+   },
+   "latin": "Somateria mollissima"
+  },
+  {
+   "id": "storspove",
+   "number": "15",
+   "group": "coast",
+   "name": {
+    "no": "Storspove",
+    "en": "Curlew"
+   },
+   "latin": "Numenius arquata"
+  },
+  {
+   "id": "kattugle",
+   "number": "16",
+   "group": "night",
+   "name": {
+    "no": "Kattugle",
+    "en": "Tawny owl"
+   },
+   "latin": "Strix aluco"
+  },
+  {
+   "id": "rugde",
+   "number": "17",
+   "group": "night",
+   "name": {
+    "no": "Rugde",
+    "en": "Woodcock"
+   },
+   "latin": "Scolopax rusticola"
+  },
+  {
+   "id": "nattergal",
+   "number": "18",
+   "group": "night",
+   "name": {
+    "no": "Nattergal",
+    "en": "Thrush nightingale"
+   },
+   "latin": "Luscinia luscinia"
+  }
+ ]
+}

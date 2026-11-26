@@ -111,6 +111,10 @@ struct SceneRules
     Range lengthS;
 };
 
+// A contour at t (0 to 1). Pitch moves in log frequency, as it is heard.
+float contourAt(const std::vector<ContourPoint>& c, float t) noexcept;
+float contourPitchAt(const std::vector<ContourPoint>& c, float t) noexcept;
+
 SceneRules rulesFor(const SongType& t, int season, int time, int sex, int age) noexcept;
 
 // Fills out from the two files' text. Returns false and sets error on bad data.

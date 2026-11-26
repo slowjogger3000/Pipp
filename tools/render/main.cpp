@@ -3,6 +3,7 @@
 //   tipp-render --bird svarttrost --type song --seconds 30 --out out/svarttrost.wav
 //   tipp-render --bird svarttrost --type call --seed 7 --set su_distance=60 --out out/x.wav
 //   tipp-render --list-params
+//   tipp-render --bird svarttrost --check-override
 //
 // --set id=value holds a knob by hand for the whole render, or sets any
 // other parameter. Choices take their option id: --set sc_time=dusk.
@@ -64,7 +65,8 @@ void usage()
     std::fprintf(stderr,
         "usage: tipp-render --bird <id> [--type song|call|alarm|flight] [--seconds <s>]\n"
         "                   [--seed <n>] [--set <id>=<value>]... [--data <dir>] --out <file.wav>\n"
-        "       tipp-render --list-params\n");
+        "       tipp-render --list-params\n"
+        "       tipp-render --bird <id> --check-override\n");
 }
 
 bool readFile(const std::string& path, std::string& out)
@@ -104,6 +106,108 @@ bool parseValue(const tipp::params::Info& info, const std::string& text, float& 
     out = std::strtof(text.c_str(), &end);
     return end != text.c_str() && *end == '\0';
 }
+
+// Drives a knob the way the interface does and checks the override
+// sequence from prd.md: hold, 3 s wait, 300 ms return, latch, return all,
+// autoplay off. Also checks the sonogram feed and the published phrase.
+int checkOverride(const tipp::BirdData& bird)
+{
+    namespace P = tipp::params;
+    using Mode = tipp::Engine::KnobMode;
+    tipp::Engine engine;
+    engine.prepare(kSampleRate);
+    engine.setBird(&bird);
+    engine.setParam(P::indexOf(P::pb_play), 1.0f);
+
+    std::vector<float> buf(32);
+    double now = 0.0;
+    auto run = [&](double s) {
+        const auto blocks = static_cast<long>(s * kSampleRate / 32.0 + 0.5);
+        for (long b = 0; b < blocks; ++b)
+            engine.process(buf.data(), buf.data(), 32);
+        now += s;
+    };
+
+    int failures = 0;
+    auto expect = [&](bool ok, const char* what) {
+        std::printf("%s  %6.2f s  %s\n", ok ? "pass" : "FAIL", now, what);
+        if (! ok)
+            ++failures;
+    };
+    const int k = tipp::kPitch;
+    const tipp::Range autoRange = bird.types[tipp::kSong].autoRange[static_cast<std::size_t>(k)];
+    auto inAuto = [&] { const float v = engine.knobValue(k); return v >= autoRange.lo - 1e-4f && v <= autoRange.hi + 1e-4f; };
+    auto touch = [&](float v) { engine.setParam(k, v); engine.handDown(k); };
+
+    run(2.0);
+    expect(engine.knobMode(k) == Mode::Auto && inAuto(), "autoplay sings the knob");
+
+    touch(1.5f);
+    run(1.0);
+    expect(engine.knobMode(k) == Mode::Held && std::abs(engine.knobValue(k) - 1.5f) < 1e-5f, "held: hand value in use");
+    engine.setParam(k, 1.6f);
+    run(0.1);
+    expect(std::abs(engine.knobValue(k) - 1.6f) < 1e-5f, "held: follows the drag");
+
+    engine.handUp(k);
+    run(1.0);
+    expect(engine.knobMode(k) == Mode::Hold && std::abs(engine.knobValue(k) - 1.6f) < 1e-5f, "released: keeps the hand value");
+    expect(std::abs(engine.holdLeft(k) - 2.0f) < 0.02f, "released: 2.0 s of hold left");
+    run(1.95);
+    expect(engine.knobMode(k) == Mode::Hold, "still holding at 2.95 s");
+    run(0.15);
+    expect(engine.knobMode(k) == Mode::Return && engine.knobValue(k) < 1.6f && engine.knobValue(k) > autoRange.hi,
+           "returning at 3.1 s, between hand and autoplay");
+    run(0.25);
+    expect(engine.knobMode(k) == Mode::Auto && inAuto(), "back to autoplay by 3.35 s");
+
+    // Sonogram feed marks the hand time.
+    {
+        const std::uint32_t w = engine.sonoWritten();
+        const double rate = engine.sonoFrameRate();
+        const auto back = [&](double s) { return w - 1u - static_cast<std::uint32_t>(s * rate); };
+        expect(std::abs(rate - 375.0) < 1e-6, "sonogram frame rate 375 per s");
+        expect((engine.sonoFrame(back(2.0)).handMask & 1u) != 0u, "sonogram marks the hold");
+        expect(engine.sonoFrame(back(0.1)).handMask == 0u, "sonogram mark ends with the return");
+    }
+
+    engine.setParam(P::indexOf(P::ap_latch), 1.0f);
+    touch(0.8f);
+    run(0.2);
+    engine.handUp(k);
+    run(6.0);
+    expect(engine.knobMode(k) == Mode::Hold && std::abs(engine.knobValue(k) - 0.8f) < 1e-5f, "latch: still holding after 6 s");
+    expect(engine.holdLeft(k) < 0.0f, "latch: no countdown");
+    engine.setParam(k + 1, 60.0f); // breath, a second override
+    engine.handDown(k + 1);
+    engine.handUp(k + 1);
+    run(0.1);
+    engine.trigger(P::indexOf(P::ap_return_all));
+    run(0.35);
+    expect(engine.knobMode(k) == Mode::Auto && engine.knobMode(k + 1) == Mode::Auto, "return all: both knobs back by 0.35 s");
+    engine.setParam(P::indexOf(P::ap_latch), 0.0f);
+
+    engine.setParam(P::indexOf(P::ap_on), 0.0f);
+    touch(1.2f);
+    run(0.2);
+    engine.handUp(k);
+    run(6.0);
+    expect(engine.knobMode(k) == Mode::Hold && std::abs(engine.knobValue(k) - 1.2f) < 1e-5f, "autoplay off: knob stays where the hand left it");
+    const auto before = engine.phrasesStarted();
+    engine.trigger(P::indexOf(P::ap_sing_once));
+    run(0.1);
+    expect(engine.phrasesStarted() == before + 1u, "autoplay off: sing once starts one phrase");
+    tipp::Engine::PhraseView view;
+    bool read = false;
+    for (int i = 0; i < 4 && ! read; ++i)
+        read = engine.readPhrase(view);
+    expect(read && view.count > 0 && view.number == engine.phrasesStarted() && engine.singing(), "phrase published for the sonogram");
+    run(8.0);
+    expect(engine.phrasesStarted() == before + 1u, "autoplay off: no second phrase");
+
+    std::printf("%s\n", failures == 0 ? "override check passed" : "override check FAILED");
+    return failures == 0 ? 0 : 1;
+}
 } // namespace
 
 int main(int argc, char** argv)
@@ -112,6 +216,7 @@ int main(int argc, char** argv)
     std::string outPath, birdId, type = "song", dataDir;
     std::uint32_t seed = 1u;
     std::vector<std::pair<std::string, std::string>> sets;
+    bool overrideCheck = false;
 
     for (int i = 1; i < argc; ++i)
     {
@@ -125,6 +230,7 @@ int main(int argc, char** argv)
         else if (a == "--seed" && hasValue)    seed = static_cast<std::uint32_t>(std::strtoul(argv[++i], nullptr, 10));
         else if (a == "--data" && hasValue)    dataDir = argv[++i];
         else if (a == "--out" && hasValue)     outPath = argv[++i];
+        else if (a == "--check-override")      overrideCheck = true;
         else if (a == "--set" && hasValue)
         {
             const std::string kv = argv[++i];
@@ -135,7 +241,7 @@ int main(int argc, char** argv)
         else { usage(); return 2; }
     }
 
-    if (outPath.empty() || birdId.empty() || seconds <= 0.5)
+    if ((outPath.empty() && ! overrideCheck) || birdId.empty() || seconds <= 0.5)
     {
         usage();
         return 2;
@@ -172,6 +278,9 @@ int main(int argc, char** argv)
         std::fprintf(stderr, "%s: %s\n", birdId.c_str(), error.c_str());
         return 2;
     }
+
+    if (overrideCheck)
+        return checkOverride(bird);
 
     namespace P = tipp::params;
     tipp::Engine engine;

@@ -40,38 +40,25 @@ float limit(float x) noexcept
     return x < 0.0f ? -y : y;
 }
 
-float interp(const std::vector<ContourPoint>& c, float t) noexcept
-{
-    if (t <= c.front().t)
-        return c.front().v;
-    for (std::size_t i = 1; i < c.size(); ++i)
-        if (t <= c[i].t)
-        {
-            const float span = c[i].t - c[i - 1].t;
-            const float u = span > 0.0f ? (t - c[i - 1].t) / span : 1.0f;
-            return c[i - 1].v + (c[i].v - c[i - 1].v) * u;
-        }
-    return c.back().v;
-}
-
-// Pitch moves in log frequency, as it is heard.
-float interpPitch(const std::vector<ContourPoint>& c, float t) noexcept
-{
-    if (t <= c.front().t)
-        return c.front().v;
-    for (std::size_t i = 1; i < c.size(); ++i)
-        if (t <= c[i].t)
-        {
-            const float span = c[i].t - c[i - 1].t;
-            const float u = span > 0.0f ? (t - c[i - 1].t) / span : 1.0f;
-            return c[i - 1].v * std::exp2(u * std::log2(c[i].v / c[i - 1].v));
-        }
-    return c.back().v;
-}
 } // namespace
 
 Engine::Engine()
 {
+    for (int i = 0; i < kSonoFrames; ++i)
+    {
+        const auto u = static_cast<std::size_t>(i);
+        sonoFreq[u].store(0.0f, std::memory_order_relaxed);
+        sonoAmp[u].store(0.0f, std::memory_order_relaxed);
+        sonoMask[u].store(0u, std::memory_order_relaxed);
+    }
+    for (int i = 0; i < kMaxNotes; ++i)
+    {
+        const auto u = static_cast<std::size_t>(i);
+        pvSyl[u].store(0, std::memory_order_relaxed);
+        pvStart[u].store(0.0f, std::memory_order_relaxed);
+        pvDur[u].store(0.0f, std::memory_order_relaxed);
+        pvMul[u].store(1.0f, std::memory_order_relaxed);
+    }
     for (std::size_t i = 0; i < values.size(); ++i)
         values[i].store(static_cast<float>(P::all[i].def), std::memory_order_relaxed);
     for (int k = 0; k < kNumKnobs; ++k)
@@ -81,6 +68,8 @@ Engine::Engine()
         handTouches[u].store(0u, std::memory_order_relaxed);
         effOut[u].store(static_cast<float>(P::all[u].def), std::memory_order_relaxed);
         overOut[u].store(false, std::memory_order_relaxed);
+        modeOut[u].store(0u, std::memory_order_relaxed);
+        holdOut[u].store(0.0f, std::memory_order_relaxed);
         autoVal[u] = autoFrom[u] = autoTo[u] = eff[u] = static_cast<float>(P::all[u].def);
     }
 }
@@ -88,6 +77,7 @@ Engine::Engine()
 void Engine::prepare(double sampleRate)
 {
     sr = static_cast<float>(sampleRate);
+    srOut.store(sampleRate, std::memory_order_relaxed);
     voice.prepare(sampleRate);
     surroundings.prepare(sampleRate);
     seenSeed = seedIn.load(std::memory_order_relaxed);
@@ -99,7 +89,11 @@ void Engine::prepare(double sampleRate)
     for (int k = 0; k < kNumKnobs; ++k)
         seenTouches[static_cast<std::size_t>(k)] = handTouches[static_cast<std::size_t>(k)].load(std::memory_order_relaxed);
     master = 0.0f;
-    peak.store(0.0f, std::memory_order_relaxed);
+    peakL.store(0.0f, std::memory_order_relaxed);
+    peakR.store(0.0f, std::memory_order_relaxed);
+    sonoSub = 0;
+    sonoBestAmp = sonoBestFreq = 0.0f;
+    sonoBestMask = 0;
     bird = nullptr;
     birdActive.store(nullptr, std::memory_order_release);
     resetBird();
@@ -155,6 +149,104 @@ bool Engine::knobOverridden(int knob) const noexcept
     if (knob < 0 || knob >= kNumKnobs)
         return false;
     return overOut[static_cast<std::size_t>(knob)].load(std::memory_order_relaxed);
+}
+
+Engine::KnobMode Engine::knobMode(int knob) const noexcept
+{
+    if (knob < 0 || knob >= kNumKnobs)
+        return KnobMode::Auto;
+    return static_cast<KnobMode>(modeOut[static_cast<std::size_t>(knob)].load(std::memory_order_relaxed));
+}
+
+float Engine::holdLeft(int knob) const noexcept
+{
+    if (knob < 0 || knob >= kNumKnobs)
+        return 0.0f;
+    return holdOut[static_cast<std::size_t>(knob)].load(std::memory_order_relaxed);
+}
+
+void Engine::takePeaks(float& left, float& right) noexcept
+{
+    left = peakL.exchange(0.0f, std::memory_order_relaxed);
+    right = peakR.exchange(0.0f, std::memory_order_relaxed);
+}
+
+Engine::SonoFrame Engine::sonoFrame(std::uint32_t index) const noexcept
+{
+    const auto u = static_cast<std::size_t>(index & static_cast<std::uint32_t>(kSonoFrames - 1));
+    SonoFrame f;
+    f.freqHz = sonoFreq[u].load(std::memory_order_relaxed);
+    f.amp = sonoAmp[u].load(std::memory_order_relaxed);
+    f.handMask = sonoMask[u].load(std::memory_order_relaxed);
+    return f;
+}
+
+bool Engine::readPhrase(PhraseView& out) const noexcept
+{
+    const std::uint32_t s1 = pvSeq.load(std::memory_order_acquire);
+    if ((s1 & 1u) != 0u)
+        return false;
+    out.number = pvNumber.load(std::memory_order_relaxed);
+    out.count = std::clamp(pvCount.load(std::memory_order_relaxed), 0, kMaxNotes);
+    out.lengthMs = pvLength.load(std::memory_order_relaxed);
+    for (int i = 0; i < out.count; ++i)
+    {
+        const auto u = static_cast<std::size_t>(i);
+        out.notes[u].syl = pvSyl[u].load(std::memory_order_relaxed);
+        out.notes[u].startMs = pvStart[u].load(std::memory_order_relaxed);
+        out.notes[u].durMs = pvDur[u].load(std::memory_order_relaxed);
+        out.notes[u].pitchMul = pvMul[u].load(std::memory_order_relaxed);
+    }
+    std::atomic_thread_fence(std::memory_order_acquire);
+    return pvSeq.load(std::memory_order_relaxed) == s1;
+}
+
+void Engine::publishPhrase() noexcept
+{
+    const std::uint32_t s = pvSeq.load(std::memory_order_relaxed);
+    pvSeq.store(s + 1u, std::memory_order_relaxed);
+    std::atomic_thread_fence(std::memory_order_release);
+    pvNumber.store(phraseCount.load(std::memory_order_relaxed), std::memory_order_relaxed);
+    pvCount.store(cur.count, std::memory_order_relaxed);
+    pvLength.store(cur.lengthMs, std::memory_order_relaxed);
+    for (int i = 0; i < cur.count; ++i)
+    {
+        const auto u = static_cast<std::size_t>(i);
+        pvSyl[u].store(cur.notes[u].syl, std::memory_order_relaxed);
+        pvStart[u].store(cur.notes[u].startMs, std::memory_order_relaxed);
+        pvDur[u].store(cur.notes[u].durMs, std::memory_order_relaxed);
+        pvMul[u].store(cur.notes[u].pitchMul, std::memory_order_relaxed);
+    }
+    pvSeq.store(s + 2u, std::memory_order_release);
+}
+
+void Engine::feedSonogram(const VoiceControls& vc) noexcept
+{
+    std::uint16_t mask = 0;
+    for (int k = 0; k < kNumKnobs; ++k)
+    {
+        const Mode m = knobs[static_cast<std::size_t>(k)].mode;
+        if (m == Mode::Held || m == Mode::Hold)
+            mask = static_cast<std::uint16_t>(mask | (1u << static_cast<unsigned>(k)));
+    }
+    if (vc.amp >= sonoBestAmp)
+    {
+        sonoBestAmp = vc.amp;
+        sonoBestFreq = vc.freqHz;
+    }
+    sonoBestMask = static_cast<std::uint16_t>(sonoBestMask | mask);
+
+    if (++sonoSub < kSonoDecim)
+        return;
+    const std::uint32_t n = sonoCount.load(std::memory_order_relaxed);
+    const auto u = static_cast<std::size_t>(n & static_cast<std::uint32_t>(kSonoFrames - 1));
+    sonoFreq[u].store(sonoBestFreq, std::memory_order_relaxed);
+    sonoAmp[u].store(sonoBestAmp, std::memory_order_relaxed);
+    sonoMask[u].store(sonoBestMask, std::memory_order_relaxed);
+    sonoCount.store(n + 1u, std::memory_order_release);
+    sonoSub = 0;
+    sonoBestAmp = sonoBestFreq = 0.0f;
+    sonoBestMask = 0;
 }
 
 int Engine::choice(int paramIndex) const noexcept
@@ -293,8 +385,13 @@ void Engine::updateKnobs(float dt) noexcept
                 break;
         }
 
+        float left = 0.0f;
+        if (s.mode == Mode::Held || s.mode == Mode::Hold)
+            left = (! apOn || latch) ? -1.0f : std::max(0.0f, apHold - (s.mode == Mode::Hold ? s.timer : 0.0f));
         effOut[u].store(eff[u], std::memory_order_relaxed);
         overOut[u].store(s.mode != Mode::Auto, std::memory_order_relaxed);
+        modeOut[u].store(static_cast<std::uint8_t>(s.mode), std::memory_order_relaxed);
+        holdOut[u].store(left, std::memory_order_relaxed);
     }
 }
 
@@ -402,6 +499,7 @@ void Engine::startPhrase() noexcept
     phraseMs = 0.0f;
     cursor = 0;
     phraseCount.fetch_add(1u, std::memory_order_relaxed);
+    publishPhrase();
 }
 
 void Engine::runAutoplay(float dt, VoiceControls& vc) noexcept
@@ -495,8 +593,8 @@ void Engine::runAutoplay(float dt, VoiceControls& vc) noexcept
     }
 
     const float u = (phraseMs - n.startMs) / n.durMs;
-    vc.freqHz = interpPitch(s.pitch, u) * n.pitchMul * pitchKnob;
-    vc.amp = interp(s.amp, u) * n.gain * kVoiceLevel;
+    vc.freqHz = contourPitchAt(s.pitch, u) * n.pitchMul * pitchKnob;
+    vc.amp = contourAt(s.amp, u) * n.gain * kVoiceLevel;
     lastFreq = vc.freqHz;
 
     if (s.trillHz > 0.0f)
@@ -515,7 +613,7 @@ void Engine::runAutoplay(float dt, VoiceControls& vc) noexcept
 
 void Engine::process(float* left, float* right, int numSamples) noexcept
 {
-    float blockPeak = 0.0f;
+    float blockL = 0.0f, blockR = 0.0f;
     const float masterStep = 1.0f / (0.03f * sr);
 
     for (int start = 0; start < numSamples; start += kSubBlock)
@@ -538,6 +636,10 @@ void Engine::process(float* left, float* right, int numSamples) noexcept
 
         VoiceControls vc;
         runAutoplay(dt, vc);
+        singingOut.store(playing, std::memory_order_relaxed);
+        posOut.store(phraseMs, std::memory_order_relaxed);
+        tempoOut.store(std::max(0.25f, eff[kTempo] / 100.0f), std::memory_order_relaxed);
+        feedSonogram(vc);
 
         std::fill(birdBuf.begin(), birdBuf.begin() + n, 0.0f);
         voice.render(birdBuf.data(), n, vc);
@@ -556,11 +658,16 @@ void Engine::process(float* left, float* right, int numSamples) noexcept
             l[i] = a;
             if (right != left)
                 r[i] = b;
-            blockPeak = std::max({ blockPeak, std::fabs(a), std::fabs(b) });
+            blockL = std::max(blockL, std::fabs(a));
+            blockR = std::max(blockR, std::fabs(b));
         }
     }
 
-    peak.store(blockPeak, std::memory_order_relaxed);
+    // Max since the interface last took them.
+    for (float old = peakL.load(std::memory_order_relaxed); blockL > old
+         && ! peakL.compare_exchange_weak(old, blockL, std::memory_order_relaxed);) {}
+    for (float old = peakR.load(std::memory_order_relaxed); blockR > old
+         && ! peakR.compare_exchange_weak(old, blockR, std::memory_order_relaxed);) {}
     levelOut.store(voice.envelope(), std::memory_order_relaxed);
 }
 } // namespace tipp

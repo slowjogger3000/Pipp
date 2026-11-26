@@ -19,12 +19,33 @@ juce_add_gui_app(Tipp
     BUNDLE_ID com.skisse.tipp
     VERSION ${PROJECT_VERSION})
 
-target_sources(Tipp PRIVATE Source/Main.cpp)
+target_sources(Tipp PRIVATE Source/Main.cpp Source/MainComponent.cpp)
+target_include_directories(Tipp PRIVATE Source)
+
+# IBM Plex Mono and Instrument Serif (both SIL OFL), embedded when present.
+set(TIPP_FONTS
+    ${CMAKE_CURRENT_SOURCE_DIR}/Resources/fonts/IBMPlexMono-Regular.ttf
+    ${CMAKE_CURRENT_SOURCE_DIR}/Resources/fonts/IBMPlexMono-Medium.ttf
+    ${CMAKE_CURRENT_SOURCE_DIR}/Resources/fonts/IBMPlexMono-SemiBold.ttf
+    ${CMAKE_CURRENT_SOURCE_DIR}/Resources/fonts/InstrumentSerif-Regular.ttf)
+set(TIPP_HAS_FONTS 1)
+foreach(f ${TIPP_FONTS})
+    if(NOT EXISTS ${f})
+        set(TIPP_HAS_FONTS 0)
+    endif()
+endforeach()
+if(TIPP_HAS_FONTS)
+    juce_add_binary_data(TippFonts SOURCES ${TIPP_FONTS})
+    target_link_libraries(Tipp PRIVATE TippFonts)
+else()
+    message(WARNING "Fonts missing in standalone/Resources/fonts. Falling back to Menlo and Georgia.")
+endif()
 
 target_compile_definitions(Tipp PRIVATE
     JUCE_WEB_BROWSER=0
     JUCE_USE_CURL=0
     TIPP_DATA_DIR="${CMAKE_SOURCE_DIR}/data"
+    TIPP_HAS_FONTS=${TIPP_HAS_FONTS}
     JUCE_APPLICATION_NAME_STRING="$<TARGET_PROPERTY:Tipp,JUCE_PRODUCT_NAME>"
     JUCE_APPLICATION_VERSION_STRING="$<TARGET_PROPERTY:Tipp,JUCE_VERSION>")
 

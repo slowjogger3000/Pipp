@@ -40,13 +40,16 @@ If a reply only answers a question and changes nothing, still end with the block
 
 Update this at the end of every work session.
 
-- Current milestone: M1 done 2026-11-26. Eirik called the blackbird recognisable after round 1. Final knob ranges are in `prd.md`. Waiting for Eirik's go for M2.
-- Built in M1 round 1: `core/Syrinx.h` (voice), `core/Surroundings.*` (distance, wind, space, place), `core/Engine.*` (knob override sequence, autoplay with seed, phrase generation and playback), `core/BirdData.*` and `core/Json.*` (parse the text of `voice.json` and `songs.json`), `core/Random.h` (PCG32 for choices, xorshift for noise). `data/birds/svarttrost/voice.json` and `songs.json`. The test voice and `--tone` are gone.
-- Verified: zero warnings in core, render tool and standalone. Render checks pass for 30 s song and call and for 8 knob-extreme renders. Same seed gives a byte-identical WAV. All core `.cpp` files compile with `emcc`. Spectrograms look as designed (fluted notes 1.4 to 2.7 kHz, twitter 4 to 7 kHz, call around 4 kHz).
-- Not verified: the standalone builds but has not been launched; it reads `data/` from the source tree through `TIPP_DATA_DIR` (dev only). Native and WASM phrase order not compared (M8). Web and phone are empty folders.
+- Current milestone: M2 (Play screen, Mac standalone), round 1 built 2026-11-26. Not committed. Waiting for Eirik to launch the app, drag knobs by hand and listen.
+- M1 done 2026-11-26: blackbird approved as recognisable. Final knob ranges are in `prd.md`.
+- Built in M2 round 1: `standalone/Source/MainComponent.*` (window, layout, timer), `UI/Theme.h` (tokens, bevels, hatch, graph paper, fonts), `UI/Widgets.h` (`Btn`), `UI/Knob.h`, `UI/Sonogram.h`, `UI/Plate.h`, `UI/BirdList.h`, `UI/Strings.h`. Engine now publishes knob mode and hold countdown, stereo peaks, a sonogram feed (375 frames/s) and the current phrase (seqlock). Contour helpers moved to `BirdData.h` so the sonogram draws grey with the engine's own maths. Data: `data/birds/index.json` (18 birds, names unverified), `data/birds/svarttrost/plate.json`, `data/strings/en.json` and `no.json` (Play screen only; Norwegian wording is mine, Eirik to check).
+- Verified: zero warnings in core, render tool and standalone. Engine audio is byte-identical to M1 for song and call (seed 1, 30 s). `tipp-render --check-override` passes 18 checks (hold, 3 s wait, 300 ms return, latch, return all, autoplay off, sing once, sonogram hand mark, phrase publish). Snapshots in `out/m2-play-*.png` match `Main.dc.html` in layout, sizes, colours and labels, in English and Norwegian. Core still compiles with `emcc`.
+- Not verified: Eirik has not launched the app or dragged a knob with a real mouse.
+- Fonts: IBM Plex Mono 400/500/600 and Instrument Serif 400 are in `standalone/Resources/fonts/` with their OFL texts, fetched from github.com/google/fonts on 2026-11-26, and embedded through `BinaryData`. Without them CMake warns and the app falls back to Menlo and Georgia.
+- Choices made in M2 round 1, open to Eirik: grey shows the rest of the phrase being sung, not the phrase after the pause (it is not generated until it starts, so a Length or Variation drag in the pause still applies). Tabs other than PLAY, DRAW, ½×, ¼×, −1 OCT, Dialect, Mimics, the bird stepper and the 17 birds without data are hatched as disabled. Plate callouts not in `birds.md` (juvenile bill, female and juvenile eye-ring, juvenile throat) show `[TO VERIFY]`; the juvenile caption no longer claims a practice song. App starts stopped. State (seed, knobs) is not saved between launches yet.
 - Song shapes, timings and pitches in `songs.json` are sound design guesses, marked in its `_note`. The twitter ending and phrase length are still `[TO VERIFY]` in `birds.md`.
 - Tools present on Eirik's Mac (checked 2026-11-26): cmake, Xcode, emcc, node, ffmpeg, lame.
-- Open decisions: recognition engine (parked, see `prd.md`). The phone export format for the desktop Collection.
+- Open decisions: recognition engine (parked, see `prd.md`). The phone export format for the desktop Collection. How bird ids with æ, ø, å are written as folder names (M3).
 
 ## Stack
 
@@ -87,6 +90,8 @@ Checked in M0 and M1:
 - MP3 for listening: `ffmpeg -v error -y -i out/svarttrost-song.wav -b:a 192k out/svarttrost-song.mp3`
 - Spectrogram to check shapes without listening: `ffmpeg -v error -y -t 10 -i out/svarttrost-song.wav -lavfi "showspectrumpic=s=1600x500:mode=combined:scale=log:stop=10000" out/song.png`
 - Standalone (fetches JUCE, own build folder): `cmake -B build-standalone -G Xcode -DTIPP_BUILD_STANDALONE=ON && cmake --build build-standalone --config Release --target Tipp`. The app lands in `build-standalone/standalone/Tipp_artefacts/Release/Tipp.app`.
+- Override check (no audio file): `build/Release/tipp-render --bird svarttrost --check-override`
+- Standalone snapshot (plays, optionally drags a knob 3 s before the end, saves the window and quits): `build-standalone/standalone/Tipp_artefacts/Release/Tipp.app/Contents/MacOS/Tipp --snapshot out/play.png --seconds 7 [--hand vo_pitch] [--lang no]`. Without `--hand` it waits for mid-phrase so the grey strokes show.
 - Core to WASM, compile check only: `for f in Engine BirdData Json Surroundings; do emcc -std=c++17 -O2 -c core/$f.cpp -o /tmp/$f.o; done`
 
 Planned, not yet working:
@@ -176,3 +181,6 @@ Add to this list as they are found.
 - `AudioProcessorEditor` already has a member called `processor`. Name the reference `proc`.
 - `String (v, 0)` does not mean zero decimals. Use `String (roundToInt (v))`.
 - Static `StringArray` objects trigger leak-detector noise at shutdown. Return a fresh one from a function.
+- `setSize()` in a component constructor calls `resized()` at once. Call it after every child exists, or `resized()` touches null children (M2 crashed this way).
+- A timer that counts its own ticks runs slow under load. Time tests with `Time::getMillisecondCounterHiRes()`.
+- macOS stores non-ASCII file names decomposed (NFD). Bird ids like `kjøttmeis` need a decision before they become folders.

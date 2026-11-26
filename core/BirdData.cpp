@@ -305,4 +305,32 @@ bool parseBird(const std::string& id, const std::string& voiceJson, const std::s
     }
     return true;
 }
+float contourAt(const std::vector<ContourPoint>& c, float t) noexcept
+{
+    if (t <= c.front().t)
+        return c.front().v;
+    for (std::size_t i = 1; i < c.size(); ++i)
+        if (t <= c[i].t)
+        {
+            const float span = c[i].t - c[i - 1].t;
+            const float u = span > 0.0f ? (t - c[i - 1].t) / span : 1.0f;
+            return c[i - 1].v + (c[i].v - c[i - 1].v) * u;
+        }
+    return c.back().v;
+}
+
+float contourPitchAt(const std::vector<ContourPoint>& c, float t) noexcept
+{
+    if (t <= c.front().t)
+        return c.front().v;
+    for (std::size_t i = 1; i < c.size(); ++i)
+        if (t <= c[i].t)
+        {
+            const float span = c[i].t - c[i - 1].t;
+            const float u = span > 0.0f ? (t - c[i - 1].t) / span : 1.0f;
+            return c[i - 1].v * std::exp2(u * std::log2(c[i].v / c[i - 1].v));
+        }
+    return c.back().v;
+}
+
 } // namespace tipp

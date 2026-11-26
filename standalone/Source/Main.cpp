@@ -1,117 +1,59 @@
-// M1 skeleton: a 1280x800 window that runs tipp::Engine with the blackbird.
-// Space plays and stops, 1 picks song, 2 picks call. The real interface
-// starts in M2.
+// Tipp standalone. The window holds MainComponent at 1280x800.
+//
+// Test hook, used by the M2 checks:
+//   Tipp --snapshot <file.png> [--seconds <s>] [--hand <knob id>] [--lang no]
+// plays for the given time, drags the knob 3 s before the end if asked,
+// saves a picture of the window and quits.
 
-#include "BirdData.h"
-#include "Engine.h"
+#include "MainComponent.h"
 
-#include <juce_audio_utils/juce_audio_utils.h>
+#include "Params.h"
 
 namespace
 {
-class MainComponent final : public juce::AudioAppComponent
-{
-public:
-    MainComponent()
-    {
-        setSize(1280, 800);
-        setWantsKeyboardFocus(true);
-        loadBird("svarttrost");
-        setAudioChannels(0, 2);
-    }
-
-    ~MainComponent() override { shutdownAudio(); }
-
-    void prepareToPlay(int, double sampleRate) override
-    {
-        engine.prepare(sampleRate);
-        engine.setBird(bird.get());
-    }
-
-    void getNextAudioBlock(const juce::AudioSourceChannelInfo& info) override
-    {
-        auto* buffer = info.buffer;
-        float* left = buffer->getWritePointer(0, info.startSample);
-        float* right = buffer->getNumChannels() > 1 ? buffer->getWritePointer(1, info.startSample) : left;
-        engine.process(left, right, info.numSamples);
-    }
-
-    void releaseResources() override {}
-
-    void paint(juce::Graphics& g) override
-    {
-        g.fillAll(juce::Colour(0xffddd3bd)); // ground
-        g.setColour(juce::Colour(0xff221c14)); // ink
-        g.drawRect(getLocalBounds(), 1);
-        juce::String text = loadError.isNotEmpty() ? loadError
-                          : juce::String(playing ? "PLAYING. " : "STOPPED. ")
-                                + (typeIndex == 0 ? "SONG" : "CALL")
-                                + ". SPACE PLAYS AND STOPS, 1 SONG, 2 CALL.";
-        g.drawText(text, getLocalBounds(), juce::Justification::centred);
-    }
-
-    bool keyPressed(const juce::KeyPress& key) override
-    {
-        namespace P = tipp::params;
-        if (key == juce::KeyPress::spaceKey)
-        {
-            playing = ! playing;
-            engine.setParam(P::indexOf(P::pb_play), playing ? 1.0f : 0.0f);
-        }
-        else if (key.getTextCharacter() == '1' || key.getTextCharacter() == '2')
-        {
-            typeIndex = key.getTextCharacter() == '1' ? 0 : 1;
-            engine.setParam(P::indexOf(P::sc_type), static_cast<float>(typeIndex));
-        }
-        else
-            return false;
-        repaint();
-        return true;
-    }
-
-private:
-    // M2 replaces this with a loader shared by the bird list.
-    void loadBird(const juce::String& id)
-    {
-        const juce::File dir = juce::File(TIPP_DATA_DIR).getChildFile("birds").getChildFile(id);
-        auto data = std::make_unique<tipp::BirdData>();
-        std::string error;
-        if (! tipp::parseBird(id.toStdString(), dir.getChildFile("voice.json").loadFileAsString().toStdString(),
-                              dir.getChildFile("songs.json").loadFileAsString().toStdString(), *data, error))
-        {
-            loadError = "CANNOT LOAD " + id.toUpperCase() + ": " + juce::String(error);
-            return;
-        }
-        bird = std::move(data);
-    }
-
-    tipp::Engine engine;
-    std::unique_ptr<tipp::BirdData> bird;
-    juce::String loadError;
-    bool playing = false;
-    int typeIndex = 0;
-};
-
 class TippApplication final : public juce::JUCEApplication
 {
 public:
     const juce::String getApplicationName() override { return JUCE_APPLICATION_NAME_STRING; }
     const juce::String getApplicationVersion() override { return JUCE_APPLICATION_VERSION_STRING; }
+    bool moreThanOneInstanceAllowed() override { return true; }
 
-    void initialise(const juce::String&) override { window = std::make_unique<Window>(); }
+    void initialise(const juce::String& commandLine) override
+    {
+        // Dev only: data comes from the source tree until packaging.
+        auto* content = new tipp::ui::MainComponent(juce::File(TIPP_DATA_DIR));
+        window = std::make_unique<Window>(content);
+
+        const auto args = juce::StringArray::fromTokens(commandLine, true);
+        auto value = [&args](const char* flag) {
+            const int i = args.indexOf(flag);
+            return i >= 0 && i + 1 < args.size() ? args[i + 1].unquoted() : juce::String();
+        };
+        if (const auto lang = value("--lang"); lang.isNotEmpty())
+            content->setLanguage(lang);
+        if (const auto png = value("--snapshot"); png.isNotEmpty())
+        {
+            const auto secs = value("--seconds");
+            const int knob = tipp::params::indexOf(value("--hand").toRawUTF8());
+            content->runSnapshot(juce::File::getCurrentWorkingDirectory().getChildFile(png),
+                                 secs.isNotEmpty() ? secs.getDoubleValue() : 8.0, knob >= 0 && knob < tipp::kNumKnobs ? knob : -1);
+        }
+    }
+
     void shutdown() override { window = nullptr; }
 
 private:
     class Window final : public juce::DocumentWindow
     {
     public:
-        Window()
+        explicit Window(juce::Component* content)
             : DocumentWindow("Tipp", juce::Colour(0xffddd3bd), DocumentWindow::closeButton | DocumentWindow::minimiseButton)
         {
             setUsingNativeTitleBar(true);
-            setContentOwned(new MainComponent(), true);
+            setContentOwned(content, true);
             centreWithSize(getWidth(), getHeight());
             setVisible(true);
+            content->grabKeyboardFocus();
         }
 
         void closeButtonPressed() override { juce::JUCEApplication::getInstance()->systemRequestedQuit(); }
