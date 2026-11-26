@@ -5,6 +5,13 @@
 //   tipp-render --list-params
 //   tipp-render --bird svarttrost --check-override
 //   tipp-render --bird blameis --compare kjottmeis --out out/compare.wav
+//   tipp-render --bird svarttrost --check-draw
+//   tipp-render --bird svarttrost --draw --out out/draw.wav
+//
+// --draw sings a fixed drawn line in draw mode, again each time it ends.
+// --keep keeps that line as a phrase: autoplay sings it after each phrase
+// of the bird's own. --check-draw tests the drawn line and draw mode
+// without writing audio.
 //
 // --compare runs the field guide's COMPARE: one phrase of --bird, a gap,
 // one phrase of the other bird, then stop. The file ends when it is done.
@@ -72,7 +79,9 @@ void usage()
         "                   [--seed <n>] [--set <id>=<value>]... [--data <dir>] --out <file.wav>\n"
         "       tipp-render --list-params\n"
         "       tipp-render --bird <id> --check-override\n"
-        "       tipp-render --bird <id> --compare <other id> [--seconds <max s>] --out <file.wav>\n");
+        "       tipp-render --bird <id> --compare <other id> [--seconds <max s>] --out <file.wav>\n"
+        "       tipp-render --bird <id> --check-draw\n"
+        "       tipp-render --bird <id> (--draw | --keep) [--seconds <s>] [--set ...] --out <file.wav>\n");
 }
 
 bool readFile(const std::string& path, std::string& out)
@@ -111,6 +120,189 @@ bool parseValue(const tipp::params::Info& info, const std::string& text, float& 
     char* end = nullptr;
     out = std::strtof(text.c_str(), &end);
     return end != text.c_str() && *end == '\0';
+}
+
+// The sonogram's scale: 80 px per second, 40 px per kHz.
+constexpr float kPxPerMs = 0.08f;
+constexpr float kPxPerHz = 0.04f;
+constexpr float kTolPx = 2.5f;
+
+// A stroke as the pointer would give it: one sample every 10 ms.
+template <typename HzAt>
+void stroke(tipp::DrawnLine& line, float fromMs, float toMs, HzAt hzAt)
+{
+    std::vector<tipp::DrawnPoint> raw;
+    for (float t = fromMs; t <= toMs + 0.01f; t += 10.0f)
+        raw.push_back({ t, hzAt((t - fromMs) / std::max(1.0f, toMs - fromMs)), false });
+    tipp::addStroke(line, raw.data(), static_cast<int>(raw.size()), kPxPerMs, kPxPerHz, kTolPx);
+}
+
+// A rising slur with a dip, a dot, and a long fall.
+tipp::DrawnLine demoLine()
+{
+    tipp::DrawnLine line;
+    stroke(line, 300.0f, 700.0f, [](float u) { return 2000.0f + 1400.0f * u - 500.0f * std::sin(3.14159f * u); });
+    stroke(line, 900.0f, 900.0f, [](float) { return 4000.0f; });
+    stroke(line, 1100.0f, 1700.0f, [](float u) { return 5000.0f - 2500.0f * u * u; });
+    return line;
+}
+
+int notesIn(const tipp::DrawnLine& line)
+{
+    int n = 0;
+    for (int i = 0; i < line.count; ++i)
+        if (! line.pts[static_cast<std::size_t>(i)].joinPrev)
+            ++n;
+    return n;
+}
+
+// The drawn line's editing and how the engine sings it.
+int checkDraw(const tipp::BirdData& bird)
+{
+    namespace P = tipp::params;
+    int failures = 0;
+    auto check = [&failures](bool pass, const char* what) {
+        std::printf("%-4s %s\n", pass ? "ok" : "FAIL", what);
+        if (! pass)
+            ++failures;
+    };
+
+    {
+        tipp::DrawnLine line;
+        stroke(line, 0.0f, 500.0f, [](float u) { return 2000.0f + 2000.0f * u; });
+        check(line.count == 2, "a straight stroke keeps its 2 ends");
+    }
+
+    const tipp::DrawnLine demo = demoLine();
+    check(notesIn(demo) == 3, "demo line has 3 notes");
+    check(demo.count > 4 && demo.count < 20, "curved strokes keep a few corners, not every sample");
+
+    {
+        // Within a few px of what was drawn, and never past the points.
+        float worst = 0.0f;
+        bool monotone = true;
+        for (float t = 300.0f; t <= 700.0f; t += 5.0f)
+        {
+            const float u = (t - 300.0f) / 400.0f;
+            const float want = 2000.0f + 1400.0f * u - 500.0f * std::sin(3.14159f * u);
+            float hz = 0.0f, amp = 0.0f;
+            tipp::drawnAt(demo, t, hz, amp);
+            worst = std::max(worst, std::fabs(hz - want) * kPxPerHz);
+        }
+        for (int k = 0; k + 1 < demo.count; ++k)
+        {
+            const auto& a = demo.pts[static_cast<std::size_t>(k)];
+            const auto& b = demo.pts[static_cast<std::size_t>(k + 1)];
+            if (! b.joinPrev)
+                continue;
+            for (int j = 1; j < 10; ++j)
+            {
+                float hz = 0.0f, amp = 0.0f;
+                tipp::drawnAt(demo, a.tMs + (b.tMs - a.tMs) * static_cast<float>(j) / 10.0f, hz, amp);
+                monotone = monotone && hz >= std::min(a.hz, b.hz) * 0.999f && hz <= std::max(a.hz, b.hz) * 1.001f;
+            }
+        }
+        std::printf("     line is within %.1f px of the stroke\n", static_cast<double>(worst));
+        check(worst < 6.0f, "sung line follows the stroke within 6 px");
+        check(monotone, "no overshoot between points");
+    }
+
+    {
+        float hz = 0.0f, a0 = 1.0f, a1 = 0.0f, a2 = 1.0f, aGap = 1.0f;
+        tipp::drawnAt(demo, 300.0f, hz, a0);
+        tipp::drawnAt(demo, 500.0f, hz, a1);
+        tipp::drawnAt(demo, 700.0f, hz, a2);
+        tipp::drawnAt(demo, 800.0f, hz, aGap);
+        check(a0 == 0.0f && a2 == 0.0f && a1 == 1.0f && aGap == 0.0f, "notes start and end silent, full in the middle");
+        check(std::fabs(hz - 4000.0f) < 1.0f, "in a gap the pitch waits at the next note");
+        check(std::fabs(tipp::drawnEnd(demo) - 1700.0f) < 0.5f && std::fabs(tipp::drawnStart(demo) - 300.0f) < 0.5f, "start and end");
+    }
+
+    {
+        // A stroke across the middle of a note cuts it into 3.
+        tipp::DrawnLine line;
+        stroke(line, 0.0f, 1000.0f, [](float u) { return 2000.0f + 1000.0f * u; });
+        stroke(line, 400.0f, 600.0f, [](float) { return 5000.0f; });
+        float hz = 0.0f, amp = 0.0f;
+        tipp::drawnAt(line, 200.0f, hz, amp);
+        check(notesIn(line) == 3 && std::fabs(hz - 2200.0f) < 30.0f, "a new stroke replaces only its own span");
+    }
+
+    {
+        tipp::DrawnLine line = demo;
+        const int before = line.count;
+        const auto p = line.pts[1];
+        tipp::eraseNear(line, p.tMs, p.hz, kPxPerMs, kPxPerHz, 6.0f);
+        check(line.count == before - 1, "erase removes the point under the pointer");
+        line = demo;
+        float hz = 0.0f, amp = 0.0f;
+        tipp::drawnAt(line, 1400.0f, hz, amp);
+        tipp::eraseNear(line, 1400.0f, hz, kPxPerMs, kPxPerHz, 6.0f);
+        check(notesIn(line) > notesIn(demo), "erase on the curve between points cuts the note");
+    }
+
+    {
+        tipp::DrawnLine line;
+        bool lastFit = true;
+        for (int i = 0; i < 70; ++i)
+        {
+            const tipp::DrawnPoint dot { 100.0f * static_cast<float>(i), 3000.0f, false };
+            lastFit = tipp::addStroke(line, &dot, 1, kPxPerMs, kPxPerHz, kTolPx);
+        }
+        check(line.count == tipp::DrawnLine::kMax && ! lastFit, "a full line refuses more points");
+    }
+
+    // The engine: draw mode waits, sing once sings the line, kept takes turns.
+    {
+        tipp::Engine e;
+        e.prepare(kSampleRate);
+        e.setBird(&bird);
+        e.setDrawn(demo);
+        e.setParam(P::indexOf(P::pb_draw), 1.0f);
+        e.setParam(P::indexOf(P::pb_play), 1.0f);
+        std::vector<float> buf(kBlock);
+        auto run = [&](double s) {
+            for (int i = 0; i < static_cast<int>(s * kSampleRate / kBlock); ++i)
+                e.process(buf.data(), buf.data(), kBlock);
+        };
+        run(4.0);
+        check(e.phrasesStarted() == 0u, "draw mode: autoplay waits");
+        e.trigger(P::indexOf(P::ap_sing_once));
+        run(0.2); // into the first note
+        tipp::Engine::PhraseView v;
+        const bool read = e.readPhrase(v);
+        check(read && v.drawn && v.count == 0 && std::fabs(v.lengthMs - 1400.0f) < 1.0f && e.drawnSung() == 1u,
+              "sing once sings the drawn line");
+        const auto f = e.sonoFrame(e.sonoWritten() - 1u);
+        float hz = 0.0f, amp = 0.0f;
+        tipp::drawnAt(demo, 300.0f + e.phrasePosMs(), hz, amp);
+        std::printf("     sonogram %.0f Hz, line %.0f Hz\n", static_cast<double>(f.freqHz), static_cast<double>(hz));
+        check(f.amp > 0.1f && std::fabs(std::log2(f.freqHz / hz)) < 0.05f, "the sonogram shows the line's pitch");
+        run(6.0);
+        check(e.phrasesStarted() == 1u && ! e.singing(), "one phrase, then it waits again");
+
+        e.setParam(P::indexOf(P::pb_speed), 2.0f);
+        e.trigger(P::indexOf(P::ap_sing_once));
+        run(0.1);
+        check(std::fabs(e.phraseTempo() - 0.25f) < 1.0e-4f, "quarter speed reaches the drawn line");
+        run(5.0);
+        check(e.singing() && e.drawnSung() == 2u, "at quarter speed the 1.4 s line still sings after 5 s");
+        run(1.0);
+        check(! e.singing(), "and ends by 6 s");
+        e.setParam(P::indexOf(P::pb_speed), 0.0f);
+
+        e.setParam(P::indexOf(P::pb_draw), 0.0f);
+        e.keepDrawn(true);
+        const auto p0 = e.phrasesStarted(), d0 = e.drawnSung();
+        run(40.0);
+        const auto own = (e.phrasesStarted() - p0) - (e.drawnSung() - d0);
+        const auto drawn = e.drawnSung() - d0;
+        std::printf("     kept: %u own phrases, %u drawn\n", own, drawn);
+        check(own >= 2u && drawn >= 2u && (own > drawn ? own - drawn : drawn - own) <= 1u, "a kept line takes every other turn");
+    }
+
+    std::printf("%s\n", failures == 0 ? "draw check passed" : "draw check FAILED");
+    return failures == 0 ? 0 : 1;
 }
 
 // Drives a knob the way the interface does and checks the override
@@ -222,7 +414,7 @@ int main(int argc, char** argv)
     std::string outPath, birdId, type = "song", dataDir, compareId;
     std::uint32_t seed = 1u;
     std::vector<std::pair<std::string, std::string>> sets;
-    bool overrideCheck = false;
+    bool overrideCheck = false, drawCheck = false, drawSing = false, keep = false;
 
     for (int i = 1; i < argc; ++i)
     {
@@ -237,6 +429,9 @@ int main(int argc, char** argv)
         else if (a == "--data" && hasValue)    dataDir = argv[++i];
         else if (a == "--out" && hasValue)     outPath = argv[++i];
         else if (a == "--check-override")      overrideCheck = true;
+        else if (a == "--check-draw")          drawCheck = true;
+        else if (a == "--draw")                drawSing = true;
+        else if (a == "--keep")                keep = true;
         else if (a == "--compare" && hasValue) compareId = argv[++i];
         else if (a == "--set" && hasValue)
         {
@@ -248,7 +443,7 @@ int main(int argc, char** argv)
         else { usage(); return 2; }
     }
 
-    if ((outPath.empty() && ! overrideCheck) || birdId.empty() || seconds <= 0.5)
+    if ((outPath.empty() && ! overrideCheck && ! drawCheck) || birdId.empty() || seconds <= 0.5)
     {
         usage();
         return 2;
@@ -288,6 +483,8 @@ int main(int argc, char** argv)
 
     if (overrideCheck)
         return checkOverride(bird);
+    if (drawCheck)
+        return checkDraw(bird);
 
     tipp::BirdData other;
     if (! compareId.empty())
@@ -342,6 +539,12 @@ int main(int argc, char** argv)
     engine.setBird(&bird);
     engine.setParam(P::indexOf(P::pb_play), 1.0f);
 
+    if (drawSing || keep)
+        engine.setDrawn(demoLine());
+    if (drawSing)
+        engine.setParam(P::indexOf(P::pb_draw), 1.0f);
+
+    engine.keepDrawn(keep);
     // Play stops 100 ms before the end; the engine fades out in 30 ms.
     auto frames = static_cast<std::size_t>(seconds * kSampleRate);
     const auto stopAt = frames - static_cast<std::size_t>(0.1 * kSampleRate);
@@ -374,6 +577,8 @@ int main(int argc, char** argv)
         }
         else if (pos >= stopAt)
             engine.setParam(P::indexOf(P::pb_play), 0.0f);
+        else if (drawSing && ! engine.singing() && pos % kSampleRate < kBlock)
+            engine.trigger(P::indexOf(P::ap_sing_once)); // about once a second while idle
         const int n = static_cast<int>(std::min<std::size_t>(kBlock, frames - pos));
         engine.process(left.data() + pos, right.data() + pos, n);
     }
@@ -437,6 +642,8 @@ int main(int argc, char** argv)
     report("start", edgeStart <= kEdgeLimit, "%.6f (limit %.3f)", static_cast<double>(edgeStart), static_cast<double>(kEdgeLimit));
     report("end", edgeEnd <= kEdgeLimit, "%.6f (limit %.3f)", static_cast<double>(edgeEnd), static_cast<double>(kEdgeLimit));
     report("sang", engine.phrasesStarted() > 0 && rms >= kMinRms, "rms %.4f (minimum %.3f)", static_cast<double>(rms), static_cast<double>(kMinRms));
+    if (drawSing || keep)
+        report("drawn", engine.drawnSung() > 0u, "%.0f drawn phrases (minimum %.0f)", static_cast<double>(engine.drawnSung()), 1.0);
     if (comparing)
     {
         report("compare", sawFirst && sawSecond && doneAt > 0 && engine.phrasesStarted() == 2u,

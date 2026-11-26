@@ -50,6 +50,11 @@ public:
     void setLanguage(const juce::String& lang);
     // Test hook: pick a bird by id and a plate variant before a snapshot.
     void chooseScene(const juce::String& birdId, bool female, bool juvenile);
+    // Test hooks: speed index (0 1x, 1 half, 2 quarter), hearing shift, and
+    // draw mode with a sample line, entered a second before the snapshot.
+    void setSpeed(int index);
+    void setShift(bool down);
+    void snapshotDraw() { snapshotDrawMode = true; }
 
 private:
     void timerCallback() override;
@@ -66,6 +71,9 @@ private:
     void setAge(int v);
     void setSeason(int v);
     void setSongType(int v);
+    void setDrawMode(bool on);
+    void drawSampleLine();
+    void updateSongTools();
     void playType(int type);
     void startCompare(const juce::String& otherId);
     void stopCompare();
@@ -93,6 +101,8 @@ private:
     int season = 0, timeOfDay = 0, songType = 0, place = 0, sex = 0, age = 0;
     bool apOn = true, latch = false;
     float hold = 3.0f;
+    int speedIndex = 0;
+    bool shiftDown = false, drawMode = false, kept = false;
 
     // Header.
     Btn playBtn, stopBtn, prevBtn, nextBtn, enBtn, noBtn;
@@ -107,6 +117,7 @@ private:
     // Song panel.
     Sonogram sono;
     Btn drawBtn, shiftOffBtn, shiftOctBtn;
+    Btn eraseBtn, clearBtn, singItBtn, keepBtn; // draw mode
     std::array<Btn, 3> speedBtns;
 
     // Scene.
@@ -148,6 +159,7 @@ private:
     double snapshotSeconds = 0.0, elapsed = 0.0, snapshotStartMs = 0.0;
     int snapshotKnob = -1;
     int handPhase = 0;
+    bool snapshotDrawMode = false;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(MainComponent)
 };

@@ -23,12 +23,20 @@ constexpr int iReturnAll = P::indexOf(P::ap_return_all);
 constexpr int iSingOnce = P::indexOf(P::ap_sing_once);
 constexpr int iReroll = P::indexOf(P::ap_reroll);
 constexpr int iPlay = P::indexOf(P::pb_play);
+constexpr int iSpeed = P::indexOf(P::pb_speed);
+constexpr int iShift = P::indexOf(P::pb_shift);
+constexpr int iDraw = P::indexOf(P::pb_draw);
+
+// pb_speed options, in order.
+constexpr float kSpeeds[3] = { 1.0f, 0.5f, 0.25f };
 
 static_assert(P::indexOf(P::vo_pitch) == kPitch && P::indexOf(P::su_space) == kSpace,
               "the 12 knobs must open params::all in Knob order");
 
 constexpr float kReturnSeconds = 0.3f;
 constexpr float kVoiceLevel = 0.62f;
+constexpr float kDrawnGain = 0.8f;
+constexpr float kShiftGlideS = 0.02f; // hearing shift slides over about 60 ms
 
 // Soft knee above 0.5. Never exceeds 0.68.
 float limit(float x) noexcept
@@ -60,6 +68,13 @@ Engine::Engine()
         pvDur[u].store(0.0f, std::memory_order_relaxed);
         pvMul[u].store(1.0f, std::memory_order_relaxed);
     }
+    for (int i = 0; i < DrawnLine::kMax; ++i)
+    {
+        const auto u = static_cast<std::size_t>(i);
+        dlT[u].store(0.0f, std::memory_order_relaxed);
+        dlHz[u].store(0.0f, std::memory_order_relaxed);
+        dlJoin[u].store(false, std::memory_order_relaxed);
+    }
     for (std::size_t i = 0; i < values.size(); ++i)
         values[i].store(static_cast<float>(P::all[i].def), std::memory_order_relaxed);
     for (int k = 0; k < kNumKnobs; ++k)
@@ -90,6 +105,7 @@ void Engine::prepare(double sampleRate)
     for (int k = 0; k < kNumKnobs; ++k)
         seenTouches[static_cast<std::size_t>(k)] = handTouches[static_cast<std::size_t>(k)].load(std::memory_order_relaxed);
     master = 0.0f;
+    shiftMul = shiftTarget;
     peakL.store(0.0f, std::memory_order_relaxed);
     peakR.store(0.0f, std::memory_order_relaxed);
     sonoSub = 0;
@@ -136,6 +152,40 @@ void Engine::trigger(int index) noexcept
     if (index == iReturnAll)     trigReturnAll.fetch_add(1u, std::memory_order_relaxed);
     else if (index == iSingOnce) trigSingOnce.fetch_add(1u, std::memory_order_relaxed);
     else if (index == iReroll)   trigReroll.fetch_add(1u, std::memory_order_relaxed);
+}
+
+void Engine::setDrawn(const DrawnLine& line) noexcept
+{
+    const std::uint32_t s = dlSeq.load(std::memory_order_relaxed);
+    dlSeq.store(s + 1u, std::memory_order_relaxed);
+    std::atomic_thread_fence(std::memory_order_release);
+    const int n = std::clamp(line.count, 0, DrawnLine::kMax);
+    dlCount.store(n, std::memory_order_relaxed);
+    for (int i = 0; i < n; ++i)
+    {
+        const auto u = static_cast<std::size_t>(i);
+        dlT[u].store(line.pts[u].tMs, std::memory_order_relaxed);
+        dlHz[u].store(line.pts[u].hz, std::memory_order_relaxed);
+        dlJoin[u].store(line.pts[u].joinPrev, std::memory_order_relaxed);
+    }
+    dlSeq.store(s + 2u, std::memory_order_release);
+}
+
+bool Engine::readDrawn(DrawnLine& out) const noexcept
+{
+    const std::uint32_t s1 = dlSeq.load(std::memory_order_acquire);
+    if ((s1 & 1u) != 0u)
+        return false;
+    out.count = std::clamp(dlCount.load(std::memory_order_relaxed), 0, DrawnLine::kMax);
+    for (int i = 0; i < out.count; ++i)
+    {
+        const auto u = static_cast<std::size_t>(i);
+        out.pts[u].tMs = dlT[u].load(std::memory_order_relaxed);
+        out.pts[u].hz = dlHz[u].load(std::memory_order_relaxed);
+        out.pts[u].joinPrev = dlJoin[u].load(std::memory_order_relaxed);
+    }
+    std::atomic_thread_fence(std::memory_order_acquire);
+    return dlSeq.load(std::memory_order_relaxed) == s1;
 }
 
 float Engine::knobValue(int knob) const noexcept
@@ -190,6 +240,8 @@ bool Engine::readPhrase(PhraseView& out) const noexcept
     out.number = pvNumber.load(std::memory_order_relaxed);
     out.count = std::clamp(pvCount.load(std::memory_order_relaxed), 0, kMaxNotes);
     out.lengthMs = pvLength.load(std::memory_order_relaxed);
+    out.drawn = pvDrawn.load(std::memory_order_relaxed);
+    out.drawnStartMs = pvDrawnStart.load(std::memory_order_relaxed);
     for (int i = 0; i < out.count; ++i)
     {
         const auto u = static_cast<std::size_t>(i);
@@ -209,9 +261,12 @@ void Engine::publishPhrase() noexcept
     pvSeq.store(s + 1u, std::memory_order_relaxed);
     std::atomic_thread_fence(std::memory_order_release);
     pvNumber.store(phraseCount.load(std::memory_order_relaxed), std::memory_order_relaxed);
-    pvCount.store(cur.count, std::memory_order_relaxed);
-    pvLength.store(cur.lengthMs, std::memory_order_relaxed);
-    for (int i = 0; i < cur.count; ++i)
+    const int count = drawnPhrase ? 0 : cur.count;
+    pvCount.store(count, std::memory_order_relaxed);
+    pvLength.store(drawnPhrase ? drawnEnd(drawnCur) - drawnStart(drawnCur) : cur.lengthMs, std::memory_order_relaxed);
+    pvDrawn.store(drawnPhrase, std::memory_order_relaxed);
+    pvDrawnStart.store(drawnStart(drawnCur), std::memory_order_relaxed);
+    for (int i = 0; i < count; ++i)
     {
         const auto u = static_cast<std::size_t>(i);
         pvSyl[u].store(cur.notes[u].syl, std::memory_order_relaxed);
@@ -270,6 +325,7 @@ void Engine::resetBird() noexcept
 {
     playing = false;
     hasPhrase = false;
+    drawnPhrase = lastWasDrawn = false;
     boutLeft = 0;
     singOncePending = false;
     pauseElapsed = 0.0f;
@@ -325,6 +381,9 @@ void Engine::readControls() noexcept
     apOn = choice(iApOn) != 0;
     latch = choice(iApLatch) != 0;
     play = choice(iPlay) != 0;
+    drawMode = choice(iDraw) != 0;
+    speed = kSpeeds[std::clamp(choice(iSpeed), 0, 2)];
+    shiftTarget = choice(iShift) != 0 ? 0.5f : 1.0f;
     apHold = values[static_cast<std::size_t>(iApHold)].load(std::memory_order_relaxed);
 }
 
@@ -518,10 +577,69 @@ void Engine::startPhrase() noexcept
     }
 
     playing = true;
+    drawnPhrase = lastWasDrawn = false;
     phraseMs = 0.0f;
     cursor = 0;
     phraseCount.fetch_add(1u, std::memory_order_relaxed);
     publishPhrase();
+}
+
+bool Engine::startDrawn() noexcept
+{
+    if (bird == nullptr)
+        return false;
+    bool read = false;
+    for (int attempt = 0; attempt < 3 && ! read; ++attempt)
+        read = readDrawn(drawnCur);
+    if (! read || drawnCur.count == 0)
+    {
+        drawnCur.count = 0;
+        return false;
+    }
+    playing = true;
+    drawnPhrase = lastWasDrawn = true;
+    phraseMs = 0.0f;
+    cursor = 0;
+    phraseCount.fetch_add(1u, std::memory_order_relaxed);
+    drawnCount.fetch_add(1u, std::memory_order_relaxed);
+    publishPhrase();
+    return true;
+}
+
+float Engine::drawnTempo() const noexcept
+{
+    const float base = bird != nullptr && bird->base[kTempo] > 0.0f ? bird->base[kTempo] : 100.0f;
+    return std::max(0.25f, eff[kTempo] / base);
+}
+
+// The drawn line in the bird's voice. The pitch knob moves it by its ratio
+// to the bird's base pitch, so it sings as drawn until a hand turns it.
+void Engine::singDrawn(float dt, const SceneRules& rules, VoiceControls& vc) noexcept
+{
+    phraseMs += dt * 1000.0f * drawnTempo();
+    const float start = drawnStart(drawnCur);
+    if (phraseMs >= drawnEnd(drawnCur) - start)
+    {
+        playing = false;
+        drawnPhrase = false;
+        pauseElapsed = 0.0f;
+        if (apOn && ! drawMode && rules.active)
+            pickPhraseEndValues(rules);
+        return;
+    }
+
+    float hz = 0.0f, amp = 0.0f;
+    drawnAt(drawnCur, start + phraseMs, hz, amp);
+    const float basePitch = bird->base[kPitch] > 0.0f ? bird->base[kPitch] : 1.0f;
+    vc.freqHz = hz * eff[kPitch] / basePitch;
+    vc.amp = amp * kDrawnGain * kVoiceLevel;
+    lastFreq = vc.freqHz;
+    if (eff[kTrill] > 0.5f)
+    {
+        vc.trillHz = eff[kTrill];
+        vc.trillDepthSt = 1.3f;
+        vc.trillAm = 0.4f;
+    }
 }
 
 void Engine::runAutoplay(float dt, VoiceControls& vc) noexcept
@@ -550,7 +668,18 @@ void Engine::runAutoplay(float dt, VoiceControls& vc) noexcept
             pickPhraseEndValues(rules);
     }
 
-    if (! playing)
+    if (! playing && drawMode)
+    {
+        // Draw mode: autoplay waits, and sing once sings the drawn line.
+        if (singOncePending)
+        {
+            singOncePending = false;
+            startDrawn();
+        }
+        if (! playing)
+            return;
+    }
+    else if (! playing)
     {
         if (! rules.active)
             return;
@@ -561,10 +690,19 @@ void Engine::runAutoplay(float dt, VoiceControls& vc) noexcept
         {
             singOncePending = false;
             firstWait = 0.0f;
-            startPhrase();
+            // A kept line takes its turn after each phrase of the bird's own.
+            const bool kept = keptIn.load(std::memory_order_relaxed);
+            if (! (kept && ! lastWasDrawn && startDrawn()))
+                startPhrase();
         }
         if (! playing)
             return;
+    }
+
+    if (drawnPhrase)
+    {
+        singDrawn(dt, rules, vc);
+        return;
     }
 
     const float tempo = std::max(0.25f, eff[kTempo] / 100.0f);
@@ -657,12 +795,26 @@ void Engine::process(float* left, float* right, int numSamples) noexcept
             continue;
         }
 
+        // Speed slows song time only. The voice runs at the real rate, so
+        // pitch stays where it was.
         VoiceControls vc;
-        runAutoplay(dt, vc);
+        runAutoplay(dt * speed, vc);
+        vc.trillHz *= speed;
         singingOut.store(playing, std::memory_order_relaxed);
         posOut.store(phraseMs, std::memory_order_relaxed);
-        tempoOut.store(std::max(0.25f, eff[kTempo] / 100.0f), std::memory_order_relaxed);
+        const float tempo = drawnPhrase ? drawnTempo() : std::max(0.25f, eff[kTempo] / 100.0f);
+        tempoOut.store(tempo * speed, std::memory_order_relaxed);
         feedSonogram(vc);
+
+        // Hearing shift after the sonogram feed: the sonogram shows the
+        // bird's own pitch.
+        if (shiftMul != shiftTarget)
+        {
+            shiftMul += (shiftTarget - shiftMul) * (1.0f - std::exp(-dt / kShiftGlideS));
+            if (std::fabs(shiftMul - shiftTarget) < 1.0e-4f)
+                shiftMul = shiftTarget;
+        }
+        vc.freqHz *= shiftMul;
 
         std::fill(birdBuf.begin(), birdBuf.begin() + n, 0.0f);
         voice.render(birdBuf.data(), n, vc);

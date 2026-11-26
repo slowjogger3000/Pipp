@@ -63,22 +63,51 @@ MainComponent::MainComponent(const juce::File& dataDirectory)
     for (auto* b : { &maleBtn, &femaleBtn, &adultBtn, &juvBtn })
         addAndMakeVisible(*b);
 
-    // Song panel. Draw, speed and hearing shift come in M5.
+    // Song panel.
     addAndMakeVisible(sono);
     sono.handLabel = [this](int k) {
         return strings("knob." + juce::String(P::all[static_cast<std::size_t>(k)].id)) + " " + strings("song.by_hand");
     };
-    drawBtn.setDisabled(true);
+    sono.flagText = [this](float hz, float secs) {
+        const bool no = strings.norwegian();
+        return number(hz / 1000.0f, 1, no) + " kHz  " + number(secs, 1, no) + " " + strings("unit.s");
+    };
+    sono.onLineChanged = [this] {
+        engine.setDrawn(sono.line);
+        if (sono.line.count == 0 && kept)
+        {
+            kept = false;
+            engine.keepDrawn(false);
+        }
+        refreshControls();
+    };
     speedBtns[0].setText(juce::String(juce::CharPointer_UTF8("1\xc3\x97")));
     speedBtns[1].setText(juce::String(juce::CharPointer_UTF8("\xc2\xbd\xc3\x97")));
     speedBtns[2].setText(juce::String(juce::CharPointer_UTF8("\xc2\xbc\xc3\x97")));
-    speedBtns[0].setOn(true);
-    speedBtns[1].setDisabled(true);
-    speedBtns[2].setDisabled(true);
-    shiftOffBtn.setOn(true);
-    shiftOctBtn.setDisabled(true);
+    for (int i = 0; i < 3; ++i)
+        speedBtns[static_cast<std::size_t>(i)].onClick = [this, i] { setSpeed(i); };
+    shiftOffBtn.onClick = [this] { setShift(false); };
+    shiftOctBtn.onClick = [this] { setShift(true); };
+    drawBtn.onClick = [this] { setDrawMode(! drawMode); };
+    eraseBtn.onClick = [this] { sono.erasing = ! sono.erasing; refreshControls(); };
+    clearBtn.onClick = [this] {
+        sono.line.count = 0;
+        sono.onLineChanged();
+    };
+    singItBtn.onClick = [this] {
+        if (! playing)
+            setPlaying(true);
+        engine.trigger(P::indexOf(P::ap_sing_once));
+    };
+    keepBtn.onClick = [this] {
+        kept = ! kept;
+        engine.keepDrawn(kept);
+        refreshControls();
+    };
     for (auto* b : { &drawBtn, &shiftOffBtn, &shiftOctBtn, &speedBtns[0], &speedBtns[1], &speedBtns[2] })
         addAndMakeVisible(*b);
+    for (auto* b : { &eraseBtn, &clearBtn, &singItBtn, &keepBtn })
+        addChildComponent(*b);
 
     // Scene.
     for (int row = 0; row < 4; ++row)
@@ -288,6 +317,55 @@ void MainComponent::setSongType(int v)
     refreshControls();
 }
 
+void MainComponent::setSpeed(int index)
+{
+    speedIndex = juce::jlimit(0, 2, index);
+    sendChoice(P::pb_speed, speedIndex);
+    refreshControls();
+}
+
+void MainComponent::setShift(bool down)
+{
+    shiftDown = down;
+    sendChoice(P::pb_shift, down ? 1 : 0);
+    refreshControls();
+}
+
+// Draw mode: autoplay waits (in the engine), the sonogram stops after the
+// phrase being sung, and the head shows the drawing tools.
+void MainComponent::setDrawMode(bool on)
+{
+    if (on)
+        stopCompare();
+    drawMode = on;
+    sono.erasing = false;
+    sono.setDrawMode(on);
+    sendChoice(P::pb_draw, on ? 1 : 0);
+    resized();
+    refreshControls();
+}
+
+void MainComponent::updateSongTools()
+{
+    const bool play = activeTab == 0;
+    for (juce::Component* c : std::initializer_list<juce::Component*> { &speedBtns[0], &speedBtns[1], &speedBtns[2], &shiftOffBtn, &shiftOctBtn })
+        c->setVisible(play && ! drawMode);
+    for (juce::Component* c : std::initializer_list<juce::Component*> { &eraseBtn, &clearBtn, &singItBtn, &keepBtn })
+        c->setVisible(play && drawMode);
+}
+
+// The line in design/Draw.dc.html: 4 points from 4 s, ending at 3.4 kHz,
+// 6.6 s, where the crosshair sits.
+void MainComponent::drawSampleLine()
+{
+    const tipp::DrawnPoint raw[5] = { { 4000.0f, 1900.0f, false }, { 4650.0f, 3000.0f, false }, { 5275.0f, 2400.0f, false },
+                                      { 5950.0f, 3800.0f, false }, { 6550.0f, 3400.0f, false } };
+    sono.line.count = 0;
+    tipp::addStroke(sono.line, raw, 5, Sonogram::kPxPerMs, Sonogram::kPxPerHz, Sonogram::kStrokeTolPx);
+    sono.onLineChanged();
+    sono.hoverAt({ 524.0f, 184.0f });
+}
+
 // A song type's play button in the field guide: that type, playing, one
 // phrase now. Autoplay goes on as it was set.
 void MainComponent::playType(int type)
@@ -301,6 +379,8 @@ void MainComponent::startCompare(const juce::String& otherId)
 {
     const bool again = compare.running() && otherId == comparingId;
     stopCompare();
+    if (drawMode)
+        setDrawMode(false); // COMPARE needs autoplay's sing once
     if (again || bird == nullptr)
         return; // a second click on the same COMPARE stops it
 
@@ -346,6 +426,7 @@ void MainComponent::setTab(int index)
             b.setVisible(play);
     for (auto& k : knobs)
         k->setVisible(play);
+    updateSongTools();
     guide.setVisible(! play);
     repaint();
 }
@@ -406,6 +487,11 @@ void MainComponent::applyStrings()
     drawBtn.setText(strings("song.draw"));
     shiftOffBtn.setText(strings("song.shift_off"));
     shiftOctBtn.setText(strings("song.shift_oct"));
+    eraseBtn.setText(strings("song.erase"));
+    clearBtn.setText(strings("song.clear"));
+    singItBtn.setText(strings("song.sing_it"));
+    keepBtn.setText(strings("song.keep"));
+    sono.yourPhraseText = strings("song.your_phrase");
     for (int row = 0; row < 4; ++row)
     {
         const auto ids = optionIds(kSceneIds[row]);
@@ -446,6 +532,20 @@ void MainComponent::refreshControls()
     adultBtn.setOn(age == 0);
     juvBtn.setOn(age == 1);
     plate.setVariant(variant());
+
+    drawBtn.setOn(drawMode);
+    for (int i = 0; i < 3; ++i)
+        speedBtns[static_cast<std::size_t>(i)].setOn(speedIndex == i);
+    shiftOffBtn.setOn(! shiftDown);
+    shiftOctBtn.setOn(shiftDown);
+    const bool hasLine = sono.line.count > 0;
+    eraseBtn.setOn(sono.erasing);
+    eraseBtn.setDisabled(! hasLine);
+    clearBtn.setDisabled(! hasLine);
+    singItBtn.setDisabled(! hasLine);
+    keepBtn.setDisabled(! hasLine);
+    keepBtn.setOn(kept);
+    updateSongTools();
 
     const int values[4] = { season, timeOfDay, songType, place };
     for (int row = 0; row < 4; ++row)
@@ -534,10 +634,19 @@ void MainComponent::timerCallback()
                 handPhase = 2;
             }
         }
+        // Draw mode: enter it a second before, wait until the view stops,
+        // then add the design's line and place the crosshair.
+        if (snapshotDrawMode && elapsed >= snapshotSeconds - 1.0 && ! drawMode)
+            setDrawMode(true);
+        const bool drawReady = snapshotDrawMode && sono.isFrozen();
+        if (drawReady && sono.line.count == 0)
+            drawSampleLine();
+
         // Without a drag, wait for the middle of a phrase so the grey
         // "next" strokes are on screen.
         const bool midPhrase = engine.singing() && engine.phrasePosMs() > 500.0f;
-        if (elapsed >= snapshotSeconds && (snapshotKnob >= 0 || midPhrase || elapsed > snapshotSeconds + 15.0))
+        const bool ready = snapshotDrawMode ? drawReady : (snapshotKnob >= 0 || midPhrase);
+        if (elapsed >= snapshotSeconds && (ready || elapsed > snapshotSeconds + 15.0))
         {
             const auto image = createComponentSnapshot(getLocalBounds(), true, 1.0f);
             snapshotFile.deleteFile();
@@ -700,6 +809,22 @@ void MainComponent::resized()
         const auto lab = mono(10.0f, 500, 0.06f);
         const int cy = songHead.getY() + 13;
         int x = songHead.getRight() - 8;
+        if (drawMode)
+        {
+            // Draw mode: DRAW and its four tools, 6px apart.
+            phraseValue = lengthValue = {};
+            for (auto* b : { &keepBtn, &singItBtn, &clearBtn, &eraseBtn, &drawBtn })
+            {
+                const int w = textW(lab, b == &drawBtn ? strings("song.draw") : b == &eraseBtn ? strings("song.erase")
+                                         : b == &clearBtn ? strings("song.clear") : b == &singItBtn ? strings("song.sing_it")
+                                                          : strings("song.keep")) + 16;
+                x -= w;
+                b->setBounds(x, cy - 10, w, 20);
+                x -= 6;
+            }
+        }
+        else
+        {
         auto takeText = [&](const juce::String& key, int w) {
             x -= w;
             songLabels.push_back({ { x, cy - 7, w, 14 }, key });
@@ -721,6 +846,7 @@ void MainComponent::resized()
         takeText("song.speed", textW(lab, strings("song.speed")));
         const int drawW = textW(lab, strings("song.draw")) + 16;
         drawBtn.setBounds(x - drawW, cy - 10, drawW, 20);
+        }
     }
 
     // Scene: 4 flexible switches, then Dialect and Mimics at 92px, 12px gaps.
@@ -970,11 +1096,14 @@ void MainComponent::paintPanels(juce::Graphics& g)
     for (const auto& [rect, keyName] : songLabels)
         g.drawText(strings(keyName), rect, juce::Justification::centredLeft, false);
     g.setColour(colour::ink);
-    const auto& ph = sono.lastPhrase();
-    const float tempo = std::max(0.25f, engine.phraseTempo());
-    g.drawText(ph.number > 0 ? juce::String(ph.number) : juce::String("-"), phraseValue, juce::Justification::centredLeft, false);
-    g.drawText(ph.number > 0 ? number(ph.lengthMs / tempo / 1000.0f, 1, no) + " " + strings("unit.s") : juce::String("-"), lengthValue,
-               juce::Justification::centredLeft, false);
+    if (! drawMode)
+    {
+        const auto& ph = sono.lastPhrase();
+        const float tempo = std::max(0.01f, engine.phraseTempo());
+        g.drawText(ph.number > 0 ? juce::String(ph.number) : juce::String("-"), phraseValue, juce::Justification::centredLeft, false);
+        g.drawText(ph.number > 0 ? number(ph.lengthMs / tempo / 1000.0f, 1, no) + " " + strings("unit.s") : juce::String("-"), lengthValue,
+                   juce::Justification::centredLeft, false);
+    }
 
     // kHz axis and the well's left edge.
     g.setFont(mono(9.0f, 400));
@@ -1010,6 +1139,7 @@ void MainComponent::paintPanels(juce::Graphics& g)
         for (int i = 0; i < 3; ++i)
             parts[i] = strings(juce::String(rows[i]) + "." + optionIds(ids[i])[values[i]]).toLowerCase();
         const auto text = loadError.isNotEmpty() ? loadError
+                        : drawMode ? strings("song.draw_caption")
                         : strings.format("song.caption", { { "bird", currentEntry() != nullptr ? currentEntry()->name(no) : juce::String() },
                                                            { "type", parts[0] }, { "season", parts[1] }, { "time", parts[2] } });
         g.setFont(mono(9.0f, 400));

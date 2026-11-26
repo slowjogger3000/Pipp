@@ -12,6 +12,7 @@
 // latch, return all) runs here, not in the interfaces.
 
 #include "BirdData.h"
+#include "Drawn.h"
 #include "Params.h"
 #include "Random.h"
 #include "Surroundings.h"
@@ -47,6 +48,15 @@ public:
     void handDown(int knob) noexcept;
     void handUp(int knob) noexcept;
     void trigger(int index) noexcept; // ap_return_all, ap_sing_once, ap_reroll
+
+    // The drawn line. Call from one host thread; it is copied for the
+    // audio thread at the start of each drawn phrase. With pb_draw on,
+    // autoplay waits and ap_sing_once sings the line. Kept, autoplay sings
+    // it after each phrase of the bird's own while draw mode is off.
+    void setDrawn(const DrawnLine& line) noexcept;
+    void keepDrawn(bool keep) noexcept { keptIn.store(keep, std::memory_order_relaxed); }
+    bool drawnKept() const noexcept { return keptIn.load(std::memory_order_relaxed); }
+    std::uint32_t drawnSung() const noexcept { return drawnCount.load(std::memory_order_relaxed); }
 
     // Writes numSamples to both channels. right may equal left.
     void process(float* left, float* right, int numSamples) noexcept;
@@ -94,13 +104,16 @@ public:
         std::uint32_t number = 0; // phrasesStarted() when it began
         int count = 0;
         float lengthMs = 0.0f;
+        bool drawn = false;        // the drawn line, count is 0
+        float drawnStartMs = 0.0f; // where it starts on the drawing
         std::array<PhraseNote, kMaxNotes> notes {};
     };
     // Returns false if the phrase changed during the copy. Try again.
     bool readPhrase(PhraseView& out) const noexcept;
     bool singing() const noexcept { return singingOut.load(std::memory_order_relaxed); }
     float phrasePosMs() const noexcept { return posOut.load(std::memory_order_relaxed); } // data time
-    float phraseTempo() const noexcept { return tempoOut.load(std::memory_order_relaxed); } // data ms per real ms
+    // Data ms per real ms: tempo times speed.
+    float phraseTempo() const noexcept { return tempoOut.load(std::memory_order_relaxed); }
     std::uint32_t seed() const noexcept { return seedOut.load(std::memory_order_relaxed); }
     std::uint32_t phrasesStarted() const noexcept { return phraseCount.load(std::memory_order_relaxed); }
 
@@ -139,6 +152,10 @@ private:
     void publishPhrase() noexcept;
     void feedSonogram(const VoiceControls& vc) noexcept;
     void startPhrase() noexcept;
+    bool startDrawn() noexcept;
+    bool readDrawn(DrawnLine& out) const noexcept;
+    void singDrawn(float dt, const SceneRules& rules, VoiceControls& vc) noexcept;
+    float drawnTempo() const noexcept;
     void generatePhrase(const SongType& type) noexcept;
     void pickPhraseEndValues(const SceneRules& rules) noexcept;
     float pick(Range r) noexcept;
@@ -151,6 +168,12 @@ private:
     std::atomic<std::uint32_t> seedIn { 1u };
     std::atomic<std::uint32_t> trigReturnAll { 0u }, trigSingOnce { 0u }, trigReroll { 0u };
     std::atomic<const BirdData*> birdIn { nullptr };
+    std::atomic<std::uint32_t> dlSeq { 0u };
+    std::atomic<int> dlCount { 0 };
+    std::array<std::atomic<float>, DrawnLine::kMax> dlT, dlHz;
+    std::array<std::atomic<bool>, DrawnLine::kMax> dlJoin;
+    std::atomic<bool> keptIn { false };
+    std::atomic<std::uint32_t> drawnCount { 0u };
 
     // Published.
     std::atomic<const BirdData*> birdActive { nullptr };
@@ -170,6 +193,8 @@ private:
     std::atomic<std::uint32_t> pvNumber { 0u };
     std::atomic<int> pvCount { 0 };
     std::atomic<float> pvLength { 0.0f };
+    std::atomic<bool> pvDrawn { false };
+    std::atomic<float> pvDrawnStart { 0.0f };
     std::array<std::atomic<int>, kMaxNotes> pvSyl, pvPart;
     std::array<std::atomic<float>, kMaxNotes> pvStart, pvDur, pvMul;
     std::atomic<bool> singingOut { false };
@@ -189,7 +214,8 @@ private:
     std::array<KnobState, kNumKnobs> knobs {};
     std::array<float, kNumKnobs> autoFrom {}, autoTo {}, autoVal {}, eff {};
 
-    bool apOn = true, latch = false, play = false;
+    bool apOn = true, latch = false, play = false, drawMode = false;
+    float speed = 1.0f, shiftTarget = 1.0f, shiftMul = 1.0f;
     float apHold = 3.0f;
     int season = 0, timeOfDay = 0, sex = 0, age = 0, typeIdx = 0, place = 0;
     int lastType = -1;
@@ -197,6 +223,8 @@ private:
     Phrase cur;
     bool hasPhrase = false;
     int boutTemplate = -1, boutLeft = 0;
+    DrawnLine drawnCur;
+    bool drawnPhrase = false, lastWasDrawn = false;
     bool playing = false;
     bool singOncePending = false;
     float phraseMs = 0.0f;

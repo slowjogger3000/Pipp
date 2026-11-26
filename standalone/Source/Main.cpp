@@ -3,7 +3,7 @@
 // Test hook, used by the M2 checks:
 //   Tipp --snapshot <file.png> [--seconds <s>] [--hand <knob id>] [--lang no]
 //        [--bird <id>] [--sex female] [--age juvenile] [--tab guide]
-//        [--compare <id>]
+//        [--compare <id>] [--speed 0.5|0.25] [--shift] [--draw]
 // plays for the given time, drags the knob 3 s before the end if asked,
 // saves a picture of the window and quits.
 
@@ -39,6 +39,12 @@ public:
                 content->chooseScene(bird, value("--sex") == "female", value("--age") == "juvenile");
             if (value("--tab") == "guide")
                 content->setTab(1);
+            if (const auto speed = value("--speed"); speed.isNotEmpty())
+                content->setSpeed(speed == "0.25" ? 2 : speed == "0.5" ? 1 : 0);
+            if (args.contains("--shift"))
+                content->setShift(true);
+            if (args.contains("--draw"))
+                content->snapshotDraw();
             const auto secs = value("--seconds");
             const int knob = tipp::params::indexOf(value("--hand").toRawUTF8());
             content->runSnapshot(juce::File::getCurrentWorkingDirectory().getChildFile(png),
