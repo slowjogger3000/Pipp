@@ -1,12 +1,12 @@
 // The desktop shell, 1280x800 scaled to the window: header, tabs, body and
-// status bar, as in design-handover.md "Shared layout, desktop". PLAY, FIELD
-// GUIDE, QUIZ, CHORUS and LOG are built; COLLECTION is hatched until its
-// screen exists. Same tab rules as MainComponent::setTab().
+// status bar, as in design-handover.md "Shared layout, desktop". All 6 tabs
+// are built. Same tab rules as MainComponent::setTab().
 
 import type { AudioHost } from '../audio/host.ts';
 import { index, hasSound, type IndexBird } from '../data.ts';
 import { Btn, box, canvases, el, number, MINUS } from './dom.ts';
 import { ChorusScreen } from './chorus.ts';
+import { DeskCollectionScreen } from './deskcollection.ts';
 import { GuideScreen } from './guide.ts';
 import { LogScreen } from './log.ts';
 import { PlayScreen, kSceneKeys, kSceneOptions } from './play.ts';
@@ -16,7 +16,7 @@ import { Strings, upper, type Lang } from './strings.ts';
 
 const kTabKeys = ['play', 'guide', 'quiz', 'chorus', 'log', 'collection'] as const;
 const kLangKey = 'tipp.lang';
-const kBuiltTabs = 5;
+const kBuiltTabs = 6;
 
 export class App {
   readonly s = new Strings();
@@ -42,6 +42,9 @@ export class App {
   private quiz: QuizScreen;
   private chorus: ChorusScreen;
   private log: LogScreen;
+  private collection: DeskCollectionScreen;
+  // COMPARE WITH TIPP in the collection: one phrase, then the Play bird stops.
+  private oneShot: { base: number; seen: boolean; at: number } | null = null;
   private transportRow: HTMLDivElement;
   private outGroup: HTMLDivElement;
   private aside: HTMLDivElement;
@@ -135,7 +138,13 @@ export class App {
       playBird: () => this.st.bird,
       playType: () => this.st.type,
     });
-    for (const r of [this.quiz.root, this.chorus.root, this.log.root]) r.style.pointerEvents = 'auto';
+    this.collection = new DeskCollectionScreen(full, this.s, {
+      refresh: () => this.refresh(),
+      playBird: () => this.st.bird,
+      openPlay: (id) => { this.setTab(0); this.selectBird(id); },
+      sing: (id, type) => this.singOnce(id, type),
+    });
+    for (const r of [this.quiz.root, this.chorus.root, this.log.root, this.collection.root]) r.style.pointerEvents = 'auto';
     this.status = el('div', 'status', stage);
 
     window.addEventListener('resize', () => this.fit());
@@ -213,6 +222,7 @@ export class App {
 
   setPlaying(on: boolean) {
     this.stopCompare();
+    this.endOneShot();
     this.st.playing = on;
     // Audio starts on the first press: browsers need a user gesture.
     if (on) void this.host.start();
@@ -249,6 +259,28 @@ export class App {
     this.host.trigger('ap_sing_once');
   }
 
+  // One phrase of a bird with autoplay held off, for the collection's
+  // COMPARE WITH TIPP. frame() stops the bird when the phrase is done and
+  // gives autoplay back as it was set.
+  private singOnce(id: string, type: number) {
+    this.selectBird(id);
+    this.st.type = type;
+    this.host.param('sc_type', type);
+    this.host.param('ap_on', 0);
+    this.st.playing = true;
+    void this.host.start();
+    this.host.param('pb_play', 1);
+    this.host.trigger('ap_sing_once');
+    this.oneShot = { base: this.host.phrasesStarted, seen: false, at: performance.now() };
+    this.refresh();
+  }
+
+  private endOneShot() {
+    if (!this.oneShot) return;
+    this.oneShot = null;
+    this.host.param('ap_on', this.st.apOn ? 1 : 0);
+  }
+
   private startCompare(otherId: string) {
     const again = this.comparing === otherId;
     this.stopCompare();
@@ -283,8 +315,10 @@ export class App {
     this.quiz.show(i === 2);
     this.chorus.show(i === 3);
     this.log.show(i === 4);
-    // The log has no transport (Log.dc.html), so the Play bird stops there.
-    if (i === 4 && this.st.playing) this.setPlaying(false);
+    this.collection.show(i === 5);
+    // The log and the collection have no transport (Log.dc.html,
+    // DeskCollection.dc.html), so the Play bird stops there.
+    if (i >= 4 && this.st.playing) this.setPlaying(false);
     this.aside.style.visibility = i < 2 ? '' : 'hidden';
     if (i === 2) this.quiz.enter();
     if (i === 3) this.chorus.enter();
@@ -294,8 +328,13 @@ export class App {
   }
 
   private key(e: KeyboardEvent) {
-    const fn = ['F1', 'F2', 'F3', 'F4', 'F5'].indexOf(e.key);
+    const fn = ['F1', 'F2', 'F3', 'F4', 'F5', 'F6'].indexOf(e.key);
     if (fn >= 0) { this.setTab(fn); e.preventDefault(); return; }
+    if (this.tab === 5) {
+      // Collection: Up and Down move through the bird list.
+      if (e.key === 'ArrowUp' || e.key === 'ArrowDown') { this.collection.step(e.key === 'ArrowUp' ? -1 : 1); e.preventDefault(); }
+      return;
+    }
     if (this.tab === 4) {
       // Log: Up and Down move through the entries, Enter opens the bird.
       if (e.key === 'ArrowUp' || e.key === 'ArrowDown') { this.log.step(e.key === 'ArrowUp' ? -1 : 1); e.preventDefault(); }
@@ -338,14 +377,15 @@ export class App {
     this.quiz.applyStrings();
     this.chorus.applyStrings();
     this.log.applyStrings();
+    this.collection.applyStrings();
     this.refresh();
   }
 
   refresh() {
     const st = this.st, s = this.s, tab = this.tab;
     const on = tab === 2 ? this.quiz.playing : tab === 3 ? this.chorus.playing : st.playing;
-    this.transportRow.style.display = tab === 4 ? 'none' : '';
-    this.outGroup.style.display = tab === 4 ? 'none' : '';
+    this.transportRow.style.display = tab >= 4 ? 'none' : '';
+    this.outGroup.style.display = tab >= 4 ? 'none' : '';
     this.playBtn.on(on);
     this.stopBtn.on(!on);
     // Play and the field guide have the list and stepper.
@@ -373,6 +413,12 @@ export class App {
     // Status bar: state, summary, keys.
     this.status.replaceChildren();
     const audio = this.host.error ? `AUDIO: ${this.host.error}` : '';
+    if (tab === 5) {
+      el('span', '', this.status, s.t('tab.collection'));
+      el('span', 'summary', this.status, audio || this.collection.statusText());
+      for (const k of ['status.keys_bird', 'status.keys_screen_web']) el('span', 'keys', this.status, s.t(k));
+      return;
+    }
     if (tab === 4) {
       el('span', '', this.status, s.t('tab.log'));
       el('span', 'summary', this.status, audio || this.log.statusText());
@@ -429,6 +475,13 @@ export class App {
     if (this.tab === 1) this.guide.poll(this.play.plate.open);
     if (this.tab === 2) this.quiz.poll();
     if (this.tab === 3) this.chorus.poll();
+    // COMPARE WITH TIPP: stop once the one phrase has been sung.
+    const one = this.oneShot;
+    if (one) {
+      if (this.host.phrasesStarted > one.base) one.seen = true;
+      // A bird that does not sing in this scene never starts: give up after 3 s.
+      if ((one.seen && !this.host.singing) || (!one.seen && performance.now() - one.at > 3000)) { this.endOneShot(); this.setPlaying(false); }
+    }
     // COMPARE ends on its own; clear the button once the worklet says so.
     if (this.comparing) {
       if (this.host.compare.running) this.compareSeen = true;

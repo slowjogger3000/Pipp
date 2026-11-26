@@ -337,8 +337,9 @@ export class CollectionScreen {
         .glyph(this.playing === r.id ? 'stop' : 'play', s.t('coll.play'));
       pb.on(this.playing === r.id);
       const img = el('img', '', row);
-      Object.assign(img.style, { width: '120px', height: '40px', flex: 'none', border: '1px solid var(--ink)', background: 'var(--face)' });
-      img.src = r.thumb;
+      Object.assign(img.style, { width: '120px', height: '40px', flex: 'none', border: '1px solid var(--ink)', backgroundColor: 'var(--face)' });
+      if (r.thumb) img.src = r.thumb;
+      else img.classList.add('hatched');
       img.alt = '';
       const mid = box(row, { flex: '1', minWidth: '0', display: 'flex', flexDirection: 'column' });
       const type = s.t(`type.${kTypeIds[r.type] ?? 'song'}`);
@@ -346,7 +347,7 @@ export class CollectionScreen {
       const head = [this.bird ? '' : this.name(r.bird, r.latin), type.charAt(0) + type.slice(1).toLocaleLowerCase('nb'), len].filter((x) => x).join(' · ');
       box(mid, { font: '500 12px var(--mono)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }).textContent = head;
       box(mid, { color: 'var(--inkSoft)' }).textContent = r.date;
-      box(row, { font: '500 12px var(--mono)', flex: 'none' }).textContent = `${number(Math.round(r.confidence * 100), 0, s.no)} %`;
+      box(row, { font: '500 12px var(--mono)', flex: 'none' }).textContent = r.confidence >= 0 ? `${number(Math.round(r.confidence * 100), 0, s.no)} %` : '–';
       if (this.selecting) {
         row.style.cursor = 'pointer';
         row.addEventListener('click', () => this.toggleSelect(r.id));

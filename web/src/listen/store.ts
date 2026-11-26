@@ -11,7 +11,8 @@ export interface Recording {
   confidence: number;  // 0 to 1
   mime: string;
   audio: Blob;
-  thumb: string;       // 120x40 sonogram as a PNG data URL
+  thumb: string;       // 120x40 sonogram as a PNG data URL, or '' when there is none
+  from?: 'phone' | 'file'; // where the desktop got it; missing means recorded here
 }
 
 export interface Picture {
@@ -19,6 +20,7 @@ export interface Picture {
   bird: string;
   date: string;
   image: Blob;
+  from?: 'phone' | 'file';
 }
 
 const kDb = 'tipp';
@@ -61,6 +63,10 @@ export function now(): string {
   const d = new Date(), p = (n: number) => String(n).padStart(2, '0');
   return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}`;
 }
+
+// The ids already stored, so an import can skip what it has (prd.md).
+export const recordingIds = async () => new Set(await run<IDBValidKey[]>('recordings', 'readonly', (s) => s.getAllKeys()));
+export const pictureIds = async () => new Set(await run<IDBValidKey[]>('pictures', 'readonly', (s) => s.getAllKeys()));
 
 export const deleteRecording = (id: string) => run<undefined>('recordings', 'readwrite', (s) => s.delete(id));
 export const deletePicture = (id: string) => run<undefined>('pictures', 'readwrite', (s) => s.delete(id));
