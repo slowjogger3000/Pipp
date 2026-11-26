@@ -29,6 +29,49 @@ The names and Latin binomials were written from general knowledge and have not b
 
 The great spotted woodpecker drums. Its "song" type is a drum roll, so the voice engine needs a percussive source for it.
 
+## Proposed for M11: 32 more birds (draft, Eirik to edit)
+
+Drafted 2026-11-26 for M11, not yet agreed. Names and Latin names come from general knowledge and are not checked against Artsdatabanken, as for the 18. No fact about any of these birds is verified until its SNL check is written below, as for the 18. Strike, swap or move birds before M11 starts.
+
+The aim: the birds a Norwegian beginner is most likely to hear in a year, spread over 7 groups so each group is a useful quiz set. Four of them are already named as lookalikes of the 18 (redwing, chiffchaff, lesser black-backed gull, common snipe), so COMPARE gets more to play.
+
+| No | Group | Norwegian | English | Latin | Folder | Note |
+|---|---|---|---|---|---|---|
+| 19 | Garden | Skjære | Magpie | Pica pica | `skjaere` | harsh chatter |
+| 20 | Garden | Kråke | Hooded crow | Corvus cornix | `krake` | |
+| 21 | Garden | Ringdue | Wood pigeon | Columba palumbus | `ringdue` | cooing |
+| 22 | Garden | Grønnfink | Greenfinch | Chloris chloris | `gronnfink` | |
+| 23 | Garden | Stær | Starling | Sturnus vulgaris | `staer` | mimics; the MIMICS control stays dropped for version 1 |
+| 24 | Garden | Linerle | White wagtail | Motacilla alba | `linerle` | |
+| 25 | Forest | Rødvingetrost | Redwing | Turdus iliacus | `rodvingetrost` | lookalike of the song thrush |
+| 26 | Forest | Gråtrost | Fieldfare | Turdus pilaris | `gratrost` | |
+| 27 | Forest | Svarthvit fluesnapper | Pied flycatcher | Ficedula hypoleuca | `svarthvitfluesnapper` | |
+| 28 | Forest | Granmeis | Willow tit | Poecile montanus | `granmeis` | |
+| 29 | Forest | Fuglekonge | Goldcrest | Regulus regulus | `fuglekonge` | very high song |
+| 30 | Forest | Gransanger | Chiffchaff | Phylloscopus collybita | `gransanger` | lookalike of the willow warbler |
+| 31 | Forest | Bjørkefink | Brambling | Fringilla montifringilla | `bjorkefink` | |
+| 32 | Forest | Svartspett | Black woodpecker | Dryocopus martius | `svartspett` | drums, uses `core/Drum.h` |
+| 33 | Coast and water | Fiskemåke | Common gull | Larus canus | `fiskemake` | |
+| 34 | Coast and water | Sildemåke | Lesser black-backed gull | Larus fuscus | `sildemake` | lookalike of the herring gull |
+| 35 | Coast and water | Makrellterne | Common tern | Sterna hirundo | `makrellterne` | |
+| 36 | Wetland and lake | Stokkand | Mallard | Anas platyrhynchos | `stokkand` | quacks: may need a rougher source |
+| 37 | Wetland and lake | Sangsvane | Whooper swan | Cygnus cygnus | `sangsvane` | trumpeting |
+| 38 | Wetland and lake | Storlom | Black-throated diver | Gavia arctica | `storlom` | wailing |
+| 39 | Wetland and lake | Enkeltbekkasin | Common snipe | Gallinago gallinago | `enkeltbekkasin` | lookalike of the woodcock; its display sound is made by tail feathers, may need a new source |
+| 40 | Mountain | Heipiper | Meadow pipit | Anthus pratensis | `heipiper` | |
+| 41 | Mountain | Lirype | Willow ptarmigan | Lagopus lagopus | `lirype` | |
+| 42 | Mountain | Heilo | Golden plover | Pluvialis apricaria | `heilo` | |
+| 43 | Mountain | Ravn | Raven | Corvus corax | `ravn` | |
+| 44 | Farmland | Låvesvale | Barn swallow | Hirundo rustica | `lavesvale` | |
+| 45 | Farmland | Sanglerke | Skylark | Alauda arvensis | `sanglerke` | long song in flight |
+| 46 | Farmland | Gulspurv | Yellowhammer | Emberiza citrinella | `gulspurv` | |
+| 47 | Farmland | Vipe | Lapwing | Vanellus vanellus | `vipe` | |
+| 48 | Night | Perlugle | Tengmalm's owl | Aegolius funereus | `perlugle` | |
+| 49 | Night | Åkerrikse | Corncrake | Crex crex | `akerrikse` | |
+| 50 | Night | Nattravn | Nightjar | Caprimulgus europaeus | `nattravn` | long churring |
+
+Left out on purpose, to swap in if wanted: kaie (jackdaw), dompap (bullfinch), toppmeis (crested tit), munk (blackcap), trepiper (tree pipit), svartbak (great black-backed gull), strandsnipe (common sandpiper), steinskvett (wheatear), tårnseiler (swift), hornugle (long-eared owl).
+
 ## Svarttrost, checked 2026-11-26
 
 Sources used: Store norske leksikon (snl.no/svarttrost), which follows Artsdatabanken's classification and cites BirdLife Norge for its population figure. A search excerpt from Fuglevennen (fuglevennen.no). A BirdLife Norge press release from 2021. Artsdatabanken's own species page and the full Fuglevennen page could not be opened, so check those two when possible.

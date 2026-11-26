@@ -55,7 +55,7 @@ With autoplay off, SING ONCE triggers one phrase and the knobs stay where the ha
 
 | Control | Values |
 |---|---|
-| Bird | 18 birds in 4 groups, see `birds.md` |
+| Bird | 18 birds in 4 groups, see `birds.md`. M11 (proposed 2026-11-26) grows this to about 50 in 7 groups |
 | Sex | Male, Female |
 | Age | Adult, Juvenile |
 
