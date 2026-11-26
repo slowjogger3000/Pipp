@@ -116,6 +116,8 @@ Checks: the same seed gives the same phrase order in the standalone and the web 
 
 Checks: Eirik runs it on his phone. Record, save, find it in the collection, play it back.
 
+Done 2026-11-26: Eirik ran it on his iPhone; recording, saving, the collection, playback, camera, share and settings work.
+
 ## M10. Remaining birds and extras
 
 **Model: Opus** for song data.
