@@ -76,7 +76,11 @@ Sex and age change the plate and its callouts. Whether they change the sound is 
 | `su_wind` | Wind | 0 to 15 | m/s |
 | `su_space` | Space | 0 to 100 | % |
 
-Ranges are starting points. Tune them by ear in M1 and record the final values here.
+Final after M1 (2026-11-26): the ranges above are kept as they are. The blackbird was approved as recognisable with them, and `data/birds/svarttrost/voice.json` uses the same ranges. A later bird may narrow a range in its own `voice.json`.
+
+Where autoplay moves a knob, it stays inside a narrower range set per song type in `songs.json`. The blackbird's song moves Pitch 0.97 to 1.03, Breath 8 to 18, Tension 15 to 32, Rough 3 to 10 and Tempo 92 to 108. Its call moves Pitch 0.98 to 1.02, Breath 18 to 26, Tension 72 to 88 and Rough 10 to 18.
+
+Length cannot make a phrase longer than the most syllables its phrase rules allow.
 
 ### Autoplay
 

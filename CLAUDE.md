@@ -40,12 +40,11 @@ If a reply only answers a question and changes nothing, still end with the block
 
 Update this at the end of every work session.
 
-- Current milestone: M1. Round 1 approved by Eirik and committed 2026-11-26. M1 is done when he says the blackbird is recognisable; then record the final knob ranges in `prd.md`.
+- Current milestone: M1 done 2026-11-26. Eirik called the blackbird recognisable after round 1. Final knob ranges are in `prd.md`. Waiting for Eirik's go for M2.
 - Built in M1 round 1: `core/Syrinx.h` (voice), `core/Surroundings.*` (distance, wind, space, place), `core/Engine.*` (knob override sequence, autoplay with seed, phrase generation and playback), `core/BirdData.*` and `core/Json.*` (parse the text of `voice.json` and `songs.json`), `core/Random.h` (PCG32 for choices, xorshift for noise). `data/birds/svarttrost/voice.json` and `songs.json`. The test voice and `--tone` are gone.
 - Verified: zero warnings in core, render tool and standalone. Render checks pass for 30 s song and call and for 8 knob-extreme renders. Same seed gives a byte-identical WAV. All core `.cpp` files compile with `emcc`. Spectrograms look as designed (fluted notes 1.4 to 2.7 kHz, twitter 4 to 7 kHz, call around 4 kHz).
-- Not verified: Eirik approved round 1 but has not yet called the blackbird recognisable. The standalone builds but has not been launched; it reads `data/` from the source tree through `TIPP_DATA_DIR` (dev only). Native and WASM phrase order not compared (M8). Web and phone are empty folders.
+- Not verified: the standalone builds but has not been launched; it reads `data/` from the source tree through `TIPP_DATA_DIR` (dev only). Native and WASM phrase order not compared (M8). Web and phone are empty folders.
 - Song shapes, timings and pitches in `songs.json` are sound design guesses, marked in its `_note`. The twitter ending and phrase length are still `[TO VERIFY]` in `birds.md`.
-- Knob ranges in `prd.md` are unchanged. Record final values there when Eirik approves the blackbird.
 - Tools present on Eirik's Mac (checked 2026-11-26): cmake, Xcode, emcc, node, ffmpeg, lame.
 - Open decisions: recognition engine (parked, see `prd.md`). The phone export format for the desktop Collection.
 
