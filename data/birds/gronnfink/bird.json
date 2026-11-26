@@ -1,0 +1,108 @@
+{
+ "_note": "Field guide text for this bird, both languages. Facts come from birds.md (M11 batch 1, SNL). A field with verified false shows [TO VERIFY]. Norwegian wording is mine, Eirik to check. calendar rows: one letter per month from January, y yes, n no, ? not known.",
+ "xeno_canto": "https://xeno-canto.org/species/chloris-chloris",
+ "facts": {
+  "length": {
+   "en": "15 cm, about a house sparrow",
+   "no": "15 cm, omtrent som en gråspurv",
+   "verified": true
+  },
+  "broods": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "range": {
+   "en": "Most in the south, north to Sør-Varanger",
+   "no": "Flest i sør, nord til Sør-Varanger",
+   "verified": true
+  },
+  "habitat": {
+   "en": "Open farmland with dense trees and bushes",
+   "no": "Åpent kulturlandskap med tette trær og busker",
+   "verified": true
+  },
+  "food": {
+   "en": "Seeds; common at feeders",
+   "no": "Frø; vanlig på fôringsbrett",
+   "verified": true
+  },
+  "status": {
+   "en": "VU, vulnerable, Norwegian red list",
+   "no": "VU, sårbar, norsk rødliste",
+   "verified": true
+  },
+  "nest": {
+   "en": "In dense juniper or larger trees, 5 to 6 eggs",
+   "no": "I tett einer eller større trær, 5 til 6 egg",
+   "verified": true
+  }
+ },
+ "sings": {
+  "male": {
+   "en": "Sings, also in a song flight",
+   "no": "Synger, også i sangflukt",
+   "verified": true
+  },
+  "female": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "song_notes": {
+  "en": "A short, monotonous, characteristic reeling sound, like the brambling's song but not as harsh, rising at the end. The male may sing in a stiff-winged song flight in wide circles.",
+  "no": "En kort, monoton og karakteristisk snerring, lik bjørkefinkens sang men ikke så hard, og stigende mot slutten. Hannen kan synge i sangflukt med stive vinger i store sirkler.",
+  "verified": true
+ },
+ "mnemonic": {
+  "en": "",
+  "no": "",
+  "verified": false
+ },
+ "types": {
+  "song": {
+   "en": "A short reeling, rising at the end.",
+   "no": "En kort snerring, stigende mot slutten.",
+   "verified": true
+  },
+  "call": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "alarm": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "flight": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "parts": {},
+ "calendar": {
+  "present": "yyyyyyyyyyyy",
+  "sings": "????????????",
+  "note": {
+   "en": "Resident and wanderer; part of the population leaves in autumn. [TO VERIFY] singing months.",
+   "no": "Stand- og streiffugl; en del forlater landet om høsten. [TO VERIFY] månedene med sang.",
+   "verified": true
+  }
+ },
+ "lookalikes": [
+  {
+   "name": {
+    "en": "Siskin",
+    "no": "Grønnsisik"
+   },
+   "text": {
+    "en": "Young birds look alike, grey and yellow-green. The greenfinch is much larger with a heavy cone-shaped bill; the siskin's bill is fairly long and pointed.",
+    "no": "Unge fugler ligner, grå og gulgrønne. Grønnfinken er mye større med kraftig, kjegleformet nebb; grønnsisiken har et ganske langt, spisst nebb.",
+    "verified": true
+   }
+  }
+ ]
+}

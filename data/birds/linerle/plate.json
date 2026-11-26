@@ -1,0 +1,269 @@
+{
+ "_note": "White wagtail ink plate in a 280x240 box, drawn in M11 from the great tit plate, not from a design: black crown, nape and throat (ink), a white mask (face), grey back as light hatching, white belly, long tail. SNL describes the species, not the sexes or the juvenile, so the female shows the species' marks and the juvenile is drawn alike with [TO VERIFY]. Bill colour not in SNL.",
+ "box": [
+  280,
+  240
+ ],
+ "clips": {
+  "body": "M198 70 C196 56 180 50 166 56 C152 62 142 76 132 92 C120 110 110 130 108 150 C110 160 118 168 126 172 C146 182 170 174 180 156 C192 136 199 108 199 90 C200 86 201 82 200 80 Z",
+  "wing": "M156 92 C164 118 148 148 112 160 C118 138 130 110 156 92 Z"
+ },
+ "layers": [
+  {
+   "path": "M14 206 C80 202 150 199 268 194",
+   "stroke": 4
+  },
+  {
+   "path": "M214 197 l20 -20 M224 187 l16 3",
+   "stroke": 1.5
+  },
+  {
+   "path": "M234 177 q10 -10 18 -2 q-9 8 -18 2 Z M240 190 q11 -5 16 3 q-10 4 -16 -3 Z",
+   "fill": "face",
+   "stroke": 1
+  },
+  {
+   "path": "M114 146 L36 208 L48 220 L126 166 Z",
+   "fill": "face",
+   "stroke": 1.5,
+   "part": "tail"
+  },
+  {
+   "path": "M118 152 L40 211 M122 159 L44 215",
+   "stroke": 1,
+   "part": "tail"
+  },
+  {
+   "path": "M142 176 L144 199 M156 175 L159 198 M136 201 L144 199 L152 201 M151 199 L159 198 L167 200",
+   "stroke": 1.5
+  },
+  {
+   "clip": "body",
+   "fill": "face",
+   "stroke": 1.5
+  },
+  {
+   "hatch": "body"
+  },
+  {
+   "hatch": "wing"
+  },
+  {
+   "clip": "wing",
+   "stroke": 1.5
+  },
+  {
+   "path": "M126 101 L163 123 L161 128 L124 106 Z",
+   "fill": "face",
+   "stroke": 1,
+   "within": "wing"
+  },
+  {
+   "path": "M194 112 C186 132 172 152 150 168 C164 180 178 170 186 152 C194 136 198 120 199 106 Z",
+   "fill": "face",
+   "within": "body"
+  },
+  {
+   "path": "M200 66 L200 82 C200 96 198 104 194 110 C184 110 172 104 160 98 C152 94 144 92 136 90 C142 76 152 60 168 54 C184 50 198 56 200 66 Z",
+   "fill": "cap",
+   "within": "body"
+  },
+  {
+   "path": "M200 86 C198 80 192 76 184 76 C176 74 166 74 158 76 C154 86 160 98 172 102 C184 104 194 100 200 92 Z",
+   "fill": "face",
+   "stroke": 1,
+   "within": "body"
+  },
+  {
+   "clip": "body",
+   "stroke": 1.5
+  },
+  {
+   "eye": [
+    182,
+    68
+   ],
+   "pupil": 2.4
+  },
+  {
+   "path": "M182.4 66.8 m-0.9 0 a0.9 0.9 0 1 0 1.8 0 a0.9 0.9 0 1 0 -1.8 0",
+   "fill": "face"
+  },
+  {
+   "path": "M198 71 L216 75 L200 77 Z",
+   "fill": "bill",
+   "stroke": 1.5,
+   "part": "upper"
+  },
+  {
+   "path": "M200 77 L214 77 L200 80 Z",
+   "fill": "bill",
+   "stroke": 1.5,
+   "part": "lower"
+  },
+  {
+   "path": "M226 64 A14 14 0 0 1 226 88 M233 56 A24 24 0 0 1 233 96 M240 48 A34 34 0 0 1 240 104",
+   "stroke": 1.5,
+   "part": "arcs"
+  }
+ ],
+ "hatch": {
+  "body": {
+   "rect": [
+    104,
+    50,
+    204,
+    184
+   ],
+   "up": true,
+   "clip": "body"
+  },
+  "wing": {
+   "rect": [
+    108,
+    88,
+    166,
+    164
+   ],
+   "up": false,
+   "clip": "wing"
+  }
+ },
+ "pivots": {
+  "upper": {
+   "at": [
+    200,
+    74
+   ],
+   "deg": -14
+  },
+  "lower": {
+   "at": [
+    200,
+    79
+   ],
+   "deg": 10
+  },
+  "tail": {
+   "at": [
+    120,
+    156
+   ],
+   "deg": -7
+  }
+ },
+ "variants": {
+  "male": {
+   "body_pitch": 10,
+   "wing_pitch": 5,
+   "eye_ring": 0,
+   "bill": "shadow",
+   "cap": "ink"
+  },
+  "female": {
+   "body_pitch": 10,
+   "wing_pitch": 5,
+   "eye_ring": 0,
+   "bill": "shadow",
+   "cap": "ink"
+  },
+  "juvenile": {
+   "body_pitch": 10,
+   "wing_pitch": 5,
+   "eye_ring": 0,
+   "bill": "shadow",
+   "cap": "ink"
+  }
+ },
+ "callouts": [
+  {
+   "id": "head",
+   "leader": "M170 88 L122 36",
+   "at": [
+    120,
+    30
+   ],
+   "align": "right",
+   "male": {
+    "en": "WHITE MASK",
+    "no": "HVIT MASKE",
+    "verified": true
+   },
+   "female": {
+    "en": "WHITE MASK",
+    "no": "HVIT MASKE",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  },
+  {
+   "id": "plumage",
+   "leader": "M150 112 L112 104",
+   "at": [
+    108,
+    98
+   ],
+   "align": "right",
+   "male": {
+    "en": "WHITE, BLACK AND GREY",
+    "no": "HVIT, SVART OG GRÅ",
+    "verified": true
+   },
+   "female": {
+    "en": "WHITE, BLACK AND GREY",
+    "no": "HVIT, SVART OG GRÅ",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  },
+  {
+   "id": "tail",
+   "leader": "M80 184 L72 160",
+   "at": [
+    68,
+    144
+   ],
+   "align": "right",
+   "male": {
+    "en": "LONG, WAGGING",
+    "no": "LANG, VIPPENDE",
+    "verified": true
+   },
+   "female": {
+    "en": "LONG, WAGGING",
+    "no": "LANG, VIPPENDE",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  }
+ ],
+ "captions": {
+  "male": {
+   "en": "Adult. White mask, long wagging tail.",
+   "no": "Voksen. Hvit maske, lang vippende hale.",
+   "verified": true
+  },
+  "female": {
+   "en": "Female.",
+   "no": "Hunn.",
+   "verified": false
+  },
+  "juvenile": {
+   "en": "Juvenile.",
+   "no": "Ungfugl.",
+   "verified": false
+  }
+ }
+}

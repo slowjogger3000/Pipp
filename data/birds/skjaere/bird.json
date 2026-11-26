@@ -1,0 +1,96 @@
+{
+ "_note": "Field guide text for this bird, both languages. Facts come from birds.md (M11 batch 1, SNL). A field with verified false shows [TO VERIFY]. Norwegian wording is mine, Eirik to check. calendar rows: one letter per month from January, y yes, n no, ? not known.",
+ "xeno_canto": "https://xeno-canto.org/species/pica-pica",
+ "facts": {
+  "length": {
+   "en": "About 50 cm, the tail 20 to 30 cm",
+   "no": "Omtrent 50 cm, halen 20 til 30 cm",
+   "verified": true
+  },
+  "broods": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "range": {
+   "en": "The whole country",
+   "no": "Hele landet",
+   "verified": true
+  },
+  "habitat": {
+   "en": "Near people, strongly tied to settlement",
+   "no": "Nær folk, sterkt knyttet til bebyggelse",
+   "verified": true
+  },
+  "food": {
+   "en": "Omnivore: insects, worms, carrion, eggs, berries, grain",
+   "no": "Altetende: insekter, mark, åtsler, egg, bær, korn",
+   "verified": true
+  },
+  "status": {
+   "en": "LC, least concern",
+   "no": "LC, livskraftig",
+   "verified": true
+  },
+  "nest": {
+   "en": "Roofed stick nest in a tree, 6 to 8 eggs",
+   "no": "Kuppelformet kvistreir i et tre, 6 til 8 egg",
+   "verified": true
+  }
+ },
+ "sings": {
+  "male": {
+   "en": "Sings: a low chattering creak",
+   "no": "Synger: en lav, skvatrende knirking",
+   "verified": true
+  },
+  "female": {
+   "en": "Yes, a pair babble together",
+   "no": "Ja, paret babler sammen",
+   "verified": true
+  }
+ },
+ "song_notes": {
+  "en": "Mostly hoarse, rasping, not very musical sounds. The song is a low, slightly chattering creak, heard even on cold winter days. Calls a chattering «sjakk-sjakk-sjakk»; alarm a fast «tsje-tsje-tsje».",
+  "no": "Mest hese, raspende, lite musikalske lyder. Sangen er en lav, litt skvatrende knirking, som høres selv på kalde vinterdager. Lokker med skvatrende «sjakk-sjakk-sjakk», varsler med raske «tsje-tsje-tsje».",
+  "verified": true
+ },
+ "mnemonic": {
+  "en": "",
+  "no": "",
+  "verified": false
+ },
+ "types": {
+  "song": {
+   "en": "A low, chattering creak.",
+   "no": "En lav, skvatrende knirking.",
+   "verified": true
+  },
+  "call": {
+   "en": "Chattering «sjakk-sjakk-sjakk».",
+   "no": "Skvatrende «sjakk-sjakk-sjakk».",
+   "verified": true
+  },
+  "alarm": {
+   "en": "Fast staccato «tsje-tsje-tsje»; very intense at a cat.",
+   "no": "Raske, staccato «tsje-tsje-tsje»; svært intense mot katt.",
+   "verified": true
+  },
+  "flight": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "parts": {},
+ "calendar": {
+  "present": "yyyyyyyyyyyy",
+  "sings": "????????????",
+  "note": {
+   "en": "Resident and very sedentary. The song is heard even on cold winter days. [TO VERIFY] singing months.",
+   "no": "Standfugl, svært stedbunden. Sangen høres selv på kalde vinterdager. [TO VERIFY] månedene med sang.",
+   "verified": true
+  }
+ },
+ "lookalikes": []
+}

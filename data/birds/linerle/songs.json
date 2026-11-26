@@ -1,0 +1,220 @@
+{
+ "_note": "White wagtail, M11 batch 1. No source in hand describes its song or calls (SNL says nothing), so the whole song is a placeholder, like the herring gull's: a loose twitter of short two-part chirps and thin notes, 3,5 to 6 kHz. Replace when a source is found.",
+ "syllables": {
+  "chi": {
+   "dur_ms": 70,
+   "pitch": [
+    [
+     0,
+     4600
+    ],
+    [
+     0.4,
+     5600
+    ],
+    [
+     1,
+     4800
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.12,
+     1
+    ],
+    [
+     0.6,
+     0.75
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.5
+  },
+  "tsli": {
+   "dur_ms": 120,
+   "pitch": [
+    [
+     0,
+     4200
+    ],
+    [
+     0.45,
+     5400
+    ],
+    [
+     0.55,
+     5300
+    ],
+    [
+     1,
+     4400
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.1,
+     1
+    ],
+    [
+     0.42,
+     0.6
+    ],
+    [
+     0.5,
+     0.2
+    ],
+    [
+     0.6,
+     0.9
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.5
+  },
+  "tsri": {
+   "dur_ms": 90,
+   "pitch": [
+    [
+     0,
+     5800
+    ],
+    [
+     1,
+     4600
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.12,
+     1
+    ],
+    [
+     0.6,
+     0.75
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.45,
+   "tension": -10
+  },
+  "twit": {
+   "dur_ms": 80,
+   "pitch": [
+    [
+     0,
+     3800
+    ],
+    [
+     0.5,
+     4900
+    ],
+    [
+     1,
+     4300
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.12,
+     1
+    ],
+    [
+     0.6,
+     0.75
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.5
+  }
+ },
+ "types": {
+  "song": {
+   "pause_s": [
+    2.0,
+    6.0
+   ],
+   "length_s": [
+    1.2,
+    3.0
+   ],
+   "transpose_st": 0.6,
+   "avoid_repeat": false,
+   "auto": {
+    "vo_pitch": [
+     0.97,
+     1.03
+    ],
+    "vo_breath": [
+     12,
+     20
+    ],
+    "vo_tension": [
+     44,
+     56
+    ],
+    "vo_rough": [
+     10,
+     18
+    ],
+    "ph_tempo": [
+     95,
+     105
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 1,
+     "sections": [
+      {
+       "pool": [
+        "chi",
+        "tsli",
+        "tsri",
+        "twit"
+       ],
+       "count": [
+        4,
+        12
+       ],
+       "share": 1.0,
+       "gap_ms": [
+        50,
+        160
+       ],
+       "no_adjacent_repeat": true
+      }
+     ]
+    }
+   ],
+   "overrides": []
+  }
+ }
+}

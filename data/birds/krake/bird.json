@@ -1,0 +1,108 @@
+{
+ "_note": "Field guide text for this bird, both languages. Facts come from birds.md (M11 batch 1, SNL). A field with verified false shows [TO VERIFY]. Norwegian wording is mine, Eirik to check. calendar rows: one letter per month from January, y yes, n no, ? not known.",
+ "xeno_canto": "https://xeno-canto.org/species/corvus-cornix",
+ "facts": {
+  "length": {
+   "en": "Nearly 50 cm, 500 to 600 g",
+   "no": "Nesten 50 cm, 500 til 600 g",
+   "verified": true
+  },
+  "broods": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "range": {
+   "en": "Coast, inland and mountains",
+   "no": "Kyst, innland og fjell",
+   "verified": true
+  },
+  "habitat": {
+   "en": "Mostly near people; open and treeless land too",
+   "no": "Mest nær folk; også åpent og treløst land",
+   "verified": true
+  },
+  "food": {
+   "en": "Omnivore; robs nests, drops shellfish on rocks",
+   "no": "Altetende; plyndrer reir, slipper skjell på stein",
+   "verified": true
+  },
+  "status": {
+   "en": "LC, least concern",
+   "no": "LC, livskraftig",
+   "verified": true
+  },
+  "nest": {
+   "en": "Twig nest in a tree, bush or cliff, 4 to 5 eggs",
+   "no": "Kvistreir i tre, busk eller berg, 4 til 5 egg",
+   "verified": true
+  }
+ },
+ "sings": {
+  "male": {
+   "en": "Calls «krra krra krra»",
+   "no": "Roper «krra krra krra»",
+   "verified": true
+  },
+  "female": {
+   "en": "Calls; begs from her mate when incubating",
+   "no": "Roper; tigger mat av make når hun ruger",
+   "verified": true
+  }
+ },
+ "song_notes": {
+  "en": "The main call is a harsh, hoarse, rolling «krra krra krra» that varies in tone and loudness; a perched bird bows with each call. No separate song is described.",
+  "no": "Hovedlyden er et hardt, hest, rullende «krra krra krra» som varierer i tone og styrke; en sittende fugl bukker for hvert rop. Ingen egen sang er beskrevet.",
+  "verified": true
+ },
+ "mnemonic": {
+  "en": "",
+  "no": "",
+  "verified": false
+ },
+ "types": {
+  "song": {
+   "en": "The main call, «krra krra krra». No separate song is described, so this slot plays the call.",
+   "no": "Hovedlyden, «krra krra krra». Ingen egen sang er beskrevet, så her spilles ropet.",
+   "verified": true
+  },
+  "call": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "alarm": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "flight": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "parts": {},
+ "calendar": {
+  "present": "yyyyyyyyyyyy",
+  "sings": "????????????",
+  "note": {
+   "en": "Resident and migrant: many winter on the coast, others abroad and back in March to April. [TO VERIFY] calling months.",
+   "no": "Stand- og trekkfugl: mange overvintrer langs kysten, andre i utlandet og kommer tilbake i mars til april. [TO VERIFY] månedene med rop.",
+   "verified": true
+  }
+ },
+ "lookalikes": [
+  {
+   "name": {
+    "en": "Raven",
+    "no": "Ravn"
+   },
+   "text": {
+    "en": "The raven has a wedge-shaped tail and often glides; the crow's tail is square-cut, its wingbeats slow and calm.",
+    "no": "Ravnen har kileformet hale og glir ofte; kråkas hale er tverrskåret, vingeslagene rolige.",
+    "verified": true
+   }
+  }
+ ]
+}

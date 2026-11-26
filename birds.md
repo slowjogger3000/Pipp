@@ -72,6 +72,140 @@ The aim: the birds a Norwegian beginner is most likely to hear in a year, spread
 
 Left out on purpose, to swap in if wanted: kaie (jackdaw), dompap (bullfinch), toppmeis (crested tit), munk (blackcap), trepiper (tree pipit), svartbak (great black-backed gull), strandsnipe (common sandpiper), steinskvett (wheatear), tårnseiler (swift), hornugle (long-eared owl).
 
+## M11 batch 1, garden birds, checked 2026-11-26
+
+Source: Store norske leksikon (snl.no), one page per bird, read in full on 2026-11-26. Transcriptions are SNL's own spelling. What SNL does not say is not verified.
+
+### Skjære (folder `skjaere`), snl.no/skjære, Olav Hogstad and Magne Husby, updated 2026-11-17
+
+| Field | Value |
+|---|---|
+| Length | About 50 cm, of which the tail is 20 to 30 cm |
+| Plumage | Black and white, very long tail with green metallic gloss |
+| Sexes | Alike; males on average about 10 % larger |
+| Juvenile | Like the adults, shorter tail without gloss, thinner-looking neck |
+| Song | Usually hoarse, rasping, not very musical sounds. The song is a low, slightly chattering creak, heard even on cold winter days. A pair close together both sing a babbling song |
+| Call | «sjakk-sjakk-sjakk», chattering |
+| Alarm | Fast staccato series «tsje-tsje-tsje»; at a cat a very intense «tsche-tsche-tsje-tsje» |
+| Habitat | Strongly tied to human settlement |
+| Range in Norway | The whole country |
+| Food | Omnivore: insects, spiders, snails, worms, carrion, scraps, eggs and chicks, berries and grain |
+| Nest | Large round stick nest with a roof and one or two side entrances, usually in a tree; building starts in late February |
+| Eggs | 6 to 8, most often 7, laid April to May |
+| Migration | Resident, very sedentary |
+| Population | 100 000 to 200 000 pairs (BirdLife Norge) |
+| Status | LC |
+| Lookalikes | None named |
+
+### Kråke (folder `krake`), snl.no/kråke, Olav Hogstad and Magne Husby, updated 2026-10-07
+
+| Field | Value |
+|---|---|
+| Length, weight | Nearly 50 cm, 500 to 600 g |
+| Plumage | Grey, with black head, breast, wings and tail |
+| Sexes | Female somewhat smaller |
+| Juvenile | A little duller than the adults |
+| Call | The main call is a harsh, hoarse, rolling «krra krra krra», varying in tone and loudness. A perched bird bows with each call. The incubating female has a begging sound |
+| Song | Not described separately |
+| Habitat | Coast, inland and treeless mountain, mostly near people |
+| Range in Norway | Coast, inland and mountains |
+| Food | Omnivore, also nest robbing; drops snails and shellfish on rocks |
+| Nest | Twig nest in a tree, bush, cliff or old building, built March to April |
+| Eggs | Usually 4 to 5, laid April to May |
+| Migration | Both resident and migrant; many winter on the coast, some go to Denmark, Germany, Belgium and Britain and return March to April |
+| Population | 150 000 to 300 000 pairs |
+| Status | LC |
+| Versus raven | The crow's tail is square-cut, the raven's wedge-shaped; the crow flies slowly with calm wingbeats and rarely glides |
+| Versus carrion crow | Formerly the same species (svartkråke); hybrids occur in Norway. No field marks given |
+| Source note | SNL's systematics table lists Corvus corone, its fact box and text Corvus cornix |
+
+### Ringdue (folder `ringdue`), snl.no/ringdue, Jørgen Skavdal Søraker, updated 2026-11-07
+
+| Field | Value |
+|---|---|
+| Length, weight | 38 to 42 cm, wingspan 70 to 80 cm, about 300 to 600 g |
+| Plumage | Grey-blue, white patch on each side of the neck, white band across the wing, most visible in flight |
+| Sexes | Alike in size and plumage |
+| Juvenile | The neck patch appears in the autumn of its first year |
+| Song | A repeated rhythmic phrase of five syllables of unequal length, «ho-hoo-hoo-ho-ho», which can remind of an owl. Mostly by day. The male sings more than the female |
+| Other sound | Can clap its wings together on take-off and at the top of a flight arc |
+| Calls | Not described |
+| Habitat | Forest and farmland; since the 1950s also city parks and gardens |
+| Range in Norway | Most of the country, limited in Finnmark but spreading |
+| Food | Seeds, grain, berries, nuts, acorns |
+| Nest | Platform of dry twigs in a tree, usually 3 to 5 m up |
+| Eggs | 1 to 2 |
+| Broods | Often two a year; first brood April to May |
+| Migration | Migrant, winters mainly in south-west Europe; some winter on the coast of southern Norway north to Trøndelag |
+| Population | 350 000 to 700 000 pairs (BirdLife Norge) |
+| Status | LC |
+| Lookalikes | Feral pigeon and stock dove: similar build, differ somewhat in colour pattern and size. The neck patch is the mark |
+
+### Grønnfink (folder `gronnfink`), snl.no/grønnfink, Tom Schandy, updated 2026-11-06
+
+| Field | Value |
+|---|---|
+| Length | 15 cm, about a house sparrow |
+| Plumage | Green-yellow, stout cone-shaped bill; yellow on the wing and at the base of the outer tail feathers, clearer in the male |
+| Male | Greener and more yellow |
+| Female | Greyer, faintly streaked back |
+| Juvenile | Not described in the text; a caption says it is fairly like a young siskin, grey and yellow-green |
+| Song | A short, monotonous, characteristic reeling sound; like the brambling's (bjørkefink) song but not as harsh, and rising at the end. The male may sing in a stiff-winged song flight in large circles over its territory |
+| Calls | Not described |
+| Habitat | Open farmland and settled land with dense trees and bushes |
+| Range in Norway | Most numerous in the south, breeds north to Sør-Varanger |
+| Food | Seeds all year, young also get insects; common at feeders (sunflower seeds) |
+| Nest | Often in dense juniper or larger trees |
+| Eggs | 5 to 6 |
+| Migration | Resident and wanderer; part of the population leaves in autumn |
+| Population | 135 000 to 400 000 pairs, falling since the mid-2000s |
+| Status | VU, vulnerable, Norwegian red list |
+| Versus siskin | The greenfinch is much larger with a heavy cone-shaped bill; the siskin has a fairly long pointed bill |
+
+### Stær (folder `staer`), snl.no/stær, Morten Helberg, updated 2026-11-08
+
+| Field | Value |
+|---|---|
+| Length | About 22 cm, fairly short tail |
+| Plumage | Summer: glossy black with green and blue sheen, fairly plain. Winter into spring: heavily white-spotted |
+| Juvenile | Plain brown in autumn, then darker with white spots; adult colour by the first year |
+| Sexes | Not described |
+| Song | A very good mimic: the song often holds the songs and sounds of many other birds, and whistles, sirens and other man-made signal sounds. Structure and timing not described |
+| Calls | Not described |
+| Habitat | Near people and farmland; nests in cavities, buildings and nest boxes; roosts in dense flocks |
+| Range in Norway | Breeds in every county, most on the coast north to Troms |
+| Food | Worms, snails, insects, seeds, fruit and berries |
+| Eggs | 3 to 7 |
+| Broods | Often two |
+| Migration | Mostly a migrant; most Norwegian birds winter in Britain; some winter in Norway |
+| Population | Down about 29 % in 18 years |
+| Status | NT, near threatened, Norwegian red list |
+| Versus blackbird | Both have yellow bills. The starling has a short tail and walks; the blackbird has a long tail and mostly hops |
+
+### Linerle (folder `linerle`), snl.no/linerle, Morten Helberg and Jørgen Skavdal Søraker, updated 2026-08-04
+
+| Field | Value |
+|---|---|
+| Length, weight | 16,5 to 19 cm, 17,3 to 28 g |
+| Plumage | White, black and grey, long wagging tail; easiest known by the white mask around the eye |
+| Sexes, juvenile | Not described |
+| Song, calls | Not described |
+| Habitat | Coast to mountains; nests in cavities and covered places, often on buildings and bridges |
+| Range in Norway | The whole country |
+| Food | Insects and other small animals, on land and by water, found by sight; wags its tail |
+| Eggs | 3 to 8 |
+| Broods | Usually two or three |
+| Migration | Migrant: arrives from early April in the south to early May in the north; winters in southern Europe, North Africa and the Middle East |
+| Population | 400 000 to 600 000 pairs (2015), stable |
+| Status | LC |
+| Lookalike | Only the subspecies svartryggerle (pied wagtail), with a black or dark grey back and flanks |
+
+### Batch 1, to verify
+
+- Linerle: no source in hand describes its song or calls, so every linerle sound is a placeholder. Starling: no call is described, and the song's structure is not; the starling's sound is a design guess around mimicry, which Tipp does not do (MIMICS dropped for version 1).
+- Crow and wood pigeon calls, magpie song shape, greenfinch calls: not described beyond the lines above.
+- Every juvenile and most female plate values.
+
 ## Svarttrost, checked 2026-11-26
 
 Sources used: Store norske leksikon (snl.no/svarttrost), which follows Artsdatabanken's classification and cites BirdLife Norge for its population figure. A search excerpt from Fuglevennen (fuglevennen.no). A BirdLife Norge press release from 2021. Artsdatabanken's own species page and the full Fuglevennen page could not be opened, so check those two when possible.

@@ -1,0 +1,349 @@
+{
+ "_note": "Wood pigeon, M11 batch 1. Verified (birds.md, SNL): a repeated rhythmic phrase of five syllables of unequal length, «ho-hoo-hoo-ho-ho», owl-like, mostly by day, the male more than the female. Design: one syllable holds the whole five-note motif (short, long, long, short, short) around 340 to 410 Hz with soft breathy onsets; a phrase repeats it 3 to 5 times. Pitches and timings are guesses. Wing claps (verified) are not made: the engine has no source for them.",
+ "syllables": {
+  "motif": {
+   "dur_ms": 2100,
+   "pitch": [
+    [
+     0,
+     360
+    ],
+    [
+     0.12,
+     350
+    ],
+    [
+     0.18,
+     380
+    ],
+    [
+     0.3,
+     410
+    ],
+    [
+     0.42,
+     380
+    ],
+    [
+     0.48,
+     390
+    ],
+    [
+     0.68,
+     375
+    ],
+    [
+     0.75,
+     360
+    ],
+    [
+     0.86,
+     355
+    ],
+    [
+     0.9,
+     350
+    ],
+    [
+     1,
+     340
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.03,
+     0.8
+    ],
+    [
+     0.09,
+     0.7
+    ],
+    [
+     0.12,
+     0
+    ],
+    [
+     0.18,
+     0
+    ],
+    [
+     0.22,
+     1
+    ],
+    [
+     0.38,
+     0.85
+    ],
+    [
+     0.42,
+     0
+    ],
+    [
+     0.48,
+     0
+    ],
+    [
+     0.52,
+     0.95
+    ],
+    [
+     0.64,
+     0.8
+    ],
+    [
+     0.68,
+     0
+    ],
+    [
+     0.75,
+     0
+    ],
+    [
+     0.78,
+     0.8
+    ],
+    [
+     0.83,
+     0.65
+    ],
+    [
+     0.86,
+     0
+    ],
+    [
+     0.9,
+     0
+    ],
+    [
+     0.93,
+     0.75
+    ],
+    [
+     0.98,
+     0.6
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.8,
+   "breath": 6,
+   "tension": -4
+  },
+  "motif2": {
+   "dur_ms": 1900,
+   "pitch": [
+    [
+     0,
+     374.40000000000003
+    ],
+    [
+     0.12,
+     364.0
+    ],
+    [
+     0.18,
+     395.2
+    ],
+    [
+     0.3,
+     426.40000000000003
+    ],
+    [
+     0.42,
+     395.2
+    ],
+    [
+     0.48,
+     405.6
+    ],
+    [
+     0.68,
+     390.0
+    ],
+    [
+     0.75,
+     374.40000000000003
+    ],
+    [
+     0.86,
+     369.2
+    ],
+    [
+     0.9,
+     364.0
+    ],
+    [
+     1,
+     353.6
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.03,
+     0.8
+    ],
+    [
+     0.09,
+     0.7
+    ],
+    [
+     0.12,
+     0
+    ],
+    [
+     0.18,
+     0
+    ],
+    [
+     0.22,
+     1
+    ],
+    [
+     0.38,
+     0.85
+    ],
+    [
+     0.42,
+     0
+    ],
+    [
+     0.48,
+     0
+    ],
+    [
+     0.52,
+     0.95
+    ],
+    [
+     0.64,
+     0.8
+    ],
+    [
+     0.68,
+     0
+    ],
+    [
+     0.75,
+     0
+    ],
+    [
+     0.78,
+     0.8
+    ],
+    [
+     0.83,
+     0.65
+    ],
+    [
+     0.86,
+     0
+    ],
+    [
+     0.9,
+     0
+    ],
+    [
+     0.93,
+     0.75
+    ],
+    [
+     0.98,
+     0.6
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.8,
+   "breath": 6,
+   "tension": -4
+  }
+ },
+ "types": {
+  "song": {
+   "pause_s": [
+    5.0,
+    14.0
+   ],
+   "length_s": [
+    6.0,
+    12.0
+   ],
+   "transpose_st": 0.6,
+   "avoid_repeat": false,
+   "auto": {
+    "vo_pitch": [
+     0.98,
+     1.02
+    ],
+    "vo_breath": [
+     22,
+     30
+    ],
+    "vo_tension": [
+     6,
+     14
+    ],
+    "vo_rough": [
+     2,
+     6
+    ],
+    "ph_tempo": [
+     96,
+     104
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 1,
+     "sections": [
+      {
+       "pool": [
+        "motif",
+        "motif2"
+       ],
+       "count": [
+        3,
+        5
+       ],
+       "share": 1.0,
+       "gap_ms": [
+        350,
+        650
+       ]
+      }
+     ]
+    }
+   ],
+   "overrides": [
+    {
+     "_note": "Mostly by day (birds.md); longer pauses at dawn, dusk and night are a design choice.",
+     "when": {
+      "time": "night"
+     },
+     "active": false
+    },
+    {
+     "when": {
+      "sex": "female"
+     },
+     "pause_s": [
+      12.0,
+      30.0
+     ]
+    }
+   ]
+  }
+ }
+}

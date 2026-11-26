@@ -519,7 +519,7 @@ void MainComponent::configurePlate(Plate& p)
 {
     p.language = strings.language();
     p.toVerify = strings("to_verify");
-    for (const char* id : { "bill", "eye_ring", "plumage", "throat", "head", "cheek", "breast", "eye_stripe", "wing" })
+    for (const char* id : { "bill", "eye_ring", "plumage", "throat", "head", "cheek", "breast", "eye_stripe", "wing", "tail", "neck" })
         p.calloutLabels[id] = strings("plate." + juce::String(id));
     p.repaint();
 }

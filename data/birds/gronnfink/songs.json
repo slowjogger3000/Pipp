@@ -1,0 +1,223 @@
+{
+ "_note": "Greenfinch, M11 batch 1. Verified (birds.md, SNL): a short, monotonous, characteristic reeling sound, like the brambling's song but not as harsh, rising at the end. Design: one drawn-out buzzy note of 0,7 to 1,1 s around 3 to 4 kHz, its buzz a fast amplitude trill, gliding up over the last third; sometimes two in a row. Pitch, length and buzz rate are guesses. No call type: SNL describes none.",
+ "syllables": {
+  "reel": {
+   "dur_ms": 900,
+   "pitch": [
+    [
+     0,
+     3100
+    ],
+    [
+     0.6,
+     3200
+    ],
+    [
+     1,
+     4300
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.12,
+     0.9
+    ],
+    [
+     0.7,
+     1
+    ],
+    [
+     0.95,
+     0.8
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.7,
+   "rough": 6,
+   "trill": {
+    "hz": 55,
+    "depth_st": 0.4,
+    "am": 0.65
+   }
+  },
+  "reel2": {
+   "dur_ms": 1100,
+   "pitch": [
+    [
+     0,
+     3000
+    ],
+    [
+     0.65,
+     3150
+    ],
+    [
+     1,
+     4100
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.1,
+     0.9
+    ],
+    [
+     0.7,
+     1
+    ],
+    [
+     0.95,
+     0.8
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.7,
+   "rough": 6,
+   "trill": {
+    "hz": 50,
+    "depth_st": 0.4,
+    "am": 0.65
+   }
+  },
+  "reel3": {
+   "dur_ms": 700,
+   "pitch": [
+    [
+     0,
+     3300
+    ],
+    [
+     0.55,
+     3350
+    ],
+    [
+     1,
+     4500
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.12,
+     0.9
+    ],
+    [
+     0.7,
+     1
+    ],
+    [
+     0.95,
+     0.8
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.7,
+   "rough": 6,
+   "trill": {
+    "hz": 60,
+    "depth_st": 0.4,
+    "am": 0.65
+   }
+  }
+ },
+ "types": {
+  "song": {
+   "pause_s": [
+    3.0,
+    7.0
+   ],
+   "length_s": [
+    0.7,
+    2.6
+   ],
+   "transpose_st": 0.5,
+   "avoid_repeat": false,
+   "auto": {
+    "vo_pitch": [
+     0.97,
+     1.03
+    ],
+    "vo_breath": [
+     18,
+     26
+    ],
+    "vo_tension": [
+     42,
+     54
+    ],
+    "vo_rough": [
+     20,
+     32
+    ],
+    "ph_tempo": [
+     95,
+     105
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 3,
+     "sections": [
+      {
+       "pool": [
+        "reel",
+        "reel2",
+        "reel3"
+       ],
+       "count": [
+        1,
+        1
+       ],
+       "share": 1.0,
+       "gap_ms": [
+        200,
+        300
+       ]
+      }
+     ]
+    },
+    {
+     "weight": 1,
+     "sections": [
+      {
+       "pool": [
+        "reel",
+        "reel3"
+       ],
+       "count": [
+        2,
+        2
+       ],
+       "share": 1.0,
+       "gap_ms": [
+        300,
+        600
+       ]
+      }
+     ]
+    }
+   ],
+   "overrides": []
+  }
+ }
+}

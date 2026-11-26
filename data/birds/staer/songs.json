@@ -1,0 +1,411 @@
+{
+ "_note": "Starling, M11 batch 1. Verified (birds.md, SNL): a very good mimic, its song often holding other birds' songs and sounds and whistles, sirens and other man-made signals. Tipp does not mimic (MIMICS dropped for version 1), so the whole song is a stand-in guess: a long varied run of clear falling and rising whistles, dry clicks, a creaky rattle and short squeaks, 2 to 4 kHz with whistles up to 6 kHz, no element repeated back to back. No call type: SNL describes none.",
+ "syllables": {
+  "whfall": {
+   "dur_ms": 420,
+   "pitch": [
+    [
+     0,
+     5200
+    ],
+    [
+     0.3,
+     4800
+    ],
+    [
+     1,
+     2400
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.25,
+     1
+    ],
+    [
+     0.7,
+     0.85
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.55,
+   "rough": -12,
+   "tension": -18,
+   "breath": -6
+  },
+  "whrise": {
+   "dur_ms": 380,
+   "pitch": [
+    [
+     0,
+     2600
+    ],
+    [
+     0.7,
+     4600
+    ],
+    [
+     1,
+     4900
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.25,
+     1
+    ],
+    [
+     0.7,
+     0.85
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.55,
+   "rough": -12,
+   "tension": -18,
+   "breath": -6
+  },
+  "wolf": {
+   "dur_ms": 700,
+   "pitch": [
+    [
+     0,
+     2600
+    ],
+    [
+     0.25,
+     4200
+    ],
+    [
+     0.35,
+     4300
+    ],
+    [
+     0.43,
+     2400
+    ],
+    [
+     0.7,
+     4600
+    ],
+    [
+     1,
+     2300
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.08,
+     1
+    ],
+    [
+     0.35,
+     0.8
+    ],
+    [
+     0.4,
+     0
+    ],
+    [
+     0.45,
+     0
+    ],
+    [
+     0.55,
+     1
+    ],
+    [
+     0.9,
+     0.6
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.5,
+   "rough": -12,
+   "tension": -18
+  },
+  "click": {
+   "dur_ms": 25,
+   "pitch": [
+    [
+     0,
+     3800
+    ],
+    [
+     1,
+     3000
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.2,
+     1
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.4,
+   "rough": 30,
+   "tension": 20
+  },
+  "rattle": {
+   "dur_ms": 500,
+   "pitch": [
+    [
+     0,
+     2900
+    ],
+    [
+     1,
+     2600
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.1,
+     0.9
+    ],
+    [
+     0.8,
+     0.8
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.45,
+   "rough": 26,
+   "trill": {
+    "hz": 40,
+    "depth_st": 1.5,
+    "am": 0.7
+   }
+  },
+  "squeak": {
+   "dur_ms": 140,
+   "pitch": [
+    [
+     0,
+     3600
+    ],
+    [
+     0.5,
+     4400
+    ],
+    [
+     1,
+     3800
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.12,
+     1
+    ],
+    [
+     0.6,
+     0.75
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.45,
+   "rough": 8
+  },
+  "creak": {
+   "dur_ms": 260,
+   "pitch": [
+    [
+     0,
+     1600
+    ],
+    [
+     0.5,
+     2000
+    ],
+    [
+     1,
+     1500
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.15,
+     1
+    ],
+    [
+     0.7,
+     0.7
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.4,
+   "rough": 34,
+   "tension": -6
+  }
+ },
+ "types": {
+  "song": {
+   "pause_s": [
+    0.6,
+    3.0
+   ],
+   "length_s": [
+    3.0,
+    8.0
+   ],
+   "transpose_st": 1.5,
+   "avoid_repeat": true,
+   "auto": {
+    "vo_pitch": [
+     0.95,
+     1.05
+    ],
+    "vo_breath": [
+     14,
+     24
+    ],
+    "vo_tension": [
+     44,
+     60
+    ],
+    "vo_rough": [
+     14,
+     30
+    ],
+    "ph_tempo": [
+     90,
+     110
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 2,
+     "sections": [
+      {
+       "pool": [
+        "whfall",
+        "whrise",
+        "wolf",
+        "squeak"
+       ],
+       "count": [
+        2,
+        5
+       ],
+       "share": 0.4,
+       "gap_ms": [
+        120,
+        300
+       ],
+       "no_adjacent_repeat": true
+      },
+      {
+       "pool": [
+        "click",
+        "rattle",
+        "creak",
+        "squeak"
+       ],
+       "count": [
+        4,
+        12
+       ],
+       "share": 0.6,
+       "gap_ms": [
+        40,
+        160
+       ],
+       "no_adjacent_repeat": true
+      }
+     ]
+    },
+    {
+     "weight": 1,
+     "sections": [
+      {
+       "pool": [
+        "click",
+        "squeak",
+        "creak"
+       ],
+       "count": [
+        3,
+        8
+       ],
+       "share": 0.4,
+       "gap_ms": [
+        40,
+        120
+       ],
+       "no_adjacent_repeat": true
+      },
+      {
+       "pool": [
+        "wolf",
+        "whfall",
+        "rattle"
+       ],
+       "count": [
+        2,
+        4
+       ],
+       "share": 0.6,
+       "gap_ms": [
+        150,
+        350
+       ],
+       "no_adjacent_repeat": true
+      }
+     ]
+    }
+   ],
+   "overrides": []
+  }
+ }
+}

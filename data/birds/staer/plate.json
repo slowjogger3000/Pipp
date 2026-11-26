@@ -1,0 +1,216 @@
+{
+ "_note": "Starling ink plate in a 280x240 box, drawn in M11 from the song thrush plate, not from a design: shorter tail, glossy black in summer plumage as dense hatching, yellow bill (face). SNL describes adults, not sexes, so the female is drawn as the male. The juvenile is plain brown in autumn (SNL), light hatching and a dark bill (bill colour [TO VERIFY]). Winter spots are not drawn.",
+ "box": [
+  280,
+  240
+ ],
+ "clips": {
+  "body": "M190 60 C184 44 158 42 150 62 C134 80 104 106 90 136 C92 146 98 154 106 158 C128 180 162 178 178 152 C192 130 198 104 192 80 C194 74 194 66 190 60 Z",
+  "wing": "M152 90 C156 118 136 146 98 152 C106 136 118 110 152 90 Z"
+ },
+ "layers": [
+  {
+   "path": "M14 211 C80 205 150 201 268 193",
+   "stroke": 4
+  },
+  {
+   "path": "M214 196 l20 -20 M224 186 l16 3",
+   "stroke": 1.5
+  },
+  {
+   "path": "M234 176 q10 -10 18 -2 q-9 8 -18 2 Z M240 189 q11 -5 16 3 q-10 4 -16 -3 Z",
+   "fill": "face",
+   "stroke": 1
+  },
+  {
+   "path": "M90 136 L66 168 L78 178 L106 158 Z",
+   "fill": "face",
+   "stroke": 1.5,
+   "part": "tail"
+  },
+  {
+   "path": "M94 142 L69 172 M98 147 L72 175 M102 153 L75 177",
+   "stroke": 1,
+   "part": "tail"
+  },
+  {
+   "path": "M136 172 L139 199 M152 173 L157 198 M131 201 L139 199 L148 202 M149 200 L157 198 L166 201",
+   "stroke": 1.5
+  },
+  {
+   "clip": "body",
+   "fill": "face",
+   "stroke": 1.5
+  },
+  {
+   "hatch": "body"
+  },
+  {
+   "hatch": "wing"
+  },
+  {
+   "clip": "wing",
+   "stroke": 1.5
+  },
+  {
+   "eye": [
+    177,
+    65
+   ],
+   "pupil": 2.4
+  },
+  {
+   "path": "M177.6 64.4 m-1.2 0 a1.2 1.2 0 1 0 2.4 0 a1.2 1.2 0 1 0 -2.4 0",
+   "fill": "face"
+  },
+  {
+   "path": "M189 60 L224 66 L193 70 Z",
+   "fill": "bill",
+   "stroke": 1.5,
+   "part": "upper"
+  },
+  {
+   "path": "M193 70 L219 69 L191 77 Z",
+   "fill": "bill",
+   "stroke": 1.5,
+   "part": "lower"
+  },
+  {
+   "path": "M230 52 A16 16 0 0 1 230 76 M237 44 A26 26 0 0 1 237 84 M243 36 A36 36 0 0 1 243 92",
+   "stroke": 1.5,
+   "part": "arcs"
+  }
+ ],
+ "hatch": {
+  "body": {
+   "rect": [
+    86,
+    42,
+    200,
+    182
+   ],
+   "up": true,
+   "clip": "body"
+  },
+  "wing": {
+   "rect": [
+    96,
+    88,
+    158,
+    154
+   ],
+   "up": false,
+   "clip": "wing"
+  }
+ },
+ "pivots": {
+  "upper": {
+   "at": [
+    192,
+    67
+   ],
+   "deg": -16
+  },
+  "lower": {
+   "at": [
+    192,
+    72
+   ],
+   "deg": 10
+  },
+  "tail": {
+   "at": [
+    98,
+    147
+   ],
+   "deg": -5
+  }
+ },
+ "variants": {
+  "male": {
+   "body_pitch": 3,
+   "wing_pitch": 3,
+   "eye_ring": 0,
+   "bill": "face"
+  },
+  "female": {
+   "body_pitch": 3,
+   "wing_pitch": 3,
+   "eye_ring": 0,
+   "bill": "face"
+  },
+  "juvenile": {
+   "body_pitch": 8,
+   "wing_pitch": 6,
+   "eye_ring": 0,
+   "bill": "shadow"
+  }
+ },
+ "callouts": [
+  {
+   "id": "bill",
+   "leader": "M204 58 L204 23",
+   "at": [
+    204,
+    10
+   ],
+   "align": "centre",
+   "male": {
+    "en": "YELLOW",
+    "no": "GUL",
+    "verified": true
+   },
+   "female": {
+    "en": "YELLOW",
+    "no": "GUL",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  },
+  {
+   "id": "plumage",
+   "leader": "M120 112 L72 86",
+   "at": [
+    70,
+    80
+   ],
+   "align": "right",
+   "male": {
+    "en": "GLOSSY BLACK",
+    "no": "GLANSENDE SVART",
+    "verified": true
+   },
+   "female": {
+    "en": "GLOSSY BLACK",
+    "no": "GLANSENDE SVART",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "PLAIN BROWN",
+    "no": "ENSFARGET BRUN",
+    "verified": true
+   }
+  }
+ ],
+ "captions": {
+  "male": {
+   "en": "Adult in summer. In winter heavily white-spotted.",
+   "no": "Voksen om sommeren. Om vinteren tett hvitprikket.",
+   "verified": true
+  },
+  "female": {
+   "en": "Adult in summer. In winter heavily white-spotted.",
+   "no": "Voksen om sommeren. Om vinteren tett hvitprikket.",
+   "verified": true
+  },
+  "juvenile": {
+   "en": "Juvenile in autumn: plain brown.",
+   "no": "Ungfugl om høsten: ensfarget brun.",
+   "verified": true
+  }
+ }
+}

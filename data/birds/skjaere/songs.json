@@ -1,0 +1,441 @@
+{
+ "_note": "Magpie, M11 batch 1. Verified (birds.md, SNL): hoarse, rasping sounds; the song is a low, slightly chattering creak; call «sjakk-sjakk-sjakk», chattering; alarm a fast staccato «tsje-tsje-tsje», very intense at a cat. Shapes, pitches and timings are sound design guesses: the song is a loose run of low rough creaks and chatters around 1 to 2,5 kHz; the call a run of 3 to 7 harsh 'sjakk' notes about 7 a second; the alarm a faster, longer rattle of shorter notes.",
+ "syllables": {
+  "creak": {
+   "dur_ms": 160,
+   "pitch": [
+    [
+     0,
+     1100
+    ],
+    [
+     0.4,
+     1500
+    ],
+    [
+     1,
+     1200
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.15,
+     1
+    ],
+    [
+     0.7,
+     0.7
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.5,
+   "rough": 16,
+   "tension": -6
+  },
+  "creak2": {
+   "dur_ms": 120,
+   "pitch": [
+    [
+     0,
+     1300
+    ],
+    [
+     0.5,
+     1050
+    ],
+    [
+     1,
+     1150
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.15,
+     1
+    ],
+    [
+     0.7,
+     0.7
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.5,
+   "rough": 18,
+   "tension": -8
+  },
+  "chit": {
+   "dur_ms": 60,
+   "pitch": [
+    [
+     0,
+     2200
+    ],
+    [
+     0.4,
+     2500
+    ],
+    [
+     1,
+     2000
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.12,
+     1
+    ],
+    [
+     0.6,
+     0.75
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.42,
+   "rough": 10
+  },
+  "babble": {
+   "dur_ms": 90,
+   "pitch": [
+    [
+     0,
+     1700
+    ],
+    [
+     0.3,
+     2100
+    ],
+    [
+     0.6,
+     1800
+    ],
+    [
+     1,
+     1900
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.12,
+     1
+    ],
+    [
+     0.6,
+     0.75
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.42,
+   "rough": 8,
+   "tension": -10
+  },
+  "sjakk": {
+   "dur_ms": 85,
+   "pitch": [
+    [
+     0,
+     1500
+    ],
+    [
+     0.25,
+     2100
+    ],
+    [
+     1,
+     1700
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.08,
+     1
+    ],
+    [
+     0.5,
+     0.8
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.55,
+   "rough": 30
+  },
+  "tsje": {
+   "dur_ms": 60,
+   "pitch": [
+    [
+     0,
+     1800
+    ],
+    [
+     0.3,
+     2300
+    ],
+    [
+     1,
+     1900
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.08,
+     1
+    ],
+    [
+     0.5,
+     0.8
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.5,
+   "rough": 32
+  }
+ },
+ "types": {
+  "song": {
+   "pause_s": [
+    2.0,
+    6.0
+   ],
+   "length_s": [
+    1.5,
+    3.5
+   ],
+   "transpose_st": 0.8,
+   "avoid_repeat": false,
+   "auto": {
+    "vo_pitch": [
+     0.97,
+     1.03
+    ],
+    "vo_breath": [
+     14,
+     22
+    ],
+    "vo_tension": [
+     52,
+     64
+    ],
+    "vo_rough": [
+     40,
+     52
+    ],
+    "ph_tempo": [
+     95,
+     105
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 3,
+     "sections": [
+      {
+       "pool": [
+        "creak",
+        "creak2",
+        "chit",
+        "babble"
+       ],
+       "count": [
+        6,
+        16
+       ],
+       "share": 1.0,
+       "gap_ms": [
+        40,
+        140
+       ],
+       "no_adjacent_repeat": true
+      }
+     ]
+    },
+    {
+     "weight": 2,
+     "sections": [
+      {
+       "pool": [
+        "creak",
+        "creak2"
+       ],
+       "count": [
+        2,
+        4
+       ],
+       "share": 0.4,
+       "gap_ms": [
+        90,
+        180
+       ]
+      },
+      {
+       "pool": [
+        "babble",
+        "chit"
+       ],
+       "count": [
+        5,
+        12
+       ],
+       "share": 0.6,
+       "gap_ms": [
+        30,
+        80
+       ]
+      }
+     ]
+    }
+   ],
+   "overrides": []
+  },
+  "call": {
+   "pause_s": [
+    2.0,
+    7.0
+   ],
+   "length_s": [
+    0.4,
+    1.2
+   ],
+   "avoid_repeat": false,
+   "auto": {
+    "vo_pitch": [
+     0.97,
+     1.03
+    ],
+    "vo_breath": [
+     16,
+     22
+    ],
+    "vo_tension": [
+     58,
+     68
+    ],
+    "vo_rough": [
+     50,
+     62
+    ],
+    "ph_tempo": [
+     95,
+     105
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 1,
+     "sections": [
+      {
+       "pool": [
+        "sjakk"
+       ],
+       "count": [
+        3,
+        7
+       ],
+       "share": 1.0,
+       "gap_ms": [
+        55,
+        90
+       ]
+      }
+     ]
+    }
+   ],
+   "overrides": []
+  },
+  "alarm": {
+   "pause_s": [
+    0.8,
+    3.0
+   ],
+   "length_s": [
+    0.8,
+    2.4
+   ],
+   "avoid_repeat": false,
+   "auto": {
+    "vo_pitch": [
+     0.97,
+     1.03
+    ],
+    "vo_breath": [
+     16,
+     22
+    ],
+    "vo_tension": [
+     60,
+     72
+    ],
+    "vo_rough": [
+     54,
+     66
+    ],
+    "ph_tempo": [
+     95,
+     105
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 1,
+     "sections": [
+      {
+       "pool": [
+        "tsje"
+       ],
+       "count": [
+        8,
+        22
+       ],
+       "share": 1.0,
+       "gap_ms": [
+        25,
+        45
+       ]
+      }
+     ]
+    }
+   ],
+   "overrides": []
+  }
+ }
+}

@@ -1,0 +1,237 @@
+{
+ "_note": "Magpie ink plate in a 280x240 box, drawn in M11 from the blackbird plate, not from a design. Black is dense hatching, with a white belly and white shoulder patch (face) and a very long tail in shadow tone for the green gloss. Sexes alike (SNL), so the female is drawn as the male. The juvenile has a shorter tail without gloss (SNL). Bill colour not in SNL, so no bill callout.",
+ "box": [
+  280,
+  240
+ ],
+ "clips": {
+  "body": "M190 60 C184 44 158 42 150 62 C134 80 104 106 90 136 C92 146 98 154 106 158 C128 180 162 178 178 152 C192 130 198 104 192 80 C194 74 194 66 190 60 Z",
+  "wing": "M152 90 C156 118 136 146 98 152 C106 136 118 110 152 90 Z"
+ },
+ "layers": [
+  {
+   "path": "M14 211 C80 205 150 201 268 193",
+   "stroke": 4
+  },
+  {
+   "path": "M214 196 l20 -20 M224 186 l16 3",
+   "stroke": 1.5
+  },
+  {
+   "path": "M234 176 q10 -10 18 -2 q-9 8 -18 2 Z M240 189 q11 -5 16 3 q-10 4 -16 -3 Z",
+   "fill": "face",
+   "stroke": 1
+  },
+  {
+   "variant": "tail",
+   "fill": "tailfill",
+   "stroke": 1.5,
+   "part": "tail"
+  },
+  {
+   "variant": "tail_lines",
+   "stroke": 1,
+   "part": "tail"
+  },
+  {
+   "path": "M136 172 L139 199 M152 173 L157 198 M131 201 L139 199 L148 202 M149 200 L157 198 L166 201",
+   "stroke": 1.5
+  },
+  {
+   "clip": "body",
+   "fill": "face",
+   "stroke": 1.5
+  },
+  {
+   "hatch": "body"
+  },
+  {
+   "path": "M184 138 C178 126 164 118 150 120 C134 124 120 140 110 156 C130 178 164 176 180 150 Z",
+   "fill": "face",
+   "stroke": 1,
+   "within": "body"
+  },
+  {
+   "hatch": "wing"
+  },
+  {
+   "clip": "wing",
+   "stroke": 1.5
+  },
+  {
+   "path": "M150 92 C140 100 128 112 118 126 L128 130 C136 116 144 106 152 99 Z",
+   "fill": "face",
+   "stroke": 1,
+   "within": "wing"
+  },
+  {
+   "eye": [
+    177,
+    65
+   ],
+   "pupil": 2.4
+  },
+  {
+   "path": "M177.6 64.4 m-1.2 0 a1.2 1.2 0 1 0 2.4 0 a1.2 1.2 0 1 0 -2.4 0",
+   "fill": "face"
+  },
+  {
+   "path": "M190 60 L220 66 L193 70 Z",
+   "fill": "bill",
+   "stroke": 1.5,
+   "part": "upper"
+  },
+  {
+   "path": "M193 70 L216 69 L191 79 Z",
+   "fill": "bill",
+   "stroke": 1.5,
+   "part": "lower"
+  },
+  {
+   "path": "M230 52 A16 16 0 0 1 230 76 M237 44 A26 26 0 0 1 237 84 M243 36 A36 36 0 0 1 243 92",
+   "stroke": 1.5,
+   "part": "arcs"
+  }
+ ],
+ "hatch": {
+  "body": {
+   "rect": [
+    86,
+    42,
+    200,
+    182
+   ],
+   "up": true,
+   "clip": "body"
+  },
+  "wing": {
+   "rect": [
+    96,
+    88,
+    158,
+    154
+   ],
+   "up": false,
+   "clip": "wing"
+  }
+ },
+ "pivots": {
+  "upper": {
+   "at": [
+    192,
+    67
+   ],
+   "deg": -16
+  },
+  "lower": {
+   "at": [
+    192,
+    72
+   ],
+   "deg": 10
+  },
+  "tail": {
+   "at": [
+    98,
+    147
+   ],
+   "deg": -4
+  }
+ },
+ "variants": {
+  "male": {
+   "body_pitch": 3,
+   "wing_pitch": 3,
+   "eye_ring": 0,
+   "bill": "ink",
+   "tail": "M90 136 L18 204 L30 214 L106 158 Z",
+   "tail_lines": "M94 142 L22 207 M98 147 L26 210 M102 153 L29 212",
+   "tailfill": "shadow"
+  },
+  "female": {
+   "body_pitch": 3,
+   "wing_pitch": 3,
+   "eye_ring": 0,
+   "bill": "ink",
+   "tail": "M90 136 L18 204 L30 214 L106 158 Z",
+   "tail_lines": "M94 142 L22 207 M98 147 L26 210 M102 153 L29 212",
+   "tailfill": "shadow"
+  },
+  "juvenile": {
+   "body_pitch": 3,
+   "wing_pitch": 3,
+   "eye_ring": 0,
+   "bill": "ink",
+   "tail": "M90 136 L50 180 L62 190 L106 158 Z",
+   "tail_lines": "M94 142 L53 184 M98 147 L56 187 M102 153 L59 189",
+   "tailfill": "face"
+  }
+ },
+ "callouts": [
+  {
+   "id": "plumage",
+   "leader": "M150 146 L72 96",
+   "at": [
+    70,
+    80
+   ],
+   "align": "right",
+   "male": {
+    "en": "BLACK AND WHITE",
+    "no": "SVART OG HVIT",
+    "verified": true
+   },
+   "female": {
+    "en": "BLACK AND WHITE",
+    "no": "SVART OG HVIT",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "LIKE THE ADULTS",
+    "no": "SOM DE VOKSNE",
+    "verified": true
+   }
+  },
+  {
+   "id": "tail",
+   "leader": "M40 200 L30 214",
+   "at": [
+    10,
+    222
+   ],
+   "align": "left",
+   "male": {
+    "en": "VERY LONG, GREEN GLOSS",
+    "no": "SVÆRT LANG, GRØNN GLANS",
+    "verified": true
+   },
+   "female": {
+    "en": "VERY LONG, GREEN GLOSS",
+    "no": "SVÆRT LANG, GRØNN GLANS",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "SHORTER, NO GLOSS",
+    "no": "KORTERE, UTEN GLANS",
+    "verified": true
+   }
+  }
+ ],
+ "captions": {
+  "male": {
+   "en": "Adult. Sexes alike; the male is a little larger.",
+   "no": "Voksen. Kjønnene er like; hannen er litt større.",
+   "verified": true
+  },
+  "female": {
+   "en": "Female. Like the male, a little smaller.",
+   "no": "Hunn. Som hannen, litt mindre.",
+   "verified": true
+  },
+  "juvenile": {
+   "en": "Juvenile. Shorter tail without gloss.",
+   "no": "Ungfugl. Kortere hale uten glans.",
+   "verified": true
+  }
+ }
+}

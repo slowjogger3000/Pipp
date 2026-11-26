@@ -1,0 +1,119 @@
+{
+ "_note": "Field guide text for this bird, both languages. Facts come from birds.md (M11 batch 1, SNL). A field with verified false shows [TO VERIFY]. Norwegian wording is mine, Eirik to check. calendar rows: one letter per month from January, y yes, n no, ? not known.",
+ "xeno_canto": "https://xeno-canto.org/species/columba-palumbus",
+ "facts": {
+  "length": {
+   "en": "38 to 42 cm, 300 to 600 g",
+   "no": "38 til 42 cm, 300 til 600 g",
+   "verified": true
+  },
+  "broods": {
+   "en": "Often 2 a year",
+   "no": "Ofte 2 kull i året",
+   "verified": true
+  },
+  "range": {
+   "en": "Most of the country, spreading in Finnmark",
+   "no": "Det meste av landet, sprer seg i Finnmark",
+   "verified": true
+  },
+  "habitat": {
+   "en": "Forest and farmland, also parks and gardens",
+   "no": "Skog og kulturlandskap, også parker og hager",
+   "verified": true
+  },
+  "food": {
+   "en": "Seeds, grain, berries, nuts, acorns",
+   "no": "Frø, korn, bær, nøtter, eikenøtter",
+   "verified": true
+  },
+  "status": {
+   "en": "LC, least concern",
+   "no": "LC, livskraftig",
+   "verified": true
+  },
+  "nest": {
+   "en": "Twig platform in a tree, 1 to 2 eggs",
+   "no": "Plattform av kvister i et tre, 1 til 2 egg",
+   "verified": true
+  }
+ },
+ "sings": {
+  "male": {
+   "en": "Sings, more than the female",
+   "no": "Synger, mer enn hunnen",
+   "verified": true
+  },
+  "female": {
+   "en": "Sings, less than the male",
+   "no": "Synger, mindre enn hannen",
+   "verified": true
+  }
+ },
+ "song_notes": {
+  "en": "A repeated rhythmic phrase of five syllables of unequal length, «ho-hoo-hoo-ho-ho», that can remind of an owl; mostly by day. Can clap its wings on take-off.",
+  "no": "En gjentatt rytmisk frase på fem stavelser av ulik lengde, «ho-hoo-hoo-ho-ho», som kan minne om en ugle; mest om dagen. Kan klappe med vingene når den letter.",
+  "verified": true
+ },
+ "mnemonic": {
+  "en": "",
+  "no": "",
+  "verified": false
+ },
+ "types": {
+  "song": {
+   "en": "«ho-hoo-hoo-ho-ho», repeated, by day.",
+   "no": "«ho-hoo-hoo-ho-ho», gjentatt, om dagen.",
+   "verified": true
+  },
+  "call": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "alarm": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "flight": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "parts": {},
+ "calendar": {
+  "present": "???yyyy?????",
+  "sings": "????????????",
+  "note": {
+   "en": "Migrant; some winter on the coast of southern Norway. First brood in April to May. [TO VERIFY] arrival, departure and singing months.",
+   "no": "Trekkfugl; noen overvintrer langs kysten av Sør-Norge. Første kull i april til mai. [TO VERIFY] ankomst, avreise og månedene med sang.",
+   "verified": true
+  }
+ },
+ "lookalikes": [
+  {
+   "name": {
+    "en": "Feral pigeon",
+    "no": "Bydue"
+   },
+   "text": {
+    "en": "Similar build, differs somewhat in colour pattern and size. Only the wood pigeon has the white neck patch.",
+    "no": "Lik kroppsbygning, noe ulik i fargemønster og størrelse. Bare ringdua har den hvite halsflekken.",
+    "verified": true
+   }
+  },
+  {
+   "name": {
+    "en": "Stock dove",
+    "no": "Skogdue"
+   },
+   "text": {
+    "en": "Similar build, differs somewhat in colour pattern and size. Only the wood pigeon has the white neck patch.",
+    "no": "Lik kroppsbygning, noe ulik i fargemønster og størrelse. Bare ringdua har den hvite halsflekken.",
+    "verified": true
+   }
+  }
+ ]
+}

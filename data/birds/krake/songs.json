@@ -1,0 +1,195 @@
+{
+ "_note": "Hooded crow, M11 batch 1. Verified (birds.md, SNL): a harsh, hoarse, rolling «krra krra krra», varying in tone and loudness. SNL describes no song, so the song slot plays this call (Play and the quiz need a song). Pitch, length and spacing are sound design guesses: 2 to 5 rough notes of 250 to 380 ms around 0,7 to 1 kHz, a rolling texture from a slow trill in the amplitude.",
+ "syllables": {
+  "krra": {
+   "dur_ms": 330,
+   "pitch": [
+    [
+     0,
+     780
+    ],
+    [
+     0.25,
+     980
+    ],
+    [
+     0.7,
+     900
+    ],
+    [
+     1,
+     700
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.08,
+     1
+    ],
+    [
+     0.7,
+     0.85
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.7,
+   "rough": 14,
+   "trill": {
+    "hz": 28,
+    "depth_st": 0.6,
+    "am": 0.35
+   }
+  },
+  "krra2": {
+   "dur_ms": 280,
+   "pitch": [
+    [
+     0,
+     850
+    ],
+    [
+     0.3,
+     1050
+    ],
+    [
+     1,
+     760
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.08,
+     1
+    ],
+    [
+     0.7,
+     0.8
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.7,
+   "rough": 14,
+   "trill": {
+    "hz": 32,
+    "depth_st": 0.5,
+    "am": 0.35
+   }
+  },
+  "krra3": {
+   "dur_ms": 380,
+   "pitch": [
+    [
+     0,
+     700
+    ],
+    [
+     0.3,
+     880
+    ],
+    [
+     1,
+     650
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.1,
+     1
+    ],
+    [
+     0.7,
+     0.85
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.65,
+   "rough": 18,
+   "trill": {
+    "hz": 24,
+    "depth_st": 0.7,
+    "am": 0.4
+   }
+  }
+ },
+ "types": {
+  "song": {
+   "pause_s": [
+    3.0,
+    10.0
+   ],
+   "length_s": [
+    1.2,
+    3.0
+   ],
+   "transpose_st": 1.2,
+   "avoid_repeat": false,
+   "auto": {
+    "vo_pitch": [
+     0.97,
+     1.03
+    ],
+    "vo_breath": [
+     16,
+     24
+    ],
+    "vo_tension": [
+     64,
+     76
+    ],
+    "vo_rough": [
+     52,
+     64
+    ],
+    "ph_tempo": [
+     95,
+     105
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 1,
+     "sections": [
+      {
+       "pool": [
+        "krra",
+        "krra2",
+        "krra3"
+       ],
+       "count": [
+        2,
+        5
+       ],
+       "share": 1.0,
+       "gap_ms": [
+        220,
+        420
+       ]
+      }
+     ]
+    }
+   ],
+   "overrides": []
+  }
+ }
+}

@@ -1,0 +1,108 @@
+{
+ "_note": "Field guide text for this bird, both languages. Facts come from birds.md (M11 batch 1, SNL). A field with verified false shows [TO VERIFY]. Norwegian wording is mine, Eirik to check. calendar rows: one letter per month from January, y yes, n no, ? not known.",
+ "xeno_canto": "https://xeno-canto.org/species/motacilla-alba",
+ "facts": {
+  "length": {
+   "en": "16,5 to 19 cm, 17 to 28 g",
+   "no": "16,5 til 19 cm, 17 til 28 g",
+   "verified": true
+  },
+  "broods": {
+   "en": "Usually 2 or 3",
+   "no": "Vanligvis 2 eller 3",
+   "verified": true
+  },
+  "range": {
+   "en": "The whole country, coast to mountains",
+   "no": "Hele landet, fra kyst til fjell",
+   "verified": true
+  },
+  "habitat": {
+   "en": "Open land, often by buildings, bridges and water",
+   "no": "Åpent land, ofte ved bygninger, bruer og vann",
+   "verified": true
+  },
+  "food": {
+   "en": "Insects and other small animals",
+   "no": "Insekter og andre smådyr",
+   "verified": true
+  },
+  "status": {
+   "en": "LC, least concern",
+   "no": "LC, livskraftig",
+   "verified": true
+  },
+  "nest": {
+   "en": "Cavities and covered places, 3 to 8 eggs",
+   "no": "Hulrom og overdekte steder, 3 til 8 egg",
+   "verified": true
+  }
+ },
+ "sings": {
+  "male": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "female": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "song_notes": {
+  "en": "[TO VERIFY] No source in hand describes its song or calls. Every sound here is a placeholder.",
+  "no": "[TO VERIFY] Ingen kilde vi har beskriver sangen eller lydene. Alle lydene her er plassholdere.",
+  "verified": false
+ },
+ "mnemonic": {
+  "en": "",
+  "no": "",
+  "verified": false
+ },
+ "types": {
+  "song": {
+   "en": "Placeholder twitter. No source describes its sounds.",
+   "no": "Plassholder-kvitter. Ingen kilde beskriver lydene.",
+   "verified": false
+  },
+  "call": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "alarm": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "flight": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "parts": {},
+ "calendar": {
+  "present": "???yyyy?????",
+  "sings": "????????????",
+  "note": {
+   "en": "Migrant: arrives in early April in the south to early May in the north, winters in southern Europe, North Africa and the Middle East. [TO VERIFY] departure and singing months.",
+   "no": "Trekkfugl: kommer i begynnelsen av april i sør til begynnelsen av mai i nord, overvintrer i Sør-Europa, Nord-Afrika og Midtøsten. [TO VERIFY] avreise og månedene med sang.",
+   "verified": true
+  }
+ },
+ "lookalikes": [
+  {
+   "name": {
+    "en": "Pied wagtail",
+    "no": "Svartryggerle"
+   },
+   "text": {
+    "en": "A subspecies with a black or dark grey back and flanks; a few pairs breed in Sørlandet and Vestlandet.",
+    "no": "En underart med svart eller mørkegrå rygg og sider; noen få par hekker på Sørlandet og Vestlandet.",
+    "verified": true
+   }
+  }
+ ]
+}

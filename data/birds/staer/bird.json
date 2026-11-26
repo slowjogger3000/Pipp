@@ -1,0 +1,105 @@
+{
+ "_note": "Field guide text for this bird, both languages. Facts come from birds.md (M11 batch 1, SNL). A field with verified false shows [TO VERIFY]. Norwegian wording is mine, Eirik to check. calendar rows: one letter per month from January, y yes, n no, ? not known.",
+ "xeno_canto": "https://xeno-canto.org/species/sturnus-vulgaris",
+ "facts": {
+  "length": {
+   "en": "About 22 cm, short tail",
+   "no": "Omtrent 22 cm, kort hale",
+   "verified": true
+  },
+  "broods": {
+   "en": "Often 2",
+   "no": "Ofte 2",
+   "verified": true
+  },
+  "range": {
+   "en": "Every county, most on the coast north to Troms",
+   "no": "Alle fylker, flest langs kysten nord til Troms",
+   "verified": true
+  },
+  "habitat": {
+   "en": "Near people and farmland; nests in cavities and boxes",
+   "no": "Nær folk og kulturlandskap; hekker i hulrom og kasser",
+   "verified": true
+  },
+  "food": {
+   "en": "Worms, snails, insects, seeds, fruit, berries",
+   "no": "Meitemark, snegler, insekter, frø, frukt, bær",
+   "verified": true
+  },
+  "status": {
+   "en": "NT, near threatened, Norwegian red list",
+   "no": "NT, nær truet, norsk rødliste",
+   "verified": true
+  },
+  "nest": {
+   "en": "In cavities, buildings and nest boxes, 3 to 7 eggs",
+   "no": "I hulrom, bygninger og fuglekasser, 3 til 7 egg",
+   "verified": true
+  }
+ },
+ "sings": {
+  "male": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "female": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "song_notes": {
+  "en": "A very good mimic: the song often holds songs and sounds of many other birds, and whistles, sirens and other man-made signal sounds. [TO VERIFY] how the song is built.",
+  "no": "En svært god hermer: sangen inneholder ofte sang og lyder fra mange andre fugler, og plystring, sirener og andre menneskeskapte signallyder. [TO VERIFY] hvordan sangen er bygd opp.",
+  "verified": true
+ },
+ "mnemonic": {
+  "en": "",
+  "no": "",
+  "verified": false
+ },
+ "types": {
+  "song": {
+   "en": "Whistles, clicks and rattles. A stand-in: Tipp does not mimic other birds.",
+   "no": "Plystring, klikk og skrall. En stedfortreder: Tipp hermer ikke andre fugler.",
+   "verified": false
+  },
+  "call": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "alarm": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "flight": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "parts": {},
+ "calendar": {
+  "present": "????????????",
+  "sings": "????????????",
+  "note": {
+   "en": "Mostly a migrant; most Norwegian birds winter in Britain, some stay. [TO VERIFY] arrival, departure and singing months.",
+   "no": "For det meste trekkfugl; de fleste norske overvintrer på De britiske øyer, noen blir. [TO VERIFY] ankomst, avreise og månedene med sang.",
+   "verified": true
+  }
+ },
+ "lookalikes": [
+  {
+   "id": "svarttrost",
+   "text": {
+    "en": "Both have yellow bills. The starling has a short tail and walks; the blackbird has a long tail and mostly hops.",
+    "no": "Begge har gult nebb. Stæren har kort hale og går; svarttrosten har lang hale og hopper mest.",
+    "verified": true
+   }
+  }
+ ]
+}

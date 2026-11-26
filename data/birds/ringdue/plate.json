@@ -1,0 +1,251 @@
+{
+ "_note": "Wood pigeon ink plate in a 280x240 box, drawn in M11 from the blackbird plate, not from a design: grey-blue in shadow tone, white neck patch and white wing band (face), short bill. Sexes alike (SNL). The juvenile has no neck patch until its first autumn (SNL). Bill colour not in SNL, so no bill callout.",
+ "box": [
+  280,
+  240
+ ],
+ "clips": {
+  "body": "M190 60 C184 44 158 42 150 62 C134 80 104 106 90 136 C92 146 98 154 106 158 C128 180 162 178 178 152 C192 130 198 104 192 80 C194 74 194 66 190 60 Z",
+  "wing": "M152 90 C156 118 136 146 98 152 C106 136 118 110 152 90 Z"
+ },
+ "layers": [
+  {
+   "path": "M14 211 C80 205 150 201 268 193",
+   "stroke": 4
+  },
+  {
+   "path": "M214 196 l20 -20 M224 186 l16 3",
+   "stroke": 1.5
+  },
+  {
+   "path": "M234 176 q10 -10 18 -2 q-9 8 -18 2 Z M240 189 q11 -5 16 3 q-10 4 -16 -3 Z",
+   "fill": "face",
+   "stroke": 1
+  },
+  {
+   "path": "M90 136 L42 194 L54 206 L106 158 Z",
+   "fill": "shadow",
+   "stroke": 1.5,
+   "part": "tail"
+  },
+  {
+   "path": "M94 142 L46 198 M98 147 L49 202 M102 153 L52 205",
+   "stroke": 1,
+   "part": "tail"
+  },
+  {
+   "path": "M136 172 L139 199 M152 173 L157 198 M131 201 L139 199 L148 202 M149 200 L157 198 L166 201",
+   "stroke": 1.5
+  },
+  {
+   "clip": "body",
+   "fill": "shadow",
+   "stroke": 1.5
+  },
+  {
+   "hatch": "body"
+  },
+  {
+   "hatch": "wing"
+  },
+  {
+   "clip": "wing",
+   "stroke": 1.5
+  },
+  {
+   "path": "M148 96 L104 144 L111 149 L152 102 Z",
+   "fill": "face",
+   "stroke": 1,
+   "within": "wing"
+  },
+  {
+   "variant": "neck",
+   "fill": "face",
+   "stroke": 1,
+   "within": "body"
+  },
+  {
+   "eye": [
+    177,
+    65
+   ],
+   "pupil": 2.4
+  },
+  {
+   "path": "M190 61 L206 65 L192 68 Z",
+   "fill": "bill",
+   "stroke": 1.5,
+   "part": "upper"
+  },
+  {
+   "path": "M192 68 L204 68 L191 72 Z",
+   "fill": "bill",
+   "stroke": 1.5,
+   "part": "lower"
+  },
+  {
+   "path": "M230 52 A16 16 0 0 1 230 76 M237 44 A26 26 0 0 1 237 84 M243 36 A36 36 0 0 1 243 92",
+   "stroke": 1.5,
+   "part": "arcs"
+  }
+ ],
+ "hatch": {
+  "body": {
+   "rect": [
+    86,
+    42,
+    200,
+    182
+   ],
+   "up": true,
+   "clip": "body"
+  },
+  "wing": {
+   "rect": [
+    96,
+    88,
+    158,
+    154
+   ],
+   "up": false,
+   "clip": "wing"
+  }
+ },
+ "pivots": {
+  "upper": {
+   "at": [
+    192,
+    67
+   ],
+   "deg": -16
+  },
+  "lower": {
+   "at": [
+    192,
+    72
+   ],
+   "deg": 10
+  },
+  "tail": {
+   "at": [
+    98,
+    147
+   ],
+   "deg": -5
+  }
+ },
+ "variants": {
+  "male": {
+   "body_pitch": 0,
+   "wing_pitch": 9,
+   "eye_ring": 0,
+   "bill": "shadow",
+   "neck": "M158 80 C155 84 156 90 160 91 C167 90 172 86 172 80 C168 77 162 77 158 80 Z"
+  },
+  "female": {
+   "body_pitch": 0,
+   "wing_pitch": 9,
+   "eye_ring": 0,
+   "bill": "shadow",
+   "neck": "M158 80 C155 84 156 90 160 91 C167 90 172 86 172 80 C168 77 162 77 158 80 Z"
+  },
+  "juvenile": {
+   "body_pitch": 0,
+   "wing_pitch": 9,
+   "eye_ring": 0,
+   "bill": "shadow",
+   "neck": ""
+  }
+ },
+ "callouts": [
+  {
+   "id": "plumage",
+   "leader": "M130 132 L72 96",
+   "at": [
+    70,
+    80
+   ],
+   "align": "right",
+   "male": {
+    "en": "GREY-BLUE",
+    "no": "GRÅBLÅ",
+    "verified": true
+   },
+   "female": {
+    "en": "GREY-BLUE",
+    "no": "GRÅBLÅ",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  },
+  {
+   "id": "neck",
+   "leader": "M168 86 L236 112",
+   "at": [
+    276,
+    120
+   ],
+   "align": "right",
+   "male": {
+    "en": "WHITE PATCH",
+    "no": "HVIT FLEKK",
+    "verified": true
+   },
+   "female": {
+    "en": "WHITE PATCH",
+    "no": "HVIT FLEKK",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "NONE UNTIL AUTUMN",
+    "no": "FØRST TIL HØSTEN",
+    "verified": true
+   }
+  },
+  {
+   "id": "wing",
+   "leader": "M122 126 L74 124",
+   "at": [
+    70,
+    118
+   ],
+   "align": "right",
+   "male": {
+    "en": "WHITE BAND",
+    "no": "HVITT BÅND",
+    "verified": true
+   },
+   "female": {
+    "en": "WHITE BAND",
+    "no": "HVITT BÅND",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  }
+ ],
+ "captions": {
+  "male": {
+   "en": "Adult. Grey-blue, white neck patch and wing band.",
+   "no": "Voksen. Gråblå, hvit halsflekk og hvitt vingebånd.",
+   "verified": true
+  },
+  "female": {
+   "en": "Female. Like the male.",
+   "no": "Hunn. Som hannen.",
+   "verified": true
+  },
+  "juvenile": {
+   "en": "Juvenile. No neck patch until its first autumn.",
+   "no": "Ungfugl. Ingen halsflekk før den første høsten.",
+   "verified": true
+  }
+ }
+}

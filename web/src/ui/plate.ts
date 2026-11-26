@@ -22,7 +22,7 @@ interface PlateDoc {
   captions?: Record<string, Text>;
 }
 
-export const kCalloutIds = ['bill', 'eye_ring', 'plumage', 'throat', 'head', 'cheek', 'breast', 'eye_stripe', 'wing'];
+export const kCalloutIds = ['bill', 'eye_ring', 'plumage', 'throat', 'head', 'cheek', 'breast', 'eye_stripe', 'wing', 'tail', 'neck'];
 
 export class Plate {
   readonly cv: Canvas;
