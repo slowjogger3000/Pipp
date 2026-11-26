@@ -1,0 +1,250 @@
+{
+ "_note": "Common gull ink plate in a 280x240 box, M11 batch 4, built from the herring gull plate: blue-grey back (hatching), black wingtips with white spots, a shorter yellow-green bill without the red spot (birds.md, SNL). The juvenile has densely hatched brown wings and the adult's grey back. Size is not shown.",
+ "box": [
+  280,
+  240
+ ],
+ "clips": {
+  "body": "M198 80 C198 64 186 56 172 58 C160 60 152 70 152 82 C126 88 96 104 66 124 C98 138 126 158 150 162 C174 166 192 152 194 130 C196 112 198 96 198 80 Z",
+  "wing": "M166 100 C138 100 104 110 70 124 C46 132 28 138 16 142 C40 146 80 142 112 136 C140 130 160 118 166 100 Z"
+ },
+ "hatch": {
+  "body": {
+   "rect": [
+    64,
+    54,
+    200,
+    168
+   ],
+   "up": true,
+   "clip": "body"
+  },
+  "wing": {
+   "rect": [
+    14,
+    98,
+    168,
+    148
+   ],
+   "up": false,
+   "clip": "wing"
+  }
+ },
+ "pivots": {
+  "upper": {
+   "at": [
+    198,
+    82
+   ],
+   "deg": -10
+  },
+  "lower": {
+   "at": [
+    198,
+    88
+   ],
+   "deg": 8
+  },
+  "tail": {
+   "at": [
+    70,
+    126
+   ],
+   "deg": -3
+  }
+ },
+ "layers": [
+  {
+   "path": "M14 216 C50 198 110 192 170 194 C214 196 246 204 268 216 Z",
+   "fill": "face",
+   "stroke": 1.5
+  },
+  {
+   "path": "M60 210 l14 -6 M150 202 l18 2 M214 206 l12 4",
+   "stroke": 1
+  },
+  {
+   "path": "M140 160 L138 196 M158 162 L160 195 M128 197 L138 196 L148 198 M150 196 L160 195 L170 197",
+   "stroke": 1.5
+  },
+  {
+   "path": "M70 120 L40 128 L44 136 L74 130 Z",
+   "fill": "face",
+   "stroke": 1.5,
+   "part": "tail"
+  },
+  {
+   "clip": "body",
+   "fill": "face",
+   "stroke": 1.5
+  },
+  {
+   "hatch": "body"
+  },
+  {
+   "clip": "wing",
+   "fill": "face"
+  },
+  {
+   "hatch": "wing"
+  },
+  {
+   "variant": "tips",
+   "fill": "ink"
+  },
+  {
+   "variant": "mirrors",
+   "fill": "face",
+   "path": "M198 85 L213 85 L215 88 L198 89 Z"
+  },
+  {
+   "clip": "wing",
+   "stroke": 1.5
+  },
+  {
+   "clip": "body",
+   "stroke": 1.5
+  },
+  {
+   "eye": [
+    184,
+    72
+   ],
+   "pupil": 2.2
+  },
+  {
+   "path": "M197 77 L216 80 C219 82 218 84 214 85 L198 85 Z",
+   "fill": "bill",
+   "stroke": 1.5,
+   "part": "upper"
+  },
+  {
+   "path": "M198 85 L213 85 L215 88 L198 89 Z",
+   "fill": "bill",
+   "stroke": 1.5,
+   "part": "lower"
+  },
+  {
+   "path": "M234 70 A16 16 0 0 1 234 98 M241 62 A26 26 0 0 1 241 106 M248 54 A36 36 0 0 1 248 114",
+   "stroke": 1.5,
+   "part": "arcs"
+  }
+ ],
+ "variants": {
+  "male": {
+   "body_pitch": 0,
+   "wing_pitch": 8,
+   "eye_ring": 0,
+   "bill": "face",
+   "tips": "M60 128 C40 134 26 139 16 142 C34 145 54 143 70 138 Z",
+   "mirrors": "M26 141 a3 2 0 1 0 6 0 a3 2 0 1 0 -6 0 Z M40 139 a3 2 0 1 0 6 0 a3 2 0 1 0 -6 0 Z"
+  },
+  "female": {
+   "body_pitch": 0,
+   "wing_pitch": 8,
+   "eye_ring": 0,
+   "bill": "face",
+   "tips": "M60 128 C40 134 26 139 16 142 C34 145 54 143 70 138 Z",
+   "mirrors": "M26 141 a3 2 0 1 0 6 0 a3 2 0 1 0 -6 0 Z M40 139 a3 2 0 1 0 6 0 a3 2 0 1 0 -6 0 Z"
+  },
+  "juvenile": {
+   "body_pitch": 0,
+   "wing_pitch": 5,
+   "eye_ring": 0,
+   "bill": "shadow",
+   "tips": "",
+   "mirrors": ""
+  }
+ },
+ "callouts": [
+  {
+   "id": "bill",
+   "leader": "M208 80 L208 33",
+   "at": [
+    208,
+    20
+   ],
+   "align": "centre",
+   "male": {
+    "en": "YELLOW-GREEN, NO RED SPOT",
+    "no": "GULGRØNT, INGEN RØD FLEKK",
+    "verified": true
+   },
+   "female": {
+    "en": "YELLOW-GREEN, NO RED SPOT",
+    "no": "GULGRØNT, INGEN RØD FLEKK",
+    "verified": false
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  },
+  {
+   "id": "plumage",
+   "leader": "M120 112 L86 80",
+   "at": [
+    82,
+    74
+   ],
+   "align": "right",
+   "male": {
+    "en": "BLUE-GREY BACK",
+    "no": "BLÅGRÅ RYGG",
+    "verified": true
+   },
+   "female": {
+    "en": "BLUE-GREY BACK",
+    "no": "BLÅGRÅ RYGG",
+    "verified": false
+   },
+   "juvenile": {
+    "en": "GREY BACK",
+    "no": "GRÅ RYGG",
+    "verified": true
+   }
+  },
+  {
+   "id": "wing",
+   "leader": "M40 140 L80 172",
+   "at": [
+    84,
+    184
+   ],
+   "align": "centre",
+   "male": {
+    "en": "BLACK TIPS, WHITE SPOTS",
+    "no": "SVARTE SPISSER, HVITE FLEKKER",
+    "verified": true
+   },
+   "female": {
+    "en": "BLACK TIPS, WHITE SPOTS",
+    "no": "SVARTE SPISSER, HVITE FLEKKER",
+    "verified": false
+   },
+   "juvenile": {
+    "en": "BROWN WINGS",
+    "no": "BRUNE VINGER",
+    "verified": true
+   }
+  }
+ ],
+ "captions": {
+  "male": {
+   "en": "Adult. Beak and tail follow the sound.",
+   "no": "Voksen. Nebb og hale følger lyden.",
+   "verified": true
+  },
+  "female": {
+   "en": "Female. No difference from the male is known.",
+   "no": "Hunn. Ingen kjent forskjell fra hannen.",
+   "verified": false
+  },
+  "juvenile": {
+   "en": "First winter. About two years to adult plumage.",
+   "no": "Første vinter. Omtrent to år til voksendrakt.",
+   "verified": true
+  }
+ }
+}

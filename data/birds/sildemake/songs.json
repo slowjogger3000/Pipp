@@ -1,0 +1,368 @@
+{
+ "_note": "Lesser black-backed gull, M11 batch 4. Placeholder sounds: SNL describes none (birds.md). The 'song' slot holds a long laughing call series, deeper and rougher than the herring gull's (my choice), and 'call' deep 'kjow' notes and a 'gag-ag-ag' series. All shapes are sound design guesses. Rework once a source is found.",
+ "syllables": {
+  "kaaow": {
+   "dur_ms": 460,
+   "pitch": [
+    [
+     0,
+     1050
+    ],
+    [
+     0.3,
+     1400
+    ],
+    [
+     0.7,
+     1320
+    ],
+    [
+     1,
+     1000
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.1,
+     0.9
+    ],
+    [
+     0.5,
+     1
+    ],
+    [
+     0.85,
+     0.7
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.85
+  },
+  "kyow": {
+   "dur_ms": 380,
+   "pitch": [
+    [
+     0,
+     1100
+    ],
+    [
+     0.35,
+     1450
+    ],
+    [
+     1,
+     1020
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.1,
+     1
+    ],
+    [
+     0.6,
+     0.8
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.85
+  },
+  "ha": {
+   "dur_ms": 130,
+   "pitch": [
+    [
+     0,
+     1200
+    ],
+    [
+     0.4,
+     1330
+    ],
+    [
+     1,
+     1080
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.15,
+     1
+    ],
+    [
+     0.6,
+     0.8
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.85
+  },
+  "ha2": {
+   "dur_ms": 120,
+   "pitch": [
+    [
+     0,
+     1120
+    ],
+    [
+     0.4,
+     1250
+    ],
+    [
+     1,
+     1000
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.15,
+     1
+    ],
+    [
+     0.6,
+     0.8
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.8
+  },
+  "kjow": {
+   "dur_ms": 300,
+   "pitch": [
+    [
+     0,
+     1080
+    ],
+    [
+     0.4,
+     1500
+    ],
+    [
+     1,
+     960
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.1,
+     1
+    ],
+    [
+     0.6,
+     0.8
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.8
+  },
+  "gag": {
+   "dur_ms": 95,
+   "pitch": [
+    [
+     0,
+     1250
+    ],
+    [
+     1,
+     1080
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.15,
+     1
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.75,
+   "rough": 14
+  }
+ },
+ "types": {
+  "song": {
+   "pause_s": [
+    5.0,
+    12.0
+   ],
+   "length_s": [
+    2.4,
+    3.8
+   ],
+   "transpose_st": 1.0,
+   "avoid_repeat": false,
+   "auto": {
+    "vo_pitch": [
+     0.97,
+     1.03
+    ],
+    "vo_breath": [
+     12,
+     22
+    ],
+    "vo_tension": [
+     60,
+     76
+    ],
+    "vo_rough": [
+     24,
+     36
+    ],
+    "ph_tempo": [
+     95,
+     105
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 1,
+     "sections": [
+      {
+       "pool": [
+        "kaaow",
+        "kyow"
+       ],
+       "count": [
+        1,
+        3
+       ],
+       "share": 0.5,
+       "gap_ms": [
+        120,
+        220
+       ]
+      },
+      {
+       "pool": [
+        "ha",
+        "ha2"
+       ],
+       "count": [
+        5,
+        11
+       ],
+       "share": 0.5,
+       "gap_ms": [
+        35,
+        70
+       ]
+      }
+     ]
+    }
+   ],
+   "overrides": []
+  },
+  "call": {
+   "pause_s": [
+    1.5,
+    5.0
+   ],
+   "length_s": [
+    0.3,
+    1.6
+   ],
+   "avoid_repeat": false,
+   "auto": {
+    "vo_pitch": [
+     0.97,
+     1.03
+    ],
+    "vo_breath": [
+     12,
+     22
+    ],
+    "vo_tension": [
+     60,
+     76
+    ],
+    "vo_rough": [
+     24,
+     36
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 2,
+     "sections": [
+      {
+       "pool": [
+        "kjow"
+       ],
+       "count": [
+        1,
+        3
+       ],
+       "share": 1.0,
+       "gap_ms": [
+        220,
+        420
+       ],
+       "no_adjacent_repeat": false
+      }
+     ]
+    },
+    {
+     "weight": 1,
+     "sections": [
+      {
+       "pool": [
+        "gag"
+       ],
+       "count": [
+        3,
+        6
+       ],
+       "share": 1.0,
+       "gap_ms": [
+        80,
+        140
+       ],
+       "no_adjacent_repeat": false
+      }
+     ]
+    }
+   ],
+   "overrides": []
+  }
+ }
+}

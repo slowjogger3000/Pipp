@@ -1,0 +1,68 @@
+{
+ "_note": "Sound design starting values for the common tern, M11 batch 4. Not bird facts.",
+ "pitch_ref_hz": 2500,
+ "base": {
+  "vo_pitch": 1.0,
+  "vo_breath": 16,
+  "vo_tension": 78,
+  "vo_trill": 0,
+  "vo_rough": 34,
+  "ph_tempo": 100,
+  "ph_pause": 4.0,
+  "ph_length": 2.0,
+  "ph_variation": 50,
+  "su_distance": 30,
+  "su_wind": 1.5,
+  "su_space": 35
+ },
+ "ranges": {
+  "vo_pitch": [
+   0.5,
+   2.0
+  ],
+  "vo_breath": [
+   0,
+   100
+  ],
+  "vo_tension": [
+   0,
+   100
+  ],
+  "vo_trill": [
+   0,
+   40
+  ],
+  "vo_rough": [
+   0,
+   100
+  ],
+  "ph_tempo": [
+   50,
+   200
+  ],
+  "ph_pause": [
+   0.2,
+   20
+  ],
+  "ph_length": [
+   0.2,
+   8
+  ],
+  "ph_variation": [
+   0,
+   100
+  ],
+  "su_distance": [
+   1,
+   200
+  ],
+  "su_wind": [
+   0,
+   15
+  ],
+  "su_space": [
+   0,
+   100
+  ]
+ }
+}

@@ -1,0 +1,107 @@
+{
+ "_note": "Field guide text for the common tern, both languages. Facts from birds.md (SNL, checked 2026-11-26). SNL describes its sounds only against the Arctic tern's, so the shapes and every type text are [TO VERIFY]. Norwegian wording is mine, Eirik to check. calendar: one letter per month from January, y yes, n no, ? not known.",
+ "xeno_canto": "https://xeno-canto.org/species/sterna-hirundo",
+ "facts": {
+  "length": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "broods": {
+   "en": "Usually 2 to 3 eggs, May to June",
+   "no": "Vanligvis 2 til 3 egg, mai til juni",
+   "verified": true
+  },
+  "range": {
+   "en": "The commonest tern on the coast of southern Norway, fewer to the north; about 11 000 pairs",
+   "no": "Den vanligste ternen langs kysten av Sør-Norge, færre nordover; rundt 11 000 par",
+   "verified": true
+  },
+  "habitat": {
+   "en": "Coast and fresh water inland, in colonies",
+   "no": "Kysten og ferskvann i innlandet, i kolonier",
+   "verified": true
+  },
+  "food": {
+   "en": "Mainly small fish, also crustaceans and insects; hovers and dives",
+   "no": "Mest småfisk, også krepsdyr og insekter; står stille i lufta og stupdykker",
+   "verified": true
+  },
+  "status": {
+   "en": "EN, endangered, Norwegian red list",
+   "no": "EN, sterkt truet, norsk rødliste",
+   "verified": true
+  },
+  "nest": {
+   "en": "A shallow scrape on the ground, often lined with dry grass",
+   "no": "En grunn grop på bakken, ofte fôret med tørre strå",
+   "verified": true
+  }
+ },
+ "sings": {
+  "male": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "female": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "song_notes": {
+  "en": "Its sounds are like the Arctic tern's, but harder, more grating and deeper, and it is usually very noisy at the colony. [TO VERIFY] SNL gives no transcription, so the notes Tipp plays are a stand-in. Grey and white with a black cap, a forked tail and an orange-red bill with a black tip in the breeding season.",
+  "no": "Lydene ligner rødnebbternas, men er hardere, mer skurrende og dypere, og den er som regel svært lydelig ved kolonien. [TO VERIFY] SNL gir ingen gjengivelse, så tonene Tipp spiller er en stedfortreder. Grå og hvit med svart hette, kløftet stjert og oransjerødt nebb med svart spiss i hekketiden.",
+  "verified": true
+ },
+ "mnemonic": {
+  "en": "",
+  "no": "",
+  "verified": false
+ },
+ "types": {
+  "song": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "call": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "alarm": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "flight": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "calendar": {
+  "present": "nnnnyyyyynnn",
+  "sings": "????????????",
+  "note": {
+   "en": "Arrives in May and leaves July to September; most Norwegian birds winter on the coasts of West and South Africa. Eggs in May and June.",
+   "no": "Kommer i mai og drar juli til september; de fleste norske fuglene overvintrer langs kysten av Vest- og Sør-Afrika. Egg i mai og juni.",
+   "verified": true
+  }
+ },
+ "lookalikes": [
+  {
+   "name": {
+    "en": "Arctic tern",
+    "no": "Rødnebbterne"
+   },
+   "text": {
+    "en": "Hard to tell apart. The Arctic tern has shorter legs, an all-red bill and longer tail streamers.",
+    "no": "Vanskelige å skille. Rødnebbterna har kortere bein, helrødt nebb og lengre stjertspyd.",
+    "verified": true
+   }
+  }
+ ]
+}

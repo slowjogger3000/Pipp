@@ -1,0 +1,283 @@
+{
+ "_note": "Common tern ink plate in a 280x240 box, drawn in M11 batch 4, not from a design: standing on a rock, slim grey and white body (light hatching), black cap (ink), long pointed wings past the forked tail, short legs, orange-red bill (shadow) with a black tip (birds.md, SNL, breeding season). Sexes alike as far as known; juvenile and winter plumage not described, so the juvenile is drawn like the adult and marked [TO VERIFY].",
+ "box": [
+  280,
+  240
+ ],
+ "clips": {
+  "body": "M200 88 C200 74 190 66 178 66 C166 66 158 74 157 86 C136 94 104 110 72 130 C102 142 128 164 152 166 C176 168 192 156 194 138 C196 120 200 104 200 88 Z",
+  "wing": "M172 106 C142 106 106 118 72 130 C46 140 24 150 8 156 C36 156 80 148 114 140 C144 132 166 120 172 106 Z",
+  "cap": "M156 86 C157 72 167 63 180 63 C192 63 200 72 201 84 C192 81 181 81 172 83 C165 84 160 86 156 86 Z"
+ },
+ "hatch": {
+  "body": {
+   "rect": [
+    64,
+    60,
+    202,
+    170
+   ],
+   "up": true,
+   "clip": "body"
+  },
+  "wing": {
+   "rect": [
+    6,
+    100,
+    174,
+    160
+   ],
+   "up": false,
+   "clip": "wing"
+  }
+ },
+ "pivots": {
+  "upper": {
+   "at": [
+    199,
+    83
+   ],
+   "deg": -12
+  },
+  "lower": {
+   "at": [
+    199,
+    89
+   ],
+   "deg": 10
+  },
+  "tail": {
+   "at": [
+    72,
+    128
+   ],
+   "deg": -3
+  }
+ },
+ "layers": [
+  {
+   "path": "M14 216 C50 198 110 192 170 194 C214 196 246 204 268 216 Z",
+   "fill": "face",
+   "stroke": 1.5
+  },
+  {
+   "path": "M60 210 l14 -6 M150 202 l18 2 M214 206 l12 4",
+   "stroke": 1
+  },
+  {
+   "path": "M148 164 L146 193 M162 165 L164 193 M138 194 L146 193 L154 195 M156 194 L164 193 L172 195",
+   "stroke": 1.5
+  },
+  {
+   "path": "M74 124 L22 128 L42 134 L18 144 L76 134 Z",
+   "fill": "face",
+   "stroke": 1.5,
+   "part": "tail"
+  },
+  {
+   "clip": "body",
+   "fill": "face",
+   "stroke": 1.5
+  },
+  {
+   "hatch": "body"
+  },
+  {
+   "clip": "wing",
+   "fill": "face"
+  },
+  {
+   "hatch": "wing"
+  },
+  {
+   "clip": "wing",
+   "stroke": 1.5
+  },
+  {
+   "clip": "body",
+   "stroke": 1.5
+  },
+  {
+   "variant": "capfill",
+   "fill": "ink"
+  },
+  {
+   "eye": [
+    184,
+    77
+   ],
+   "pupil": 2.2
+  },
+  {
+   "path": "M199 79 L234 85 L199 88 Z",
+   "fill": "bill",
+   "stroke": 1.5,
+   "part": "upper"
+  },
+  {
+   "variant": "tip_u",
+   "fill": "ink",
+   "part": "upper"
+  },
+  {
+   "path": "M199 88 L229 87 L199 92 Z",
+   "fill": "bill",
+   "stroke": 1.5,
+   "part": "lower"
+  },
+  {
+   "variant": "tip_l",
+   "fill": "ink",
+   "part": "lower"
+  },
+  {
+   "path": "M242 70 A16 16 0 0 1 242 98 M249 62 A26 26 0 0 1 249 106 M256 54 A36 36 0 0 1 256 114",
+   "stroke": 1.5,
+   "part": "arcs"
+  }
+ ],
+ "variants": {
+  "male": {
+   "body_pitch": 0,
+   "wing_pitch": 10,
+   "eye_ring": 0,
+   "bill": "shadow",
+   "capfill": "M156 86 C157 72 167 63 180 63 C192 63 200 72 201 84 C192 81 181 81 172 83 C165 84 160 86 156 86 Z",
+   "tip_u": "M224 83.3 L234 85 L224 86.6 Z",
+   "tip_l": "M221 87.3 L229 87 L221 89.4 Z"
+  },
+  "female": {
+   "body_pitch": 0,
+   "wing_pitch": 10,
+   "eye_ring": 0,
+   "bill": "shadow",
+   "capfill": "M156 86 C157 72 167 63 180 63 C192 63 200 72 201 84 C192 81 181 81 172 83 C165 84 160 86 156 86 Z",
+   "tip_u": "M224 83.3 L234 85 L224 86.6 Z",
+   "tip_l": "M221 87.3 L229 87 L221 89.4 Z"
+  },
+  "juvenile": {
+   "body_pitch": 0,
+   "wing_pitch": 10,
+   "eye_ring": 0,
+   "bill": "shadow",
+   "capfill": "M156 86 C157 72 167 63 180 63 C192 63 200 72 201 84 C192 81 181 81 172 83 C165 84 160 86 156 86 Z",
+   "tip_u": "M224 83.3 L234 85 L224 86.6 Z",
+   "tip_l": "M221 87.3 L229 87 L221 89.4 Z"
+  }
+ },
+ "callouts": [
+  {
+   "id": "bill",
+   "leader": "M218 84 L218 33",
+   "at": [
+    218,
+    20
+   ],
+   "align": "centre",
+   "male": {
+    "en": "ORANGE-RED, BLACK TIP",
+    "no": "ORANSJERØDT, SVART SPISS",
+    "verified": true
+   },
+   "female": {
+    "en": "ORANGE-RED, BLACK TIP",
+    "no": "ORANSJERØDT, SVART SPISS",
+    "verified": false
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  },
+  {
+   "id": "head",
+   "leader": "M170 70 L134 50",
+   "at": [
+    130,
+    44
+   ],
+   "align": "right",
+   "male": {
+    "en": "BLACK CAP",
+    "no": "SVART HETTE",
+    "verified": true
+   },
+   "female": {
+    "en": "BLACK CAP",
+    "no": "SVART HETTE",
+    "verified": false
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  },
+  {
+   "id": "plumage",
+   "leader": "M120 116 L86 80",
+   "at": [
+    82,
+    74
+   ],
+   "align": "right",
+   "male": {
+    "en": "GREY AND WHITE",
+    "no": "GRÅ OG HVIT",
+    "verified": true
+   },
+   "female": {
+    "en": "GREY AND WHITE",
+    "no": "GRÅ OG HVIT",
+    "verified": false
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  },
+  {
+   "id": "tail",
+   "leader": "M40 140 L76 172",
+   "at": [
+    80,
+    184
+   ],
+   "align": "centre",
+   "male": {
+    "en": "FORKED, SHORT STREAMERS",
+    "no": "KLØFTET, KORTE SPYD",
+    "verified": true
+   },
+   "female": {
+    "en": "FORKED, SHORT STREAMERS",
+    "no": "KLØFTET, KORTE SPYD",
+    "verified": false
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  }
+ ],
+ "captions": {
+  "male": {
+   "en": "Summer adult. Red legs.",
+   "no": "Voksen om sommeren. Røde bein.",
+   "verified": true
+  },
+  "female": {
+   "en": "Female. No difference from the male is known.",
+   "no": "Hunn. Ingen kjent forskjell fra hannen.",
+   "verified": false
+  },
+  "juvenile": {
+   "en": "Young bird.",
+   "no": "Ungfugl.",
+   "verified": false
+  }
+ }
+}

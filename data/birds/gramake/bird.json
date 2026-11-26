@@ -93,13 +93,18 @@
  },
  "lookalikes": [
   {
-   "name": {
-    "en": "Lesser black-backed gull",
-    "no": "Sildemåke"
-   },
+   "id": "sildemake",
    "text": {
     "en": "Young herring gulls are sturdier, with shorter wings and a heavier bill.",
     "no": "Unge gråmåker er kraftigere, med kortere vinger og kraftigere nebb.",
+    "verified": true
+   }
+  },
+  {
+   "id": "fiskemake",
+   "text": {
+    "en": "The common gull is smaller, with a yellow-green bill without the red spot.",
+    "no": "Fiskemåken er mindre, med gulgrønt nebb uten rød flekk.",
     "verified": true
    }
   }

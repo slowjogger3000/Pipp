@@ -1,0 +1,115 @@
+{
+ "_note": "Field guide text for the common gull, both languages. Facts from birds.md (SNL, checked 2026-11-26). SNL describes no sounds, so every sound text is [TO VERIFY]. Norwegian wording is mine, Eirik to check. calendar: one letter per month from January, y yes, n no, ? not known.",
+ "xeno_canto": "https://xeno-canto.org/species/larus-canus",
+ "facts": {
+  "length": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "broods": {
+   "en": "1 to 3 eggs, usually 3; from early May in the south, into June in the north",
+   "no": "1 til 3 egg, oftest 3; fra tidlig mai i sør, til og med juni i nord",
+   "verified": true
+  },
+  "range": {
+   "en": "The whole country, most on the coast; 90 000 to 125 000 pairs (2015)",
+   "no": "Hele landet, flest langs kysten; 90 000 til 125 000 par (2015)",
+   "verified": true
+  },
+  "habitat": {
+   "en": "Coast, fresh water, wetlands and bogs; more and more in towns",
+   "no": "Kyst, ferskvann, våtmark og myr; stadig oftere i byer",
+   "verified": true
+  },
+  "food": {
+   "en": "Mostly fish from the surface; also shellfish, worms, insects and berries",
+   "no": "Mest fisk fra vannflaten; også skjell, mark, insekter og bær",
+   "verified": true
+  },
+  "status": {
+   "en": "VU, vulnerable, Norwegian red list",
+   "no": "VU, sårbar, norsk rødliste",
+   "verified": true
+  },
+  "nest": {
+   "en": "On the ground on skerries and islands, also in trees and on buildings",
+   "no": "På bakken på skjær og øyer, også i trær og på bygninger",
+   "verified": true
+  }
+ },
+ "sings": {
+  "male": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "female": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "song_notes": {
+  "en": "[TO VERIFY] SNL describes no sounds of the common gull. Tipp plays a long laughing call series here as a stand-in, higher than the herring gull's. One of Norway's smallest gulls: blue-grey back, black wingtips with white spots, a yellow-green bill without a red spot.",
+  "no": "[TO VERIFY] SNL beskriver ingen lyder fra fiskemåken. Tipp spiller en lang, lattermild ropserie her som stedfortreder, lysere enn gråmåkens. En av Norges minste måker: blågrå rygg, svarte vingespisser med hvite flekker, gulgrønt nebb uten rød flekk.",
+  "verified": true
+ },
+ "mnemonic": {
+  "en": "",
+  "no": "",
+  "verified": false
+ },
+ "types": {
+  "song": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "call": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "alarm": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "flight": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "calendar": {
+  "present": "yyyyyyyyyyyy",
+  "sings": "????????????",
+  "note": {
+   "en": "Most leave for the North Sea countries in winter, some for Spain and Portugal; a few stay on the west coast. Eggs from early May.",
+   "no": "De fleste trekker til landene rundt Nordsjøen om vinteren, noen til Spania og Portugal; noen få blir langs Vestlandskysten. Egg fra tidlig mai.",
+   "verified": true
+  }
+ },
+ "lookalikes": [
+  {
+   "name": {
+    "en": "Kittiwake",
+    "no": "Krykkje"
+   },
+   "text": {
+    "en": "The kittiwake has all-black wingtips and black legs.",
+    "no": "Krykkja har helt svarte vingespisser og svarte bein.",
+    "verified": true
+   }
+  },
+  {
+   "id": "gramake",
+   "text": {
+    "en": "The larger gulls have a red spot on the lower bill; the common gull has none.",
+    "no": "De større måkene har rød flekk på undernebbet; fiskemåken har ingen.",
+    "verified": true
+   }
+  }
+ ]
+}

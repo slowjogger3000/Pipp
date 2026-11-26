@@ -394,6 +394,73 @@ Source: Store norske leksikon (snl.no), one page per bird, read in full on 2026-
 - Brambling: singing months; the song's pitch.
 - Black woodpecker: drum pitch (tree resonance is mine); pitch and timing of every call.
 
+## M11 batch 4, coast and water, checked 2026-11-26
+
+Source: Store norske leksikon (snl.no), one page per bird, read in full on 2026-11-26. None of the three pages gives a sound transcription.
+
+### Fiskemåke (folder `fiskemake`), snl.no/fiskemåke, Morten Helberg (byline Olav Fossbakken), updated 2026-11-04
+
+| Field | Value |
+|---|---|
+| Size, weight | One of Norway's smallest gulls; Norwegian breeders 300 to 480 g. Length not given |
+| Adult | White underside, blue-grey back and wings, black wingtips with white spots at the end |
+| Bill | Yellow-green, without the red spot on the lower bill that the larger gulls have |
+| Legs | Grey or yellow-green, sometimes yellow |
+| Eye, eye-ring | Not described |
+| Juvenile | Brown wings and grey back in the first winter; about two years to adult plumage |
+| Sexes | No difference described |
+| Sounds | None described (only a link to xeno-canto) |
+| Habitat | The whole country, most on the coast; also inland at fresh water, wetlands and bogs; more and more in towns |
+| Food | Mostly fish from the surface; shellfish, snails, worms; on land insects, earthworms, flying ants, crane flies, berries |
+| Nest | Usually on the ground on skerries and islands; also in trees, on buildings and other structures |
+| Eggs | 1 to 3, usually 3, from early May in the south into June in the north; 23 to 28 days, both parents |
+| Migration | Most winter around the North Sea, some in Spain and Portugal; a few stay on the west coast |
+| Population | 90 000 to 125 000 pairs (2015); over 95 % decline 1984 to 2019 in seabird reserves in Vest-Agder |
+| Status | VU (NT from 2010, VU from 2021); protected (the text says 2012, a caption says 2010) |
+| Lookalikes | Kittiwake: all-black wingtips and black legs. The larger gulls: red spot on the lower bill |
+
+### Sildemåke (folder `sildemake`), snl.no/sildemåke, Morten Helberg (byline John Sandøy), updated 2026-11-09
+
+| Field | Value |
+|---|---|
+| Size, weight | Smaller than the herring gull; Norwegian breeders 0,5 to 1 kg. Length not given |
+| Adult | Black to dark grey back, white underside, yellow bill with a red spot on the lower bill, usually yellow legs («gulføtting»), red eye-ring |
+| Wingtips | Usually white only on the outermost one or two primaries |
+| Subspecies | Back tone is the main mark: northern (fuscus) darkest, graellsii palest; intermedius about 28 000 pairs |
+| Juvenile | First plumage always has evenly dark primaries (herring and great black-backed gulls paler inner ones); 2 to 4 years to adult plumage |
+| Sexes | No difference described |
+| Sounds | None described |
+| Habitat | The whole country, patchy in the north, most in Vest-Agder; colonies in the skerries, often with herring and great black-backed gulls, on lower boggy ground; roofs in towns from the Swedish border to Bergen |
+| Food | Shoaling fish (sand eel, saithe, herring), earthworms, insects, waste |
+| Eggs | 2 to 3, May to June; 24 to 26 days; young fly after about 40 days |
+| Migration | Arrives from March, leaves mainly August to October; winters from the British Isles to Guinea |
+| Population | Northern subspecies about 2000 pairs (2015), down over 90 % |
+| Status | LC |
+| Lookalikes | Great black-backed gull: about twice the weight (1,1 to 2,2 kg), grey-pink legs, much white in the wingtip. Herring gull: larger; juvenile primaries as above |
+
+### Makrellterne (folder `makrellterne`), snl.no/makrellterne, Jan Eivind Østnes, updated 2026-08-04
+
+| Field | Value |
+|---|---|
+| Size, weight | A medium-sized tern, 100 to 135 g. Length not given |
+| Adult | Grey and white, black cap over the head, red legs in summer, orange-red bill with a black tip in the breeding season, forked tail with outer streamers that do not reach past the wingtips when sitting |
+| Winter, juvenile, sexes | Not described |
+| Sounds | Like the Arctic tern's, but harder, more grating and deeper; usually very noisy at the colony. No transcription |
+| Habitat | Coast and fresh water inland, not in the Arctic; colonies of a few to thousands of pairs, in Norway usually some tens |
+| Food | Mainly small fish, also crustaceans and insects; hovers and dives |
+| Nest | A shallow scrape on the ground, often lined with dry grass |
+| Eggs | Usually 2 to 3, May to June; 22 to 28 days, both sexes; young fly after about 4 weeks |
+| Migration | Long-distance migrant; arrives in May, leaves July to September; most Norwegian birds winter on the coasts of West and South Africa |
+| Population | About 11 000 pairs (BirdLife Norge); the commonest tern on the coast of southern Norway, the Arctic tern takes over further north; sharp decline in the 2000s |
+| Status | EN |
+| Versus Arctic tern | Hard to tell apart; the common tern has longer legs, a black bill tip in the breeding season (the Arctic tern's is all red, a little longer, can look down-curved), shorter outer tail streamers |
+
+### Batch 4, to verify
+
+- Every sound of the common gull and the lesser black-backed gull (placeholders, like the herring gull).
+- Common tern: the shape and pitch of every sound; winter and juvenile plumage.
+- All three: length; female and juvenile plate values beyond what is listed.
+
 ## Svarttrost, checked 2026-11-26
 
 Sources used: Store norske leksikon (snl.no/svarttrost), which follows Artsdatabanken's classification and cites BirdLife Norge for its population figure. A search excerpt from Fuglevennen (fuglevennen.no). A BirdLife Norge press release from 2021. Artsdatabanken's own species page and the full Fuglevennen page could not be opened, so check those two when possible.
