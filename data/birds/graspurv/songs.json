@@ -1,0 +1,57 @@
+{
+  "_note": "House sparrow, M3 round 1. Shapes, pitches, timings and both call types are sound design guesses, not verified, not tuned against recordings. Verified (birds.md, SNL): the song is a simple, short, repeated phrase, chirping 'sjirp, sjirp', heard most in spring; chattering and twittering calls all year. Design: the song is a run of 3 to 10 harsh chirps, each a quick rise and fall around 3 to 5 kHz with many harmonics and some roughness, 2 to 4 a second; 'sjirp', a two-part 'sjilp' and a lower 'tsjip' mix freely. The same phrase repeats with short pauses (bout). Call type: a fast rough chatter run, or a softer twitter of short high notes. Neither call has a transcription in birds.md.",
+
+  "syllables": {
+    "sjirp": { "dur_ms": 130, "pitch": [[0, 3100], [0.3, 4700], [0.55, 4300], [1, 3300]], "amp": [[0, 0], [0.1, 1], [0.6, 0.75], [1, 0]], "gain": 0.6 },
+    "sjilp": { "dur_ms": 150, "pitch": [[0, 3300], [0.2, 4500], [0.42, 3600], [0.5, 3900], [0.7, 4400], [1, 3200]], "amp": [[0, 0], [0.08, 1], [0.38, 0.8], [0.46, 0.3], [0.56, 0.9], [0.8, 0.6], [1, 0]], "gain": 0.6 },
+    "tsjip": { "dur_ms": 110, "pitch": [[0, 2900], [0.25, 3900], [1, 3000]], "amp": [[0, 0], [0.12, 1], [0.6, 0.7], [1, 0]], "gain": 0.6, "rough": 4 },
+
+    "chat":  { "dur_ms": 38, "pitch": [[0, 3600], [0.3, 4000], [1, 3300]], "amp": [[0, 0], [0.12, 1], [0.6, 0.6], [1, 0]], "gain": 0.55, "rough": 16, "tension": 8 },
+    "chat2": { "dur_ms": 34, "pitch": [[0, 3400], [0.3, 3800], [1, 3200]], "amp": [[0, 0], [0.12, 1], [0.6, 0.6], [1, 0]], "gain": 0.5, "rough": 16, "tension": 8 },
+    "tw1":   { "dur_ms": 55, "pitch": [[0, 4600], [0.4, 5600], [1, 4900]], "amp": [[0, 0], [0.15, 1], [0.6, 0.7], [1, 0]], "gain": 0.4, "rough": -10, "tension": -20 },
+    "tw2":   { "dur_ms": 45, "pitch": [[0, 5300], [1, 4500]], "amp": [[0, 0], [0.15, 1], [0.6, 0.7], [1, 0]], "gain": 0.4, "rough": -10, "tension": -20 }
+  },
+
+  "types": {
+    "song": {
+      "pause_s": [1.2, 4.0],
+      "length_s": [1.5, 3.8],
+      "transpose_st": 0.8,
+      "avoid_repeat": false,
+      "bout": [3, 8],
+      "auto": {
+        "vo_pitch": [0.97, 1.03],
+        "vo_breath": [12, 18],
+        "vo_tension": [56, 68],
+        "vo_rough": [20, 28],
+        "ph_tempo": [94, 106]
+      },
+      "phrases": [
+        { "weight": 3, "sections": [
+          { "pool": ["sjirp", "sjilp"], "count": [3, 10], "share": 1.0, "gap_ms": [150, 330], "no_adjacent_repeat": false }
+        ] },
+        { "weight": 2, "sections": [
+          { "pool": ["sjirp", "tsjip"], "count": [3, 9], "share": 1.0, "gap_ms": [170, 360], "no_adjacent_repeat": false }
+        ] }
+      ],
+      "overrides": []
+    },
+
+    "call": {
+      "pause_s": [1.0, 4.0],
+      "length_s": [0.4, 1.4],
+      "avoid_repeat": false,
+      "auto": {
+        "vo_pitch": [0.98, 1.02],
+        "vo_breath": [14, 22],
+        "vo_tension": [60, 72],
+        "vo_rough": [26, 36]
+      },
+      "phrases": [
+        { "weight": 2, "sections": [ { "pool": ["chat", "chat2"], "count": [6, 16], "share": 1.0, "gap_ms": [22, 34], "no_adjacent_repeat": false } ] },
+        { "weight": 1, "sections": [ { "pool": ["tw1", "tw2"], "count": [3, 8], "share": 1.0, "gap_ms": [60, 120], "no_adjacent_repeat": false } ] }
+      ],
+      "overrides": []
+    }
+  }
+}

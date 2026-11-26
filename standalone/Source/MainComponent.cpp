@@ -773,9 +773,16 @@ void MainComponent::paintPanels(juce::Graphics& g)
     g.fillRect(plateHead);
     g.setColour(colour::ink);
     g.fillRect(plateHead.getX(), plateHead.getBottom() - 1, plateHead.getWidth(), 1);
-    g.setFont(serif(22.0f));
     if (const auto* e = currentEntry())
-        g.drawFittedText(e->name(no), plateHead.reduced(8, 0).withRight(maleBtn.getX() - 8), juce::Justification::centredLeft, 1, 0.7f);
+    {
+        // Long names ("House sparrow") get a smaller serif instead of an ellipsis.
+        const auto area = plateHead.reduced(8, 0).withRight(maleBtn.getX() - 8);
+        float size = 22.0f;
+        while (size > 13.0f && textW(serif(size), e->name(no)) > area.getWidth())
+            size -= 1.0f;
+        g.setFont(serif(size));
+        g.drawFittedText(e->name(no), area, juce::Justification::centredLeft, 1, 0.85f);
+    }
     {
         const auto w = plateWell.withTrimmedTop(0).withTrimmedBottom(0);
         draw::graphPaper(g, w.withTrimmedTop(0));
