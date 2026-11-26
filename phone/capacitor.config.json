@@ -1,0 +1,9 @@
+{
+  "appId": "no.skisse.tipp",
+  "appName": "Tipp",
+  "webDir": "../web/dist",
+  "ios": {
+    "contentInset": "always",
+    "backgroundColor": "#ddd3bd"
+  }
+}

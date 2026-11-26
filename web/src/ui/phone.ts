@@ -1,9 +1,9 @@
 // The phone layout of the web app, 390 wide, from design/Phone.dc.html and
 // PhoneBirds.dc.html. One column: header (wordmark, NO/EN, transport), 6
 // tabs, the screen, a status bar. SPILL with its bird picker, BOK, QUIZ, KOR
-// and SAMLING (empty collection and the log) are built. LYTT is hatched
-// until the microphone comes in M9. BOK, QUIZ, KOR and the log are the
-// desktop screen classes in their phone layout.
+// LYTT (microphone, recognition stub) and SAMLING (recordings, pictures and
+// the log) are built. BOK, QUIZ, KOR and the log are the desktop screen
+// classes in their phone layout; LYTT and the collection are phone only.
 //
 // The column is laid out at 390 css px and zoomed to the window width, so
 // the design's sizes hold on every phone. The engine, worklet and drawing
@@ -13,6 +13,8 @@ import type { AudioHost } from '../audio/host.ts';
 import { index, hasSound, type IndexBird } from '../data.ts';
 import { Btn, Canvas, box, el, number, MINUS } from './dom.ts';
 import { ChorusScreen } from './chorus.ts';
+import { CollectionScreen } from './collection.ts';
+import { ListenScreen } from './listen.ts';
 import { GuideScreen } from './guide.ts';
 import { Knob, kKnobIds } from './knob.ts';
 import { LogScreen } from './log.ts';
@@ -56,11 +58,8 @@ export class PhoneApp {
   private log: LogScreen;
   private coll: HTMLDivElement;
   private collSwitch: Btn[] = [];
-  private collEmpty: HTMLDivElement;
-  private collTitle: HTMLDivElement;
-  private collText: HTMLParagraphElement;
-  private collBtns: Btn[] = [];
-  private collNote: HTMLParagraphElement;
+  private collection: CollectionScreen;
+  private listen: ListenScreen;
   private collLog = false;
   private comparing = '';
   private compareSeen = false;
@@ -137,9 +136,9 @@ export class PhoneApp {
     // ---------------------------------------------------------- tabs
     const tabs = el('div', 'ph-tabs', col);
     kTabKeys.forEach((_, i) => {
-      const t = el('div', i === 0 ? 'ph-tab active' : i === 2 ? 'ph-tab disabled' : 'ph-tab', tabs);
+      const t = el('div', i === 0 ? 'ph-tab active' : 'ph-tab', tabs);
       if (i === 5) t.style.flex = '1.3';
-      if (i !== 2) t.addEventListener('click', () => this.setTab(i));
+      t.addEventListener('click', () => this.setTab(i));
       this.tabs.push(t);
     });
 
@@ -301,24 +300,32 @@ export class PhoneApp {
     this.coll = coll;
     const sw = el('div', 'joined fill', coll);
     this.collSwitch = [false, true].map((log) => new Btn(sw, '', () => { this.collLog = log; this.refresh(); }, { flex: '1', height: '44px' }));
-    // Recordings and pictures come with LYTT and the camera (M9); until
-    // then the collection is empty, as design/CollectionEmpty.dc.html.
-    this.collEmpty = box(coll, { display: 'flex', flexDirection: 'column', gap: '12px' });
-    const card = box(this.collEmpty, { border: '1px solid var(--ink)' });
-    const inner = box(card, { display: 'flex', flexDirection: 'column', gap: '10px', padding: '16px 10px', background: 'var(--sheet)', boxShadow: 'var(--inset)' });
-    this.collTitle = box(inner, { font: '400 28px/1.05 var(--serif)' });
-    this.collText = el('p', '', inner);
-    this.collText.style.margin = '0';
-    const cb = box(inner, { display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '6px' });
-    this.collBtns = [0, 1].map(() => new Btn(cb, '', undefined, { height: '44px', minWidth: '0' }).disabled(true));
-    this.collNote = el('p', '', this.collEmpty);
-    Object.assign(this.collNote.style, { margin: '0', color: 'var(--inkSoft)' });
+    this.collection = new CollectionScreen(coll, s, {
+      refresh: () => this.refresh(),
+      openListen: () => this.setTab(2),
+      playBird: () => st.bird,
+    });
     this.log = new LogScreen(coll, s, {
       refresh: () => this.refresh(),
       openBird: (id) => { this.setTab(1); this.selectBird(id); },
       playBird: () => st.bird,
       playType: () => st.type,
     }, true);
+
+    // ---------------------------------------------------------- LYTT
+    this.listen = new ListenScreen(this.main, s, {
+      refresh: () => this.refresh(),
+      openGuide: (id) => { this.setTab(1); this.selectBird(id); },
+      openCollection: () => { this.collLog = false; this.setTab(5); },
+      singBird: (id) => {
+        this.setTab(0);
+        this.selectBird(id);
+        this.setPlaying(true);
+        this.host.trigger('ap_sing_once');
+      },
+      logHeard: (id, type) => this.log.addHeard(id, type),
+      playBird: () => st.bird,
+    });
 
     window.addEventListener('resize', () => this.fit());
     window.addEventListener('keydown', (e) => {
@@ -345,6 +352,7 @@ export class PhoneApp {
     this.guide.resize(z);
     this.quiz.resize(z);
     this.chorus.resize(z);
+    this.listen.resize(z);
     this.plate.paint(true);
     for (const k of this.knobs) k.invalidate();
   }
@@ -369,7 +377,7 @@ export class PhoneApp {
   // ------------------------------------------------------------ tabs
 
   private setTab(i: number) {
-    if (i === this.tab || i === 2) return;
+    if (i === this.tab) return;
     const was = this.tab;
     this.tab = i;
     this.stopCompare();
@@ -383,8 +391,11 @@ export class PhoneApp {
     this.quiz.show(i === 3);
     this.chorus.show(i === 4);
     this.coll.style.display = i === 5 ? 'flex' : 'none';
-    // SAMLING has no transport use; the Play bird stops there, as on the desktop log.
-    if (i === 5 && this.st.playing) this.setPlaying(false);
+    this.listen.show(i === 2);
+    this.collection.show(i === 5 && !this.collLog);
+    // LYTT and SAMLING have no use for the transport; the Play bird stops
+    // there, as on the desktop log (and must not sing into the microphone).
+    if ((i === 2 || i === 5) && this.st.playing) this.setPlaying(false);
     if (i === 3) this.quiz.enter();
     if (i === 4) this.chorus.enter();
     if (i === 5) this.log.enter();
@@ -561,11 +572,8 @@ export class PhoneApp {
     this.pickerClose.text(s.t('phone.close'));
     this.collSwitch[0].text(s.t('phone.coll.media'));
     this.collSwitch[1].text(s.t('phone.coll.log'));
-    this.collTitle.textContent = s.t('phone.coll.empty_title');
-    this.collText.textContent = s.t('phone.coll.empty_text');
-    this.collBtns[0].text(s.t('phone.coll.go_listen'));
-    this.collBtns[1].text(s.t('phone.coll.new_picture'));
-    this.collNote.textContent = s.t('phone.coll.note');
+    this.collection.applyStrings();
+    this.listen.applyStrings();
     this.guide.applyStrings();
     this.quiz.applyStrings();
     this.chorus.applyStrings();
@@ -597,7 +605,7 @@ export class PhoneApp {
     this.guide.setState({ sex: st.sex, age: st.age, season: st.season, type: st.type, comparing: this.comparing });
     this.collSwitch[0].on(!this.collLog);
     this.collSwitch[1].on(this.collLog);
-    this.collEmpty.style.display = this.collLog ? 'none' : 'flex';
+    if (tab === 5 && this.collection.root.style.display !== (this.collLog ? 'none' : 'flex')) this.collection.show(!this.collLog);
     this.log.show(tab === 5 && this.collLog);
     this.prevBtn.disabled(this.neighbour(-1) === null);
     this.nextBtn.disabled(this.neighbour(1) === null);
@@ -650,7 +658,8 @@ export class PhoneApp {
     };
     if (tab === 3) return status(s.t('tab.quiz'), this.quiz.statusText());
     if (tab === 4) return status(s.t(this.chorus.playing ? 'status.playing' : 'status.stopped'), this.chorus.statusText());
-    if (tab === 5) return status(s.t('phone.tab.collection'), this.collLog ? this.log.statusText() : s.t('phone.coll.status_empty'));
+    if (tab === 5) return status(s.t('phone.tab.collection'), this.collLog ? this.log.statusText() : this.collection.statusText());
+    if (tab === 2) return status(this.listen.statusLeft(), this.listen.statusText());
     if (tab === 1 && b) {
       const sex = s.t(st.sex === 1 ? 'plate.female' : 'plate.male'), age = s.t(st.age === 1 ? 'plate.juv' : 'plate.adult');
       return status(s.t('phone.guide.status'), `${upper(this.name(b))}, ${sex}, ${age}`);
@@ -681,6 +690,7 @@ export class PhoneApp {
     if (this.tab === 1) this.guide.poll(this.plate.open);
     if (this.tab === 3) this.quiz.poll();
     if (this.tab === 4) this.chorus.poll();
+    if (this.tab === 2) this.listen.poll();
     if (this.comparing) {
       if (h.compare.running) this.compareSeen = true;
       else if (this.compareSeen || performance.now() - this.compareAt > 1500) { this.comparing = ''; this.refresh(); }

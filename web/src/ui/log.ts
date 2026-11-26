@@ -334,6 +334,20 @@ export class LogScreen {
     this.on.refresh();
   }
 
+  // A line from LYTT's LAGRE OPPTAK: this bird, now, heard, nothing seen.
+  addHeard(bird: string, type: number) {
+    const d = new Date(), p2 = (n: number) => String(n).padStart(2, '0');
+    const entry: LogEntry = {
+      bird, date: `${d.getFullYear()}-${p2(d.getMonth() + 1)}-${p2(d.getDate())}`, time: `${p2(d.getHours())}:${p2(d.getMinutes())}`,
+      place: '', heard: kHeard[type] ?? 'song', saw: 'none', note: '', added: Date.now(),
+    };
+    this.entries.push(entry);
+    this.entries.sort(order);
+    this.selected = this.entries.indexOf(entry);
+    this.save();
+    this.update();
+  }
+
   remove() {
     const e = this.entries[this.selected];
     if (!e) return;
