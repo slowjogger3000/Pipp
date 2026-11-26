@@ -48,8 +48,8 @@ With autoplay off, SING ONCE triggers one phrase and the knobs stay where the ha
 | Time of day | Dawn, Day, Dusk, Night | Manual only |
 | Song type | Song, Call, Alarm, Flight | A type the bird lacks in this scene is hatched and disabled |
 | Place | Garden, Forest, Open, Shore | Sets the reverb and background character |
-| Dialect | Per bird | Hatched for birds with none |
-| Mimics | Per bird | Only for mimics such as starling. Hatched otherwise |
+| Dialect | Per bird | Hatched for birds with none. Dropped for version 1 (Eirik, 2026-11-26): no source describes a dialect for the 18, so it is hatched for all |
+| Mimics | Per bird | Only for mimics such as starling. Hatched otherwise. Dropped for version 1 (Eirik, 2026-11-26): none of the 18 mimics, so it is hatched for all |
 
 ### Bird
 

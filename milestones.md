@@ -121,8 +121,10 @@ Checks: Eirik runs it on his phone. Record, save, find it in the collection, pla
 **Model: Opus** for song data.
 
 - Forest, coast and water, and night birds.
-- Dialect for birds that have one. Mimics for starling if it is added.
-- Mnemonics once Eirik has collected them.
+- Dialect for birds that have one. Mimics for starling if it is added. Dropped by Eirik 2026-11-26: no source describes a dialect for the 18, and the starling is not one of them.
+- Mnemonics once Eirik has collected them. Not a gate for M10: they go into `bird.json` when they come.
+
+Done 2026-11-26: all 18 birds built and approved by Eirik by ear.
 
 ## Parked
 
