@@ -1,0 +1,257 @@
+{
+ "_note": "Thrush nightingale ink plate in a 280x240 box, drawn in M10 from the robin plate (same small perched bird), not from a design: brown above (hatching), grey-white below, rust-brown tail in shadow tone (birds.md, SNL). Male and female are alike; the juvenile is not described and is drawn like the adults.",
+ "box": [
+  280,
+  240
+ ],
+ "clips": {
+  "body": "M198 72 C196 58 182 52 168 56 C152 60 140 74 132 92 C120 112 114 132 116 150 C120 166 132 176 148 178 C166 180 182 170 190 152 C198 134 200 108 199 92 C200 86 201 82 200 80 Z",
+  "wing": "M158 94 C164 120 150 148 120 160 C124 138 134 112 158 94 Z"
+ },
+ "layers": [
+  {
+   "path": "M14 206 C80 202 150 199 268 194",
+   "stroke": 4
+  },
+  {
+   "path": "M214 197 l20 -20 M224 187 l16 3",
+   "stroke": 1.5
+  },
+  {
+   "path": "M234 177 q10 -10 18 -2 q-9 8 -18 2 Z M240 190 q11 -5 16 3 q-10 4 -16 -3 Z",
+   "fill": "face",
+   "stroke": 1
+  },
+  {
+   "path": "M120 150 L84 194 L96 202 L132 166 Z",
+   "fill": "shadow",
+   "stroke": 1.5,
+   "part": "tail"
+  },
+  {
+   "path": "M124 156 L88 198 M128 162 L92 201",
+   "stroke": 1,
+   "part": "tail"
+  },
+  {
+   "path": "M148 178 L148 199 M162 176 L163 198 M140 201 L148 199 L156 201 M155 199 L163 198 L171 200",
+   "stroke": 1.5
+  },
+  {
+   "clip": "body",
+   "fill": "face",
+   "stroke": 1.5
+  },
+  {
+   "hatch": "body"
+  },
+  {
+   "path": "M194 58 C184 58 176 64 172 74 C168 88 160 102 160 118 C160 136 168 150 182 164 L216 164 L216 50 Z",
+   "fill": "breast",
+   "within": "body"
+  },
+  {
+   "path": "M194 58 C184 58 176 64 172 74 C168 88 160 102 160 118 C160 136 168 150 182 164",
+   "stroke": 1,
+   "within": "body"
+  },
+  {
+   "hatch": "wing"
+  },
+  {
+   "clip": "wing",
+   "stroke": 1.5
+  },
+  {
+   "clip": "body",
+   "stroke": 1.5
+  },
+  {
+   "eye": [
+    184,
+    72
+   ],
+   "pupil": 2.4
+  },
+  {
+   "path": "M184.6 71.4 m-1.2 0 a1.2 1.2 0 1 0 2.4 0 a1.2 1.2 0 1 0 -2.4 0",
+   "fill": "face"
+  },
+  {
+   "path": "M198 72 L214 77 L200 79 Z",
+   "fill": "bill",
+   "stroke": 1.5,
+   "part": "upper"
+  },
+  {
+   "path": "M200 79 L212 79 L200 82 Z",
+   "fill": "bill",
+   "stroke": 1.5,
+   "part": "lower"
+  },
+  {
+   "path": "M226 66 A14 14 0 0 1 226 90 M233 58 A24 24 0 0 1 233 98 M240 50 A34 34 0 0 1 240 106",
+   "stroke": 1.5,
+   "part": "arcs"
+  }
+ ],
+ "hatch": {
+  "body": {
+   "rect": [
+    112,
+    50,
+    204,
+    182
+   ],
+   "up": true,
+   "clip": "body"
+  },
+  "wing": {
+   "rect": [
+    118,
+    90,
+    166,
+    164
+   ],
+   "up": false,
+   "clip": "wing"
+  }
+ },
+ "pivots": {
+  "upper": {
+   "at": [
+    200,
+    76
+   ],
+   "deg": -14
+  },
+  "lower": {
+   "at": [
+    200,
+    80
+   ],
+   "deg": 10
+  },
+  "tail": {
+   "at": [
+    126,
+    158
+   ],
+   "deg": -6
+  }
+ },
+ "variants": {
+  "male": {
+   "body_pitch": 8,
+   "wing_pitch": 5,
+   "eye_ring": 0,
+   "bill": "shadow",
+   "breast": "face"
+  },
+  "female": {
+   "body_pitch": 8,
+   "wing_pitch": 5,
+   "eye_ring": 0,
+   "bill": "shadow",
+   "breast": "face"
+  },
+  "juvenile": {
+   "body_pitch": 8,
+   "wing_pitch": 5,
+   "eye_ring": 0,
+   "bill": "shadow",
+   "breast": "face"
+  }
+ },
+ "callouts": [
+  {
+   "id": "bill",
+   "leader": "M206 74 L206 23",
+   "at": [
+    206,
+    10
+   ],
+   "align": "centre",
+   "male": {
+    "en": "",
+    "no": "",
+    "verified": false
+   },
+   "female": {
+    "en": "",
+    "no": "",
+    "verified": false
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  },
+  {
+   "id": "plumage",
+   "leader": "M140 100 L112 116",
+   "at": [
+    108,
+    110
+   ],
+   "align": "right",
+   "male": {
+    "en": "BROWN ABOVE",
+    "no": "BRUN OVERSIDE",
+    "verified": true
+   },
+   "female": {
+    "en": "BROWN ABOVE",
+    "no": "BRUN OVERSIDE",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  },
+  {
+   "id": "breast",
+   "leader": "M186 130 L232 212",
+   "at": [
+    276,
+    224
+   ],
+   "align": "right",
+   "male": {
+    "en": "GREY-WHITE",
+    "no": "GRÅHVIT",
+    "verified": true
+   },
+   "female": {
+    "en": "GREY-WHITE",
+    "no": "GRÅHVIT",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  }
+ ],
+ "captions": {
+  "male": {
+   "en": "Singing at night. Rust-brown tail.",
+   "no": "Synger om natten. Rustbrun hale.",
+   "verified": true
+  },
+  "female": {
+   "en": "Female. Male and female are alike.",
+   "no": "Hunn. Hann og hunn er like.",
+   "verified": true
+  },
+  "juvenile": {
+   "en": "Juvenile. Drawn like the adults.",
+   "no": "Ungfugl. Tegnet som de voksne.",
+   "verified": false
+  }
+ }
+}

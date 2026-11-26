@@ -436,9 +436,28 @@ To verify: length, juvenile plumage, bill and feet colour, duets, the other soun
 
 To verify: length, wingspan, bill and leg colour, the juvenile, any call outside roding, exact months of roding.
 
+### Nattergal (folder `nattergal`), snl.no/nattergal, Tom Schandy, updated 2026-11-08
+
+| Field | Value |
+|---|---|
+| Length | 16 cm |
+| Appearance | Grey-brown overall: brown above, grey-white below, rust-brown tail |
+| Sex | Male and female are alike |
+| Song | Whistled notes repeated the way the song thrush repeats its phrases, plus smacking and drumming sounds. Sung at night, and also in early mornings. Carries up to two kilometres in good conditions |
+| Habitat | Mostly deciduous forest with rich undergrowth near farmland, often by damp ground, water or a stream |
+| Range in Norway | First heard singing at Bygdøy in 1926 and 1927, first breeding at Tromøya in 1964. Now breeds sparsely from Agder to the Oslofjord and in southern Innlandet, most in Vestfold; north to Sunnmøre. 500 to 1000 pairs; rose in the 1970s, since stable or a little down |
+| Food | Insects, earthworms, snails; some berries in autumn and winter |
+| Nest | Well hidden on or by the ground |
+| Eggs | 4 to 6, incubated 13 days; the young leave the nest after about 10 to 12 days |
+| Migration | Back in the first half of May. Probably winters in eastern Africa |
+| Status | NT, near threatened, on the Norwegian red list; LC globally |
+| Versus common nightingale | The common nightingale (sørnattergal) is more red-brown above and paler below; very rare in Norway |
+
+To verify: calls, bill, eye and leg colour, weight, wingspan, the juvenile, singing months, departure month.
+
 ## All other birds
 
-Nothing is verified for the 1 other bird outside the garden group. Collect facts per bird with the same fields as the blackbird table before writing `bird.json`.
+Every bird outside the garden group now has a section above.
 
 ## Dawn chorus
 

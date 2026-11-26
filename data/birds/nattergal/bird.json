@@ -1,0 +1,132 @@
+{
+ "_note": "Field guide text for the thrush nightingale, both languages. Facts from birds.md (SNL, checked 2026-11-26). Norwegian wording is mine, Eirik to check. calendar: one letter per month from January, y yes, n no, ? not known.",
+ "xeno_canto": "https://xeno-canto.org/species/luscinia-luscinia",
+ "facts": {
+  "length": {
+   "en": "16 cm",
+   "no": "16 cm",
+   "verified": true
+  },
+  "broods": {
+   "en": "4 to 6 eggs, 13 days",
+   "no": "4 til 6 egg, 13 dager",
+   "verified": true
+  },
+  "range": {
+   "en": "Agder to the Oslofjord, southern Innlandet; 500 to 1000 pairs",
+   "no": "Agder til Oslofjorden, sørlige Innlandet; 500 til 1000 par",
+   "verified": true
+  },
+  "habitat": {
+   "en": "Deciduous thickets near farmland and water",
+   "no": "Løvskog med tett kratt nær kulturmark og vann",
+   "verified": true
+  },
+  "food": {
+   "en": "Insects, earthworms, snails; some berries",
+   "no": "Insekter, meitemark, snegler; litt bær",
+   "verified": true
+  },
+  "status": {
+   "en": "NT, near threatened, Norwegian red list",
+   "no": "NT, nær truet, norsk rødliste",
+   "verified": true
+  },
+  "nest": {
+   "en": "Well hidden on or by the ground",
+   "no": "Godt skjult på eller ved bakken",
+   "verified": true
+  }
+ },
+ "sings": {
+  "male": {
+   "en": "Sings",
+   "no": "Synger",
+   "verified": false
+  },
+  "female": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "song_notes": {
+  "en": "Whistled notes repeated the way the song thrush repeats its phrases, plus smacking and drumming sounds. Sung at night, and also in early mornings; in good conditions it carries up to two kilometres. Male and female look alike.",
+  "no": "Fløytetoner som gjentas på måltrostvis, og smattende og trommende lyder. Synger om natten, men også tidlig om morgenen; under gode forhold høres sangen opptil to kilometer unna. Hann og hunn er like.",
+  "verified": true
+ },
+ "mnemonic": {
+  "en": "",
+  "no": "",
+  "verified": false
+ },
+ "types": {
+  "song": {
+   "en": "Repeated whistles, smacking and drumming sounds, at night.",
+   "no": "Gjentatte fløytetoner, smattende og trommende lyder, om natten.",
+   "verified": true
+  },
+  "call": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "alarm": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "flight": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "parts": {
+  "whistle": {
+   "en": "REPEATED WHISTLE",
+   "no": "GJENTATT FLØYTETONE",
+   "verified": true
+  },
+  "smack": {
+   "en": "SMACKING",
+   "no": "SMATTING",
+   "verified": true
+  },
+  "drum": {
+   "en": "DRUMMING",
+   "no": "TROMMING",
+   "verified": true
+  }
+ },
+ "calendar": {
+  "present": "????yyyy????",
+  "sings": "????????????",
+  "note": {
+   "en": "Back in the first half of May; probably winters in eastern Africa. [TO VERIFY] departure month and singing months.",
+   "no": "Kommer tilbake i første halvdel av mai; overvintrer trolig i Øst-Afrika. [TO VERIFY] når den drar, og sangmånedene.",
+   "verified": true
+  }
+ },
+ "lookalikes": [
+  {
+   "id": "maltrost",
+   "text": {
+    "en": "The nightingale repeats its whistled notes the way the song thrush repeats its phrases.",
+    "no": "Nattergalen gjentar fløytetonene på måltrostvis.",
+    "verified": true
+   }
+  },
+  {
+   "name": {
+    "en": "Common nightingale",
+    "no": "Sørnattergal"
+   },
+   "text": {
+    "en": "More red-brown above and paler below; very rare in Norway.",
+    "no": "Mer rødbrun på oversiden og lysere under; svært sjelden i Norge.",
+    "verified": true
+   }
+  }
+ ]
+}
