@@ -187,9 +187,36 @@ SNL names the family both as flycatchers (text) and thrushes (header). Not used 
 - Whether females sing, for all five.
 - Wingspan for all five.
 
+## Forest birds, checked 2026-11-26
+
+Source: Store norske leksikon (snl.no), one article per bird, read in full, as for the garden birds.
+
+### Måltrost (folder `maltrost`), snl.no/måltrost, Tom Schandy, updated 2026-11-08
+
+| Field | Value |
+|---|---|
+| Length, weight | About 21 cm, 60 to 100 g |
+| Appearance | Fairly anonymous: grey-brown upperparts, brown and white-spotted underparts. Relatively short tail. No rust-red patch under the wings (the redwing has one), though it can be strongly rust-beige there |
+| Sex and age | No difference stated |
+| Song | One of the forest's best singers. A mix of chirping trills and clear, melodic whistled notes. Sings staccato and repeats the same phrase 2 to 3 times |
+| Song perch | Shy; usually seen singing in the top of a tree in spring |
+| Habitat | Most common in conifer and mixed forest, also pure deciduous forest and mountain birch forest. In some southern towns, villa areas, large gardens and parks |
+| Range in Norway | Breeds in most of the country, scarcer in Finnmark. 1 to 1,5 million pairs |
+| Food | Insects, earthworms and snails, most in May to July; smashes snail shells on a stone. Berries and fruit from July to October |
+| Nest | Close to the trunk in a tree or bush, with a "mortared" base of wood pulp, unlike other thrushes |
+| Eggs | 4 to 6, blue-green with a few black spots. The female incubates 12 to 14 days |
+| Young | Fed by both parents, leave the nest after about two weeks |
+| Migration | Migrant. Most winter on the Iberian Peninsula and in north-west Africa, some on the Norwegian coast north to Nordland. Returns in March to April |
+| Status | LC on the Norwegian red list, and globally |
+| Versus redwing | The redwing is the only smaller Norwegian thrush, and has the rust-red patch under the wing |
+
+SNL also names two old folk readings of the song, «kyss meg, kyss meg» and «får du fisk, får du fisk». They are candidates for a mnemonic; Eirik decides whether to use them.
+
+To verify: calls and alarm call (not in the article), bill colour, any sex or age difference, singing months beyond "spring", time of day for song, broods per season, autumn departure month, wingspan, whether females sing.
+
 ## All other birds
 
-Nothing is verified for the 12 birds outside the garden group. Collect facts per bird with the same fields as the blackbird table before writing `bird.json`.
+Nothing is verified for the 11 other birds outside the garden group. Collect facts per bird with the same fields as the blackbird table before writing `bird.json`.
 
 ## Dawn chorus
 

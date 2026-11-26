@@ -1,5 +1,5 @@
 {
- "_note": "Dawn chorus setup. Entry minutes are relative to sunrise. Robin, blackbird, song thrush and great tit are the placeholders from design/Chorus.dc.html; birds.md says they have no source. Every other bird has no number at all and enters at default_entry_min, also a placeholder. Eirik supplies the real times. Lane 3 is the chaffinch because the song thrush in the design has no sound yet. Distances are the design's 20, 12 and 45 m; the fourth lane is muted in the design and shows no distance, 30 m is mine.",
+ "_note": "Dawn chorus setup. Entry minutes are relative to sunrise. Robin, blackbird, song thrush and great tit are the placeholders from design/Chorus.dc.html; birds.md says they have no source. Every other bird has no number at all and enters at default_entry_min, also a placeholder. Eirik supplies the real times. Lane 3 is the song thrush, as in the design (it was the chaffinch until the song thrush had sound in M10). Distances are the design's 20, 12 and 45 m; the fourth lane is muted in the design and shows no distance, 30 m is mine.",
  "verified": false,
  "default_entry_min": -40,
  "entry_min": {
@@ -11,7 +11,7 @@
  "lanes": [
   { "bird": "rodstrupe", "distance_m": 20 },
   { "bird": "svarttrost", "distance_m": 12 },
-  { "bird": "bokfink", "distance_m": 45 },
+  { "bird": "maltrost", "distance_m": 45 },
   { "bird": "kjottmeis", "distance_m": 30 }
  ]
 }

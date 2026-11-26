@@ -1,0 +1,122 @@
+{
+ "_note": "Field guide text for the song thrush, both languages. Facts from birds.md (SNL, checked 2026-11-26). verified false shows [TO VERIFY]. Norwegian wording is mine, Eirik to check. calendar: one letter per month from January, y yes, n no, ? not known.",
+ "xeno_canto": "https://xeno-canto.org/species/turdus-philomelos",
+ "facts": {
+  "length": {
+   "en": "About 21 cm, 60 to 100 g",
+   "no": "Omtrent 21 cm, 60 til 100 g",
+   "verified": true
+  },
+  "broods": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "range": {
+   "en": "Most of the country, scarcer in Finnmark",
+   "no": "Det meste av landet, færre i Finnmark",
+   "verified": true
+  },
+  "habitat": {
+   "en": "Conifer and mixed forest, also parks in the south",
+   "no": "Bar- og blandingsskog, også parker i sør",
+   "verified": true
+  },
+  "food": {
+   "en": "Insects, earthworms, snails; berries in autumn",
+   "no": "Insekter, meitemark, snegler; bær om høsten",
+   "verified": true
+  },
+  "status": {
+   "en": "LC, viable, Norwegian red list",
+   "no": "LC, livskraftig, norsk rødliste",
+   "verified": true
+  },
+  "nest": {
+   "en": "Near the trunk, wood-pulp base, 4 to 6 eggs",
+   "no": "Inntil stammen, bunn av tremasse, 4 til 6 egg",
+   "verified": true
+  }
+ },
+ "sings": {
+  "male": {
+   "en": "Sings",
+   "no": "Synger",
+   "verified": false
+  },
+  "female": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "song_notes": {
+  "en": "One of the forest's best singers. A mix of chirping trills and clear, melodic whistled notes, sung staccato. Each phrase is repeated 2 to 3 times. Shy; usually seen singing in the top of a tree in spring.",
+  "no": "En av skogens beste sangere. En blanding av kvitrende triller og klare, melodiske fløytetoner, sunget stakkato. Hver strofe gjentas to til tre ganger. Sky; ses helst syngende i toppen av et tre om våren.",
+  "verified": true
+ },
+ "mnemonic": {
+  "en": "",
+  "no": "",
+  "verified": false
+ },
+ "types": {
+  "song": {
+   "en": "Whistles and trills, each phrase 2 to 3 times.",
+   "no": "Fløytetoner og triller, hver strofe to til tre ganger.",
+   "verified": true
+  },
+  "call": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "alarm": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "flight": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "parts": {
+  "repeat": {
+   "en": "REPEATED PHRASE",
+   "no": "GJENTATT STROFE",
+   "verified": true
+  }
+ },
+ "calendar": {
+  "present": "??yyyyyyyy??",
+  "sings": "??yyy???????",
+  "note": {
+   "en": "Migrant. Most winter in Iberia and north-west Africa, some on the coast north to Nordland. Returns in March to April. [TO VERIFY] departure month and singing months after spring.",
+   "no": "Trekkfugl. De fleste overvintrer på Den iberiske halvøy og i Nordvest-Afrika, noen langs kysten nord til Nordland. Kommer tilbake i mars til april. [TO VERIFY] når den drar, og sangmånedene etter våren.",
+   "verified": true
+  }
+ },
+ "lookalikes": [
+  {
+   "id": "svarttrost",
+   "text": {
+    "en": "The blackbird does not repeat its phrases; the song thrush repeats each one.",
+    "no": "Svarttrosten gjentar ikke strofene; måltrosten gjentar hver strofe.",
+    "verified": true
+   }
+  },
+  {
+   "name": {
+    "en": "Redwing",
+    "no": "Rødvingetrost"
+   },
+   "text": {
+    "en": "Smaller, with a rust-red patch under the wing.",
+    "no": "Mindre, med en rustrød flekk under vingen.",
+    "verified": true
+   }
+  }
+ ]
+}
