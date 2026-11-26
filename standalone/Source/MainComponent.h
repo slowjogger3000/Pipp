@@ -148,7 +148,7 @@ private:
     // State the interface owns. The engine gets each value as it changes.
     bool playing = false;
     int season = 0, timeOfDay = 0, songType = 0, place = 0, sex = 0, age = 0;
-    bool apOn = true, latch = false;
+    bool apOn = true, latch = true; // a set knob stays set (prd.md, Override)
     float hold = 3.0f;
     int speedIndex = 0;
     bool shiftDown = false, drawMode = false, kept = false;

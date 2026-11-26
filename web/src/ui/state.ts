@@ -23,6 +23,6 @@ export interface State {
 export function initialState(): State {
   return {
     bird: 'svarttrost', sex: 0, age: 0, season: 0, time: 0, type: 0, place: 0,
-    apOn: true, latch: false, hold: 3, speed: 0, shift: false, draw: false, kept: false, playing: false,
+    apOn: true, latch: true, hold: 3, speed: 0, shift: false, draw: false, kept: false, playing: false,
   };
 }

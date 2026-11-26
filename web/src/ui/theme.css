@@ -199,3 +199,28 @@ a.btn { color: var(--ink); }
 .ph-birds .row.sel { background: var(--ink); color: var(--onInk); }
 .ph-birds .row.sel .n, .ph-birds .row.sel .other { color: var(--onInk); }
 .ph-birds .row.off { background-image: var(--hatching); cursor: default; }
+
+/* Phone versions of the desktop screens. */
+.ph .field { white-space: normal; height: auto; }
+.ph .input { height: 44px; font-size: 13px; }
+.ph .grow { min-height: 28px; height: auto; }
+.ph .tkey { white-space: normal; padding-top: 4px; padding-bottom: 4px; }
+.ph .tcell, .ph .tval { white-space: normal; overflow: visible; padding-top: 4px; padding-bottom: 4px; line-height: 16px; }
+.ph .look { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "name btn" "other btn" "text text"; column-gap: 8px; row-gap: 2px; padding: 8px 0; align-items: center; }
+.ph .look .lname { position: static; grid-area: name; width: auto; height: auto; }
+.ph .look .lother { position: static; grid-area: other; width: auto; }
+.ph .look .ltext { position: static; grid-area: text; transform: none; max-height: none; display: block; -webkit-line-clamp: unset; margin-top: 4px; }
+.ph .pchip { width: 28px; height: 28px; flex: none; border: 1px solid var(--ink); display: flex; align-items: center; justify-content: center; font: 600 12px var(--mono); }
+.ph .plane.muted { background-image: var(--hatching); }
+.ph .plane:last-of-type { border-bottom: none; }
+.ph .chorusnow { display: none; }
+.plogrow { min-height: 56px; display: flex; flex-direction: column; justify-content: center; gap: 2px; padding: 6px 8px; border-bottom: 1px solid var(--divider); cursor: pointer; }
+.plogrow > span { display: flex; justify-content: space-between; gap: 8px; }
+.plogrow > span > span:last-child { text-align: right; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.plogrow .pbird { font-size: 13px; }
+.plogrow .ptag { font: 500 10px var(--mono); letter-spacing: 0.06em; }
+.plogrow .soft { color: var(--inkSoft); }
+.plogrow.sel { background: var(--ink); color: var(--onInk); }
+.plogrow.sel .soft { color: var(--onInk); }
+.plogrow.blank { color: var(--faint); cursor: default; }
+.ph .logsheet { font: 400 11px/16px var(--mono); }

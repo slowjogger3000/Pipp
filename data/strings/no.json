@@ -246,5 +246,20 @@
  "phone.scene.type": "TYPE",
  "phone.ap.hold": "HOLD",
  "phone.pick_bird": "Velg fugl",
- "phone.close": "LUKK"
+ "phone.close": "LUKK",
+ "phone.quiz.setup": "OPPSETT",
+ "phone.quiz.correct": "{n} RIKTIGE",
+ "phone.quiz.change": "BYTT",
+ "phone.chorus.change_all": "BYTT FUGLER",
+ "phone.log.new": "JEG HØRTE DEN: NY LINJE",
+ "phone.coll.media": "OPPTAK OG BILDER",
+ "phone.coll.log": "LOGG",
+ "phone.coll.empty_title": "Samlingen er tom",
+ "phone.coll.empty_text": "Opptak du lagrer fra Lytt og bilder du tar havner her, sortert per fugl.",
+ "phone.coll.go_listen": "GÅ TIL LYTT",
+ "phone.coll.new_picture": "NYTT BILDE",
+ "phone.coll.note": "Alt ligger på telefonen. Ingen konto, ingen opplasting.",
+ "phone.coll.status_empty": "0 OPPTAK, 0 BILDER",
+ "phone.guide.status": "FUGLEBOK",
+ "phone.quiz.open_guide": "ÅPNE I BOK"
 }

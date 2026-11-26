@@ -3,6 +3,9 @@
 // ADD TO LOG, the link to Artsobservasjoner and the field manners note.
 // Right: the log list on sheet, OPEN BIRD, DELETE ENTRY, EXPORT CSV.
 //
+// On the phone the log lives in SAMLING (design/CollectionLog.dc.html): a
+// list of two-line rows, I HEARD IT: NEW LINE opens the same form above it.
+//
 // Entries live in localStorage under tipp.log, newest first. Heard and saw
 // are stored as ids, so the language can change after an entry is made.
 
@@ -97,15 +100,23 @@ export class LogScreen {
   private openBtn: Btn;
   private deleteBtn: Btn;
   private exportBtn: Btn;
+  private newBtn: Btn | null = null;
+  private form: HTMLDivElement;
+  private formOpen = false;
 
-  constructor(parent: HTMLElement, private s: Strings, private on: LogHandlers) {
-    const root = box(parent, { position: 'absolute', left: '8px', top: '8px', width: '1264px', height: '664px', display: 'none' });
+  constructor(parent: HTMLElement, private s: Strings, private on: LogHandlers, readonly phone = false) {
+    const root = phone ? box(parent, { display: 'none', flexDirection: 'column', gap: '12px' })
+      : box(parent, { position: 'absolute', left: '8px', top: '8px', width: '1264px', height: '664px', display: 'none' });
     this.root = root;
+    const bh = phone ? 44 : 24;
 
     // ---------------------------------------------------------- form
+    if (phone) this.newBtn = new Btn(root, '', () => this.openForm(!this.formOpen), { height: '44px' });
     const left = box(root, { display: 'flex', flexDirection: 'column', gap: '12px' });
-    place(left, 0, 0, 360, 664);
+    if (!phone) place(left, 0, 0, 360, 664);
     const form = box(left, { display: 'flex', flexDirection: 'column', gap: '8px' });
+    this.form = phone ? left : form;
+    if (phone) left.style.display = 'none';
     this.formLabel = el('div', 'section', form);
 
     const field = (parentEl: HTMLElement, key: string, input: HTMLElement | null) => {
@@ -147,28 +158,32 @@ export class LogScreen {
     this.placeIn = input('log-place');
     field(form, 'place', this.placeIn);
     const heardF = field(form, 'heard', null);
-    this.heardBtns = joined(heardF, kHeard.map((h) => ({ text: '', onClick: () => { this.heard = h; this.update(); } })), 24);
+    this.heardBtns = joined(heardF, kHeard.map((h) => ({ text: '', onClick: () => { this.heard = h; this.update(); } })), bh);
     const sawF = field(form, 'saw', null);
-    this.sawBtns = joined(sawF, kSaw.map((v) => ({ text: '', onClick: () => { this.saw = v; this.update(); } })), 24);
+    this.sawBtns = joined(sawF, kSaw.map((v) => ({ text: '', onClick: () => { this.saw = v; this.update(); } })), bh);
     this.noteIn = input('log-note');
     field(form, 'note', this.noteIn);
 
     const actions = box(form, { display: 'flex', gap: '6px' });
-    this.addBtn = new Btn(actions, '', () => this.add(), { flex: '1', height: '32px', fontSize: '11px' });
-    this.report = el('a', 'btn', actions);
-    Object.assign(this.report.style, { flex: '1', height: '32px', textDecoration: 'none' });
+    this.addBtn = new Btn(actions, '', () => this.add(), { flex: '1', height: phone ? '44px' : '32px', fontSize: '11px' });
+    this.report = el('a', 'btn');
+    if (!phone) actions.appendChild(this.report);
+    Object.assign(this.report.style, { flex: '1', height: phone ? '44px' : '32px', textDecoration: 'none' });
     this.report.href = kReportUrl;
     this.report.target = '_blank';
     this.report.rel = 'noopener noreferrer';
 
-    const manners = box(left, { display: 'flex', flexDirection: 'column', gap: '6px' });
+    const manners = box(phone ? box(root, { display: 'contents' }) : left, { display: 'flex', flexDirection: 'column', gap: '6px' });
     this.mannersLabel = el('div', 'section', manners);
     this.mannersText = el('p', '', manners);
     Object.assign(this.mannersText.style, { margin: '0', font: '400 11px/16px var(--mono)' });
 
     // ---------------------------------------------------------- list
-    const right = box(root, { display: 'flex', flexDirection: 'column', gap: '6px' });
-    place(right, 372, 0, 1264 - 372, 664);
+    const right = box(root, { display: 'flex', flexDirection: 'column', gap: phone ? '12px' : '6px' });
+    if (phone) {
+      right.style.order = '0';
+      root.insertBefore(right, manners.parentElement);
+    } else place(right, 372, 0, 1264 - 372, 664);
     const head = box(right, { display: 'flex', alignItems: 'center', gap: '6px', height: '14px', flex: 'none' });
     this.listLabel = el('span', 'field', head);
     Object.assign(this.listLabel.style, { fontSize: '10px', lineHeight: '14px', height: '14px' });
@@ -177,17 +192,30 @@ export class LogScreen {
     Object.assign(this.countLabel.style, { font: '500 10px var(--mono)', letterSpacing: '0.06em' });
 
     const sheet = box(right, { flex: '1', minHeight: '0', display: 'flex', flexDirection: 'column' }, 'sheet logsheet');
-    this.listHead = box(sheet, { gridTemplateColumns: kCols }, 'logrow loghead');
-    this.rows = box(sheet, { flex: '1', minHeight: '0', overflowY: 'auto' }, 'logrows');
+    if (phone) head.style.marginBottom = '-6px'; // label row and sheet 6px apart, as a section
+    this.listHead = box(sheet, { gridTemplateColumns: kCols, display: phone ? 'none' : '' }, 'logrow loghead');
+    this.rows = box(sheet, phone ? {} : { flex: '1', minHeight: '0', overflowY: 'auto' }, 'logrows');
 
-    const bottom = box(right, { display: 'flex', gap: '6px', flex: 'none' });
-    const bstyle = { height: '24px', padding: '0 10px' };
+    const bottom = box(right, phone ? { display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: '6px' } : { display: 'flex', gap: '6px', flex: 'none' });
+    const bstyle = phone ? { height: '44px', padding: '0', minWidth: '0' } : { height: '24px', padding: '0 10px' };
     this.openBtn = new Btn(bottom, '', () => this.open(), bstyle);
     this.deleteBtn = new Btn(bottom, '', () => this.remove(), bstyle);
     this.exportBtn = new Btn(bottom, '', () => this.exportCsv(), bstyle);
+    if (phone) {
+      right.appendChild(this.report);
+      this.report.style.flex = 'none';
+    }
   }
 
-  show(on: boolean) { this.root.style.display = on ? '' : 'none'; }
+  show(on: boolean) { this.root.style.display = on ? (this.phone ? 'flex' : '') : 'none'; }
+
+  // Phone: the form opens above the list.
+  openForm(on: boolean) {
+    this.formOpen = on;
+    if (on) this.enter();
+    this.form.style.display = on ? 'flex' : 'none';
+    this.update();
+  }
 
   // Entering the log: the form starts on the Play bird, now, and the Play
   // scene's song type. Place, note and saw stay as last typed.
@@ -238,6 +266,7 @@ export class LogScreen {
     this.openBtn.text(s.t('log.open'));
     this.deleteBtn.text(s.t('log.delete'));
     this.exportBtn.text(s.t('log.export'));
+    this.newBtn?.text(s.t('phone.log.new'));
     this.update();
   }
 
@@ -249,16 +278,31 @@ export class LogScreen {
     this.countLabel.textContent = s.t('log.heard_count', { n: String(heardBirds), total: String(index.birds.length) });
 
     this.rows.replaceChildren();
+    this.newBtn?.on(this.formOpen);
     this.entries.forEach((e, i) => {
-      const row = box(this.rows, { gridTemplateColumns: kCols }, i === this.selected ? 'logrow sel' : 'logrow');
       const pn = [e.place, e.note].filter((t) => t.trim()).join(', ');
+      if (this.phone) {
+        // Two lines: bird and what was heard and seen, then when and where.
+        const row = box(this.rows, {}, i === this.selected ? 'plogrow sel' : 'plogrow');
+        const a = el('span', '', row), b = el('span', 'soft', row);
+        el('span', 'pbird', a, this.name(this.bird(e.bird)) || e.bird);
+        el('span', 'ptag', a, `${this.heardText(e.heard)} · ${this.sawText(e.saw)}`);
+        el('span', '', b, `${e.date} ${e.time}`);
+        el('span', '', b, pn);
+        row.addEventListener('click', () => { this.selected = i; this.message = ''; this.update(); this.on.refresh(); });
+        return;
+      }
+      const row = box(this.rows, { gridTemplateColumns: kCols }, i === this.selected ? 'logrow sel' : 'logrow');
       for (const t of [e.date, e.time, this.name(this.bird(e.bird)) || e.bird, this.heardText(e.heard), this.sawText(e.saw), pn]) el('span', '', row, t);
       row.addEventListener('click', () => { this.selected = i; this.message = ''; this.update(); this.on.refresh(); });
       row.addEventListener('dblclick', () => this.open());
     });
     // The faint line under the last entry, as in the design.
-    const blank = box(this.rows, { gridTemplateColumns: kCols }, 'logrow blank');
-    for (const t of ['----------', '-----', '---', '---', '---', '---']) el('span', '', blank, t);
+    if (!this.phone || this.entries.length === 0) {
+      const blank = box(this.rows, { gridTemplateColumns: kCols }, this.phone ? 'plogrow blank' : 'logrow blank');
+      if (this.phone) blank.textContent = '---';
+      else for (const t of ['----------', '-----', '---', '---', '---', '---']) el('span', '', blank, t);
+    }
 
     const sel = this.entries[this.selected];
     this.openBtn.disabled(!sel || !hasSound(sel.bird));
@@ -283,6 +327,7 @@ export class LogScreen {
     this.selected = this.entries.indexOf(entry);
     this.save();
     this.noteIn.value = '';
+    if (this.phone) { this.formOpen = false; this.form.style.display = 'none'; }
     this.message = this.s.t('log.added', { bird: this.name(this.bird(entry.bird)) });
     this.update();
     this.scrollToSelected();

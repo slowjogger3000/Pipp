@@ -13,7 +13,7 @@ import type { AudioHost } from '../audio/host.ts';
 import { kChorusColumns, kLanes, KnobMode, type Ptr } from '../core/tipp.ts';
 import { chorusSetup, index } from '../data.ts';
 import { Btn, Canvas, box, colour, el, font, graphPaper, hatch, joined, number, place, MINUS, textWidth } from './dom.ts';
-import type { Strings } from './strings.ts';
+import { upper, type Strings } from './strings.ts';
 
 const kSeasonIds = ['spring', 'summer', 'autumn', 'winter'] as const;
 const kPlaceIds = ['garden', 'forest', 'open', 'shore'] as const;
@@ -48,23 +48,31 @@ export class ChorusScreen {
   private laneMute = [false, false, false, false];
   private laneSolo = [false, false, false, false];
 
-  private morningLabel: HTMLDivElement;
+  private morningLabel!: HTMLDivElement;
   private fieldLabels: HTMLDivElement[] = [];
-  private seasonBtns: Btn[];
-  private placeBtns: Btn[];
-  private speedBtns: Btn[];
-  private title: HTMLDivElement;
-  private nowEl: HTMLDivElement;
+  private seasonBtns!: Btn[];
+  private placeBtns!: Btn[];
+  private speedBtns!: Btn[];
+  private title!: HTMLDivElement;
+  private nowEl!: HTMLDivElement;
   private lanes: { e: HTMLDivElement; name: HTMLDivElement; dist: HTMLDivElement; mute: Btn; solo: Btn; change: Btn }[] = [];
-  private timeline: Canvas;
-  private caption: HTMLDivElement;
-  private note: HTMLDivElement;
+  private timeline!: Canvas;
+  private caption!: HTMLDivElement;
+  private note!: HTMLDivElement;
+
+  private strips: Canvas[] = [];
+  private nowShort: HTMLSpanElement | null = null;
 
   // ids and ptrs: every bird with sound, in index order (the quiz's list).
   constructor(parent: HTMLElement, private host: AudioHost, private s: Strings, private ids: string[], private ptrs: Ptr[],
-              private on: { refresh(): void; playBird(): string }) {
-    const root = box(parent, { position: 'absolute', left: '8px', top: '8px', width: '1264px', height: '664px', display: 'none' });
+              private on: { refresh(): void; playBird(): string }, readonly phone = false) {
+    const root = phone ? box(parent, { display: 'none', flexDirection: 'column', gap: '12px' })
+      : box(parent, { position: 'absolute', left: '8px', top: '8px', width: '1264px', height: '664px', display: 'none' });
     this.root = root;
+    if (phone) {
+      this.buildPhone(root);
+      return;
+    }
 
     // ---------------------------------------------------------- morning
     this.morningLabel = el('div', 'section', root);
@@ -115,9 +123,59 @@ export class ChorusScreen {
     place(this.note, 0, 68 + 448 + 12, 1264, 16);
   }
 
+  // The phone column, as design/PhoneChorus.dc.html: morning rows, then 4
+  // lanes, each a 48px head over a 36px strip; 356px span the 120 minutes.
+  // One CHANGE BIRDS button under the panel moves every lane on.
+  private buildPhone(root: HTMLDivElement) {
+    const morning = box(root, { display: 'flex', flexDirection: 'column', gap: '6px' });
+    this.morningLabel = el('div', 'section', morning);
+    const grid = box(morning, { display: 'grid', gridTemplateColumns: '60px minmax(0, 1fr)', rowGap: '4px', alignItems: 'center' });
+    const groups: Btn[][] = [];
+    for (let i = 0; i < 3; i++) {
+      this.fieldLabels.push(el('div', 'field', grid));
+      groups.push(joined(box(grid, {}), [0, 1, 2, 3].map((v) => ({ text: '', onClick: () => this.setChoice(i, v) })), 44));
+    }
+    [this.seasonBtns, this.placeBtns, this.speedBtns] = groups;
+    this.speedBtns[1].text('10×');
+    this.speedBtns[2].text('60×');
+
+    const panel = box(root, { border: '1px solid var(--ink)', display: 'flex', flexDirection: 'column' });
+    const head = box(panel, { justifyContent: 'space-between' }, 'panelhead');
+    this.title = el('div', 'title', head);
+    this.nowEl = el('div', '', head);
+    this.nowShort = el('span', '', this.nowEl);
+    Object.assign(this.nowShort.style, { font: '500 10px var(--mono)', letterSpacing: '0.06em' });
+    const hidden = box(root, { display: 'none' });
+    for (let i = 0; i < kLanes; i++) {
+      const e = box(panel, { display: 'flex', flexDirection: 'column', borderBottom: '1px solid var(--ink)' }, 'plane');
+      const top = box(e, { height: '48px', display: 'flex', alignItems: 'center', gap: '8px', padding: '0 6px' });
+      const chip = box(top, { background: kTrack[i], color: kOnTrack[i] }, 'pchip');
+      chip.textContent = String(i + 1);
+      const name = box(top, { flex: '1', minWidth: '0', font: '400 22px/1 var(--serif)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' });
+      const dist = box(top, { font: '500 10px var(--mono)', letterSpacing: '0.06em', whiteSpace: 'nowrap' });
+      const btns = box(top, { display: 'flex' });
+      const mute = new Btn(btns, '', () => this.toggleMute(i), { height: '44px', padding: '0 8px' });
+      const solo = new Btn(btns, '', () => this.toggleSolo(i), { height: '44px', padding: '0 8px', marginLeft: '-1px' });
+      const change = new Btn(hidden, '', () => this.changeBird(i));
+      const stripWrap = box(e, { height: '36px', borderTop: '1px solid var(--divider)' });
+      this.strips.push(new Canvas(stripWrap, 356, 35));
+      this.lanes.push({ e, name, dist, mute, solo, change });
+    }
+    this.timeline = new Canvas(box(panel, {}), 356, 16); // the minute axis
+    this.caption = box(panel, { borderTop: '1px solid var(--ink)', padding: '0 8px', height: '18px' }, 'cap');
+    const changeAll = new Btn(root, '', () => { for (let i = 0; i < kLanes; i++) this.changeBird(i); }, { height: '44px' });
+    this.changeAllBtn = changeAll;
+    this.note = box(root, { font: '400 11px/16px var(--mono)', color: 'var(--inkSoft)' });
+  }
+
+  private changeAllBtn: Btn | null = null;
+
   get visible(): boolean { return this.root.style.display !== 'none'; }
-  show(on: boolean) { this.root.style.display = on ? '' : 'none'; }
-  resize(scale: number) { this.timeline.resize(scale); }
+  show(on: boolean) { this.root.style.display = on ? (this.phone ? 'flex' : '') : 'none'; }
+  resize(scale: number) {
+    this.timeline.resize(scale);
+    for (const c of this.strips) c.resize(scale);
+  }
 
   // ------------------------------------------------------------ setup
 
@@ -243,6 +301,7 @@ export class ChorusScreen {
       l.solo.text(s.t('chorus.solo'));
       l.change.text(s.t('chorus.change'));
     }
+    this.changeAllBtn?.text(s.t('phone.chorus.change_all'));
     this.caption.replaceChildren();
     el('b', '', this.caption, `${s.t('fig')} 1`);
     this.caption.append(s.t('chorus.caption'));
@@ -256,6 +315,7 @@ export class ChorusScreen {
     this.placeBtns.forEach((b, i) => b.on(this.place === i));
     this.speedBtns.forEach((b, i) => b.on(this.speed === i));
     const canChange = this.ids.length > kLanes;
+    this.changeAllBtn?.disabled(!canChange);
     this.lanes.forEach((l, i) => {
       l.mute.on(this.laneMute[i]);
       l.solo.on(this.laneSolo[i]);
@@ -264,7 +324,7 @@ export class ChorusScreen {
       const k = this.laneBird[i];
       l.name.textContent = k >= 0 ? this.name(k) : '';
       l.dist.textContent = this.laneMute[i] ? s.t('chorus.muted') : `${number(this.laneDistance[i], 0, s.no)} m`;
-      l.name.style.right = `${8 + textWidth(font(10, 500), l.dist.textContent, 0.6) + 2 + 10}px`;
+      if (!this.phone) l.name.style.right = `${8 + textWidth(font(10, 500), l.dist.textContent, 0.6) + 2 + 10}px`;
     });
     this.on.refresh();
   }
@@ -285,7 +345,48 @@ export class ChorusScreen {
       this.on.refresh();
     }
     this.paintHead();
-    this.paintTimeline();
+    if (this.phone) this.paintStrips();
+    else this.paintTimeline();
+  }
+
+  // Phone: one strip per lane and the minute axis under them.
+  private paintStrips() {
+    const s = this.s, W = 356, H = 35;
+    const ppm = W / 120;
+    const xFor = (minute: number) => (minute - kStartMin) * ppm;
+    const sang = this.host.chorusSang;
+    const sx = Math.round(xFor(0)), nx = Math.floor(xFor(this.minute));
+    for (let i = 0; i < kLanes; i++) {
+      const g = this.strips[i].begin();
+      if (!this.laneMute[i]) graphPaper(g, W, H);
+      if (this.inSeason(i)) {
+        const bx = Math.round(xFor(this.laneEntry[i]));
+        const by = 7, bh = 20;
+        g.fillStyle = kTrack[i];
+        for (let px = Math.max(0, bx); px < W; px++) {
+          const c0 = Math.floor(px / ppm * kPxPerMin), c1 = Math.min(kChorusColumns, Math.floor((px + 1) / ppm * kPxPerMin));
+          let on = false;
+          for (let c = c0; c < c1 && !on; c++) on = sang[i * kChorusColumns + c] !== 0;
+          if (on) g.fillRect(px, by + 1, 1, bh - 2);
+        }
+        g.fillStyle = colour.ink;
+        g.fillRect(bx, by, W + 1 - bx, 1);
+        g.fillRect(bx, by + bh - 1, W + 1 - bx, 1);
+        g.fillRect(bx, by, 1, bh);
+      }
+      if (this.laneMute[i]) hatch(g, 0, 0, W, H);
+      g.fillStyle = colour.ink;
+      g.fillRect(sx, 0, 1, H);
+      g.fillStyle = colour.plum;
+      g.fillRect(nx, 0, 1, H);
+    }
+    const g = this.timeline.begin();
+    g.font = font(9, 400);
+    g.fillStyle = colour.inkSoft;
+    g.textBaseline = 'middle';
+    g.textAlign = 'left';
+    const labels = [s.t('chorus.axis_min', { n: `${MINUS}90` }), `${MINUS}60`, `${MINUS}30`, s.t('chorus.sunrise')];
+    labels.forEach((t, k) => g.fillText(t, 2 + Math.round(xFor(-90 + 30 * k)), 8));
   }
 
   // NOW and SINGING on the right of the panel head.
@@ -293,6 +394,10 @@ export class ChorusScreen {
     const s = this.s, c = this.host.chorus, m = this.minute;
     const mins = Math.round(Math.abs(m));
     const nowText = mins === 0 ? s.t('chorus.at') : s.t(m < 0 ? 'chorus.before' : 'chorus.after', { n: String(mins) });
+    if (this.nowShort) {
+      if (this.nowShort.textContent !== upper(nowText)) this.nowShort.textContent = upper(nowText);
+      return;
+    }
     let singing = 0;
     for (let i = 0; i < kLanes; i++) if (this.host.ready && c[3 + 5 * i] !== 0 && c[4 + 5 * i] !== 0) singing++;
     const text = `${s.t('chorus.now')}|${nowText}|${s.t('chorus.singing')}|${s.t('chorus.of', { n: String(singing), total: String(kLanes) })}`;

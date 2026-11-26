@@ -1,7 +1,9 @@
 // The phone layout of the web app, 390 wide, from design/Phone.dc.html and
 // PhoneBirds.dc.html. One column: header (wordmark, NO/EN, transport), 6
-// tabs, the screen, a status bar. Only SPILL and its bird picker are built;
-// the other tabs are hatched until their phone screens exist.
+// tabs, the screen, a status bar. SPILL with its bird picker, BOK, QUIZ, KOR
+// and SAMLING (empty collection and the log) are built. LYTT is hatched
+// until the microphone comes in M9. BOK, QUIZ, KOR and the log are the
+// desktop screen classes in their phone layout.
 //
 // The column is laid out at 390 css px and zoomed to the window width, so
 // the design's sizes hold on every phone. The engine, worklet and drawing
@@ -10,7 +12,11 @@
 import type { AudioHost } from '../audio/host.ts';
 import { index, hasSound, type IndexBird } from '../data.ts';
 import { Btn, Canvas, box, el, number, MINUS } from './dom.ts';
+import { ChorusScreen } from './chorus.ts';
+import { GuideScreen } from './guide.ts';
 import { Knob, kKnobIds } from './knob.ts';
+import { LogScreen } from './log.ts';
+import { QuizScreen } from './quiz.ts';
 import { kSceneIds, kSceneKeys, kSceneOptions } from './play.ts';
 import { Plate } from './plate.ts';
 import { Sonogram } from './sonogram.ts';
@@ -42,6 +48,23 @@ export class PhoneApp {
   private pickerClose: Btn;
   private pickerList: HTMLDivElement;
   private pickerOpen = false;
+  private tab = 0;
+  private stepper: HTMLDivElement;
+  private guide: GuideScreen;
+  private quiz: QuizScreen;
+  private chorus: ChorusScreen;
+  private log: LogScreen;
+  private coll: HTMLDivElement;
+  private collSwitch: Btn[] = [];
+  private collEmpty: HTMLDivElement;
+  private collTitle: HTMLDivElement;
+  private collText: HTMLParagraphElement;
+  private collBtns: Btn[] = [];
+  private collNote: HTMLParagraphElement;
+  private collLog = false;
+  private comparing = '';
+  private compareSeen = false;
+  private compareAt = 0;
 
   // SPILL
   private prevBtn: Btn;
@@ -108,14 +131,15 @@ export class PhoneApp {
     this.noBtn = new Btn(lang, '', () => this.setLanguage('no'), big);
     this.enBtn = new Btn(lang, '', () => this.setLanguage('en'), big);
     const transport = el('div', 'joined', header);
-    this.playBtn = new Btn(transport, '', () => this.setPlaying(true), big).glyph('play', 'Play');
-    this.stopBtn = new Btn(transport, '', () => this.setPlaying(false), big).glyph('stop', 'Stop');
+    this.playBtn = new Btn(transport, '', () => this.transport(true), big).glyph('play', 'Play');
+    this.stopBtn = new Btn(transport, '', () => this.transport(false), big).glyph('stop', 'Stop');
 
     // ---------------------------------------------------------- tabs
     const tabs = el('div', 'ph-tabs', col);
     kTabKeys.forEach((_, i) => {
-      const t = el('div', i === 0 ? 'ph-tab active' : 'ph-tab disabled', tabs);
+      const t = el('div', i === 0 ? 'ph-tab active' : i === 2 ? 'ph-tab disabled' : 'ph-tab', tabs);
       if (i === 5) t.style.flex = '1.3';
+      if (i !== 2) t.addEventListener('click', () => this.setTab(i));
       this.tabs.push(t);
     });
 
@@ -123,10 +147,12 @@ export class PhoneApp {
     this.status = el('div', 'status ph-status', col);
 
     // ---------------------------------------------------------- SPILL
+    // The bird stepper belongs to SPILL and BOK.
+    const stepper = box(this.main, { display: 'flex', alignItems: 'center', marginBottom: '12px' });
+    this.stepper = stepper;
     const play = box(this.main, { display: 'flex', flexDirection: 'column', gap: '12px' });
     this.play = play;
 
-    const stepper = box(play, { display: 'flex', alignItems: 'center' });
     this.prevBtn = new Btn(stepper, '', () => this.stepBird(-1), big).glyph('prev', 'Previous bird');
     this.readout = box(stepper, {}, 'ph-readout well');
     this.readout.addEventListener('click', () => this.showPicker(true));
@@ -253,9 +279,50 @@ export class PhoneApp {
     this.pickerClose = new Btn(pHead, '', () => this.showPicker(false), { height: '44px', padding: '0 16px' });
     this.pickerList = box(picker, {}, 'sheet ph-birds');
 
+    // ---------------------------------------------------------- BOK, QUIZ, KOR
+    this.guide = new GuideScreen(this.main, host, s, {
+      sex: (v) => this.setChoice('sc_sex', 'sex', v),
+      age: (v) => this.setChoice('sc_age', 'age', v),
+      season: (v) => { st.season = v; host.param('sc_season', v); this.refresh(); },
+      playType: (t) => { st.type = t; host.param('sc_type', t); this.setPlaying(true); host.trigger('ap_sing_once'); },
+      compare: (id) => this.startCompare(id),
+    }, true);
+    this.quiz = new QuizScreen(this.main, host, s, {
+      refresh: () => this.refresh(),
+      openGuide: (id) => { this.setTab(1); this.selectBird(id); },
+    }, true);
+    this.chorus = new ChorusScreen(this.main, host, s, this.quiz.ids, this.quiz.ids.map((id) => host.birds.get(id)!), {
+      refresh: () => this.refresh(),
+      playBird: () => st.bird,
+    }, true);
+
+    // ---------------------------------------------------------- SAMLING
+    const coll = box(this.main, { display: 'none', flexDirection: 'column', gap: '12px' });
+    this.coll = coll;
+    const sw = el('div', 'joined fill', coll);
+    this.collSwitch = [false, true].map((log) => new Btn(sw, '', () => { this.collLog = log; this.refresh(); }, { flex: '1', height: '44px' }));
+    // Recordings and pictures come with LYTT and the camera (M9); until
+    // then the collection is empty, as design/CollectionEmpty.dc.html.
+    this.collEmpty = box(coll, { display: 'flex', flexDirection: 'column', gap: '12px' });
+    const card = box(this.collEmpty, { border: '1px solid var(--ink)' });
+    const inner = box(card, { display: 'flex', flexDirection: 'column', gap: '10px', padding: '16px 10px', background: 'var(--sheet)', boxShadow: 'var(--inset)' });
+    this.collTitle = box(inner, { font: '400 28px/1.05 var(--serif)' });
+    this.collText = el('p', '', inner);
+    this.collText.style.margin = '0';
+    const cb = box(inner, { display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '6px' });
+    this.collBtns = [0, 1].map(() => new Btn(cb, '', undefined, { height: '44px', minWidth: '0' }).disabled(true));
+    this.collNote = el('p', '', this.collEmpty);
+    Object.assign(this.collNote.style, { margin: '0', color: 'var(--inkSoft)' });
+    this.log = new LogScreen(coll, s, {
+      refresh: () => this.refresh(),
+      openBird: (id) => { this.setTab(1); this.selectBird(id); },
+      playBird: () => st.bird,
+      playType: () => st.type,
+    }, true);
+
     window.addEventListener('resize', () => this.fit());
     window.addEventListener('keydown', (e) => {
-      if (e.key === ' ') { this.setPlaying(!st.playing); e.preventDefault(); }
+      if (e.key === ' ') { this.transport(!this.transportOn()); e.preventDefault(); }
     });
     document.fonts?.ready.then(() => this.applyStrings());
 
@@ -275,6 +342,9 @@ export class PhoneApp {
     this.col.style.left = `${Math.max(0, (window.innerWidth - kWidth * z) / 2) / z}px`;
     const canvases: Canvas[] = [this.plate.cv, this.sono.cv, ...this.knobs.map((k) => k.cv)];
     for (const c of canvases) c.resize(z);
+    this.guide.resize(z);
+    this.quiz.resize(z);
+    this.chorus.resize(z);
     this.plate.paint(true);
     for (const k of this.knobs) k.invalidate();
   }
@@ -292,6 +362,65 @@ export class PhoneApp {
     for (const k of this.knobs) k.setBird(ptr);
     this.error = this.plate.load(id);
     this.plate.paint(true);
+    this.guide.setBird(id);
+    this.refresh();
+  }
+
+  // ------------------------------------------------------------ tabs
+
+  private setTab(i: number) {
+    if (i === this.tab || i === 2) return;
+    const was = this.tab;
+    this.tab = i;
+    this.stopCompare();
+    if (was === 3) { this.quiz.leave(); this.sendScene(); }
+    if (was === 4) { this.chorus.leave(); this.sendScene(); }
+    if (this.pickerOpen) this.showPicker(false);
+    this.tabs.forEach((t, k) => t.classList.toggle('active', k === i));
+    this.stepper.style.display = i <= 1 ? 'flex' : 'none';
+    this.play.style.display = i === 0 ? 'flex' : 'none';
+    this.guide.show(i === 1);
+    this.quiz.show(i === 3);
+    this.chorus.show(i === 4);
+    this.coll.style.display = i === 5 ? 'flex' : 'none';
+    // SAMLING has no transport use; the Play bird stops there, as on the desktop log.
+    if (i === 5 && this.st.playing) this.setPlaying(false);
+    if (i === 3) this.quiz.enter();
+    if (i === 4) this.chorus.enter();
+    if (i === 5) this.log.enter();
+    this.main.scrollTop = 0;
+    this.refresh();
+  }
+
+  private transportOn(): boolean {
+    return this.tab === 3 ? this.quiz.playing : this.tab === 4 ? this.chorus.playing : this.st.playing;
+  }
+
+  // Play and Stop act on the screen shown.
+  private transport(on: boolean) {
+    if (this.tab === 3) { if (on) this.quiz.playAgain(); else this.quiz.stop(); }
+    else if (this.tab === 4) this.chorus.setPlaying(on);
+    else this.setPlaying(on);
+  }
+
+  private startCompare(otherId: string) {
+    const again = this.comparing === otherId;
+    this.stopCompare();
+    if (this.st.draw) this.setDraw(false); // COMPARE needs autoplay's sing once
+    if (again) return;
+    void this.host.start();
+    this.comparing = otherId;
+    this.compareSeen = false;
+    this.compareAt = performance.now();
+    const st = this.st;
+    this.host.post({ t: 'compare', first: st.bird, second: otherId, restore: { autoplay: st.apOn, play: st.playing, type: st.type }, type: 0 });
+    this.refresh();
+  }
+
+  private stopCompare() {
+    if (!this.comparing) return;
+    this.host.post({ t: 'compareCancel' });
+    this.comparing = '';
     this.refresh();
   }
 
@@ -308,7 +437,9 @@ export class PhoneApp {
 
   private showPicker(on: boolean) {
     this.pickerOpen = on;
-    this.play.style.display = on ? 'none' : 'flex';
+    this.stepper.style.display = on ? 'none' : 'flex';
+    this.play.style.display = on || this.tab !== 0 ? 'none' : 'flex';
+    this.guide.show(!on && this.tab === 1);
     this.picker.style.display = on ? 'flex' : 'none';
     this.main.scrollTop = 0;
     if (on) this.renderPicker();
@@ -351,6 +482,7 @@ export class PhoneApp {
   }
 
   private setPlaying(on: boolean) {
+    this.stopCompare();
     this.st.playing = on;
     // Audio starts on the first press: browsers need a user gesture.
     if (on) void this.host.start();
@@ -427,6 +559,17 @@ export class PhoneApp {
     ['group.voice', 'group.phrasing', 'group.surroundings'].forEach((k, i) => (this.groupLabels[i].textContent = s.t(k)));
     this.pickerTitle.textContent = s.t('phone.pick_bird');
     this.pickerClose.text(s.t('phone.close'));
+    this.collSwitch[0].text(s.t('phone.coll.media'));
+    this.collSwitch[1].text(s.t('phone.coll.log'));
+    this.collTitle.textContent = s.t('phone.coll.empty_title');
+    this.collText.textContent = s.t('phone.coll.empty_text');
+    this.collBtns[0].text(s.t('phone.coll.go_listen'));
+    this.collBtns[1].text(s.t('phone.coll.new_picture'));
+    this.collNote.textContent = s.t('phone.coll.note');
+    this.guide.applyStrings();
+    this.quiz.applyStrings();
+    this.chorus.applyStrings();
+    this.log.applyStrings();
 
     // kHz axis right of the labels, seconds under the sonogram.
     this.axis.replaceChildren();
@@ -445,11 +588,17 @@ export class PhoneApp {
   }
 
   private refresh() {
-    const st = this.st, s = this.s;
+    const st = this.st, s = this.s, tab = this.tab;
     this.enBtn.on(!s.no);
     this.noBtn.on(s.no);
-    this.playBtn.on(st.playing);
-    this.stopBtn.on(!st.playing);
+    const on = this.transportOn();
+    this.playBtn.on(on);
+    this.stopBtn.on(!on);
+    this.guide.setState({ sex: st.sex, age: st.age, season: st.season, type: st.type, comparing: this.comparing });
+    this.collSwitch[0].on(!this.collLog);
+    this.collSwitch[1].on(this.collLog);
+    this.collEmpty.style.display = this.collLog ? 'none' : 'flex';
+    this.log.show(tab === 5 && this.collLog);
     this.prevBtn.disabled(this.neighbour(-1) === null);
     this.nextBtn.disabled(this.neighbour(1) === null);
     const b = this.birdEntry(st.bird);
@@ -494,11 +643,23 @@ export class PhoneApp {
     this.holdVal.textContent = `${number(st.hold, 1, s.no)} ${s.t('unit.s')}`;
 
     this.status.replaceChildren();
-    el('span', '', this.status, s.t(st.playing ? 'status.playing' : 'status.stopped'));
+    const audio = this.host.error ? `AUDIO: ${this.host.error}` : '';
+    const status = (left: string, summary: string) => {
+      el('span', '', this.status, left);
+      el('span', 'summary', this.status, audio || summary);
+    };
+    if (tab === 3) return status(s.t('tab.quiz'), this.quiz.statusText());
+    if (tab === 4) return status(s.t(this.chorus.playing ? 'status.playing' : 'status.stopped'), this.chorus.statusText());
+    if (tab === 5) return status(s.t('phone.tab.collection'), this.collLog ? this.log.statusText() : s.t('phone.coll.status_empty'));
+    if (tab === 1 && b) {
+      const sex = s.t(st.sex === 1 ? 'plate.female' : 'plate.male'), age = s.t(st.age === 1 ? 'plate.juv' : 'plate.adult');
+      return status(s.t('phone.guide.status'), `${upper(this.name(b))}, ${sex}, ${age}`);
+    }
     const parts = [st.season, st.time, st.type, st.place].map((v, r) => s.t(`${kSceneKeys[r]}.${kSceneOptions[r][v]}`));
     if (b) parts.unshift(upper(this.name(b)));
-    const audio = this.host.error ? `AUDIO: ${this.host.error}` : '';
-    el('span', 'summary', this.status, this.error || audio || parts.join(', '));
+    const other = this.birdEntry(this.comparing);
+    status(s.t(st.playing ? 'status.playing' : 'status.stopped'),
+      this.error || (other && b ? s.t('status.comparing', { a: upper(this.name(b)), b: upper(this.name(other)) }) : parts.join(', ')));
   }
 
   private frame() {
@@ -517,6 +678,13 @@ export class PhoneApp {
     const target = Math.min(1, Math.max(0, h.level / 0.35));
     this.plate.open += (target - this.plate.open) * 0.3;
     this.plate.paint();
+    if (this.tab === 1) this.guide.poll(this.plate.open);
+    if (this.tab === 3) this.quiz.poll();
+    if (this.tab === 4) this.chorus.poll();
+    if (this.comparing) {
+      if (h.compare.running) this.compareSeen = true;
+      else if (this.compareSeen || performance.now() - this.compareAt > 1500) { this.comparing = ''; this.refresh(); }
+    }
 
     const ph = this.sono.lastPhrase;
     const tempo = Math.max(0.01, h.phraseTempo);

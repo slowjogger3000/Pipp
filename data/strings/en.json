@@ -246,5 +246,20 @@
  "phone.scene.type": "TYPE",
  "phone.ap.hold": "HOLD",
  "phone.pick_bird": "Choose bird",
- "phone.close": "CLOSE"
+ "phone.close": "CLOSE",
+ "phone.quiz.setup": "SETUP",
+ "phone.quiz.correct": "{n} CORRECT",
+ "phone.quiz.change": "CHANGE",
+ "phone.chorus.change_all": "CHANGE BIRDS",
+ "phone.log.new": "I HEARD IT: NEW LINE",
+ "phone.coll.media": "RECORDINGS AND PICTURES",
+ "phone.coll.log": "LOG",
+ "phone.coll.empty_title": "The collection is empty",
+ "phone.coll.empty_text": "Recordings you save from Listen and pictures you take end up here, sorted by bird.",
+ "phone.coll.go_listen": "GO TO LISTEN",
+ "phone.coll.new_picture": "NEW PICTURE",
+ "phone.coll.note": "Everything stays on the phone. No account, no upload.",
+ "phone.coll.status_empty": "0 RECORDINGS, 0 PICTURES",
+ "phone.guide.status": "FIELD GUIDE",
+ "phone.quiz.open_guide": "OPEN IN GUIDE"
 }

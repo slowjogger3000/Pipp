@@ -34,6 +34,8 @@ A birdsong emulator. Tipp synthesises the songs and calls of common Norwegian bi
 3. Then it returns to the autoplay value over 300 ms.
 4. LATCH keeps every override until it is switched off. RETURN ALL releases all overrides at once.
 
+LATCH is on when the app starts (Eirik, 2026-11-26): a knob you set stays where you put it until RETURN ALL, or until LATCH is switched off. Steps 2 and 3 apply only with LATCH off.
+
 With autoplay off, SING ONCE triggers one phrase and the knobs stay where the hand left them.
 
 ## Controls

@@ -34,8 +34,8 @@ export class Knob {
     c.addEventListener('pointerleave', () => { this.hover = false; this.dirty = true; });
     c.addEventListener('pointerdown', (e) => {
       c.setPointerCapture(e.pointerId);
+      this.startNorm = this.toNorm(this.value()); // before dragging: value() then reads the engine or the bird
       this.dragging = true;
-      this.startNorm = this.toNorm(this.value());
       this.startY = e.clientY;
       this.send(this.startNorm);
       host.post({ t: 'hand', k, down: true });

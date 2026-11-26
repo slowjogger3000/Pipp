@@ -27,8 +27,6 @@ const kTimeIds = ['dawn', 'day', 'dusk', 'night'] as const;
 const kQuestions = 10;
 const kNumSets = 6;
 const kLeftW = 950, kRightX = 962, kRightW = 1264 - kRightX;
-const kWellW = 920, kWellH = 240;
-const kPxPerKHz = 30, kPxPerSecond = 80, kLeftPx = 20;
 
 interface Question {
   bird: number; type: number; count: number; answers: number[]; correctSlot: number; picked: number;
@@ -68,34 +66,49 @@ export class QuizScreen {
   private next = 0;
   private dirty = true;
 
-  private counter: HTMLDivElement;
-  private figTitle: HTMLDivElement;
-  private againBtn: Btn;
-  private halfBtn: Btn;
-  private hintBtn: Btn;
-  private axis: Canvas;
-  private well: Canvas;
-  private caption: HTMLDivElement;
+  private counter!: HTMLDivElement;
+  private figTitle!: HTMLDivElement;
+  private againBtn!: Btn;
+  private halfBtn!: Btn;
+  private hintBtn!: Btn;
+  private axis!: Canvas;
+  private well!: Canvas;
+  private caption!: HTMLDivElement;
   private answers: { e: HTMLDivElement; name: HTMLSpanElement; tag: HTMLSpanElement }[] = [];
-  private band: HTMLDivElement;
-  private bandText: HTMLDivElement;
-  private compareBtn: Btn;
-  private guideBtn: Btn;
-  private nextBtn: Btn;
-  private setLabel: HTMLDivElement;
-  private askLabel: HTMLDivElement;
-  private hintsLabel: HTMLDivElement;
-  private scoreLabel: HTMLDivElement;
+  private band!: HTMLDivElement;
+  private bandText!: HTMLDivElement;
+  private compareBtn!: Btn;
+  private guideBtn!: Btn;
+  private nextBtn!: Btn;
+  private setLabel!: HTMLDivElement;
+  private askLabel!: HTMLDivElement;
+  private hintsLabel!: HTMLDivElement;
+  private scoreLabel!: HTMLDivElement;
   private setBtns: Btn[] = [];
-  private askBtns: Btn[];
-  private hintBtns: Btn[];
+  private askBtns!: Btn[];
+  private hintBtns!: Btn[];
   private scoreRows: { key: HTMLSpanElement; val: HTMLSpanElement }[] = [];
-  private practise: HTMLDivElement;
+  private practise!: HTMLDivElement;
 
-  constructor(parent: HTMLElement, private host: AudioHost, private s: Strings, private on: QuizHandlers) {
-    const root = box(parent, { position: 'absolute', left: '8px', top: '8px', width: '1264px', height: '664px', display: 'none' });
+  // The mystery sonogram: 920x240 on the desktop, 320x160 on the phone.
+  private wellW = 920;
+  private wellH = 240;
+  private pxPerKHz = 30;
+  private pxPerSecond = 80;
+  private leftPx = 20;
+  private axisW = 27;
+  private scoreRight: HTMLSpanElement | null = null;
+  private setCycle: Btn | null = null;
+
+  constructor(parent: HTMLElement, private host: AudioHost, private s: Strings, private on: QuizHandlers, readonly phone = false) {
+    const root = phone ? box(parent, { display: 'none', flexDirection: 'column', gap: '12px' })
+      : box(parent, { position: 'absolute', left: '8px', top: '8px', width: '1264px', height: '664px', display: 'none' });
     this.root = root;
     this.buildBirds();
+    if (phone) {
+      this.buildPhone(root);
+      return;
+    }
 
     // ---------------------------------------------------------- figure
     this.counter = el('div', 'section', root);
@@ -109,10 +122,10 @@ export class QuizScreen {
     this.againBtn = new Btn(head, '', () => this.playAgain());
     this.halfBtn = new Btn(head, '', () => this.toggleHalf());
     this.hintBtn = new Btn(head, '', () => { this.hintShown = true; this.update(); });
-    const graph = box(fig, { display: 'flex', height: `${kWellH}px`, flex: 'none' });
+    const graph = box(fig, { display: 'flex', height: `${this.wellH}px`, flex: 'none' });
     const axisWrap = box(graph, { width: '28px', flex: 'none', borderRight: '1px solid var(--ink)' });
-    this.axis = new Canvas(axisWrap, 27, kWellH);
-    this.well = new Canvas(graph, kWellW, kWellH);
+    this.axis = new Canvas(axisWrap, 27, this.wellH);
+    this.well = new Canvas(graph, this.wellW, this.wellH);
     this.caption = box(fig, { height: '18px', flex: 'none', borderTop: '1px solid var(--ink)', padding: '0 8px' }, 'cap');
 
     // ---------------------------------------------------------- answers
@@ -174,6 +187,69 @@ export class QuizScreen {
     place(this.practise, kRightX, y + 20 + 68 + 6, kRightW, 64);
   }
 
+  // The phone column, as design/PhoneQuiz.dc.html: counter, the mystery
+  // sonogram with PLAY AGAIN, HALF SPEED and HINT under it, four answers
+  // stacked, the explanation band, then the setup rows.
+  private buildPhone(root: HTMLDivElement) {
+    Object.assign(this, { wellW: 320, wellH: 160, pxPerKHz: 20, pxPerSecond: 40, leftPx: 10, axisW: 35 });
+    const sec = (gap = '6px') => box(root, { display: 'flex', flexDirection: 'column', gap });
+    const head = box(root, { display: 'flex', alignItems: 'center', gap: '6px' });
+    this.counter = el('div', 'section', head);
+    this.counter.style.flex = '1';
+    this.scoreRight = el('span', '', head);
+    Object.assign(this.scoreRight.style, { font: '500 10px var(--mono)', letterSpacing: '0.06em', whiteSpace: 'nowrap' });
+
+    const fig = box(root, { border: '1px solid var(--ink)', display: 'flex', flexDirection: 'column' });
+    const ph = el('div', 'panelhead', fig);
+    this.figTitle = el('div', 'title', ph);
+    const graph = box(fig, { display: 'flex', height: `${this.wellH}px`, flex: 'none' });
+    const axisWrap = box(graph, { flex: '1', minWidth: '0', borderRight: '1px solid var(--ink)' });
+    this.axis = new Canvas(axisWrap, this.axisW, this.wellH);
+    this.well = new Canvas(graph, this.wellW, this.wellH);
+    this.caption = box(fig, { display: 'none' });
+    const tools = box(fig, {}, 'ph-tools');
+    const tool = (f: () => void) => new Btn(tools, '', f, { flex: '1 1 0', height: '44px', padding: '0', minWidth: '0' });
+    this.againBtn = tool(() => this.playAgain());
+    this.halfBtn = tool(() => this.toggleHalf());
+    this.hintBtn = tool(() => { this.hintShown = true; this.update(); });
+
+    const answers = sec();
+    for (let i = 0; i < 4; i++) {
+      const e = box(answers, { height: '44px' }, 'answer');
+      const name = el('span', 'aname', e);
+      const tag = el('span', 'atag', e);
+      e.addEventListener('click', () => this.answer(i));
+      this.answers.push({ e, name, tag });
+    }
+
+    this.band = box(root, { display: 'flex', flexDirection: 'column', gap: '8px', padding: '10px', border: '1px solid var(--ink)', background: 'var(--panel)' });
+    this.bandText = box(this.band, { font: '400 11px/16px var(--mono)' });
+    const bb = box(this.band, { display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: '6px' });
+    const bstyle = { height: '44px', padding: '0', minWidth: '0' };
+    this.compareBtn = new Btn(bb, '', () => this.compare(), bstyle);
+    this.guideBtn = new Btn(bb, '', () => this.openGuide(), bstyle);
+    this.nextBtn = new Btn(bb, '', () => this.next_(), bstyle);
+
+    const setup = sec();
+    this.scoreLabel = el('div', 'section', setup); // OPPSETT on the phone
+    const grid = box(setup, { display: 'grid', gridTemplateColumns: '60px minmax(0, 1fr)', rowGap: '4px', alignItems: 'center' });
+    this.setLabel = el('div', 'field', grid);
+    // One button steps through the sets that have birds.
+    this.setCycle = new Btn(grid, '', () => {
+      const x = this.host.tipp.x;
+      for (let k = 1; k <= kNumSets; k++) {
+        const i = (this.set + k) % kNumSets;
+        if (x.tipp_quiz_pool_size(this.q, i) > 0) { this.set = i; break; }
+      }
+      this.start();
+    }, { height: '44px', padding: '0 10px', justifyContent: 'flex-start', minWidth: '0' });
+    this.askLabel = el('div', 'field', grid);
+    this.askBtns = joined(box(grid, {}), [0, 1, 2].map((i) => ({ text: '', onClick: () => { this.ask = i; this.start(); } })), 44);
+    this.hintsLabel = el('div', 'field', grid);
+    this.hintBtns = joined(box(grid, {}), [0, 1, 2].map((i) => ({ text: '', onClick: () => { this.hints = i; this.update(); } })), 44);
+    this.practise = box(root, { font: '400 11px/16px var(--mono)', color: 'var(--inkSoft)' });
+  }
+
   // Every bird with data, with its group and lookalikes, into tipp::Quiz.
   private buildBirds() {
     const t = this.host.tipp, x = t.x;
@@ -233,7 +309,7 @@ export class QuizScreen {
   }
 
   get visible(): boolean { return this.root.style.display !== 'none'; }
-  show(on: boolean) { this.root.style.display = on ? '' : 'none'; }
+  show(on: boolean) { this.root.style.display = on ? (this.phone ? 'flex' : '') : 'none'; }
 
   resize(scale: number) {
     this.axis.resize(scale);
@@ -395,26 +471,27 @@ export class QuizScreen {
     this.halfBtn.text(s.t('quiz.half'));
     this.hintBtn.text(s.t('quiz.hint'));
     this.compareBtn.text(s.t('quiz.compare'));
-    this.guideBtn.text(s.t('quiz.open_guide'));
+    this.guideBtn.text(s.t(this.phone ? 'phone.quiz.open_guide' : 'quiz.open_guide'));
     const f = font(10, 500);
-    this.nextBtn.e.style.width = `${Math.max(textWidth(f, s.t('quiz.next'), 0.6), textWidth(f, s.t('quiz.again'), 0.6)) + 28}px`;
+    if (!this.phone) this.nextBtn.e.style.width = `${Math.max(textWidth(f, s.t('quiz.next'), 0.6), textWidth(f, s.t('quiz.again'), 0.6)) + 28}px`;
     this.setBtns.forEach((b, i) => b.text(s.t(`quiz.set.${kSetKeys[i]}`)));
     this.askBtns.forEach((b, i) => b.text(s.t(kAskKeys[i])));
     this.hintBtns.forEach((b, i) => b.text(s.t(kHintKeys[i])));
     this.setLabel.textContent = s.t('quiz.birds');
     this.askLabel.textContent = s.t('quiz.ask');
     this.hintsLabel.textContent = s.t('quiz.hints');
-    this.scoreLabel.textContent = s.t('quiz.score');
-    ['quiz.score_correct', 'quiz.score_missed', 'quiz.score_left'].forEach((k, i) => (this.scoreRows[i].key.textContent = s.t(k)));
+    this.scoreLabel.textContent = s.t(this.phone ? 'phone.quiz.setup' : 'quiz.score');
+    this.scoreRows.forEach((r, i) => (r.key.textContent = s.t(['quiz.score_correct', 'quiz.score_missed', 'quiz.score_left'][i])));
 
     const g = this.axis.begin();
     g.font = font(9, 400);
     g.fillStyle = colour.inkSoft;
     g.textAlign = 'right';
     g.textBaseline = 'middle';
-    g.fillText(s.t('axis.khz', { n: '8' }), 23, 8);
-    g.fillText(s.t('axis.khz', { n: '4' }), 23, 128);
-    g.fillText('0', 23, kWellH - 8);
+    const ax = this.axisW - 4;
+    g.fillText(s.t('axis.khz', { n: '8' }), ax, 8);
+    g.fillText(s.t('axis.khz', { n: '4' }), ax, this.wellH - 4 * this.pxPerKHz + 8);
+    g.fillText('0', ax, this.wellH - 8);
     this.update();
   }
 
@@ -449,6 +526,8 @@ export class QuizScreen {
     this.hintBtns.forEach((b, i) => b.on(this.hints === i));
 
     const scores = active ? [q.correct, q.missed, q.left] : [0, 0, 0];
+    if (this.scoreRight) this.scoreRight.textContent = s.t('phone.quiz.correct', { n: number(scores[0], 0, s.no) });
+    this.setCycle?.text(`${s.t(`quiz.set.${kSetKeys[this.set]}`)} · ${s.t('phone.quiz.change')}`);
     this.scoreRows.forEach((r, i) => (r.val.textContent = number(scores[i], 0, s.no)));
 
     if (!active) {
@@ -513,7 +592,7 @@ export class QuizScreen {
     const keep = kSonoFrames - 64;
     if (written - this.next > keep) this.next = written - keep; // fell behind the ring
     const rate = h.sonoRate;
-    const cap = Math.floor(((kWellW - kLeftPx) / kPxPerSecond) * rate) + 2;
+    const cap = Math.floor(((this.wellW - this.leftPx) / this.pxPerSecond) * rate) + 2;
     while (this.next < written) {
       if (this.frames.length < cap) {
         const f = h.sonoFrame(this.next);
@@ -528,15 +607,15 @@ export class QuizScreen {
   private paintTrace() {
     this.dirty = false;
     const g = this.well.begin();
-    graphPaper(g, kWellW, kWellH);
+    graphPaper(g, this.wellW, this.wellH);
     g.fillStyle = colour.shadow;
-    g.fillRect(0, 0, kWellW, 1);
-    g.fillRect(0, 0, 1, kWellH);
+    g.fillRect(0, 0, this.wellW, 1);
+    g.fillRect(0, 0, 1, this.wellH);
     const rate = this.host.sonoRate;
     const fr = this.frames;
     if (fr.length < 2 || rate <= 0) return;
-    const yFor = (hz: number) => kWellH - (hz / 1000) * kPxPerKHz;
-    const xFor = (i: number) => kLeftPx + (i / rate) * kPxPerSecond;
+    const yFor = (hz: number) => this.wellH - (hz / 1000) * this.pxPerKHz;
+    const xFor = (i: number) => this.leftPx + (i / rate) * this.pxPerSecond;
     const kGate = 0.03;
     g.strokeStyle = colour.ink;
     g.lineCap = 'round';

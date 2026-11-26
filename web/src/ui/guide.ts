@@ -1,4 +1,5 @@
-// The Field guide (F2), right of the bird list. Layout follows
+// The Field guide (F2), right of the bird list. On the phone (BOK) the same
+// parts stack in one 358px column, as design/PhoneGuide.dc.html. Layout follows
 // standalone/Source/UI/GuideScreen.cpp and design/Guide.dc.html. Left,
 // 360px: plate with sex and age toggles, the male and female table, field
 // facts. Right: song notes with an example phrase and the four song types,
@@ -112,9 +113,18 @@ export class GuideScreen {
   private lookLabel: HTMLDivElement;
   private lookArea: HTMLDivElement;
   private compareBtns: { id: string; b: Btn }[] = [];
+  private yearW = kRightW;
+  private yearLabelCol = kYearLabelCol;
+  private seasonH = 24;
 
-  constructor(parent: HTMLElement, private host: AudioHost, private s: Strings, private on: GuideHandlers) {
-    const root = box(parent, { position: 'absolute', left: '8px', top: '8px', width: `${kW}px`, height: `${kH}px`, display: 'none' });
+  constructor(parent: HTMLElement, private host: AudioHost, private s: Strings, private on: GuideHandlers, readonly phone = false) {
+    if (phone) {
+      this.yearW = 358;
+      this.yearLabelCol = 64;
+      this.seasonH = 44;
+    }
+    const root = phone ? box(parent, { display: 'none', flexDirection: 'column', gap: '12px' }, 'pguide')
+      : box(parent, { position: 'absolute', left: '8px', top: '8px', width: `${kW}px`, height: `${kH}px`, display: 'none' });
     this.root = root;
 
     // ---------------------------------------------------------- plate panel
@@ -125,61 +135,75 @@ export class GuideScreen {
     this.nameEl.style.flex = '1';
     this.sexBtns = joined(ph, [0, 1].map((v) => ({ text: '', width: 56, onClick: () => on.sex(v) })));
     this.ageBtns = joined(ph, [{ text: '', width: 44, onClick: () => on.age(0) }, { text: '', width: 36, onClick: () => on.age(1) }]);
-    this.plateWell = box(this.platePanel, { flex: '1', padding: '2px', boxShadow: 'var(--inset)' }, 'paper');
-    this.plate = new Plate(this.plateWell, 354, 200, s);
+    this.plateWell = box(this.platePanel, phone ? { height: '216px', padding: '2px', boxShadow: 'var(--inset)' } : { flex: '1', padding: '2px', boxShadow: 'var(--inset)' }, 'paper');
+    this.plate = new Plate(this.plateWell, phone ? 352 : 354, phone ? 212 : 200, s);
     this.plateCap = box(this.platePanel, { height: '18px', flex: 'none', borderTop: '1px solid var(--ink)', padding: '0 8px' }, 'cap');
-    this.mfLabel = el('div', 'section', root);
-    this.mfTable = el('div', 'gtable well', root);
-    this.factsLabel = el('div', 'section', root);
-    this.factsTable = el('div', 'gtable well', root);
+    const sec = () => (phone ? box(root, { display: 'flex', flexDirection: 'column', gap: '6px' }) : root);
+    let at = sec();
+    this.mfLabel = el('div', 'section', at);
+    this.mfTable = el('div', 'gtable well', at);
+    at = sec();
+    this.factsLabel = el('div', 'section', at);
+    this.factsTable = el('div', 'gtable well', at);
 
     // ---------------------------------------------------------- song notes
-    this.notesLabel = el('div', 'section', root);
-    place(this.notesLabel, kRightX, 0, kRightW, 14);
-    const figWrap = box(root, {});
-    place(figWrap, kRightX, 20, 350, 180);
+    at = sec();
+    this.notesLabel = el('div', 'section', at);
+    const figWrap = box(at, phone ? { alignSelf: 'center' } : {});
     this.fig = new Canvas(figWrap, 350, 180);
-    this.figCap = box(root, {}, 'cap');
-    place(this.figCap, kRightX, 20 + 184, kRightW, 12);
+    this.figCap = box(at, {}, 'cap');
     Object.assign(this.figCap.style, { lineHeight: '12px', display: 'flex', alignItems: 'center' });
-    this.notesText = box(root, { font: `400 11px/${kLine}px var(--mono)`, overflow: 'hidden', whiteSpace: 'pre-wrap' });
-    place(this.notesText, kRightX + 366, 20, kRightW - 366, 196);
-    this.typesTable = el('div', 'gtable well', root);
-    place(this.typesTable, kRightX, 222, kRightW, 2 + 4 * kTypeRowH);
+    this.notesText = box(at, { font: `400 11px/${kLine}px var(--mono)`, overflow: 'hidden', whiteSpace: 'pre-wrap' });
+    this.typesTable = el('div', 'gtable well', at);
+    if (!phone) {
+      place(this.notesLabel, kRightX, 0, kRightW, 14);
+      place(figWrap, kRightX, 20, 350, 180);
+      place(this.figCap, kRightX, 20 + 184, kRightW, 12);
+      place(this.notesText, kRightX + 366, 20, kRightW - 366, 196);
+      place(this.typesTable, kRightX, 222, kRightW, 2 + 4 * kTypeRowH);
+    }
     for (let i = 0; i < 4; i++) {
-      const row = box(this.typesTable, { height: `${kTypeRowH}px` }, `grow${i < 3 ? ' rule' : ''}`);
-      const b = new Btn(row, '', () => on.playType(i), { width: '24px', height: '24px', padding: '0', margin: '0 8px 0 2px' }).glyph('play', 'Play');
+      const row = box(this.typesTable, { height: `${phone ? 56 : kTypeRowH}px` }, `grow${i < 3 ? ' rule' : ''}`);
+      const b = new Btn(row, '', () => on.playType(i), phone ? { width: '44px', height: '44px', padding: '0', margin: '0 8px 0 6px' }
+        : { width: '24px', height: '24px', padding: '0', margin: '0 8px 0 2px' }).glyph('play', 'Play');
       this.typeBtns.push(b);
       el('span', 'tname', row);
       el('span', 'tval', row);
     }
 
     // ---------------------------------------------------------- year
-    this.yearLabel = el('div', 'section', root);
-    place(this.yearLabel, kRightX, 348, kRightW, 14);
-    const yearWrap = box(root, {});
-    place(yearWrap, kRightX, 368, kRightW, 80);
-    this.year = new Canvas(yearWrap, kRightW, 80);
-    const monthW = (kRightW - 1 - kYearLabelCol) / 12;
+    at = sec();
+    this.yearLabel = el('div', 'section', at);
+    const yh = 80 + this.seasonH - 24;
+    const yearWrap = box(at, phone ? { position: 'relative', height: `${yh}px` } : {});
+    if (!phone) {
+      place(this.yearLabel, kRightX, 348, kRightW, 14);
+      place(yearWrap, kRightX, 368, kRightW, 80);
+    }
+    this.year = new Canvas(yearWrap, this.yearW, yh);
+    const monthW = (this.yearW - 1 - this.yearLabelCol) / 12;
     for (let i = 0; i < 5; i++) {
-      const xa = kYearLabelCol + Math.round(kSeasonStart[i] * monthW);
-      const xb = kYearLabelCol + Math.round((kSeasonStart[i] + kSeasonSpan[i]) * monthW) + 1;
+      const xa = this.yearLabelCol + Math.round(kSeasonStart[i] * monthW);
+      const xb = this.yearLabelCol + Math.round((kSeasonStart[i] + kSeasonSpan[i]) * monthW) + 1;
       const b = new Btn(yearWrap, '', () => on.season(kSeasonValue[i]));
-      place(b.e, xa, 0, xb - xa, 24);
+      place(b.e, xa, 0, xb - xa, this.seasonH);
+      if (phone) b.e.style.letterSpacing = '0';
       this.seasonBtns.push(b);
     }
-    this.yearNote = box(root, { font: `400 11px/${kLine}px var(--mono)`, overflow: 'hidden' });
+    this.yearNote = box(at, { font: `400 11px/${kLine}px var(--mono)`, overflow: 'hidden' });
+    if (phone) this.yearNote.style.paddingLeft = `${this.yearLabelCol}px`;
 
     // ---------------------------------------------------------- lookalikes
-    this.lookLabel = el('div', 'section', root);
-    this.lookArea = box(root, {});
+    at = sec();
+    this.lookLabel = el('div', 'section', at);
+    this.lookArea = box(at, {});
 
     this.layoutLeft(0);
   }
 
   get visible(): boolean { return this.root.style.display !== 'none'; }
   show(on: boolean) {
-    this.root.style.display = on ? '' : 'none';
+    this.root.style.display = on ? (this.phone ? 'flex' : '') : 'none';
     if (on) this.paint();
   }
 
@@ -194,6 +218,7 @@ export class GuideScreen {
   // The left column from the bottom: facts, then male and female, then
   // the plate takes the rest.
   private layoutLeft(callouts: number) {
+    if (this.phone) return;
     const factsH = 2 + kRowH * 10;
     let y = kH - factsH;
     place(this.factsTable, 0, y, kLeftW, factsH);
@@ -246,12 +271,13 @@ export class GuideScreen {
     this.compareBtns = [];
     const looks: { id?: string; name?: Text; text?: Text }[] = this.info.lookalikes ?? [];
     looks.forEach((l, i) => {
-      const row = box(this.lookArea, { height: `${kLookRowH}px` }, `look${i + 1 < looks.length ? ' rule' : ''}`);
+      const row = box(this.lookArea, this.phone ? {} : { height: `${kLookRowH}px` }, `look${i + 1 < looks.length ? ' rule' : ''}`);
       el('div', 'lname', row);
       el('div', 'lother', row);
       el('div', 'ltext', row);
       const id = l.id ?? '';
-      const b = new Btn(row, '', () => this.on.compare(id), { position: 'absolute', right: '0', top: `${(kLookRowH - 1 - 24) / 2}px`, width: '84px', height: '24px' });
+      const b = new Btn(row, '', () => this.on.compare(id), this.phone ? { height: '44px', padding: '0 10px', gridArea: 'btn' }
+        : { position: 'absolute', right: '0', top: `${(kLookRowH - 1 - 24) / 2}px`, width: '84px', height: '24px' });
       b.disabled(!id || !hasSound(id));
       this.compareBtns.push({ id, b });
     });
@@ -281,9 +307,9 @@ export class GuideScreen {
 
   // A table row: label column, then one or more values.
   private row(table: HTMLElement, key: string, values: string[], last: boolean) {
-    const r = box(table, { height: `${kRowH}px` }, `grow${last ? '' : ' rule'}`);
+    const r = box(table, this.phone ? {} : { height: `${kRowH}px` }, `grow${last ? '' : ' rule'}`);
     const k = el('span', 'tkey', r, key);
-    k.style.width = `${kLabelCol}px`;
+    k.style.width = `${this.phone && values.length > 1 ? 84 : kLabelCol}px`;
     for (const v of values) el('span', 'tcell', r, v).title = v;
   }
 
@@ -307,15 +333,15 @@ export class GuideScreen {
     const name = no ? this.entry.name.no : this.entry.name.en;
     this.nameEl.textContent = name;
     let size = 22;
-    const avail = kLeftW - 2 - 16 - 111 - 8 - 79 - 8;
+    const avail = (this.phone ? 358 : kLeftW) - 2 - 16 - 111 - 8 - 79 - 8;
     while (size > 13 && textWidth(font(size, 400, true), name) > avail) size--;
     this.nameEl.style.fontSize = `${size}px`;
 
     // Male and female, adults. Rows are the plate's callouts plus song.
     const mf = this.mfTable;
     mf.replaceChildren();
-    const head = box(mf, { height: `${kRowH}px` }, 'grow ghead');
-    box(head, { width: `${kLabelCol}px`, flex: 'none' });
+    const head = box(mf, { height: `${this.phone ? 28 : kRowH}px` }, 'grow ghead');
+    box(head, { width: `${this.phone ? 84 : kLabelCol}px`, flex: 'none' });
     el('span', 'tcell', head, s.t('plate.male'));
     el('span', 'tcell', head, s.t('plate.female'));
     for (const c of this.plateDoc.callouts ?? [])
@@ -359,14 +385,16 @@ export class GuideScreen {
     // Year note, under the calendar, after the label column.
     const noteText = this.field(info.calendar?.note);
     const lines = wrap(kBody, noteText, kRightW - kYearLabelCol).length;
-    place(this.yearNote, kRightX + kYearLabelCol, 454, kRightW - kYearLabelCol, kLine * lines);
+    if (!this.phone) place(this.yearNote, kRightX + kYearLabelCol, 454, kRightW - kYearLabelCol, kLine * lines);
     this.yearNote.textContent = noteText;
 
     // Lookalikes, under the note.
     const lookY = 454 + kLine * lines + 12;
-    place(this.lookLabel, kRightX, lookY, kRightW, 14);
-    place(this.lookArea, kRightX, lookY + 20, kRightW, kH - lookY - 20);
-    this.lookArea.style.overflow = 'hidden';
+    if (!this.phone) {
+      place(this.lookLabel, kRightX, lookY, kRightW, 14);
+      place(this.lookArea, kRightX, lookY + 20, kRightW, kH - lookY - 20);
+      this.lookArea.style.overflow = 'hidden';
+    }
     const looks: { id?: string; name?: Text; text?: Text }[] = info.lookalikes ?? [];
     if (looks.length === 0) {
       this.lookArea.replaceChildren();
@@ -378,7 +406,7 @@ export class GuideScreen {
       r.children[1].textContent = this.otherName(l, !no);
       r.children[2].textContent = this.field(l.text);
       // Rows that do not fit are left out, as in the standalone.
-      (r as HTMLElement).style.visibility = lookY + 20 + (i + 1) * kLookRowH <= kH + 8 ? '' : 'hidden';
+      if (!this.phone) (r as HTMLElement).style.visibility = lookY + 20 + (i + 1) * kLookRowH <= kH + 8 ? '' : 'hidden';
     });
 
     this.refresh();
@@ -528,7 +556,7 @@ export class GuideScreen {
   // ink, n hatched, ? left plain.
   private paintYear() {
     const g = this.year.begin(), s = this.s;
-    const x0 = kYearLabelCol, w = (kRightW - 1 - kYearLabelCol) / 12;
+    const x0 = this.yearLabelCol, w = (this.yearW - 1 - this.yearLabelCol) / 12, dy = this.seasonH - 24;
     const label = (y: number, h: number, text: string) => {
       g.font = font(9, 600);
       g.letterSpacing = '1.26px';
@@ -538,13 +566,13 @@ export class GuideScreen {
       g.fillText(text, 0, y + h / 2);
       g.letterSpacing = '0px';
     };
-    label(0, 24, s.t('cal.season'));
+    label(0, this.seasonH, s.t('cal.season'));
     const months = s.t('cal.months').split('|');
     g.font = font(10, 500);
     g.fillStyle = colour.ink;
     g.textAlign = 'center';
-    for (let m = 0; m < 12 && m < months.length; m++) g.fillText(months[m], x0 + Math.round(m * w) + w / 2, 28 + 8);
-    const rows: [number, string, string][] = [[48, 'cal.present', this.info.calendar?.present ?? ''], [66, 'cal.sings', this.info.calendar?.sings ?? '']];
+    for (let m = 0; m < 12 && m < months.length; m++) g.fillText(months[m], x0 + Math.round(m * w) + w / 2, 28 + 8 + dy);
+    const rows: [number, string, string][] = [[48 + dy, 'cal.present', this.info.calendar?.present ?? ''], [66 + dy, 'cal.sings', this.info.calendar?.sings ?? '']];
     for (const [y, key, row] of rows) {
       label(y, 14, s.t(key));
       let start = 0;
