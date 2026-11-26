@@ -1,0 +1,119 @@
+{
+ "_note": "Field guide text for the woodcock, both languages. Facts from birds.md (SNL, checked 2026-11-26). Norwegian wording is mine, Eirik to check. calendar: one letter per month from January, y yes, n no, ? not known; the sings row is roding.",
+ "xeno_canto": "https://xeno-canto.org/species/scolopax-rusticola",
+ "facts": {
+  "length": {
+   "en": "About 300 g; compact, short legs",
+   "no": "Omkring 300 g; kompakt, korte bein",
+   "verified": true
+  },
+  "broods": {
+   "en": "Usually 4 eggs, late April to May",
+   "no": "Vanligvis 4 egg, sent i april til mai",
+   "verified": true
+  },
+  "range": {
+   "en": "Damp forest over most of the country",
+   "no": "Fuktig skog i det meste av landet",
+   "verified": true
+  },
+  "habitat": {
+   "en": "Damp forest",
+   "no": "Fuktig skog",
+   "verified": true
+  },
+  "food": {
+   "en": "Earthworms and insect larvae, probed for",
+   "no": "Meitemark og insektlarver, som den sonderer etter",
+   "verified": true
+  },
+  "status": {
+   "en": "LC, viable, Norwegian red list",
+   "no": "LC, livskraftig, norsk rødliste",
+   "verified": true
+  },
+  "nest": {
+   "en": "Scrape by a tree, lined with leaves and moss",
+   "no": "Grop ved et tre, foret med løv og mose",
+   "verified": true
+  }
+ },
+ "sings": {
+  "male": {
+   "en": "Rodes in spring",
+   "no": "Trekker om våren",
+   "verified": true
+  },
+  "female": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "song_notes": {
+  "en": "In spring the males fly regular routes just above the treetops at dusk or shortly before sunrise, grunting and squeaking: “orrt-orrt” followed by a sharp “pisst”. This roding is called «rugdetrekket». Mainly active at night; large eyes set far back see almost all round.",
+  "no": "Om våren flyr hannene faste ruter like over tretoppene i skumringen eller like før soloppgang, og knorter og pistrer: «orrt-orrt» fulgt av et skarpt «pisst». Dette kalles rugdetrekket. Mest nattaktiv; de store øynene sitter langt bak og ser nesten hele veien rundt.",
+  "verified": true
+ },
+ "mnemonic": {
+  "en": "",
+  "no": "",
+  "verified": false
+ },
+ "types": {
+  "song": {
+   "en": "Roding: “orrt-orrt”, then a sharp “pisst”, at dusk and dawn.",
+   "no": "Rugdetrekk: «orrt-orrt», så et skarpt «pisst», i skumring og grålysning.",
+   "verified": true
+  },
+  "call": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "alarm": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "flight": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "parts": {
+  "orrt": {
+   "en": "ORRT-ORRT",
+   "no": "ORRT-ORRT",
+   "verified": true
+  },
+  "pisst": {
+   "en": "PISST",
+   "no": "PISST",
+   "verified": true
+  }
+ },
+ "calendar": {
+  "present": "??yyyyyyyy??",
+  "sings": "??yyy???????",
+  "note": {
+   "en": "Arrives in March and April, leaves in September and October; some stay on the south coast in winter. Roding in spring. [TO VERIFY] which months.",
+   "no": "Kommer i mars og april, drar i september og oktober; noen blir på sørlandskysten om vinteren. Rugdetrekk om våren. [TO VERIFY] hvilke måneder.",
+   "verified": true
+  }
+ },
+ "lookalikes": [
+  {
+   "name": {
+    "en": "Snipes",
+    "no": "Bekkasiner"
+   },
+   "text": {
+    "en": "Also have a very long, straight bill.",
+    "no": "Har også svært langt, rett nebb.",
+    "verified": true
+   }
+  }
+ ]
+}

@@ -415,9 +415,30 @@ Source: Store norske leksikon (snl.no), one article per bird, read in full.
 
 To verify: length, juvenile plumage, bill and feet colour, duets, the other sounds, hunting.
 
+### Rugde (folder `rugde`), snl.no/rugde, Jan Eivind Østnes, updated 2026-05-12
+
+| Field | Value |
+|---|---|
+| Weight | About 300 g. A large, compact wader with short legs |
+| Appearance | Strongly mottled, mostly in red-brown tones. Very long, straight, strong bill, as in the snipes. Large eyes set far back, seeing almost all round. Broad wings with rounded tips; in flight the bill points down |
+| Sex, young | No plumage difference stated; no juvenile description |
+| Roding | In spring the males fly regular routes just above the treetops at dusk or shortly before sunrise («rugdetrekket»), grunting and squeaking: «orrt-orrt» followed by a sharp «pisst» |
+| Activity | Mainly active at night |
+| Habitat | Damp forest over most of the country; seen by forest roads on late spring evenings and early mornings |
+| Population | 50 000 to 75 000 pairs (Norsk ornitologisk forening, 2015) |
+| Food | Mostly animal food, in the breeding season earthworms and insect larvae; probes deep with the bill, which senses prey at the tip |
+| Nest | A shallow scrape, often by a tree, lined with dry leaves, moss and straw |
+| Eggs | Usually four, brownish-yellow with dark spots, laid in the second half of April or first half of May. The female incubates alone, about 22 days |
+| Young | Leave the nest at once; the female tends them until they fly at 5 to 6 weeks, and can carry one at a time between legs and breast in flight |
+| Migration | Most leave in winter, some stay on the south coast. Arrives in March and April, leaves in September and October; winters in western and southern Europe |
+| Hunting | Spring hunting during roding banned since 1932; open 10 September to 23 December |
+| Status | LC in Norway and globally |
+
+To verify: length, wingspan, bill and leg colour, the juvenile, any call outside roding, exact months of roding.
+
 ## All other birds
 
-Nothing is verified for the 2 other birds outside the garden group. Collect facts per bird with the same fields as the blackbird table before writing `bird.json`.
+Nothing is verified for the 1 other bird outside the garden group. Collect facts per bird with the same fields as the blackbird table before writing `bird.json`.
 
 ## Dawn chorus
 

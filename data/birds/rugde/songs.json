@@ -1,0 +1,232 @@
+{
+ "_note": "Woodcock, M10. Verified (birds.md, SNL): in spring the males fly regular routes just above the treetops at dusk or shortly before sunrise, grunting and squeaking «orrt-orrt» followed by a sharp «pisst». Sound design choices: the grunt as a low rough rattle at about 340 to 440 Hz, 2 or 3 of them, then the «pisst» at 5 to 6,4 kHz, repeated every 1,5 to 4 s. Active only at dawn and dusk, and not for the female. No call type: SNL describes no other sound.",
+ "syllables": {
+  "orrt": {
+   "dur_ms": 260,
+   "pitch": [
+    [
+     0,
+     340
+    ],
+    [
+     0.3,
+     420
+    ],
+    [
+     1,
+     320
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.08,
+     0.9
+    ],
+    [
+     0.6,
+     1
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.8,
+   "rough": 40,
+   "breath": 10,
+   "tension": 10,
+   "trill": {
+    "hz": 38,
+    "depth_st": 1.5,
+    "am": 0.8
+   }
+  },
+  "orrt2": {
+   "dur_ms": 240,
+   "pitch": [
+    [
+     0,
+     360
+    ],
+    [
+     0.35,
+     440
+    ],
+    [
+     1,
+     330
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.08,
+     0.9
+    ],
+    [
+     0.6,
+     1
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.8,
+   "rough": 40,
+   "breath": 10,
+   "tension": 10,
+   "trill": {
+    "hz": 34,
+    "depth_st": 1.5,
+    "am": 0.8
+   }
+  },
+  "pisst": {
+   "dur_ms": 130,
+   "pitch": [
+    [
+     0,
+     5200
+    ],
+    [
+     0.3,
+     6400
+    ],
+    [
+     1,
+     5600
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.06,
+     1
+    ],
+    [
+     0.5,
+     0.7
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.75,
+   "rough": -20,
+   "breath": 15,
+   "tension": 20
+  }
+ },
+ "types": {
+  "song": {
+   "pause_s": [
+    1.5,
+    4.0
+   ],
+   "length_s": [
+    0.9,
+    1.6
+   ],
+   "transpose_st": 0.5,
+   "avoid_repeat": false,
+   "auto": {
+    "vo_pitch": [
+     0.98,
+     1.02
+    ],
+    "vo_breath": [
+     24,
+     36
+    ],
+    "vo_tension": [
+     34,
+     46
+    ],
+    "vo_rough": [
+     32,
+     48
+    ],
+    "ph_tempo": [
+     96,
+     104
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 1,
+     "sections": [
+      {
+       "part": "orrt",
+       "pool": [
+        "orrt",
+        "orrt2"
+       ],
+       "count": [
+        2,
+        3
+       ],
+       "share": 0.75,
+       "gap_ms": [
+        120,
+        200
+       ]
+      },
+      {
+       "part": "pisst",
+       "pool": [
+        "pisst"
+       ],
+       "count": [
+        1,
+        1
+       ],
+       "share": 0.25,
+       "gap_ms": [
+        50,
+        50
+       ],
+       "lead_gap_ms": [
+        150,
+        260
+       ]
+      }
+     ]
+    }
+   ],
+   "overrides": [
+    {
+     "_note": "Roding is the males' (SNL).",
+     "when": {
+      "sex": "female"
+     },
+     "active": false
+    },
+    {
+     "_note": "At dusk or shortly before sunrise (SNL).",
+     "when": {
+      "time": "day"
+     },
+     "active": false
+    },
+    {
+     "when": {
+      "time": "night"
+     },
+     "active": false
+    }
+   ]
+  }
+ }
+}
