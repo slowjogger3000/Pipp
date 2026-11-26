@@ -106,7 +106,7 @@
  "status.stopped": "STOPPED",
  "status.keys_play": "SPACE PLAY",
  "status.keys_bird": "UP DOWN BIRD",
- "status.keys_screen": "F1 TO F4, F6 SCREEN",
+ "status.keys_screen": "F1 TO F6 SCREEN",
  "status.not_yet": "NOT IN THIS BUILD YET",
  "error.load": "CANNOT LOAD {bird}: {error}",
  "ap.legend_hand_any": "HELD BY HAND",

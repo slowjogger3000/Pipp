@@ -7,6 +7,8 @@
 //        [--tab quiz] [--quiz-seed <n>] [--quiz-skip <n>] [--answer right|wrong] [--leave-quiz]
 //        [--tab chorus] [--chorus-start <min>] [--chorus-speed real|10x|60x|loop] [--mute-lane 1-4]
 //        [--tab collection] [--collection-dir <dir>] [--import <zip>] [--add <file,file>]
+//        [--tab log] [--log-file <json>] [--log-fill "bird|date|time|place|heard 0-3|saw 0-3|note"] [--log-add]
+//        [--log-select <n>] [--log-delete] [--log-export <csv>]
 //        [--coll-bird <id>] [--choose-row <n>] [--open-picture <n>] [--export <zip>] [--coll-compare]
 // plays for the given time, drags the knob 3 s before the end if asked,
 // saves a picture of the window and quits.
@@ -70,6 +72,28 @@ public:
                     coll.compareChosen();
                 if (const auto pic = value("--open-picture"); pic.isNotEmpty())
                     coll.openPicture(pic.getIntValue());
+            }
+            if (value("--tab") == "log")
+            {
+                auto& log = content->logScreenForTest();
+                const auto cwd = juce::File::getCurrentWorkingDirectory();
+                if (const auto f = value("--log-file"); f.isNotEmpty())
+                    log.setFile(cwd.getChildFile(f));
+                content->setTab(4);
+                if (const auto fill = value("--log-fill"); fill.isNotEmpty())
+                {
+                    const auto p = juce::StringArray::fromTokens(fill, "|", "");
+                    if (p.size() >= 7)
+                        log.fill(p[0], p[1], p[2], p[3], p[4].getIntValue(), p[5].getIntValue(), p[6]);
+                }
+                if (args.contains("--log-add"))
+                    log.add();
+                if (const auto n = value("--log-select"); n.isNotEmpty())
+                    log.select(n.getIntValue());
+                if (args.contains("--log-delete"))
+                    log.remove();
+                if (const auto csv = value("--log-export"); csv.isNotEmpty())
+                    log.exportCsv(cwd.getChildFile(csv));
             }
             if (value("--tab") == "guide")
                 content->setTab(1);

@@ -216,6 +216,21 @@ MainComponent::MainComponent(const juce::File& dataDirectory)
     };
     chorusScreen.onChange = [this](int i) { changeLaneBird(i); };
 
+    // Log.
+    addChildComponent(logScreen);
+    logScreen.playBird = [this] { return currentEntry() != nullptr ? currentEntry()->id : juce::String(); };
+    logScreen.playType = [this] { return songType; };
+    logScreen.onOpenBird = [this](const juce::String& id) {
+        for (int i = 0; i < static_cast<int>(list.birds.size()); ++i)
+            if (list.birds[static_cast<std::size_t>(i)].id == id)
+            {
+                selectBird(i);
+                setTab(1);
+            }
+    };
+    logScreen.onStatus = [this] { repaint(statusArea); };
+    logScreen.onFocusHost = [this] { grabKeyboardFocus(); };
+
     // Collection.
     addChildComponent(collScreen);
     collScreen.playBird = [this] { return currentEntry() != nullptr ? currentEntry()->id : juce::String(); };
@@ -234,6 +249,8 @@ MainComponent::MainComponent(const juce::File& dataDirectory)
     loadIndex();
     setCollectionFolder(juce::File::getSpecialLocation(juce::File::userApplicationDataDirectory)
                             .getChildFile("Application Support").getChildFile("Tipp").getChildFile("collection"));
+    logScreen.setFile(juce::File::getSpecialLocation(juce::File::userApplicationDataDirectory)
+                          .getChildFile("Application Support").getChildFile("Tipp").getChildFile("log.json"));
     for (int i = 0; i < static_cast<int>(list.birds.size()); ++i)
         if (list.birds[static_cast<std::size_t>(i)].id == "svarttrost")
             selectBird(i);
@@ -493,7 +510,7 @@ void MainComponent::stopCompare()
 void MainComponent::setTab(int index)
 {
     const int was = activeTab;
-    activeTab = index == 4 ? was : juce::jlimit(0, 5, index); // LOG is not built
+    activeTab = juce::jlimit(0, 5, index);
     if (was == activeTab)
         return;
     if (was == 5)
@@ -525,8 +542,14 @@ void MainComponent::setTab(int index)
     quizScreen.setVisible(activeTab == 2);
     chorusScreen.setVisible(activeTab == 3);
     collScreen.setVisible(activeTab == 5);
-    playBtn.setVisible(activeTab != 5);
-    stopBtn.setVisible(activeTab != 5);
+    logScreen.setVisible(activeTab == 4);
+    playBtn.setVisible(activeTab < 4);
+    stopBtn.setVisible(activeTab < 4);
+    if (activeTab == 4)
+    {
+        setPlaying(false); // the log's header has no transport (Log.dc.html)
+        logScreen.enter();
+    }
     if (activeTab == 5)
     {
         setPlaying(false); // the header has no transport here
@@ -542,7 +565,7 @@ void MainComponent::setTab(int index)
 void MainComponent::mouseUp(const juce::MouseEvent& e)
 {
     for (int i = 0; i < 6; ++i)
-        if (i != 4 && tabRects[static_cast<std::size_t>(i)].contains(e.getPosition()))
+        if (tabRects[static_cast<std::size_t>(i)].contains(e.getPosition()))
             setTab(i);
 }
 
@@ -626,6 +649,7 @@ void MainComponent::applyStrings()
     quizScreen.applyStrings();
     chorusScreen.applyStrings();
     collScreen.applyStrings();
+    logScreen.applyStrings();
     if (activeTab == 2)
         updateQuizView();
     sono.nowText = strings("song.now");
@@ -1284,7 +1308,7 @@ void MainComponent::timerCallback()
 
 void MainComponent::runSnapshot(const juce::File& png, double seconds, int handKnob)
 {
-    if (activeTab == 5)
+    if (activeTab >= 4)
     {
         snapshotFile = png;
         snapshotSeconds = seconds;
@@ -1339,10 +1363,25 @@ bool MainComponent::keyPressed(const juce::KeyPress& key)
         setTab(key == juce::KeyPress::F1Key ? 0 : key == juce::KeyPress::F2Key ? 1 : 2);
         return true;
     }
-    if (key == juce::KeyPress::F4Key || key == juce::KeyPress::F6Key)
+    if (key == juce::KeyPress::F4Key || key == juce::KeyPress::F5Key || key == juce::KeyPress::F6Key)
     {
-        setTab(key == juce::KeyPress::F4Key ? 3 : 5);
+        setTab(key == juce::KeyPress::F4Key ? 3 : key == juce::KeyPress::F5Key ? 4 : 5);
         return true;
+    }
+    if (activeTab == 4)
+    {
+        // Log: Up and Down choose a line, Enter opens its bird.
+        if (key == juce::KeyPress::upKey || key == juce::KeyPress::downKey)
+        {
+            logScreen.step(key == juce::KeyPress::upKey ? -1 : 1);
+            return true;
+        }
+        if (key == juce::KeyPress::returnKey)
+        {
+            logScreen.open();
+            return true;
+        }
+        return false;
     }
     if (activeTab == 5)
     {
@@ -1451,6 +1490,7 @@ void MainComponent::resized()
     quizScreen.setBounds(bodyArea.withX(headerArea.getX()).withWidth(headerArea.getWidth()));
     chorusScreen.setBounds(quizScreen.getBounds());
     collScreen.setBounds(quizScreen.getBounds());
+    logScreen.setBounds(quizScreen.getBounds());
 
     // Tabs: widths follow their labels.
     {
@@ -1694,8 +1734,8 @@ void MainComponent::paintHeader(juce::Graphics& g)
     }
 
     draw::fieldLabel(g, langLabelArea, strings("header.language"));
-    if (activeTab == 5)
-        return; // the collection's header has no OUT (DeskCollection.dc.html)
+    if (activeTab >= 4)
+        return; // the log's and the collection's header have no OUT (Log.dc.html, DeskCollection.dc.html)
     draw::fieldLabel(g, outLabelArea, strings("header.out"));
 
     // Output level and meter.
@@ -1737,8 +1777,6 @@ void MainComponent::paintTabs(juce::Graphics& g)
         const juce::Rectangle<int> tab(x, tabsArea.getBottom() - 1 - h + (active ? 1 : 0), w, h);
         g.setColour(active ? colour::ground : colour::panel);
         g.fillRect(tab);
-        if (i == 4)
-            draw::hatch(g, tab); // LOG is not built in the standalone
         g.setColour(colour::ink);
         g.fillRect(tab.getX(), tab.getY(), tab.getWidth(), 1);
         g.fillRect(tab.getX(), tab.getY(), 1, tab.getHeight() - (active ? 1 : 0));
@@ -1937,6 +1975,21 @@ void MainComponent::paintStatus(juce::Graphics& g)
     const auto f = mono(10.0f, 500, 0.06f);
     g.setFont(f);
     auto r = statusArea.withTrimmedTop(1).reduced(12, 0);
+    if (activeTab == 4)
+    {
+        const auto state = strings("tab.log");
+        g.drawText(state, r.removeFromLeft(textW(f, state) + 2), juce::Justification::centredLeft, false);
+        r.removeFromLeft(16);
+        g.setColour(colour::inkSoft);
+        for (const char* k : { "log.keys_open", "log.keys_entry" })
+        {
+            const auto t = strings(k);
+            g.drawText(t, r.removeFromRight(textW(f, t) + 2), juce::Justification::centredRight, false);
+            r.removeFromRight(16);
+        }
+        g.drawText(loadError.isNotEmpty() ? loadError : logScreen.statusText(), r, juce::Justification::centredLeft, false);
+        return;
+    }
     if (activeTab == 5)
     {
         const auto state = strings("tab.collection");

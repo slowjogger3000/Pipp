@@ -10,6 +10,7 @@
 #include "UI/CollectionScreen.h"
 #include "UI/GuideScreen.h"
 #include "UI/Knob.h"
+#include "UI/LogScreen.h"
 #include "UI/Plate.h"
 #include "UI/QuizScreen.h"
 #include "UI/Sonogram.h"
@@ -50,7 +51,7 @@ public:
     // Test hook: play for `seconds`, optionally drag a knob near the end,
     // save a snapshot and quit.
     void runSnapshot(const juce::File& png, double seconds, int handKnob);
-    // 0 Play, 1 Field guide, 2 Quiz, 3 Chorus, 5 Collection. Log (4) is not built yet.
+    // 0 Play, 1 Field guide, 2 Quiz, 3 Chorus, 4 Log, 5 Collection.
     void setTab(int index);
     // Test hook: COMPARE with a lookalike, as its button does.
     void compareWith(const juce::String& id) { startCompare(id); }
@@ -76,6 +77,7 @@ public:
     // Test hooks for the collection: its folder, and the screen to act on.
     void setCollectionFolder(const juce::File& folder);
     CollectionScreen& collectionScreen() noexcept { return collScreen; }
+    LogScreen& logScreenForTest() noexcept { return logScreen; }
     void snapshotQuiz(std::uint32_t seed, int skip, int answer, bool leave)
     {
         snapshotLeaveQuiz = leave;
@@ -237,6 +239,9 @@ private:
     bool chorusPlaying = false;
     float chorusSnapStart = tipp::Chorus::kStartMin;
     int chorusSnapMute = -1;
+
+    // Log (F5): heard-it entries in ~/Library/Application Support/Tipp/log.json.
+    LogScreen logScreen { strings, list.birds, list.groups };
 
     // Collection (F6): recordings from the phone export or added files.
     FilePlayer filePlayer;

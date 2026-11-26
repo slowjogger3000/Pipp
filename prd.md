@@ -167,6 +167,7 @@ A recognised bird that is not one of the 18 is shown hatched with "not in Tipp".
 ## Storage and privacy
 
 - Settings, log, recordings and pictures are stored on the device.
+- Each build keeps its own log: the web app and the phone in the browser's storage, the Mac standalone in ~/Library/Application Support/Tipp/log.json (the same entry format). Logs are not merged.
 - Nothing from the microphone is saved until the user presses save.
 - No account, no upload, no analytics in version 1.
 
