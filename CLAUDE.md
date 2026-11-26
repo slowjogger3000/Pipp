@@ -40,7 +40,7 @@ If a reply only answers a question and changes nothing, still end with the block
 
 Update this at the end of every work session.
 
-- Current milestone: M2 (Play screen, Mac standalone), round 1 built 2026-11-26. Not committed. Waiting for Eirik to launch the app, drag knobs by hand and listen.
+- Current milestone: M2 (Play screen, Mac standalone), round 1 built and committed 2026-11-26 (b96c84f). Waiting for Eirik to launch the app, drag knobs by hand and listen.
 - M1 done 2026-11-26: blackbird approved as recognisable. Final knob ranges are in `prd.md`.
 - Built in M2 round 1: `standalone/Source/MainComponent.*` (window, layout, timer), `UI/Theme.h` (tokens, bevels, hatch, graph paper, fonts), `UI/Widgets.h` (`Btn`), `UI/Knob.h`, `UI/Sonogram.h`, `UI/Plate.h`, `UI/BirdList.h`, `UI/Strings.h`. Engine now publishes knob mode and hold countdown, stereo peaks, a sonogram feed (375 frames/s) and the current phrase (seqlock). Contour helpers moved to `BirdData.h` so the sonogram draws grey with the engine's own maths. Data: `data/birds/index.json` (18 birds, names unverified), `data/birds/svarttrost/plate.json`, `data/strings/en.json` and `no.json` (Play screen only; Norwegian wording is mine, Eirik to check).
 - Verified: zero warnings in core, render tool and standalone. Engine audio is byte-identical to M1 for song and call (seed 1, 30 s). `tipp-render --check-override` passes 18 checks (hold, 3 s wait, 300 ms return, latch, return all, autoplay off, sing once, sonogram hand mark, phrase publish). Snapshots in `out/m2-play-*.png` match `Main.dc.html` in layout, sizes, colours and labels, in English and Norwegian. Core still compiles with `emcc`.
