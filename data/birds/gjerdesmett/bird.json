@@ -1,0 +1,95 @@
+{
+ "_note": "Field guide text for the wren, both languages. Facts from birds.md (SNL, checked 2026-11-26). Norwegian wording is mine, Eirik to check. calendar: one letter per month from January, y yes, n no, ? not known.",
+ "xeno_canto": "https://xeno-canto.org/species/troglodytes-troglodytes",
+ "facts": {
+  "length": {
+   "en": "9 to 10 cm, 6 to 12 g",
+   "no": "9 til 10 cm, 6 til 12 g",
+   "verified": true
+  },
+  "broods": {
+   "en": "Two broods can occur",
+   "no": "To kull kan forekomme",
+   "verified": true
+  },
+  "range": {
+   "en": "Coast and large valleys in the south, sparser north",
+   "no": "Kysten og de store dalene i sør, færre nordover",
+   "verified": true
+  },
+  "habitat": {
+   "en": "Forest with fallen trees, scree, coastal scrub",
+   "no": "Skog med rotvelter, steinur, kystkratt",
+   "verified": true
+  },
+  "food": {
+   "en": "Insects and spiders; berries, seeds in winter",
+   "no": "Insekter og edderkopper; bær og frø om vinteren",
+   "verified": true
+  },
+  "status": {
+   "en": "LC, viable, Norwegian red list",
+   "no": "LC, livskraftig, norsk rødliste",
+   "verified": true
+  },
+  "nest": {
+   "en": "Ball with side entrance, 5 to 8 eggs",
+   "no": "Kulerundt med inngang på siden, 5 til 8 egg",
+   "verified": true
+  }
+ },
+ "sings": {
+  "male": {
+   "en": "Sings",
+   "no": "Synger",
+   "verified": false
+  },
+  "female": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "song_notes": {
+  "en": "Remarkably loud for so small a bird: one quick, melodious phrase of trilling sounds. Can sing all year, most in the breeding season. Often on or near the ground, darting in and out of stone walls and bushes.",
+  "no": "Bemerkelsesverdig kraftig for en så liten fugl: én rask og melodiøs strofe av trillende lyder. Kan synge hele året, oftest i hekketiden. Ofte på eller nær bakken, smetter inn og ut av steingjerder og busker.",
+  "verified": true
+ },
+ "mnemonic": {
+  "en": "",
+  "no": "",
+  "verified": false
+ },
+ "types": {
+  "song": {
+   "en": "Loud, quick and melodious, full of trills.",
+   "no": "Kraftig, rask og melodiøs, full av triller.",
+   "verified": true
+  },
+  "call": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "alarm": {
+   "en": "A hard “tsjekk” or “tsssrrr”, often repeated.",
+   "no": "Et hardt «tsjekk» eller «tsssrrr», som ofte gjentas.",
+   "verified": true
+  },
+  "flight": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "calendar": {
+  "present": "yyyyyyyyyyyy",
+  "sings": "yyyyyyyyyyyy",
+  "note": {
+   "en": "Some winter in Norway, mostly on the south coast; many winter in Western Europe. Sings all year, most in the breeding season. Nest building starts late March or early April.",
+   "no": "Noen overvintrer i Norge, mest langs kysten i sør; mange overvintrer i Vest-Europa. Synger hele året, oftest i hekketiden. Reirbyggingen starter i slutten av mars eller tidlig i april.",
+   "verified": true
+  }
+ },
+ "lookalikes": []
+}

@@ -234,9 +234,30 @@ To verify: calls and alarm call (not in the article), bill colour, any sex or ag
 
 To verify: calls and alarm call, how the song is built (length, pitch, ending), singing months and time of day, bill and leg colour, any sex or age difference, broods, wingspan, whether females sing.
 
+### Gjerdesmett (folder `gjerdesmett`), snl.no/gjerdesmett, Edvard Kaurin Barth and Bård Gunnar Stokke, updated 2026-08-04
+
+| Field | Value |
+|---|---|
+| Length, weight | 9 to 10 cm, 6 to 12 g. One of Norway's smallest birds |
+| Appearance | A small, round ball of feathers, barred across in brown shades. Short tail held almost straight up. Bill relatively long, thin and slightly curved |
+| Sex | The sexes are alike |
+| Song | Remarkably loud for its size: one quick, melodious phrase of trilling sounds. Can sing all year, most in the breeding season |
+| Alarm | A hard «tsjekk» or «tsssrrr», often repeated |
+| Habitat | All forest types, prefers moist places with fallen trees and root plates, scree and rockfall; also sparse coastal vegetation. Much on or near the ground, darting in and out of stone walls and bushes, often taken for a small rodent. In winter often enters buildings, and several may roost together, for example in a nest box |
+| Range in Norway | Common along the coast and up the large valleys of Sør-Norge, sparser inland and further north in Nord-Norge. 350 000 to 700 000 pairs; drops after cold, snowy winters and recovers quickly |
+| Food | Mostly insects and spiders, sometimes berries and seeds, mostly in winter |
+| Nest | The male builds several nests and lets the female choose. A round ball with a side entrance, of moss, leaves and grass, lined with feathers; in dense twigs, rock crevices, under a turf edge or higher up. Building starts late March or early April |
+| Eggs | Most often 5 to 8, white with small rust-brown speckles. The female incubates about 16 days |
+| Broods | Two broods can occur |
+| Young | Fed by both parents 14 to 19 days in the nest, then 9 to 18 days after |
+| Migration | Some winter in Norway, mostly on the south coast; many winter in Western Europe |
+| Status | LC on the Norwegian red list, and globally |
+
+To verify: calls other than the alarm, how long the song is and how it is built, bill and leg colour, the juvenile, singing time of day, wingspan, lookalikes, whether females sing.
+
 ## All other birds
 
-Nothing is verified for the 10 other birds outside the garden group. Collect facts per bird with the same fields as the blackbird table before writing `bird.json`.
+Nothing is verified for the 9 other birds outside the garden group. Collect facts per bird with the same fields as the blackbird table before writing `bird.json`.
 
 ## Dawn chorus
 

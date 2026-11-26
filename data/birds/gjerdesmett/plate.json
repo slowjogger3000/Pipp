@@ -1,0 +1,221 @@
+{
+ "_note": "Wren ink plate in a 280x240 box, drawn in M10, not from a design: a round ball of feathers, barred brown (hatching), tail cocked straight up, long thin slightly curved bill (birds.md, SNL). The sexes are alike; the juvenile is drawn like the adults and not verified.",
+ "box": [
+  280,
+  240
+ ],
+ "clips": {
+  "body": "M196 108 C196 82 176 66 150 68 C122 70 102 92 102 122 C102 152 124 172 152 172 C180 172 198 150 196 108 Z",
+  "wing": "M170 112 C168 136 150 154 122 158 C128 138 146 118 170 112 Z"
+ },
+ "hatch": {
+  "body": {
+   "rect": [
+    100,
+    66,
+    200,
+    174
+   ],
+   "up": true,
+   "clip": "body"
+  },
+  "wing": {
+   "rect": [
+    120,
+    110,
+    172,
+    160
+   ],
+   "up": false,
+   "clip": "wing"
+  }
+ },
+ "pivots": {
+  "upper": {
+   "at": [
+    196,
+    103
+   ],
+   "deg": -14
+  },
+  "lower": {
+   "at": [
+    196,
+    107
+   ],
+   "deg": 10
+  },
+  "tail": {
+   "at": [
+    118,
+    104
+   ],
+   "deg": -6
+  }
+ },
+ "layers": [
+  {
+   "path": "M14 206 C80 202 150 199 268 194",
+   "stroke": 4
+  },
+  {
+   "path": "M214 197 l20 -20 M224 187 l16 3",
+   "stroke": 1.5
+  },
+  {
+   "path": "M234 177 q10 -10 18 -2 q-9 8 -18 2 Z M240 190 q11 -5 16 3 q-10 4 -16 -3 Z",
+   "fill": "face",
+   "stroke": 1
+  },
+  {
+   "path": "M112 106 L94 60 L107 55 L126 100 Z",
+   "fill": "face",
+   "stroke": 1.5,
+   "part": "tail"
+  },
+  {
+   "path": "M104 82 L113 78 M99 70 L109 66 M108 92 L118 88",
+   "stroke": 1,
+   "part": "tail"
+  },
+  {
+   "path": "M140 170 L142 199 M156 170 L159 198 M134 201 L142 199 L150 201 M151 199 L159 198 L167 200",
+   "stroke": 1.5
+  },
+  {
+   "clip": "body",
+   "fill": "face",
+   "stroke": 1.5
+  },
+  {
+   "hatch": "body"
+  },
+  {
+   "hatch": "wing"
+  },
+  {
+   "clip": "wing",
+   "stroke": 1.5
+  },
+  {
+   "path": "M184 120 l8 -2 M180 132 l9 -2 M174 144 l9 -3 M164 156 l8 -3",
+   "stroke": 1,
+   "within": "body"
+  },
+  {
+   "clip": "body",
+   "stroke": 1.5
+  },
+  {
+   "eye": [
+    180,
+    96
+   ],
+   "pupil": 2.2
+  },
+  {
+   "path": "M194 99 C204 97 214 99 223 104 L196 105 Z",
+   "fill": "bill",
+   "stroke": 1.5,
+   "part": "upper"
+  },
+  {
+   "path": "M196 105 L222 105 C212 109 204 110 196 110 Z",
+   "fill": "bill",
+   "stroke": 1.5,
+   "part": "lower"
+  },
+  {
+   "path": "M234 92 A14 14 0 0 1 234 116 M241 84 A24 24 0 0 1 241 124 M248 76 A34 34 0 0 1 248 132",
+   "stroke": 1.5,
+   "part": "arcs"
+  }
+ ],
+ "variants": {
+  "male": {
+   "body_pitch": 6,
+   "wing_pitch": 5,
+   "eye_ring": 0,
+   "bill": "shadow"
+  },
+  "female": {
+   "body_pitch": 6,
+   "wing_pitch": 5,
+   "eye_ring": 0,
+   "bill": "shadow"
+  },
+  "juvenile": {
+   "body_pitch": 6,
+   "wing_pitch": 5,
+   "eye_ring": 0,
+   "bill": "shadow"
+  }
+ },
+ "callouts": [
+  {
+   "id": "bill",
+   "leader": "M212 102 L212 42",
+   "at": [
+    212,
+    29
+   ],
+   "align": "centre",
+   "male": {
+    "en": "LONG, THIN, CURVED",
+    "no": "LANGT, TYNT, BUET",
+    "verified": true
+   },
+   "female": {
+    "en": "LONG, THIN, CURVED",
+    "no": "LANGT, TYNT, BUET",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  },
+  {
+   "id": "plumage",
+   "leader": "M128 132 L74 150",
+   "at": [
+    70,
+    144
+   ],
+   "align": "right",
+   "male": {
+    "en": "BARRED BROWN",
+    "no": "TVERRSTRIPET BRUN",
+    "verified": true
+   },
+   "female": {
+    "en": "BARRED BROWN",
+    "no": "TVERRSTRIPET BRUN",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  }
+ ],
+ "captions": {
+  "male": {
+   "en": "Singing, tail cocked. Beak and tail follow the sound.",
+   "no": "Synger med stjerten til værs. Nebb og hale følger lyden.",
+   "verified": true
+  },
+  "female": {
+   "en": "Female. The sexes are alike.",
+   "no": "Hunn. Kjønnene er like.",
+   "verified": true
+  },
+  "juvenile": {
+   "en": "Juvenile. Drawn like the adults.",
+   "no": "Ungfugl. Tegnet som de voksne.",
+   "verified": false
+  }
+ }
+}
