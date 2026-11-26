@@ -170,6 +170,37 @@ A recognised bird that is not one of the 18 is shown hatched with "not in Tipp".
 - Nothing from the microphone is saved until the user presses save.
 - No account, no upload, no analytics in version 1.
 
+### Phone export (decided by Eirik 2026-11-26)
+
+EKSPORTER in the phone's SAMLING makes one file, `tipp-export-YYYY-MM-DD.zip`, and hands it to the system share sheet (AirDrop, Files). Under VELG it takes what is chosen; otherwise everything the bird filter shows. The desktop's IMPORT FROM PHONE EXPORT reads the same file.
+
+The zip is stored without compression (audio and pictures are already compressed) and holds:
+
+- `manifest.json`
+- `recordings/<id>.<ext>`: the audio as recorded (`m4a` on iOS, `webm` elsewhere), and `recordings/<id>.png`, the 120x40 sonogram thumbnail.
+- `pictures/<id>.<ext>`: each picture as taken (`jpg`, `png` or `heic`).
+
+`manifest.json`:
+
+```json
+{
+  "format": "tipp-export",
+  "version": 1,
+  "exported": "2026-11-26 14:30",
+  "recordings": [
+    { "id": "...", "bird": "svarttrost", "latin": "", "type": "song", "seconds": 12,
+      "date": "2026-11-26 14:02", "confidence": 0.86, "mime": "audio/mp4",
+      "audio": "recordings/<id>.m4a", "thumb": "recordings/<id>.png" }
+  ],
+  "pictures": [
+    { "id": "...", "bird": "svarttrost", "date": "2026-11-26 14:05", "mime": "image/jpeg",
+      "image": "pictures/<id>.jpg" }
+  ]
+}
+```
+
+`bird` is the `index.json` id, or empty for a bird outside Tipp (then `latin` names it). `type` is `song`, `call`, `alarm` or `flight`. Dates are local time. An importer skips an id it already has, and ignores fields it does not know, so later versions can add fields without breaking version 1 readers.
+
 ## Language
 
 English and Norwegian (bokmål), switched in the header. Bird names follow the language, with the other name shown beside it. Norwegian numbers use a decimal comma.
@@ -193,4 +224,4 @@ The Log and Collection screens carry a short field manners note: playing song ou
 | Does the female or juvenile sound differ | Not verified for any bird |
 | Dawn chorus entry order and times | Not verified |
 | Mnemonics | None collected yet |
-| Desktop collection | Designed. Filled by importing the phone app's export, the export format is not specified yet |
+| Desktop collection | Designed. Filled by importing the phone app's export (format under Storage and privacy, decided 2026-11-26); import not built yet |

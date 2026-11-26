@@ -308,5 +308,7 @@
  "coll.deleted": "{n} DELETED",
  "coll.close": "CLOSE",
  "coll.prev_picture": "Previous picture",
- "coll.next_picture": "Next picture"
+ "coll.next_picture": "Next picture",
+ "coll.exporting": "MAKING THE EXPORT",
+ "coll.export_saved": "{file} SAVED"
 }

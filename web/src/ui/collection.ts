@@ -5,16 +5,18 @@
 // last, then VELG, DEL, EKSPORTER. Everything comes from listen/store.ts.
 //
 // Agreed with Eirik 2026-11-26, not in design/: while VELG is on, the action
-// row reads FERDIG, DEL, SLETT (SLETT takes EKSPORTER's place), and SLETT
-// asks once more (SLETT 3?) before it deletes. A tap on a picture opens the
-// viewer (viewer.ts). Not built: the recording detail view. EKSPORTER waits
-// for the phone export format.
+// row reads FERDIG, DEL, EKSPORTER, SLETT, and SLETT asks once more (SLETT 3?)
+// before it deletes. A tap on a picture opens the viewer (viewer.ts).
+// EKSPORTER makes the zip from prd.md (Phone export): what is chosen under
+// VELG, otherwise everything the filter shows. Not built: the recording
+// detail view.
 
 import { index, type IndexBird } from '../data.ts';
 import { deletePicture, deleteRecording, newId, now, pictures, recordings, savePicture, type Picture, type Recording } from '../listen/store.ts';
 import { Btn, box, el, number } from './dom.ts';
 import { upper, type Strings } from './strings.ts';
 import { PictureViewer } from './viewer.ts';
+import { buildExport } from '../listen/export.ts';
 
 const kTypeIds = ['song', 'call', 'alarm', 'flight'] as const;
 const kArmMs = 4000;
@@ -56,6 +58,8 @@ export class CollectionScreen {
   private picCount: HTMLSpanElement;
   private picGrid: HTMLDivElement;
   private actions: Btn[];
+  private actRow: HTMLDivElement;
+  private exporting = false;
   private note: HTMLParagraphElement;
   private fileIn: HTMLInputElement;
 
@@ -113,12 +117,13 @@ export class CollectionScreen {
     this.picCount = el('span', 'label', ph);
     this.picGrid = box(picSec, { display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: '6px' });
     const act = box(this.full, { display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: '6px' });
+    this.actRow = act;
     const style = { height: '44px', padding: '0', minWidth: '0' };
     this.actions = [
       new Btn(act, '', () => { this.selecting = !this.selecting; this.selected.clear(); this.disarm(); this.render(); }, style),
       new Btn(act, '', () => void this.share(), style),
-      // SLETT while VELG is on; otherwise EKSPORTER, hatched: the export format is open (prd.md)
-      new Btn(act, '', () => { if (this.selecting) void this.removeSelected(); }, style),
+      new Btn(act, '', () => void this.exportZip(), style),
+      new Btn(act, '', () => { if (this.selecting) void this.removeSelected(); }, style), // only under VELG
     ];
     this.note = el('p', '', this.full);
     Object.assign(this.note.style, { margin: '0', color: 'var(--inkSoft)' });
@@ -231,13 +236,52 @@ export class CollectionScreen {
     await this.shareFiles(files);
   }
 
-  private async shareFiles(files: File[]) {
+  private async shareFiles(files: File[], download = false) {
     if (!files.length) return;
     try {
       if (navigator.canShare?.({ files })) await navigator.share({ files });
+      else if (download) this.download(files[0]);
       else this.message = this.s.t('coll.share_unavailable');
     } catch { /* the user closed the share sheet */ }
     this.render();
+  }
+
+  // Where the share sheet takes no files (desktop browsers): save it instead.
+  private download(f: File) {
+    const url = URL.createObjectURL(f);
+    const a = el('a', '', document.body);
+    a.href = url;
+    a.download = f.name;
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 10000);
+    this.message = this.s.t('coll.export_saved', { file: f.name });
+  }
+
+  // What EKSPORTER and the counts take: the chosen items under VELG,
+  // otherwise what the bird filter shows.
+  private exportSet(): { recs: Recording[]; pics: Picture[] } {
+    if (this.selecting) return { recs: this.recs.filter((r) => this.selected.has(r.id)), pics: this.pics.filter((p) => this.selected.has(p.id)) };
+    return { recs: this.recs.filter((r) => !this.bird || r.bird === this.bird), pics: this.pics.filter((p) => !this.bird || p.bird === this.bird) };
+  }
+
+  // EKSPORTER: one zip (prd.md, Phone export) to the share sheet.
+  private async exportZip() {
+    const { recs, pics } = this.exportSet();
+    if (this.exporting || recs.length + pics.length === 0) return;
+    this.exporting = true;
+    this.message = this.s.t('coll.exporting');
+    this.render();
+    try {
+      const file = await buildExport(recs, pics);
+      this.message = '';
+      await this.shareFiles([file], true);
+    } catch (e) {
+      this.message = String(e);
+    } finally {
+      this.exporting = false;
+      this.render();
+    }
   }
 
   applyStrings() {
@@ -270,8 +314,12 @@ export class CollectionScreen {
     this.actions[0].text(s.t(this.selecting ? 'coll.done' : 'coll.select')).on(this.selecting);
     this.actions[1].disabled(this.selected.size === 0);
     const n = this.selected.size;
-    this.actions[2].text(s.t(!this.selecting ? 'coll.export' : this.armed ? 'coll.delete_confirm' : 'coll.delete', { n: String(n) }))
-      .on(this.selecting && !!this.armed).disabled(!this.selecting || n === 0);
+    const ex = this.exportSet();
+    this.actRow.style.gridTemplateColumns = `repeat(${this.selecting ? 4 : 3}, minmax(0, 1fr))`;
+    this.actions[2].text(s.t('coll.export')).disabled(this.exporting || ex.recs.length + ex.pics.length === 0);
+    this.actions[3].show(this.selecting)
+      .text(s.t(this.armed ? 'coll.delete_confirm' : 'coll.delete', { n: String(n) }))
+      .on(!!this.armed).disabled(n === 0);
 
     const recs = this.recs.filter((r) => !this.bird || r.bird === this.bird);
     const pics = this.pics.filter((p) => !this.bird || p.bird === this.bird);

@@ -308,5 +308,7 @@
  "coll.deleted": "{n} SLETTET",
  "coll.close": "LUKK",
  "coll.prev_picture": "Forrige bilde",
- "coll.next_picture": "Neste bilde"
+ "coll.next_picture": "Neste bilde",
+ "coll.exporting": "LAGER EKSPORTEN",
+ "coll.export_saved": "{file} LAGRET"
 }
