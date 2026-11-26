@@ -1,0 +1,155 @@
+{
+ "_note": "Tengmalm's owl, M11 batch 8. Verified by SNL: the male's song in the winter forest, a rapid series of clear, deep notes, from January to February, heard 2 to 3 km on quiet nights. No transcription or note count, so pitch, rate and count are sound design guesses: 6 to 14 pure notes near 680 Hz, about 5 a second.",
+ "syllables": {
+  "po": {
+   "dur_ms": 110,
+   "pitch": [
+    [
+     0,
+     650
+    ],
+    [
+     0.3,
+     690
+    ],
+    [
+     1,
+     670
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.15,
+     1
+    ],
+    [
+     0.6,
+     0.85
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.8,
+   "breath": 12,
+   "tension": -10
+  },
+  "po2": {
+   "dur_ms": 120,
+   "pitch": [
+    [
+     0,
+     640
+    ],
+    [
+     0.3,
+     680
+    ],
+    [
+     1,
+     660
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.15,
+     1
+    ],
+    [
+     0.6,
+     0.85
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.8,
+   "breath": 12,
+   "tension": -10
+  }
+ },
+ "types": {
+  "song": {
+   "pause_s": [
+    2.0,
+    6.0
+   ],
+   "length_s": [
+    1.2,
+    3.0
+   ],
+   "transpose_st": 0.5,
+   "avoid_repeat": false,
+   "auto": {
+    "vo_pitch": [
+     0.98,
+     1.02
+    ],
+    "vo_breath": [
+     14,
+     24
+    ],
+    "vo_tension": [
+     10,
+     20
+    ],
+    "vo_rough": [
+     0,
+     4
+    ],
+    "ph_tempo": [
+     96,
+     104
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 1,
+     "sections": [
+      {
+       "pool": [
+        "po",
+        "po2"
+       ],
+       "count": [
+        6,
+        14
+       ],
+       "share": 1.0,
+       "gap_ms": [
+        70,
+        100
+       ]
+      }
+     ]
+    }
+   ],
+   "overrides": [
+    {
+     "_note": "Males sing (SNL).",
+     "when": {
+      "sex": "female"
+     },
+     "active": false
+    },
+    {
+     "_note": "Heard on quiet nights (SNL).",
+     "when": {
+      "time": "day"
+     },
+     "active": false
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,348 @@
+{
+ "_note": "Nightjar, M11 batch 8. Verified by SNL: a very special whirring song like a spinning wheel (local name huldrerokk); the call a frog-like, plaintive «kruit»; silent in flight except in courtship, when it claps its wings over its back. No pitch, length or time given, so all shapes are sound design guesses: the song long breathy notes pulsed at 30 Hz, now and then a step down in pitch; the call a short rising and falling 'kruit'; flight 1 to 3 wing claps from the drum source.",
+ "syllables": {
+  "churr": {
+   "dur_ms": 2000,
+   "pitch": [
+    [
+     0,
+     1250
+    ],
+    [
+     1,
+     1250
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.04,
+     1
+    ],
+    [
+     0.96,
+     1
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.65,
+   "breath": 40,
+   "rough": 30,
+   "trill": {
+    "hz": 30,
+    "depth_st": 0.8,
+    "am": 0.9
+   }
+  },
+  "churr_lo": {
+   "dur_ms": 1600,
+   "pitch": [
+    [
+     0,
+     1050
+    ],
+    [
+     1,
+     1050
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.05,
+     1
+    ],
+    [
+     0.95,
+     1
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.65,
+   "breath": 40,
+   "rough": 30,
+   "trill": {
+    "hz": 27,
+    "depth_st": 0.8,
+    "am": 0.9
+   }
+  },
+  "kruit": {
+   "dur_ms": 200,
+   "pitch": [
+    [
+     0,
+     900
+    ],
+    [
+     0.5,
+     1400
+    ],
+    [
+     1,
+     1100
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.12,
+     1
+    ],
+    [
+     0.6,
+     0.8
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.75,
+   "rough": 25,
+   "tension": -10
+  },
+  "clap": {
+   "dur_ms": 90,
+   "pitch": [
+    [
+     0,
+     1600
+    ],
+    [
+     1,
+     1550
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.02,
+     1
+    ],
+    [
+     0.5,
+     0.8
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.9,
+   "drum": {
+    "rate": [
+     12.0,
+     12.0
+    ]
+   }
+  }
+ },
+ "types": {
+  "song": {
+   "pause_s": [
+    1.0,
+    4.0
+   ],
+   "length_s": [
+    4.0,
+    10.0
+   ],
+   "transpose_st": 0.3,
+   "avoid_repeat": false,
+   "auto": {
+    "vo_pitch": [
+     0.99,
+     1.01
+    ],
+    "vo_breath": [
+     36,
+     46
+    ],
+    "vo_tension": [
+     40,
+     52
+    ],
+    "vo_rough": [
+     24,
+     34
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 1,
+     "sections": [
+      {
+       "pool": [
+        "churr"
+       ],
+       "count": [
+        2,
+        4
+       ],
+       "share": 0.75,
+       "gap_ms": [
+        0,
+        20
+       ]
+      },
+      {
+       "pool": [
+        "churr_lo"
+       ],
+       "count": [
+        1,
+        1
+       ],
+       "share": 0.25,
+       "gap_ms": [
+        0,
+        20
+       ],
+       "lead_gap_ms": [
+        0,
+        20
+       ]
+      }
+     ]
+    }
+   ],
+   "overrides": [
+    {
+     "_note": "Arrives late May (SNL).",
+     "when": {
+      "season": "winter"
+     },
+     "active": false
+    },
+    {
+     "_note": "Leaves in August to September (SNL).",
+     "when": {
+      "season": "autumn"
+     },
+     "active": false
+    }
+   ]
+  },
+  "call": {
+   "pause_s": [
+    2.0,
+    6.0
+   ],
+   "length_s": [
+    0.2,
+    1.4
+   ],
+   "avoid_repeat": false,
+   "auto": {
+    "vo_pitch": [
+     0.98,
+     1.02
+    ],
+    "vo_breath": [
+     16,
+     26
+    ],
+    "vo_tension": [
+     40,
+     52
+    ],
+    "vo_rough": [
+     20,
+     30
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 1,
+     "sections": [
+      {
+       "pool": [
+        "kruit"
+       ],
+       "count": [
+        1,
+        3
+       ],
+       "share": 1.0,
+       "gap_ms": [
+        500,
+        900
+       ]
+      }
+     ]
+    }
+   ],
+   "overrides": []
+  },
+  "flight": {
+   "pause_s": [
+    2.0,
+    6.0
+   ],
+   "length_s": [
+    0.1,
+    1.0
+   ],
+   "avoid_repeat": false,
+   "auto": {
+    "vo_pitch": [
+     0.98,
+     1.02
+    ],
+    "vo_breath": [
+     16,
+     26
+    ],
+    "vo_tension": [
+     20,
+     32
+    ],
+    "vo_rough": [
+     20,
+     32
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 1,
+     "sections": [
+      {
+       "pool": [
+        "clap"
+       ],
+       "count": [
+        1,
+        3
+       ],
+       "share": 1.0,
+       "gap_ms": [
+        250,
+        450
+       ]
+      }
+     ]
+    }
+   ],
+   "overrides": []
+  }
+ }
+}

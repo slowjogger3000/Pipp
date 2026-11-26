@@ -66,7 +66,7 @@ The aim: the birds a Norwegian beginner is most likely to hear in a year, spread
 | 45 | Farmland | Sanglerke | Skylark | Alauda arvensis | `sanglerke` | long song in flight |
 | 46 | Farmland | Gulspurv | Yellowhammer | Emberiza citrinella | `gulspurv` | |
 | 47 | Farmland | Vipe | Lapwing | Vanellus vanellus | `vipe` | |
-| 48 | Night | Perlugle | Tengmalm's owl | Aegolius funereus | `perlugle` | |
+| 48 | Night | Perleugle | Tengmalm's owl | Aegolius funereus | `perleugle` | |
 | 49 | Night | Åkerrikse | Corncrake | Crex crex | `akerrikse` | |
 | 50 | Night | Nattravn | Nightjar | Caprimulgus europaeus | `nattravn` | long churring |
 
@@ -709,6 +709,63 @@ Source: Store norske leksikon (snl.no), one page per bird, read in full on 2026-
 | Population | 7500 to 10 000 pairs (2015), probably fewer now; about 90 % decline since the 1970s |
 | Status | CR |
 | Lookalikes | In flight the broad, rounded wingtips set it apart from every other Norwegian wader |
+
+## M11 batch 8, night, checked 2026-11-26
+
+Source: Store norske leksikon (snl.no), one page per bird, read in full on 2026-11-26. Tengmalm's owl is perleugle in SNL (snl.no/perlugle does not exist), so the folder is `perleugle`. None of the three pages names a lookalike.
+
+### Perleugle (folder `perleugle`), snl.no/perleugle, Rolf Terje Kroglund, updated 2026-11-08
+
+| Field | Value |
+|---|---|
+| Size | 25 to 27 cm, wingspan 50 to 62 cm, 100 to 150 g; the female heaviest; the second-smallest owl in Norway |
+| Plumage | Back, crown and nape brownish with many round white spots, the "pearls" of the name; underside pale with brown streaks |
+| Juvenile | Uniformly chocolate-brown |
+| Sexes | Only weight given; no plumage difference stated |
+| Bill, eyes, feet | Not described |
+| Song | Males heard in the winter forest: a rapid series of clear, deep notes; from January to February; on quiet nights heard 2 to 3 km. No transcription, note count or rate |
+| Calls | Not described |
+| Habitat | Coniferous forest; most numerous in Østlandet and Trøndelag |
+| Food | Mainly small rodents, hunted by ear from a low perch, moving on after a few minutes; by day sits close to the trunk of a dense spruce |
+| Nest | Hollow trees; takes nest boxes filled with wood chips |
+| Eggs | 3 to 7 white, usually March to April; the female alone sits 25 to 32 days; young fly at 5 to 6 weeks |
+| Movement | In Norway all year; males usually stay, females and young wander |
+| Population | Varies strongly with the small-rodent years; no figure |
+| Status | LC |
+
+### Åkerrikse (folder `akerrikse`), snl.no/åkerrikse, Helene Lampe, updated 2026-11-04
+
+| Field | Value |
+|---|---|
+| Size | A little larger than a thrush, about 100 to 200 g; length not given |
+| Plumage | Brown and mottled above, yellow-brown with cross bars below, grey neck region; short bill and tail |
+| Sexes, juvenile, colours of bill, eye and legs | Not described |
+| Voice | Hard to see, but the sound is very distinctive: a single-toned creaking or rattling that can go on for hours, mostly in the evening and at night. No transcription |
+| Habitat | Cultivated land; nests on farmland |
+| Food, eggs, incubation | Not described |
+| Migration | Migrant; breeds sparsely along the coast and probably winters mainly in southern Africa. Arrival and departure not given |
+| Population | About 100 pairs in 1994; 204 singing males in 2013 (154 in Østlandet); 5 confirmed breedings in 2013; mainly the coast from Vest-Agder to Møre og Romsdal and some places in Østlandet |
+| Status | CR; mowing machines are the threat |
+| Folklore | Coming up to mountain farms foretold a bad harvest; staying near houses foretold a death |
+
+### Nattravn (folder `nattravn`), snl.no/nattravn, Tom Schandy, updated 2026-11-08
+
+| Field | Value |
+|---|---|
+| Size | 24 to 28 cm, 60 to 90 g |
+| Plumage | Grey-brown and mottled, fairly long tail, long wings; one of the best camouflages of any bird |
+| Bill | Small and weak, a very wide gape fringed with bristles |
+| Sexes, juvenile, eye, legs | Not described |
+| Song | A very special whirring song, like a spinning wheel (local name huldrerokk). Pitch, length, time and carry not given |
+| Call | Frog-like but plaintive «kruit» |
+| Other sound | Silent in flight except in courtship, when it claps its wings over its body |
+| Habitat | Hilly forest with sparse, open pine; mainly lowland around the Oslofjord and down the Sørlandet coast |
+| Food | Insects caught in flight at night: cockchafers, dung beetles, moths |
+| Nest | A scrape in the ground |
+| Eggs | 2 white with grey-blue and beige marks; mostly the female sits 17 to 18 days |
+| Migration | Arrives late in May, leaves in August to September for tropical Africa |
+| Population | 715 to 1225 pairs (BirdLife Norge) |
+| Status | LC |
 
 ## Svarttrost, checked 2026-11-26
 

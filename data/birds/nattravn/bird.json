@@ -1,0 +1,95 @@
+{
+ "_note": "Field guide text for the nightjar, both languages. SNL gives no pitch or length, so the note shapes are [TO VERIFY]. Facts from birds.md (SNL, checked 2026-11-26). Norwegian wording is mine, Eirik to check. calendar: one letter per month from January, y yes, n no, ? not known.",
+ "xeno_canto": "https://xeno-canto.org/species/caprimulgus-europaeus",
+ "facts": {
+  "length": {
+   "en": "24 to 28 cm, 60 to 90 g",
+   "no": "24 til 28 cm, 60 til 90 g",
+   "verified": true
+  },
+  "broods": {
+   "en": "2 white eggs with grey-blue and beige marks; mostly the female sits 17 to 18 days",
+   "no": "2 hvite egg med gråblå og beige flekker; mest hunnen ruger 17 til 18 dager",
+   "verified": true
+  },
+  "range": {
+   "en": "Mainly lowland around the Oslofjord and down the Sørlandet coast; 715 to 1225 pairs",
+   "no": "Mest i lavlandet rundt Oslofjorden og nedover sørlandskysten; 715 til 1225 par",
+   "verified": true
+  },
+  "habitat": {
+   "en": "Hilly forest with sparse, open pine",
+   "no": "Småkupert skog med glissen, åpen furuskog",
+   "verified": true
+  },
+  "food": {
+   "en": "Insects caught in flight at night: cockchafers, dung beetles, moths",
+   "no": "Insekter tatt i flukt om natten: oldenborrer, tordivler, nattsvermere",
+   "verified": true
+  },
+  "status": {
+   "en": "LC, least concern, Norwegian red list",
+   "no": "LC, livskraftig, norsk rødliste",
+   "verified": true
+  },
+  "nest": {
+   "en": "A scrape in the ground",
+   "no": "En grop på bakken",
+   "verified": true
+  }
+ },
+ "sings": {
+  "male": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "female": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "song_notes": {
+  "en": "A very special whirring song, like a spinning wheel; hence the local name huldrerokk. The call is a frog-like but plaintive «kruit». It flies silently except in courtship, when it claps its wings over its back. [TO VERIFY] SNL gives no pitch or length, so the notes Tipp plays are a stand-in.",
+  "no": "En svært spesiell surrende sang, som en rokk; derav navnet huldrerokk. Lokkelyden er en froskeaktig, men klagende «kruit». Flukten er lydløs unntatt under kurtise, da den klapper vingene sammen over kroppen. [TO VERIFY] SNL gir ingen tonehøyde eller lengde, så tonene Tipp spiller er en stedfortreder.",
+  "verified": true
+ },
+ "mnemonic": {
+  "en": "",
+  "no": "",
+  "verified": false
+ },
+ "types": {
+  "song": {
+   "en": "A whirring song, like a spinning wheel.",
+   "no": "En surrende sang, som en rokk.",
+   "verified": true
+  },
+  "call": {
+   "en": "A frog-like but plaintive «kruit».",
+   "no": "En froskeaktig, men klagende «kruit».",
+   "verified": true
+  },
+  "alarm": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "flight": {
+   "en": "Wing claps in courtship; otherwise silent in flight.",
+   "no": "Vingeklapp under kurtise; ellers lydløs i flukt.",
+   "verified": true
+  }
+ },
+ "calendar": {
+  "present": "nnnnyyyy?nnn",
+  "sings": "nnnn????nnnn",
+  "note": {
+   "en": "Arrives late in May, leaves early, in August to September, for tropical Africa.",
+   "no": "Kommer sist i mai og drar tidlig, i august til september, til det tropiske Afrika.",
+   "verified": true
+  }
+ },
+ "lookalikes": []
+}

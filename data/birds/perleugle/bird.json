@@ -1,0 +1,95 @@
+{
+ "_note": "Field guide text for Tengmalm's owl, both languages. SNL gives no transcription, so the note shapes are [TO VERIFY]. Facts from birds.md (SNL, checked 2026-11-26). Norwegian wording is mine, Eirik to check. calendar: one letter per month from January, y yes, n no, ? not known.",
+ "xeno_canto": "https://xeno-canto.org/species/aegolius-funereus",
+ "facts": {
+  "length": {
+   "en": "25 to 27 cm, wingspan 50 to 62 cm, 100 to 150 g; the female heaviest",
+   "no": "25 til 27 cm, vingespenn 50 til 62 cm, 100 til 150 g; hunnen tyngst",
+   "verified": true
+  },
+  "broods": {
+   "en": "3 to 7 white eggs, usually March to April; the female alone sits 25 to 32 days",
+   "no": "3 til 7 hvite egg, oftest mars til april; hunnen alene ruger 25 til 32 dager",
+   "verified": true
+  },
+  "range": {
+   "en": "Most numerous in Østlandet and Trøndelag; numbers swing with the small-rodent years",
+   "no": "Mest tallrik på Østlandet og i Trøndelag; bestanden svinger med smågnagerårene",
+   "verified": true
+  },
+  "habitat": {
+   "en": "Coniferous forest",
+   "no": "Barskog",
+   "verified": true
+  },
+  "food": {
+   "en": "Mainly small rodents, hunted by ear from a low perch",
+   "no": "Mest smågnagere, jaktet etter hørselen fra en lav post",
+   "verified": true
+  },
+  "status": {
+   "en": "LC, least concern, Norwegian red list",
+   "no": "LC, livskraftig, norsk rødliste",
+   "verified": true
+  },
+  "nest": {
+   "en": "In hollow trees; takes nest boxes filled with wood chips",
+   "no": "I hule trær; tar nestekasser fylt med flis",
+   "verified": true
+  }
+ },
+ "sings": {
+  "male": {
+   "en": "A rapid series of clear, deep notes",
+   "no": "En rask serie klare, dype toner",
+   "verified": true
+  },
+  "female": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "song_notes": {
+  "en": "Males sing in the winter forest from January to February: a rapid series of clear, deep notes that can carry 2 to 3 km on quiet nights. [TO VERIFY] SNL gives no transcription or note count, so the notes Tipp plays are a stand-in. Brown above with many round white spots, the pearls that give it its Norwegian name.",
+  "no": "Hannene synger i vinterskogen fra januar til februar: en rask serie klare, dype toner som kan høres 2 til 3 km stille netter. [TO VERIFY] SNL gir ingen gjengivelse eller antall toner, så tonene Tipp spiller er en stedfortreder. Brun ovenpå med mange runde hvite flekker, perlene som gir den navnet.",
+  "verified": true
+ },
+ "mnemonic": {
+  "en": "",
+  "no": "",
+  "verified": false
+ },
+ "types": {
+  "song": {
+   "en": "A rapid series of clear, deep notes.",
+   "no": "En rask serie klare, dype toner.",
+   "verified": true
+  },
+  "call": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "alarm": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "flight": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "calendar": {
+  "present": "yyyyyyyyyyyy",
+  "sings": "yy??????????",
+  "note": {
+   "en": "In Norway all year: the males mostly stay, females and young wander. Song from January to February; eggs March to April.",
+   "no": "I Norge hele året: hannene blir som regel, hunner og unge streifer. Sang fra januar til februar; egg mars til april.",
+   "verified": true
+  }
+ },
+ "lookalikes": []
+}

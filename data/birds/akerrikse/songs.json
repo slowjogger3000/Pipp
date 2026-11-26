@@ -1,0 +1,153 @@
+{
+ "_note": "Corncrake, M11 batch 8. Verified by SNL: a single-toned creaking or rattling that can go on for hours, mostly in the evening and at night. No transcription, so the shape is a sound design guess: rough, breathy rasps at one pitch, each rattled by a fast amplitude trill, in pairs with short pauses so the series runs on.",
+ "syllables": {
+  "rasp": {
+   "dur_ms": 220,
+   "pitch": [
+    [
+     0,
+     2100
+    ],
+    [
+     1,
+     2100
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.08,
+     1
+    ],
+    [
+     0.8,
+     0.9
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.7,
+   "rough": 70,
+   "breath": 45,
+   "trill": {
+    "hz": 22,
+    "depth_st": 0.6,
+    "am": 0.9
+   }
+  },
+  "rasp2": {
+   "dur_ms": 200,
+   "pitch": [
+    [
+     0,
+     2050
+    ],
+    [
+     1,
+     2050
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.08,
+     1
+    ],
+    [
+     0.8,
+     0.9
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.7,
+   "rough": 70,
+   "breath": 45,
+   "trill": {
+    "hz": 24,
+    "depth_st": 0.6,
+    "am": 0.9
+   }
+  }
+ },
+ "types": {
+  "song": {
+   "pause_s": [
+    0.25,
+    0.5
+   ],
+   "length_s": [
+    0.5,
+    0.8
+   ],
+   "transpose_st": 0.2,
+   "avoid_repeat": false,
+   "auto": {
+    "vo_pitch": [
+     0.99,
+     1.01
+    ],
+    "vo_breath": [
+     40,
+     50
+    ],
+    "vo_tension": [
+     40,
+     50
+    ],
+    "vo_rough": [
+     60,
+     72
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 1,
+     "sections": [
+      {
+       "pool": [
+        "rasp",
+        "rasp2"
+       ],
+       "count": [
+        2,
+        2
+       ],
+       "share": 1.0,
+       "gap_ms": [
+        200,
+        260
+       ]
+      }
+     ]
+    }
+   ],
+   "overrides": [
+    {
+     "_note": "Mostly evening and night (SNL).",
+     "when": {
+      "time": "day"
+     },
+     "active": false
+    },
+    {
+     "_note": "Migrant, winters probably in southern Africa (SNL).",
+     "when": {
+      "season": "winter"
+     },
+     "active": false
+    }
+   ]
+  }
+ }
+}
