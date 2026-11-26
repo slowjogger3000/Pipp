@@ -108,15 +108,12 @@
    }
   },
   {
-   "name": {
-    "en": "Redwing",
-    "no": "Rødvingetrost"
-   },
    "text": {
-    "en": "Smaller, with a rust-red patch under the wing.",
-    "no": "Mindre, med en rustrød flekk under vingen.",
+    "en": "Like the redwing, which has a clear pale stripe over the eye and a rust-red patch under the wing.",
+    "no": "Ligner rødvingetrosten, som har en tydelig lys stripe over øyet og en rustrød flekk under vingen.",
     "verified": true
-   }
+   },
+   "id": "rodvingetrost"
   }
  ]
 }

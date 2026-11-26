@@ -1,0 +1,116 @@
+{
+ "_note": "Field guide text for this bird, both languages. Facts come from birds.md (M11, SNL). A field with verified false shows [TO VERIFY]. Norwegian wording is mine, Eirik to check. calendar rows: one letter per month from January, y yes, n no, ? not known.",
+ "xeno_canto": "https://xeno-canto.org/species/turdus-iliacus",
+ "facts": {
+  "length": {
+   "en": "21 cm, 60 to 80 g",
+   "no": "21 cm, 60 til 80 g",
+   "verified": true
+  },
+  "broods": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "range": {
+   "en": "Forest over the whole country",
+   "no": "Skog over hele landet",
+   "verified": true
+  },
+  "habitat": {
+   "en": "Forest from towns to mountain forest, also willow and juniper scrub",
+   "no": "Skog fra by til fjellskog, også vierkratt og einerkratt",
+   "verified": true
+  },
+  "food": {
+   "en": "Snails, worms, insects; berries in autumn",
+   "no": "Snegler, meitemark, insekter; bær om høsten",
+   "verified": true
+  },
+  "status": {
+   "en": "LC, least concern",
+   "no": "LC, livskraftig",
+   "verified": true
+  },
+  "nest": {
+   "en": "Low and open, by a trunk or in a bush, 4 to 6 eggs",
+   "no": "Lavt og åpent, inntil en stamme eller i en busk, 4 til 6 egg",
+   "verified": true
+  }
+ },
+ "sings": {
+  "male": {
+   "en": "Sings",
+   "no": "Synger",
+   "verified": false
+  },
+  "female": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "song_notes": {
+  "en": "A descending, melodic phrase followed by a faint twitter. The song varies in regional dialects. Flocks migrating at night are heard by a thin «siiip».",
+  "no": "En fallende, melodisk strofe fulgt av en svak kvitring. Sangen varierer i dialekter i ulike deler av landet. Flokker som trekker om natten høres på et tynt «siiip».",
+  "verified": true
+ },
+ "mnemonic": {
+  "en": "",
+  "no": "",
+  "verified": false
+ },
+ "types": {
+  "song": {
+   "en": "A falling phrase, then a faint twitter.",
+   "no": "En fallende strofe, så en svak kvitring.",
+   "verified": true
+  },
+  "call": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "alarm": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "flight": {
+   "en": "A thin «siiip», heard from night flocks.",
+   "no": "Et tynt «siiip», hørt fra trekkflokker om natten.",
+   "verified": true
+  }
+ },
+ "parts": {
+  "phrase": {
+   "en": "FALLING PHRASE",
+   "no": "FALLENDE STROFE",
+   "verified": true
+  },
+  "twitter": {
+   "en": "FAINT TWITTER",
+   "no": "SVAK KVITRING",
+   "verified": true
+  }
+ },
+ "calendar": {
+  "present": "???yyyyyy???",
+  "sings": "????????????",
+  "note": {
+   "en": "Migrant, winters in south-west Europe; returns in March to April, leaves in September to November. [TO VERIFY] singing months.",
+   "no": "Trekkfugl, overvintrer i Sørvest-Europa; kommer i mars til april, drar i september til november. [TO VERIFY] månedene med sang.",
+   "verified": true
+  }
+ },
+ "lookalikes": [
+  {
+   "id": "maltrost",
+   "text": {
+    "en": "Like the song thrush; the redwing has a clear pale stripe over the eye and a rust-red patch under the wing.",
+    "no": "Ligner måltrosten; rødvingetrosten har en tydelig lys stripe over øyet og en rustrød flekk under vingen.",
+    "verified": true
+   }
+  }
+ ]
+}

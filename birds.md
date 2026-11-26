@@ -206,6 +206,98 @@ Source: Store norske leksikon (snl.no), one page per bird, read in full on 2026-
 - Crow and wood pigeon calls, magpie song shape, greenfinch calls: not described beyond the lines above.
 - Every juvenile and most female plate values.
 
+## M11 batch 2, forest birds part 1, checked 2026-11-26
+
+Source: Store norske leksikon (snl.no), one page per bird, read in full on 2026-11-26. Transcriptions are SNL's own spelling.
+
+### Rødvingetrost (folder `rodvingetrost`), snl.no/rødvingetrost, Tom Schandy, updated 2026-08-05
+
+| Field | Value |
+|---|---|
+| Length, weight | 21 cm, 60 to 80 g |
+| Plumage | A clear pale stripe over the eye and a well-visible rust-red patch under the wing. Sexes and juvenile not described |
+| Song | A descending, melodic phrase followed by a faint twitter. Varies in regional dialects across the country |
+| Flight call | Flocks migrating at night are heard by a thin «siiip» |
+| Alarm | Intense alarm calls near the nest; no transcription |
+| Habitat | Forest from towns to mountain forest; also willow scrub on mountains and juniper scrub on the coast |
+| Range in Norway | Forest over the whole country |
+| Food | Snails, earthworms, insects; many berries in autumn, blueberry and crowberry |
+| Nest | Low and open, by a trunk or in a bush, sometimes on the ground |
+| Eggs | 4 to 6 |
+| Migration | Mainly a migrant, winters in south-west Europe; returns March to April, leaves September to November |
+| Population | 1 to 1,5 million pairs (BirdLife Norge) |
+| Status | LC in Norway (NT globally) |
+| Versus song thrush | Like the song thrush; the redwing has a clear pale stripe over the eye and a rust-red patch under the wing |
+
+### Gråtrost (folder `gratrost`), snl.no/gråtrost, Tom Schandy and Audun Rugstad, updated 2026-11-06
+
+| Field | Value |
+|---|---|
+| Length, weight | 25 cm, 80 to 130 g, one of the largest thrushes |
+| Plumage | Ash-grey head, nape and rump, brown upper back, rust-yellow breast with black spots, white belly. Sexes and juvenile not described |
+| Song | Not very melodic: a somewhat monotonous chattering with «sjæk-sjæk-sjøl» sounds put in |
+| Calls | Not described beyond the song |
+| Habitat | Treeless land and mountain birch wood; more and more in towns in Østlandet; feeds on fields and lawns; gardens for berries in late summer and autumn |
+| Range in Norway | The whole country |
+| Food | Insects and spiders, above all earthworms |
+| Nest | Tree forks, bushes, ledges, buildings; often in colonies, defends the nest hard against crows and raptors |
+| Eggs | 5 to 6 |
+| Broods | Two possible in southern Norway |
+| Migration | Migrant and wanderer; many winter on the coast north to Troms, others in Britain and western Europe |
+| Population | 0,35 to 0,9 million pairs (BirdLife Norge), falling about 3 % a year 1996 to 2013 |
+| Status | LC |
+| Lookalikes | None named |
+
+### Svarthvit fluesnapper (folder `svarthvitfluesnapper`), snl.no/svarthvit_fluesnapper, Tom Schandy, updated 2026-11-08
+
+| Field | Value |
+|---|---|
+| Length | About 13 cm, a little smaller than a great tit |
+| Male | Mostly strong black and white. Males vary from brown, female-like plumage to fully black; the darkest are usually the oldest |
+| Female | Grey-brown above, white below |
+| Juvenile | Not described |
+| Song | Short but loud and rhythmic, about 2 s, with repetitions and sudden changes of rhythm and pitch |
+| Calls | Not described |
+| Habitat | Gardens and forest up into the birch belt |
+| Range in Norway | Large parts of the country |
+| Food | Insects |
+| Nest | Holes in trees, often nest boxes |
+| Eggs | 4 to 7 |
+| Broods | Bigamy is regular (one male, two females) |
+| Migration | Migrant, winters in Africa south of the Sahara; returns around the turn of April and May |
+| Population | 630 000 to 1 350 000 pairs, falling about 2 % a year 1996 to 2013 |
+| Status | LC |
+| Lookalikes | Only the atlas flycatcher, a separate species in north-west Africa; no field marks given |
+
+### Granmeis (folder `granmeis`), snl.no/granmeis, Olav Hogstad, updated 2026-08-04
+
+| Field | Value |
+|---|---|
+| Length, weight | About 12 cm, 11 to 14 g, fairly large head with a full nape |
+| Plumage | Light grey above with a long pale stripe along the wing (the main mark), matt black cap, bright white cheeks, black throat patch. Birds on the west coast have less white cheeks |
+| Male | A larger throat patch means higher rank |
+| Female | Not described separately |
+| Juvenile | Like the adults |
+| Song | A plaintive «tiuuu tiuuu tiuuu», more rarely a slightly buzzing «zi-zi-zerrrl». Mostly in the breeding season, also in late summer and now and then in winter |
+| Call | «titi-tæææ-tæææ» |
+| Alarm | An agitated «spitt! spitt!» and a quick «sisisi» |
+| Habitat | Conifer and mixed forest, also mountain birch |
+| Range in Norway | The whole country, mountains too |
+| Food | Insects and spiders in summer, seeds in winter; hoards 50 000 to 80 000 items over a summer |
+| Nest | Hole the pair digs in a rotten stump |
+| Eggs | 7 to 9, laid May to June |
+| Migration | Resident; some young birds wander south-west in autumn |
+| Population | 500 000 to 800 000 pairs |
+| Status | VU, vulnerable, Norwegian red list |
+| Versus marsh tit | Very like the marsh tit (løvmeis), which looks slimmer and browner, lacks the pale wing stripe and has off-white cheeks |
+
+### Batch 2, to verify
+
+- Pied flycatcher: no call or alarm described; the song's notes are not described beyond rhythm and length.
+- Redwing: dialects not modelled (DIALECT dropped for version 1); no alarm transcription.
+- Fieldfare: no calls described.
+- Every juvenile except the willow tit's, and the female redwing, fieldfare and willow tit.
+
 ## Svarttrost, checked 2026-11-26
 
 Sources used: Store norske leksikon (snl.no/svarttrost), which follows Artsdatabanken's classification and cites BirdLife Norge for its population figure. A search excerpt from Fuglevennen (fuglevennen.no). A BirdLife Norge press release from 2021. Artsdatabanken's own species page and the full Fuglevennen page could not be opened, so check those two when possible.

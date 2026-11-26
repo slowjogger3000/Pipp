@@ -1,0 +1,108 @@
+{
+ "_note": "Field guide text for this bird, both languages. Facts come from birds.md (M11, SNL). A field with verified false shows [TO VERIFY]. Norwegian wording is mine, Eirik to check. calendar rows: one letter per month from January, y yes, n no, ? not known.",
+ "xeno_canto": "https://xeno-canto.org/species/poecile-montanus",
+ "facts": {
+  "length": {
+   "en": "About 12 cm, 11 to 14 g",
+   "no": "Omtrent 12 cm, 11 til 14 g",
+   "verified": true
+  },
+  "broods": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "range": {
+   "en": "The whole country, mountains too",
+   "no": "Hele landet, også fjellet",
+   "verified": true
+  },
+  "habitat": {
+   "en": "Conifer and mixed forest, mountain birch",
+   "no": "Bar- og blandingsskog, fjellbjørkeskog",
+   "verified": true
+  },
+  "food": {
+   "en": "Insects and spiders, seeds in winter; hoards",
+   "no": "Insekter og edderkopper, frø om vinteren; hamstrer",
+   "verified": true
+  },
+  "status": {
+   "en": "VU, vulnerable, Norwegian red list",
+   "no": "VU, sårbar, norsk rødliste",
+   "verified": true
+  },
+  "nest": {
+   "en": "A hole it digs in a rotten stump, 7 to 9 eggs",
+   "no": "Et hull den hakker i en råtten stubbe, 7 til 9 egg",
+   "verified": true
+  }
+ },
+ "sings": {
+  "male": {
+   "en": "Sings",
+   "no": "Synger",
+   "verified": false
+  },
+  "female": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "song_notes": {
+  "en": "A plaintive «tiuuu tiuuu tiuuu», more rarely a slightly buzzing «zi-zi-zerrrl»; mostly in the breeding season, also in late summer and now and then in winter. Call «titi-tæææ-tæææ»; alarm an agitated «spitt! spitt!» and a quick «sisisi».",
+  "no": "Et klagende «tiuuu tiuuu tiuuu», sjeldnere et litt summende «zi-zi-zerrrl»; mest i hekketiden, også på sensommeren og av og til om vinteren. Lokker «titi-tæææ-tæææ»; varsler med opphisset «spitt! spitt!» og raskt «sisisi».",
+  "verified": true
+ },
+ "mnemonic": {
+  "en": "",
+  "no": "",
+  "verified": false
+ },
+ "types": {
+  "song": {
+   "en": "Plaintive «tiuuu tiuuu tiuuu», rarely «zi-zi-zerrrl».",
+   "no": "Klagende «tiuuu tiuuu tiuuu», sjeldnere «zi-zi-zerrrl».",
+   "verified": true
+  },
+  "call": {
+   "en": "«titi-tæææ-tæææ».",
+   "no": "«titi-tæææ-tæææ».",
+   "verified": true
+  },
+  "alarm": {
+   "en": "Agitated «spitt! spitt!» and a quick «sisisi».",
+   "no": "Opphisset «spitt! spitt!» og raskt «sisisi».",
+   "verified": true
+  },
+  "flight": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "parts": {},
+ "calendar": {
+  "present": "yyyyyyyyyyyy",
+  "sings": "????yy?y????",
+  "note": {
+   "en": "Resident; some young birds wander south-west in autumn. Sings mostly in the breeding season (eggs in May to June), also in late summer and now and then in winter. [TO VERIFY] the other months.",
+   "no": "Standfugl; noen unge fugler streifer mot sørvest om høsten. Synger mest i hekketiden (egg i mai til juni), også på sensommeren og av og til om vinteren. [TO VERIFY] de andre månedene.",
+   "verified": true
+  }
+ },
+ "lookalikes": [
+  {
+   "name": {
+    "en": "Marsh tit",
+    "no": "Løvmeis"
+   },
+   "text": {
+    "en": "Very alike. The marsh tit looks slimmer and browner, has no pale wing stripe and off-white cheeks.",
+    "no": "Svært lik. Løvmeisen ser slankere og brunere ut, mangler den lyse vingestripen og har gråhvite kinn.",
+    "verified": true
+   }
+  }
+ ]
+}

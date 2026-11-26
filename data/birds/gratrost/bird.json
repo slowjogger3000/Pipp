@@ -1,0 +1,96 @@
+{
+ "_note": "Field guide text for this bird, both languages. Facts come from birds.md (M11, SNL). A field with verified false shows [TO VERIFY]. Norwegian wording is mine, Eirik to check. calendar rows: one letter per month from January, y yes, n no, ? not known.",
+ "xeno_canto": "https://xeno-canto.org/species/turdus-pilaris",
+ "facts": {
+  "length": {
+   "en": "25 cm, 80 to 130 g",
+   "no": "25 cm, 80 til 130 g",
+   "verified": true
+  },
+  "broods": {
+   "en": "Two possible in the south",
+   "no": "To kull mulig i sør",
+   "verified": true
+  },
+  "range": {
+   "en": "The whole country",
+   "no": "Hele landet",
+   "verified": true
+  },
+  "habitat": {
+   "en": "Open land and mountain birch; towns in Østlandet",
+   "no": "Åpent land og fjellbjørkeskog; byer på Østlandet",
+   "verified": true
+  },
+  "food": {
+   "en": "Earthworms above all, insects, berries",
+   "no": "Meitemark fremfor alt, insekter, bær",
+   "verified": true
+  },
+  "status": {
+   "en": "LC, least concern",
+   "no": "LC, livskraftig",
+   "verified": true
+  },
+  "nest": {
+   "en": "Tree forks, bushes, ledges; often in colonies, 5 to 6 eggs",
+   "no": "Tregreiner, busker, hyller; ofte i kolonier, 5 til 6 egg",
+   "verified": true
+  }
+ },
+ "sings": {
+  "male": {
+   "en": "Sings",
+   "no": "Synger",
+   "verified": false
+  },
+  "female": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "song_notes": {
+  "en": "Not very melodic: a somewhat monotonous chattering with «sjæk-sjæk-sjøl» sounds put in.",
+  "no": "Ikke særlig melodisk: en noe monoton skvatring med innlagte «sjæk-sjæk-sjøl»-lyder.",
+  "verified": true
+ },
+ "mnemonic": {
+  "en": "",
+  "no": "",
+  "verified": false
+ },
+ "types": {
+  "song": {
+   "en": "Monotonous chattering with «sjæk-sjæk-sjøl».",
+   "no": "Monoton skvatring med «sjæk-sjæk-sjøl».",
+   "verified": true
+  },
+  "call": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "alarm": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "flight": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "parts": {},
+ "calendar": {
+  "present": "yyyyyyyyyyyy",
+  "sings": "????????????",
+  "note": {
+   "en": "Migrant and wanderer; many winter on the coast north to Troms, most in rowan-berry years. [TO VERIFY] singing months.",
+   "no": "Trekk- og streiffugl; mange overvintrer langs kysten nord til Troms, flest i år med mye rognebær. [TO VERIFY] månedene med sang.",
+   "verified": true
+  }
+ },
+ "lookalikes": []
+}

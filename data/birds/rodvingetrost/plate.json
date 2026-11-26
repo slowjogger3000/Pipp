@@ -1,0 +1,228 @@
+{
+ "_note": "Redwing ink plate in a 280x240 box, drawn in M11 from the song thrush plate, not from a design: brown (hatching), a pale stripe over the eye (face) and the rust-red patch under the wing (shadow tone). SNL gives only those two marks, so no breast spots are drawn. Sexes and juvenile are not described; the female shows the species' marks, the juvenile is drawn alike with [TO VERIFY].",
+ "box": [
+  280,
+  240
+ ],
+ "clips": {
+  "body": "M190 60 C184 44 158 42 150 62 C134 80 104 106 90 136 C92 146 98 154 106 158 C128 180 162 178 178 152 C192 130 198 104 192 80 C194 74 194 66 190 60 Z",
+  "wing": "M152 90 C156 118 136 146 98 152 C106 136 118 110 152 90 Z"
+ },
+ "layers": [
+  {
+   "path": "M14 211 C80 205 150 201 268 193",
+   "stroke": 4
+  },
+  {
+   "path": "M214 196 l20 -20 M224 186 l16 3",
+   "stroke": 1.5
+  },
+  {
+   "path": "M234 176 q10 -10 18 -2 q-9 8 -18 2 Z M240 189 q11 -5 16 3 q-10 4 -16 -3 Z",
+   "fill": "face",
+   "stroke": 1
+  },
+  {
+   "path": "M90 136 L58 178 L70 190 L106 158 Z",
+   "fill": "face",
+   "stroke": 1.5,
+   "part": "tail"
+  },
+  {
+   "path": "M94 142 L61 182 M98 147 L64 186 M102 153 L67 189",
+   "stroke": 1,
+   "part": "tail"
+  },
+  {
+   "path": "M136 172 L139 199 M152 173 L157 198 M131 201 L139 199 L148 202 M149 200 L157 198 L166 201",
+   "stroke": 1.5
+  },
+  {
+   "clip": "body",
+   "fill": "face",
+   "stroke": 1.5
+  },
+  {
+   "hatch": "body"
+  },
+  {
+   "path": "M152 126 C142 140 128 150 110 156 C124 164 142 162 156 150 C162 142 160 132 152 126 Z",
+   "fill": "shadow",
+   "stroke": 1,
+   "within": "body"
+  },
+  {
+   "hatch": "wing"
+  },
+  {
+   "clip": "wing",
+   "stroke": 1.5
+  },
+  {
+   "path": "M148 72 C158 61 175 56 192 59 L191 64 C176 60.5 162 63 152 76 Z",
+   "fill": "face",
+   "stroke": 1,
+   "within": "body"
+  },
+  {
+   "eye": [
+    177,
+    65
+   ],
+   "pupil": 2.4
+  },
+  {
+   "path": "M177.6 64.4 m-1.2 0 a1.2 1.2 0 1 0 2.4 0 a1.2 1.2 0 1 0 -2.4 0",
+   "fill": "face"
+  },
+  {
+   "path": "M190 60 L220 66 L193 70 Z",
+   "fill": "bill",
+   "stroke": 1.5,
+   "part": "upper"
+  },
+  {
+   "path": "M193 70 L216 69 L191 79 Z",
+   "fill": "bill",
+   "stroke": 1.5,
+   "part": "lower"
+  },
+  {
+   "path": "M230 52 A16 16 0 0 1 230 76 M237 44 A26 26 0 0 1 237 84 M243 36 A36 36 0 0 1 243 92",
+   "stroke": 1.5,
+   "part": "arcs"
+  }
+ ],
+ "hatch": {
+  "body": {
+   "rect": [
+    86,
+    42,
+    200,
+    182
+   ],
+   "up": true,
+   "clip": "body"
+  },
+  "wing": {
+   "rect": [
+    96,
+    88,
+    158,
+    154
+   ],
+   "up": false,
+   "clip": "wing"
+  }
+ },
+ "pivots": {
+  "upper": {
+   "at": [
+    192,
+    67
+   ],
+   "deg": -16
+  },
+  "lower": {
+   "at": [
+    192,
+    72
+   ],
+   "deg": 10
+  },
+  "tail": {
+   "at": [
+    98,
+    147
+   ],
+   "deg": -5
+  }
+ },
+ "variants": {
+  "male": {
+   "body_pitch": 8,
+   "wing_pitch": 6,
+   "eye_ring": 0,
+   "bill": "shadow"
+  },
+  "female": {
+   "body_pitch": 8,
+   "wing_pitch": 6,
+   "eye_ring": 0,
+   "bill": "shadow"
+  },
+  "juvenile": {
+   "body_pitch": 8,
+   "wing_pitch": 6,
+   "eye_ring": 0,
+   "bill": "shadow"
+  }
+ },
+ "callouts": [
+  {
+   "id": "eye_stripe",
+   "leader": "M172 56 L122 36",
+   "at": [
+    120,
+    30
+   ],
+   "align": "right",
+   "male": {
+    "en": "PALE",
+    "no": "LYS",
+    "verified": true
+   },
+   "female": {
+    "en": "PALE",
+    "no": "LYS",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  },
+  {
+   "id": "wing",
+   "leader": "M150 140 L236 150",
+   "at": [
+    276,
+    158
+   ],
+   "align": "right",
+   "male": {
+    "en": "RUST-RED BELOW",
+    "no": "RUSTRØD UNDER",
+    "verified": true
+   },
+   "female": {
+    "en": "RUST-RED BELOW",
+    "no": "RUSTRØD UNDER",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  }
+ ],
+ "captions": {
+  "male": {
+   "en": "Adult. Pale stripe over the eye, rust-red under the wing.",
+   "no": "Voksen. Lys stripe over øyet, rustrødt under vingen.",
+   "verified": true
+  },
+  "female": {
+   "en": "Female.",
+   "no": "Hunn.",
+   "verified": false
+  },
+  "juvenile": {
+   "en": "Juvenile.",
+   "no": "Ungfugl.",
+   "verified": false
+  }
+ }
+}

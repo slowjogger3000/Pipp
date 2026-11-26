@@ -1,0 +1,96 @@
+{
+ "_note": "Field guide text for this bird, both languages. Facts come from birds.md (M11, SNL). A field with verified false shows [TO VERIFY]. Norwegian wording is mine, Eirik to check. calendar rows: one letter per month from January, y yes, n no, ? not known.",
+ "xeno_canto": "https://xeno-canto.org/species/ficedula-hypoleuca",
+ "facts": {
+  "length": {
+   "en": "About 13 cm",
+   "no": "Omtrent 13 cm",
+   "verified": true
+  },
+  "broods": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "range": {
+   "en": "Large parts of the country",
+   "no": "Store deler av landet",
+   "verified": true
+  },
+  "habitat": {
+   "en": "Gardens and forest up into the birch belt",
+   "no": "Hager og skog opp i bjørkebeltet",
+   "verified": true
+  },
+  "food": {
+   "en": "Insects",
+   "no": "Insekter",
+   "verified": true
+  },
+  "status": {
+   "en": "LC, least concern",
+   "no": "LC, livskraftig",
+   "verified": true
+  },
+  "nest": {
+   "en": "Tree holes and nest boxes, 4 to 7 eggs",
+   "no": "Hull i trær og fuglekasser, 4 til 7 egg",
+   "verified": true
+  }
+ },
+ "sings": {
+  "male": {
+   "en": "Sings",
+   "no": "Synger",
+   "verified": false
+  },
+  "female": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "song_notes": {
+  "en": "A short but loud and rhythmic song of about 2 s, with repetitions and sudden changes of rhythm and pitch.",
+  "no": "En kort, men kraftig og rytmisk sang på omtrent 2 sekunder, med gjentakelser og brå skifter i rytme og tonehøyde.",
+  "verified": true
+ },
+ "mnemonic": {
+  "en": "",
+  "no": "",
+  "verified": false
+ },
+ "types": {
+  "song": {
+   "en": "Short, loud, rhythmic, about 2 s, sudden changes.",
+   "no": "Kort, kraftig, rytmisk, omtrent 2 s, brå skifter.",
+   "verified": true
+  },
+  "call": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "alarm": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "flight": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "parts": {},
+ "calendar": {
+  "present": "????yyy?????",
+  "sings": "????????????",
+  "note": {
+   "en": "Migrant, winters in Africa south of the Sahara; returns around the turn of April and May. [TO VERIFY] departure and singing months.",
+   "no": "Trekkfugl, overvintrer i Afrika sør for Sahara; kommer rundt overgangen april–mai. [TO VERIFY] avreise og månedene med sang.",
+   "verified": true
+  }
+ },
+ "lookalikes": []
+}

@@ -1,0 +1,334 @@
+{
+ "_note": "Fieldfare, M11 batch 2. Verified (birds.md, SNL): not very melodic, a somewhat monotonous chattering with «sjæk-sjæk-sjøl» sounds put in. Design: a run of short rough chatter notes at 2 to 4 kHz, broken once or twice by a harsh 'sjæk sjæk' pair and a lower, longer 'sjøl'. Pitches and timings are guesses. No call type: SNL describes none beyond the song.",
+ "syllables": {
+  "ch1": {
+   "dur_ms": 55,
+   "pitch": [
+    [
+     0,
+     3000
+    ],
+    [
+     0.4,
+     3600
+    ],
+    [
+     1,
+     2800
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.12,
+     1
+    ],
+    [
+     0.6,
+     0.75
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.45,
+   "rough": 14
+  },
+  "ch2": {
+   "dur_ms": 50,
+   "pitch": [
+    [
+     0,
+     3400
+    ],
+    [
+     1,
+     2900
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.12,
+     1
+    ],
+    [
+     0.6,
+     0.75
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.42,
+   "rough": 14
+  },
+  "ch3": {
+   "dur_ms": 65,
+   "pitch": [
+    [
+     0,
+     2600
+    ],
+    [
+     0.5,
+     3200
+    ],
+    [
+     1,
+     2700
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.12,
+     1
+    ],
+    [
+     0.6,
+     0.75
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.45,
+   "rough": 14
+  },
+  "sjaek": {
+   "dur_ms": 120,
+   "pitch": [
+    [
+     0,
+     2300
+    ],
+    [
+     0.25,
+     3000
+    ],
+    [
+     1,
+     2400
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.08,
+     1
+    ],
+    [
+     0.5,
+     0.8
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.6,
+   "rough": 32
+  },
+  "sjol": {
+   "dur_ms": 170,
+   "pitch": [
+    [
+     0,
+     2000
+    ],
+    [
+     0.4,
+     2400
+    ],
+    [
+     1,
+     1800
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.1,
+     1
+    ],
+    [
+     0.6,
+     0.75
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.55,
+   "rough": 26,
+   "tension": -8
+  }
+ },
+ "types": {
+  "song": {
+   "pause_s": [
+    2.0,
+    6.0
+   ],
+   "length_s": [
+    1.8,
+    4.0
+   ],
+   "transpose_st": 0.6,
+   "avoid_repeat": false,
+   "auto": {
+    "vo_pitch": [
+     0.97,
+     1.03
+    ],
+    "vo_breath": [
+     14,
+     22
+    ],
+    "vo_tension": [
+     46,
+     58
+    ],
+    "vo_rough": [
+     24,
+     36
+    ],
+    "ph_tempo": [
+     95,
+     105
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 2,
+     "sections": [
+      {
+       "pool": [
+        "ch1",
+        "ch2",
+        "ch3"
+       ],
+       "count": [
+        5,
+        12
+       ],
+       "share": 0.5,
+       "gap_ms": [
+        30,
+        80
+       ],
+       "no_adjacent_repeat": true
+      },
+      {
+       "pool": [
+        "sjaek"
+       ],
+       "count": [
+        2,
+        2
+       ],
+       "share": 0.2,
+       "gap_ms": [
+        70,
+        110
+       ]
+      },
+      {
+       "pool": [
+        "sjol"
+       ],
+       "count": [
+        1,
+        1
+       ],
+       "share": 0.1,
+       "gap_ms": [
+        60,
+        90
+       ],
+       "lead_gap_ms": [
+        60,
+        100
+       ]
+      },
+      {
+       "pool": [
+        "ch1",
+        "ch2",
+        "ch3"
+       ],
+       "count": [
+        3,
+        8
+       ],
+       "share": 0.2,
+       "gap_ms": [
+        30,
+        80
+       ],
+       "no_adjacent_repeat": true,
+       "chance": 0.6
+      }
+     ]
+    },
+    {
+     "weight": 1,
+     "sections": [
+      {
+       "pool": [
+        "ch1",
+        "ch2",
+        "ch3"
+       ],
+       "count": [
+        8,
+        16
+       ],
+       "share": 0.8,
+       "gap_ms": [
+        30,
+        80
+       ],
+       "no_adjacent_repeat": true
+      },
+      {
+       "pool": [
+        "sjaek"
+       ],
+       "count": [
+        1,
+        2
+       ],
+       "share": 0.2,
+       "gap_ms": [
+        70,
+        110
+       ]
+      }
+     ]
+    }
+   ],
+   "overrides": []
+  }
+ }
+}

@@ -1,0 +1,551 @@
+{
+ "_note": "Redwing, M11 batch 2. Verified (birds.md, SNL): a descending, melodic phrase followed by a faint twitter (parts named); dialects exist but are not modelled; a thin «siiip» from flocks migrating at night. Design: the phrase is 3 to 6 clear notes stepping down from about 4,2 to 2,4 kHz, the twitter 4 to 10 short soft notes at 4,5 to 7 kHz; pauses 3 to 8 s. The 'siiip' is a thin 7 kHz note of 0,25 to 0,35 s, falling a little. Pitches and timings are guesses.",
+ "syllables": {
+  "n1": {
+   "dur_ms": 220,
+   "pitch": [
+    [
+     0,
+     4300
+    ],
+    [
+     1,
+     4000
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.25,
+     1
+    ],
+    [
+     0.7,
+     0.85
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.8,
+   "tension": -12
+  },
+  "n2": {
+   "dur_ms": 200,
+   "pitch": [
+    [
+     0,
+     3800
+    ],
+    [
+     1,
+     3500
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.25,
+     1
+    ],
+    [
+     0.7,
+     0.85
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.8,
+   "tension": -12
+  },
+  "n3": {
+   "dur_ms": 240,
+   "pitch": [
+    [
+     0,
+     3300
+    ],
+    [
+     1,
+     3050
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.25,
+     1
+    ],
+    [
+     0.7,
+     0.85
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.8,
+   "tension": -12
+  },
+  "n4": {
+   "dur_ms": 260,
+   "pitch": [
+    [
+     0,
+     2900
+    ],
+    [
+     1,
+     2500
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.25,
+     1
+    ],
+    [
+     0.7,
+     0.85
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.75,
+   "tension": -12
+  },
+  "tw1": {
+   "dur_ms": 45,
+   "pitch": [
+    [
+     0,
+     5200
+    ],
+    [
+     1,
+     6200
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.12,
+     1
+    ],
+    [
+     0.6,
+     0.75
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.25,
+   "rough": 6
+  },
+  "tw2": {
+   "dur_ms": 40,
+   "pitch": [
+    [
+     0,
+     6600
+    ],
+    [
+     1,
+     5600
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.12,
+     1
+    ],
+    [
+     0.6,
+     0.75
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.22,
+   "rough": 6
+  },
+  "tw3": {
+   "dur_ms": 55,
+   "pitch": [
+    [
+     0,
+     4600
+    ],
+    [
+     0.5,
+     5600
+    ],
+    [
+     1,
+     5000
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.12,
+     1
+    ],
+    [
+     0.6,
+     0.75
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.24,
+   "rough": 6
+  },
+  "siip": {
+   "dur_ms": 300,
+   "pitch": [
+    [
+     0,
+     7400
+    ],
+    [
+     0.6,
+     7100
+    ],
+    [
+     1,
+     6700
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.2,
+     1
+    ],
+    [
+     0.8,
+     0.8
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.55,
+   "tension": -20,
+   "breath": 8
+  }
+ },
+ "types": {
+  "song": {
+   "pause_s": [
+    3.0,
+    8.0
+   ],
+   "length_s": [
+    1.6,
+    3.0
+   ],
+   "transpose_st": 1.0,
+   "avoid_repeat": true,
+   "auto": {
+    "vo_pitch": [
+     0.97,
+     1.03
+    ],
+    "vo_breath": [
+     10,
+     18
+    ],
+    "vo_tension": [
+     24,
+     36
+    ],
+    "vo_rough": [
+     2,
+     6
+    ],
+    "ph_tempo": [
+     95,
+     105
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 2,
+     "sections": [
+      {
+       "pool": [
+        "n1"
+       ],
+       "count": [
+        1,
+        1
+       ],
+       "share": 0.12,
+       "gap_ms": [
+        60,
+        60
+       ],
+       "part": "phrase"
+      },
+      {
+       "pool": [
+        "n2"
+       ],
+       "count": [
+        1,
+        1
+       ],
+       "share": 0.12,
+       "gap_ms": [
+        60,
+        60
+       ],
+       "lead_gap_ms": [
+        50,
+        90
+       ],
+       "part": "phrase"
+      },
+      {
+       "pool": [
+        "n3"
+       ],
+       "count": [
+        1,
+        1
+       ],
+       "share": 0.12,
+       "gap_ms": [
+        60,
+        60
+       ],
+       "lead_gap_ms": [
+        50,
+        90
+       ],
+       "part": "phrase"
+      },
+      {
+       "pool": [
+        "n4"
+       ],
+       "count": [
+        1,
+        1
+       ],
+       "share": 0.14,
+       "gap_ms": [
+        60,
+        60
+       ],
+       "lead_gap_ms": [
+        50,
+        90
+       ],
+       "part": "phrase"
+      },
+      {
+       "pool": [
+        "tw1",
+        "tw2",
+        "tw3"
+       ],
+       "count": [
+        4,
+        10
+       ],
+       "share": 0.5,
+       "gap_ms": [
+        25,
+        60
+       ],
+       "lead_gap_ms": [
+        120,
+        220
+       ],
+       "no_adjacent_repeat": true,
+       "part": "twitter"
+      }
+     ]
+    },
+    {
+     "weight": 1,
+     "sections": [
+      {
+       "pool": [
+        "n1"
+       ],
+       "count": [
+        1,
+        1
+       ],
+       "share": 0.15,
+       "gap_ms": [
+        60,
+        60
+       ],
+       "part": "phrase"
+      },
+      {
+       "pool": [
+        "n2"
+       ],
+       "count": [
+        1,
+        1
+       ],
+       "share": 0.15,
+       "gap_ms": [
+        60,
+        60
+       ],
+       "lead_gap_ms": [
+        50,
+        90
+       ],
+       "part": "phrase"
+      },
+      {
+       "pool": [
+        "n4"
+       ],
+       "count": [
+        1,
+        1
+       ],
+       "share": 0.15,
+       "gap_ms": [
+        60,
+        60
+       ],
+       "lead_gap_ms": [
+        50,
+        90
+       ],
+       "part": "phrase"
+      },
+      {
+       "pool": [
+        "tw1",
+        "tw2",
+        "tw3"
+       ],
+       "count": [
+        3,
+        8
+       ],
+       "share": 0.55,
+       "gap_ms": [
+        25,
+        60
+       ],
+       "lead_gap_ms": [
+        120,
+        220
+       ],
+       "no_adjacent_repeat": true,
+       "part": "twitter"
+      }
+     ]
+    }
+   ],
+   "overrides": []
+  },
+  "flight": {
+   "pause_s": [
+    1.5,
+    6.0
+   ],
+   "length_s": [
+    0.3,
+    0.4
+   ],
+   "avoid_repeat": false,
+   "auto": {
+    "vo_pitch": [
+     0.96,
+     1.04
+    ],
+    "vo_breath": [
+     14,
+     20
+    ],
+    "vo_tension": [
+     18,
+     26
+    ],
+    "vo_rough": [
+     0,
+     4
+    ],
+    "ph_tempo": [
+     95,
+     105
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 1,
+     "sections": [
+      {
+       "pool": [
+        "siip"
+       ],
+       "count": [
+        1,
+        1
+       ],
+       "share": 1.0,
+       "gap_ms": [
+        100,
+        100
+       ]
+      }
+     ]
+    }
+   ],
+   "overrides": []
+  }
+ }
+}

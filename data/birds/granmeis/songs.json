@@ -1,0 +1,542 @@
+{
+ "_note": "Willow tit, M11 batch 2. Verified (birds.md, SNL): song a plaintive «tiuuu tiuuu tiuuu», more rarely a slightly buzzing «zi-zi-zerrrl», mostly in the breeding season, also late summer and now and then in winter; call «titi-tæææ-tæææ»; alarm an agitated «spitt! spitt!» and a quick «sisisi». Design: 'tiuuu' is a pure falling note of 0,35 s from about 4,3 to 3,3 kHz, 3 to 5 in a row; 'zerrrl' a buzzy 0,5 s trill after two short 'zi'; 'tæææ' a harsh nasal 0,25 s note near 3 kHz; 'spitt' a sharp 60 ms note; 'sisisi' thin quick notes near 7 kHz. Pitches and timings are guesses. Winter pauses longer is a design choice.",
+ "syllables": {
+  "tiu": {
+   "dur_ms": 360,
+   "pitch": [
+    [
+     0,
+     4400
+    ],
+    [
+     0.15,
+     4300
+    ],
+    [
+     1,
+     3300
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.15,
+     1
+    ],
+    [
+     0.75,
+     0.8
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.75,
+   "tension": -14,
+   "rough": -4
+  },
+  "tiu2": {
+   "dur_ms": 400,
+   "pitch": [
+    [
+     0,
+     4200
+    ],
+    [
+     0.15,
+     4100
+    ],
+    [
+     1,
+     3200
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.15,
+     1
+    ],
+    [
+     0.75,
+     0.8
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.75,
+   "tension": -14,
+   "rough": -4
+  },
+  "zi": {
+   "dur_ms": 70,
+   "pitch": [
+    [
+     0,
+     6200
+    ],
+    [
+     1,
+     5800
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.12,
+     1
+    ],
+    [
+     0.6,
+     0.75
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.5
+  },
+  "zerrl": {
+   "dur_ms": 520,
+   "pitch": [
+    [
+     0,
+     5400
+    ],
+    [
+     1,
+     4600
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.1,
+     0.9
+    ],
+    [
+     0.8,
+     0.8
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.55,
+   "rough": 6,
+   "trill": {
+    "hz": 38,
+    "depth_st": 1.2,
+    "am": 0.6
+   }
+  },
+  "ti": {
+   "dur_ms": 55,
+   "pitch": [
+    [
+     0,
+     6600
+    ],
+    [
+     1,
+     6200
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.12,
+     1
+    ],
+    [
+     0.6,
+     0.75
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.45
+  },
+  "taeae": {
+   "dur_ms": 260,
+   "pitch": [
+    [
+     0,
+     2900
+    ],
+    [
+     0.3,
+     3200
+    ],
+    [
+     1,
+     2800
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.1,
+     1
+    ],
+    [
+     0.8,
+     0.85
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.6,
+   "rough": 30,
+   "tension": 18
+  },
+  "spitt": {
+   "dur_ms": 60,
+   "pitch": [
+    [
+     0,
+     7000
+    ],
+    [
+     1,
+     5200
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.08,
+     1
+    ],
+    [
+     0.5,
+     0.7
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.55,
+   "rough": 8,
+   "tension": 10
+  },
+  "si": {
+   "dur_ms": 45,
+   "pitch": [
+    [
+     0,
+     7400
+    ],
+    [
+     1,
+     7000
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.12,
+     1
+    ],
+    [
+     0.6,
+     0.75
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.35,
+   "tension": -10
+  }
+ },
+ "types": {
+  "song": {
+   "pause_s": [
+    3.0,
+    9.0
+   ],
+   "length_s": [
+    1.2,
+    2.6
+   ],
+   "transpose_st": 0.6,
+   "avoid_repeat": false,
+   "auto": {
+    "vo_pitch": [
+     0.97,
+     1.03
+    ],
+    "vo_breath": [
+     10,
+     18
+    ],
+    "vo_tension": [
+     16,
+     28
+    ],
+    "vo_rough": [
+     3,
+     9
+    ],
+    "ph_tempo": [
+     95,
+     105
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 4,
+     "sections": [
+      {
+       "pool": [
+        "tiu",
+        "tiu2"
+       ],
+       "count": [
+        3,
+        5
+       ],
+       "share": 1.0,
+       "gap_ms": [
+        140,
+        240
+       ]
+      }
+     ]
+    },
+    {
+     "weight": 1,
+     "sections": [
+      {
+       "pool": [
+        "zi"
+       ],
+       "count": [
+        2,
+        2
+       ],
+       "share": 0.3,
+       "gap_ms": [
+        60,
+        90
+       ]
+      },
+      {
+       "pool": [
+        "zerrl"
+       ],
+       "count": [
+        1,
+        1
+       ],
+       "share": 0.7,
+       "gap_ms": [
+        80,
+        80
+       ],
+       "lead_gap_ms": [
+        70,
+        100
+       ]
+      }
+     ]
+    }
+   ],
+   "overrides": [
+    {
+     "_note": "Now and then in winter (birds.md): longer pauses is a design choice.",
+     "when": {
+      "season": "winter"
+     },
+     "pause_s": [
+      12.0,
+      40.0
+     ]
+    }
+   ]
+  },
+  "call": {
+   "pause_s": [
+    2.0,
+    8.0
+   ],
+   "length_s": [
+    0.6,
+    1.2
+   ],
+   "avoid_repeat": false,
+   "auto": {
+    "vo_pitch": [
+     0.97,
+     1.03
+    ],
+    "vo_breath": [
+     14,
+     20
+    ],
+    "vo_tension": [
+     30,
+     42
+    ],
+    "vo_rough": [
+     24,
+     34
+    ],
+    "ph_tempo": [
+     95,
+     105
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 1,
+     "sections": [
+      {
+       "pool": [
+        "ti"
+       ],
+       "count": [
+        2,
+        2
+       ],
+       "share": 0.2,
+       "gap_ms": [
+        40,
+        60
+       ]
+      },
+      {
+       "pool": [
+        "taeae"
+       ],
+       "count": [
+        2,
+        3
+       ],
+       "share": 0.8,
+       "gap_ms": [
+        50,
+        90
+       ],
+       "lead_gap_ms": [
+        40,
+        70
+       ]
+      }
+     ]
+    }
+   ],
+   "overrides": []
+  },
+  "alarm": {
+   "pause_s": [
+    0.8,
+    3.0
+   ],
+   "length_s": [
+    0.3,
+    1.4
+   ],
+   "avoid_repeat": false,
+   "auto": {
+    "vo_pitch": [
+     0.97,
+     1.03
+    ],
+    "vo_breath": [
+     12,
+     18
+    ],
+    "vo_tension": [
+     30,
+     40
+    ],
+    "vo_rough": [
+     10,
+     18
+    ],
+    "ph_tempo": [
+     95,
+     105
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 1,
+     "sections": [
+      {
+       "pool": [
+        "spitt"
+       ],
+       "count": [
+        2,
+        4
+       ],
+       "share": 1.0,
+       "gap_ms": [
+        220,
+        380
+       ]
+      }
+     ]
+    },
+    {
+     "weight": 1,
+     "sections": [
+      {
+       "pool": [
+        "si"
+       ],
+       "count": [
+        3,
+        6
+       ],
+       "share": 1.0,
+       "gap_ms": [
+        30,
+        50
+       ]
+      }
+     ]
+    }
+   ],
+   "overrides": []
+  }
+ }
+}
