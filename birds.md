@@ -632,6 +632,84 @@ Source: Store norske leksikon (snl.no), one page per bird, read in full on 2026-
 - Golden plover: the whistle's shape and pitch; which months it calls; juvenile.
 - Raven: pitch and timing of every call.
 
+## M11 batch 7, farmland, checked 2026-11-26
+
+Source: Store norske leksikon (snl.no), one page per bird, read in full on 2026-11-26. Transcriptions are SNL's own spelling.
+
+### Låvesvale (folder `lavesvale`), snl.no/låvesvale, Bård Gunnar Stokke, updated 2026-08-04
+
+| Field | Value |
+|---|---|
+| Size | About 18 cm, 16 to 24 g |
+| Plumage | Blue-black above, white below, rust-red forehead and throat, blue-black breast band |
+| Sexes | Long tail streamers, longest in the male |
+| Bill, legs, juvenile | Not described |
+| Song | A quick twittering. No transcription |
+| Calls | Not described |
+| Habitat | Open farmland, often near water |
+| Food | Insects caught on the wing, low over the ground |
+| Nest | Mostly indoors in barns: clay with straw and hair, lined with grass and white feathers |
+| Eggs | 2 to 7, usually 4 to 5; often a second brood in July, sometimes three |
+| Migration | Arrives April to May; long-distance migrant, winters in Africa south of the Sahara |
+| Population | 30 000 to 50 000 pairs; fewer in Finnmark and high up |
+| Status | LC |
+| Lookalikes | None named |
+
+### Sanglerke (folder `sanglerke`), snl.no/sanglerke, Tom Schandy, updated 2026-08-05
+
+| Field | Value |
+|---|---|
+| Size | 16 to 18 cm, a little larger than a house sparrow |
+| Plumage | Colour pattern like the meadow pipit's and tree pipit's; a hint of a crest |
+| Sexes, juvenile, bill | Not described |
+| Song | The song flight: whirring, it climbs higher and higher with a continuous stream of trills and whistles, then after a long display glides slowly down and drops to the ground like a stone. No transcription |
+| Calls | Not described |
+| Habitat | Open farmland with some cover |
+| Food | Insects and small animals; seeds and grain in winter |
+| Nest | A hollow on the ground, of grass, lined with fine straw and hair |
+| Eggs | 2 to 6, the female sits 11 to 12 days; usually 2 to 3 broods |
+| Migration | One of the first back: February to March in the south, April in the far north; most winter on the west coast of the continent to Iberia |
+| Population | 100 000 to 300 000 pairs; mainly the lowlands of the east and the south coast, common to Trøndelag, sparse in the far north |
+| Status | NT on the red list (the SNL text says vulnerable; the list category is used) |
+| Lookalikes | Meadow pipit and tree pipit, similar colour pattern but smaller |
+
+### Gulspurv (folder `gulspurv`), snl.no/gulspurv, Bård Gunnar Stokke, updated 2026-08-03
+
+| Field | Value |
+|---|---|
+| Size | 16 to 16,5 cm, 20 to 36,5 g |
+| Male | Yellow head with dark markings, yellow underside, reddish-brown and olive breast patch, reddish-brown rump |
+| Female, juvenile | Much less yellow |
+| Song | «zi-zi-zi-zi-zi-zi-ziiiiiii», a quick series that many hear as counting to seven; the count varies from five to twelve |
+| Calls | Not described |
+| Habitat | Farmland, often near the forest edge |
+| Food | Mainly seeds; insects in the breeding season |
+| Nest | On or near the ground, well hidden: dry grass, lined with fine straw and hair; built in May to June |
+| Eggs | 3 to 5; the female sits 12 to 14 days; usually one brood in Norway |
+| Movement | Mainly resident and wandering; some leave Norway in winter |
+| Population | 100 000 to 200 000 pairs (2015) |
+| Status | VU |
+| Mnemonic | Counting to seven (SNL: many hear the song this way) |
+| Lookalikes | None named |
+
+### Vipe (folder `vipe`), snl.no/vipe, Jan Eivind Østnes, updated 2026-11-15
+
+| Field | Value |
+|---|---|
+| Size | 32 cm |
+| Plumage | Very long crest; dark green glossy back; black face, throat and breast; white belly; rust-red under the tail; black bill |
+| Female | Shorter crest; the black breast mottled with white |
+| Juvenile, winter | Not described |
+| Voice | Very vocal in the breeding season, with high, penetrating, plaintive calls. Early in spring the male tumbles low over the nest site in an acrobatic display flight, with a characteristic hoarse song and humming sounds from the wings. No transcription |
+| Habitat | Moist grassland in farmland, coastal meadows, wetlands |
+| Food | Almost only animal food, mainly earthworms and insects |
+| Nest | A simple scrape on damp ground, lined with dry grass |
+| Eggs | Usually 4; both sit 23 to 30 days |
+| Migration | One of the first back, February to March in the south; leaves July to October, wintering mainly in France and Iberia; a few winter on the south-west coast |
+| Population | 7500 to 10 000 pairs (2015), probably fewer now; about 90 % decline since the 1970s |
+| Status | CR |
+| Lookalikes | In flight the broad, rounded wingtips set it apart from every other Norwegian wader |
+
 ## Svarttrost, checked 2026-11-26
 
 Sources used: Store norske leksikon (snl.no/svarttrost), which follows Artsdatabanken's classification and cites BirdLife Norge for its population figure. A search excerpt from Fuglevennen (fuglevennen.no). A BirdLife Norge press release from 2021. Artsdatabanken's own species page and the full Fuglevennen page could not be opened, so check those two when possible.

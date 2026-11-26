@@ -1,0 +1,238 @@
+{
+ "_note": "Skylark ink plate in a 280x240 box, M11 batch 7, built from the meadow pipit plate (SNL: a similar colour pattern), with the hint of a crest and without the white outer tail feathers, which SNL does not mention for the skylark. Sexes and juvenile are not described.",
+ "box": [
+  280,
+  240
+ ],
+ "clips": {
+  "body": "M198 70 C196 56 180 50 166 56 C152 62 142 76 132 92 C120 110 110 130 108 150 C110 160 118 168 126 172 C146 182 170 174 180 156 C192 136 199 108 199 90 C200 86 201 82 200 80 Z",
+  "wing": "M156 92 C164 118 148 148 112 160 C118 138 130 110 156 92 Z"
+ },
+ "layers": [
+  {
+   "path": "M14 206 C80 202 150 199 268 194",
+   "stroke": 4
+  },
+  {
+   "path": "M214 197 l20 -20 M224 187 l16 3",
+   "stroke": 1.5
+  },
+  {
+   "path": "M234 177 q10 -10 18 -2 q-9 8 -18 2 Z M240 190 q11 -5 16 3 q-10 4 -16 -3 Z",
+   "fill": "face",
+   "stroke": 1
+  },
+  {
+   "path": "M114 146 L62 204 L74 214 L126 166 Z",
+   "fill": "face",
+   "stroke": 1.5,
+   "part": "tail"
+  },
+  {
+   "path": "M118 152 L66 207 M122 159 L70 211",
+   "stroke": 1,
+   "part": "tail"
+  },
+  {
+   "path": "M142 176 L144 199 M156 175 L159 198 M136 201 L144 199 L152 201 M151 199 L159 198 L167 200",
+   "stroke": 1.5
+  },
+  {
+   "clip": "body",
+   "fill": "face",
+   "stroke": 1.5
+  },
+  {
+   "hatch": "body"
+  },
+  {
+   "variant": "under",
+   "fill": "face",
+   "within": "body"
+  },
+  {
+   "path": "M186 96 l2 5 M180 108 l2 5 M190 112 l2 5 M174 122 l2 5 M184 128 l2 5 M168 136 l2 5 M178 142 l2 4",
+   "stroke": 1.4,
+   "within": "body"
+  },
+  {
+   "hatch": "wing"
+  },
+  {
+   "clip": "wing",
+   "stroke": 1.5
+  },
+  {
+   "clip": "body",
+   "stroke": 1.5
+  },
+  {
+   "path": "M170 58 L166 40 L176 50 L178 56 Z",
+   "fill": "face",
+   "stroke": 1.3
+  },
+  {
+   "eye": [
+    182,
+    68
+   ],
+   "pupil": 2.4
+  },
+  {
+   "path": "M182.4 66.8 m-0.9 0 a0.9 0.9 0 1 0 1.8 0 a0.9 0.9 0 1 0 -1.8 0",
+   "fill": "face"
+  },
+  {
+   "path": "M198 69 L218 75 L200 77 Z",
+   "fill": "bill",
+   "stroke": 1.5,
+   "part": "upper"
+  },
+  {
+   "path": "M200 77 L216 76 L200 80 Z",
+   "fill": "bill",
+   "stroke": 1.5,
+   "part": "lower"
+  },
+  {
+   "path": "M226 64 A14 14 0 0 1 226 88 M233 56 A24 24 0 0 1 233 96 M240 48 A34 34 0 0 1 240 104",
+   "stroke": 1.5,
+   "part": "arcs"
+  }
+ ],
+ "hatch": {
+  "body": {
+   "rect": [
+    104,
+    50,
+    204,
+    184
+   ],
+   "up": true,
+   "clip": "body"
+  },
+  "wing": {
+   "rect": [
+    108,
+    88,
+    166,
+    164
+   ],
+   "up": false,
+   "clip": "wing"
+  }
+ },
+ "pivots": {
+  "upper": {
+   "at": [
+    200,
+    74
+   ],
+   "deg": -14
+  },
+  "lower": {
+   "at": [
+    200,
+    79
+   ],
+   "deg": 10
+  },
+  "tail": {
+   "at": [
+    120,
+    156
+   ],
+   "deg": -5
+  }
+ },
+ "variants": {
+  "male": {
+   "body_pitch": 7,
+   "wing_pitch": 5,
+   "eye_ring": 0,
+   "bill": "shadow",
+   "under": "M199 84 C196 108 190 134 180 156 C170 174 146 182 126 172 C140 170 156 160 166 144 C178 124 188 102 192 84 Z"
+  },
+  "female": {
+   "body_pitch": 7,
+   "wing_pitch": 5,
+   "eye_ring": 0,
+   "bill": "shadow",
+   "under": "M199 84 C196 108 190 134 180 156 C170 174 146 182 126 172 C140 170 156 160 166 144 C178 124 188 102 192 84 Z"
+  },
+  "juvenile": {
+   "body_pitch": 7,
+   "wing_pitch": 5,
+   "eye_ring": 0,
+   "bill": "shadow",
+   "under": "M199 84 C196 108 190 134 180 156 C170 174 146 182 126 172 C140 170 156 160 166 144 C178 124 188 102 192 84 Z"
+  }
+ },
+ "callouts": [
+  {
+   "id": "head",
+   "leader": "M168 46 L126 30",
+   "at": [
+    122,
+    24
+   ],
+   "align": "right",
+   "male": {
+    "en": "HINT OF A CREST",
+    "no": "ANTYDNING TIL TOPP",
+    "verified": true
+   },
+   "female": {
+    "en": "HINT OF A CREST",
+    "no": "ANTYDNING TIL TOPP",
+    "verified": false
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  },
+  {
+   "id": "plumage",
+   "leader": "M140 100 L74 86",
+   "at": [
+    70,
+    80
+   ],
+   "align": "right",
+   "male": {
+    "en": "LIKE THE PIPITS",
+    "no": "SOM PIPLERKENE",
+    "verified": true
+   },
+   "female": {
+    "en": "LIKE THE PIPITS",
+    "no": "SOM PIPLERKENE",
+    "verified": false
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  }
+ ],
+ "captions": {
+  "male": {
+   "en": "Singing. Beak and tail follow the sound.",
+   "no": "Synger. Nebb og hale følger lyden.",
+   "verified": true
+  },
+  "female": {
+   "en": "Female. No difference from the male is known.",
+   "no": "Hunn. Ingen kjent forskjell fra hannen.",
+   "verified": false
+  },
+  "juvenile": {
+   "en": "Juvenile. Drawn like the adult.",
+   "no": "Ungfugl. Tegnet som de voksne.",
+   "verified": false
+  }
+ }
+}

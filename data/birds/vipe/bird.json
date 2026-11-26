@@ -1,0 +1,107 @@
+{
+ "_note": "Field guide text for the lapwing, both languages. SNL gives no transcription, so the shapes are [TO VERIFY]. Facts from birds.md (SNL, checked 2026-11-26). Norwegian wording is mine, Eirik to check. calendar: one letter per month from January, y yes, n no, ? not known.",
+ "xeno_canto": "https://xeno-canto.org/species/vanellus-vanellus",
+ "facts": {
+  "length": {
+   "en": "32 cm",
+   "no": "32 cm",
+   "verified": true
+  },
+  "broods": {
+   "en": "Usually 4 eggs; both sit 23 to 30 days",
+   "no": "Vanligvis 4 egg; begge ruger i 23 til 30 dager",
+   "verified": true
+  },
+  "range": {
+   "en": "Farmland, mostly in the south; 7500 to 10 000 pairs (2015), probably fewer now",
+   "no": "Kulturlandskap, mest i Sør-Norge; 7500 til 10 000 par (2015), trolig færre nå",
+   "verified": true
+  },
+  "habitat": {
+   "en": "Moist grassland in farmland, coastal meadows, wetlands",
+   "no": "Fuktig gressmark i kulturlandskapet, strandenger, våtmark",
+   "verified": true
+  },
+  "food": {
+   "en": "Almost only animal food, mainly earthworms and insects",
+   "no": "Nesten bare animalsk føde, mest meitemark og insekter",
+   "verified": true
+  },
+  "status": {
+   "en": "CR, critically endangered, Norwegian red list; about 90 % decline since the 1970s",
+   "no": "CR, kritisk truet, norsk rødliste; rundt 90 % nedgang siden 1970-tallet",
+   "verified": true
+  },
+  "nest": {
+   "en": "A simple scrape on the ground, on damp ground lined with dry grass",
+   "no": "En enkel grop på bakken, på fuktig grunn fôret med tørt gress",
+   "verified": true
+  }
+ },
+ "sings": {
+  "male": {
+   "en": "Hoarse song in display flight",
+   "no": "Hes sang i fluktspill",
+   "verified": true
+  },
+  "female": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "song_notes": {
+  "en": "Very vocal in the breeding season, with high, penetrating, plaintive calls. Early in spring the male tumbles low over the nest site in an acrobatic display flight; its characteristic hoarse song comes with humming sounds from the wings. [TO VERIFY] SNL gives no transcription, so the notes Tipp plays are a stand-in.",
+  "no": "Svært lydelig i hekketiden, med høye, gjennomtrengende, klagende lyder. Tidlig om våren kaster hannen seg lavt over hekkeplassen i et akrobatisk fluktspill; den karakteristiske hese sangen følges av summende lyder fra vingene. [TO VERIFY] SNL gir ingen gjengivelse, så tonene Tipp spiller er en stedfortreder.",
+  "verified": true
+ },
+ "mnemonic": {
+  "en": "",
+  "no": "",
+  "verified": false
+ },
+ "types": {
+  "song": {
+   "en": "The male's hoarse song in display flight, with humming wings.",
+   "no": "Hannens hese sang i fluktspill, med summende vinger.",
+   "verified": true
+  },
+  "call": {
+   "en": "High, penetrating, plaintive calls.",
+   "no": "Høye, gjennomtrengende, klagende lyder.",
+   "verified": true
+  },
+  "alarm": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "flight": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "calendar": {
+  "present": "?yyyyyyyyy??",
+  "sings": "????????????",
+  "note": {
+   "en": "One of the first migrants back, February to March in the south; leaves July to October, wintering mainly in France and Iberia. A few winter on the south-west coast.",
+   "no": "En av de første trekkfuglene tilbake, februar til mars i sør; drar juli til oktober og overvintrer mest i Frankrike og på Den iberiske halvøy. Noen få overvintrer på sørvestkysten.",
+   "verified": true
+  }
+ },
+ "lookalikes": [
+  {
+   "name": {
+    "en": "Other waders",
+    "no": "Andre vadefugler"
+   },
+   "text": {
+    "en": "In flight the broad, rounded wingtips set it apart from every other Norwegian wader.",
+    "no": "I flukt skiller de brede, avrundede vingespissene den fra alle andre norske vadefugler.",
+    "verified": true
+   }
+  }
+ ]
+}

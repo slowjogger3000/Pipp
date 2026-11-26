@@ -1,0 +1,291 @@
+{
+ "_note": "Barn swallow ink plate in a 280x240 box, M11 batch 7, built from the willow warbler plate: blue-black above (dense hatching), white below, rust-red forehead and throat (shadow), blue-black breast band (ink), long tail streamers in ink, the female's shorter (birds.md, SNL). Juvenile not described, drawn like the female, [TO VERIFY].",
+ "box": [
+  280,
+  240
+ ],
+ "clips": {
+  "body": "M198 70 C196 56 180 50 166 56 C152 62 142 76 132 92 C120 110 110 130 108 150 C110 160 118 168 126 172 C146 182 170 174 180 156 C192 136 199 108 199 90 C200 86 201 82 200 80 Z",
+  "wing": "M156 92 C164 118 148 148 112 160 C118 138 130 110 156 92 Z"
+ },
+ "layers": [
+  {
+   "path": "M14 206 C80 202 150 199 268 194",
+   "stroke": 4
+  },
+  {
+   "path": "M214 197 l20 -20 M224 187 l16 3",
+   "stroke": 1.5
+  },
+  {
+   "path": "M234 177 q10 -10 18 -2 q-9 8 -18 2 Z M240 190 q11 -5 16 3 q-10 4 -16 -3 Z",
+   "fill": "face",
+   "stroke": 1
+  },
+  {
+   "variant": "streamers",
+   "fill": "ink",
+   "stroke": 1,
+   "part": "tail"
+  },
+  {
+   "path": "M142 176 L144 199 M156 175 L159 198 M136 201 L144 199 L152 201 M151 199 L159 198 L167 200",
+   "stroke": 1.5
+  },
+  {
+   "clip": "body",
+   "fill": "face",
+   "stroke": 1.5
+  },
+  {
+   "hatch": "body"
+  },
+  {
+   "variant": "under",
+   "fill": "face",
+   "within": "body"
+  },
+  {
+   "variant": "rust",
+   "fill": "shadow",
+   "stroke": 1,
+   "within": "body"
+  },
+  {
+   "variant": "band",
+   "fill": "ink",
+   "within": "body"
+  },
+  {
+   "hatch": "wing"
+  },
+  {
+   "clip": "wing",
+   "stroke": 1.5
+  },
+  {
+   "clip": "body",
+   "stroke": 1.5
+  },
+  {
+   "eye": [
+    182,
+    68
+   ],
+   "pupil": 2.4
+  },
+  {
+   "path": "M182.4 66.8 m-0.9 0 a0.9 0.9 0 1 0 1.8 0 a0.9 0.9 0 1 0 -1.8 0",
+   "fill": "face"
+  },
+  {
+   "path": "M198 69 L218 75 L200 77 Z",
+   "fill": "bill",
+   "stroke": 1.5,
+   "part": "upper"
+  },
+  {
+   "path": "M200 77 L216 76 L200 80 Z",
+   "fill": "bill",
+   "stroke": 1.5,
+   "part": "lower"
+  },
+  {
+   "path": "M226 64 A14 14 0 0 1 226 88 M233 56 A24 24 0 0 1 233 96 M240 48 A34 34 0 0 1 240 104",
+   "stroke": 1.5,
+   "part": "arcs"
+  }
+ ],
+ "hatch": {
+  "body": {
+   "rect": [
+    104,
+    50,
+    204,
+    184
+   ],
+   "up": true,
+   "clip": "body"
+  },
+  "wing": {
+   "rect": [
+    108,
+    88,
+    166,
+    164
+   ],
+   "up": false,
+   "clip": "wing"
+  }
+ },
+ "pivots": {
+  "upper": {
+   "at": [
+    200,
+    74
+   ],
+   "deg": -14
+  },
+  "lower": {
+   "at": [
+    200,
+    79
+   ],
+   "deg": 10
+  },
+  "tail": {
+   "at": [
+    120,
+    156
+   ],
+   "deg": -5
+  }
+ },
+ "variants": {
+  "male": {
+   "body_pitch": 3.5,
+   "wing_pitch": 3,
+   "eye_ring": 0,
+   "bill": "ink",
+   "under": "M199 84 C196 108 190 134 180 156 C170 174 146 182 126 172 C140 170 156 160 166 144 C178 124 188 102 192 84 Z",
+   "rust": "M200 80 C199 88 197 94 193 98 C188 94 187 86 190 79 Z M188 56 C193 57 197 62 199 68 L194 69 C192 64 190 60 186 58 Z",
+   "band": "M193 98 C190 106 186 112 182 116 C178 110 182 102 188 96 Z",
+   "streamers": "M114 146 L38 222 L44 225 L110 162 L60 230 L67 231 L126 166 Z"
+  },
+  "female": {
+   "body_pitch": 3.5,
+   "wing_pitch": 3,
+   "eye_ring": 0,
+   "bill": "ink",
+   "under": "M199 84 C196 108 190 134 180 156 C170 174 146 182 126 172 C140 170 156 160 166 144 C178 124 188 102 192 84 Z",
+   "rust": "M200 80 C199 88 197 94 193 98 C188 94 187 86 190 79 Z M188 56 C193 57 197 62 199 68 L194 69 C192 64 190 60 186 58 Z",
+   "band": "M193 98 C190 106 186 112 182 116 C178 110 182 102 188 96 Z",
+   "streamers": "M114 146 L56 206 L62 209 L112 162 L74 214 L81 215 L126 166 Z"
+  },
+  "juvenile": {
+   "body_pitch": 3.5,
+   "wing_pitch": 3,
+   "eye_ring": 0,
+   "bill": "ink",
+   "under": "M199 84 C196 108 190 134 180 156 C170 174 146 182 126 172 C140 170 156 160 166 144 C178 124 188 102 192 84 Z",
+   "rust": "M200 80 C199 88 197 94 193 98 C188 94 187 86 190 79 Z M188 56 C193 57 197 62 199 68 L194 69 C192 64 190 60 186 58 Z",
+   "band": "M193 98 C190 106 186 112 182 116 C178 110 182 102 188 96 Z",
+   "streamers": "M114 146 L56 206 L62 209 L112 162 L74 214 L81 215 L126 166 Z"
+  }
+ },
+ "callouts": [
+  {
+   "id": "throat",
+   "leader": "M196 88 L232 60",
+   "at": [
+    236,
+    48
+   ],
+   "align": "centre",
+   "male": {
+    "en": "RUST-RED, AS THE FOREHEAD",
+    "no": "RUSTRØD, SOM PANNA",
+    "verified": true
+   },
+   "female": {
+    "en": "RUST-RED, AS THE FOREHEAD",
+    "no": "RUSTRØD, SOM PANNA",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  },
+  {
+   "id": "plumage",
+   "leader": "M150 90 L74 86",
+   "at": [
+    70,
+    80
+   ],
+   "align": "right",
+   "male": {
+    "en": "BLUE-BLACK ABOVE",
+    "no": "SVARTBLÅ OVER",
+    "verified": true
+   },
+   "female": {
+    "en": "BLUE-BLACK ABOVE",
+    "no": "SVARTBLÅ OVER",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  },
+  {
+   "id": "breast",
+   "leader": "M186 108 L232 160",
+   "at": [
+    236,
+    172
+   ],
+   "align": "centre",
+   "male": {
+    "en": "DARK BAND, WHITE BELOW",
+    "no": "MØRKT BÅND, HVIT UNDER",
+    "verified": true
+   },
+   "female": {
+    "en": "DARK BAND, WHITE BELOW",
+    "no": "MØRKT BÅND, HVIT UNDER",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  },
+  {
+   "id": "tail",
+   "leader": "M70 200 L40 150",
+   "at": [
+    40,
+    138
+   ],
+   "align": "centre",
+   "male": {
+    "en": "LONG STREAMERS",
+    "no": "LANGE SPYD",
+    "verified": true
+   },
+   "female": {
+    "en": "SHORTER STREAMERS",
+    "no": "KORTERE SPYD",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  }
+ ],
+ "captions": {
+  "male": {
+   "en": "Male. Beak and tail follow the sound.",
+   "no": "Hann. Nebb og hale følger lyden.",
+   "verified": true
+  },
+  "female": {
+   "en": "Female. Shorter tail streamers.",
+   "no": "Hunn. Kortere stjertspyd.",
+   "verified": true
+  },
+  "juvenile": {
+   "en": "Juvenile. Drawn like the female.",
+   "no": "Ungfugl. Tegnet som hunnen.",
+   "verified": false
+  }
+ }
+}

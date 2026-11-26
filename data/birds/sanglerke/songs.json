@@ -1,0 +1,368 @@
+{
+ "_note": "Skylark, M11 batch 7. Verified by SNL: in its song flight it climbs higher and higher with a whirring sound and a continuous stream of trills and whistles, then glides down and drops like a stone. The engine holds 64 notes a phrase, so each note here is a short motif: warbled trills (fast pitch and amplitude trill) and clear whistles, 2,4 to 5 kHz, with very short gaps, 40 to 64 of them, 15 to 35 s. Pitches, shapes and lengths are sound design guesses.",
+ "syllables": {
+  "trA": {
+   "dur_ms": 520,
+   "pitch": [
+    [
+     0,
+     3600
+    ],
+    [
+     0.5,
+     4200
+    ],
+    [
+     1,
+     3800
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.05,
+     0.9
+    ],
+    [
+     0.9,
+     0.8
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.65,
+   "trill": {
+    "hz": 26,
+    "depth_st": 2.5,
+    "am": 0.6
+   }
+  },
+  "trB": {
+   "dur_ms": 440,
+   "pitch": [
+    [
+     0,
+     4300
+    ],
+    [
+     0.5,
+     3700
+    ],
+    [
+     1,
+     4100
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.05,
+     0.9
+    ],
+    [
+     0.9,
+     0.8
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.65,
+   "trill": {
+    "hz": 32,
+    "depth_st": 2.0,
+    "am": 0.6
+   }
+  },
+  "trC": {
+   "dur_ms": 380,
+   "pitch": [
+    [
+     0,
+     3000
+    ],
+    [
+     1,
+     3500
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.05,
+     0.9
+    ],
+    [
+     0.9,
+     0.8
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.65,
+   "trill": {
+    "hz": 22,
+    "depth_st": 3.0,
+    "am": 0.6
+   }
+  },
+  "wh1": {
+   "dur_ms": 220,
+   "pitch": [
+    [
+     0,
+     2800
+    ],
+    [
+     0.4,
+     3600
+    ],
+    [
+     1,
+     3300
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.12,
+     1
+    ],
+    [
+     0.6,
+     0.7
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.65
+  },
+  "wh2": {
+   "dur_ms": 260,
+   "pitch": [
+    [
+     0,
+     4600
+    ],
+    [
+     0.5,
+     4000
+    ],
+    [
+     1,
+     4400
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.12,
+     1
+    ],
+    [
+     0.6,
+     0.7
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.65
+  },
+  "wh3": {
+   "dur_ms": 180,
+   "pitch": [
+    [
+     0,
+     2500
+    ],
+    [
+     1,
+     3100
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.12,
+     1
+    ],
+    [
+     0.6,
+     0.7
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.6
+  },
+  "chir": {
+   "dur_ms": 300,
+   "pitch": [
+    [
+     0,
+     4000
+    ],
+    [
+     0.25,
+     4800
+    ],
+    [
+     0.5,
+     3800
+    ],
+    [
+     0.75,
+     4600
+    ],
+    [
+     1,
+     3900
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.05,
+     1
+    ],
+    [
+     0.22,
+     0
+    ],
+    [
+     0.28,
+     0
+    ],
+    [
+     0.33,
+     1
+    ],
+    [
+     0.48,
+     0
+    ],
+    [
+     0.55,
+     0
+    ],
+    [
+     0.6,
+     1
+    ],
+    [
+     0.75,
+     0
+    ],
+    [
+     0.8,
+     0
+    ],
+    [
+     0.85,
+     1
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.6
+  }
+ },
+ "types": {
+  "song": {
+   "pause_s": [
+    4.0,
+    12.0
+   ],
+   "length_s": [
+    15.0,
+    35.0
+   ],
+   "transpose_st": 0.8,
+   "avoid_repeat": false,
+   "auto": {
+    "vo_pitch": [
+     0.98,
+     1.02
+    ],
+    "vo_breath": [
+     14,
+     24
+    ],
+    "vo_tension": [
+     70,
+     84
+    ],
+    "vo_rough": [
+     2,
+     8
+    ],
+    "ph_tempo": [
+     96,
+     104
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 1,
+     "sections": [
+      {
+       "pool": [
+        "trA",
+        "trB",
+        "trC",
+        "wh1",
+        "wh2",
+        "wh3",
+        "chir"
+       ],
+       "count": [
+        40,
+        64
+       ],
+       "share": 1.0,
+       "gap_ms": [
+        10,
+        45
+       ]
+      }
+     ]
+    }
+   ],
+   "overrides": []
+  }
+ }
+}

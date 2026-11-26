@@ -1,0 +1,107 @@
+{
+ "_note": "Field guide text for the yellowhammer, both languages. Facts from birds.md (SNL, checked 2026-11-26). Norwegian wording is mine, Eirik to check. calendar: one letter per month from January, y yes, n no, ? not known.",
+ "xeno_canto": "https://xeno-canto.org/species/emberiza-citrinella",
+ "facts": {
+  "length": {
+   "en": "16 to 16,5 cm, 20 to 36,5 g",
+   "no": "16 til 16,5 cm, 20 til 36,5 g",
+   "verified": true
+  },
+  "broods": {
+   "en": "3 to 5 eggs; the female sits 12 to 14 days; usually one brood in Norway",
+   "no": "3 til 5 egg; hunnen ruger i 12 til 14 dager; vanligvis ett kull i Norge",
+   "verified": true
+  },
+  "range": {
+   "en": "Common in farmland over much of the country, fewer in the north; 100 000 to 200 000 pairs (2015)",
+   "no": "Vanlig i kulturlandskapet i store deler av landet, færre i nord; 100 000 til 200 000 par (2015)",
+   "verified": true
+  },
+  "habitat": {
+   "en": "Farmland, often near the forest edge",
+   "no": "Kulturlandskap, ofte nær skogkanten",
+   "verified": true
+  },
+  "food": {
+   "en": "Mainly seeds; insects in the breeding season",
+   "no": "Mest frø; insekter i hekketiden",
+   "verified": true
+  },
+  "status": {
+   "en": "VU, vulnerable, Norwegian red list",
+   "no": "VU, sårbar, norsk rødliste",
+   "verified": true
+  },
+  "nest": {
+   "en": "Well hidden on or near the ground: dry grass, lined with fine straw and hair",
+   "no": "Godt skjult på eller nær bakken: tørt gress, fôret med fine strå og hår",
+   "verified": true
+  }
+ },
+ "sings": {
+  "male": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "female": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "song_notes": {
+  "en": "A quick series, “zi-zi-zi-zi-zi-zi-ziiiiiii”, which many hear as counting to seven; the count can vary from five to twelve.",
+  "no": "En rask serie, «zi-zi-zi-zi-zi-zi-ziiiiiii», som mange beskriver som å telle til sju; antallet kan variere fra fem til tolv.",
+  "verified": true
+ },
+ "mnemonic": {
+  "en": "Counting to seven: zi-zi-zi-zi-zi-zi-ziiii.",
+  "no": "Teller til sju: zi-zi-zi-zi-zi-zi-ziiii.",
+  "verified": true
+ },
+ "types": {
+  "song": {
+   "en": "“zi-zi-zi-zi-zi-zi-ziiiiiii”, five to twelve notes.",
+   "no": "«zi-zi-zi-zi-zi-zi-ziiiiiii», fem til tolv toner.",
+   "verified": true
+  },
+  "call": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "alarm": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "flight": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "parts": {
+  "zi": {
+   "en": "ZI-ZI-ZI",
+   "no": "ZI-ZI-ZI",
+   "verified": true
+  },
+  "ziii": {
+   "en": "ZIIIIIII",
+   "no": "ZIIIIIII",
+   "verified": true
+  }
+ },
+ "calendar": {
+  "present": "yyyyyyyyyyyy",
+  "sings": "????????????",
+  "note": {
+   "en": "Mainly resident and wandering; some leave Norway in winter. The nest is built in May to June.",
+   "no": "Mest standfugl og streiffugl; noen forlater landet om vinteren. Reiret bygges i mai til juni.",
+   "verified": true
+  }
+ },
+ "lookalikes": []
+}

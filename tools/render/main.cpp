@@ -533,6 +533,9 @@ int checkOverride(const tipp::BirdData& bird)
     engine.handUp(k);
     run(6.0);
     expect(engine.knobMode(k) == Mode::Hold && std::abs(engine.knobValue(k) - 1.2f) < 1e-5f, "autoplay off: knob stays where the hand left it");
+    // A long song (the skylark's runs 15 to 35 s) can still be going: let it end.
+    for (int i = 0; i < 1200 && engine.singing(); ++i)
+        run(0.1);
     const auto before = engine.phrasesStarted();
     engine.trigger(P::indexOf(P::ap_sing_once));
     run(0.1);
@@ -739,7 +742,7 @@ int checkQuiz(const tipp::BirdData& bird)
             voice.start(engine, &bird, tipp::kSong, false);
             voice.setHalfSpeed(engine, half);
             double singing = 0.0;
-            const auto blocks = static_cast<long>(25.0 * kSampleRate / 32.0 + 0.5);
+            const auto blocks = static_cast<long>(150.0 * kSampleRate / 32.0 + 0.5); // room for a long song at half speed
             for (long i = 0; i < blocks; ++i)
             {
                 if (i % 50 == 0)

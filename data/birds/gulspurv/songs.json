@@ -1,0 +1,246 @@
+{
+ "_note": "Yellowhammer, M11 batch 7. Verified by SNL: «zi-zi-zi-zi-zi-zi-ziiiiiii», a quick series that many hear as counting to seven, varying from five to twelve. Pitch and timing are sound design guesses: buzzy 'zi' notes about 5 kHz, then one drawn-out end note. Parts named from the transcription.",
+ "syllables": {
+  "zi": {
+   "dur_ms": 85,
+   "pitch": [
+    [
+     0,
+     5300
+    ],
+    [
+     0.4,
+     5500
+    ],
+    [
+     1,
+     5000
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.12,
+     1
+    ],
+    [
+     0.6,
+     0.7
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.7,
+   "rough": 14
+  },
+  "zi2": {
+   "dur_ms": 80,
+   "pitch": [
+    [
+     0,
+     5200
+    ],
+    [
+     0.4,
+     5450
+    ],
+    [
+     1,
+     4950
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.12,
+     1
+    ],
+    [
+     0.6,
+     0.7
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.68,
+   "rough": 14
+  },
+  "ziii": {
+   "dur_ms": 850,
+   "pitch": [
+    [
+     0,
+     5100
+    ],
+    [
+     0.2,
+     5250
+    ],
+    [
+     1,
+     4700
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.04,
+     0.9
+    ],
+    [
+     0.5,
+     1
+    ],
+    [
+     0.9,
+     0.7
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.7,
+   "rough": 18
+  },
+  "ziii2": {
+   "dur_ms": 700,
+   "pitch": [
+    [
+     0,
+     4400
+    ],
+    [
+     0.2,
+     4600
+    ],
+    [
+     1,
+     4200
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.04,
+     0.9
+    ],
+    [
+     0.5,
+     1
+    ],
+    [
+     0.9,
+     0.7
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.68,
+   "rough": 18
+  }
+ },
+ "types": {
+  "song": {
+   "pause_s": [
+    3.0,
+    9.0
+   ],
+   "length_s": [
+    1.6,
+    2.8
+   ],
+   "transpose_st": 0.6,
+   "avoid_repeat": false,
+   "bout": [
+    3,
+    10
+   ],
+   "auto": {
+    "vo_pitch": [
+     0.98,
+     1.02
+    ],
+    "vo_breath": [
+     16,
+     26
+    ],
+    "vo_tension": [
+     66,
+     80
+    ],
+    "vo_rough": [
+     14,
+     22
+    ],
+    "ph_tempo": [
+     96,
+     104
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 1,
+     "sections": [
+      {
+       "pool": [
+        "zi",
+        "zi2"
+       ],
+       "count": [
+        4,
+        11
+       ],
+       "share": 0.6,
+       "gap_ms": [
+        55,
+        85
+       ],
+       "part": "zi",
+       "no_adjacent_repeat": false
+      },
+      {
+       "pool": [
+        "ziii",
+        "ziii2"
+       ],
+       "count": [
+        1,
+        1
+       ],
+       "share": 0.4,
+       "gap_ms": [
+        40,
+        40
+       ],
+       "part": "ziii",
+       "lead_gap_ms": [
+        60,
+        110
+       ]
+      }
+     ]
+    }
+   ],
+   "overrides": []
+  }
+ }
+}

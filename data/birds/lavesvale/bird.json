@@ -1,0 +1,95 @@
+{
+ "_note": "Field guide text for the barn swallow, both languages. Facts from birds.md (SNL, checked 2026-11-26). Norwegian wording is mine, Eirik to check. calendar: one letter per month from January, y yes, n no, ? not known.",
+ "xeno_canto": "https://xeno-canto.org/species/hirundo-rustica",
+ "facts": {
+  "length": {
+   "en": "About 18 cm, 16 to 24 g",
+   "no": "Rundt 18 cm, 16 til 24 g",
+   "verified": true
+  },
+  "broods": {
+   "en": "2 to 7 eggs, usually 4 to 5; often a second brood in July, sometimes three",
+   "no": "2 til 7 egg, oftest 4 til 5; ofte et andrekull i juli, noen ganger tre",
+   "verified": true
+  },
+  "range": {
+   "en": "Much of the country, fewer in Finnmark and high up; 30 000 to 50 000 pairs",
+   "no": "Store deler av landet, færre i Finnmark og høyt til fjells; 30 000 til 50 000 par",
+   "verified": true
+  },
+  "habitat": {
+   "en": "Open farmland, often near water",
+   "no": "Åpent kulturlandskap, ofte nær vann",
+   "verified": true
+  },
+  "food": {
+   "en": "Insects caught on the wing, low over the ground",
+   "no": "Insekter tatt i lufta, lavt over bakken",
+   "verified": true
+  },
+  "status": {
+   "en": "LC, least concern, Norwegian red list",
+   "no": "LC, livskraftig, norsk rødliste",
+   "verified": true
+  },
+  "nest": {
+   "en": "Mostly indoors in barns: clay with straw and hair, lined with grass and white feathers",
+   "no": "Mest innendørs i låver: leire med strå og hår, fôret med gress og hvite fjær",
+   "verified": true
+  }
+ },
+ "sings": {
+  "male": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "female": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "song_notes": {
+  "en": "The song is a quick twittering. [TO VERIFY] SNL gives nothing more, so the notes Tipp plays are a stand-in. Blue-black above, white below, a rust-red forehead and throat with a blue-black breast band; long tail streamers, longest in the male.",
+  "no": "Sangen er en rask kvitring. [TO VERIFY] SNL sier ikke mer, så tonene Tipp spiller er en stedfortreder. Svartblå over, hvit under, rustrød panne og strupe med svartblått brystbånd; lange stjertspyd, lengst hos hannen.",
+  "verified": true
+ },
+ "mnemonic": {
+  "en": "",
+  "no": "",
+  "verified": false
+ },
+ "types": {
+  "song": {
+   "en": "A quick twittering.",
+   "no": "En rask kvitring.",
+   "verified": true
+  },
+  "call": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "alarm": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "flight": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "calendar": {
+  "present": "???yyyyy????",
+  "sings": "????????????",
+  "note": {
+   "en": "Arrives April to May; long-distance migrant, winters in Africa south of the Sahara. Eggs May to June, often a second brood in July. [TO VERIFY] when it leaves.",
+   "no": "Kommer april til mai; langtrekker, overvintrer i Afrika sør for Sahara. Egg mai til juni, ofte et andrekull i juli. [TO VERIFY] når den drar.",
+   "verified": true
+  }
+ },
+ "lookalikes": []
+}

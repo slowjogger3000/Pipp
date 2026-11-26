@@ -1,0 +1,281 @@
+{
+ "_note": "Yellowhammer ink plate in a 280x240 box, M11 batch 7, built from the willow warbler plate: male with a yellow head with dark markings (face with thin ink marks), yellow underside (face), reddish-brown and olive breast patch and reddish-brown rump (shadow); the female and juvenile much less yellow (the head hatched) (birds.md, SNL).",
+ "box": [
+  280,
+  240
+ ],
+ "clips": {
+  "body": "M198 70 C196 56 180 50 166 56 C152 62 142 76 132 92 C120 110 110 130 108 150 C110 160 118 168 126 172 C146 182 170 174 180 156 C192 136 199 108 199 90 C200 86 201 82 200 80 Z",
+  "wing": "M156 92 C164 118 148 148 112 160 C118 138 130 110 156 92 Z"
+ },
+ "layers": [
+  {
+   "path": "M14 206 C80 202 150 199 268 194",
+   "stroke": 4
+  },
+  {
+   "path": "M214 197 l20 -20 M224 187 l16 3",
+   "stroke": 1.5
+  },
+  {
+   "path": "M234 177 q10 -10 18 -2 q-9 8 -18 2 Z M240 190 q11 -5 16 3 q-10 4 -16 -3 Z",
+   "fill": "face",
+   "stroke": 1
+  },
+  {
+   "path": "M114 146 L62 204 L74 214 L126 166 Z",
+   "fill": "face",
+   "stroke": 1.5,
+   "part": "tail"
+  },
+  {
+   "path": "M118 152 L66 207 M122 159 L70 211",
+   "stroke": 1,
+   "part": "tail"
+  },
+  {
+   "path": "M142 176 L144 199 M156 175 L159 198 M136 201 L144 199 L152 201 M151 199 L159 198 L167 200",
+   "stroke": 1.5
+  },
+  {
+   "clip": "body",
+   "fill": "face",
+   "stroke": 1.5
+  },
+  {
+   "hatch": "body"
+  },
+  {
+   "variant": "under",
+   "fill": "face",
+   "within": "body"
+  },
+  {
+   "variant": "head",
+   "fill": "face",
+   "within": "body"
+  },
+  {
+   "variant": "marks",
+   "fill": "ink",
+   "within": "body"
+  },
+  {
+   "variant": "breastpatch",
+   "fill": "shadow",
+   "within": "body"
+  },
+  {
+   "path": "M120 136 C114 146 112 156 116 162 C122 156 128 146 130 138 Z",
+   "fill": "shadow",
+   "within": "body"
+  },
+  {
+   "hatch": "wing"
+  },
+  {
+   "clip": "wing",
+   "stroke": 1.5
+  },
+  {
+   "clip": "body",
+   "stroke": 1.5
+  },
+  {
+   "eye": [
+    182,
+    68
+   ],
+   "pupil": 2.4
+  },
+  {
+   "path": "M182.4 66.8 m-0.9 0 a0.9 0.9 0 1 0 1.8 0 a0.9 0.9 0 1 0 -1.8 0",
+   "fill": "face"
+  },
+  {
+   "path": "M198 69 L218 75 L200 77 Z",
+   "fill": "bill",
+   "stroke": 1.5,
+   "part": "upper"
+  },
+  {
+   "path": "M200 77 L216 76 L200 80 Z",
+   "fill": "bill",
+   "stroke": 1.5,
+   "part": "lower"
+  },
+  {
+   "path": "M226 64 A14 14 0 0 1 226 88 M233 56 A24 24 0 0 1 233 96 M240 48 A34 34 0 0 1 240 104",
+   "stroke": 1.5,
+   "part": "arcs"
+  }
+ ],
+ "hatch": {
+  "body": {
+   "rect": [
+    104,
+    50,
+    204,
+    184
+   ],
+   "up": true,
+   "clip": "body"
+  },
+  "wing": {
+   "rect": [
+    108,
+    88,
+    166,
+    164
+   ],
+   "up": false,
+   "clip": "wing"
+  }
+ },
+ "pivots": {
+  "upper": {
+   "at": [
+    200,
+    74
+   ],
+   "deg": -14
+  },
+  "lower": {
+   "at": [
+    200,
+    79
+   ],
+   "deg": 10
+  },
+  "tail": {
+   "at": [
+    120,
+    156
+   ],
+   "deg": -5
+  }
+ },
+ "variants": {
+  "male": {
+   "body_pitch": 7,
+   "wing_pitch": 5,
+   "eye_ring": 0,
+   "bill": "shadow",
+   "under": "M199 84 C196 108 190 134 180 156 C170 174 146 182 126 172 C140 170 156 160 166 144 C178 124 188 102 192 84 Z",
+   "head": "M160 54 C170 48 186 48 196 58 C200 66 200 76 199 84 C188 86 172 84 160 78 C156 70 156 60 160 54 Z",
+   "marks": "M166 62 L184 58 L184 60.5 L166 64.5 Z M170 76 L190 78 L190 80.5 L170 78.5 Z",
+   "breastpatch": "M197 92 C195 104 191 114 186 120 C182 112 184 100 190 92 Z"
+  },
+  "female": {
+   "body_pitch": 7,
+   "wing_pitch": 5,
+   "eye_ring": 0,
+   "bill": "shadow",
+   "under": "M199 84 C196 108 190 134 180 156 C170 174 146 182 126 172 C140 170 156 160 166 144 C178 124 188 102 192 84 Z",
+   "head": "",
+   "marks": "",
+   "breastpatch": ""
+  },
+  "juvenile": {
+   "body_pitch": 7,
+   "wing_pitch": 5,
+   "eye_ring": 0,
+   "bill": "shadow",
+   "under": "M199 84 C196 108 190 134 180 156 C170 174 146 182 126 172 C140 170 156 160 166 144 C178 124 188 102 192 84 Z",
+   "head": "",
+   "marks": "",
+   "breastpatch": ""
+  }
+ },
+ "callouts": [
+  {
+   "id": "head",
+   "leader": "M176 54 L126 30",
+   "at": [
+    122,
+    24
+   ],
+   "align": "right",
+   "male": {
+    "en": "YELLOW, DARK MARKINGS",
+    "no": "GUL, MØRKE TEGNINGER",
+    "verified": true
+   },
+   "female": {
+    "en": "MUCH LESS YELLOW",
+    "no": "MYE MINDRE GUL",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "MUCH LESS YELLOW",
+    "no": "MYE MINDRE GUL",
+    "verified": true
+   }
+  },
+  {
+   "id": "breast",
+   "leader": "M188 110 L232 200",
+   "at": [
+    276,
+    212
+   ],
+   "align": "right",
+   "male": {
+    "en": "YELLOW, RUST AND OLIVE",
+    "no": "GUL, RUSTBRUN OG OLIVEN",
+    "verified": true
+   },
+   "female": {
+    "en": "",
+    "no": "",
+    "verified": false
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  },
+  {
+   "id": "plumage",
+   "leader": "M124 150 L74 120",
+   "at": [
+    70,
+    112
+   ],
+   "align": "right",
+   "male": {
+    "en": "RUST-BROWN RUMP",
+    "no": "RØDBRUN OVERGUMP",
+    "verified": true
+   },
+   "female": {
+    "en": "RUST-BROWN RUMP",
+    "no": "RØDBRUN OVERGUMP",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  }
+ ],
+ "captions": {
+  "male": {
+   "en": "Male. Beak and tail follow the sound.",
+   "no": "Hann. Nebb og hale følger lyden.",
+   "verified": true
+  },
+  "female": {
+   "en": "Female. Much less yellow.",
+   "no": "Hunn. Mye mindre gul.",
+   "verified": true
+  },
+  "juvenile": {
+   "en": "Juvenile. Much less yellow.",
+   "no": "Ungfugl. Mye mindre gul.",
+   "verified": true
+  }
+ }
+}
