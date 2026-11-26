@@ -2,6 +2,8 @@
 add_library(tipp_core STATIC
     BirdData.cpp
     BirdData.h
+    Chorus.cpp
+    Chorus.h
     Compare.cpp
     Compare.h
     Drawn.cpp

@@ -5,6 +5,7 @@
 //        [--bird <id>] [--sex female] [--age juvenile] [--tab guide]
 //        [--compare <id>] [--speed 0.5|0.25] [--shift] [--draw]
 //        [--tab quiz] [--quiz-seed <n>] [--quiz-skip <n>] [--answer right|wrong] [--leave-quiz]
+//        [--tab chorus] [--chorus-start <min>] [--chorus-speed real|10x|60x|loop] [--mute-lane 1-4]
 // plays for the given time, drags the knob 3 s before the end if asked,
 // saves a picture of the window and quits.
 
@@ -47,6 +48,16 @@ public:
             }
             if (value("--tab") == "guide")
                 content->setTab(1);
+            if (value("--tab") == "chorus")
+            {
+                const auto sp = value("--chorus-speed");
+                const auto start = value("--chorus-start");
+                content->snapshotChorus(start.isNotEmpty() ? start.getFloatValue() : -90.0f,
+                                        sp == "real" ? 0 : sp == "60x" ? 2 : sp == "loop" ? 3 : 1,
+                                        value("--mute-lane").isNotEmpty() ? value("--mute-lane").getIntValue() - 1 : -1);
+                content->snapshotQuiz(0u, 0, 0, args.contains("--leave-quiz"));
+                content->setTab(3);
+            }
             if (const auto speed = value("--speed"); speed.isNotEmpty())
                 content->setSpeed(speed == "0.25" ? 2 : speed == "0.5" ? 1 : 0);
             if (args.contains("--shift"))

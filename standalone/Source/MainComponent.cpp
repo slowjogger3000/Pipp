@@ -45,10 +45,17 @@ MainComponent::MainComponent(const juce::File& dataDirectory)
     playBtn.onClick = [this] {
         if (activeTab == 2)
             quizPlayAgain();
+        else if (activeTab == 3)
+            setChorusPlaying(true);
         else
             setPlaying(true);
     };
     stopBtn.onClick = [this] {
+        if (activeTab == 3)
+        {
+            setChorusPlaying(false);
+            return;
+        }
         if (activeTab != 2)
         {
             setPlaying(false);
@@ -192,6 +199,23 @@ MainComponent::MainComponent(const juce::File& dataDirectory)
     quizScreen.onAsk = [this](int v) { quizAsk = v; startQuiz(); };
     quizScreen.onHints = [this](int v) { quizHints = v; updateQuizView(); };
 
+    // Dawn chorus.
+    addChildComponent(chorusScreen);
+    chorusScreen.onSeason = [this](int v) { chorusSeason = v; chorus.setSeason(v); updateChorusView(); };
+    chorusScreen.onPlace = [this](int v) { chorusPlace = v; chorus.setPlace(v); updateChorusView(); };
+    chorusScreen.onSpeed = [this](int v) { chorusSpeed = v; chorus.setSpeed(v); updateChorusView(); };
+    chorusScreen.onMute = [this](int i) {
+        laneMute[static_cast<std::size_t>(i)] = ! laneMute[static_cast<std::size_t>(i)];
+        chorus.setMute(i, laneMute[static_cast<std::size_t>(i)]);
+        updateChorusView();
+    };
+    chorusScreen.onSolo = [this](int i) {
+        laneSolo[static_cast<std::size_t>(i)] = ! laneSolo[static_cast<std::size_t>(i)];
+        chorus.setSolo(i, laneSolo[static_cast<std::size_t>(i)]);
+        updateChorusView();
+    };
+    chorusScreen.onChange = [this](int i) { changeLaneBird(i); };
+
     engine.setParam(P::indexOf(P::ap_hold), hold);
     loadIndex();
     for (int i = 0; i < static_cast<int>(list.birds.size()); ++i)
@@ -214,6 +238,7 @@ MainComponent::~MainComponent()
 void MainComponent::prepareToPlay(int, double sampleRate)
 {
     engine.prepare(sampleRate);
+    chorus.prepare(sampleRate);
     engine.setBird(bird.get());
 }
 
@@ -223,6 +248,7 @@ void MainComponent::getNextAudioBlock(const juce::AudioSourceChannelInfo& info)
     float* left = buffer->getWritePointer(0, info.startSample);
     float* right = buffer->getNumChannels() > 1 ? buffer->getWritePointer(1, info.startSample) : left;
     engine.process(left, right, info.numSamples);
+    chorus.processAdd(left, right, info.numSamples); // silent unless the chorus plays
 }
 
 // Data -----------------------------------------------------------------------
@@ -448,9 +474,13 @@ void MainComponent::stopCompare()
 void MainComponent::setTab(int index)
 {
     const int was = activeTab;
-    activeTab = juce::jlimit(0, 2, index);
-    if (was == 2 && activeTab != 2)
+    activeTab = juce::jlimit(0, 3, index);
+    if (was == activeTab)
+        return;
+    if (was == 2)
         leaveQuiz();
+    if (was == 3)
+        leaveChorus();
     const bool play = activeTab == 0;
     for (juce::Component* c : std::initializer_list<juce::Component*> {
              &plate, &maleBtn, &femaleBtn, &adultBtn, &juvBtn, &sono, &drawBtn, &shiftOffBtn, &shiftOctBtn,
@@ -464,18 +494,22 @@ void MainComponent::setTab(int index)
         k->setVisible(play);
     updateSongTools();
     guide.setVisible(activeTab == 1);
-    list.setVisible(activeTab != 2);
-    prevBtn.setVisible(activeTab != 2);
-    nextBtn.setVisible(activeTab != 2);
+    const bool ownBird = activeTab < 2; // Play and Field guide have the list and stepper
+    list.setVisible(ownBird);
+    prevBtn.setVisible(ownBird);
+    nextBtn.setVisible(ownBird);
     quizScreen.setVisible(activeTab == 2);
-    if (was != 2 && activeTab == 2)
+    chorusScreen.setVisible(activeTab == 3);
+    if (activeTab == 2)
         enterQuiz();
+    if (activeTab == 3)
+        enterChorus();
     refreshControls();
 }
 
 void MainComponent::mouseUp(const juce::MouseEvent& e)
 {
-    for (int i = 0; i < 3; ++i)
+    for (int i = 0; i < 4; ++i)
         if (tabRects[static_cast<std::size_t>(i)].contains(e.getPosition()))
             setTab(i);
 }
@@ -558,6 +592,7 @@ void MainComponent::applyStrings()
     configurePlate(guide.plate);
     guide.applyStrings();
     quizScreen.applyStrings();
+    chorusScreen.applyStrings();
     if (activeTab == 2)
         updateQuizView();
     sono.nowText = strings("song.now");
@@ -570,7 +605,7 @@ void MainComponent::refreshControls()
 {
     prevBtn.setDisabled(neighbour(-1) < 0);
     nextBtn.setDisabled(neighbour(1) < 0);
-    const bool on = activeTab == 2 ? quizPlaying : playing;
+    const bool on = activeTab == 2 ? quizPlaying : activeTab == 3 ? chorusPlaying : playing;
     playBtn.setOn(on);
     stopBtn.setOn(! on);
     maleBtn.setOn(sex == 0);
@@ -609,11 +644,15 @@ void MainComponent::refreshControls()
     latchBtn.setOn(latch);
     if (activeTab == 2)
         updateQuizView();
+    if (activeTab == 3)
+        updateChorusView();
     repaint();
 }
 
 const BirdEntry* MainComponent::headerEntry() const
 {
+    if (activeTab == 3)
+        return nullptr; // several birds, no readout
     if (activeTab != 2)
         return currentEntry();
     if (! quiz.active() || ! quiz.answered())
@@ -925,6 +964,140 @@ void MainComponent::updateQuizView()
     repaint(statusArea);
 }
 
+// Chorus ---------------------------------------------------------------------
+
+int MainComponent::quizIndexOf(const juce::String& id) const
+{
+    for (std::size_t k = 0; k < quizEntries.size(); ++k)
+        if (list.birds[static_cast<std::size_t>(quizEntries[k])].id == id)
+            return static_cast<int>(k);
+    return -1;
+}
+
+// Lanes, entry minutes and distances from data/chorus.json, once.
+void MainComponent::loadChorus()
+{
+    if (! chorusDoc.isVoid())
+        return;
+    buildQuizBirds(); // every bird with data, parsed for the run
+    chorusDoc = juce::JSON::parse(dataDir.getChildFile("chorus.json"));
+    if (chorusDoc.isVoid())
+        loadError = strings.format("error.load", { { "bird", "CHORUS" }, { "error", "chorus.json" } });
+    const auto* lanes = chorusDoc["lanes"].getArray();
+    for (int i = 0; i < tipp::Chorus::kLanes; ++i)
+    {
+        const auto u = static_cast<std::size_t>(i);
+        juce::var lane = lanes != nullptr && i < lanes->size() ? (*lanes)[i] : juce::var();
+        laneDistance[u] = lane.hasProperty("distance_m") ? static_cast<float>(lane["distance_m"]) : 15.0f;
+        int k = quizIndexOf(lane["bird"].toString());
+        if (k < 0)
+            for (int j = 0; j < static_cast<int>(quizData.size()) && k < 0; ++j)
+                if (std::find(laneBird.begin(), laneBird.end(), j) == laneBird.end())
+                    k = j;
+        chorus.setDistance(i, laneDistance[u]);
+        setLaneBird(i, k);
+    }
+    chorus.setSeason(chorusSeason);
+    chorus.setPlace(chorusPlace);
+    chorus.setSpeed(chorusSpeed);
+    chorus.setSeed(static_cast<std::uint32_t>(juce::Random::getSystemRandom().nextInt()));
+}
+
+void MainComponent::setLaneBird(int lane, int k)
+{
+    const auto u = static_cast<std::size_t>(lane);
+    laneBird[u] = k;
+    if (k < 0)
+    {
+        chorus.setLaneBird(lane, nullptr);
+        return;
+    }
+    const auto id = list.birds[static_cast<std::size_t>(quizEntries[static_cast<std::size_t>(k)])].id;
+    const auto entries = chorusDoc["entry_min"];
+    laneEntry[u] = static_cast<float>(entries.hasProperty(juce::Identifier(id)) ? entries[juce::Identifier(id)]
+                                                                                : chorusDoc.getProperty("default_entry_min", -40.0));
+    chorus.setEntry(lane, laneEntry[u]);
+    chorus.setLaneBird(lane, quizData[static_cast<std::size_t>(k)].get());
+
+    // The Play bird keeps the voice and phrasing knobs latched there.
+    const auto* e = currentEntry();
+    const bool playBird = e != nullptr && e->id == id;
+    for (int knob = 0; knob < tipp::kDistance; ++knob)
+    {
+        const bool latched = playBird && engine.knobOverridden(knob) && engine.holdLeft(knob) < 0.0f
+                          && engine.knobMode(knob) == tipp::Engine::KnobMode::Hold;
+        if (latched)
+            chorus.holdKnob(lane, knob, engine.knobValue(knob));
+        else
+            chorus.releaseKnob(lane, knob);
+    }
+}
+
+// CHANGE BIRD: the next bird with sound that no other lane has.
+void MainComponent::changeLaneBird(int lane)
+{
+    const int n = static_cast<int>(quizData.size());
+    const int from = laneBird[static_cast<std::size_t>(lane)];
+    for (int step = 1; step < n; ++step)
+    {
+        const int k = ((from < 0 ? 0 : from) + step) % n;
+        if (std::find(laneBird.begin(), laneBird.end(), k) == laneBird.end())
+        {
+            setLaneBird(lane, k);
+            break;
+        }
+    }
+    updateChorusView();
+}
+
+void MainComponent::enterChorus()
+{
+    stopCompare();
+    loadChorus();
+    engine.setParam(P::indexOf(P::pb_play), 0.0f); // the Play bird rests
+    for (int i = 0; i < tipp::Chorus::kLanes; ++i)
+        setLaneBird(i, laneBird[static_cast<std::size_t>(i)]); // picks up latched knobs
+    updateChorusView();
+}
+
+void MainComponent::leaveChorus()
+{
+    setChorusPlaying(false);
+    sendScene();
+}
+
+void MainComponent::setChorusPlaying(bool on)
+{
+    if (on && chorus.finished())
+        chorus.seek(tipp::Chorus::kStartMin);
+    chorusPlaying = on;
+    chorus.setPlaying(on);
+    refreshControls();
+}
+
+void MainComponent::updateChorusView()
+{
+    ChorusScreen::View v;
+    v.season = chorusSeason;
+    v.place = chorusPlace;
+    v.speed = chorusSpeed;
+    v.canChange = quizData.size() > static_cast<std::size_t>(tipp::Chorus::kLanes);
+    for (int i = 0; i < tipp::Chorus::kLanes; ++i)
+    {
+        const auto u = static_cast<std::size_t>(i);
+        auto& lane = v.lanes[u];
+        const int k = laneBird[u];
+        lane.name = k >= 0 ? quizName(k) : juce::String();
+        lane.entry = laneEntry[u];
+        lane.distance = juce::roundToInt(laneDistance[u]);
+        lane.mute = laneMute[u];
+        lane.solo = laneSolo[u];
+        lane.inSeason = k >= 0 && tipp::rulesFor(quizData[static_cast<std::size_t>(k)]->types[tipp::kSong], chorusSeason, 0, 0, 0).active;
+    }
+    chorusScreen.setView(v);
+    repaint(statusArea);
+}
+
 // Timer ----------------------------------------------------------------------
 
 void MainComponent::timerCallback()
@@ -952,6 +1125,18 @@ void MainComponent::timerCallback()
 
     sono.poll();
 
+    if (activeTab == 3)
+    {
+        chorusScreen.poll();
+        if (chorusPlaying && chorus.finished())
+        {
+            chorusPlaying = false;
+            chorus.setPlaying(false);
+            refreshControls();
+        }
+        repaint(headerArea);
+    }
+
     if (activeTab == 2)
     {
         quizVoice.tick(engine);
@@ -976,8 +1161,11 @@ void MainComponent::timerCallback()
     plate.setOpen(plateOpen);
     guide.plate.setOpen(plateOpen);
 
-    float l = 0.0f, r = 0.0f;
+    float l = 0.0f, r = 0.0f, cl = 0.0f, cr = 0.0f;
     engine.takePeaks(l, r);
+    chorus.takePeaks(cl, cr);
+    l = std::max(l, cl);
+    r = std::max(r, cr);
     meterL = std::max(l, meterL * 0.85f);
     meterR = std::max(r, meterR * 0.85f);
     meterPeak = std::max(std::max(l, r), meterPeak * 0.97f);
@@ -1017,7 +1205,7 @@ void MainComponent::timerCallback()
         // Without a drag, wait for the middle of a phrase so the grey
         // "next" strokes are on screen.
         const bool midPhrase = engine.singing() && engine.phrasePosMs() > 500.0f;
-        if (snapshotLeaveQuiz && activeTab == 2 && elapsed >= snapshotSeconds - 4.0)
+        if (snapshotLeaveQuiz && activeTab >= 2 && elapsed >= snapshotSeconds - 4.0)
             setTab(0);
         if (activeTab == 2 && snapshotAnswer != 0 && elapsed >= snapshotSeconds - 1.0 && quiz.active() && ! quiz.answered())
         {
@@ -1027,7 +1215,7 @@ void MainComponent::timerCallback()
         // Quiz: once the mystery phrase has been sung in full.
         const bool quizReady = activeTab == 2 && quizAsks > 0u && ! engine.singing()
                             && (snapshotAnswer == 0 || quiz.answered());
-        const bool ready = snapshotDrawMode ? drawReady : activeTab == 2 ? quizReady : (snapshotKnob >= 0 || midPhrase);
+        const bool ready = snapshotDrawMode ? drawReady : activeTab == 2 ? quizReady : activeTab == 3 ? true : (snapshotKnob >= 0 || midPhrase);
         if (elapsed >= snapshotSeconds && (ready || elapsed > snapshotSeconds + 15.0))
         {
             const auto image = createComponentSnapshot(getLocalBounds(), true, 1.0f);
@@ -1043,6 +1231,21 @@ void MainComponent::timerCallback()
 
 void MainComponent::runSnapshot(const juce::File& png, double seconds, int handKnob)
 {
+    if (activeTab == 3)
+    {
+        // Chorus: from the given minute, playing, a lane muted if asked.
+        snapshotFile = png;
+        snapshotSeconds = seconds;
+        snapshotKnob = -1;
+        elapsed = 0.0;
+        snapshotStartMs = juce::Time::getMillisecondCounterHiRes();
+        chorus.setSpeed(chorusSpeed);
+        chorus.seek(chorusSnapStart);
+        if (chorusSnapMute >= 0)
+            chorusScreen.onMute(chorusSnapMute);
+        setChorusPlaying(true);
+        return;
+    }
     snapshotFile = png;
     snapshotSeconds = seconds;
     snapshotKnob = handKnob;
@@ -1073,6 +1276,27 @@ bool MainComponent::keyPressed(const juce::KeyPress& key)
     {
         setTab(key == juce::KeyPress::F1Key ? 0 : key == juce::KeyPress::F2Key ? 1 : 2);
         return true;
+    }
+    if (key == juce::KeyPress::F4Key)
+    {
+        setTab(3);
+        return true;
+    }
+    if (activeTab == 3)
+    {
+        // Chorus: 1 to 4 mute a lane, Space plays and stops.
+        const auto c = key.getTextCharacter();
+        if (c >= '1' && c <= '4')
+        {
+            chorusScreen.onMute(static_cast<int>(c - '1'));
+            return true;
+        }
+        if (key == juce::KeyPress::spaceKey)
+        {
+            setChorusPlaying(! chorusPlaying);
+            return true;
+        }
+        return false;
     }
     if (activeTab == 2)
     {
@@ -1152,6 +1376,7 @@ void MainComponent::resized()
     mainArea = bodyArea.reduced(8);
     guide.setBounds(bodyArea);
     quizScreen.setBounds(bodyArea.withX(headerArea.getX()).withWidth(headerArea.getWidth()));
+    chorusScreen.setBounds(quizScreen.getBounds());
 
     // Tabs: widths follow their labels.
     {
@@ -1331,8 +1556,8 @@ void MainComponent::paint(juce::Graphics& g)
     paintHeader(g);
     paintTabs(g);
 
-    // Bird list aside. The quiz has none.
-    if (activeTab != 2)
+    // Bird list aside. Quiz and Chorus have none.
+    if (activeTab < 2)
     {
         g.setColour(colour::panel);
         g.fillRect(asideArea);
@@ -1374,7 +1599,7 @@ void MainComponent::paintHeader(juce::Graphics& g)
 
     // Bird readout. In the quiz it waits for the answer.
     const auto* e = headerEntry();
-    if (activeTab != 2 || e != nullptr)
+    if (activeTab < 2 || e != nullptr)
         draw::inset(g, readoutArea);
     if (e != nullptr)
     {
@@ -1432,8 +1657,8 @@ void MainComponent::paintTabs(juce::Graphics& g)
         const juce::Rectangle<int> tab(x, tabsArea.getBottom() - 1 - h + (active ? 1 : 0), w, h);
         g.setColour(active ? colour::ground : colour::panel);
         g.fillRect(tab);
-        if (i > 2)
-            draw::hatch(g, tab); // Play, Field guide and Quiz are built
+        if (i > 3)
+            draw::hatch(g, tab); // Play, Field guide, Quiz and Chorus are built
         g.setColour(colour::ink);
         g.fillRect(tab.getX(), tab.getY(), tab.getWidth(), 1);
         g.fillRect(tab.getX(), tab.getY(), 1, tab.getHeight() - (active ? 1 : 0));
@@ -1632,6 +1857,27 @@ void MainComponent::paintStatus(juce::Graphics& g)
     const auto f = mono(10.0f, 500, 0.06f);
     g.setFont(f);
     auto r = statusArea.withTrimmedTop(1).reduced(12, 0);
+    if (activeTab == 3)
+    {
+        const auto state = strings(chorusPlaying ? "status.playing" : "status.stopped");
+        g.drawText(state, r.removeFromLeft(textW(f, state) + 2), juce::Justification::centredLeft, false);
+        r.removeFromLeft(16);
+        g.setColour(colour::inkSoft);
+        for (const char* k : { "chorus.keys_mute", "status.keys_play" })
+        {
+            const auto t = strings(k);
+            g.drawText(t, r.removeFromRight(textW(f, t) + 2), juce::Justification::centredRight, false);
+            r.removeFromRight(16);
+        }
+        const juce::String speeds[4] = { strings("chorus.speed_real"), juce::String(juce::CharPointer_UTF8("10\xc3\x97")),
+                                         juce::String(juce::CharPointer_UTF8("60\xc3\x97")), strings("chorus.speed_loop") };
+        const auto text = chorus.finished() ? strings("chorus.status_done")
+                        : strings.format("chorus.status", { { "season", strings("season." + optionIds(P::sc_season)[chorusSeason]) },
+                                                            { "place", strings("place." + optionIds(P::sc_place)[chorusPlace]) },
+                                                            { "speed", speeds[chorusSpeed] } });
+        g.drawText(loadError.isNotEmpty() ? loadError : text, r, juce::Justification::centredLeft, false);
+        return;
+    }
     if (activeTab == 2)
     {
         const auto state = strings("tab.quiz");

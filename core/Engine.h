@@ -20,10 +20,22 @@
 
 #include <array>
 #include <atomic>
+#include <cmath>
 #include <cstdint>
 
 namespace tipp
 {
+// Linear to 0.5, then bends smoothly towards 0.68. The engine's output
+// limiter, also used on the chorus mix.
+inline float softLimit(float x) noexcept
+{
+    const float a = std::fabs(x);
+    if (a <= 0.5f)
+        return x;
+    const float y = 0.5f + 0.18f * std::tanh((a - 0.5f) / 0.18f);
+    return x < 0.0f ? -y : y;
+}
+
 class Engine
 {
 public:

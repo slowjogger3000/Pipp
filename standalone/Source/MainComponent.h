@@ -6,6 +6,7 @@
 // publishes. No song or override logic lives here.
 
 #include "UI/BirdList.h"
+#include "UI/ChorusScreen.h"
 #include "UI/GuideScreen.h"
 #include "UI/Knob.h"
 #include "UI/Plate.h"
@@ -15,6 +16,7 @@
 #include "UI/Widgets.h"
 
 #include "BirdData.h"
+#include "Chorus.h"
 #include "Compare.h"
 #include "Engine.h"
 #include "Quiz.h"
@@ -44,7 +46,7 @@ public:
     // Test hook: play for `seconds`, optionally drag a knob near the end,
     // save a snapshot and quit.
     void runSnapshot(const juce::File& png, double seconds, int handKnob);
-    // 0 Play, 1 Field guide, 2 Quiz. The other tabs are not built yet.
+    // 0 Play, 1 Field guide, 2 Quiz, 3 Chorus. Log and Collection are not built yet.
     void setTab(int index);
     // Test hook: COMPARE with a lookalike, as its button does.
     void compareWith(const juce::String& id) { startCompare(id); }
@@ -60,6 +62,13 @@ public:
     // Test hooks for the quiz: a fixed seed, questions answered before the
     // snapshot (wrong, right, wrong, ...), and the answer to give a second
     // before it: 1 right, -1 wrong.
+    // Test hook for the chorus: start minute, speed index, lane to mute (-1 none).
+    void snapshotChorus(float startMin, int speed, int muteLane)
+    {
+        chorusSnapStart = startMin;
+        chorusSpeed = speed;
+        chorusSnapMute = muteLane;
+    }
     void snapshotQuiz(std::uint32_t seed, int skip, int answer, bool leave)
     {
         snapshotLeaveQuiz = leave;
@@ -112,6 +121,16 @@ private:
     juce::String quizName(int k) const;
     juce::String quizExplain() const;
     juce::String quizHint() const;
+
+    // Chorus.
+    void loadChorus();
+    void enterChorus();
+    void leaveChorus();
+    void setChorusPlaying(bool on);
+    void setLaneBird(int lane, int quizIndex);
+    void changeLaneBird(int lane);
+    void updateChorusView();
+    int quizIndexOf(const juce::String& id) const;
 
     void paintHeader(juce::Graphics& g);
     void paintTabs(juce::Graphics& g);
@@ -199,6 +218,18 @@ private:
     std::uint32_t quizSeed = 0u; // 0: from the clock
     int quizSkip = 0, snapshotAnswer = 0;
     bool snapshotLeaveQuiz = false; // back to PLAY 4 s before the snapshot
+
+    // Dawn chorus (F4). Lane birds come from quizData, alive for the run.
+    tipp::Chorus chorus;
+    ChorusScreen chorusScreen { strings, chorus };
+    juce::var chorusDoc; // data/chorus.json
+    std::array<int, tipp::Chorus::kLanes> laneBird { { -1, -1, -1, -1 } }; // quizData index
+    std::array<float, tipp::Chorus::kLanes> laneEntry {}, laneDistance {};
+    std::array<bool, tipp::Chorus::kLanes> laneMute {}, laneSolo {};
+    int chorusSeason = 0, chorusPlace = 0, chorusSpeed = tipp::Chorus::k10x;
+    bool chorusPlaying = false;
+    float chorusSnapStart = tipp::Chorus::kStartMin;
+    int chorusSnapMute = -1;
 
     // Snapshot test.
     juce::File snapshotFile;

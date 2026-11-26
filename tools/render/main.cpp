@@ -8,6 +8,8 @@
 //   tipp-render --bird svarttrost --check-draw
 //   tipp-render --bird svarttrost --draw --out out/draw.wav
 //   tipp-render --bird svarttrost --check-quiz
+//   tipp-render --chorus --chorus-start -75 --chorus-speed 60x --seconds 40 --out out/chorus.wav
+//   tipp-render --check-chorus
 //
 // --draw sings a fixed drawn line in draw mode, again each time it ends.
 // --keep keeps that line as a phrase: autoplay sings it after each phrase
@@ -18,6 +20,11 @@
 // missed birds coming back sooner, the same seed giving the same quiz, and
 // QuizVoice singing one phrase of --bird at half speed. No audio file.
 //
+// --chorus renders the dawn chorus with the 4 lanes in data/chorus.json
+// (or --lanes a,b,c,d), from --chorus-start minutes (default -90) at
+// --chorus-speed real|10x|60x|loop (default 10x). --check-chorus tests the
+// clock, entries, mute, solo, season, the end and loop. No --bird needed.
+//
 // --compare runs the field guide's COMPARE: one phrase of --bird, a gap,
 // one phrase of the other bird, then stop. The file ends when it is done.
 //
@@ -27,8 +34,10 @@
 // Exit codes: 0 all checks pass, 1 a check failed, 2 bad arguments or I/O.
 
 #include "BirdData.h"
+#include "Chorus.h"
 #include "Compare.h"
 #include "Engine.h"
+#include "Json.h"
 #include "Params.h"
 #include "Quiz.h"
 #include "WavWriter.h"
@@ -39,6 +48,7 @@
 #include <cstdlib>
 #include <cstring>
 #include <fstream>
+#include <memory>
 #include <sstream>
 #include <string>
 #include <utility>
@@ -88,6 +98,8 @@ void usage()
         "       tipp-render --bird <id> --compare <other id> [--seconds <max s>] --out <file.wav>\n"
         "       tipp-render --bird <id> --check-draw\n"
         "       tipp-render --bird <id> --check-quiz\n"
+        "       tipp-render --chorus [--lanes a,b,c,d] [--chorus-start <min>] [--chorus-speed real|10x|60x|loop] [--seconds <s>] --out <file.wav>\n"
+        "       tipp-render --check-chorus\n"
         "       tipp-render --bird <id> (--draw | --keep) [--seconds <s>] [--set ...] --out <file.wav>\n");
 }
 
@@ -152,6 +164,122 @@ tipp::DrawnLine demoLine()
     stroke(line, 900.0f, 900.0f, [](float) { return 4000.0f; });
     stroke(line, 1100.0f, 1700.0f, [](float u) { return 5000.0f - 2500.0f * u * u; });
     return line;
+}
+
+struct Stats
+{
+    std::size_t nonFinite = 0;
+    float peak = 0.0f, maxStep = 0.0f, rms = 0.0f, edgeStart = 0.0f, edgeEnd = 0.0f;
+};
+
+Stats measure(const std::vector<float>& left, const std::vector<float>& right)
+{
+    Stats st;
+    double sumSq = 0.0;
+    float prevL = 0.0f, prevR = 0.0f;
+    for (std::size_t i = 0; i < left.size(); ++i)
+    {
+        const float l = left[i], r = right[i];
+        if (! std::isfinite(l) || ! std::isfinite(r)) { ++st.nonFinite; continue; }
+        st.peak = std::max({ st.peak, std::fabs(l), std::fabs(r) });
+        st.maxStep = std::max({ st.maxStep, std::fabs(l - prevL), std::fabs(r - prevR) });
+        sumSq += static_cast<double>(l) * static_cast<double>(l);
+        prevL = l;
+        prevR = r;
+    }
+    if (! left.empty())
+    {
+        st.rms = static_cast<float>(std::sqrt(sumSq / static_cast<double>(left.size())));
+        st.edgeStart = std::max(std::fabs(left.front()), std::fabs(right.front()));
+        st.edgeEnd = std::max(std::fabs(left.back()), std::fabs(right.back()));
+    }
+    return st;
+}
+
+// The dawn chorus setup from data/chorus.json, and the parsed birds.
+struct ChorusSetup
+{
+    std::vector<std::string> ids;
+    std::vector<float> entry, distance;
+    std::vector<std::unique_ptr<tipp::BirdData>> birds;
+};
+
+bool loadChorus(const std::string& dataDir, const std::string& lanesCsv, ChorusSetup& out)
+{
+    std::string text, error;
+    tipp::json::Value doc;
+    if (! readFile(dataDir + "/chorus.json", text) || ! tipp::json::parse(text, doc, error))
+    {
+        std::fprintf(stderr, "cannot read %s/chorus.json %s\n", dataDir.c_str(), error.c_str());
+        return false;
+    }
+    const auto* def = doc.get("default_entry_min");
+    const auto* entries = doc.get("entry_min");
+    const auto* lanes = doc.get("lanes");
+    if (lanes == nullptr || ! lanes->isArray() || lanes->items.size() != static_cast<std::size_t>(tipp::Chorus::kLanes))
+    {
+        std::fprintf(stderr, "chorus.json needs 4 lanes\n");
+        return false;
+    }
+    for (const auto& l : lanes->items)
+    {
+        out.ids.push_back(l.get("bird") != nullptr ? l.get("bird")->text : std::string());
+        out.distance.push_back(l.get("distance_m") != nullptr ? static_cast<float>(l.get("distance_m")->number) : 15.0f);
+    }
+    if (! lanesCsv.empty())
+    {
+        std::stringstream ss(lanesCsv);
+        std::string id;
+        for (std::size_t i = 0; i < out.ids.size() && std::getline(ss, id, ','); ++i)
+            out.ids[i] = id;
+    }
+    for (const auto& id : out.ids)
+    {
+        const auto* e = entries != nullptr ? entries->get(id.c_str()) : nullptr;
+        out.entry.push_back(static_cast<float>(e != nullptr ? e->number : def != nullptr ? def->number : -40.0));
+        std::string v, s;
+        const std::string dir = dataDir + "/birds/" + id + "/";
+        auto b = std::make_unique<tipp::BirdData>();
+        if (! readFile(dir + "voice.json", v) || ! readFile(dir + "songs.json", s) || ! tipp::parseBird(id, v, s, *b, error))
+        {
+            std::fprintf(stderr, "cannot load bird %s %s\n", id.c_str(), error.c_str());
+            return false;
+        }
+        out.birds.push_back(std::move(b));
+    }
+    return true;
+}
+
+void setUpChorus(tipp::Chorus& chorus, const ChorusSetup& setup, std::uint32_t seed)
+{
+    chorus.prepare(kSampleRate);
+    chorus.setSeed(seed);
+    for (int i = 0; i < tipp::Chorus::kLanes; ++i)
+    {
+        const auto u = static_cast<std::size_t>(i);
+        chorus.setLaneBird(i, setup.birds[u].get());
+        chorus.setEntry(i, setup.entry[u]);
+        chorus.setDistance(i, setup.distance[u]);
+    }
+}
+
+// Runs the chorus for s seconds in 512-sample blocks. Adds to the buffers if given.
+void runChorus(tipp::Chorus& chorus, double s, std::vector<float>* left = nullptr, std::vector<float>* right = nullptr)
+{
+    std::vector<float> l(kBlock), r(kBlock);
+    const auto total = static_cast<std::size_t>(s * kSampleRate);
+    for (std::size_t pos = 0; pos < total; pos += kBlock)
+    {
+        const int n = static_cast<int>(std::min<std::size_t>(kBlock, total - pos));
+        std::fill(l.begin(), l.end(), 0.0f);
+        std::fill(r.begin(), r.end(), 0.0f);
+        chorus.processAdd(l.data(), r.data(), n);
+        if (left != nullptr)
+        {
+            left->insert(left->end(), l.begin(), l.begin() + n);
+            right->insert(right->end(), r.begin(), r.begin() + n);
+        }
+    }
 }
 
 int notesIn(const tipp::DrawnLine& line)
@@ -598,13 +726,161 @@ int checkQuiz(const tipp::BirdData& bird)
     return failures == 0 ? 0 : 1;
 }
 
+int checkChorus(const std::string& dataDir)
+{
+    using tipp::Chorus;
+    int failures = 0;
+    auto check = [&failures](bool pass, const char* what) {
+        std::printf("%-4s %s\n", pass ? "ok" : "FAIL", what);
+        if (! pass)
+            ++failures;
+    };
+    ChorusSetup setup;
+    if (! loadChorus(dataDir, "", setup))
+        return 2;
+    std::printf("     lanes:");
+    for (std::size_t i = 0; i < setup.ids.size(); ++i)
+        std::printf(" %s %+g min %g m,", setup.ids[i].c_str(), static_cast<double>(setup.entry[i]), static_cast<double>(setup.distance[i]));
+    std::printf("\n");
+
+    auto sangBetween = [](const Chorus& c, int lane, float from, float to) {
+        for (int col = 0; col < Chorus::kColumns; ++col)
+        {
+            const float m = Chorus::kStartMin + static_cast<float>(col) / Chorus::kColumnsPerMin;
+            if (m >= from && m < to && c.sang(lane, col))
+                return true;
+        }
+        return false;
+    };
+
+    {
+        Chorus c;
+        setUpChorus(c, setup, 1u);
+        c.setSpeed(Chorus::k60x);
+        c.setPlaying(true);
+        runChorus(c, 30.0);
+        check(std::fabs(c.minute() - (-60.0f)) < 0.05f, "60x: 30 s moves the clock from -90 to -60 min");
+        c.setPlaying(false);
+        runChorus(c, 2.0);
+        check(std::fabs(c.minute() - (-60.0f)) < 0.05f, "stopped, the clock waits");
+    }
+
+    {
+        // Entries: lane 0 (-70) sings after it, never before; lane 3 (-25) not yet.
+        Chorus c;
+        setUpChorus(c, setup, 1u);
+        c.seek(-78.0f);
+        c.setSpeed(Chorus::k60x);
+        c.setPlaying(true);
+        runChorus(c, 7.0); // to -71
+        check(! c.laneStarted(0) && ! sangBetween(c, 0, -90.0f, 30.0f), "a lane is quiet before its entry minute");
+        runChorus(c, 20.0); // to -51
+        check(c.laneStarted(0) && sangBetween(c, 0, setup.entry[0], 30.0f), "it starts singing after its entry minute");
+        check(! sangBetween(c, 0, -90.0f, setup.entry[0]), "nothing recorded before the entry");
+        check(c.laneStarted(1) && ! c.laneStarted(3), "lane 2 has started, lane 4 (-25) has not");
+    }
+
+    std::vector<float> fullL, fullR;
+    {
+        // The whole dawn at 60x: every lane sings, the clock stops at +30
+        // and the output ends at zero. Peak with all 4 lanes.
+        Chorus c;
+        setUpChorus(c, setup, 1u);
+        c.setSpeed(Chorus::k60x);
+        c.setPlaying(true);
+        runChorus(c, 121.0, &fullL, &fullR);
+        bool all = true;
+        for (int i = 0; i < Chorus::kLanes; ++i)
+            all = all && sangBetween(c, i, setup.entry[static_cast<std::size_t>(i)], 30.0f);
+        check(all, "all 4 lanes sing by sunrise");
+        check(c.finished() && std::fabs(c.minute() - Chorus::kEndMin) < 1e-3f, "the clock stops at +30 min");
+        const auto st = measure(fullL, fullR);
+        std::printf("     whole dawn: peak %.3f, rms %.4f, step %.3f\n", static_cast<double>(st.peak), static_cast<double>(st.rms), static_cast<double>(st.maxStep));
+        check(st.nonFinite == 0 && st.peak < kMaxPeak && st.maxStep <= kMaxStep, "4 lanes together: finite, below the peak and step limits");
+        check(st.edgeEnd <= kEdgeLimit, "silent after the end");
+    }
+
+    {
+        // Same seed, same chorus.
+        Chorus c;
+        setUpChorus(c, setup, 1u);
+        c.setSpeed(Chorus::k60x);
+        c.setPlaying(true);
+        std::vector<float> l, r;
+        runChorus(c, 40.0, &l, &r);
+        check(std::equal(l.begin(), l.end(), fullL.begin()), "the same seed gives the same chorus");
+    }
+
+    {
+        // Mute every lane: silent within the 30 ms fade. Solo: only that lane.
+        Chorus c;
+        setUpChorus(c, setup, 1u);
+        c.seek(-20.0f);
+        c.setSpeed(Chorus::kRealTime);
+        c.setPlaying(true);
+        runChorus(c, 4.0);
+        for (int i = 0; i < Chorus::kLanes; ++i)
+            c.setMute(i, true);
+        std::vector<float> l, r;
+        runChorus(c, 0.05, &l, &r);
+        float tail = 0.0f;
+        for (std::size_t i = static_cast<std::size_t>(0.035 * kSampleRate); i < l.size(); ++i)
+            tail = std::max({ tail, std::fabs(l[i]), std::fabs(r[i]) });
+        check(tail == 0.0f && ! c.laneAudible(0), "muted lanes are silent after the fade");
+        for (int i = 0; i < Chorus::kLanes; ++i)
+            c.setMute(i, false);
+        c.setSolo(1, true);
+        runChorus(c, 0.1);
+        check(c.laneAudible(1) && ! c.laneAudible(0) && ! c.laneAudible(2) && ! c.laneAudible(3), "solo leaves only that lane audible");
+        c.setMute(1, true);
+        runChorus(c, 0.1);
+        check(! c.laneAudible(1), "mute wins over solo on the same lane");
+    }
+
+    {
+        // Out of season: a song switched off in winter keeps that lane quiet.
+        tipp::BirdData winterless = *setup.birds[0];
+        tipp::Override o;
+        o.season = 3;
+        o.hasActive = true;
+        o.active = false;
+        winterless.types[tipp::kSong].overrides.push_back(o);
+        Chorus c;
+        setUpChorus(c, setup, 1u);
+        c.setLaneBird(0, &winterless);
+        c.setSeason(3);
+        c.seek(-60.0f);
+        c.setSpeed(Chorus::k60x);
+        c.setPlaying(true);
+        runChorus(c, 10.0);
+        check(! c.laneInSeason(0) && ! c.laneStarted(0) && ! sangBetween(c, 0, -90.0f, 30.0f) && c.laneStarted(1),
+              "a bird that does not sing in the season stays quiet");
+    }
+
+    {
+        // Loop: past +30 it starts over at -90 and clears what was sung.
+        Chorus c;
+        setUpChorus(c, setup, 1u);
+        c.seek(25.0f);
+        c.setSpeed(Chorus::kLoop);
+        c.setPlaying(true);
+        runChorus(c, 33.0); // 5.5 dawn minutes at 10x
+        check(! c.finished() && c.minute() < -88.0f && c.minute() > -90.0f, "LOOP starts over at -90 min");
+        check(! sangBetween(c, 1, 0.0f, 30.0f), "and clears the record");
+    }
+
+    std::printf("%s\n", failures == 0 ? "chorus check passed" : "chorus check FAILED");
+    return failures == 0 ? 0 : 1;
+}
+
 int main(int argc, char** argv)
 {
     double seconds = 30.0;
-    std::string outPath, birdId, type = "song", dataDir, compareId;
+    std::string outPath, birdId, type = "song", dataDir, compareId, lanesCsv, chorusSpeed = "10x";
+    float chorusStart = tipp::Chorus::kStartMin;
     std::uint32_t seed = 1u;
     std::vector<std::pair<std::string, std::string>> sets;
-    bool overrideCheck = false, drawCheck = false, quizCheck = false, drawSing = false, keep = false;
+    bool overrideCheck = false, drawCheck = false, quizCheck = false, chorusCheck = false, chorusRender = false, drawSing = false, keep = false;
 
     for (int i = 1; i < argc; ++i)
     {
@@ -621,6 +897,11 @@ int main(int argc, char** argv)
         else if (a == "--check-override")      overrideCheck = true;
         else if (a == "--check-draw")          drawCheck = true;
         else if (a == "--check-quiz")          quizCheck = true;
+        else if (a == "--check-chorus")        chorusCheck = true;
+        else if (a == "--chorus")              chorusRender = true;
+        else if (a == "--lanes" && hasValue)   lanesCsv = argv[++i];
+        else if (a == "--chorus-start" && hasValue) chorusStart = std::strtof(argv[++i], nullptr);
+        else if (a == "--chorus-speed" && hasValue) chorusSpeed = argv[++i];
         else if (a == "--draw")                drawSing = true;
         else if (a == "--keep")                keep = true;
         else if (a == "--compare" && hasValue) compareId = argv[++i];
@@ -634,7 +915,8 @@ int main(int argc, char** argv)
         else { usage(); return 2; }
     }
 
-    if ((outPath.empty() && ! overrideCheck && ! drawCheck && ! quizCheck) || birdId.empty() || seconds <= 0.5)
+    const bool chorusMode = chorusCheck || chorusRender;
+    if ((outPath.empty() && ! overrideCheck && ! drawCheck && ! quizCheck && ! chorusCheck) || (birdId.empty() && ! chorusMode) || seconds <= 0.5)
     {
         usage();
         return 2;
@@ -645,7 +927,7 @@ int main(int argc, char** argv)
         for (const char* candidate : { "data", "../data", "../../data" })
         {
             std::string probe;
-            if (readFile(std::string(candidate) + "/birds/" + birdId + "/voice.json", probe))
+            if (readFile(std::string(candidate) + (chorusMode ? "/chorus.json" : "/birds/" + birdId + "/voice.json"), probe))
             {
                 dataDir = candidate;
                 break;
@@ -655,6 +937,59 @@ int main(int argc, char** argv)
     {
         std::fprintf(stderr, "cannot find data/birds/%s. Run from the repo root or pass --data.\n", birdId.c_str());
         return 2;
+    }
+
+    if (chorusCheck)
+        return checkChorus(dataDir);
+    if (chorusRender)
+    {
+        const int speed = chorusSpeed == "real" ? tipp::Chorus::kRealTime : chorusSpeed == "60x" ? tipp::Chorus::k60x
+                        : chorusSpeed == "loop" ? tipp::Chorus::kLoop : tipp::Chorus::k10x;
+        ChorusSetup setup;
+        if (! loadChorus(dataDir, lanesCsv, setup))
+            return 2;
+        tipp::Chorus chorus;
+        setUpChorus(chorus, setup, seed);
+        chorus.seek(chorusStart);
+        chorus.setSpeed(speed);
+        chorus.setPlaying(true);
+        std::vector<float> left, right;
+        runChorus(chorus, seconds - 0.1, &left, &right);
+        chorus.setPlaying(false); // lanes fade out in 30 ms
+        runChorus(chorus, 0.1, &left, &right);
+        const float endMin = chorus.minute();
+
+        std::vector<float> interleaved(left.size() * 2);
+        for (std::size_t i = 0; i < left.size(); ++i)
+        {
+            interleaved[2 * i] = left[i];
+            interleaved[2 * i + 1] = right[i];
+        }
+        if (! tipp::render::writeWavFloat(outPath.c_str(), interleaved, 2, kSampleRate))
+        {
+            std::fprintf(stderr, "could not write %s\n", outPath.c_str());
+            return 2;
+        }
+        const auto st = measure(left, right);
+        bool ok = true;
+        auto report = [&ok](const char* name, bool pass, const char* fmt, double v, double lim) {
+            std::printf("%-4s %-10s ", pass ? "ok" : "FAIL", name);
+            std::printf(fmt, v, lim);
+            std::printf("\n");
+            ok = ok && pass;
+        };
+        int started = 0;
+        for (int i = 0; i < tipp::Chorus::kLanes; ++i)
+            started += chorus.laneStarted(i) ? 1 : 0;
+        std::printf("%s: chorus %s, %+.1f to %+.1f min, seed %u, %d lanes started, rms %.4f\n", outPath.c_str(), chorusSpeed.c_str(),
+                    static_cast<double>(chorusStart), static_cast<double>(endMin), seed, started, static_cast<double>(st.rms));
+        report("finite", st.nonFinite == 0, "%.0f non-finite samples (limit %.0f)", static_cast<double>(st.nonFinite), 0.0);
+        report("peak", st.peak < kMaxPeak, "%.4f (limit %.2f)", static_cast<double>(st.peak), static_cast<double>(kMaxPeak));
+        report("step", st.maxStep <= kMaxStep, "%.4f largest sample step (limit %.2f)", static_cast<double>(st.maxStep), static_cast<double>(kMaxStep));
+        report("start", st.edgeStart <= kEdgeLimit, "%.6f (limit %.3f)", static_cast<double>(st.edgeStart), static_cast<double>(kEdgeLimit));
+        report("end", st.edgeEnd <= kEdgeLimit, "%.6f (limit %.3f)", static_cast<double>(st.edgeEnd), static_cast<double>(kEdgeLimit));
+        report("sang", started > 0 && st.rms >= kMinRms, "rms %.4f (minimum %.3f)", static_cast<double>(st.rms), static_cast<double>(kMinRms));
+        return ok ? 0 : 1;
     }
 
     const std::string birdDir = dataDir + "/birds/" + birdId + "/";

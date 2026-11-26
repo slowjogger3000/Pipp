@@ -39,14 +39,7 @@ constexpr float kDrawnGain = 0.8f;
 constexpr float kShiftGlideS = 0.02f; // hearing shift slides over about 60 ms
 
 // Soft knee above 0.5. Never exceeds 0.68.
-float limit(float x) noexcept
-{
-    const float a = std::fabs(x);
-    if (a <= 0.5f)
-        return x;
-    const float y = 0.5f + 0.18f * std::tanh((a - 0.5f) / 0.18f);
-    return x < 0.0f ? -y : y;
-}
+float limit(float x) noexcept { return softLimit(x); }
 
 } // namespace
 
