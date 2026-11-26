@@ -1,0 +1,120 @@
+/* Office beige, from design/tokens.json (same values as standalone/Source/UI/Theme.h).
+   The rules are in design-handover.md: state is ink, wells hold data, disabled
+   is hatched, square corners, 1px ink lines, bevels. */
+
+@font-face { font-family: 'Plex Mono'; font-weight: 400; src: url('../../../standalone/Resources/fonts/IBMPlexMono-Regular.ttf') format('truetype'); }
+@font-face { font-family: 'Plex Mono'; font-weight: 500; src: url('../../../standalone/Resources/fonts/IBMPlexMono-Medium.ttf') format('truetype'); }
+@font-face { font-family: 'Plex Mono'; font-weight: 600; src: url('../../../standalone/Resources/fonts/IBMPlexMono-SemiBold.ttf') format('truetype'); }
+@font-face { font-family: 'Instrument Serif'; font-weight: 400; src: url('../../../standalone/Resources/fonts/InstrumentSerif-Regular.ttf') format('truetype'); }
+
+:root {
+  --ground: #ddd3bd;
+  --panel: #cec2a6;
+  --face: #efe8d6;
+  --sheet: #e3d9c2;
+  --hilite: #fbf7ec;
+  --shadow: #a3967a;
+  --ink: #221c14;
+  --inkSoft: #4f4634;
+  --faint: #b5a98b;
+  --onInk: #ddd3bd;
+  --paper: #fff8ec;
+  --rule: #d8ccb0;
+  --ruleMajor: #c4b796;
+  --divider: #bdb093;
+  --clay: #936255;
+  --khaki: #b5a37a;
+  --sage: #809a8c;
+  --plum: #5e4458;
+  --hatch: rgba(34, 28, 20, 0.10);
+  --mono: 'Plex Mono', Menlo, monospace;
+  --serif: 'Instrument Serif', Georgia, serif;
+  --raised: inset 1px 1px 0 #fbf7ec, inset -1px -1px 0 #a3967a;
+  --inset: inset 1px 1px 0 #a3967a;
+  --hatching: repeating-linear-gradient(135deg, var(--hatch) 0 1px, transparent 1px 7px);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--panel); overflow: hidden; }
+body { font-family: var(--mono); color: var(--ink); -webkit-font-smoothing: antialiased; -webkit-user-select: none; user-select: none; }
+#app { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; }
+
+/* The 1280x800 desktop stage, scaled to the window. */
+.stage { position: absolute; left: 0; top: 0; width: 1280px; height: 800px; background: var(--ground); border: 1px solid var(--ink); transform-origin: 0 0; display: flex; flex-direction: column; overflow: hidden; }
+
+/* Buttons: raised off, ink on, hatched disabled. */
+.btn { font: 500 10px/1 var(--mono); letter-spacing: 0.06em; color: var(--ink); background: var(--face); border: 1px solid var(--ink); box-shadow: var(--raised); border-radius: 0; padding: 0 8px; height: 20px; display: inline-flex; align-items: center; justify-content: center; white-space: nowrap; cursor: pointer; flex: none; }
+.btn.on { background: var(--ink); color: var(--onInk); box-shadow: none; }
+.btn:disabled, .btn.disabled { background: var(--hatching), var(--face); color: var(--inkSoft); box-shadow: none; cursor: default; }
+.btn:focus { outline: none; }
+.btn svg { display: block; }
+.joined { display: inline-flex; flex: none; }
+.joined.fill { display: flex; width: 100%; }
+.joined.fill > .btn { min-width: 0; padding: 0 2px; overflow: hidden; letter-spacing: 0.02em; }
+.joined > .btn + .btn { margin-left: -1px; }
+
+.well { background: var(--face); border: 1px solid var(--ink); box-shadow: var(--inset); }
+.sheet { background: var(--sheet); border: 1px solid var(--ink); box-shadow: var(--inset); }
+.paper { background-color: var(--face);
+  background-image: linear-gradient(var(--ruleMajor) 1px, transparent 1px), linear-gradient(90deg, var(--ruleMajor) 1px, transparent 1px),
+    linear-gradient(var(--rule) 1px, transparent 1px), linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 40px 40px, 40px 40px, 8px 8px, 8px 8px; }
+.hatched { background-image: var(--hatching); }
+
+.section { display: flex; align-items: center; gap: 6px; font: 600 10px/14px var(--mono); letter-spacing: 0.14em; color: var(--inkSoft); height: 14px; white-space: nowrap; }
+.section::after { content: ''; flex: 1; height: 1px; background: var(--ink); }
+.field { font: 600 9px/12px var(--mono); letter-spacing: 0.14em; color: var(--inkSoft); height: 12px; white-space: nowrap; }
+.serif { font-family: var(--serif); font-weight: 400; }
+.cap { font: 400 9px/17px var(--mono); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cap b { font-weight: 600; letter-spacing: 0.14em; margin-right: 8px; }
+
+/* Header */
+.header { height: 56px; flex: none; border-bottom: 1px solid var(--ink); display: flex; align-items: center; padding: 0 12px; gap: 12px; }
+.wordmark { width: 56px; height: 40px; position: relative; margin-right: 12px; }
+.wordmark span { font: 400 32px/32px var(--serif); letter-spacing: 0.02em; }
+.wordmark i { position: absolute; left: 0; top: 35px; width: 56px; height: 5px; background: var(--ink); display: flex; padding: 1px; gap: 0; }
+.wordmark i b { flex: 1; }
+.readout { width: 280px; height: 32px; margin: 0 -1px; display: flex; align-items: center; padding: 0 10px; gap: 8px; font-size: 12px; }
+.readout .num { color: var(--inkSoft); width: 18px; }
+.readout .name { font-weight: 500; flex: 1; white-space: nowrap; overflow: hidden; }
+.readout .latin { color: var(--inkSoft); font-size: 11px; }
+.readout.empty { visibility: hidden; }
+.hgroup { display: flex; flex-direction: column; gap: 2px; }
+.hgroup .row { display: flex; }
+.out { width: 72px; height: 24px; display: flex; align-items: center; justify-content: flex-end; padding: 0 6px; font: 500 12px var(--mono); }
+.meter { width: 96px; height: 24px; margin-left: -1px; position: relative; }
+.meter i { position: absolute; left: 4px; height: 6px; background: var(--ink); }
+
+/* Tabs */
+.tabs { height: 36px; flex: none; background: var(--panel); border-bottom: 1px solid var(--ink); display: flex; align-items: flex-end; padding-left: 8px; position: relative; }
+.tab { height: 26px; margin-bottom: -1px; margin-right: -1px; border: 1px solid var(--ink); border-bottom: none; background: var(--panel); padding: 0 16px; display: flex; align-items: center; gap: 8px; font: 600 10px var(--mono); letter-spacing: 0.14em; color: var(--inkSoft); cursor: pointer; position: relative; height: 27px; }
+.tab kbd { font: 400 10px var(--mono); letter-spacing: 0.14em; color: var(--inkSoft); }
+.tab.active { background: var(--ground); color: var(--ink); height: 31px; z-index: 1; }
+.tab.disabled { background: var(--hatching), var(--panel); cursor: default; }
+
+/* Status bar */
+.status { height: 28px; flex: none; background: var(--panel); border-top: 1px solid var(--ink); display: flex; align-items: center; padding: 0 12px; gap: 14px; font: 500 10px var(--mono); letter-spacing: 0.06em; white-space: nowrap; }
+.status .summary { flex: 1; overflow: hidden; text-overflow: ellipsis; }
+.status .keys { color: var(--inkSoft); }
+
+.body { flex: 1; display: flex; min-height: 0; }
+.aside { width: 240px; flex: none; background: var(--panel); border-right: 1px solid var(--ink); padding: 8px; display: flex; flex-direction: column; gap: 6px; }
+
+/* Bird list */
+.birdlist { flex: 1; overflow: hidden; padding: 1px; }
+.birdlist .gh { height: 24px; background: var(--panel); border-top: 1px solid var(--divider); border-bottom: 1px solid var(--divider); font: 600 9px/22px var(--mono); letter-spacing: 0.14em; color: var(--inkSoft); padding-left: 8px; }
+.birdlist .gh:first-child { border-top: none; }
+.birdlist .row { height: 24px; display: flex; align-items: center; padding-left: 8px; font: 400 13px var(--mono); color: var(--ink); cursor: pointer; }
+.birdlist .row .n { width: 28px; color: var(--inkSoft); flex: none; }
+.birdlist .row.off { background-image: var(--hatching); cursor: default; }
+.birdlist .row.sel { background: var(--ink); color: var(--onInk); }
+.birdlist .row.sel .n { color: var(--onInk); }
+.birdlist .row span:last-child { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-right: 4px; }
+
+.panelhead { height: 28px; flex: none; background: var(--panel); border-bottom: 1px solid var(--ink); display: flex; align-items: center; padding: 0 8px; gap: 12px; }
+.panelhead .title { font: 400 22px/28px var(--serif); white-space: nowrap; overflow: hidden; }
+.panelhead .label { font: 500 10px var(--mono); letter-spacing: 0.06em; color: var(--inkSoft); white-space: nowrap; }
+.panelhead .value { font: 500 10px var(--mono); letter-spacing: 0.06em; white-space: nowrap; }
+
+canvas { display: block; }
+.error { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font: 500 12px var(--mono); padding: 40px; text-align: center; }

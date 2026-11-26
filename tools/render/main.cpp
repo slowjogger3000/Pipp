@@ -10,6 +10,11 @@
 //   tipp-render --bird svarttrost --check-quiz
 //   tipp-render --chorus --chorus-start -75 --chorus-speed 60x --seconds 40 --out out/chorus.wav
 //   tipp-render --check-chorus
+//   tipp-render --bird svarttrost --seconds 120 --phrase-log out/log.txt --out out/x.wav
+//
+// --phrase-log writes one line per phrase (number, length, syllable indices
+// with start times and pitch factors, floats as hex bits). web/scripts/check-seed.mjs
+// writes the same lines from the WASM build, so the two can be diffed.
 //
 // --draw sings a fixed drawn line in draw mode, again each time it ends.
 // --keep keeps that line as a phrase: autoplay sings it after each phrase
@@ -873,10 +878,34 @@ int checkChorus(const std::string& dataDir)
     return failures == 0 ? 0 : 1;
 }
 
+// One line per new phrase, the same format as web/scripts/check-seed.mjs.
+void logPhrase(const tipp::Engine& engine, std::string& out)
+{
+    static tipp::Engine::PhraseView view;
+    static std::uint32_t last = 0u;
+    if (out.empty())
+        last = 0u;
+    if (! engine.readPhrase(view) || view.number == 0u || view.number == last)
+        return;
+    last = view.number;
+    // Floats as their bits, so the comparison is exact.
+    const auto bits = [](float f) { std::uint32_t u = 0u; std::memcpy(&u, &f, sizeof u); return static_cast<unsigned>(u); };
+    char buf[64];
+    std::snprintf(buf, sizeof buf, "%u len %08x:", view.number, bits(view.lengthMs));
+    out += buf;
+    for (int i = 0; i < view.count; ++i)
+    {
+        const auto& n = view.notes[static_cast<std::size_t>(i)];
+        std::snprintf(buf, sizeof buf, " %d@%08x*%08x", n.syl, bits(n.startMs), bits(n.pitchMul));
+        out += buf;
+    }
+    out += "\n";
+}
+
 int main(int argc, char** argv)
 {
     double seconds = 30.0;
-    std::string outPath, birdId, type = "song", dataDir, compareId, lanesCsv, chorusSpeed = "10x";
+    std::string outPath, birdId, type = "song", dataDir, compareId, lanesCsv, chorusSpeed = "10x", phraseLogPath;
     float chorusStart = tipp::Chorus::kStartMin;
     std::uint32_t seed = 1u;
     std::vector<std::pair<std::string, std::string>> sets;
@@ -905,6 +934,7 @@ int main(int argc, char** argv)
         else if (a == "--draw")                drawSing = true;
         else if (a == "--keep")                keep = true;
         else if (a == "--compare" && hasValue) compareId = argv[++i];
+        else if (a == "--phrase-log" && hasValue) phraseLogPath = argv[++i];
         else if (a == "--set" && hasValue)
         {
             const std::string kv = argv[++i];
@@ -1078,6 +1108,7 @@ int main(int argc, char** argv)
     const auto stopAt = frames - static_cast<std::size_t>(0.1 * kSampleRate);
 
     std::vector<float> left(frames), right(frames);
+    std::string phraseLog;
 
     // COMPARE is ticked once per block, as an interface timer would.
     tipp::Compare compare;
@@ -1109,6 +1140,18 @@ int main(int argc, char** argv)
             engine.trigger(P::indexOf(P::ap_sing_once)); // about once a second while idle
         const int n = static_cast<int>(std::min<std::size_t>(kBlock, frames - pos));
         engine.process(left.data() + pos, right.data() + pos, n);
+        if (! phraseLogPath.empty())
+            logPhrase(engine, phraseLog);
+    }
+    if (! phraseLogPath.empty())
+    {
+        std::ofstream f(phraseLogPath);
+        f << phraseLog;
+        if (! f)
+        {
+            std::fprintf(stderr, "could not write %s\n", phraseLogPath.c_str());
+            return 2;
+        }
     }
     if (comparing && compare.running())
     {

@@ -1,4 +1,5 @@
 #include "Engine.h"
+#include "Exact.h"
 
 #include <algorithm>
 #include <cmath>
@@ -532,7 +533,7 @@ void Engine::generatePhrase(const SongType& type) noexcept
                 note.syl = syl;
                 note.startMs = t;
                 note.durMs = s.durMs * (1.0f + 0.18f * var * rng.bipolar());
-                note.pitchMul = std::exp2((transpose + 0.6f * var * rng.bipolar()) / 12.0f);
+                note.pitchMul = exactExp2((transpose + 0.6f * var * rng.bipolar()) / 12.0f);
                 note.gain = s.gain * (1.0f - 0.25f * var * rng.unit());
                 note.part = sec.part;
                 t += note.durMs;

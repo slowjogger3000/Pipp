@@ -10,6 +10,7 @@ add_library(tipp_core STATIC
     Drawn.h
     Engine.cpp
     Engine.h
+    Exact.h
     Json.cpp
     Json.h
     Params.h
@@ -22,3 +23,5 @@ add_library(tipp_core STATIC
 target_include_directories(tipp_core PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_compile_features(tipp_core PUBLIC cxx_std_17)
 target_link_libraries(tipp_core PRIVATE tipp_warnings)
+# Same bits native and in WebAssembly: no fused multiply-add (see Exact.h).
+target_compile_options(tipp_core PRIVATE -ffp-contract=off)
