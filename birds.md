@@ -298,9 +298,35 @@ To verify: the size of the falling third, how fast and how many times «ko-ko» 
 
 To verify: bill, eye and leg colour, number of beats per roll, months of drumming beyond "spring", what the drumming is for, broods, wingspan, lookalikes.
 
+## Coast and water birds, checked 2026-11-26
+
+Source: Store norske leksikon (snl.no), one article per bird, read in full.
+
+### Gråmåke (folder `gramake`), snl.no/gråmåke, Morten Helberg, updated 2026-08-04
+
+| Field | Value |
+|---|---|
+| Size | Not given as figures. Finnmark birds are on average 150 g heavier, head and bill 6 mm longer, wing 11 mm longer than birds from Vest-Agder and the Oslofjord |
+| Adult | Silver-grey back, black wingtips (usually on the five outermost primaries, white tip on the outermost), white head from January on |
+| Bill, eye, legs | Yellow bill with a red spot on the lower mandible, yellow eye-ring, grey-pink legs (some pale or straw-yellow, mostly in March and April) |
+| Sex | No difference stated |
+| Young | Very variable in size, pattern and colour. A pale window on the inner 3 to 5 primaries. Takes three to five years to reach adult plumage |
+| Habitat | Breeds mostly on islands in salt water, also fresh water and on buildings in towns; along the whole coast and locally inland |
+| Population | 233 000 pairs in 2006, 72 000 in 2015. Sharp decline in Europe and most of Norway; the inner Oslofjord halved since 2001; causes not known |
+| Food | Mostly fish taken at the surface; a generalist: shellfish, earthworms, insects, small mammals, plants, waste. Follows fishing boats |
+| Nest | Of herbs, grass and moss; alone or in colonies of a few to several thousand pairs |
+| Eggs | 1 to 3, usually 2 or 3, laid from about 20 April through May. Both incubate about 26 days; the young fly after about 40 days |
+| Migration | Partial migrant. Northern birds winter around the North Sea; southern birds at the Skagerrak and the North Sea |
+| Status | VU, vulnerable, on the Norwegian red list (2021 to 2028); LC globally |
+| Versus lesser black-backed gull | Young herring gulls are sturdier, with shorter wings and a heavier bill. A broad black band on the sixth outer primary is rare in the herring gull |
+
+Sounds: none of SNL, Norwegian Wikipedia, BirdID or the Fuglevennen and BirdLife Norge pages (not found) describe the herring gull's calls. Every sound in Tipp is a placeholder until a source is found.
+
+To verify: all calls, length, wingspan, weight, head pattern of adults in winter, eye colour.
+
 ## All other birds
 
-Nothing is verified for the 7 other birds outside the garden group. Collect facts per bird with the same fields as the blackbird table before writing `bird.json`.
+Nothing is verified for the 6 other birds outside the garden group. Collect facts per bird with the same fields as the blackbird table before writing `bird.json`.
 
 ## Dawn chorus
 
