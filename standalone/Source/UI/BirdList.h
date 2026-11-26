@@ -2,11 +2,14 @@
 
 // The 240px bird list: a sheet well, 24px group headers on panel and 24px
 // rows, the selected row in ink. A bird without data in this build is
-// hatched and disabled.
+// hatched and disabled. With 50 birds it scrolls (agreed with Eirik
+// 2026-11-26): mouse wheel or trackpad, a thin bar on the right, and a newly
+// selected bird is brought into view.
 
 #include "Strings.h"
 #include "Theme.h"
 
+#include <algorithm>
 #include <functional>
 #include <vector>
 
@@ -36,7 +39,24 @@ public:
         juce::Graphics::ScopedSaveState save(g);
         g.reduceClipRegion(r.reduced(1));
 
-        int y = 1;
+        // Bring a newly selected bird into view, keeping its header too when
+        // it is the first in its group.
+        if (selected != shownSelected)
+        {
+            shownSelected = selected;
+            const int top = rowTop(selected);
+            if (top >= 0)
+            {
+                const int view = r.getHeight() - 2;
+                if (top - 24 < scrollY)
+                    scrollY = top - 24;
+                else if (top + 24 > scrollY + view)
+                    scrollY = top + 24 - view;
+            }
+        }
+        clampScroll();
+
+        int y = 1 - scrollY;
         rows.clear();
         for (int gi = 0; gi < groups.size(); ++gi)
         {
@@ -78,6 +98,25 @@ public:
                 y += 24;
             }
         }
+
+        // Scroll bar: a thin shadow-coloured thumb, only when the list is longer.
+        const int view = r.getHeight() - 2, content = contentHeight();
+        if (content > view)
+        {
+            const int h = std::max(24, view * view / content);
+            const int t = 1 + (view - h) * scrollY / (content - view);
+            g.setColour(colour::shadow);
+            g.fillRect(r.getRight() - 1 - 5, t, 4, h);
+        }
+    }
+
+    void mouseWheelMove(const juce::MouseEvent&, const juce::MouseWheelDetails& w) override
+    {
+        const int before = scrollY;
+        scrollY -= juce::roundToInt(w.deltaY * 24.0f * 8.0f);
+        clampScroll();
+        if (scrollY != before)
+            repaint();
     }
 
     void mouseUp(const juce::MouseEvent& e) override
@@ -88,6 +127,47 @@ public:
     }
 
 private:
+    int contentHeight() const
+    {
+        int h = 0;
+        for (const auto& grp : groups)
+        {
+            h += 24;
+            for (const auto& b : birds)
+                if (b.group == grp)
+                    h += 24;
+        }
+        return h;
+    }
+
+    // The bird's row top in content pixels, -1 if it is not listed.
+    int rowTop(int index) const
+    {
+        if (index < 0 || index >= static_cast<int>(birds.size()))
+            return -1;
+        int y = 0;
+        for (const auto& grp : groups)
+        {
+            y += 24;
+            for (int i = 0; i < static_cast<int>(birds.size()); ++i)
+            {
+                if (birds[static_cast<std::size_t>(i)].group != grp)
+                    continue;
+                if (i == index)
+                    return y;
+                y += 24;
+            }
+        }
+        return -1;
+    }
+
+    void clampScroll()
+    {
+        scrollY = juce::jlimit(0, std::max(0, contentHeight() - (getHeight() - 2)), scrollY);
+    }
+
+    int scrollY = 0;
+    int shownSelected = -2;
     std::vector<std::pair<juce::Rectangle<int>, int>> rows;
 };
 } // namespace tipp::ui

@@ -414,6 +414,14 @@ export class App {
         if (ok) row.addEventListener('click', () => this.selectBird(b.id));
       }
     }
+    // The list scrolls (50 birds, agreed with Eirik 2026-11-26): keep the
+    // chosen bird in view without scrolling the page around it.
+    const sel = this.list.querySelector<HTMLElement>('.row.sel');
+    if (sel) {
+      const top = sel.offsetTop - this.list.offsetTop, bottom = top + sel.offsetHeight, view = this.list.clientHeight;
+      if (top < this.list.scrollTop + 24) this.list.scrollTop = Math.max(0, top - 24);
+      else if (bottom > this.list.scrollTop + view) this.list.scrollTop = bottom - view;
+    }
   }
 
   private frame() {

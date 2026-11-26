@@ -27,7 +27,7 @@ namespace tipp
 {
 struct QuizBird
 {
-    int group = 0;               // the host's group index (garden 0, forest 1, coast 2, night 3)
+    int group = 0;               // index in index.json's groups: garden 0, forest 1, coast 2, wetland 3, mountain 4, farmland 5, night 6
     bool hasCall = false;        // songs.json has a call
     std::vector<int> lookalikes; // indices in the same list, birds with data only
 };
@@ -36,7 +36,8 @@ class Quiz
 {
 public:
     // Which birds: lookalike pairs, one group, or every bird with data.
-    enum Set : int { kPairs, kGarden, kForest, kCoast, kNight, kAll, kNumSets };
+    // The group sets follow index.json's groups, in the same order.
+    enum Set : int { kPairs, kGarden, kForest, kCoast, kWetland, kMountain, kFarmland, kNight, kAll, kNumSets };
     enum Ask : int { kAskSong, kAskCall, kAskBoth, kNumAsks };
 
     static constexpr int kQuestions = 10;

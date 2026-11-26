@@ -13,6 +13,7 @@
 #include "Widgets.h"
 
 #include "Engine.h"
+#include "Quiz.h"
 
 #include <array>
 #include <functional>
@@ -56,10 +57,15 @@ private:
     std::uint32_t start = 0u, next = 0u;
 };
 
+// The quiz set's name: ALL n BIRDS carries the number of birds in index.json.
+juce::String quizSetName(const Strings& s, int set, int birdCount);
+
 class QuizScreen final : public juce::Component
 {
 public:
     QuizScreen(const Strings& s, tipp::Engine& e);
+
+    int birdCount = 0; // birds in index.json, for ALL n BIRDS
 
     struct View
     {
@@ -72,7 +78,7 @@ public:
         juce::String band;    // prompt, hint or explanation
         juce::String caption; // FIG. 1 text
         int set = 0, ask = 0, hints = 0;
-        std::array<bool, 6> setHasBirds {};
+        std::array<bool, tipp::Quiz::kNumSets> setHasBirds {};
         int correct = 0, missed = 0, left = 0;
         juce::String practise;
         bool half = false, hintUsed = false, comparing = false;
@@ -113,7 +119,7 @@ private:
 
     Btn againBtn, halfBtn, hintBtn, compareBtn, guideBtn, nextBtn;
     std::array<Answer, 4> answers;
-    std::array<Btn, 6> setBtns;
+    std::array<Btn, tipp::Quiz::kNumSets> setBtns;
     std::array<Btn, 3> askBtns, hintBtns;
 
     // Set in resized().

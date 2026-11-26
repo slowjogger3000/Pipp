@@ -18,14 +18,16 @@ import { lower, type Strings } from './strings.ts';
 
 type Info = Record<string, any>; // bird.json
 
-const kSetKeys = ['pairs', 'garden', 'forest', 'coast', 'night', 'all'] as const;
+// tipp::Quiz::Set: pairs, the groups in index.json's order, all.
+const kSetKeys = ['pairs', 'garden', 'forest', 'coast', 'wetland', 'mountain', 'farmland', 'night', 'all'] as const;
 const kAskKeys = ['type.song', 'type.call', 'quiz.ask_both'] as const;
 const kHintKeys = ['guide.mnemonic', 'scene.season', 'quiz.hints_none'] as const;
 const kTypeIds = ['song', 'call', 'alarm', 'flight'] as const;
 const kSeasonIds = ['spring', 'summer', 'autumn', 'winter'] as const;
 const kTimeIds = ['dawn', 'day', 'dusk', 'night'] as const;
 const kQuestions = 10;
-const kNumSets = 6;
+const kNumSets = kSetKeys.length;
+const kSetRows = Math.ceil(kNumSets / 2);
 const kLeftW = 950, kRightX = 962, kRightW = 1264 - kRightX;
 
 interface Question {
@@ -152,13 +154,18 @@ export class QuizScreen {
     this.setLabel = el('div', 'section', root);
     place(this.setLabel, kRightX, y, kRightW, 14);
     y += 20;
+    // Two columns, filled down the first, then the second (agreed with Eirik
+    // 2026-11-26 when the sets grew from 6 to 9).
+    const colW = Math.ceil((kRightW + 1) / 2);
     for (let i = 0; i < kNumSets; i++) {
       const b = new Btn(root, '', () => { this.set = i; this.start(); });
-      place(b.e, kRightX, y + i * 23, kRightW, 24);
+      const col = Math.floor(i / kSetRows), row = i % kSetRows;
+      const x = kRightX + col * (colW - 1);
+      place(b.e, x, y + row * 23, col === 0 ? colW : kRightX + kRightW - x, 24);
       b.e.style.justifyContent = 'flex-start';
       this.setBtns.push(b);
     }
-    y += 6 * 23 + 1 + 12;
+    y += kSetRows * 23 + 1 + 12;
     this.askLabel = el('div', 'section', root);
     place(this.askLabel, kRightX, y, kRightW, 14);
     const askRow = box(root, {});
@@ -474,7 +481,7 @@ export class QuizScreen {
     this.guideBtn.text(s.t(this.phone ? 'phone.quiz.open_guide' : 'quiz.open_guide'));
     const f = font(10, 500);
     if (!this.phone) this.nextBtn.e.style.width = `${Math.max(textWidth(f, s.t('quiz.next'), 0.6), textWidth(f, s.t('quiz.again'), 0.6)) + 28}px`;
-    this.setBtns.forEach((b, i) => b.text(s.t(`quiz.set.${kSetKeys[i]}`)));
+    this.setBtns.forEach((b, i) => b.text(this.setName(i)));
     this.askBtns.forEach((b, i) => b.text(s.t(kAskKeys[i])));
     this.hintBtns.forEach((b, i) => b.text(s.t(kHintKeys[i])));
     this.setLabel.textContent = s.t('quiz.birds');
@@ -527,7 +534,7 @@ export class QuizScreen {
 
     const scores = active ? [q.correct, q.missed, q.left] : [0, 0, 0];
     if (this.scoreRight) this.scoreRight.textContent = s.t('phone.quiz.correct', { n: number(scores[0], 0, s.no) });
-    this.setCycle?.text(`${s.t(`quiz.set.${kSetKeys[this.set]}`)} · ${s.t('phone.quiz.change')}`);
+    this.setCycle?.text(`${this.setName(this.set)} · ${s.t('phone.quiz.change')}`);
     this.scoreRows.forEach((r, i) => (r.val.textContent = number(scores[i], 0, s.no)));
 
     if (!active) {
@@ -632,8 +639,12 @@ export class QuizScreen {
     }
   }
 
+  private setName(i: number): string {
+    return this.s.t(`quiz.set.${kSetKeys[i]}`, { n: String(index.birds.length) });
+  }
+
   // Status bar: the set and what is asked.
   statusText(): string {
-    return `${this.s.t(`quiz.set.${kSetKeys[this.set]}`)}, ${this.s.t(kAskKeys[this.ask])}`;
+    return `${this.setName(this.set)}, ${this.s.t(kAskKeys[this.ask])}`;
   }
 }

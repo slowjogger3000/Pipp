@@ -128,7 +128,7 @@ Done 2026-11-26: Eirik ran it on his iPhone; recording, saving, the collection, 
 
 Done 2026-11-26: all 18 birds built and approved by Eirik by ear.
 
-## M11. About 50 birds (proposed 2026-11-26, waiting for Eirik's go)
+## M11. About 50 birds (go from Eirik 2026-11-26)
 
 **Model: Opus** for song data, **Sonnet** for the groundwork.
 
@@ -140,6 +140,8 @@ Groundwork, before the first new bird:
 - Code that assumes 4 groups: `core/Quiz.h` group index, the quiz set lists in `web/src/ui/quiz.ts` and `standalone/Source/UI/QuizScreen.cpp`, the group headers in the bird lists. Code that assumes 18: `quiz.set.all` (ALL 18 BIRDS) becomes a count.
 - Two layout questions for Eirik, since the designs show 18 birds and 6 quiz sets: the desktop bird list (240px, 24px rows) holds about 22 rows in the window, so 50 birds and 7 headers need it to scroll; and the quiz settings need room for 9 sets (pairs, 7 groups, all). Ask before changing either.
 - Sound sources: the snipe's display sound is made by tail feathers and the mallard quacks, so the syrinx may not cover them. Check each against the engine before its batch, and ask before adding a source to `core/`, as was done with `Drum.h`.
+
+Groundwork done 2026-11-26: Eirik chose a scrolling bird list and the quiz sets in two (columns, as the sets are a column).
 
 Then one batch per group, 3 to 8 birds, in this order: garden, forest (two batches), coast and water, wetland and lake, mountain, farmland, night. Per bird, as in M3 and M10: facts from SNL into `birds.md`, then `bird.json`, `voice.json`, `songs.json`, `plate.json`, renders and snapshots. Per batch: all render checks pass, MP3s for every bird in the batch, Eirik listens to the batch and names the birds that need work, those are fixed, then commit.
 

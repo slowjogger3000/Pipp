@@ -8,8 +8,16 @@ namespace
 {
 int textW(const juce::Font& f, const juce::String& s) { return draw::textWidth(f, s); }
 
-constexpr const char* kSetKeys[6] = { "pairs", "garden", "forest", "coast", "night", "all" };
+constexpr const char* kSetKeys[tipp::Quiz::kNumSets] = { "pairs", "garden", "forest", "coast", "wetland", "mountain", "farmland", "night", "all" };
 } // namespace
+
+juce::String quizSetName(const Strings& s, int set, int birdCount)
+{
+    if (set < 0 || set >= tipp::Quiz::kNumSets)
+        return {};
+    const juce::String key = "quiz.set." + juce::String(kSetKeys[set]);
+    return set == tipp::Quiz::kAll ? s.format(key, { { "n", juce::String(birdCount) } }) : s(key);
+}
 
 // QuizSonogram ----------------------------------------------------------------
 
@@ -120,7 +128,7 @@ QuizScreen::QuizScreen(const Strings& s, tipp::Engine& e) : sono(e), strings(s)
         a.onClick = [this, i] { if (onAnswer) onAnswer(i); };
         addAndMakeVisible(a);
     }
-    for (int i = 0; i < 6; ++i)
+    for (int i = 0; i < tipp::Quiz::kNumSets; ++i)
     {
         auto& b = setBtns[static_cast<std::size_t>(i)];
         b.alignLeft = true;
@@ -143,8 +151,8 @@ void QuizScreen::applyStrings()
     hintBtn.setText(strings("quiz.hint"));
     compareBtn.setText(strings("quiz.compare"));
     guideBtn.setText(strings("quiz.open_guide"));
-    for (int i = 0; i < 6; ++i)
-        setBtns[static_cast<std::size_t>(i)].setText(strings("quiz.set." + juce::String(kSetKeys[i])));
+    for (int i = 0; i < tipp::Quiz::kNumSets; ++i)
+        setBtns[static_cast<std::size_t>(i)].setText(quizSetName(strings, i, birdCount));
     const char* ask[3] = { "type.song", "type.call", "quiz.ask_both" };
     const char* hints[3] = { "guide.mnemonic", "scene.season", "quiz.hints_none" };
     for (int i = 0; i < 3; ++i)
@@ -196,7 +204,7 @@ void QuizScreen::refresh()
         a.setMouseCursor(a.clickable ? juce::MouseCursor::PointingHandCursor : juce::MouseCursor::NormalCursor);
         a.repaint();
     }
-    for (int i = 0; i < 6; ++i)
+    for (int i = 0; i < tipp::Quiz::kNumSets; ++i)
     {
         setBtns[static_cast<std::size_t>(i)].setOn(view.set == i);
         setBtns[static_cast<std::size_t>(i)].setDisabled(! view.setHasBirds[static_cast<std::size_t>(i)]);
@@ -268,9 +276,20 @@ void QuizScreen::resized()
     auto rr = right;
     setLabel = rr.removeFromTop(14);
     rr.removeFromTop(6);
-    for (int i = 0; i < 6; ++i)
-        setBtns[static_cast<std::size_t>(i)].setBounds(rr.getX(), rr.getY() + i * 23, rr.getWidth(), 24);
-    rr.removeFromTop(6 * 23 + 1);
+    // Two columns, filled down the first, then the second (agreed with Eirik
+    // 2026-11-26 when the sets grew from 6 to 9).
+    {
+        constexpr int rows = (tipp::Quiz::kNumSets + 1) / 2;
+        const int colW = (rr.getWidth() + 1) / 2;
+        for (int i = 0; i < tipp::Quiz::kNumSets; ++i)
+        {
+            const int col = i / rows, row = i % rows;
+            const int x = rr.getX() + col * (colW - 1);
+            const int w = col == 0 ? colW : rr.getRight() - x;
+            setBtns[static_cast<std::size_t>(i)].setBounds(x, rr.getY() + row * 23, w, 24);
+        }
+        rr.removeFromTop(rows * 23 + 1);
+    }
     rr.removeFromTop(12);
     askLabel = rr.removeFromTop(14);
     rr.removeFromTop(6);

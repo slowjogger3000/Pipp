@@ -277,6 +277,7 @@ void MainComponent::loadIndex()
         }
     if (list.birds.empty())
         loadError = strings("error.index");
+    quizScreen.birdCount = static_cast<int> (list.birds.size());
 }
 
 void MainComponent::selectBird(int index)
@@ -1894,9 +1895,8 @@ void MainComponent::paintStatus(juce::Graphics& g)
             g.drawText(t, r.removeFromRight(textW(f, t) + 2), juce::Justification::centredRight, false);
             r.removeFromRight(16);
         }
-        const char* sets[6] = { "pairs", "garden", "forest", "coast", "night", "all" };
         const char* asks[3] = { "type.song", "type.call", "quiz.ask_both" };
-        g.drawText(loadError.isNotEmpty() ? loadError : strings("quiz.set." + juce::String(sets[quizSet])) + ", " + strings(asks[quizAsk]),
+        g.drawText(loadError.isNotEmpty() ? loadError : tipp::ui::quizSetName(strings, quizSet, static_cast<int> (list.birds.size())) + ", " + strings(asks[quizAsk]),
                    r, juce::Justification::centredLeft, false);
         return;
     }

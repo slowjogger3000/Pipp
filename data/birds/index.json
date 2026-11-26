@@ -1,10 +1,13 @@
 {
- "_note": "The 18 birds in list order, from birds.md. Names and Latin names are not checked against Artsdatabanken, so verified_names is false. An id is the Norwegian name in lower case with æ, ø, å written ae, o, a.",
+ "_note": "The birds in list order (18, plus 32 added in M11 and hatched until built), from birds.md. Names and Latin names are not checked against Artsdatabanken, so verified_names is false. An id is the Norwegian name in lower case with æ, ø, å written ae, o, a.",
  "verified_names": false,
  "groups": [
   "garden",
   "forest",
   "coast",
+  "wetland",
+  "mountain",
+  "farmland",
   "night"
  ],
  "birds": [
@@ -187,6 +190,326 @@
     "en": "Thrush nightingale"
    },
    "latin": "Luscinia luscinia"
+  },
+  {
+   "id": "skjaere",
+   "number": "19",
+   "group": "garden",
+   "name": {
+    "no": "Skjære",
+    "en": "Magpie"
+   },
+   "latin": "Pica pica"
+  },
+  {
+   "id": "krake",
+   "number": "20",
+   "group": "garden",
+   "name": {
+    "no": "Kråke",
+    "en": "Hooded crow"
+   },
+   "latin": "Corvus cornix"
+  },
+  {
+   "id": "ringdue",
+   "number": "21",
+   "group": "garden",
+   "name": {
+    "no": "Ringdue",
+    "en": "Wood pigeon"
+   },
+   "latin": "Columba palumbus"
+  },
+  {
+   "id": "gronnfink",
+   "number": "22",
+   "group": "garden",
+   "name": {
+    "no": "Grønnfink",
+    "en": "Greenfinch"
+   },
+   "latin": "Chloris chloris"
+  },
+  {
+   "id": "staer",
+   "number": "23",
+   "group": "garden",
+   "name": {
+    "no": "Stær",
+    "en": "Starling"
+   },
+   "latin": "Sturnus vulgaris"
+  },
+  {
+   "id": "linerle",
+   "number": "24",
+   "group": "garden",
+   "name": {
+    "no": "Linerle",
+    "en": "White wagtail"
+   },
+   "latin": "Motacilla alba"
+  },
+  {
+   "id": "rodvingetrost",
+   "number": "25",
+   "group": "forest",
+   "name": {
+    "no": "Rødvingetrost",
+    "en": "Redwing"
+   },
+   "latin": "Turdus iliacus"
+  },
+  {
+   "id": "gratrost",
+   "number": "26",
+   "group": "forest",
+   "name": {
+    "no": "Gråtrost",
+    "en": "Fieldfare"
+   },
+   "latin": "Turdus pilaris"
+  },
+  {
+   "id": "svarthvitfluesnapper",
+   "number": "27",
+   "group": "forest",
+   "name": {
+    "no": "Svarthvit fluesnapper",
+    "en": "Pied flycatcher"
+   },
+   "latin": "Ficedula hypoleuca"
+  },
+  {
+   "id": "granmeis",
+   "number": "28",
+   "group": "forest",
+   "name": {
+    "no": "Granmeis",
+    "en": "Willow tit"
+   },
+   "latin": "Poecile montanus"
+  },
+  {
+   "id": "fuglekonge",
+   "number": "29",
+   "group": "forest",
+   "name": {
+    "no": "Fuglekonge",
+    "en": "Goldcrest"
+   },
+   "latin": "Regulus regulus"
+  },
+  {
+   "id": "gransanger",
+   "number": "30",
+   "group": "forest",
+   "name": {
+    "no": "Gransanger",
+    "en": "Chiffchaff"
+   },
+   "latin": "Phylloscopus collybita"
+  },
+  {
+   "id": "bjorkefink",
+   "number": "31",
+   "group": "forest",
+   "name": {
+    "no": "Bjørkefink",
+    "en": "Brambling"
+   },
+   "latin": "Fringilla montifringilla"
+  },
+  {
+   "id": "svartspett",
+   "number": "32",
+   "group": "forest",
+   "name": {
+    "no": "Svartspett",
+    "en": "Black woodpecker"
+   },
+   "latin": "Dryocopus martius"
+  },
+  {
+   "id": "fiskemake",
+   "number": "33",
+   "group": "coast",
+   "name": {
+    "no": "Fiskemåke",
+    "en": "Common gull"
+   },
+   "latin": "Larus canus"
+  },
+  {
+   "id": "sildemake",
+   "number": "34",
+   "group": "coast",
+   "name": {
+    "no": "Sildemåke",
+    "en": "Lesser black-backed gull"
+   },
+   "latin": "Larus fuscus"
+  },
+  {
+   "id": "makrellterne",
+   "number": "35",
+   "group": "coast",
+   "name": {
+    "no": "Makrellterne",
+    "en": "Common tern"
+   },
+   "latin": "Sterna hirundo"
+  },
+  {
+   "id": "stokkand",
+   "number": "36",
+   "group": "wetland",
+   "name": {
+    "no": "Stokkand",
+    "en": "Mallard"
+   },
+   "latin": "Anas platyrhynchos"
+  },
+  {
+   "id": "sangsvane",
+   "number": "37",
+   "group": "wetland",
+   "name": {
+    "no": "Sangsvane",
+    "en": "Whooper swan"
+   },
+   "latin": "Cygnus cygnus"
+  },
+  {
+   "id": "storlom",
+   "number": "38",
+   "group": "wetland",
+   "name": {
+    "no": "Storlom",
+    "en": "Black-throated diver"
+   },
+   "latin": "Gavia arctica"
+  },
+  {
+   "id": "enkeltbekkasin",
+   "number": "39",
+   "group": "wetland",
+   "name": {
+    "no": "Enkeltbekkasin",
+    "en": "Common snipe"
+   },
+   "latin": "Gallinago gallinago"
+  },
+  {
+   "id": "heipiper",
+   "number": "40",
+   "group": "mountain",
+   "name": {
+    "no": "Heipiper",
+    "en": "Meadow pipit"
+   },
+   "latin": "Anthus pratensis"
+  },
+  {
+   "id": "lirype",
+   "number": "41",
+   "group": "mountain",
+   "name": {
+    "no": "Lirype",
+    "en": "Willow ptarmigan"
+   },
+   "latin": "Lagopus lagopus"
+  },
+  {
+   "id": "heilo",
+   "number": "42",
+   "group": "mountain",
+   "name": {
+    "no": "Heilo",
+    "en": "Golden plover"
+   },
+   "latin": "Pluvialis apricaria"
+  },
+  {
+   "id": "ravn",
+   "number": "43",
+   "group": "mountain",
+   "name": {
+    "no": "Ravn",
+    "en": "Raven"
+   },
+   "latin": "Corvus corax"
+  },
+  {
+   "id": "lavesvale",
+   "number": "44",
+   "group": "farmland",
+   "name": {
+    "no": "Låvesvale",
+    "en": "Barn swallow"
+   },
+   "latin": "Hirundo rustica"
+  },
+  {
+   "id": "sanglerke",
+   "number": "45",
+   "group": "farmland",
+   "name": {
+    "no": "Sanglerke",
+    "en": "Skylark"
+   },
+   "latin": "Alauda arvensis"
+  },
+  {
+   "id": "gulspurv",
+   "number": "46",
+   "group": "farmland",
+   "name": {
+    "no": "Gulspurv",
+    "en": "Yellowhammer"
+   },
+   "latin": "Emberiza citrinella"
+  },
+  {
+   "id": "vipe",
+   "number": "47",
+   "group": "farmland",
+   "name": {
+    "no": "Vipe",
+    "en": "Lapwing"
+   },
+   "latin": "Vanellus vanellus"
+  },
+  {
+   "id": "perlugle",
+   "number": "48",
+   "group": "night",
+   "name": {
+    "no": "Perlugle",
+    "en": "Tengmalm's owl"
+   },
+   "latin": "Aegolius funereus"
+  },
+  {
+   "id": "akerrikse",
+   "number": "49",
+   "group": "night",
+   "name": {
+    "no": "Åkerrikse",
+    "en": "Corncrake"
+   },
+   "latin": "Crex crex"
+  },
+  {
+   "id": "nattravn",
+   "number": "50",
+   "group": "night",
+   "name": {
+    "no": "Nattravn",
+    "en": "Nightjar"
+   },
+   "latin": "Caprimulgus europaeus"
   }
  ]
 }
