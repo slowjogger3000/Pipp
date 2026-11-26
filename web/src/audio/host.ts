@@ -72,6 +72,10 @@ export class AudioHost {
       if (this.ctx.state !== 'running') await this.ctx.resume();
       return;
     }
+    // iOS Safari mutes web audio with the ring switch unless the page asks
+    // for playback, as a media player does.
+    const session = (navigator as unknown as { audioSession?: { type: string } }).audioSession;
+    if (session) session.type = 'playback';
     const ctx = new AudioContext({ latencyHint: 'interactive' });
     this.ctx = ctx;
     const resumed = ctx.resume(); // inside the gesture, before any await

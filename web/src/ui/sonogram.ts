@@ -1,5 +1,5 @@
-// The live sonogram well, 680x320: 40px per kHz from 0 to 8 kHz, 80px per
-// second. The playhead is fixed and the song scrolls under it. Ink is the
+// The live sonogram well, 680x320 on the desktop: 40px per kHz from 0 to
+// 8 kHz, 80px per second. The phone uses 320x160, 20px per kHz. The playhead is fixed and the song scrolls under it. Ink is the
 // engine's sonogram feed; grey is the rest of the phrase the engine
 // published, drawn with the engine's own contour maths. Same drawing as
 // standalone/Source/UI/Sonogram.h, including draw mode.
@@ -9,11 +9,8 @@ import { kSonoFrames } from '../audio/host.ts';
 import type { PhraseView } from '../core/tipp.ts';
 import { Canvas, colour, font, graphPaper } from './dom.ts';
 
-export const kPxPerKHz = 40;
 export const kPxPerSecond = 80;
-export const kPlayheadX = 456;
 const kPxPerMs = kPxPerSecond / 1000;
-const kPxPerHz = kPxPerKHz / 1000;
 const kStrokeTolPx = 2.5;
 const kEraseRadiusPx = 7;
 const kDrawMinHz = 250, kDrawMaxHz = 8000, kDotMs = 90;
@@ -43,15 +40,25 @@ export class Sonogram {
   private phraseStartFrame = 0;
   private readonly at: number; // 2 floats scratch in wasm memory
 
-  constructor(parent: HTMLElement, private host: AudioHost) {
-    this.cv = new Canvas(parent, 680, 320);
+  // Size of the well and where the playhead sits, in css px.
+  readonly W: number;
+  readonly H: number;
+  readonly px: number;
+  private readonly phz: number;
+
+  constructor(parent: HTMLElement, private host: AudioHost, geo = { w: 680, h: 320, pxPerKHz: 40, playheadX: 456 }) {
+    this.W = geo.w;
+    this.H = geo.h;
+    this.px = geo.playheadX;
+    this.phz = geo.pxPerKHz / 1000;
+    this.cv = new Canvas(parent, this.W, this.H);
     this.line = host.tipp.x.tipp_line_new();
     this.at = host.tipp.alloc(8);
     const c = this.cv.c;
     c.style.touchAction = 'none';
     const pos = (e: PointerEvent) => {
       const r = c.getBoundingClientRect();
-      return { x: ((e.clientX - r.left) / r.width) * 680, y: ((e.clientY - r.top) / r.height) * 320 };
+      return { x: ((e.clientX - r.left) / r.width) * this.W, y: ((e.clientY - r.top) / r.height) * this.H };
     };
     c.addEventListener('pointerdown', (e) => {
       if (!this.drawMode) return;
@@ -80,12 +87,14 @@ export class Sonogram {
       const n = this.stroke.length / 3;
       const p = t.buf(this.stroke.length * 4);
       t.f32(p, this.stroke.length).set(this.stroke);
-      t.x.tipp_line_add_stroke(this.line, p, n, kPxPerMs, kPxPerHz, kStrokeTolPx);
+      t.x.tipp_line_add_stroke(this.line, p, n, kPxPerMs, this.phz, kStrokeTolPx);
       this.stroke = [];
       this.onLineChanged();
     });
     c.addEventListener('pointerleave', () => { this.hover = false; });
   }
+
+  private y(hz: number): number { return this.H - hz * this.phz; }
 
   get lastPhrase(): PhraseView | null { return this.phrase; }
   get frozenNow(): boolean { return this.frozenReady; }
@@ -113,18 +122,18 @@ export class Sonogram {
     const flat = raw.flatMap(([t, hz]) => [t, hz, 0]);
     const tp = this.host.tipp, p = tp.buf(flat.length * 4);
     tp.f32(p, flat.length).set(flat);
-    tp.x.tipp_line_add_stroke(this.line, p, raw.length, kPxPerMs, kPxPerHz, kStrokeTolPx);
+    tp.x.tipp_line_add_stroke(this.line, p, raw.length, kPxPerMs, this.phz, kStrokeTolPx);
     this.onLineChanged();
   }
   hoverAt(x: number, y: number) { this.hover = true; this.pointer = { x, y }; }
 
   private pointFor(p: { x: number; y: number }): [number, number, number] {
-    return [Math.max(0, p.x) / kPxPerMs, Math.min(kDrawMaxHz, Math.max(kDrawMinHz, (320 - p.y) / kPxPerHz)), 0];
+    return [Math.max(0, p.x) / kPxPerMs, Math.min(kDrawMaxHz, Math.max(kDrawMinHz, (this.H - p.y) / this.phz)), 0];
   }
 
   private eraseAt(p: { x: number; y: number }) {
     const [t, hz] = this.pointFor(p);
-    if (this.host.tipp.x.tipp_line_erase(this.line, t, hz, kPxPerMs, kPxPerHz, kEraseRadiusPx)) this.onLineChanged();
+    if (this.host.tipp.x.tipp_line_erase(this.line, t, hz, kPxPerMs, this.phz, kEraseRadiusPx)) this.onLineChanged();
   }
 
   private drawnAt(t: number): [number, number] {
@@ -159,7 +168,7 @@ export class Sonogram {
     const oldest = written - avail;
     const lead = Math.floor(0.35 * this.frozenRate);
     if (this.startNumber > 0 && this.phraseStartFrame >= oldest + lead) {
-      const span = Math.floor((680 / kPxPerSecond) * this.frozenRate);
+      const span = Math.floor((this.W / kPxPerSecond) * this.frozenRate);
       const from = this.phraseStartFrame - lead;
       for (let i = from; i < written && i - from < span; i++) this.frozen.push(h.sonoFrame(i));
     }
@@ -168,10 +177,10 @@ export class Sonogram {
 
   private paint() {
     const g = this.cv.begin();
-    graphPaper(g, 680, 320);
+    graphPaper(g, this.W, this.H);
     g.fillStyle = colour.shadow;
-    g.fillRect(0, 0, 680, 1);
-    g.fillRect(0, 0, 1, 320);
+    g.fillRect(0, 0, this.W, 1);
+    g.fillRect(0, 0, 1, this.H);
     g.lineCap = 'round';
 
     if (this.drawMode && this.frozenReady) {
@@ -184,14 +193,14 @@ export class Sonogram {
     this.paintNext(g);
 
     g.fillStyle = colour.plum;
-    g.fillRect(kPlayheadX, 0, 1, 320);
-    g.fillRect(kPlayheadX + 1, 0, 26, 12);
+    g.fillRect(this.px, 0, 1, this.H);
+    g.fillRect(this.px + 1, 0, 26, 12);
     g.fillStyle = colour.paper;
     g.font = font(8, 600);
     g.letterSpacing = '0.5px';
     g.textBaseline = 'middle';
     g.textAlign = 'left';
-    g.fillText(this.nowText, kPlayheadX + 5, 6.5);
+    g.fillText(this.nowText, this.px + 5, 6.5);
     g.letterSpacing = '0px';
   }
 
@@ -214,7 +223,7 @@ export class Sonogram {
       const f = this.frozen[i], p = this.frozen[i - 1];
       if (!this.joins(f, p)) continue;
       const level = Math.min(1, (0.5 * (f.amp + p.amp)) / 0.35);
-      this.seg(g, ((i - 1) / this.frozenRate) * kPxPerSecond, y(p.hz), (i / this.frozenRate) * kPxPerSecond, y(f.hz), 1.5 + 1.5 * level);
+      this.seg(g, ((i - 1) / this.frozenRate) * kPxPerSecond, this.y(p.hz), (i / this.frozenRate) * kPxPerSecond, this.y(f.hz), 1.5 + 1.5 * level);
     }
   }
 
@@ -229,7 +238,7 @@ export class Sonogram {
       g.setLineDash([2, 4]);
       g.beginPath();
       g.moveTo(sx, 0);
-      g.lineTo(sx, 320);
+      g.lineTo(sx, this.H);
       g.stroke();
       g.setLineDash([]);
       g.fillStyle = colour.ink;
@@ -255,8 +264,8 @@ export class Sonogram {
       for (let j = 0; j <= steps; j++) {
         const t = t0 + ((t1 - t0) * j) / steps;
         const [hz] = this.drawnAt(Math.min(t1 - 0.01, Math.max(t0 + 0.01, t)));
-        if (j === 0) g.moveTo(t * kPxPerMs, y(hz));
-        else g.lineTo(t * kPxPerMs, y(hz));
+        if (j === 0) g.moveTo(t * kPxPerMs, this.y(hz));
+        else g.lineTo(t * kPxPerMs, this.y(hz));
       }
       g.stroke();
       a = b + 1;
@@ -264,7 +273,7 @@ export class Sonogram {
     if (this.stroke.length) {
       g.beginPath();
       for (let i = 0; i < this.stroke.length; i += 3) {
-        const px = this.stroke[i] * kPxPerMs, py = y(this.stroke[i + 1]);
+        const px = this.stroke[i] * kPxPerMs, py = this.y(this.stroke[i + 1]);
         if (i === 0) g.moveTo(px, py);
         else g.lineTo(px, py);
       }
@@ -272,7 +281,7 @@ export class Sonogram {
     }
     g.lineWidth = 1;
     for (let i = 0; i < n; i++) {
-      const sx = Math.round(pts[3 * i] * kPxPerMs) - 3, sy = Math.round(y(pts[3 * i + 1])) - 3;
+      const sx = Math.round(pts[3 * i] * kPxPerMs) - 3, sy = Math.round(this.y(pts[3 * i + 1])) - 3;
       g.fillStyle = colour.face;
       g.fillRect(sx, sy, 6, 6);
       g.strokeStyle = colour.ink;
@@ -280,7 +289,7 @@ export class Sonogram {
     }
     if (this.host.singing && this.phrase?.drawn) {
       g.fillStyle = colour.plum;
-      g.fillRect((this.phrase.drawnStartMs + this.host.phrasePosMs) * kPxPerMs, 0, 1, 320);
+      g.fillRect((this.phrase.drawnStartMs + this.host.phrasePosMs) * kPxPerMs, 0, 1, this.H);
     }
     g.lineCap = 'round';
   }
@@ -304,7 +313,7 @@ export class Sonogram {
     g.font = font(9, 500);
     const w = Math.ceil(g.measureText(text).width) + 12;
     let fx = x + 6, fy = yy - 24;
-    if (fx + w > 680) fx = x - 6 - w;
+    if (fx + w > this.W) fx = x - 6 - w;
     if (fy < 0) fy = yy + 10;
     g.fillRect(fx, fy, w, 14);
     g.fillStyle = colour.onInk;
@@ -317,10 +326,10 @@ export class Sonogram {
     const h = this.host;
     const written = h.sonoWritten, rate = h.sonoRate;
     if (written < 2 || rate <= 0) return;
-    const visible = Math.ceil((kPlayheadX / kPxPerSecond) * rate) + 2;
+    const visible = Math.ceil((this.px / kPxPerSecond) * rate) + 2;
     const count = Math.min(visible, Math.min(written, kSonoFrames - 64));
     const first = written - count;
-    const xFor = (i: number) => kPlayheadX - ((written - 1 - i) / rate) * kPxPerSecond;
+    const xFor = (i: number) => this.px - ((written - 1 - i) / rate) * kPxPerSecond;
 
     let prev = h.sonoFrame(first), prevX = xFor(first);
     let runKnob = -1, runStart = 0;
@@ -343,7 +352,7 @@ export class Sonogram {
       const f = h.sonoFrame(i), x = xFor(i);
       if (this.joins(f, prev)) {
         const level = Math.min(1, (0.5 * (f.amp + prev.amp)) / 0.35);
-        this.seg(g, prevX, y(prev.hz), x, y(f.hz), 1.5 + 1.5 * level);
+        this.seg(g, prevX, this.y(prev.hz), x, this.y(f.hz), 1.5 + 1.5 * level);
       }
       const knob = f.mask !== 0 ? lowestBit(f.mask) : -1;
       if (knob !== runKnob) {
@@ -353,7 +362,7 @@ export class Sonogram {
       prev = f;
       prevX = x;
     }
-    closeRun(kPlayheadX);
+    closeRun(this.px);
   }
 
   private paintNext(g: CanvasRenderingContext2D) {
@@ -371,7 +380,7 @@ export class Sonogram {
       let px = 0, py = 0, prevOn = false;
       for (let t = from; t <= end; t += (3 / kPxPerSecond) * 1000 * tempo) {
         const [hz, amp] = this.drawnAt(t);
-        const xx = kPlayheadX + ((t - from) / tempo) * kPxPerMs, yy = y(hz * pitchRatio);
+        const xx = this.px + ((t - from) / tempo) * kPxPerMs, yy = this.y(hz * pitchRatio);
         const on = amp > 0.08;
         if (on && prevOn) this.seg(g, px, py, xx, yy, 3);
         px = xx; py = yy; prevOn = on;
@@ -384,8 +393,8 @@ export class Sonogram {
     for (const n of ph.notes) {
       if (n.syl < 0 || n.syl >= nSyl || n.durMs <= 0) continue;
       if (n.startMs + n.durMs <= pos) continue;
-      const startX = kPlayheadX + ((Math.max(n.startMs, pos) - pos) / tempo / 1000) * kPxPerSecond;
-      if (startX > 680) break;
+      const startX = this.px + ((Math.max(n.startMs, pos) - pos) / tempo / 1000) * kPxPerSecond;
+      if (startX > this.W) break;
       const u0 = Math.max(0, (pos - n.startMs) / n.durMs);
       const steps = Math.max(2, Math.floor((n.durMs / tempo / 1000) * kPxPerSecond / 3));
       let px = 0, py = 0, prevOn = false;
@@ -394,8 +403,8 @@ export class Sonogram {
         const t = n.startMs + u * n.durMs;
         x.tipp_bird_syllable_at(this.bird, n.syl, u, this.at);
         const v = tp.f32(this.at, 2);
-        const xx = kPlayheadX + ((t - pos) / tempo / 1000) * kPxPerSecond;
-        const yy = y(v[0] * n.pitchMul * pitchKnob);
+        const xx = this.px + ((t - pos) / tempo / 1000) * kPxPerSecond;
+        const yy = this.y(v[0] * n.pitchMul * pitchKnob);
         const on = v[1] > 0.08;
         if (on && prevOn) this.seg(g, px, py, xx, yy, 1.5 + 1.5 * Math.min(1, v[1]));
         px = xx; py = yy; prevOn = on;
@@ -404,7 +413,7 @@ export class Sonogram {
   }
 }
 
-function y(hz: number): number { return 320 - (hz / 1000) * kPxPerKHz; }
+
 
 function lowestBit(m: number): number {
   for (let b = 0; b < 16; b++) if ((m >> b) & 1) return b;

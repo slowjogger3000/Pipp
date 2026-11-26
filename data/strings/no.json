@@ -235,5 +235,16 @@
  "log.bad_time": "TID MÅ SKRIVES TT:MM",
  "log.added": "LAGT TIL: {bird}",
  "log.deleted": "SLETTET: {bird}",
- "log.csv_bird_latin": "LATIN"
+ "log.csv_bird_latin": "LATIN",
+ "phone.tab.play": "SPILL",
+ "phone.tab.guide": "BOK",
+ "phone.tab.listen": "LYTT",
+ "phone.tab.quiz": "QUIZ",
+ "phone.tab.chorus": "KOR",
+ "phone.tab.collection": "SAMLING",
+ "phone.scene.time": "TID",
+ "phone.scene.type": "TYPE",
+ "phone.ap.hold": "HOLD",
+ "phone.pick_bird": "Velg fugl",
+ "phone.close": "LUKK"
 }

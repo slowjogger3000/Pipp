@@ -235,5 +235,16 @@
  "log.bad_time": "TIME MUST READ HH:MM",
  "log.added": "ADDED: {bird}",
  "log.deleted": "DELETED: {bird}",
- "log.csv_bird_latin": "LATIN"
+ "log.csv_bird_latin": "LATIN",
+ "phone.tab.play": "PLAY",
+ "phone.tab.guide": "GUIDE",
+ "phone.tab.listen": "LISTEN",
+ "phone.tab.quiz": "QUIZ",
+ "phone.tab.chorus": "CHORUS",
+ "phone.tab.collection": "COLLECTION",
+ "phone.scene.time": "TIME",
+ "phone.scene.type": "TYPE",
+ "phone.ap.hold": "HOLD",
+ "phone.pick_bird": "Choose bird",
+ "phone.close": "CLOSE"
 }
