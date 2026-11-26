@@ -388,9 +388,36 @@ To verify: when and how the calls are given, leg colour, wingspan, years to adul
 
 To verify: how the call sounds, transcriptions, alarm, bill colour, wingspan, the juvenile's plumage, song months and time of day.
 
+## Night birds, checked 2026-11-26
+
+Source: Store norske leksikon (snl.no), one article per bird, read in full.
+
+### Kattugle (folder `kattugle`), snl.no/kattugle, Rolf Terje Kroglund, updated 2026-08-05
+
+| Field | Value |
+|---|---|
+| Size | Wingspan 81 to 104 cm, 550 to 750 g. A medium-sized owl |
+| Appearance | More varied than other owls, from grey-brown to red-brown. Pale underside with dark lengthwise streaks; back mottled with dark streaks. Large round head with a fairly pale, even face; two pale bands on the forehead meet over the bill. Rounded, fairly short wings; short tail with diffuse bars |
+| Eyes | Entirely black; with the much larger ural owl the only Norwegian owl with black eyes |
+| Sex | Same plumage; the female is somewhat larger and heavier |
+| Male song | A deep, drawn-out «hoo», about five seconds later a marked «kokk», at once followed by a trembling falling series of 1 to 2 seconds: «hoo..........kokk ho'o'o'o'o'o'o'». Carries 2 to 3 km in calm weather |
+| Female call | A characteristic sharp «ku'vitt» or «i' vitt» |
+| Other sounds | Many different sounds |
+| When | Almost only active at night. The male sings from January, most from the second half of February, and often in autumn too |
+| Habitat | Old deciduous forest, also mixed forest; often near people, in large gardens and parks with big trees, and farmland. Most in the lowlands |
+| Range in Norway | North to northern Trøndelag. 2500 to 6000 pairs (2015), fairly stable |
+| Food | A generalist: large insects, earthworms, snails, amphibians, birds, shrews and small rodents; clutch size follows the rodents |
+| Nest | Hollow trees, often large nest boxes; sometimes broken trunks or crow and magpie nests |
+| Eggs | 2 to 6, usually March or early April; the female incubates 28 to 30 days |
+| Young | Leave the nest at about four weeks before they can fly and climb with their bills; fed two to three months more. Parents can be very aggressive at the nest |
+| Movements | Very sedentary; young settle a few km from home |
+| Status | LC in Norway and globally |
+
+To verify: length, juvenile plumage, bill and feet colour, duets, the other sounds, hunting.
+
 ## All other birds
 
-Nothing is verified for the 3 other birds outside the garden group. Collect facts per bird with the same fields as the blackbird table before writing `bird.json`.
+Nothing is verified for the 2 other birds outside the garden group. Collect facts per bird with the same fields as the blackbird table before writing `bird.json`.
 
 ## Dawn chorus
 

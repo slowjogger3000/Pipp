@@ -1,0 +1,124 @@
+{
+ "_note": "Field guide text for the tawny owl, both languages. Facts from birds.md (SNL, checked 2026-11-26). Norwegian wording is mine, Eirik to check. calendar: one letter per month from January, y yes, n no, ? not known.",
+ "xeno_canto": "https://xeno-canto.org/species/strix-aluco",
+ "facts": {
+  "length": {
+   "en": "Wingspan 81 to 104 cm, 550 to 750 g",
+   "no": "Vingespenn 81 til 104 cm, 550 til 750 g",
+   "verified": true
+  },
+  "broods": {
+   "en": "2 to 6 eggs, March or early April",
+   "no": "2 til 6 egg, mars eller tidlig april",
+   "verified": true
+  },
+  "range": {
+   "en": "North to northern Trøndelag; 2500 to 6000 pairs",
+   "no": "Nord til nordlige Trøndelag; 2500 til 6000 par",
+   "verified": true
+  },
+  "habitat": {
+   "en": "Old deciduous forest, parks and large gardens",
+   "no": "Eldre løvskog, parker og store hager",
+   "verified": true
+  },
+  "food": {
+   "en": "Insects, worms, amphibians, birds, small mammals",
+   "no": "Insekter, mark, amfibier, fugler, smågnagere",
+   "verified": true
+  },
+  "status": {
+   "en": "LC, viable, Norwegian red list",
+   "no": "LC, livskraftig, norsk rødliste",
+   "verified": true
+  },
+  "nest": {
+   "en": "Hollow trees and large nest boxes",
+   "no": "Hule trær og store fuglekasser",
+   "verified": true
+  }
+ },
+ "sings": {
+  "male": {
+   "en": "Sings «hoo...kokk ho'o'o'o'»",
+   "no": "Synger «hoo...kokk ho'o'o'o'»",
+   "verified": true
+  },
+  "female": {
+   "en": "Calls «ku'vitt»",
+   "no": "Roper «ku'vitt»",
+   "verified": true
+  }
+ },
+ "song_notes": {
+  "en": "The male: a deep, drawn-out “hoo”, about five seconds later a marked “kokk”, at once followed by a trembling, falling series of 1 to 2 seconds: “hoo..........kokk ho'o'o'o'o'o'o'”. Carries 2 to 3 km in calm weather. Sings from January, most from the second half of February, often in autumn too; almost only active at night. The female has a sharp “ku'vitt” or “i' vitt”.",
+  "no": "Hannen: et dypt, langtrukkent «hoo», omtrent fem sekunder senere en markert «kokk», straks fulgt av en skjelvende, fallende rekke på 1 til 2 sekunder: «hoo..........kokk ho'o'o'o'o'o'o'». Høres 2 til 3 km i stille vær. Synger fra januar, mest fra andre halvdel av februar, gjerne også om høsten; nesten bare aktiv om natten. Hunnen har et skarpt «ku'vitt» eller «i' vitt».",
+  "verified": true
+ },
+ "mnemonic": {
+  "en": "",
+  "no": "",
+  "verified": false
+ },
+ "types": {
+  "song": {
+   "en": "The male's “hoo..........kokk ho'o'o'o'o'o'o'”.",
+   "no": "Hannens «hoo..........kokk ho'o'o'o'o'o'o'».",
+   "verified": true
+  },
+  "call": {
+   "en": "The female's sharp “ku'vitt” or “i' vitt”.",
+   "no": "Hunnens skarpe «ku'vitt» eller «i' vitt».",
+   "verified": true
+  },
+  "alarm": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "flight": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "parts": {
+  "hoo": {
+   "en": "HOO",
+   "no": "HOO",
+   "verified": true
+  },
+  "kokk": {
+   "en": "KOKK",
+   "no": "KOKK",
+   "verified": true
+  },
+  "tremolo": {
+   "en": "TREMBLING SERIES",
+   "no": "SKJELVENDE REKKE",
+   "verified": true
+  }
+ },
+ "calendar": {
+  "present": "yyyyyyyyyyyy",
+  "sings": "yyy?????yyy?",
+  "note": {
+   "en": "Very sedentary, in its territory all year. Sings from January, most from the second half of February, often in autumn too. [TO VERIFY] which autumn months.",
+   "no": "Svært stedbunden, i reviret hele året. Synger fra januar, mest fra andre halvdel av februar, gjerne også om høsten. [TO VERIFY] hvilke høstmåneder.",
+   "verified": true
+  }
+ },
+ "lookalikes": [
+  {
+   "name": {
+    "en": "Ural owl",
+    "no": "Slagugle"
+   },
+   "text": {
+    "en": "Much larger; the only other Norwegian owl with all-black eyes.",
+    "no": "Betydelig større; den eneste andre norske ugla med helt sorte øyne.",
+    "verified": true
+   }
+  }
+ ]
+}
