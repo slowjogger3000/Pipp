@@ -1,0 +1,107 @@
+{
+ "_note": "Field guide text for the eider, both languages. Facts from birds.md (SNL, checked 2026-11-26). Norwegian wording is mine, Eirik to check. calendar: one letter per month from January, y yes, n no, ? not known.",
+ "xeno_canto": "https://xeno-canto.org/species/somateria-mollissima",
+ "facts": {
+  "length": {
+   "en": "50 to 70 cm, 1600 to 2800 g",
+   "no": "50 til 70 cm, 1600 til 2800 g",
+   "verified": true
+  },
+  "broods": {
+   "en": "4 to 6 eggs, turn of April and May",
+   "no": "4 til 6 egg, rundt månedsskiftet april–mai",
+   "verified": true
+  },
+  "range": {
+   "en": "The whole coast; 87 000 pairs (2015)",
+   "no": "Hele kysten; 87 000 par (2015)",
+   "verified": true
+  },
+  "habitat": {
+   "en": "Shallow skerries, often with gulls and terns",
+   "no": "Grunne skjærgårder, ofte med måker og terner",
+   "verified": true
+  },
+  "food": {
+   "en": "Bottom animals, blue mussels above all",
+   "no": "Bunndyr, særlig blåskjell",
+   "verified": true
+  },
+  "status": {
+   "en": "VU, vulnerable, Norwegian red list",
+   "no": "VU, sårbar, norsk rødliste",
+   "verified": true
+  },
+  "nest": {
+   "en": "Scrape lined with the female's own down",
+   "no": "Grop foret med hunnens egen dun",
+   "verified": true
+  }
+ },
+ "sings": {
+  "male": {
+   "en": "«a-ooh-å»",
+   "no": "«a-ooh-å»",
+   "verified": true
+  },
+  "female": {
+   "en": "«gak-ak-ak-ak»",
+   "no": "«gak-ak-ak-ak»",
+   "verified": true
+  }
+ },
+ "song_notes": {
+  "en": "Often heard, with soft, hollow sounds. The male calls “a-ooh-å”; the female has a cackling “gak-ak-ak-ak”, like the engine of a fishing boat. [TO VERIFY] when and how the calls are given.",
+  "no": "Lager ofte lyd, koselige hule lyder. Hannen roper «a-ooh-å»; hunnen har et kaklende «gak-ak-ak-ak», som motoren på ei fiskeskøyte. [TO VERIFY] når og hvordan lydene brukes.",
+  "verified": true
+ },
+ "mnemonic": {
+  "en": "",
+  "no": "",
+  "verified": false
+ },
+ "types": {
+  "song": {
+   "en": "The male's “a-ooh-å”.",
+   "no": "Hannens «a-ooh-å».",
+   "verified": true
+  },
+  "call": {
+   "en": "Female: a cackling “gak-ak-ak-ak”, like a fishing boat's engine.",
+   "no": "Hunn: et kaklende «gak-ak-ak-ak», som motoren på ei fiskeskøyte.",
+   "verified": true
+  },
+  "alarm": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "flight": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "calendar": {
+  "present": "yyyyyyyyyyyy",
+  "sings": "????????????",
+  "note": {
+   "en": "Fairly resident, often near the breeding site all year. Many from Sør-Norge winter in Danish waters. Eggs around the turn of April and May.",
+   "no": "Ganske stasjonær, ofte nær hekkeplassen hele året. Mange fra Sør-Norge overvintrer i danske farvann. Egg rundt månedsskiftet april–mai.",
+   "verified": true
+  }
+ },
+ "lookalikes": [
+  {
+   "name": {
+    "en": "King eider",
+    "no": "Praktærfugl"
+   },
+   "text": {
+    "en": "Can be confused with the eider, but does not breed on mainland Norway.",
+    "no": "Kan forveksles med ærfugl, men hekker ikke på fastlandet.",
+    "verified": true
+   }
+  }
+ ]
+}

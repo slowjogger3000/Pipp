@@ -1,0 +1,264 @@
+{
+ "_note": "Eider ink plate in a 280x240 box, drawn in M10, not from a design: swimming. Drake: white with a black crown, green nape patch (shadow tone) and black belly, flanks and rear (ink). Female: brown with black bars (dense hatching). Juvenile shows the one-year male: grey-brown with a white breast (light hatching). Long, light, wedge-shaped bill (birds.md, SNL).",
+ "box": [
+  280,
+  240
+ ],
+ "clips": {
+  "body": "M210 92 C210 76 198 66 184 66 C170 66 162 76 162 88 L160 104 C130 104 90 110 66 124 C60 130 64 140 76 146 C100 160 150 166 190 158 C206 152 214 138 210 120 C208 110 206 100 210 92 Z",
+  "wing": "M184 112 C150 108 110 112 80 124 C110 132 152 134 186 126 Z"
+ },
+ "hatch": {
+  "body": {
+   "rect": [
+    58,
+    62,
+    216,
+    166
+   ],
+   "up": true,
+   "clip": "body"
+  },
+  "wing": {
+   "rect": [
+    78,
+    104,
+    188,
+    136
+   ],
+   "up": false,
+   "clip": "wing"
+  }
+ },
+ "pivots": {
+  "upper": {
+   "at": [
+    208,
+    90
+   ],
+   "deg": -8
+  },
+  "lower": {
+   "at": [
+    208,
+    96
+   ],
+   "deg": 6
+  },
+  "tail": {
+   "at": [
+    66,
+    126
+   ],
+   "deg": -4
+  }
+ },
+ "layers": [
+  {
+   "path": "M66 124 L42 116 L46 130 Z",
+   "fill": "face",
+   "stroke": 1.5,
+   "part": "tail"
+  },
+  {
+   "clip": "body",
+   "fill": "face",
+   "stroke": 1.5
+  },
+  {
+   "hatch": "body"
+  },
+  {
+   "variant": "breast",
+   "fill": "face",
+   "within": "body"
+  },
+  {
+   "variant": "black",
+   "fill": "ink",
+   "within": "body"
+  },
+  {
+   "variant": "cap",
+   "fill": "ink",
+   "within": "body"
+  },
+  {
+   "variant": "nape",
+   "fill": "shadow",
+   "stroke": 1,
+   "within": "body"
+  },
+  {
+   "clip": "wing",
+   "fill": "face"
+  },
+  {
+   "hatch": "wing"
+  },
+  {
+   "clip": "wing",
+   "stroke": 1.2
+  },
+  {
+   "clip": "body",
+   "stroke": 1.5
+  },
+  {
+   "eye": [
+    190,
+    80
+   ],
+   "pupil": 2.4
+  },
+  {
+   "path": "M208 84 L240 98 L236 102 L208 94 Z",
+   "fill": "bill",
+   "stroke": 1.5,
+   "part": "upper"
+  },
+  {
+   "path": "M208 94 L236 102 L232 105 L207 99 Z",
+   "fill": "bill",
+   "stroke": 1.5,
+   "part": "lower"
+  },
+  {
+   "path": "M12 160 C60 154 110 162 160 158 C200 155 236 160 270 156",
+   "fill": "none",
+   "stroke": 2
+  },
+  {
+   "path": "M30 172 q12 -4 24 0 M90 176 q12 -4 24 0 M170 172 q12 -4 24 0 M230 176 q10 -3 20 0",
+   "stroke": 1
+  },
+  {
+   "path": "M246 84 A16 16 0 0 1 246 112 M253 76 A26 26 0 0 1 253 120",
+   "stroke": 1.5,
+   "part": "arcs"
+  }
+ ],
+ "variants": {
+  "male": {
+   "body_pitch": 0,
+   "wing_pitch": 0,
+   "eye_ring": 0,
+   "bill": "face",
+   "black": "M60 124 C60 132 64 140 76 146 C100 160 150 166 190 158 C200 150 206 140 206 128 C170 136 118 134 60 124 Z",
+   "cap": "M168 72 C176 64 196 64 206 74 C198 78 180 78 166 78 Z",
+   "nape": "M166 82 C170 90 170 100 165 106 C162 98 162 88 166 82 Z",
+   "breast": ""
+  },
+  "female": {
+   "body_pitch": 4,
+   "wing_pitch": 4,
+   "eye_ring": 0,
+   "bill": "face",
+   "black": "",
+   "cap": "",
+   "nape": "",
+   "breast": ""
+  },
+  "juvenile": {
+   "body_pitch": 8,
+   "wing_pitch": 7,
+   "eye_ring": 0,
+   "bill": "face",
+   "black": "",
+   "cap": "",
+   "nape": "",
+   "breast": "M210 100 C214 120 208 140 196 150 C190 140 192 118 198 100 Z"
+  }
+ },
+ "callouts": [
+  {
+   "id": "head",
+   "leader": "M176 70 L130 34",
+   "at": [
+    128,
+    28
+   ],
+   "align": "right",
+   "male": {
+    "en": "BLACK CROWN, GREEN NAPE",
+    "no": "SVART ISSE, GRØNN NAKKE",
+    "verified": true
+   },
+   "female": {
+    "en": "BROWN, BARRED",
+    "no": "BRUN, TVERRSTRIPET",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "GREY-BROWN",
+    "no": "GRÅBRUN",
+    "verified": true
+   }
+  },
+  {
+   "id": "bill",
+   "leader": "M226 94 L226 44",
+   "at": [
+    226,
+    31
+   ],
+   "align": "centre",
+   "male": {
+    "en": "LONG, LIGHT, WEDGE",
+    "no": "LANGT, LYST, KILE",
+    "verified": true
+   },
+   "female": {
+    "en": "LONG, LIGHT, WEDGE",
+    "no": "LANGT, LYST, KILE",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "LONG, LIGHT, WEDGE",
+    "no": "LANGT, LYST, KILE",
+    "verified": true
+   }
+  },
+  {
+   "id": "plumage",
+   "leader": "M110 140 L76 198",
+   "at": [
+    72,
+    210
+   ],
+   "align": "centre",
+   "male": {
+    "en": "WHITE ABOVE, BLACK BELOW",
+    "no": "HVIT OVER, SVART UNDER",
+    "verified": true
+   },
+   "female": {
+    "en": "BROWN, BLACK BARS",
+    "no": "BRUN, SVARTE STRIPER",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "WHITE BREAST",
+    "no": "HVITT BRYST",
+    "verified": true
+   }
+  }
+ ],
+ "captions": {
+  "male": {
+   "en": "Drake in breeding plumage. Beak and tail follow the sound.",
+   "no": "Hann i prakt. Nebb og hale følger lyden.",
+   "verified": true
+  },
+  "female": {
+   "en": "Female. Uniform brown with black bars.",
+   "no": "Hunn. Jevnt brun med svarte tverrstriper.",
+   "verified": true
+  },
+  "juvenile": {
+   "en": "Young male, one year: white breast, grey-brown head and body.",
+   "no": "Ung hann, ett år: hvitt bryst, gråbrunt hode og kropp.",
+   "verified": true
+  }
+ }
+}

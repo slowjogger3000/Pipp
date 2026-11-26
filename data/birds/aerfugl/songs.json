@@ -1,0 +1,341 @@
+{
+ "_note": "Eider, M10. Verified (birds.md, SNL): often heard, soft hollow sounds; the male's «a-ooh-å»; the female's cackling «gak-ak-ak-ak», like the engine of a fishing boat. Sound design choices: the male's call at about 330 to 560 Hz with a rising 'ooh' and a falling 'å', 1 to 3 times; the female's 'gak' notes 5 to 14 at a steady engine-like 7 or 8 a second. The male's call is the song type (inactive for the female); the call type holds the male's call for the male and the female's cackle for the female, marked by sex, because no other sounds are described.",
+ "syllables": {
+  "aoha": {
+   "dur_ms": 900,
+   "pitch": [
+    [
+     0,
+     330
+    ],
+    [
+     0.12,
+     340
+    ],
+    [
+     0.2,
+     360
+    ],
+    [
+     0.45,
+     520
+    ],
+    [
+     0.6,
+     500
+    ],
+    [
+     0.72,
+     430
+    ],
+    [
+     1,
+     340
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.04,
+     0.7
+    ],
+    [
+     0.14,
+     0.6
+    ],
+    [
+     0.2,
+     0.2
+    ],
+    [
+     0.28,
+     0.9
+    ],
+    [
+     0.55,
+     1
+    ],
+    [
+     0.66,
+     0.5
+    ],
+    [
+     0.72,
+     0.8
+    ],
+    [
+     0.92,
+     0.6
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.95,
+   "breath": 10
+  },
+  "aoha2": {
+   "dur_ms": 820,
+   "pitch": [
+    [
+     0,
+     350
+    ],
+    [
+     0.15,
+     360
+    ],
+    [
+     0.25,
+     380
+    ],
+    [
+     0.5,
+     560
+    ],
+    [
+     0.65,
+     520
+    ],
+    [
+     0.75,
+     450
+    ],
+    [
+     1,
+     360
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.05,
+     0.6
+    ],
+    [
+     0.16,
+     0.5
+    ],
+    [
+     0.22,
+     0.2
+    ],
+    [
+     0.3,
+     0.9
+    ],
+    [
+     0.55,
+     1
+    ],
+    [
+     0.68,
+     0.5
+    ],
+    [
+     0.75,
+     0.8
+    ],
+    [
+     0.92,
+     0.6
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.95,
+   "breath": 10
+  },
+  "gak": {
+   "dur_ms": 90,
+   "pitch": [
+    [
+     0,
+     520
+    ],
+    [
+     0.3,
+     560
+    ],
+    [
+     1,
+     450
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.12,
+     1
+    ],
+    [
+     0.6,
+     0.7
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.85,
+   "rough": 55,
+   "breath": -10,
+   "tension": 35
+  }
+ },
+ "types": {
+  "song": {
+   "pause_s": [
+    3.0,
+    9.0
+   ],
+   "length_s": [
+    0.9,
+    3.0
+   ],
+   "transpose_st": 0.6,
+   "avoid_repeat": false,
+   "auto": {
+    "vo_pitch": [
+     0.98,
+     1.02
+    ],
+    "vo_breath": [
+     28,
+     42
+    ],
+    "vo_tension": [
+     6,
+     14
+    ],
+    "vo_rough": [
+     5,
+     12
+    ],
+    "ph_tempo": [
+     96,
+     104
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 1,
+     "sections": [
+      {
+       "pool": [
+        "aoha",
+        "aoha2"
+       ],
+       "count": [
+        1,
+        3
+       ],
+       "share": 1.0,
+       "gap_ms": [
+        500,
+        1000
+       ],
+       "no_adjacent_repeat": false
+      }
+     ]
+    }
+   ],
+   "overrides": [
+    {
+     "_note": "«a-ooh-å» is the male's (SNL).",
+     "when": {
+      "sex": "female"
+     },
+     "active": false
+    }
+   ]
+  },
+  "call": {
+   "pause_s": [
+    2.0,
+    7.0
+   ],
+   "length_s": [
+    0.8,
+    2.0
+   ],
+   "avoid_repeat": false,
+   "auto": {
+    "vo_pitch": [
+     0.98,
+     1.02
+    ],
+    "vo_breath": [
+     20,
+     36
+    ],
+    "vo_tension": [
+     8,
+     20
+    ],
+    "vo_rough": [
+     6,
+     14
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 1,
+     "sex": "male",
+     "sections": [
+      {
+       "pool": [
+        "aoha",
+        "aoha2"
+       ],
+       "count": [
+        1,
+        2
+       ],
+       "share": 1.0,
+       "gap_ms": [
+        500,
+        900
+       ],
+       "no_adjacent_repeat": false
+      }
+     ]
+    },
+    {
+     "weight": 1,
+     "sex": "female",
+     "sections": [
+      {
+       "pool": [
+        "gak"
+       ],
+       "count": [
+        5,
+        14
+       ],
+       "share": 1.0,
+       "gap_ms": [
+        35,
+        50
+       ],
+       "no_adjacent_repeat": false
+      }
+     ]
+    }
+   ],
+   "overrides": []
+  }
+ }
+}

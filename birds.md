@@ -344,9 +344,31 @@ To verify: all calls, length, wingspan, weight, head pattern of adults in winter
 
 To verify: how the flight call and other calls sound, transcriptions, piping display, alarm, wingspan, the juvenile, incubation time.
 
+### Ærfugl (folder `aerfugl`), snl.no/ærfugl, Rolf Terje Kroglund, updated 2026-11-04
+
+| Field | Value |
+|---|---|
+| Length, weight | 50 to 70 cm, 1600 to 2800 g. The largest diving duck in Norway, and the most numerous |
+| Male | White head with a black crown and two large green patches on the nape; neck, breast and back white; belly, flanks and rear black. Eclipse in late summer: almost all black, flightless for several weeks at moulting sites far offshore |
+| Female | Uniform brown with black cross-bars; dark speculum with white edges |
+| Young | Young females like adults with more diffuse bars and no white speculum edges. One-year males: white breast, grey-brown head, neck and body with some white |
+| Bill | Long, light and wedge-shaped; its profile tells it from every other duck breeding on mainland Norway |
+| Sounds | Often heard, soft hollow sounds. The male: «a-ooh-å». The female: a cackling «gak-ak-ak-ak», like the engine of a fishing boat |
+| Habitat | Shallow skerries, often in colonies with gulls, terns and greylag geese; nests on islands and the mainland, often under juniper. More tied to the sea than other Norwegian ducks |
+| Population | 87 000 pairs on the mainland (BirdLife Norge, 2015). Sharp decline, most likely because islands and small coastal settlements were abandoned |
+| Food | Mostly bottom animals in shallow water (under 5 m, can dive to 30 to 40 m): crustaceans, snails, mussels (blue mussel above all), echinoderms. Herring roe in spring |
+| Nest | A scrape lined with straw, heather and seaweed, then down from the female's own breast. The female builds alone. Eiderdown tradition kept up on the Helgeland coast, mainly in Vega; about 60 nests of down for one duvet |
+| Eggs | 4 to 6, olive-green, around the turn of April and May. The female incubates 25 to 28 days alone |
+| Young | Leave the nest 1 to 2 days old; females with broods often join together. Fly after 65 to 75 days |
+| Movements | Fairly resident; many from Sør-Norge winter in Danish waters; many Baltic birds winter in the Trondheimsfjord |
+| Status | VU, vulnerable, on the Norwegian red list; NT globally |
+| Versus king eider | Can be confused with the king eider, which does not breed on mainland Norway |
+
+To verify: when and how the calls are given, leg colour, wingspan, years to adult plumage.
+
 ## All other birds
 
-Nothing is verified for the 5 other birds outside the garden group. Collect facts per bird with the same fields as the blackbird table before writing `bird.json`.
+Nothing is verified for the 4 other birds outside the garden group. Collect facts per bird with the same fields as the blackbird table before writing `bird.json`.
 
 ## Dawn chorus
 
