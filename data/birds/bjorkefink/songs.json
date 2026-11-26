@@ -1,0 +1,269 @@
+{
+ "_note": "Brambling, M11 batch 3. Verified (birds.md, SNL): song a slow, raw, hummed note of about a second, «rrrrruh», like the greenfinch's; call a loud, quacking or hard nasal «tæ-æhp». Design: 'rrrrruh' a buzzing note of 0,9 to 1,2 s falling from about 3,3 to 2,8 kHz with a fast amplitude trill, one per phrase; 'tæ-æhp' a nasal two-part note of 0,3 s near 2,6 kHz. Pitches and timings are guesses.",
+ "syllables": {
+  "rruh": {
+   "dur_ms": 1000,
+   "pitch": [
+    [
+     0,
+     3300
+    ],
+    [
+     0.5,
+     3200
+    ],
+    [
+     1,
+     2800
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.1,
+     0.9
+    ],
+    [
+     0.6,
+     1
+    ],
+    [
+     0.9,
+     0.7
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.65,
+   "rough": 10,
+   "trill": {
+    "hz": 42,
+    "depth_st": 0.5,
+    "am": 0.7
+   }
+  },
+  "rruh2": {
+   "dur_ms": 1200,
+   "pitch": [
+    [
+     0,
+     3200
+    ],
+    [
+     0.5,
+     3100
+    ],
+    [
+     1,
+     2700
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.1,
+     0.9
+    ],
+    [
+     0.6,
+     1
+    ],
+    [
+     0.9,
+     0.7
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.65,
+   "rough": 10,
+   "trill": {
+    "hz": 38,
+    "depth_st": 0.5,
+    "am": 0.7
+   }
+  },
+  "taehp": {
+   "dur_ms": 300,
+   "pitch": [
+    [
+     0,
+     2500
+    ],
+    [
+     0.3,
+     2900
+    ],
+    [
+     0.45,
+     2800
+    ],
+    [
+     0.55,
+     2900
+    ],
+    [
+     1,
+     2300
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.08,
+     1
+    ],
+    [
+     0.4,
+     0.8
+    ],
+    [
+     0.47,
+     0.25
+    ],
+    [
+     0.55,
+     0.9
+    ],
+    [
+     0.85,
+     0.6
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.6,
+   "rough": 30,
+   "tension": 16
+  }
+ },
+ "types": {
+  "song": {
+   "pause_s": [
+    2.0,
+    6.0
+   ],
+   "length_s": [
+    0.9,
+    1.3
+   ],
+   "transpose_st": 0.5,
+   "avoid_repeat": false,
+   "auto": {
+    "vo_pitch": [
+     0.97,
+     1.03
+    ],
+    "vo_breath": [
+     18,
+     26
+    ],
+    "vo_tension": [
+     40,
+     52
+    ],
+    "vo_rough": [
+     18,
+     30
+    ],
+    "ph_tempo": [
+     95,
+     105
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 1,
+     "sections": [
+      {
+       "pool": [
+        "rruh",
+        "rruh2"
+       ],
+       "count": [
+        1,
+        1
+       ],
+       "share": 1.0,
+       "gap_ms": [
+        200,
+        200
+       ]
+      }
+     ]
+    }
+   ],
+   "overrides": []
+  },
+  "call": {
+   "pause_s": [
+    1.0,
+    5.0
+   ],
+   "length_s": [
+    0.3,
+    1.0
+   ],
+   "avoid_repeat": false,
+   "auto": {
+    "vo_pitch": [
+     0.97,
+     1.03
+    ],
+    "vo_breath": [
+     16,
+     24
+    ],
+    "vo_tension": [
+     40,
+     52
+    ],
+    "vo_rough": [
+     24,
+     34
+    ],
+    "ph_tempo": [
+     95,
+     105
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 1,
+     "sections": [
+      {
+       "pool": [
+        "taehp"
+       ],
+       "count": [
+        1,
+        2
+       ],
+       "share": 1.0,
+       "gap_ms": [
+        250,
+        450
+       ]
+      }
+     ]
+    }
+   ],
+   "overrides": []
+  }
+ }
+}

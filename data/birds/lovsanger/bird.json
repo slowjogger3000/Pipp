@@ -93,15 +93,12 @@
  },
  "lookalikes": [
   {
-   "name": {
-    "en": "Chiffchaff",
-    "no": "Gransanger"
-   },
    "text": {
     "en": "Looks confusingly alike; the song is different.",
     "no": "Ligner til forveksling; sangen er ulik.",
     "verified": true
-   }
+   },
+   "id": "gransanger"
   }
  ]
 }

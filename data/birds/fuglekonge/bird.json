@@ -1,0 +1,119 @@
+{
+ "_note": "Field guide text for this bird, both languages. Facts come from birds.md (M11, SNL). A field with verified false shows [TO VERIFY]. Norwegian wording is mine, Eirik to check. calendar rows: one letter per month from January, y yes, n no, ? not known.",
+ "xeno_canto": "https://xeno-canto.org/species/regulus-regulus",
+ "facts": {
+  "length": {
+   "en": "About 9 cm, 4,5 to 7 g, Europe's smallest bird",
+   "no": "Omtrent 9 cm, 4,5 til 7 g, Europas minste fugl",
+   "verified": true
+  },
+  "broods": {
+   "en": "Usually two",
+   "no": "Vanligvis to kull",
+   "verified": true
+  },
+  "range": {
+   "en": "Almost all coniferous forest but the far north",
+   "no": "Nesten all barskog unntatt lengst nord",
+   "verified": true
+  },
+  "habitat": {
+   "en": "Coniferous forest, high in dense branches",
+   "no": "Barskog, høyt oppe i tette greiner",
+   "verified": true
+  },
+  "food": {
+   "en": "Small insects and spiders, some spruce seeds",
+   "no": "Små insekter og edderkopper, litt granfrø",
+   "verified": true
+  },
+  "status": {
+   "en": "LC, least concern",
+   "no": "LC, livskraftig",
+   "verified": true
+  },
+  "nest": {
+   "en": "A hanging ball of moss and lichen under a spruce branch, 8 to 12 eggs",
+   "no": "En hengende ball av mose og lav under en grangrein, 8 til 12 egg",
+   "verified": true
+  }
+ },
+ "sings": {
+  "male": {
+   "en": "Sings from late winter",
+   "no": "Synger fra senvinteren",
+   "verified": true
+  },
+  "female": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "song_notes": {
+  "en": "A high, repeated motif ending in a short twitter: «sisisi-sisisi-sisisi-sisryi». Many older people cannot hear it. Song duels between neighbouring males in March and April. The call is fine three-syllable notes, «sri- sri- sri».",
+  "no": "Et høyt, gjentatt motiv som ender i en kort kvitring: «sisisi-sisisi-sisisi-sisryi». Mange eldre hører den ikke. Sangdueller mellom nabohanner i mars og april. Lokkelyden er fine trestavede toner, «sri- sri- sri».",
+  "verified": true
+ },
+ "mnemonic": {
+  "en": "",
+  "no": "",
+  "verified": false
+ },
+ "types": {
+  "song": {
+   "en": "High «sisisi-sisisi-sisisi-sisryi».",
+   "no": "Høyt «sisisi-sisisi-sisisi-sisryi».",
+   "verified": true
+  },
+  "call": {
+   "en": "Fine «sri- sri- sri».",
+   "no": "Fine «sri- sri- sri».",
+   "verified": true
+  },
+  "alarm": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "flight": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "parts": {
+  "motif": {
+   "en": "SISISI",
+   "no": "SISISI",
+   "verified": true
+  },
+  "end": {
+   "en": "SISRYI",
+   "no": "SISRYI",
+   "verified": true
+  }
+ },
+ "calendar": {
+  "present": "yyyyyyyyyyyy",
+  "sings": "??yy????????",
+  "note": {
+   "en": "Partial migrant: some leave in autumn, many for Britain, the rest stay; migrants return in April. Males sing from late winter, song duels in March and April. [TO VERIFY] the other months.",
+   "no": "Delvis trekkfugl: noen drar om høsten, mange til Storbritannia, resten blir; trekkfuglene kommer i april. Hannene synger fra senvinteren, sangdueller i mars og april. [TO VERIFY] de andre månedene.",
+   "verified": true
+  }
+ },
+ "lookalikes": [
+  {
+   "name": {
+    "en": "Firecrest",
+    "no": "Rødtoppfuglekonge"
+   },
+   "text": {
+    "en": "Its close relative in Europe.",
+    "no": "Dens nære slektning i Europa.",
+    "verified": true
+   }
+  }
+ ]
+}

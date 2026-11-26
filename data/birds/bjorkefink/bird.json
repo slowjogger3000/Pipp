@@ -1,0 +1,113 @@
+{
+ "_note": "Field guide text for this bird, both languages. Facts come from birds.md (M11, SNL). A field with verified false shows [TO VERIFY]. Norwegian wording is mine, Eirik to check. calendar rows: one letter per month from January, y yes, n no, ? not known.",
+ "xeno_canto": "https://xeno-canto.org/species/fringilla-montifringilla",
+ "facts": {
+  "length": {
+   "en": "15 cm, about a chaffinch's size",
+   "no": "15 cm, omtrent som en bokfink",
+   "verified": true
+  },
+  "broods": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "range": {
+   "en": "Most of the country; in the south most in higher forest",
+   "no": "Det meste av landet; i sør mest i høyereliggende skog",
+   "verified": true
+  },
+  "habitat": {
+   "en": "Mountain forest, conifer mixed with mountain birch",
+   "no": "Fjellskog, barskog blandet med fjellbjørk",
+   "verified": true
+  },
+  "food": {
+   "en": "Seeds, insects in summer; beech seeds in winter",
+   "no": "Frø, insekter om sommeren; bokfrø om vinteren",
+   "verified": true
+  },
+  "status": {
+   "en": "LC, least concern",
+   "no": "LC, livskraftig",
+   "verified": true
+  },
+  "nest": {
+   "en": "In a tree close to the trunk, a deep hidden cup, 5 to 7 eggs",
+   "no": "I et tre inntil stammen, en dyp, skjult skål, 5 til 7 egg",
+   "verified": true
+  }
+ },
+ "sings": {
+  "male": {
+   "en": "Sings",
+   "no": "Synger",
+   "verified": false
+  },
+  "female": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "song_notes": {
+  "en": "A slow, raw, hummed note of about a second, «rrrrruh», like the greenfinch's song. The call is a loud, quacking or hard nasal «tæ-æhp».",
+  "no": "En langsom, rå, nynnet tone på omtrent et sekund, «rrrrruh», lik grønnfinkens sang. Lokkelyden er et kraftig, kvekkende eller hardt nasalt «tæ-æhp».",
+  "verified": true
+ },
+ "mnemonic": {
+  "en": "",
+  "no": "",
+  "verified": false
+ },
+ "types": {
+  "song": {
+   "en": "A slow, raw «rrrrruh», about a second.",
+   "no": "Et langsomt, rått «rrrrruh», omtrent et sekund.",
+   "verified": true
+  },
+  "call": {
+   "en": "A hard nasal «tæ-æhp».",
+   "no": "Et hardt nasalt «tæ-æhp».",
+   "verified": true
+  },
+  "alarm": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "flight": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "parts": {},
+ "calendar": {
+  "present": "yyyyyyyyyyyy",
+  "sings": "????????????",
+  "note": {
+   "en": "Migrant and wanderer: most winter in southern Scandinavia and Europe, often in huge flocks with chaffinches; some stay and visit feeders. Returns in April and May. [TO VERIFY] singing months.",
+   "no": "Trekk- og streiffugl: de fleste overvintrer i Sør-Skandinavia og Europa, ofte i enorme flokker med bokfink; noen blir og besøker fuglebrett. Kommer i april og mai. [TO VERIFY] månedene med sang.",
+   "verified": true
+  }
+ },
+ "lookalikes": [
+  {
+   "id": "bokfink",
+   "text": {
+    "en": "The rump is white; the chaffinch's is green.",
+    "no": "Overgumpen er hvit; bokfinkens er grønn.",
+    "verified": true
+   }
+  },
+  {
+   "id": "gronnfink",
+   "text": {
+    "en": "The song is like the greenfinch's.",
+    "no": "Sangen ligner grønnfinkens.",
+    "verified": true
+   }
+  }
+ ]
+}

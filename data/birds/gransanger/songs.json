@@ -1,0 +1,174 @@
+{
+ "_note": "Chiffchaff, M11 batch 3. Verified (birds.md, SNL): a rhythmic «chiff-chaff» with no melody, in series of 15 to 40 notes. Design: 'chiff' a short note falling from about 6,2 to 4,8 kHz, 'chaff' a lower one from 5 to 3,9 kHz, about 3 notes a second in a loose alternation; the higher and lower notes are my reading of 'chiff' and 'chaff'. No call type: SNL describes none.",
+ "syllables": {
+  "chiff": {
+   "dur_ms": 95,
+   "pitch": [
+    [
+     0,
+     6200
+    ],
+    [
+     0.3,
+     5700
+    ],
+    [
+     1,
+     4800
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.12,
+     1
+    ],
+    [
+     0.6,
+     0.75
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.7
+  },
+  "chiff2": {
+   "dur_ms": 90,
+   "pitch": [
+    [
+     0,
+     6000
+    ],
+    [
+     0.3,
+     5500
+    ],
+    [
+     1,
+     4700
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.12,
+     1
+    ],
+    [
+     0.6,
+     0.75
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.65
+  },
+  "chaff": {
+   "dur_ms": 110,
+   "pitch": [
+    [
+     0,
+     5000
+    ],
+    [
+     0.3,
+     4600
+    ],
+    [
+     1,
+     3900
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.12,
+     1
+    ],
+    [
+     0.6,
+     0.75
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.7
+  }
+ },
+ "types": {
+  "song": {
+   "pause_s": [
+    3.0,
+    10.0
+   ],
+   "length_s": [
+    4.0,
+    8.0
+   ],
+   "transpose_st": 0.4,
+   "avoid_repeat": false,
+   "auto": {
+    "vo_pitch": [
+     0.97,
+     1.03
+    ],
+    "vo_breath": [
+     8,
+     16
+    ],
+    "vo_tension": [
+     30,
+     42
+    ],
+    "vo_rough": [
+     2,
+     6
+    ],
+    "ph_tempo": [
+     95,
+     105
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 1,
+     "sections": [
+      {
+       "pool": [
+        "chiff",
+        "chaff",
+        "chiff2"
+       ],
+       "count": [
+        15,
+        40
+       ],
+       "share": 1.0,
+       "gap_ms": [
+        190,
+        280
+       ],
+       "no_adjacent_repeat": true
+      }
+     ]
+    }
+   ],
+   "overrides": []
+  }
+ }
+}

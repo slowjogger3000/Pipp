@@ -1,0 +1,258 @@
+{
+ "_note": "Black woodpecker ink plate in a 280x240 box, drawn in M11 from the great spotted woodpecker plate, not from a design: clinging to a trunk, glossy black all over (dense hatching), whitish bill. Red is drawn as shadow tone: the male's whole crown, the female's small patch at the back of the head (SNL). The juvenile is browner (lighter hatching); its red is not described and is not drawn.",
+ "box": [
+  280,
+  240
+ ],
+ "clips": {
+  "body": "M178 52 C164 52 154 66 152 86 C148 116 150 150 160 172 C168 186 186 186 194 170 C202 150 204 118 202 90 C200 68 192 52 178 52 Z",
+  "wing": "M158 92 C150 118 150 150 162 176 C170 150 172 118 168 94 Z"
+ },
+ "hatch": {
+  "body": {
+   "rect": [
+    148,
+    50,
+    206,
+    188
+   ],
+   "up": true,
+   "clip": "body"
+  },
+  "wing": {
+   "rect": [
+    148,
+    90,
+    174,
+    180
+   ],
+   "up": false,
+   "clip": "wing"
+  }
+ },
+ "pivots": {
+  "upper": {
+   "at": [
+    197,
+    67
+   ],
+   "deg": -10
+  },
+  "lower": {
+   "at": [
+    197,
+    71
+   ],
+   "deg": 8
+  },
+  "tail": {
+   "at": [
+    184,
+    176
+   ],
+   "deg": 4
+  }
+ },
+ "layers": [
+  {
+   "path": "M206 0 L246 0 L246 240 L206 240 Z",
+   "fill": "face",
+   "stroke": 1.5
+  },
+  {
+   "path": "M214 20 l4 30 M232 50 l-3 40 M218 110 l3 36 M236 150 l-4 40 M212 192 l3 30 M238 6 l-2 22",
+   "stroke": 1
+  },
+  {
+   "path": "M176 174 L198 226 L208 222 L190 170 Z",
+   "fill": "face",
+   "stroke": 1.5,
+   "part": "tail"
+  },
+  {
+   "path": "M186 186 l10 26 M192 182 l10 28",
+   "stroke": 1,
+   "part": "tail"
+  },
+  {
+   "path": "M196 122 l10 -4 M196 128 l10 2 M194 152 l12 -2 M194 158 l12 4",
+   "stroke": 1.5
+  },
+  {
+   "clip": "body",
+   "fill": "face",
+   "stroke": 1.5
+  },
+  {
+   "hatch": "body"
+  },
+  {
+   "variant": "nape",
+   "fill": "shadow",
+   "stroke": 1,
+   "within": "body"
+  },
+  {
+   "variant": "crown",
+   "fill": "shadow",
+   "stroke": 1,
+   "within": "body"
+  },
+  {
+   "clip": "wing",
+   "fill": "face"
+  },
+  {
+   "hatch": "wing"
+  },
+  {
+   "clip": "wing",
+   "stroke": 1.5
+  },
+  {
+   "clip": "body",
+   "stroke": 1.5
+  },
+  {
+   "eye": [
+    188,
+    66
+   ],
+   "pupil": 2.2
+  },
+  {
+   "path": "M196 64 L215 63 L198 69 Z",
+   "fill": "bill",
+   "stroke": 1.5,
+   "part": "upper"
+  },
+  {
+   "path": "M198 69 L214 66 L197 72 Z",
+   "fill": "bill",
+   "stroke": 1.5,
+   "part": "lower"
+  },
+  {
+   "path": "M146 50 A16 16 0 0 0 146 80 M139 42 A26 26 0 0 0 139 88 M132 34 A36 36 0 0 0 132 96",
+   "stroke": 1.5,
+   "part": "arcs"
+  }
+ ],
+ "variants": {
+  "male": {
+   "body_pitch": 2,
+   "wing_pitch": 2,
+   "eye_ring": 0,
+   "bill": "face",
+   "nape": "",
+   "crown": "M160 64 C164 52 180 46 194 56 C188 60 176 60 162 70 Z"
+  },
+  "female": {
+   "body_pitch": 2,
+   "wing_pitch": 2,
+   "eye_ring": 0,
+   "bill": "face",
+   "nape": "M160 62 C163 56 170 54 174 56 C172 64 166 68 160 68 Z",
+   "crown": ""
+  },
+  "juvenile": {
+   "body_pitch": 4,
+   "wing_pitch": 4,
+   "eye_ring": 0,
+   "bill": "face",
+   "nape": "",
+   "crown": ""
+  }
+ },
+ "callouts": [
+  {
+   "id": "head",
+   "leader": "M164 60 L118 30",
+   "at": [
+    116,
+    24
+   ],
+   "align": "right",
+   "male": {
+    "en": "RED CROWN",
+    "no": "RØD ISSE",
+    "verified": true
+   },
+   "female": {
+    "en": "SMALL RED PATCH BEHIND",
+    "no": "LITEN RØD FLEKK BAK",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  },
+  {
+   "id": "plumage",
+   "leader": "M158 108 L96 116",
+   "at": [
+    92,
+    110
+   ],
+   "align": "right",
+   "male": {
+    "en": "GLOSSY BLACK",
+    "no": "BLANK SVART",
+    "verified": true
+   },
+   "female": {
+    "en": "GLOSSY BLACK",
+    "no": "BLANK SVART",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "BROWNER",
+    "no": "BRUNERE",
+    "verified": true
+   }
+  },
+  {
+   "id": "bill",
+   "leader": "M200 62 L180 26",
+   "at": [
+    180,
+    13
+   ],
+   "align": "centre",
+   "male": {
+    "en": "WHITISH",
+    "no": "HVITAKTIG",
+    "verified": true
+   },
+   "female": {
+    "en": "WHITISH",
+    "no": "HVITAKTIG",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "WHITISH",
+    "no": "HVITAKTIG",
+    "verified": true
+   }
+  }
+ ],
+ "captions": {
+  "male": {
+   "en": "Male drumming. Glossy black, red crown.",
+   "no": "Hann som trommer. Blank svart, rød isse.",
+   "verified": true
+  },
+  "female": {
+   "en": "Female. Only a small red patch at the back of the head.",
+   "no": "Hunn. Bare en liten rød flekk bak på hodet.",
+   "verified": true
+  },
+  "juvenile": {
+   "en": "Juvenile. Browner than the adults.",
+   "no": "Ungfugl. Brunere enn de voksne.",
+   "verified": false
+  }
+ }
+}

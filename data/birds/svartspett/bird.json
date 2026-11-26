@@ -1,0 +1,108 @@
+{
+ "_note": "Field guide text for this bird, both languages. Facts come from birds.md (M11, SNL). A field with verified false shows [TO VERIFY]. Norwegian wording is mine, Eirik to check. calendar rows: one letter per month from January, y yes, n no, ? not known.",
+ "xeno_canto": "https://xeno-canto.org/species/dryocopus-martius",
+ "facts": {
+  "length": {
+   "en": "45 to 48 cm, 250 to 370 g, Europe's largest woodpecker",
+   "no": "45 til 48 cm, 250 til 370 g, Europas største hakkespett",
+   "verified": true
+  },
+  "broods": {
+   "en": "One",
+   "no": "Ett kull",
+   "verified": true
+  },
+  "range": {
+   "en": "Østlandet, Sørlandet and Trøndelag; few in the north, rare in the west",
+   "no": "Østlandet, Sørlandet og Trøndelag; få i nord, sjelden på Vestlandet",
+   "verified": true
+  },
+  "habitat": {
+   "en": "Conifer forest with large trees, stumps and logging debris",
+   "no": "Barskog med store trær, stubber og hogstavfall",
+   "verified": true
+  },
+  "food": {
+   "en": "Tree-living insects, above all carpenter ants",
+   "no": "Insekter i trær, fremfor alt stokkmaur",
+   "verified": true
+  },
+  "status": {
+   "en": "LC, least concern",
+   "no": "LC, livskraftig",
+   "verified": true
+  },
+  "nest": {
+   "en": "An oval hole in a large aspen or pine, 7 to 8 m up, 3 to 6 eggs",
+   "no": "Et ovalt hull i en stor osp eller furu, 7 til 8 m opp, 3 til 6 egg",
+   "verified": true
+  }
+ },
+ "sings": {
+  "male": {
+   "en": "Drums",
+   "no": "Trommer",
+   "verified": true
+  },
+  "female": {
+   "en": "Drums now and then",
+   "no": "Trommer av og til",
+   "verified": true
+  }
+ },
+ "song_notes": {
+  "en": "Drumming very powerful, heard up to 4 km: long and even, about 20 strokes in 2 seconds, sometimes slowing a little at the end; stronger and longer than other woodpeckers'. In flight a powerful «kri-kri-kri-kri»; after landing a long, plaintive «kliii-æ»; in spring often «kly-kly-kly-kly». Alarm a hard «krykk krykk krykk».",
+  "no": "Trommingen er svært kraftig og høres opptil 4 km: lang og jevn, omtrent 20 slag på 2 sekunder, av og til litt langsommere mot slutten; sterkere og lengre enn hos andre spetter. I flukt et kraftig «kri-kri-kri-kri»; etter landing et langt, klagende «kliii-æ»; om våren ofte «kly-kly-kly-kly». Varsler med et hardt «krykk krykk krykk».",
+  "verified": true
+ },
+ "mnemonic": {
+  "en": "",
+  "no": "",
+  "verified": false
+ },
+ "types": {
+  "song": {
+   "en": "Drumming: about 20 strokes in 2 seconds, heard up to 4 km.",
+   "no": "Tromming: omtrent 20 slag på 2 sekunder, høres opptil 4 km.",
+   "verified": true
+  },
+  "call": {
+   "en": "A long, plaintive «kliii-æ»; in spring «kly-kly-kly-kly».",
+   "no": "Et langt, klagende «kliii-æ»; om våren «kly-kly-kly-kly».",
+   "verified": true
+  },
+  "alarm": {
+   "en": "A hard «krykk krykk krykk».",
+   "no": "Et hardt «krykk krykk krykk».",
+   "verified": true
+  },
+  "flight": {
+   "en": "A powerful «kri-kri-kri-kri».",
+   "no": "Et kraftig «kri-kri-kri-kri».",
+   "verified": true
+  }
+ },
+ "parts": {},
+ "calendar": {
+  "present": "yyyyyyyyyyyy",
+  "sings": "yyyyyy??yyyy",
+  "note": {
+   "en": "Resident, irruptive in some years. Drums mainly from February through the breeding season, often in the morning; also heard in autumn and winter. [TO VERIFY] July and August.",
+   "no": "Standfugl, i noen år streifer mange langt. Trommer mest fra februar og gjennom hekketiden, ofte om morgenen; høres også om høsten og vinteren. [TO VERIFY] juli og august.",
+   "verified": true
+  }
+ },
+ "lookalikes": [
+  {
+   "name": {
+    "en": "Green woodpecker",
+    "no": "Grønnspett"
+   },
+   "text": {
+    "en": "The spring call «kly-kly-kly-kly» can sound like the green woodpecker's.",
+    "no": "Vårlåten «kly-kly-kly-kly» kan ligne grønnspettens.",
+    "verified": true
+   }
+  }
+ ]
+}

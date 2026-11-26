@@ -94,15 +94,12 @@
  },
  "lookalikes": [
   {
-   "name": {
-    "en": "Brambling",
-    "no": "Bjørkefink"
-   },
    "text": {
     "en": "White rump. The chaffinch has a green one.",
     "no": "Hvit overgump. Bokfinken har grønn.",
     "verified": true
-   }
+   },
+   "id": "bjorkefink"
   },
   {
    "id": "kjottmeis",

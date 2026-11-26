@@ -1,0 +1,105 @@
+{
+ "_note": "Field guide text for this bird, both languages. Facts come from birds.md (M11, SNL). A field with verified false shows [TO VERIFY]. Norwegian wording is mine, Eirik to check. calendar rows: one letter per month from January, y yes, n no, ? not known.",
+ "xeno_canto": "https://xeno-canto.org/species/phylloscopus-collybita",
+ "facts": {
+  "length": {
+   "en": "11 cm, 6 to 10 g",
+   "no": "11 cm, 6 til 10 g",
+   "verified": true
+  },
+  "broods": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "range": {
+   "en": "Sørlandet to Troms, perhaps parts of Finnmark",
+   "no": "Sørlandet til Troms, kanskje deler av Finnmark",
+   "verified": true
+  },
+  "habitat": {
+   "en": "All forest, best mixed forest with open areas",
+   "no": "All skog, helst blandingsskog med åpne partier",
+   "verified": true
+  },
+  "food": {
+   "en": "Mainly insects, some berries",
+   "no": "Mest insekter, litt bær",
+   "verified": true
+  },
+  "status": {
+   "en": "LC, least concern",
+   "no": "LC, livskraftig",
+   "verified": true
+  },
+  "nest": {
+   "en": "Domed with a side opening, in a low conifer bush, 5 to 8 eggs",
+   "no": "Kuppelformet med sideåpning, i en lav bartrebusk, 5 til 8 egg",
+   "verified": true
+  }
+ },
+ "sings": {
+  "male": {
+   "en": "Sings",
+   "no": "Synger",
+   "verified": false
+  },
+  "female": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "song_notes": {
+  "en": "A rhythmic «chiff-chaff» with no melody, in series of 15 to 40 notes. The song is the best mark: very different from the willow warbler's.",
+  "no": "Et rytmisk «chiff-chaff» uten melodi, i serier på 15 til 40 slag. Sangen er det beste kjennetegnet: helt ulik løvsangerens.",
+  "verified": true
+ },
+ "mnemonic": {
+  "en": "",
+  "no": "",
+  "verified": false
+ },
+ "types": {
+  "song": {
+   "en": "Rhythmic «chiff-chaff», 15 to 40 notes.",
+   "no": "Rytmisk «chiff-chaff», 15 til 40 slag.",
+   "verified": true
+  },
+  "call": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "alarm": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "flight": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "parts": {},
+ "calendar": {
+  "present": "???yyy??????",
+  "sings": "????????????",
+  "note": {
+   "en": "Migrant, winters around the western Mediterranean; returns from April, up to Nordland. [TO VERIFY] departure and singing months.",
+   "no": "Trekkfugl, overvintrer rundt det vestlige Middelhavet; kommer fra april, opp til Nordland. [TO VERIFY] avreise og månedene med sang.",
+   "verified": true
+  }
+ },
+ "lookalikes": [
+  {
+   "id": "lovsanger",
+   "text": {
+    "en": "Almost identical plumage, only certain by measuring the wing feathers; the chiffchaff has darker legs. The songs are very different.",
+    "no": "Nesten lik drakt, bare sikker ved å måle håndsvingfjærene; gransangeren har mørkere bein. Sangen er helt ulik.",
+    "verified": true
+   }
+  }
+ ]
+}

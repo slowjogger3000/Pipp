@@ -1,0 +1,258 @@
+{
+ "_note": "Chiffchaff ink plate in a 280x240 box, drawn in M11 from the willow warbler plate, not from a design: brown-green above (hatching), yellowish-white below (face), a pale stripe over the eye, darker legs (heavier stroke). Sexes and juvenile are not described; the female shows the species' marks, the juvenile is drawn alike with [TO VERIFY].",
+ "box": [
+  280,
+  240
+ ],
+ "clips": {
+  "body": "M198 70 C196 56 180 50 166 56 C152 62 142 76 132 92 C120 110 110 130 108 150 C110 160 118 168 126 172 C146 182 170 174 180 156 C192 136 199 108 199 90 C200 86 201 82 200 80 Z",
+  "wing": "M156 92 C164 118 148 148 112 160 C118 138 130 110 156 92 Z"
+ },
+ "layers": [
+  {
+   "path": "M14 206 C80 202 150 199 268 194",
+   "stroke": 4
+  },
+  {
+   "path": "M214 197 l20 -20 M224 187 l16 3",
+   "stroke": 1.5
+  },
+  {
+   "path": "M234 177 q10 -10 18 -2 q-9 8 -18 2 Z M240 190 q11 -5 16 3 q-10 4 -16 -3 Z",
+   "fill": "face",
+   "stroke": 1
+  },
+  {
+   "path": "M114 146 L62 204 L74 214 L126 166 Z",
+   "fill": "face",
+   "stroke": 1.5,
+   "part": "tail"
+  },
+  {
+   "path": "M118 152 L66 207 M122 159 L70 211",
+   "stroke": 1,
+   "part": "tail"
+  },
+  {
+   "path": "M142 176 L144 199 M156 175 L159 198 M136 201 L144 199 L152 201 M151 199 L159 198 L167 200",
+   "stroke": 2.6
+  },
+  {
+   "clip": "body",
+   "fill": "face",
+   "stroke": 1.5
+  },
+  {
+   "hatch": "body"
+  },
+  {
+   "variant": "under",
+   "fill": "face",
+   "within": "body"
+  },
+  {
+   "hatch": "wing"
+  },
+  {
+   "clip": "wing",
+   "stroke": 1.5
+  },
+  {
+   "clip": "body",
+   "stroke": 1.5
+  },
+  {
+   "path": "M164 64 C172 57 186 56 198 62 L197 66 C186 61 174 61 166 68 Z",
+   "fill": "face",
+   "stroke": 1,
+   "within": "body"
+  },
+  {
+   "eye": [
+    182,
+    68
+   ],
+   "pupil": 2.4
+  },
+  {
+   "path": "M182.4 66.8 m-0.9 0 a0.9 0.9 0 1 0 1.8 0 a0.9 0.9 0 1 0 -1.8 0",
+   "fill": "face"
+  },
+  {
+   "path": "M198 69 L218 75 L200 77 Z",
+   "fill": "bill",
+   "stroke": 1.5,
+   "part": "upper"
+  },
+  {
+   "path": "M200 77 L216 76 L200 80 Z",
+   "fill": "bill",
+   "stroke": 1.5,
+   "part": "lower"
+  },
+  {
+   "path": "M226 64 A14 14 0 0 1 226 88 M233 56 A24 24 0 0 1 233 96 M240 48 A34 34 0 0 1 240 104",
+   "stroke": 1.5,
+   "part": "arcs"
+  }
+ ],
+ "hatch": {
+  "body": {
+   "rect": [
+    104,
+    50,
+    204,
+    184
+   ],
+   "up": true,
+   "clip": "body"
+  },
+  "wing": {
+   "rect": [
+    108,
+    88,
+    166,
+    164
+   ],
+   "up": false,
+   "clip": "wing"
+  }
+ },
+ "pivots": {
+  "upper": {
+   "at": [
+    200,
+    74
+   ],
+   "deg": -14
+  },
+  "lower": {
+   "at": [
+    200,
+    79
+   ],
+   "deg": 10
+  },
+  "tail": {
+   "at": [
+    120,
+    156
+   ],
+   "deg": -5
+  }
+ },
+ "variants": {
+  "male": {
+   "body_pitch": 7,
+   "wing_pitch": 6,
+   "eye_ring": 0,
+   "bill": "shadow",
+   "under": "M199 84 C196 108 190 134 180 156 C170 174 146 182 126 172 C140 170 156 160 166 144 C178 124 188 102 192 84 Z"
+  },
+  "female": {
+   "body_pitch": 7,
+   "wing_pitch": 6,
+   "eye_ring": 0,
+   "bill": "shadow",
+   "under": "M199 84 C196 108 190 134 180 156 C170 174 146 182 126 172 C140 170 156 160 166 144 C178 124 188 102 192 84 Z"
+  },
+  "juvenile": {
+   "body_pitch": 7,
+   "wing_pitch": 6,
+   "eye_ring": 0,
+   "bill": "shadow",
+   "under": "M199 84 C196 108 190 134 180 156 C170 174 146 182 126 172 C140 170 156 160 166 144 C178 124 188 102 192 84 Z"
+  }
+ },
+ "callouts": [
+  {
+   "id": "eye_stripe",
+   "leader": "M182 58 L122 36",
+   "at": [
+    120,
+    30
+   ],
+   "align": "right",
+   "male": {
+    "en": "PALE",
+    "no": "LYS",
+    "verified": true
+   },
+   "female": {
+    "en": "PALE",
+    "no": "LYS",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  },
+  {
+   "id": "plumage",
+   "leader": "M140 100 L74 86",
+   "at": [
+    70,
+    80
+   ],
+   "align": "right",
+   "male": {
+    "en": "BROWN-GREEN",
+    "no": "BRUNGRØNN",
+    "verified": true
+   },
+   "female": {
+    "en": "BROWN-GREEN",
+    "no": "BRUNGRØNN",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  },
+  {
+   "id": "breast",
+   "leader": "M184 130 L232 200",
+   "at": [
+    276,
+    212
+   ],
+   "align": "right",
+   "male": {
+    "en": "YELLOWISH WHITE",
+    "no": "GULHVIT",
+    "verified": true
+   },
+   "female": {
+    "en": "YELLOWISH WHITE",
+    "no": "GULHVIT",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  }
+ ],
+ "captions": {
+  "male": {
+   "en": "Adult. Pale stripe over the eye; darker legs than the willow warbler.",
+   "no": "Voksen. Lys stripe over øyet; mørkere bein enn løvsangeren.",
+   "verified": true
+  },
+  "female": {
+   "en": "Female.",
+   "no": "Hunn.",
+   "verified": false
+  },
+  "juvenile": {
+   "en": "Juvenile.",
+   "no": "Ungfugl.",
+   "verified": false
+  }
+ }
+}

@@ -1,0 +1,455 @@
+{
+ "_note": "Goldcrest, M11 batch 3. Verified (birds.md, SNL): song a high, repeated motif ending in a short twitter, «sisisi-sisisi-sisisi-sisryi.» (parts named); call fine three-syllable notes «sri- sri- sri». Design: 'sisisi' is one syllable of three thin notes at 6,6 to 7,6 kHz, repeated 3 or 4 times; 'sisryi' two short notes and a quick rising, trilled end. 'sri' is a thin 7 kHz note of 70 ms, three in a row. Pitches and timings are guesses.",
+ "syllables": {
+  "sisisi": {
+   "dur_ms": 260,
+   "pitch": [
+    [
+     0,
+     7400
+    ],
+    [
+     0.3,
+     6900
+    ],
+    [
+     0.36,
+     7300
+    ],
+    [
+     0.64,
+     6800
+    ],
+    [
+     0.72,
+     7200
+    ],
+    [
+     1,
+     6700
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.042,
+     1
+    ],
+    [
+     0.196,
+     0.8
+    ],
+    [
+     0.28,
+     0
+    ],
+    [
+     0.36,
+     0
+    ],
+    [
+     0.402,
+     1
+    ],
+    [
+     0.556,
+     0.8
+    ],
+    [
+     0.64,
+     0
+    ],
+    [
+     0.72,
+     0
+    ],
+    [
+     0.762,
+     1
+    ],
+    [
+     0.916,
+     0.8
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.45,
+   "tension": -10
+  },
+  "sisisi2": {
+   "dur_ms": 280,
+   "pitch": [
+    [
+     0,
+     7100
+    ],
+    [
+     0.3,
+     7500
+    ],
+    [
+     0.36,
+     7000
+    ],
+    [
+     0.64,
+     7400
+    ],
+    [
+     0.72,
+     6900
+    ],
+    [
+     1,
+     7300
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.042,
+     1
+    ],
+    [
+     0.196,
+     0.8
+    ],
+    [
+     0.28,
+     0
+    ],
+    [
+     0.36,
+     0
+    ],
+    [
+     0.402,
+     1
+    ],
+    [
+     0.556,
+     0.8
+    ],
+    [
+     0.64,
+     0
+    ],
+    [
+     0.72,
+     0
+    ],
+    [
+     0.762,
+     1
+    ],
+    [
+     0.916,
+     0.8
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.45,
+   "tension": -10
+  },
+  "sis": {
+   "dur_ms": 150,
+   "pitch": [
+    [
+     0,
+     7300
+    ],
+    [
+     0.45,
+     6800
+    ],
+    [
+     0.55,
+     7100
+    ],
+    [
+     1,
+     6700
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.0675,
+     1
+    ],
+    [
+     0.315,
+     0.8
+    ],
+    [
+     0.45,
+     0
+    ],
+    [
+     0.55,
+     0
+    ],
+    [
+     0.6175,
+     1
+    ],
+    [
+     0.865,
+     0.8
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.42,
+   "tension": -10
+  },
+  "ryi": {
+   "dur_ms": 260,
+   "pitch": [
+    [
+     0,
+     5600
+    ],
+    [
+     0.6,
+     7200
+    ],
+    [
+     1,
+     6600
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.12,
+     0.9
+    ],
+    [
+     0.7,
+     1
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.45,
+   "trill": {
+    "hz": 30,
+    "depth_st": 1.0,
+    "am": 0.5
+   }
+  },
+  "sri": {
+   "dur_ms": 70,
+   "pitch": [
+    [
+     0,
+     7200
+    ],
+    [
+     0.4,
+     7500
+    ],
+    [
+     1,
+     6900
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.12,
+     1
+    ],
+    [
+     0.6,
+     0.75
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.4,
+   "tension": -12
+  }
+ },
+ "types": {
+  "song": {
+   "pause_s": [
+    3.0,
+    8.0
+   ],
+   "length_s": [
+    1.2,
+    2.2
+   ],
+   "transpose_st": 0.5,
+   "avoid_repeat": false,
+   "auto": {
+    "vo_pitch": [
+     0.97,
+     1.03
+    ],
+    "vo_breath": [
+     8,
+     16
+    ],
+    "vo_tension": [
+     24,
+     36
+    ],
+    "vo_rough": [
+     0,
+     4
+    ],
+    "ph_tempo": [
+     95,
+     105
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 1,
+     "sections": [
+      {
+       "pool": [
+        "sisisi",
+        "sisisi2"
+       ],
+       "count": [
+        3,
+        4
+       ],
+       "share": 0.75,
+       "gap_ms": [
+        40,
+        80
+       ],
+       "part": "motif"
+      },
+      {
+       "pool": [
+        "sis"
+       ],
+       "count": [
+        1,
+        1
+       ],
+       "share": 0.1,
+       "gap_ms": [
+        50,
+        50
+       ],
+       "lead_gap_ms": [
+        50,
+        90
+       ],
+       "part": "end"
+      },
+      {
+       "pool": [
+        "ryi"
+       ],
+       "count": [
+        1,
+        1
+       ],
+       "share": 0.15,
+       "gap_ms": [
+        40,
+        40
+       ],
+       "lead_gap_ms": [
+        30,
+        50
+       ],
+       "part": "end"
+      }
+     ]
+    }
+   ],
+   "overrides": []
+  },
+  "call": {
+   "pause_s": [
+    1.5,
+    6.0
+   ],
+   "length_s": [
+    0.3,
+    0.5
+   ],
+   "avoid_repeat": false,
+   "auto": {
+    "vo_pitch": [
+     0.97,
+     1.03
+    ],
+    "vo_breath": [
+     10,
+     18
+    ],
+    "vo_tension": [
+     20,
+     30
+    ],
+    "vo_rough": [
+     0,
+     4
+    ],
+    "ph_tempo": [
+     95,
+     105
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 1,
+     "sections": [
+      {
+       "pool": [
+        "sri"
+       ],
+       "count": [
+        3,
+        3
+       ],
+       "share": 1.0,
+       "gap_ms": [
+        60,
+        90
+       ]
+      }
+     ]
+    }
+   ],
+   "overrides": []
+  }
+ }
+}

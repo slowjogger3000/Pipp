@@ -298,6 +298,102 @@ Source: Store norske leksikon (snl.no), one page per bird, read in full on 2026-
 - Fieldfare: no calls described.
 - Every juvenile except the willow tit's, and the female redwing, fieldfare and willow tit.
 
+## M11 batch 3, forest birds part 2, checked 2026-11-26
+
+Source: Store norske leksikon (snl.no), one page per bird, read in full on 2026-11-26. Transcriptions are SNL's own spelling.
+
+### Fuglekonge (folder `fuglekonge`), snl.no/fuglekonge, Olav Hogstad and Magne Husby, updated 2026-08-04
+
+| Field | Value |
+|---|---|
+| Length, weight | About 9 cm, 4,5 to 7 g, Europe's smallest bird |
+| Plumage | Pale greyish-yellow below, olive-green back, two white wing bars, a narrow yellow or red-yellow crown stripe edged with black |
+| Male | Orange crown feathers, mostly hidden under the yellow ones |
+| Female | No orange crown feathers; otherwise like the male |
+| Juvenile | Not described |
+| Song | A high, repeated motif ending in a short twitter: «sisisi-sisisi-sisisi-sisryi.» Many older people cannot hear it. Males sing from late winter; song duels March to April |
+| Call | Fine three-syllable notes, «sri- sri- sri» |
+| Habitat | Coniferous forest, often high in dense branches |
+| Range in Norway | Almost all coniferous forest except the far north; most in Sørlandet, Østlandet and Trøndelag |
+| Food | Small insects and spiders, sometimes spruce seeds |
+| Nest | Hanging round nest of moss and lichen under a spruce branch, 8 to 10 m up |
+| Eggs | 8 to 12 |
+| Broods | Usually two |
+| Migration | Partial migrant: part leaves in autumn (many to Britain), the rest stay; migrants return in April |
+| Population | 950 000 to 1,6 million pairs (BirdLife Norge), varies a lot between years |
+| Status | LC |
+| Lookalikes | Firecrest (rødtoppfuglekonge) named as its close relative; no difference given |
+
+### Gransanger (folder `gransanger`), snl.no/gransanger, Tom Schandy, updated 2026-11-06
+
+| Field | Value |
+|---|---|
+| Length, weight | 11 cm, 6 to 10 g |
+| Plumage | Brown-green above, yellowish-white below, a clear pale stripe over the eye; generally darker legs than the willow warbler. Sexes and juvenile not described |
+| Song | A rhythmic «chiff-chaff» with no melody, in series of 15 to 40 notes; the best mark, very different from the willow warbler's |
+| Calls | Not described |
+| Habitat | All forest types, prefers mixed forest with open areas |
+| Range in Norway | From Sørlandet to Troms, perhaps parts of Finnmark; less common than the willow warbler |
+| Food | Mainly insects, some berries |
+| Nest | Domed with a side opening, at or in a low conifer bush |
+| Eggs | 5 to 8 |
+| Migration | Migrant, winters around the western Mediterranean; returns from April |
+| Population | 250 000 to 500 000 pairs |
+| Status | LC |
+| Versus willow warbler | Almost identical plumage, only certain by measuring the primaries; the chiffchaff's legs are darker; the songs are very different |
+
+### Bjørkefink (folder `bjorkefink`), snl.no/bjørkefink, Tom Schandy, updated 2026-11-04
+
+| Field | Value |
+|---|---|
+| Length | 15 cm, about the size of a chaffinch |
+| Male, summer | Head, back and tail black, white rump and underside, rust-yellow throat and breast, black wings with pale bars |
+| Male, autumn and winter | Grey-brown mottled head and back, like the female |
+| Female | Grey-brown mottled head and back, white rump |
+| Juvenile | Like the female |
+| Song | A slow, raw, hummed note of about a second, «rrrrruh», like the greenfinch's |
+| Call | A loud, quacking or hard nasal «tæ-æhp» |
+| Habitat | Mountain forest, conifer mixed with mountain birch |
+| Range in Norway | Most of the country; in the south most in higher forest |
+| Food | Seeds, insects in summer; beech seeds in winter, sunflower seeds at feeders |
+| Nest | In trees close to the trunk, a deep well-hidden cup |
+| Eggs | 5 to 7 |
+| Migration | Migrant and wanderer; winters in southern Scandinavia and Europe, in huge flocks; returns April to May |
+| Population | 3 to 4 million birds (BirdLife Norge) |
+| Status | LC |
+| Versus chaffinch | The rump is white; the chaffinch's is green |
+| Versus greenfinch | The song is like the greenfinch's |
+
+### Svartspett (folder `svartspett`), snl.no/svartspett, Olav Hogstad, updated 2026-11-08
+
+| Field | Value |
+|---|---|
+| Length, weight | 45 to 48 cm, 250 to 370 g, Europe's largest woodpecker |
+| Plumage | Glossy black, whitish chisel bill about 5 cm, whitish eyes |
+| Male | Red crown |
+| Female | Only a small red patch at the back of the head |
+| Juvenile | Like the adults but browner |
+| Drumming | Very powerful, heard up to 4 km; long and even, may slow a little at the end; about 20 strokes in 2 s; stronger and longer than other woodpeckers'. Mainly spring, often mornings, February through breeding; also autumn and winter. Females drum now and then |
+| Flight call | A powerful «kri-kri-kri-kri» |
+| Call | After landing, a long plaintive «kliii-æ»; in spring often «kly-kly-kly-kly», like the green woodpecker's |
+| Alarm | A hard «krykk krykk krykk» |
+| Habitat | Conifer forest with large trees, stumps and logging debris |
+| Range in Norway | Østlandet, Sørlandet and Trøndelag; a few in the north, rare in the west |
+| Food | Tree-living insects, above all carpenter ants |
+| Nest | Oval hole in a large aspen or pine, usually 7 to 8 m up |
+| Eggs | 3 to 6 |
+| Migration | Resident, irruptive in some years |
+| Population | 2000 to 4000 pairs |
+| Status | LC |
+| Lookalikes | None; can look like a crow. The spring call is like the green woodpecker's |
+
+### Batch 3, to verify
+
+- Goldcrest: juvenile; the twitter's shape; no alarm.
+- Chiffchaff: calls; sexes and juvenile; singing months.
+- Brambling: singing months; the song's pitch.
+- Black woodpecker: drum pitch (tree resonance is mine); pitch and timing of every call.
+
 ## Svarttrost, checked 2026-11-26
 
 Sources used: Store norske leksikon (snl.no/svarttrost), which follows Artsdatabanken's classification and cites BirdLife Norge for its population figure. A search excerpt from Fuglevennen (fuglevennen.no). A BirdLife Norge press release from 2021. Artsdatabanken's own species page and the full Fuglevennen page could not be opened, so check those two when possible.
