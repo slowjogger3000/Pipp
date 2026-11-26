@@ -284,7 +284,8 @@ export class CollectionScreen {
       const row = box(this.recList, { height: '56px', display: 'flex', alignItems: 'center', gap: '8px', padding: '0 6px' }, 'recrow');
       if (i + 1 < recs.length) row.style.borderBottom = '1px solid var(--divider)';
       if (this.selected.has(r.id)) row.classList.add('sel');
-      const pb = new Btn(row, '', () => (this.selecting ? this.toggleSelect(r.id) : this.play(r)), { width: '44px', height: '44px', padding: '0' })
+      // Under VELG the whole row chooses (the row's own listener below).
+      const pb = new Btn(row, '', () => { if (!this.selecting) this.play(r); }, { width: '44px', height: '44px', padding: '0' })
         .glyph(this.playing === r.id ? 'stop' : 'play', s.t('coll.play'));
       pb.on(this.playing === r.id);
       const img = el('img', '', row);
@@ -298,7 +299,10 @@ export class CollectionScreen {
       box(mid, { font: '500 12px var(--mono)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }).textContent = head;
       box(mid, { color: 'var(--inkSoft)' }).textContent = r.date;
       box(row, { font: '500 12px var(--mono)', flex: 'none' }).textContent = `${number(Math.round(r.confidence * 100), 0, s.no)} %`;
-      if (this.selecting) row.addEventListener('click', (e) => { if (e.target === row) this.toggleSelect(r.id); });
+      if (this.selecting) {
+        row.style.cursor = 'pointer';
+        row.addEventListener('click', () => this.toggleSelect(r.id));
+      }
     });
 
     this.picGrid.replaceChildren();
