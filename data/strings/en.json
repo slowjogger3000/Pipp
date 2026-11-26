@@ -302,5 +302,11 @@
  "coll.play": "Play recording",
  "coll.note": "Recordings and pictures stay on the phone, sorted by bird. The percentage is how sure the recognition was.",
  "coll.counts": "{r} RECORDINGS, {p} PICTURES",
- "coll.share_unavailable": "SHARING IS NOT AVAILABLE HERE"
+ "coll.share_unavailable": "SHARING IS NOT AVAILABLE HERE",
+ "coll.delete": "DELETE",
+ "coll.delete_confirm": "DELETE {n}?",
+ "coll.deleted": "{n} DELETED",
+ "coll.close": "CLOSE",
+ "coll.prev_picture": "Previous picture",
+ "coll.next_picture": "Next picture"
 }

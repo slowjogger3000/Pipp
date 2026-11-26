@@ -61,3 +61,6 @@ export function now(): string {
   const d = new Date(), p = (n: number) => String(n).padStart(2, '0');
   return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}`;
 }
+
+export const deleteRecording = (id: string) => run<undefined>('recordings', 'readwrite', (s) => s.delete(id));
+export const deletePicture = (id: string) => run<undefined>('pictures', 'readwrite', (s) => s.delete(id));

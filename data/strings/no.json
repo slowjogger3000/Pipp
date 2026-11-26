@@ -302,5 +302,11 @@
  "coll.play": "Spill opptak",
  "coll.note": "Opptak og bilder ligger på telefonen, sortert per fugl. Prosenten er hvor sikker gjenkjenningen var.",
  "coll.counts": "{r} OPPTAK, {p} BILDER",
- "coll.share_unavailable": "DELING ER IKKE MULIG HER"
+ "coll.share_unavailable": "DELING ER IKKE MULIG HER",
+ "coll.delete": "SLETT",
+ "coll.delete_confirm": "SLETT {n}?",
+ "coll.deleted": "{n} SLETTET",
+ "coll.close": "LUKK",
+ "coll.prev_picture": "Forrige bilde",
+ "coll.next_picture": "Neste bilde"
 }

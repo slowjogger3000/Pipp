@@ -4,15 +4,20 @@
 // confidence), pictures in a 3-column grid of 112px tiles with NYTT BILDE
 // last, then VELG, DEL, EKSPORTER. Everything comes from listen/store.ts.
 //
-// Not designed yet, so not built: the picture viewer, the recording detail
-// view, and deleting. EKSPORTER waits for the phone export format.
+// Agreed with Eirik 2026-11-26, not in design/: while VELG is on, the action
+// row reads FERDIG, DEL, SLETT (SLETT takes EKSPORTER's place), and SLETT
+// asks once more (SLETT 3?) before it deletes. A tap on a picture opens the
+// viewer (viewer.ts). Not built: the recording detail view. EKSPORTER waits
+// for the phone export format.
 
 import { index, type IndexBird } from '../data.ts';
-import { newId, now, pictures, recordings, savePicture, type Picture, type Recording } from '../listen/store.ts';
+import { deletePicture, deleteRecording, newId, now, pictures, recordings, savePicture, type Picture, type Recording } from '../listen/store.ts';
 import { Btn, box, el, number } from './dom.ts';
 import { upper, type Strings } from './strings.ts';
+import { PictureViewer } from './viewer.ts';
 
 const kTypeIds = ['song', 'call', 'alarm', 'flight'] as const;
+const kArmMs = 4000;
 
 export interface CollectionHandlers {
   refresh(): void;
@@ -31,6 +36,8 @@ export class CollectionScreen {
   private playing = '';
   private urls: string[] = [];
   private message = '';
+  private armed = 0;   // timer id while SLETT waits for its second press
+  private viewer: PictureViewer;
 
   private empty: HTMLDivElement;
   private emptyTitle: HTMLDivElement;
@@ -60,6 +67,11 @@ export class CollectionScreen {
     this.fileIn.setAttribute('capture', 'environment');
     this.fileIn.style.display = 'none';
     this.fileIn.addEventListener('change', () => void this.addPicture());
+    this.viewer = new PictureViewer((parent.closest('.ph') as HTMLElement | null) ?? document.body, s, {
+      name: (bird) => this.name(bird),
+      share: (p) => void this.shareFiles([this.pictureFile(p)]),
+      remove: async (p) => { await deletePicture(p.id); this.selected.delete(p.id); await this.load(); },
+    });
 
     // ---------------------------------------------------------- empty
     this.empty = box(root, { display: 'flex', flexDirection: 'column', gap: '12px' });
@@ -103,9 +115,10 @@ export class CollectionScreen {
     const act = box(this.full, { display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: '6px' });
     const style = { height: '44px', padding: '0', minWidth: '0' };
     this.actions = [
-      new Btn(act, '', () => { this.selecting = !this.selecting; this.selected.clear(); this.render(); }, style),
+      new Btn(act, '', () => { this.selecting = !this.selecting; this.selected.clear(); this.disarm(); this.render(); }, style),
       new Btn(act, '', () => void this.share(), style),
-      new Btn(act, '', undefined, style).disabled(true), // EKSPORTER: the export format is open (prd.md)
+      // SLETT while VELG is on; otherwise EKSPORTER, hatched: the export format is open (prd.md)
+      new Btn(act, '', () => { if (this.selecting) void this.removeSelected(); }, style),
     ];
     this.note = el('p', '', this.full);
     Object.assign(this.note.style, { margin: '0', color: 'var(--inkSoft)' });
@@ -114,7 +127,7 @@ export class CollectionScreen {
   show(on: boolean) {
     this.root.style.display = on ? 'flex' : 'none';
     if (on) void this.load();
-    else { this.player?.pause(); this.playing = ''; }
+    else { this.player?.pause(); this.playing = ''; this.viewer.close(); this.disarm(); }
   }
 
   async load() {
@@ -172,15 +185,53 @@ export class CollectionScreen {
   private toggleSelect(id: string) {
     if (this.selected.has(id)) this.selected.delete(id);
     else this.selected.add(id);
+    this.disarm();
     this.render();
+  }
+
+  private disarm() {
+    if (this.armed) clearTimeout(this.armed);
+    this.armed = 0;
+  }
+
+  // SLETT: the first press asks (SLETT 3?), the second deletes. No undo.
+  private async removeSelected() {
+    const n = this.selected.size;
+    if (!n) return;
+    if (!this.armed) {
+      this.armed = window.setTimeout(() => { this.armed = 0; this.render(); }, kArmMs);
+      this.render();
+      return;
+    }
+    this.disarm();
+    for (const r of this.recs) {
+      if (!this.selected.has(r.id)) continue;
+      if (this.playing === r.id) { this.player?.pause(); this.playing = ''; }
+      await deleteRecording(r.id);
+    }
+    for (const p of this.pics) if (this.selected.has(p.id)) await deletePicture(p.id);
+    this.selected.clear();
+    this.selecting = false;
+    this.message = this.s.t('coll.deleted', { n: String(n) });
+    await this.load();
+  }
+
+  private static ext(mime: string): string {
+    return mime.includes('mp4') ? 'm4a' : mime.includes('webm') ? 'webm' : mime.includes('png') ? 'png' : 'jpg';
+  }
+  private pictureFile(p: Picture): File {
+    return new File([p.image], `tipp-${p.bird}-${p.date.replace(/[: ]/g, '-')}.${CollectionScreen.ext(p.image.type)}`, { type: p.image.type });
   }
 
   // DEL: the system share sheet with the chosen files.
   private async share() {
-    const ext = (mime: string) => (mime.includes('mp4') ? 'm4a' : mime.includes('webm') ? 'webm' : mime.includes('png') ? 'png' : 'jpg');
     const files: File[] = [];
-    for (const r of this.recs) if (this.selected.has(r.id)) files.push(new File([r.audio], `tipp-${r.bird || 'bird'}-${r.date.replace(/[: ]/g, '-')}.${ext(r.mime)}`, { type: r.mime }));
-    for (const p of this.pics) if (this.selected.has(p.id)) files.push(new File([p.image], `tipp-${p.bird}-${p.date.replace(/[: ]/g, '-')}.${ext(p.image.type)}`, { type: p.image.type }));
+    for (const r of this.recs) if (this.selected.has(r.id)) files.push(new File([r.audio], `tipp-${r.bird || 'bird'}-${r.date.replace(/[: ]/g, '-')}.${CollectionScreen.ext(r.mime)}`, { type: r.mime }));
+    for (const p of this.pics) if (this.selected.has(p.id)) files.push(this.pictureFile(p));
+    await this.shareFiles(files);
+  }
+
+  private async shareFiles(files: File[]) {
     if (!files.length) return;
     try {
       if (navigator.canShare?.({ files })) await navigator.share({ files });
@@ -201,7 +252,7 @@ export class CollectionScreen {
     this.recLabel.textContent = s.t('coll.recordings');
     this.picLabel.textContent = s.t('coll.pictures');
     this.actions[1].text(s.t('coll.share'));
-    this.actions[2].text(s.t('coll.export'));
+    this.viewer.applyStrings();
     this.note.textContent = s.t('coll.note');
     this.render();
   }
@@ -218,6 +269,9 @@ export class CollectionScreen {
     this.birdBtn.disabled = this.birds().length === 0;
     this.actions[0].text(s.t(this.selecting ? 'coll.done' : 'coll.select')).on(this.selecting);
     this.actions[1].disabled(this.selected.size === 0);
+    const n = this.selected.size;
+    this.actions[2].text(s.t(!this.selecting ? 'coll.export' : this.armed ? 'coll.delete_confirm' : 'coll.delete', { n: String(n) }))
+      .on(this.selecting && !!this.armed).disabled(!this.selecting || n === 0);
 
     const recs = this.recs.filter((r) => !this.bird || r.bird === this.bird);
     const pics = this.pics.filter((p) => !this.bird || p.bird === this.bird);
@@ -257,7 +311,7 @@ export class CollectionScreen {
       t.style.backgroundImage = `url("${url}")`;
       const [, m, d] = p.date.slice(0, 10).split('-');
       el('span', '', t, `${d}.${m}`);
-      t.addEventListener('click', () => { if (this.selecting) this.toggleSelect(p.id); });
+      t.addEventListener('click', () => { if (this.selecting) this.toggleSelect(p.id); else this.viewer.open(pics.slice(), p.id); });
     }
     const add = el('button', 'btn newpic', this.picGrid);
     add.type = 'button';
