@@ -434,7 +434,9 @@ int checkDraw(const tipp::BirdData& bird)
         e.setParam(P::indexOf(P::pb_draw), 0.0f);
         e.keepDrawn(true);
         const auto p0 = e.phrasesStarted(), d0 = e.drawnSung();
-        run(40.0);
+        // At least 4 turns: 40 s for most birds, longer for slow ones (the curlew).
+        for (int k = 0; k < 12 && e.phrasesStarted() - p0 < 4u; ++k)
+            run(10.0);
         const auto own = (e.phrasesStarted() - p0) - (e.drawnSung() - d0);
         const auto drawn = e.drawnSung() - d0;
         std::printf("     kept: %u own phrases, %u drawn\n", own, drawn);

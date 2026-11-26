@@ -1,0 +1,124 @@
+{
+ "_note": "Field guide text for the curlew, both languages. Facts from birds.md (SNL, checked 2026-11-26). Norwegian wording is mine, Eirik to check. calendar: one letter per month from January, y yes, n no, ? not known.",
+ "xeno_canto": "https://xeno-canto.org/species/numenius-arquata",
+ "facts": {
+  "length": {
+   "en": "50 to 60 cm, bill 10 to 15 cm",
+   "no": "50 til 60 cm, nebb 10 til 15 cm",
+   "verified": true
+  },
+  "broods": {
+   "en": "Usually 4 eggs, 26 to 30 days",
+   "no": "Vanligvis 4 egg, 26 til 30 dager",
+   "verified": true
+  },
+  "range": {
+   "en": "Much of the country, most on the coast; 2000 to 3000 pairs",
+   "no": "Store deler av landet, mest ved kysten; 2000 til 3000 par",
+   "verified": true
+  },
+  "habitat": {
+   "en": "Farmland, heaths, bogs, salt marshes",
+   "no": "Dyrket mark, lyngheier, myrer, strandenger",
+   "verified": true
+  },
+  "food": {
+   "en": "Worms, insects, crustaceans; berries in summer",
+   "no": "Mark, insekter, krepsdyr; bær om sommeren",
+   "verified": true
+  },
+  "status": {
+   "en": "EN, endangered, Norwegian red list",
+   "no": "EN, sterkt truet, norsk rødliste",
+   "verified": true
+  },
+  "nest": {
+   "en": "Scrape in open ground, lined with dry grass",
+   "no": "Grop i åpent terreng, foret med tørt gress",
+   "verified": true
+  }
+ },
+ "sings": {
+  "male": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "female": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "song_notes": {
+  "en": "In the display flight, long, clear whistled notes speed up and end in a powerful bubbling sound. The call is powerful and easy to recognise. Slow, calm wingbeats, like a gull at a distance. Halved since around 2000.",
+  "no": "I spillflukten går lange, klare fløytetoner raskere og raskere og ender i en kraftig boblende lyd. Lokkelyden er kraftig og lett å kjenne igjen. Rolige vingeslag, som en måke på avstand. Halvert siden rundt 2000.",
+  "verified": true
+ },
+ "mnemonic": {
+  "en": "",
+  "no": "",
+  "verified": false
+ },
+ "types": {
+  "song": {
+   "en": "Display flight: whistles speeding up into a powerful bubbling.",
+   "no": "Spillflukt: fløytetoner som går raskere og ender i kraftig bobling.",
+   "verified": true
+  },
+  "call": {
+   "en": "Powerful and easy to recognise. [TO VERIFY] how it sounds.",
+   "no": "Kraftig og lett å kjenne igjen. [TO VERIFY] hvordan den låter.",
+   "verified": true
+  },
+  "alarm": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "flight": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "parts": {
+  "whistles": {
+   "en": "LONG WHISTLES",
+   "no": "LANGE FLØYTETONER",
+   "verified": true
+  },
+  "faster": {
+   "en": "SPEEDING UP",
+   "no": "RASKERE",
+   "verified": true
+  },
+  "bubbling": {
+   "en": "BUBBLING",
+   "no": "BOBLING",
+   "verified": true
+  }
+ },
+ "calendar": {
+  "present": "??yyyyyyy???",
+  "sings": "??y?????????",
+  "note": {
+   "en": "Arrives in March to May. Females leave from late June, males in July and August, the young in August and September. Winters mostly on the coasts of the British Isles. [TO VERIFY] song months.",
+   "no": "Kommer i mars til mai. Hunnene drar fra slutten av juni, hannene i juli og august, ungene i august og september. Overvintrer mest langs kysten av De britiske øyer. [TO VERIFY] sangmånedene.",
+   "verified": true
+  }
+ },
+ "lookalikes": [
+  {
+   "name": {
+    "en": "Whimbrel",
+    "no": "Småspove"
+   },
+   "text": {
+    "en": "Clearly smaller with a shorter bill. Young curlews can have a much shorter bill too.",
+    "no": "Tydelig mindre med kortere nebb. Unge storspover kan også ha mye kortere nebb.",
+    "verified": true
+   }
+  }
+ ]
+}

@@ -366,9 +366,31 @@ To verify: how the flight call and other calls sound, transcriptions, piping dis
 
 To verify: when and how the calls are given, leg colour, wingspan, years to adult plumage.
 
+### Storspove (folder `storspove`), snl.no/storspove, Jan Eivind Østnes, updated 2026-11-08
+
+| Field | Value |
+|---|---|
+| Length, weight | 50 to 60 cm, 450 to 1350 g; the bill alone 10 to 15 cm. Europe's largest wader |
+| Appearance | Grey-brown, densely streaked and spotted dark. Very long, down-curved bill. Long blue-grey legs. Slow, calm wingbeats, like a gull at a distance; a clear white wedge on the back in flight |
+| Sex | The female is on average a little larger and usually has a clearly longer bill |
+| Young | Can have a much shorter bill than adults |
+| Song | The display flight starts with long, clear whistled notes that speed up and end in a powerful bubbling sound |
+| Call | Powerful and easy to recognise |
+| Habitat | Open land: farmland, heaths, bogs, salt marshes; in Norway mostly the coast and farmland. Outside the breeding season on shore flats |
+| Population | 2000 to 3000 pairs (BirdLife Norge, 2015); about halved since around 2000 |
+| Food | Bristle worms, insects, crustaceans, molluscs; many berries and seeds in summer |
+| Nest | A scrape in open ground lined with dry grass and often a few feathers |
+| Eggs | Usually four; both incubate 26 to 30 days. The young leave the nest soon and fly after 5 to 6 weeks; the female often leaves halfway |
+| Pairs, age | Monogamous and territorial, often the same pair and site for many years. Oldest ringed bird 32 years |
+| Migration | Arrives in March to May. Females leave from late June, males in July and August, young in August and September. Winters mostly on the coasts of the British Isles; birds wintering on the Norwegian coast (north to Tromsø) are thought to come from elsewhere |
+| Status | EN, endangered, on the Norwegian red list; NT globally |
+| Versus whimbrel | The whimbrel is clearly smaller with a shorter bill; young curlews can have a much shorter bill too |
+
+To verify: how the call sounds, transcriptions, alarm, bill colour, wingspan, the juvenile's plumage, song months and time of day.
+
 ## All other birds
 
-Nothing is verified for the 4 other birds outside the garden group. Collect facts per bird with the same fields as the blackbird table before writing `bird.json`.
+Nothing is verified for the 3 other birds outside the garden group. Collect facts per bird with the same fields as the blackbird table before writing `bird.json`.
 
 ## Dawn chorus
 

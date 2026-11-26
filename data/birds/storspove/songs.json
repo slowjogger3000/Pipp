@@ -1,0 +1,472 @@
+{
+ "_note": "Curlew, M10. Verified (birds.md, SNL): the display flight starts with long, clear whistled notes that speed up and end in a powerful bubbling sound; the call is powerful and easy to recognise. Sound design choices: the pitches, 3 to 5 long whistles then 3 to 6 shorter, closer ones, and a bubbling trill of 1,5 to 1,8 s; the call's two-part rising whistle is a placeholder, as SNL gives no shape or transcription.",
+ "syllables": {
+  "long1": {
+   "dur_ms": 700,
+   "pitch": [
+    [
+     0,
+     1700
+    ],
+    [
+     0.6,
+     2300
+    ],
+    [
+     1,
+     2350
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.15,
+     0.9
+    ],
+    [
+     0.7,
+     1
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.9
+  },
+  "long2": {
+   "dur_ms": 650,
+   "pitch": [
+    [
+     0,
+     1800
+    ],
+    [
+     0.6,
+     2400
+    ],
+    [
+     1,
+     2400
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.15,
+     0.9
+    ],
+    [
+     0.7,
+     1
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.9
+  },
+  "long3": {
+   "dur_ms": 560,
+   "pitch": [
+    [
+     0,
+     1900
+    ],
+    [
+     0.6,
+     2450
+    ],
+    [
+     1,
+     2450
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.15,
+     0.9
+    ],
+    [
+     0.7,
+     1
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.9
+  },
+  "mid1": {
+   "dur_ms": 380,
+   "pitch": [
+    [
+     0,
+     2000
+    ],
+    [
+     0.6,
+     2500
+    ],
+    [
+     1,
+     2450
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.15,
+     0.9
+    ],
+    [
+     0.7,
+     1
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.9
+  },
+  "mid2": {
+   "dur_ms": 320,
+   "pitch": [
+    [
+     0,
+     2100
+    ],
+    [
+     0.6,
+     2550
+    ],
+    [
+     1,
+     2500
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.15,
+     0.9
+    ],
+    [
+     0.7,
+     1
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.9
+  },
+  "bubble": {
+   "dur_ms": 1800,
+   "pitch": [
+    [
+     0,
+     2600
+    ],
+    [
+     0.3,
+     2800
+    ],
+    [
+     0.8,
+     2500
+    ],
+    [
+     1,
+     2200
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.05,
+     1
+    ],
+    [
+     0.8,
+     0.9
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 1.0,
+   "trill": {
+    "hz": 17,
+    "depth_st": 4,
+    "am": 0.85
+   }
+  },
+  "bubble2": {
+   "dur_ms": 1500,
+   "pitch": [
+    [
+     0,
+     2500
+    ],
+    [
+     0.4,
+     2750
+    ],
+    [
+     1,
+     2300
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.06,
+     1
+    ],
+    [
+     0.8,
+     0.9
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 1.0,
+   "trill": {
+    "hz": 15,
+    "depth_st": 3.5,
+    "am": 0.85
+   }
+  },
+  "kurli": {
+   "dur_ms": 520,
+   "pitch": [
+    [
+     0,
+     1700
+    ],
+    [
+     0.4,
+     1950
+    ],
+    [
+     0.5,
+     1950
+    ],
+    [
+     0.6,
+     2100
+    ],
+    [
+     1,
+     2500
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.08,
+     1
+    ],
+    [
+     0.42,
+     0.8
+    ],
+    [
+     0.48,
+     0.2
+    ],
+    [
+     0.56,
+     1
+    ],
+    [
+     0.9,
+     0.8
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.95
+  }
+ },
+ "types": {
+  "song": {
+   "pause_s": [
+    6.0,
+    14.0
+   ],
+   "length_s": [
+    5.0,
+    8.0
+   ],
+   "transpose_st": 0.6,
+   "avoid_repeat": false,
+   "auto": {
+    "vo_pitch": [
+     0.98,
+     1.02
+    ],
+    "vo_breath": [
+     10,
+     18
+    ],
+    "vo_tension": [
+     14,
+     24
+    ],
+    "vo_rough": [
+     2,
+     6
+    ],
+    "ph_tempo": [
+     96,
+     104
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 1,
+     "sections": [
+      {
+       "part": "whistles",
+       "pool": [
+        "long1",
+        "long2",
+        "long3"
+       ],
+       "count": [
+        3,
+        5
+       ],
+       "share": 0.4,
+       "gap_ms": [
+        260,
+        380
+       ]
+      },
+      {
+       "part": "faster",
+       "pool": [
+        "mid1",
+        "mid2"
+       ],
+       "count": [
+        3,
+        6
+       ],
+       "share": 0.3,
+       "gap_ms": [
+        90,
+        150
+       ]
+      },
+      {
+       "part": "bubbling",
+       "pool": [
+        "bubble",
+        "bubble2"
+       ],
+       "count": [
+        1,
+        1
+       ],
+       "share": 0.3,
+       "gap_ms": [
+        60,
+        100
+       ]
+      }
+     ]
+    }
+   ],
+   "overrides": []
+  },
+  "call": {
+   "pause_s": [
+    3.0,
+    9.0
+   ],
+   "length_s": [
+    0.6,
+    2.0
+   ],
+   "avoid_repeat": false,
+   "auto": {
+    "vo_pitch": [
+     0.98,
+     1.02
+    ],
+    "vo_breath": [
+     10,
+     18
+    ],
+    "vo_tension": [
+     14,
+     26
+    ],
+    "vo_rough": [
+     2,
+     6
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 1,
+     "sections": [
+      {
+       "pool": [
+        "kurli"
+       ],
+       "count": [
+        1,
+        3
+       ],
+       "share": 1.0,
+       "gap_ms": [
+        300,
+        600
+       ],
+       "no_adjacent_repeat": false
+      }
+     ]
+    }
+   ],
+   "overrides": []
+  }
+ }
+}
