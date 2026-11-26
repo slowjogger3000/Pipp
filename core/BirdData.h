@@ -62,6 +62,7 @@ struct Section
     Range gapMs { 50.0f, 50.0f };
     Range leadGapMs { 0.0f, 0.0f }; // before the section, unless it opens the phrase
     bool noAdjacentRepeat = true;
+    int part = -1; // index into BirdData::parts, -1 for none. Drawing only.
 };
 
 struct PhraseTemplate
@@ -103,6 +104,9 @@ struct BirdData
     std::array<Range, kNumKnobs> knobRange {}; // knob range for this bird
     std::vector<Syllable> syllables;
     std::array<SongType, kNumSongTypes> types {};
+    // Names of the parts of a phrase ("motifs", "twitter"), from a section's
+    // "part" key. The interface looks the words up in bird.json.
+    std::vector<std::string> parts;
 };
 
 // The effective rules for one scene, after overrides.

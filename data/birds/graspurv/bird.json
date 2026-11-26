@@ -1,0 +1,108 @@
+{
+ "_note": "Field guide text for this bird, both languages. Facts come from birds.md. A field with verified false shows [TO VERIFY]; a text may also carry the marker inline for the part that is not checked. Norwegian wording is mine, Eirik to check. calendar rows: one letter per month from January, y yes, n no, ? not known.",
+ "xeno_canto": "https://xeno-canto.org/species/passer-domesticus",
+ "facts": {
+  "length": {
+   "en": "About 15 cm, 25 to 35 g",
+   "no": "Omtrent 15 cm, 25 til 35 g",
+   "verified": true
+  },
+  "broods": {
+   "en": "2 or 3 a year are common",
+   "no": "2 eller 3 kull i året er vanlig",
+   "verified": true
+  },
+  "range": {
+   "en": "The whole country, rarer at altitude",
+   "no": "Hele landet, sjeldnere i høyden",
+   "verified": true
+  },
+  "habitat": {
+   "en": "By buildings: houses and farms",
+   "no": "Ved bygninger: hus og gårder",
+   "verified": true
+  },
+  "food": {
+   "en": "Grain, seeds, insects, scraps",
+   "no": "Korn, frø, insekter, matrester",
+   "verified": true
+  },
+  "status": {
+   "en": "NT, near threatened, Norwegian red list",
+   "no": "NT, nær truet, norsk rødliste",
+   "verified": true
+  },
+  "nest": {
+   "en": "Cavities in buildings, 4 to 5 eggs",
+   "no": "Hulrom i bygninger, 4 til 5 egg",
+   "verified": true
+  }
+ },
+ "sings": {
+  "male": {
+   "en": "Sings",
+   "no": "Synger",
+   "verified": false
+  },
+  "female": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "song_notes": {
+  "en": "A simple, short, repeated phrase of chirps, “sjirp, sjirp”, heard most in spring. Chattering and twittering calls all year.",
+  "no": "En enkel, kort, gjentatt frase av kvitter, «sjirp, sjirp», mest hørt om våren. Skravlende og kvitrende lyder hele året.",
+  "verified": true
+ },
+ "mnemonic": {
+  "en": "",
+  "no": "",
+  "verified": false
+ },
+ "types": {
+  "song": {
+   "en": "Chirping “sjirp, sjirp”, most in spring.",
+   "no": "Kvitrende «sjirp, sjirp», mest om våren.",
+   "verified": true
+  },
+  "call": {
+   "en": "Chattering and twittering, all year.",
+   "no": "Skravling og kvitring, hele året.",
+   "verified": true
+  },
+  "alarm": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "flight": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "parts": {},
+ "calendar": {
+  "present": "yyyyyyyyyyyy",
+  "sings": "????????????",
+  "note": {
+   "en": "Resident. The song is heard most in spring. [TO VERIFY] singing months.",
+   "no": "Standfugl. Sangen høres mest om våren. [TO VERIFY] månedene med sang.",
+   "verified": true
+  }
+ },
+ "lookalikes": [
+  {
+   "name": {
+    "en": "Tree sparrow",
+    "no": "Pilfink"
+   },
+   "text": {
+    "en": "Chestnut crown and black cheek spots.",
+    "no": "Kastanjebrun isse og svarte kinnflekker.",
+    "verified": true
+   }
+  }
+ ]
+}

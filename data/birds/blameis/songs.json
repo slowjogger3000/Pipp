@@ -32,16 +32,16 @@
       },
       "phrases": [
         { "weight": 3, "sections": [
-          { "pool": ["si1", "si2"], "count": [2, 3], "share": 0.25, "gap_ms": [60, 110] },
-          { "pool": ["r1"], "count": [6, 30], "share": 0.75, "gap_ms": [14, 22], "lead_gap_ms": [50, 90], "no_adjacent_repeat": false }
+          { "part": "si", "pool": ["si1", "si2"], "count": [2, 3], "share": 0.25, "gap_ms": [60, 110] },
+          { "part": "trill", "pool": ["r1"], "count": [6, 30], "share": 0.75, "gap_ms": [14, 22], "lead_gap_ms": [50, 90], "no_adjacent_repeat": false }
         ] },
         { "weight": 2, "sections": [
-          { "pool": ["si1", "si2"], "count": [1, 2], "share": 0.2, "gap_ms": [60, 110] },
-          { "pool": ["r2"], "count": [6, 28], "share": 0.8, "gap_ms": [16, 24], "lead_gap_ms": [50, 90], "no_adjacent_repeat": false }
+          { "part": "si", "pool": ["si1", "si2"], "count": [1, 2], "share": 0.2, "gap_ms": [60, 110] },
+          { "part": "trill", "pool": ["r2"], "count": [6, 28], "share": 0.8, "gap_ms": [16, 24], "lead_gap_ms": [50, 90], "no_adjacent_repeat": false }
         ] },
         { "weight": 1, "sections": [
-          { "pool": ["w1"], "count": [2, 2], "share": 0.3, "gap_ms": [80, 120], "no_adjacent_repeat": false },
-          { "pool": ["ch1", "ch2"], "count": [4, 14], "share": 0.7, "gap_ms": [25, 45], "lead_gap_ms": [60, 100] }
+          { "part": "whistles", "pool": ["w1"], "count": [2, 2], "share": 0.3, "gap_ms": [80, 120], "no_adjacent_repeat": false },
+          { "part": "chatter", "pool": ["ch1", "ch2"], "count": [4, 14], "share": 0.7, "gap_ms": [25, 45], "lead_gap_ms": [60, 100] }
         ] }
       ],
       "overrides": []

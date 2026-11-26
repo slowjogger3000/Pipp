@@ -127,7 +127,7 @@ int syllableIndex(const BirdData& bird, const std::string& id)
     return -1;
 }
 
-bool parseType(const Value& v, const BirdData& bird, SongType& t, const std::string& name, std::string& error)
+bool parseType(const Value& v, BirdData& bird, SongType& t, const std::string& name, std::string& error)
 {
     const std::string where = "type " + name + ": ";
     t.present = true;
@@ -181,6 +181,13 @@ bool parseType(const Value& v, const BirdData& bird, SongType& t, const std::str
                 return fail(error, where + "gaps cannot be negative");
             if (const Value* r = sv.get("no_adjacent_repeat"); r != nullptr && r->isBool())
                 s.noAdjacentRepeat = r->boolean;
+            if (const Value* part = sv.get("part"); part != nullptr && part->isString())
+            {
+                const auto it = std::find(bird.parts.begin(), bird.parts.end(), part->text);
+                s.part = static_cast<int>(it - bird.parts.begin());
+                if (it == bird.parts.end())
+                    bird.parts.push_back(part->text);
+            }
             pt.sections.push_back(std::move(s));
         }
         t.totalWeight += pt.weight;

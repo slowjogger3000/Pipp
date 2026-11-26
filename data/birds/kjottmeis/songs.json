@@ -31,12 +31,12 @@
         "ph_tempo": [94, 106]
       },
       "phrases": [
-        { "weight": 3, "sections": [ { "pool": ["m_titu"],   "count": [3, 9], "share": 1.0, "gap_ms": [45, 75], "no_adjacent_repeat": false } ] },
-        { "weight": 3, "sections": [ { "pool": ["m_tuti"],   "count": [3, 9], "share": 1.0, "gap_ms": [45, 75], "no_adjacent_repeat": false } ] },
-        { "weight": 2, "sections": [ { "pool": ["m_titiu"],  "count": [3, 8], "share": 1.0, "gap_ms": [50, 80], "no_adjacent_repeat": false } ] },
-        { "weight": 2, "sections": [ { "pool": ["m_tititu"], "count": [2, 7], "share": 1.0, "gap_ms": [50, 85], "no_adjacent_repeat": false } ] },
-        { "weight": 1, "sections": [ { "pool": ["m_situtu"], "count": [2, 6], "share": 1.0, "gap_ms": [55, 90], "no_adjacent_repeat": false } ] },
-        { "weight": 1, "sections": [ { "pool": ["m_tiu"],    "count": [4, 12], "share": 1.0, "gap_ms": [70, 110], "no_adjacent_repeat": false } ] }
+        { "weight": 3, "sections": [ { "part": "motif", "pool": ["m_titu"],   "count": [3, 9], "share": 1.0, "gap_ms": [45, 75], "no_adjacent_repeat": false } ] },
+        { "weight": 3, "sections": [ { "part": "motif", "pool": ["m_tuti"],   "count": [3, 9], "share": 1.0, "gap_ms": [45, 75], "no_adjacent_repeat": false } ] },
+        { "weight": 2, "sections": [ { "part": "motif", "pool": ["m_titiu"],  "count": [3, 8], "share": 1.0, "gap_ms": [50, 80], "no_adjacent_repeat": false } ] },
+        { "weight": 2, "sections": [ { "part": "motif", "pool": ["m_tititu"], "count": [2, 7], "share": 1.0, "gap_ms": [50, 85], "no_adjacent_repeat": false } ] },
+        { "weight": 1, "sections": [ { "part": "motif", "pool": ["m_situtu"], "count": [2, 6], "share": 1.0, "gap_ms": [55, 90], "no_adjacent_repeat": false } ] },
+        { "weight": 1, "sections": [ { "part": "motif", "pool": ["m_tiu"],    "count": [4, 12], "share": 1.0, "gap_ms": [70, 110], "no_adjacent_repeat": false } ] }
       ],
       "overrides": []
     },

@@ -1,0 +1,116 @@
+{
+ "_note": "Field guide text for this bird, both languages. Facts come from birds.md. A field with verified false shows [TO VERIFY]; a text may also carry the marker inline for the part that is not checked. Norwegian wording is mine, Eirik to check. calendar rows: one letter per month from January, y yes, n no, ? not known.",
+ "xeno_canto": "https://xeno-canto.org/species/fringilla-coelebs",
+ "facts": {
+  "length": {
+   "en": "About 15 cm",
+   "no": "Omtrent 15 cm",
+   "verified": true
+  },
+  "broods": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "range": {
+   "en": "North to Troms, scarce in Finnmark",
+   "no": "Nord til Troms, fåtallig i Finnmark",
+   "verified": true
+  },
+  "habitat": {
+   "en": "Forests and parks",
+   "no": "Skog og parker",
+   "verified": true
+  },
+  "food": {
+   "en": "Seeds, fruits, buds; insects in summer",
+   "no": "Frø, frukt, knopper; insekter om sommeren",
+   "verified": true
+  },
+  "status": {
+   "en": "LC, viable, Norwegian red list",
+   "no": "LC, livskraftig, norsk rødliste",
+   "verified": true
+  },
+  "nest": {
+   "en": "Finely built in a fork, 4 to 5 eggs",
+   "no": "Fint bygd i en greinkløft, 4 til 5 egg",
+   "verified": true
+  }
+ },
+ "sings": {
+  "male": {
+   "en": "Sings, in dialects",
+   "no": "Synger, på dialekter",
+   "verified": true
+  },
+  "female": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "song_notes": {
+  "en": "The male has a strong, characteristic song and sings in dialects. [TO VERIFY] what the song sounds like.",
+  "no": "Hannen har en kraftig, karakteristisk sang og synger på dialekter. [TO VERIFY] hvordan sangen låter.",
+  "verified": true
+ },
+ "mnemonic": {
+  "en": "",
+  "no": "",
+  "verified": false
+ },
+ "types": {
+  "song": {
+   "en": "Strong and characteristic, in dialects.",
+   "no": "Kraftig og karakteristisk, på dialekter.",
+   "verified": true
+  },
+  "call": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "alarm": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "flight": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "parts": {},
+ "calendar": {
+  "present": "yyyyyyyyyyyy",
+  "sings": "????????????",
+  "note": {
+   "en": "Mostly migrants wintering in western Europe, some along the Norwegian coast. The first reach south Norway in early March, males about a week before females. [TO VERIFY] singing months.",
+   "no": "For det meste trekkfugl som overvintrer i Vest-Europa, noen langs norskekysten. De første når Sør-Norge tidlig i mars, hannene omtrent en uke før hunnene. [TO VERIFY] månedene med sang.",
+   "verified": true
+  }
+ },
+ "lookalikes": [
+  {
+   "name": {
+    "en": "Brambling",
+    "no": "Bjørkefink"
+   },
+   "text": {
+    "en": "White rump. The chaffinch has a green one.",
+    "no": "Hvit overgump. Bokfinken har grønn.",
+    "verified": true
+   }
+  },
+  {
+   "id": "kjottmeis",
+   "text": {
+    "en": "Its “ping ping” call is like the chaffinch's.",
+    "no": "Lokkelyden «ping ping» ligner bokfinkens.",
+    "verified": true
+   }
+  }
+ ]
+}

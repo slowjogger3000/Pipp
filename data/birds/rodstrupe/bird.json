@@ -1,0 +1,96 @@
+{
+ "_note": "Field guide text for this bird, both languages. Facts come from birds.md. A field with verified false shows [TO VERIFY]; a text may also carry the marker inline for the part that is not checked. Norwegian wording is mine, Eirik to check. calendar rows: one letter per month from January, y yes, n no, ? not known.",
+ "xeno_canto": "https://xeno-canto.org/species/erithacus-rubecula",
+ "facts": {
+  "length": {
+   "en": "14 cm, 16 to 22 g",
+   "no": "14 cm, 16 til 22 g",
+   "verified": true
+  },
+  "broods": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "range": {
+   "en": "Up to Troms, scarce in Finnmark",
+   "no": "Opp til Troms, fåtallig i Finnmark",
+   "verified": true
+  },
+  "habitat": {
+   "en": "Shady, dense forest, also gardens",
+   "no": "Skyggefull, tett skog, også hager",
+   "verified": true
+  },
+  "food": {
+   "en": "Insects in summer, berries in winter",
+   "no": "Insekter om sommeren, bær om vinteren",
+   "verified": true
+  },
+  "status": {
+   "en": "LC, viable, Norwegian red list",
+   "no": "LC, livskraftig, norsk rødliste",
+   "verified": true
+  },
+  "nest": {
+   "en": "In a cavity on the ground, 6 to 7 eggs",
+   "no": "I et hulrom på bakken, 6 til 7 egg",
+   "verified": true
+  }
+ },
+ "sings": {
+  "male": {
+   "en": "Sings",
+   "no": "Synger",
+   "verified": false
+  },
+  "female": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "song_notes": {
+  "en": "Very beautiful, compared to a trickling brook. Sings early at dawn and in the evening. Starts at or a little before the capercaillie, hence the nickname “tiurklokke”.",
+  "no": "Svært vakker, sammenlignet med en sildrende bekk. Synger tidlig i grålysningen og om kvelden. Starter samtidig med eller litt før tiuren, derav kallenavnet «tiurklokke».",
+  "verified": true
+ },
+ "mnemonic": {
+  "en": "",
+  "no": "",
+  "verified": false
+ },
+ "types": {
+  "song": {
+   "en": "Early at dawn and in the evening.",
+   "no": "Tidlig i grålysningen og om kvelden.",
+   "verified": true
+  },
+  "call": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "alarm": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "flight": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "parts": {},
+ "calendar": {
+  "present": "yyyyyyyyyyyy",
+  "sings": "????????????",
+  "note": {
+   "en": "Mostly migrants, wintering in south-west Europe and the Mediterranean. Some winter in coastal south Norway. [TO VERIFY] singing months.",
+   "no": "For det meste trekkfugl som overvintrer i sørvest-Europa og Middelhavsområdet. Noen overvintrer langs kysten av Sør-Norge. [TO VERIFY] månedene med sang.",
+   "verified": true
+  }
+ },
+ "lookalikes": []
+}

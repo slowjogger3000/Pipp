@@ -45,8 +45,6 @@ MainComponent::MainComponent(const juce::File& dataDirectory)
     stopBtn.onClick = [this] { setPlaying(false); };
     prevBtn.onClick = [this] { stepBird(-1); };
     nextBtn.onClick = [this] { stepBird(1); };
-    enBtn.setText("EN");
-    noBtn.setText("NO");
     enBtn.onClick = [this] { setLanguage("en"); };
     noBtn.onClick = [this] { setLanguage("no"); };
     for (auto* b : { &playBtn, &stopBtn, &prevBtn, &nextBtn, &enBtn, &noBtn })
@@ -58,10 +56,10 @@ MainComponent::MainComponent(const juce::File& dataDirectory)
 
     // Plate panel.
     addAndMakeVisible(plate);
-    maleBtn.onClick = [this] { sex = 0; sendChoice(P::sc_sex, 0); refreshControls(); };
-    femaleBtn.onClick = [this] { sex = 1; sendChoice(P::sc_sex, 1); refreshControls(); };
-    adultBtn.onClick = [this] { age = 0; sendChoice(P::sc_age, 0); refreshControls(); };
-    juvBtn.onClick = [this] { age = 1; sendChoice(P::sc_age, 1); refreshControls(); };
+    maleBtn.onClick = [this] { setSex(0); };
+    femaleBtn.onClick = [this] { setSex(1); };
+    adultBtn.onClick = [this] { setAge(0); };
+    juvBtn.onClick = [this] { setAge(1); };
     for (auto* b : { &maleBtn, &femaleBtn, &adultBtn, &juvBtn })
         addAndMakeVisible(*b);
 
@@ -88,10 +86,14 @@ MainComponent::MainComponent(const juce::File& dataDirectory)
         {
             auto& b = scene[static_cast<std::size_t>(row)][static_cast<std::size_t>(i)];
             b.onClick = [this, row, i] {
-                int* target[4] = { &season, &timeOfDay, &songType, &place };
-                *target[row] = i;
-                sendChoice(kSceneIds[row], i);
-                refreshControls();
+                if (row == 0)      setSeason(i);
+                else if (row == 2) setSongType(i);
+                else
+                {
+                    (row == 1 ? timeOfDay : place) = i;
+                    sendChoice(kSceneIds[row], i);
+                    refreshControls();
+                }
             };
             addAndMakeVisible(b);
         }
@@ -102,7 +104,7 @@ MainComponent::MainComponent(const juce::File& dataDirectory)
 
     // Autoplay band.
     apOnBtn.fontPx = 11.0f;
-    apOnBtn.onClick = [this] { apOn = ! apOn; sendChoice(P::ap_on, apOn ? 1 : 0); refreshControls(); };
+    apOnBtn.onClick = [this] { stopCompare(); apOn = ! apOn; sendChoice(P::ap_on, apOn ? 1 : 0); refreshControls(); };
     holdMinusBtn.setText(juce::String(juce::CharPointer_UTF8("\xe2\x88\x92")));
     holdPlusBtn.setText("+");
     holdMinusBtn.fontPx = holdPlusBtn.fontPx = 12.0f;
@@ -115,10 +117,18 @@ MainComponent::MainComponent(const juce::File& dataDirectory)
     holdPlusBtn.onClick = [stepHold] { stepHold(0.5f); };
     latchBtn.onClick = [this] { latch = ! latch; sendChoice(P::ap_latch, latch ? 1 : 0); refreshControls(); };
     returnAllBtn.onClick = [this] { engine.trigger(P::indexOf(P::ap_return_all)); };
-    singOnceBtn.onClick = [this] { engine.trigger(P::indexOf(P::ap_sing_once)); };
+    singOnceBtn.onClick = [this] { stopCompare(); engine.trigger(P::indexOf(P::ap_sing_once)); };
     rerollBtn.onClick = [this] { engine.trigger(P::indexOf(P::ap_reroll)); };
     for (auto* b : { &apOnBtn, &holdMinusBtn, &holdPlusBtn, &latchBtn, &returnAllBtn, &singOnceBtn, &rerollBtn })
         addAndMakeVisible(*b);
+
+    // Field guide.
+    addChildComponent(guide);
+    guide.onSex = [this](int v) { setSex(v); };
+    guide.onAge = [this](int v) { setAge(v); };
+    guide.onSeason = [this](int v) { setSeason(v); };
+    guide.onPlayType = [this](int t) { playType(t); };
+    guide.onCompare = [this](const juce::String& id) { startCompare(id); };
 
     engine.setParam(P::indexOf(P::ap_hold), hold);
     loadIndex();
@@ -159,6 +169,7 @@ void MainComponent::loadIndex()
 {
     const auto idx = juce::JSON::parse(dataDir.getChildFile("birds").getChildFile("index.json"));
     list.groups.clear();
+    namesVerified = static_cast<bool>(idx["verified_names"]);
     if (auto* g = idx["groups"].getArray())
         for (const auto& v : *g)
             list.groups.add(v.toString());
@@ -177,11 +188,12 @@ void MainComponent::loadIndex()
             list.birds.push_back(e);
         }
     if (list.birds.empty())
-        loadError = "data/birds/index.json missing";
+        loadError = strings("error.index");
 }
 
 void MainComponent::selectBird(int index)
 {
+    stopCompare();
     const auto& e = list.birds[static_cast<std::size_t>(index)];
     const auto dir = dataDir.getChildFile("birds").getChildFile(e.id);
     auto data = std::make_unique<tipp::BirdData>();
@@ -204,6 +216,8 @@ void MainComponent::selectBird(int index)
     sono.setBird(bird.get());
     for (auto& k : knobs)
         k->setBird(bird.get());
+    guide.setBird(list.birds[static_cast<std::size_t>(index)], bird.get(), juce::JSON::parse(dir.getChildFile("bird.json")),
+                  dir.getChildFile("plate.json"), list.birds, namesVerified);
     list.repaint();
     refreshControls();
 }
@@ -224,6 +238,7 @@ void MainComponent::sendChoice(const char* id, int value)
 
 void MainComponent::setPlaying(bool on)
 {
+    stopCompare();
     playing = on;
     engine.setParam(P::indexOf(P::pb_play), on ? 1.0f : 0.0f);
     refreshControls();
@@ -242,6 +257,113 @@ bool MainComponent::typeAvailable(int type) const
         return false;
     const auto& t = bird->types[static_cast<std::size_t>(type)];
     return t.present && tipp::rulesFor(t, season, timeOfDay, sex, age).active;
+}
+
+void MainComponent::setSex(int v)
+{
+    sex = v;
+    sendChoice(P::sc_sex, v);
+    refreshControls();
+}
+
+void MainComponent::setAge(int v)
+{
+    age = v;
+    sendChoice(P::sc_age, v);
+    refreshControls();
+}
+
+void MainComponent::setSeason(int v)
+{
+    season = v;
+    sendChoice(P::sc_season, v);
+    refreshControls();
+}
+
+void MainComponent::setSongType(int v)
+{
+    stopCompare();
+    songType = v;
+    sendChoice(P::sc_type, v);
+    refreshControls();
+}
+
+// A song type's play button in the field guide: that type, playing, one
+// phrase now. Autoplay goes on as it was set.
+void MainComponent::playType(int type)
+{
+    setSongType(type);
+    setPlaying(true);
+    engine.trigger(P::indexOf(P::ap_sing_once));
+}
+
+void MainComponent::startCompare(const juce::String& otherId)
+{
+    const bool again = compare.running() && otherId == comparingId;
+    stopCompare();
+    if (again || bird == nullptr)
+        return; // a second click on the same COMPARE stops it
+
+    const auto dir = dataDir.getChildFile("birds").getChildFile(otherId);
+    auto other = std::make_unique<tipp::BirdData>();
+    std::string error;
+    if (! tipp::parseBird(otherId.toStdString(), readText(dir.getChildFile("voice.json")).toStdString(),
+                          readText(dir.getChildFile("songs.json")).toStdString(), *other, error))
+    {
+        loadError = strings.format("error.load", { { "bird", otherId.toUpperCase() }, { "error", juce::String(error) } });
+        repaint();
+        return;
+    }
+    compareBird = std::move(other);
+    comparingId = otherId;
+    compare.start(engine, bird.get(), compareBird.get(), { apOn, playing, songType }, juce::Time::getMillisecondCounterHiRes() / 1000.0);
+    refreshControls();
+}
+
+void MainComponent::stopCompare()
+{
+    compare.cancel(engine);
+    if (compareBird != nullptr)
+        retired.push_back(std::move(compareBird)); // freed once the engine lets go
+    if (comparingId.isNotEmpty())
+    {
+        comparingId = {};
+        refreshControls();
+    }
+}
+
+void MainComponent::setTab(int index)
+{
+    activeTab = juce::jlimit(0, 1, index);
+    const bool play = activeTab == 0;
+    for (juce::Component* c : std::initializer_list<juce::Component*> {
+             &plate, &maleBtn, &femaleBtn, &adultBtn, &juvBtn, &sono, &drawBtn, &shiftOffBtn, &shiftOctBtn,
+             &speedBtns[0], &speedBtns[1], &speedBtns[2], &dialectBtn, &mimicsBtn,
+             &apOnBtn, &holdMinusBtn, &holdPlusBtn, &latchBtn, &returnAllBtn, &singOnceBtn, &rerollBtn })
+        c->setVisible(play);
+    for (auto& row : scene)
+        for (auto& b : row)
+            b.setVisible(play);
+    for (auto& k : knobs)
+        k->setVisible(play);
+    guide.setVisible(! play);
+    repaint();
+}
+
+void MainComponent::mouseUp(const juce::MouseEvent& e)
+{
+    for (int i = 0; i < 2; ++i)
+        if (tabRects[static_cast<std::size_t>(i)].contains(e.getPosition()))
+            setTab(i);
+}
+
+void MainComponent::configurePlate(Plate& p)
+{
+    p.language = strings.language();
+    p.toVerify = strings("to_verify");
+    for (const char* id : { "bill", "eye_ring", "plumage", "throat", "head", "cheek", "breast", "eye_stripe", "wing" })
+        p.calloutLabels[id] = strings("plate." + juce::String(id));
+    p.repaint();
 }
 
 void MainComponent::chooseScene(const juce::String& birdId, bool female, bool juvenile)
@@ -275,6 +397,8 @@ void MainComponent::applyStrings()
     const bool no = strings.norwegian();
     enBtn.setOn(! no);
     noBtn.setOn(no);
+    enBtn.setText(strings("lang.en"));
+    noBtn.setText(strings("lang.no"));
     maleBtn.setText(strings("plate.male"));
     femaleBtn.setText(strings("plate.female"));
     adultBtn.setText(strings("plate.adult"));
@@ -302,10 +426,9 @@ void MainComponent::applyStrings()
         knob.comma = no;
         knob.repaint();
     }
-    plate.language = strings.language();
-    plate.toVerify = strings("to_verify");
-    for (const char* id : { "bill", "eye_ring", "plumage", "throat", "head", "cheek", "breast", "eye_stripe", "wing" })
-        plate.calloutLabels[id] = strings("plate." + juce::String(id));
+    configurePlate(plate);
+    configurePlate(guide.plate);
+    guide.applyStrings();
     sono.nowText = strings("song.now");
     list.repaint();
     resized();
@@ -332,6 +455,8 @@ void MainComponent::refreshControls()
             b.setOn(values[row] == i);
             b.setDisabled(row == 2 && ! typeAvailable(i));
         }
+
+    guide.setState({ sex, age, season, songType, comparingId });
 
     apOnBtn.setOn(apOn);
     apOnBtn.setText(strings(apOn ? "ap.on" : "ap.off"));
@@ -366,9 +491,18 @@ void MainComponent::timerCallback()
 
     sono.poll();
 
+    if (compare.running())
+    {
+        compare.tick(engine, juce::Time::getMillisecondCounterHiRes() / 1000.0);
+        if (! compare.running())
+            stopCompare();
+        repaint(statusArea);
+    }
+
     const float target = juce::jlimit(0.0f, 1.0f, engine.birdLevel() / 0.35f);
     plateOpen += (target - plateOpen) * 0.6f;
     plate.setOpen(plateOpen);
+    guide.plate.setOpen(plateOpen);
 
     float l = 0.0f, r = 0.0f;
     engine.takePeaks(l, r);
@@ -449,6 +583,11 @@ bool MainComponent::keyPressed(const juce::KeyPress& key)
         setPlaying(! playing);
         return true;
     }
+    if (key == juce::KeyPress::F1Key || key == juce::KeyPress::F2Key)
+    {
+        setTab(key == juce::KeyPress::F1Key ? 0 : 1);
+        return true;
+    }
     if (key == juce::KeyPress::upKey || key == juce::KeyPress::downKey)
     {
         stepBird(key == juce::KeyPress::upKey ? -1 : 1);
@@ -499,6 +638,20 @@ void MainComponent::resized()
     asideArea = bodyArea.removeFromLeft(240);
     list.setBounds(asideArea.withTrimmedRight(1).reduced(8).withTrimmedTop(20));
     mainArea = bodyArea.reduced(8);
+    guide.setBounds(bodyArea);
+
+    // Tabs: widths follow their labels.
+    {
+        const auto label = mono(10.0f, 600, 0.14f);
+        const auto keyFont = mono(10.0f, 400, 0.14f);
+        int x = tabsArea.getX() + 8;
+        for (int i = 0; i < 6; ++i)
+        {
+            const int w = 16 + textW(label, strings("tab." + juce::String(kTabKeys[i]))) + 8 + textW(keyFont, "F" + juce::String(i + 1)) + 16;
+            tabRects[static_cast<std::size_t>(i)] = { x, tabsArea.getY(), w, tabsArea.getHeight() };
+            x += w - 1;
+        }
+    }
 
     auto m = mainArea;
     auto displays = m.removeFromTop(384);
@@ -655,8 +808,11 @@ void MainComponent::paint(juce::Graphics& g)
     g.fillRect(asideArea.getRight() - 1, asideArea.getY(), 1, asideArea.getHeight());
     draw::sectionLabel(g, asideArea.withTrimmedRight(1).reduced(8).withHeight(14), strings("list.birds"));
 
-    paintPanels(g);
-    paintAutoplay(g);
+    if (activeTab == 0)
+    {
+        paintPanels(g);
+        paintAutoplay(g);
+    }
     paintStatus(g);
 
     g.setColour(colour::ink);
@@ -705,8 +861,8 @@ void MainComponent::paintHeader(juce::Graphics& g)
     // Output level and meter.
     draw::inset(g, outReadoutArea);
     const float db = meterPeak > 1.0e-5f ? 20.0f * std::log10(meterPeak) : -100.0f;
-    const juce::String dbText = db <= -99.0f ? juce::String(juce::CharPointer_UTF8("\xe2\x88\x92\xe2\x88\x9e dB"))
-                                             : number(db, 1, strings.norwegian()) + " dB";
+    const juce::String dbText = (db <= -99.0f ? juce::String(juce::CharPointer_UTF8("\xe2\x88\x92\xe2\x88\x9e"))
+                                              : number(db, 1, strings.norwegian())) + " " + strings("unit.db");
     g.setFont(mono(12.0f, 500));
     g.setColour(colour::ink);
     g.drawText(dbText, outReadoutArea.reduced(6, 0), juce::Justification::centredRight, false);
@@ -730,19 +886,19 @@ void MainComponent::paintTabs(juce::Graphics& g)
 
     const auto label = mono(10.0f, 600, 0.14f);
     const auto key = mono(10.0f, 400, 0.14f);
-    int x = tabsArea.getX() + 8;
     for (int i = 0; i < 6; ++i)
     {
         const auto text = strings("tab." + juce::String(kTabKeys[i]));
         const auto fkey = "F" + juce::String(i + 1);
-        const int w = 16 + textW(label, text) + 8 + textW(key, fkey) + 16;
-        const bool active = i == 0;
+        const int x = tabRects[static_cast<std::size_t>(i)].getX();
+        const int w = tabRects[static_cast<std::size_t>(i)].getWidth();
+        const bool active = i == activeTab;
         const int h = active ? 30 : 26;
         const juce::Rectangle<int> tab(x, tabsArea.getBottom() - 1 - h + (active ? 1 : 0), w, h);
         g.setColour(active ? colour::ground : colour::panel);
         g.fillRect(tab);
-        if (! active)
-            draw::hatch(g, tab); // only Play is built
+        if (i > 1)
+            draw::hatch(g, tab); // Play and Field guide are built
         g.setColour(colour::ink);
         g.fillRect(tab.getX(), tab.getY(), tab.getWidth(), 1);
         g.fillRect(tab.getX(), tab.getY(), 1, tab.getHeight() - (active ? 1 : 0));
@@ -759,7 +915,6 @@ void MainComponent::paintTabs(juce::Graphics& g)
         g.setColour(colour::inkSoft);
         g.setFont(key);
         g.drawText(fkey, t.withTrimmedLeft(textW(label, text) + 8), juce::Justification::centredLeft, false);
-        x += w - 1;
     }
 }
 
@@ -818,17 +973,17 @@ void MainComponent::paintPanels(juce::Graphics& g)
     const auto& ph = sono.lastPhrase();
     const float tempo = std::max(0.25f, engine.phraseTempo());
     g.drawText(ph.number > 0 ? juce::String(ph.number) : juce::String("-"), phraseValue, juce::Justification::centredLeft, false);
-    g.drawText(ph.number > 0 ? number(ph.lengthMs / tempo / 1000.0f, 1, no) + " s" : juce::String("-"), lengthValue,
+    g.drawText(ph.number > 0 ? number(ph.lengthMs / tempo / 1000.0f, 1, no) + " " + strings("unit.s") : juce::String("-"), lengthValue,
                juce::Justification::centredLeft, false);
 
     // kHz axis and the well's left edge.
     g.setFont(mono(9.0f, 400));
     g.setColour(colour::inkSoft);
-    const char* khz[5] = { "8k", "6k", "4k", "2k", "0" };
     for (int i = 0; i < 5; ++i)
     {
         const int y = i < 4 ? axisArea.getY() + 2 + 80 * i : axisArea.getBottom() - 14;
-        g.drawText(khz[i], juce::Rectangle<int>(axisArea.getX(), y, axisArea.getWidth() - 4, 12), juce::Justification::centredRight, false);
+        const auto khz = i < 4 ? strings.format("axis.khz", { { "n", juce::String(8 - 2 * i) } }) : juce::String("0");
+        g.drawText(khz, juce::Rectangle<int>(axisArea.getX(), y, axisArea.getWidth() - 4, 12), juce::Justification::centredRight, false);
     }
     g.setColour(colour::ink);
     g.fillRect(sonoArea.getX() - 1, sonoArea.getY(), 1, sonoArea.getHeight());
@@ -837,7 +992,7 @@ void MainComponent::paintPanels(juce::Graphics& g)
     g.fillRect(timeAxis.getX() + 28, timeAxis.getY(), timeAxis.getWidth() - 28, 1);
     g.setColour(colour::inkSoft);
     for (int s = 0; s <= 8; ++s)
-        g.drawText(s == 0 ? juce::String("0 s") : juce::String(s), juce::Rectangle<int>(sonoArea.getX() + 2 + 80 * s, timeAxis.getY() + 1, 60, 14),
+        g.drawText(s == 0 ? "0 " + strings("unit.s") : juce::String(s), juce::Rectangle<int>(sonoArea.getX() + 2 + 80 * s, timeAxis.getY() + 1, 60, 14),
                    juce::Justification::centredLeft, false);
 
     g.setColour(colour::ink);
@@ -885,7 +1040,7 @@ void MainComponent::paintAutoplay(juce::Graphics& g)
     draw::inset(g, holdReadout);
     g.setFont(mono(12.0f, 500));
     g.setColour(colour::ink);
-    g.drawText(number(hold, 1, no) + " s", holdReadout.reduced(6, 0), juce::Justification::centredRight, false);
+    g.drawText(number(hold, 1, no) + " " + strings("unit.s"), holdReadout.reduced(6, 0), juce::Justification::centredRight, false);
 
     // Legend: the two ring colours, and the countdown for the held knob.
     const auto f = mono(10.0f, 500, 0.06f);
@@ -918,7 +1073,7 @@ void MainComponent::paintAutoplay(juce::Graphics& g)
     {
         const float frac = hold > 0.0f ? juce::jlimit(0.0f, 1.0f, left / hold) : 0.0f;
         g.fillRect(bar.getX(), bar.getY(), juce::roundToInt(72.0f * frac), 8);
-        g.drawText(number(left, 1, no) + " s", juce::Rectangle<int>(bar.getRight() + 8, line2.getY(), 60, 14), juce::Justification::centredLeft, false);
+        g.drawText(number(left, 1, no) + " " + strings("unit.s"), juce::Rectangle<int>(bar.getRight() + 8, line2.getY(), 60, 14), juce::Justification::centredLeft, false);
     }
     else
     {
@@ -948,6 +1103,12 @@ void MainComponent::paintStatus(juce::Graphics& g)
         g.drawText(t, r.removeFromRight(textW(f, t) + 2), juce::Justification::centredRight, false);
         r.removeFromRight(14);
     }
-    g.drawText(loadError.isNotEmpty() ? loadError : sceneSummary(true), r, juce::Justification::centredLeft, false);
+    juce::String summary = sceneSummary(true);
+    if (compare.running() && currentEntry() != nullptr)
+        for (const auto& b : list.birds)
+            if (b.id == comparingId)
+                summary = strings.format("status.comparing", { { "a", currentEntry()->name(strings.norwegian()).toUpperCase() },
+                                                                { "b", b.name(strings.norwegian()).toUpperCase() } });
+    g.drawText(loadError.isNotEmpty() ? loadError : summary, r, juce::Justification::centredLeft, false);
 }
 } // namespace tipp::ui

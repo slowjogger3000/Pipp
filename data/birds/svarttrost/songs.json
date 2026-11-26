@@ -38,11 +38,11 @@
       },
       "phrases": [
         { "weight": 3, "sections": [
-          { "pool": ["fa", "fb", "fc", "fd", "fe", "ff", "fg", "fh", "fi", "fj"], "count": [2, 6], "share": 0.7, "gap_ms": [30, 110] },
-          { "pool": ["ta", "tb", "tc", "td", "te"], "count": [2, 8], "share": 0.3, "chance": 0.8, "gap_ms": [8, 35], "lead_gap_ms": [60, 150] }
+          { "part": "motifs", "pool": ["fa", "fb", "fc", "fd", "fe", "ff", "fg", "fh", "fi", "fj"], "count": [2, 6], "share": 0.7, "gap_ms": [30, 110] },
+          { "part": "twitter", "pool": ["ta", "tb", "tc", "td", "te"], "count": [2, 8], "share": 0.3, "chance": 0.8, "gap_ms": [8, 35], "lead_gap_ms": [60, 150] }
         ] },
         { "weight": 1, "sections": [
-          { "pool": ["fa", "fb", "fc", "fd", "fe", "ff", "fg", "fh", "fi", "fj"], "count": [3, 7], "share": 1.0, "gap_ms": [30, 110] }
+          { "part": "motifs", "pool": ["fa", "fb", "fc", "fd", "fe", "ff", "fg", "fh", "fi", "fj"], "count": [3, 7], "share": 1.0, "gap_ms": [30, 110] }
         ] }
       ],
       "overrides": [

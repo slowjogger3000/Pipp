@@ -87,6 +87,7 @@ public:
         float startMs = 0.0f; // data time
         float durMs = 0.0f;
         float pitchMul = 1.0f;
+        int part = -1; // BirdData::parts index, -1 for none
     };
     struct PhraseView
     {
@@ -111,6 +112,7 @@ private:
         float durMs = 0.0f;
         float pitchMul = 1.0f;
         float gain = 1.0f;
+        int part = -1;
     };
 
     struct Phrase
@@ -168,7 +170,7 @@ private:
     std::atomic<std::uint32_t> pvNumber { 0u };
     std::atomic<int> pvCount { 0 };
     std::atomic<float> pvLength { 0.0f };
-    std::array<std::atomic<int>, kMaxNotes> pvSyl;
+    std::array<std::atomic<int>, kMaxNotes> pvSyl, pvPart;
     std::array<std::atomic<float>, kMaxNotes> pvStart, pvDur, pvMul;
     std::atomic<bool> singingOut { false };
     std::atomic<float> posOut { 0.0f }, tempoOut { 1.0f };

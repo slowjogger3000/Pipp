@@ -4,6 +4,10 @@
 //   tipp-render --bird svarttrost --type call --seed 7 --set su_distance=60 --out out/x.wav
 //   tipp-render --list-params
 //   tipp-render --bird svarttrost --check-override
+//   tipp-render --bird blameis --compare kjottmeis --out out/compare.wav
+//
+// --compare runs the field guide's COMPARE: one phrase of --bird, a gap,
+// one phrase of the other bird, then stop. The file ends when it is done.
 //
 // --set id=value holds a knob by hand for the whole render, or sets any
 // other parameter. Choices take their option id: --set sc_time=dusk.
@@ -11,6 +15,7 @@
 // Exit codes: 0 all checks pass, 1 a check failed, 2 bad arguments or I/O.
 
 #include "BirdData.h"
+#include "Compare.h"
 #include "Engine.h"
 #include "Params.h"
 #include "WavWriter.h"
@@ -66,7 +71,8 @@ void usage()
         "usage: tipp-render --bird <id> [--type song|call|alarm|flight] [--seconds <s>]\n"
         "                   [--seed <n>] [--set <id>=<value>]... [--data <dir>] --out <file.wav>\n"
         "       tipp-render --list-params\n"
-        "       tipp-render --bird <id> --check-override\n");
+        "       tipp-render --bird <id> --check-override\n"
+        "       tipp-render --bird <id> --compare <other id> [--seconds <max s>] --out <file.wav>\n");
 }
 
 bool readFile(const std::string& path, std::string& out)
@@ -213,7 +219,7 @@ int checkOverride(const tipp::BirdData& bird)
 int main(int argc, char** argv)
 {
     double seconds = 30.0;
-    std::string outPath, birdId, type = "song", dataDir;
+    std::string outPath, birdId, type = "song", dataDir, compareId;
     std::uint32_t seed = 1u;
     std::vector<std::pair<std::string, std::string>> sets;
     bool overrideCheck = false;
@@ -231,6 +237,7 @@ int main(int argc, char** argv)
         else if (a == "--data" && hasValue)    dataDir = argv[++i];
         else if (a == "--out" && hasValue)     outPath = argv[++i];
         else if (a == "--check-override")      overrideCheck = true;
+        else if (a == "--compare" && hasValue) compareId = argv[++i];
         else if (a == "--set" && hasValue)
         {
             const std::string kv = argv[++i];
@@ -282,6 +289,23 @@ int main(int argc, char** argv)
     if (overrideCheck)
         return checkOverride(bird);
 
+    tipp::BirdData other;
+    if (! compareId.empty())
+    {
+        const std::string otherDir = dataDir + "/birds/" + compareId + "/";
+        std::string v2, s2;
+        if (! readFile(otherDir + "voice.json", v2) || ! readFile(otherDir + "songs.json", s2))
+        {
+            std::fprintf(stderr, "cannot read %svoice.json or songs.json\n", otherDir.c_str());
+            return 2;
+        }
+        if (! tipp::parseBird(compareId, v2, s2, other, error))
+        {
+            std::fprintf(stderr, "%s: %s\n", compareId.c_str(), error.c_str());
+            return 2;
+        }
+    }
+
     namespace P = tipp::params;
     tipp::Engine engine;
     engine.setSeed(seed);
@@ -319,18 +343,47 @@ int main(int argc, char** argv)
     engine.setParam(P::indexOf(P::pb_play), 1.0f);
 
     // Play stops 100 ms before the end; the engine fades out in 30 ms.
-    const auto frames = static_cast<std::size_t>(seconds * kSampleRate);
+    auto frames = static_cast<std::size_t>(seconds * kSampleRate);
     const auto stopAt = frames - static_cast<std::size_t>(0.1 * kSampleRate);
 
     std::vector<float> left(frames), right(frames);
 
+    // COMPARE is ticked once per block, as an interface timer would.
+    tipp::Compare compare;
+    const bool comparing = ! compareId.empty();
+    bool sawFirst = false, sawSecond = false;
+    std::size_t doneAt = 0;
+    if (comparing)
+        compare.start(engine, &bird, &other, { true, false, tipp::kSong }, 0.0);
+
     for (std::size_t pos = 0; pos < frames; pos += kBlock)
     {
-        if (pos >= stopAt)
+        if (comparing)
+        {
+            compare.tick(engine, static_cast<double>(pos) / kSampleRate);
+            sawFirst = sawFirst || compare.stage() == 1;
+            sawSecond = sawSecond || compare.stage() == 2;
+            if (! compare.running() && doneAt == 0)
+                doneAt = pos;
+            // Restore turned play off: keep 100 ms for the fade, then end the file.
+            if (doneAt > 0 && pos >= doneAt + static_cast<std::size_t>(0.1 * kSampleRate))
+            {
+                frames = pos;
+                break;
+            }
+        }
+        else if (pos >= stopAt)
             engine.setParam(P::indexOf(P::pb_play), 0.0f);
         const int n = static_cast<int>(std::min<std::size_t>(kBlock, frames - pos));
         engine.process(left.data() + pos, right.data() + pos, n);
     }
+    if (comparing && compare.running())
+    {
+        compare.cancel(engine);
+        std::fprintf(stderr, "compare did not finish in %.1f s\n", seconds);
+    }
+    left.resize(frames);
+    right.resize(frames);
 
     // Checks.
     std::size_t nonFinite = 0;
@@ -376,7 +429,7 @@ int main(int argc, char** argv)
     };
 
     std::printf("%s: %s %s, %.2f s, seed %u, %u phrases, rms %.4f\n",
-                outPath.c_str(), birdId.c_str(), type.c_str(), seconds, engine.seed(),
+                outPath.c_str(), birdId.c_str(), type.c_str(), static_cast<double>(frames) / kSampleRate, engine.seed(),
                 engine.phrasesStarted(), static_cast<double>(rms));
     report("finite", nonFinite == 0, "%.0f non-finite samples (limit %.0f)", static_cast<double>(nonFinite), 0.0);
     report("peak", peak < kMaxPeak, "%.4f (limit %.2f)", static_cast<double>(peak), static_cast<double>(kMaxPeak));
@@ -384,6 +437,12 @@ int main(int argc, char** argv)
     report("start", edgeStart <= kEdgeLimit, "%.6f (limit %.3f)", static_cast<double>(edgeStart), static_cast<double>(kEdgeLimit));
     report("end", edgeEnd <= kEdgeLimit, "%.6f (limit %.3f)", static_cast<double>(edgeEnd), static_cast<double>(kEdgeLimit));
     report("sang", engine.phrasesStarted() > 0 && rms >= kMinRms, "rms %.4f (minimum %.3f)", static_cast<double>(rms), static_cast<double>(kMinRms));
+    if (comparing)
+    {
+        report("compare", sawFirst && sawSecond && doneAt > 0 && engine.phrasesStarted() == 2u,
+               "%.0f phrases, both birds, finished (need %.0f)", static_cast<double>(engine.phrasesStarted()), 2.0);
+        report("restored", engine.birdInUse() == &bird, "%.0f (first bird back: %.0f)", engine.birdInUse() == &bird ? 1.0 : 0.0, 1.0);
+    }
 
     return ok ? 0 : 1;
 }

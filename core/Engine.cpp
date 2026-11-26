@@ -55,6 +55,7 @@ Engine::Engine()
     {
         const auto u = static_cast<std::size_t>(i);
         pvSyl[u].store(0, std::memory_order_relaxed);
+        pvPart[u].store(-1, std::memory_order_relaxed);
         pvStart[u].store(0.0f, std::memory_order_relaxed);
         pvDur[u].store(0.0f, std::memory_order_relaxed);
         pvMul[u].store(1.0f, std::memory_order_relaxed);
@@ -196,6 +197,7 @@ bool Engine::readPhrase(PhraseView& out) const noexcept
         out.notes[u].startMs = pvStart[u].load(std::memory_order_relaxed);
         out.notes[u].durMs = pvDur[u].load(std::memory_order_relaxed);
         out.notes[u].pitchMul = pvMul[u].load(std::memory_order_relaxed);
+        out.notes[u].part = pvPart[u].load(std::memory_order_relaxed);
     }
     std::atomic_thread_fence(std::memory_order_acquire);
     return pvSeq.load(std::memory_order_relaxed) == s1;
@@ -216,6 +218,7 @@ void Engine::publishPhrase() noexcept
         pvStart[u].store(cur.notes[u].startMs, std::memory_order_relaxed);
         pvDur[u].store(cur.notes[u].durMs, std::memory_order_relaxed);
         pvMul[u].store(cur.notes[u].pitchMul, std::memory_order_relaxed);
+        pvPart[u].store(cur.notes[u].part, std::memory_order_relaxed);
     }
     pvSeq.store(s + 2u, std::memory_order_release);
 }
@@ -479,6 +482,7 @@ void Engine::generatePhrase(const SongType& type) noexcept
                 note.durMs = s.durMs * (1.0f + 0.18f * var * rng.bipolar());
                 note.pitchMul = std::exp2((transpose + 0.6f * var * rng.bipolar()) / 12.0f);
                 note.gain = s.gain * (1.0f - 0.25f * var * rng.unit());
+                note.part = sec.part;
                 t += note.durMs;
                 ++count;
                 sig = (sig ^ static_cast<std::uint32_t>(syl + 1)) * 16777619u;

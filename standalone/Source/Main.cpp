@@ -2,7 +2,8 @@
 //
 // Test hook, used by the M2 checks:
 //   Tipp --snapshot <file.png> [--seconds <s>] [--hand <knob id>] [--lang no]
-//        [--bird <id>] [--sex female] [--age juvenile]
+//        [--bird <id>] [--sex female] [--age juvenile] [--tab guide]
+//        [--compare <id>]
 // plays for the given time, drags the knob 3 s before the end if asked,
 // saves a picture of the window and quits.
 
@@ -36,10 +37,15 @@ public:
         {
             if (const auto bird = value("--bird"); bird.isNotEmpty())
                 content->chooseScene(bird, value("--sex") == "female", value("--age") == "juvenile");
+            if (value("--tab") == "guide")
+                content->setTab(1);
             const auto secs = value("--seconds");
             const int knob = tipp::params::indexOf(value("--hand").toRawUTF8());
             content->runSnapshot(juce::File::getCurrentWorkingDirectory().getChildFile(png),
                                  secs.isNotEmpty() ? secs.getDoubleValue() : 8.0, knob >= 0 && knob < tipp::kNumKnobs ? knob : -1);
+            // After runSnapshot: its Play would stop a comparison.
+            if (const auto other = value("--compare"); other.isNotEmpty())
+                content->compareWith(other);
         }
     }
 

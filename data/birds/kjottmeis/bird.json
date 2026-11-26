@@ -1,0 +1,119 @@
+{
+ "_note": "Field guide text for this bird, both languages. Facts come from birds.md. A field with verified false shows [TO VERIFY]; a text may also carry the marker inline for the part that is not checked. Norwegian wording is mine, Eirik to check. calendar rows: one letter per month from January, y yes, n no, ? not known.",
+ "xeno_canto": "https://xeno-canto.org/species/parus-major",
+ "facts": {
+  "length": {
+   "en": "15 cm, 15 to 22 g",
+   "no": "15 cm, 15 til 22 g",
+   "verified": true
+  },
+  "broods": {
+   "en": "Usually 2, April to July",
+   "no": "Vanligvis 2, april til juli",
+   "verified": true
+  },
+  "range": {
+   "en": "The whole country, in forest",
+   "no": "Hele landet, i skog",
+   "verified": true
+  },
+  "habitat": {
+   "en": "All forest, gardens with nest boxes",
+   "no": "All slags skog, hager med fuglekasser",
+   "verified": true
+  },
+  "food": {
+   "en": "Insects; seeds and feeders in winter",
+   "no": "Insekter; frø og fôringsbrett om vinteren",
+   "verified": true
+  },
+  "status": {
+   "en": "LC, viable, Norwegian red list",
+   "no": "LC, livskraftig, norsk rødliste",
+   "verified": true
+  },
+  "nest": {
+   "en": "Tree holes and nest boxes, 6 to 13 eggs",
+   "no": "Trehull og fuglekasser, 6 til 13 egg",
+   "verified": true
+  }
+ },
+ "sings": {
+  "male": {
+   "en": "Sings",
+   "no": "Synger",
+   "verified": false
+  },
+  "female": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "song_notes": {
+  "en": "Repeated whistled phrases of 1 to about 6 syllables, most often 2 or 3, such as “tu-ti tu-ti tu-ti”. A large repertoire. Can start singing as early as January; territories are set up in February and March.",
+  "no": "Gjentatte, plystrende fraser på 1 til rundt 6 stavelser, oftest 2 eller 3, som «tu-ti tu-ti tu-ti». Stort repertoar. Kan begynne å synge allerede i januar; reviret etableres i februar og mars.",
+  "verified": true
+ },
+ "mnemonic": {
+  "en": "",
+  "no": "",
+  "verified": false
+ },
+ "types": {
+  "song": {
+   "en": "Repeated “tu-ti tu-ti tu-ti”, sometimes from January.",
+   "no": "Gjentatt «tu-ti tu-ti tu-ti», noen ganger fra januar.",
+   "verified": true
+  },
+  "call": {
+   "en": "“ping ping”, like the chaffinch. Also “huit huit” and “ti tuui”.",
+   "no": "«ping ping», som bokfinken. Også «huit huit» og «ti tuui».",
+   "verified": true
+  },
+  "alarm": {
+   "en": "A sharp startle call, “pist! pist!”",
+   "no": "Et skarpt skremmerop, «pist! pist!»",
+   "verified": true
+  },
+  "flight": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "parts": {
+  "motif": {
+   "en": "REPEATED MOTIF",
+   "no": "GJENTATT MOTIV",
+   "verified": true
+  }
+ },
+ "calendar": {
+  "present": "yyyyyyyyyyyy",
+  "sings": "yyy?????????",
+  "note": {
+   "en": "Mostly resident. Some move in September and October, mostly within Scandinavia. [TO VERIFY] singing months after March.",
+   "no": "For det meste standfugl. Noen trekker i september og oktober, mest innen Skandinavia. [TO VERIFY] månedene med sang etter mars.",
+   "verified": true
+  }
+ },
+ "lookalikes": [
+  {
+   "id": "blameis",
+   "text": {
+    "en": "Smaller, blue crown. Sings a trill, “sit-sitt-sirrrrr”.",
+    "no": "Mindre, blå isse. Synger en trille, «sit-sitt-sirrrrr».",
+    "verified": true
+   }
+  },
+  {
+   "id": "bokfink",
+   "text": {
+    "en": "Its call is like the great tit's “ping ping”.",
+    "no": "Lokkelyden ligner kjøttmeisens «ping ping».",
+    "verified": true
+   }
+  }
+ ]
+}

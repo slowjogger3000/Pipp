@@ -1,0 +1,138 @@
+{
+ "_note": "Field guide text for this bird, both languages. Facts come from birds.md. A field with verified false shows [TO VERIFY]; a text may also carry the marker inline for the part that is not checked. Norwegian wording is mine, Eirik to check. calendar rows: one letter per month from January, y yes, n no, ? not known.",
+ "xeno_canto": "https://xeno-canto.org/species/turdus-merula",
+ "facts": {
+  "length": {
+   "en": "About 25 cm",
+   "no": "Omtrent 25 cm",
+   "verified": true
+  },
+  "broods": {
+   "en": "Often 2 in a season",
+   "no": "Ofte 2 kull i sesongen",
+   "verified": true
+  },
+  "range": {
+   "en": "Common north to Trøndelag",
+   "no": "Vanlig nord til Trøndelag",
+   "verified": true
+  },
+  "habitat": {
+   "en": "Woods with undergrowth, also towns",
+   "no": "Skog med underskog, også byer",
+   "verified": true
+  },
+  "food": {
+   "en": "Insects, snails, earthworms, berries",
+   "no": "Insekter, snegler, meitemark, bær",
+   "verified": true
+  },
+  "status": {
+   "en": "LC, viable, Norwegian red list",
+   "no": "LC, livskraftig, norsk rødliste",
+   "verified": true
+  },
+  "nest": {
+   "en": "Cup in a bush or low tree, 4 to 6 eggs",
+   "no": "Skål i busk eller lavt tre, 4 til 6 egg",
+   "verified": true
+  }
+ },
+ "sings": {
+  "male": {
+   "en": "Sings",
+   "no": "Synger",
+   "verified": true
+  },
+  "female": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "song_notes": {
+  "en": "Mellow, melodious song of fluting tones, often at a slow pace. Unlike the song thrush, the blackbird does not repeat its phrases, and the song varies a lot from bird to bird. [TO VERIFY] phrase length and the twitter ending.",
+  "no": "Myk, melodiøs sang med fløytende toner, ofte i rolig tempo. I motsetning til måltrosten gjentar ikke svarttrosten frasene sine, og sangen varierer mye fra fugl til fugl. [TO VERIFY] fraselengde og kvitringen på slutten.",
+  "verified": true
+ },
+ "mnemonic": {
+  "en": "",
+  "no": "",
+  "verified": false
+ },
+ "types": {
+  "song": {
+   "en": "Often from a treetop, mostly early morning and late evening, from February.",
+   "no": "Ofte fra en tretopp, mest tidlig morgen og sent på kvelden, fra februar.",
+   "verified": true
+  },
+  "call": {
+   "en": "A metallic, monotonous “pink pink pink” at dusk before roosting, or when disturbed.",
+   "no": "Et metallisk, ensformig «pink pink pink» i skumringen før natten, eller når den blir forstyrret.",
+   "verified": true
+  },
+  "alarm": {
+   "en": "A loud alarm call. [TO VERIFY] how it sounds.",
+   "no": "Et høyt varselrop. [TO VERIFY] hvordan det låter.",
+   "verified": true
+  },
+  "flight": {
+   "en": "Migrates alone at night. No flight call in the sources checked.",
+   "no": "Trekker alene om natten. Ingen fluktlyd i kildene som er lest.",
+   "verified": false
+  }
+ },
+ "parts": {
+  "motifs": {
+   "en": "FLUTED MOTIFS",
+   "no": "FLØYTENDE MOTIV",
+   "verified": true
+  },
+  "twitter": {
+   "en": "TWITTER",
+   "no": "KVITRING",
+   "verified": false
+  }
+ },
+ "calendar": {
+  "present": "yyyyyyyyyyyy",
+  "sings": "ny??????????",
+  "note": {
+   "en": "Most leave in autumn and return in late March. Many males winter in the lowlands on berries and fruit. [TO VERIFY] last singing month.",
+   "no": "De fleste drar om høsten og kommer tilbake i slutten av mars. Mange hanner overvintrer i lavlandet på bær og frukt. [TO VERIFY] siste måned med sang.",
+   "verified": true
+  }
+ },
+ "lookalikes": [
+  {
+   "id": "maltrost",
+   "text": {
+    "en": "Repeats its phrases. The blackbird does not.",
+    "no": "Gjentar frasene sine. Svarttrosten gjør det ikke.",
+    "verified": true
+   }
+  },
+  {
+   "name": {
+    "en": "Mistle thrush",
+    "no": "Duetrost"
+   },
+   "text": {
+    "en": "Shorter, faster phrases with short pauses and less variation.",
+    "no": "Kortere, raskere fraser med korte pauser og mindre variasjon.",
+    "verified": false
+   }
+  },
+  {
+   "name": {
+    "en": "Starling",
+    "no": "Stær"
+   },
+   "text": {
+    "en": "Song is a run of whistles, clicks and mimicry.",
+    "no": "Sangen er en strøm av plystring, klikk og hermelyder.",
+    "verified": false
+   }
+  }
+ ]
+}

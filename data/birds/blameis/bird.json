@@ -1,0 +1,126 @@
+{
+ "_note": "Field guide text for this bird, both languages. Facts come from birds.md. A field with verified false shows [TO VERIFY]; a text may also carry the marker inline for the part that is not checked. Norwegian wording is mine, Eirik to check. calendar rows: one letter per month from January, y yes, n no, ? not known.",
+ "xeno_canto": "https://xeno-canto.org/species/cyanistes-caeruleus",
+ "facts": {
+  "length": {
+   "en": "About 12 cm, 10 to 13 g",
+   "no": "Omtrent 12 cm, 10 til 13 g",
+   "verified": true
+  },
+  "broods": {
+   "en": "One, in some years two",
+   "no": "Ett, noen år to",
+   "verified": true
+  },
+  "range": {
+   "en": "North to Finnmark, sparser there",
+   "no": "Nord til Finnmark, sjeldnere der",
+   "verified": true
+  },
+  "habitat": {
+   "en": "Lowland deciduous and mixed forest",
+   "no": "Løv- og blandingsskog i lavlandet",
+   "verified": true
+  },
+  "food": {
+   "en": "Insects and spiders; seeds in winter",
+   "no": "Insekter og edderkopper; frø om vinteren",
+   "verified": true
+  },
+  "status": {
+   "en": "LC, viable, Norwegian red list",
+   "no": "LC, livskraftig, norsk rødliste",
+   "verified": true
+  },
+  "nest": {
+   "en": "Holes and nest boxes, 8 to 12 eggs",
+   "no": "Hull og fuglekasser, 8 til 12 egg",
+   "verified": true
+  }
+ },
+ "sings": {
+  "male": {
+   "en": "Sings",
+   "no": "Synger",
+   "verified": false
+  },
+  "female": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "song_notes": {
+  "en": "A trill-like series, “sit-sitt-sirrrrrrr”. Also a chattering series that opens with a couple of whistles.",
+  "no": "En trilleaktig rekke, «sit-sitt-sirrrrrrr». Også en skravlende rekke som åpner med et par plystretoner.",
+  "verified": true
+ },
+ "mnemonic": {
+  "en": "",
+  "no": "",
+  "verified": false
+ },
+ "types": {
+  "song": {
+   "en": "“sit-sitt-sirrrrrrr”, or a couple of whistles and a chatter.",
+   "no": "«sit-sitt-sirrrrrrr», eller et par plystretoner og skravling.",
+   "verified": true
+  },
+  "call": {
+   "en": "Short sharp “sits”, a rasping “sits it pæ-pæ-pæ”, and “spitt spitt”.",
+   "no": "Korte, skarpe «sits», et raspende «sits it pæ-pæ-pæ» og «spitt spitt».",
+   "verified": true
+  },
+  "alarm": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "flight": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "parts": {
+  "si": {
+   "en": "SIT NOTES",
+   "no": "SIT-TONER",
+   "verified": true
+  },
+  "trill": {
+   "en": "TRILL",
+   "no": "TRILLE",
+   "verified": true
+  },
+  "whistles": {
+   "en": "WHISTLES",
+   "no": "PLYSTRING",
+   "verified": true
+  },
+  "chatter": {
+   "en": "CHATTER",
+   "no": "SKRAVLING",
+   "verified": true
+  }
+ },
+ "calendar": {
+  "present": "yyyyyyyyyyyy",
+  "sings": "????????????",
+  "note": {
+   "en": "Mostly resident. In some years many move south in September and October, mostly young females. [TO VERIFY] singing months.",
+   "no": "For det meste standfugl. Noen år trekker mange sørover i september og oktober, mest unge hunner. [TO VERIFY] månedene med sang.",
+   "verified": true
+  }
+ },
+ "lookalikes": [
+  {
+   "id": "kjottmeis",
+   "text": {
+    "en": "Bigger, black head, yellow breast with a black stripe. Sings repeated “tu-ti tu-ti”.",
+    "no": "Større, svart hode, gult bryst med svart stripe. Synger gjentatt «tu-ti tu-ti».",
+    "verified": true
+   }
+  }
+ ]
+}

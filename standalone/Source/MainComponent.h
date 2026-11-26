@@ -6,6 +6,7 @@
 // publishes. No song or override logic lives here.
 
 #include "UI/BirdList.h"
+#include "UI/GuideScreen.h"
 #include "UI/Knob.h"
 #include "UI/Plate.h"
 #include "UI/Sonogram.h"
@@ -13,6 +14,7 @@
 #include "UI/Widgets.h"
 
 #include "BirdData.h"
+#include "Compare.h"
 #include "Engine.h"
 
 #include <juce_audio_utils/juce_audio_utils.h>
@@ -40,6 +42,11 @@ public:
     // Test hook: play for `seconds`, optionally drag a knob near the end,
     // save a snapshot and quit.
     void runSnapshot(const juce::File& png, double seconds, int handKnob);
+    // 0 Play, 1 Field guide. The other tabs are not built yet.
+    void setTab(int index);
+    // Test hook: COMPARE with a lookalike, as its button does.
+    void compareWith(const juce::String& id) { startCompare(id); }
+    void mouseUp(const juce::MouseEvent& e) override;
     void setLanguage(const juce::String& lang);
     // Test hook: pick a bird by id and a plate variant before a snapshot.
     void chooseScene(const juce::String& birdId, bool female, bool juvenile);
@@ -55,6 +62,14 @@ private:
     void sendChoice(const char* id, int value);
     void setPlaying(bool on);
     void refreshControls();
+    void setSex(int v);
+    void setAge(int v);
+    void setSeason(int v);
+    void setSongType(int v);
+    void playType(int type);
+    void startCompare(const juce::String& otherId);
+    void stopCompare();
+    void configurePlate(Plate& p);
     bool typeAvailable(int type) const;
     juce::String variant() const;
     juce::String sceneSummary(bool caps) const;
@@ -118,6 +133,15 @@ private:
     std::array<juce::Rectangle<int>, 6> sceneFieldLabels;
     std::array<juce::Rectangle<int>, 3> knobGroupLabels;
     juce::Rectangle<int> apBand, apTitle, holdLabel, holdReadout, legendArea;
+
+    // Field guide and its COMPARE.
+    int activeTab = 0;
+    std::array<juce::Rectangle<int>, 6> tabRects;
+    GuideScreen guide { strings };
+    bool namesVerified = false;
+    tipp::Compare compare;
+    std::unique_ptr<tipp::BirdData> compareBird; // alive while compare runs
+    juce::String comparingId;
 
     // Snapshot test.
     juce::File snapshotFile;

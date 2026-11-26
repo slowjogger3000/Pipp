@@ -2,6 +2,8 @@
 add_library(tipp_core STATIC
     BirdData.cpp
     BirdData.h
+    Compare.cpp
+    Compare.h
     Engine.cpp
     Engine.h
     Json.cpp
