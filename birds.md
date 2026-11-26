@@ -255,9 +255,30 @@ To verify: calls and alarm call, how the song is built (length, pitch, ending), 
 
 To verify: calls other than the alarm, how long the song is and how it is built, bill and leg colour, the juvenile, singing time of day, wingspan, lookalikes, whether females sing.
 
+### Gjøk (folder `gjok`), snl.no/gjøk, Edvard Kaurin Barth and Bård Gunnar Stokke, updated 2026-11-06
+
+| Field | Value |
+|---|---|
+| Length, weight | 32 to 33 cm, about 115 g |
+| Shape | Long tail, long pointed wings. In size, build and flight easily taken for a sparrowhawk or the smallest falcons |
+| Male | Slate-grey with cross-barring, paler underparts |
+| Female | Two types: one like the male, one strongly rufous-brown above with black bars. In Norway the grey type is clearly the most common |
+| Male song | The well-known «ko-ko»: two notes in a falling third, the first «ko» higher than the second. Carries far. The male also has some hoarse, chattering sounds |
+| Female call | Only a trilling or bubbling sound, often after laying |
+| Winter | Silent in its winter quarters in Africa |
+| Habitat | All kinds of forest, out to the coast; in the birch belt and a little into the bare mountain, in places very many. Numbers vary a lot from year to year |
+| Range in Norway | Breeds over the whole country. 5000 to 15 000 pairs; fallen about 30 % in ten years |
+| Food | A distinct insect eater, most of all caterpillars; also dragonflies, grasshoppers, beetles. Eats eggs from other birds' nests |
+| Brood parasite | The only Norwegian brood parasite; builds no nest. At least 27 songbirds are known hosts in Norway; the meadow pipit by far the most common. Each female lays eggs like her host's. The chick tips the host's eggs and young out of the nest from 10 to 12 hours old until about four days old |
+| Eggs | 10 to 20, one in each nest about every second day. Incubation about 12 days; the chick leaves the nest after about three weeks |
+| Migration | Back over the whole country during May. Adults leave in late July or early August; young from mid-August to mid-September. Winters in tropical and southern Africa |
+| Status | NT, near threatened, on the Norwegian red list; LC globally |
+
+To verify: the size of the falling third, how fast and how many times «ko-ko» is repeated, time of day and months of the song, what the male's hoarse sounds and the female's bubbling sound like in detail, bill, eye and leg colour, the juvenile, wingspan.
+
 ## All other birds
 
-Nothing is verified for the 9 other birds outside the garden group. Collect facts per bird with the same fields as the blackbird table before writing `bird.json`.
+Nothing is verified for the 8 other birds outside the garden group. Collect facts per bird with the same fields as the blackbird table before writing `bird.json`.
 
 ## Dawn chorus
 

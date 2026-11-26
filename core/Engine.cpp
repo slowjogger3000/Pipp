@@ -482,12 +482,24 @@ void Engine::generatePhrase(const SongType& type) noexcept
         }
         else
         {
-            std::uint32_t r = rng.below(std::max(1u, type.totalWeight));
+            // Templates marked for the other sex are left out. Without such
+            // marks the draw is the same as before (same bound, same order).
+            std::uint32_t total = 0u;
+            for (const auto& t : type.templates)
+                if (t.sex < 0 || t.sex == sex)
+                    total += t.weight;
+            const bool all = total == 0u; // nothing for this sex: use every template
+            if (all)
+                total = type.totalWeight;
+            std::uint32_t r = rng.below(std::max(1u, total));
             int ti = 0;
             for (const auto& t : type.templates)
             {
-                if (r < t.weight) { tp = &t; break; }
-                r -= t.weight;
+                if (all || t.sex < 0 || t.sex == sex)
+                {
+                    if (r < t.weight) { tp = &t; break; }
+                    r -= t.weight;
+                }
                 ++ti;
             }
             if (type.boutMax > 1)

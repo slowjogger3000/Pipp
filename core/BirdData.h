@@ -68,6 +68,7 @@ struct Section
 struct PhraseTemplate
 {
     std::uint32_t weight = 1u;
+    int sex = -1; // sc_sex option this template is for, -1 for both (the cuckoo's female call)
     std::vector<Section> sections;
 };
 

@@ -151,6 +151,12 @@ bool parseType(const Value& v, BirdData& bird, SongType& t, const std::string& n
     {
         PhraseTemplate pt;
         pt.weight = static_cast<std::uint32_t>(std::max(1.0f, std::round(num(pv.get("weight"), 1.0f))));
+        if (const Value* sx = pv.get("sex"); sx != nullptr)
+        {
+            pt.sex = optionIndex(params::sc_sex, sx->text);
+            if (pt.sex < 0)
+                return fail(error, where + "bad phrase sex " + sx->text);
+        }
         const Value* sections = pv.get("sections");
         if (sections == nullptr || ! sections->isArray() || sections->items.empty())
             return fail(error, where + "phrase without sections");

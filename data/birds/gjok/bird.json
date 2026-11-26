@@ -1,0 +1,107 @@
+{
+ "_note": "Field guide text for the cuckoo, both languages. Facts from birds.md (SNL, checked 2026-11-26). Norwegian wording is mine, Eirik to check. calendar: one letter per month from January, y yes, n no, ? not known.",
+ "xeno_canto": "https://xeno-canto.org/species/cuculus-canorus",
+ "facts": {
+  "length": {
+   "en": "32 to 33 cm, about 115 g",
+   "no": "32 til 33 cm, omtrent 115 g",
+   "verified": true
+  },
+  "broods": {
+   "en": "Brood parasite: 10 to 20 eggs, one per host nest",
+   "no": "Reirparasitt: 10 til 20 egg, ett i hvert vertsreir",
+   "verified": true
+  },
+  "range": {
+   "en": "The whole country, 5000 to 15 000 pairs",
+   "no": "Hele landet, 5000 til 15 000 par",
+   "verified": true
+  },
+  "habitat": {
+   "en": "All forest, out to the coast and up to the birch belt",
+   "no": "All slags skog, ut til kysten og opp i bjørkebeltet",
+   "verified": true
+  },
+  "food": {
+   "en": "Insects, most of all caterpillars; birds' eggs",
+   "no": "Insekter, mest sommerfugllarver; fugleegg",
+   "verified": true
+  },
+  "status": {
+   "en": "NT, near threatened, Norwegian red list",
+   "no": "NT, nær truet, norsk rødliste",
+   "verified": true
+  },
+  "nest": {
+   "en": "None; meadow pipit the commonest host",
+   "no": "Ingen; heipiplerke er vanligste vert",
+   "verified": true
+  }
+ },
+ "sings": {
+  "male": {
+   "en": "Sings «ko-ko»",
+   "no": "Synger «ko-ko»",
+   "verified": true
+  },
+  "female": {
+   "en": "No; trills or bubbles",
+   "no": "Nei; triller eller bobler",
+   "verified": true
+  }
+ },
+ "song_notes": {
+  "en": "The male's well-known “ko-ko”: two notes falling a third, the first higher than the second. It carries far. The male also has some hoarse, chattering sounds; the female has only a trilling or bubbling sound, often after laying. Silent in Africa in winter.",
+  "no": "Hannens kjente «ko-ko»: to toner i en fallende ters, der det første «ko» er lysere enn det andre. Den høres langt. Hannen har også noen hese, skvatrende lyder; hunnen har bare en trillende eller boblende lyd, ofte etter egglegging. Stum i Afrika om vinteren.",
+  "verified": true
+ },
+ "mnemonic": {
+  "en": "",
+  "no": "",
+  "verified": false
+ },
+ "types": {
+  "song": {
+   "en": "The male's “ko-ko”, falling a third.",
+   "no": "Hannens «ko-ko», en fallende ters.",
+   "verified": true
+  },
+  "call": {
+   "en": "Male: hoarse, chattering sounds. Female: a trilling or bubbling sound.",
+   "no": "Hann: hese, skvatrende lyder. Hunn: en trillende eller boblende lyd.",
+   "verified": true
+  },
+  "alarm": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "flight": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "calendar": {
+  "present": "nnnnyyyyynnn",
+  "sings": "nnnn?????nnn",
+  "note": {
+   "en": "Back over the whole country during May. Adults leave in late July or early August, young from mid-August to mid-September. Winters in tropical and southern Africa. [TO VERIFY] months of song.",
+   "no": "Tilbake over hele landet i løpet av mai. De voksne drar i slutten av juli eller tidlig i august, ungene fra midten av august til midten av september. Overvintrer i tropisk og sørlig Afrika. [TO VERIFY] sangmånedene.",
+   "verified": true
+  }
+ },
+ "lookalikes": [
+  {
+   "name": {
+    "en": "Sparrowhawk",
+    "no": "Spurvehauk"
+   },
+   "text": {
+    "en": "In size, build and flight easily taken for a sparrowhawk or the smallest falcons.",
+    "no": "I størrelse, bygning og flukt lett å forveksle med spurvehauk eller de minste falkene.",
+    "verified": true
+   }
+  }
+ ]
+}

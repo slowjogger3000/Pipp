@@ -1,0 +1,292 @@
+{
+ "_note": "Cuckoo, M10. Verified (birds.md, SNL): the male's «ko-ko» is two notes in a falling third, the first higher, and carries far; the male also has some hoarse, chattering sounds; the female has only a trilling or bubbling sound. Sound design choices: a falling major third (4 semitones) at 745 and 591 Hz, «ko-ko» repeated 4 to 10 times in a series with long pauses between series, the shapes of the chatter and the bubbling. The female does not sing «ko-ko» (song inactive for sex female). The call type holds the male chatter and the female bubbling, each marked with its sex, so each sex makes only its own sound.",
+ "syllables": {
+  "koko": {
+   "dur_ms": 560,
+   "pitch": [
+    [
+     0,
+     730
+    ],
+    [
+     0.28,
+     745
+    ],
+    [
+     0.34,
+     745
+    ],
+    [
+     0.46,
+     591
+    ],
+    [
+     0.55,
+     591
+    ],
+    [
+     1,
+     574
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.05,
+     1
+    ],
+    [
+     0.24,
+     0.9
+    ],
+    [
+     0.32,
+     0
+    ],
+    [
+     0.46,
+     0
+    ],
+    [
+     0.53,
+     1
+    ],
+    [
+     0.85,
+     0.75
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.9
+  },
+  "skvatr": {
+   "dur_ms": 140,
+   "pitch": [
+    [
+     0,
+     900
+    ],
+    [
+     0.5,
+     1100
+    ],
+    [
+     1,
+     800
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.1,
+     1
+    ],
+    [
+     0.6,
+     0.6
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.7,
+   "rough": 70,
+   "breath": 40,
+   "tension": 35
+  },
+  "bobl": {
+   "dur_ms": 1500,
+   "pitch": [
+    [
+     0,
+     2100
+    ],
+    [
+     0.3,
+     2300
+    ],
+    [
+     1,
+     1700
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.06,
+     1
+    ],
+    [
+     0.8,
+     0.8
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.75,
+   "breath": 20,
+   "tension": 30,
+   "trill": {
+    "hz": 13,
+    "depth_st": 3,
+    "am": 0.9
+   }
+  }
+ },
+ "types": {
+  "song": {
+   "pause_s": [
+    4.0,
+    10.0
+   ],
+   "length_s": [
+    2.5,
+    6.5
+   ],
+   "transpose_st": 0.5,
+   "avoid_repeat": false,
+   "auto": {
+    "vo_pitch": [
+     0.99,
+     1.01
+    ],
+    "vo_breath": [
+     24,
+     36
+    ],
+    "vo_tension": [
+     10,
+     18
+    ],
+    "vo_rough": [
+     2,
+     6
+    ],
+    "ph_tempo": [
+     96,
+     104
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 1,
+     "sections": [
+      {
+       "pool": [
+        "koko"
+       ],
+       "count": [
+        4,
+        10
+       ],
+       "share": 1.0,
+       "gap_ms": [
+        280,
+        420
+       ],
+       "no_adjacent_repeat": false
+      }
+     ]
+    }
+   ],
+   "overrides": [
+    {
+     "_note": "The female has only a trilling or bubbling sound (SNL).",
+     "when": {
+      "sex": "female"
+     },
+     "active": false
+    }
+   ]
+  },
+  "call": {
+   "pause_s": [
+    3.0,
+    8.0
+   ],
+   "length_s": [
+    0.6,
+    2.0
+   ],
+   "avoid_repeat": false,
+   "auto": {
+    "vo_pitch": [
+     0.98,
+     1.02
+    ],
+    "vo_breath": [
+     20,
+     40
+    ],
+    "vo_tension": [
+     25,
+     40
+    ],
+    "vo_rough": [
+     4,
+     12
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 1,
+     "sex": "male",
+     "sections": [
+      {
+       "pool": [
+        "skvatr"
+       ],
+       "count": [
+        3,
+        7
+       ],
+       "share": 1.0,
+       "gap_ms": [
+        40,
+        90
+       ],
+       "no_adjacent_repeat": false
+      }
+     ]
+    },
+    {
+     "weight": 1,
+     "sex": "female",
+     "sections": [
+      {
+       "pool": [
+        "bobl"
+       ],
+       "count": [
+        1,
+        1
+       ],
+       "share": 1.0,
+       "gap_ms": [
+        50,
+        50
+       ],
+       "no_adjacent_repeat": false
+      }
+     ]
+    }
+   ],
+   "overrides": []
+  }
+ }
+}

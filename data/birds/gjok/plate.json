@@ -1,0 +1,257 @@
+{
+ "_note": "Cuckoo ink plate in a 280x240 box, drawn in M10, not from a design: long tail, long pointed wing, slate-grey (hatching) with paler barred underparts (birds.md, SNL). The female is drawn as the grey type, the commonest in Norway; the juvenile is drawn like the adults and not verified.",
+ "box": [
+  280,
+  240
+ ],
+ "clips": {
+  "body": "M206 86 C204 70 188 62 174 66 C150 72 126 96 106 128 C102 138 108 146 120 148 C150 152 182 140 196 118 C204 106 208 96 206 86 Z",
+  "wing": "M180 92 C174 118 146 142 92 162 C112 134 140 108 180 92 Z"
+ },
+ "hatch": {
+  "body": {
+   "rect": [
+    100,
+    60,
+    210,
+    152
+   ],
+   "up": true,
+   "clip": "body"
+  },
+  "wing": {
+   "rect": [
+    90,
+    90,
+    182,
+    164
+   ],
+   "up": false,
+   "clip": "wing"
+  }
+ },
+ "pivots": {
+  "upper": {
+   "at": [
+    204,
+    84
+   ],
+   "deg": -14
+  },
+  "lower": {
+   "at": [
+    204,
+    90
+   ],
+   "deg": 10
+  },
+  "tail": {
+   "at": [
+    116,
+    140
+   ],
+   "deg": -4
+  }
+ },
+ "layers": [
+  {
+   "path": "M14 206 C80 202 150 199 268 194",
+   "stroke": 4
+  },
+  {
+   "path": "M214 197 l20 -20 M224 187 l16 3",
+   "stroke": 1.5
+  },
+  {
+   "path": "M234 177 q10 -10 18 -2 q-9 8 -18 2 Z M240 190 q11 -5 16 3 q-10 4 -16 -3 Z",
+   "fill": "face",
+   "stroke": 1
+  },
+  {
+   "path": "M112 134 L28 190 L38 202 L124 148 Z",
+   "fill": "face",
+   "stroke": 1.5,
+   "part": "tail"
+  },
+  {
+   "path": "M92 150 l7 8 M76 160 l7 9 M60 171 l7 8 M44 181 l7 9",
+   "stroke": 1.5,
+   "part": "tail"
+  },
+  {
+   "path": "M150 150 L152 199 M164 148 L168 198 M144 201 L152 199 L160 201 M159 199 L168 198 L176 200",
+   "stroke": 1.5
+  },
+  {
+   "clip": "body",
+   "fill": "face",
+   "stroke": 1.5
+  },
+  {
+   "hatch": "body"
+  },
+  {
+   "variant": "under",
+   "fill": "face",
+   "within": "body"
+  },
+  {
+   "path": "M196 106 l-8 4 M190 118 l-9 4 M180 128 l-10 4 M168 136 l-10 4 M154 142 l-10 3 M140 146 l-10 2",
+   "stroke": 1.2,
+   "within": "body"
+  },
+  {
+   "clip": "wing",
+   "fill": "face"
+  },
+  {
+   "hatch": "wing"
+  },
+  {
+   "clip": "wing",
+   "stroke": 1.5
+  },
+  {
+   "clip": "body",
+   "stroke": 1.5
+  },
+  {
+   "eye": [
+    194,
+    78
+   ],
+   "pupil": 2.4
+  },
+  {
+   "path": "M205 79 L223 85 L206 88 Z",
+   "fill": "bill",
+   "stroke": 1.5,
+   "part": "upper"
+  },
+  {
+   "path": "M206 88 L221 87 L205 92 Z",
+   "fill": "bill",
+   "stroke": 1.5,
+   "part": "lower"
+  },
+  {
+   "path": "M232 74 A14 14 0 0 1 232 98 M239 66 A24 24 0 0 1 239 106 M246 58 A34 34 0 0 1 246 114",
+   "stroke": 1.5,
+   "part": "arcs"
+  }
+ ],
+ "variants": {
+  "male": {
+   "body_pitch": 7,
+   "wing_pitch": 5,
+   "eye_ring": 0,
+   "bill": "shadow",
+   "under": "M207 94 C202 116 186 136 160 146 C144 151 126 151 112 148 C136 144 160 132 178 116 C192 104 200 96 207 94 Z"
+  },
+  "female": {
+   "body_pitch": 7,
+   "wing_pitch": 5,
+   "eye_ring": 0,
+   "bill": "shadow",
+   "under": "M207 94 C202 116 186 136 160 146 C144 151 126 151 112 148 C136 144 160 132 178 116 C192 104 200 96 207 94 Z"
+  },
+  "juvenile": {
+   "body_pitch": 7,
+   "wing_pitch": 5,
+   "eye_ring": 0,
+   "bill": "shadow",
+   "under": "M207 94 C202 116 186 136 160 146 C144 151 126 151 112 148 C136 144 160 132 178 116 C192 104 200 96 207 94 Z"
+  }
+ },
+ "callouts": [
+  {
+   "id": "bill",
+   "leader": "M212 82 L212 23",
+   "at": [
+    212,
+    10
+   ],
+   "align": "centre",
+   "male": {
+    "en": "",
+    "no": "",
+    "verified": false
+   },
+   "female": {
+    "en": "",
+    "no": "",
+    "verified": false
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  },
+  {
+   "id": "plumage",
+   "leader": "M150 90 L84 60",
+   "at": [
+    80,
+    54
+   ],
+   "align": "right",
+   "male": {
+    "en": "SLATE-GREY",
+    "no": "SKIFERGRÅ",
+    "verified": true
+   },
+   "female": {
+    "en": "GREY, OR RUFOUS",
+    "no": "GRÅ, ELLER RØDBRUN",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  },
+  {
+   "id": "breast",
+   "leader": "M176 128 L232 150",
+   "at": [
+    276,
+    158
+   ],
+   "align": "right",
+   "male": {
+    "en": "PALER, BARRED",
+    "no": "LYSERE, TVERRSTRIPET",
+    "verified": true
+   },
+   "female": {
+    "en": "",
+    "no": "",
+    "verified": false
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  }
+ ],
+ "captions": {
+  "male": {
+   "en": "Male calling «ko-ko». Beak and tail follow the sound.",
+   "no": "Hann som roper «ko-ko». Nebb og hale følger lyden.",
+   "verified": true
+  },
+  "female": {
+   "en": "Female, grey type. Some are rufous-brown above with black bars.",
+   "no": "Hunn, grå type. Noen er rødbrune på oversiden med svarte tverrstriper.",
+   "verified": true
+  },
+  "juvenile": {
+   "en": "Juvenile. Drawn like the adults.",
+   "no": "Ungfugl. Tegnet som de voksne.",
+   "verified": false
+  }
+ }
+}
