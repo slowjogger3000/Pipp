@@ -40,10 +40,12 @@ If a reply only answers a question and changes nothing, still end with the block
 
 Update this at the end of every work session.
 
-- Current milestone: M0 done 2026-11-26, waiting for Eirik's go for M1.
-- Verified: core and render tool build with zero warnings. The render check passes on a 5 s 440 Hz test tone. `core/Engine.cpp` compiles with `emcc`. The standalone skeleton builds against JUCE 9.0.6. `tipp-render --list-params` prints all 32 IDs.
-- Not verified: the standalone has not been launched or listened to. Web and phone are empty folders.
-- The engine plays only `core/TestVoice.h`, a sine. `tipp-render --bird` exits with code 2 until M1.
+- Current milestone: M1. Round 1 approved by Eirik and committed 2026-11-26. M1 is done when he says the blackbird is recognisable; then record the final knob ranges in `prd.md`.
+- Built in M1 round 1: `core/Syrinx.h` (voice), `core/Surroundings.*` (distance, wind, space, place), `core/Engine.*` (knob override sequence, autoplay with seed, phrase generation and playback), `core/BirdData.*` and `core/Json.*` (parse the text of `voice.json` and `songs.json`), `core/Random.h` (PCG32 for choices, xorshift for noise). `data/birds/svarttrost/voice.json` and `songs.json`. The test voice and `--tone` are gone.
+- Verified: zero warnings in core, render tool and standalone. Render checks pass for 30 s song and call and for 8 knob-extreme renders. Same seed gives a byte-identical WAV. All core `.cpp` files compile with `emcc`. Spectrograms look as designed (fluted notes 1.4 to 2.7 kHz, twitter 4 to 7 kHz, call around 4 kHz).
+- Not verified: Eirik approved round 1 but has not yet called the blackbird recognisable. The standalone builds but has not been launched; it reads `data/` from the source tree through `TIPP_DATA_DIR` (dev only). Native and WASM phrase order not compared (M8). Web and phone are empty folders.
+- Song shapes, timings and pitches in `songs.json` are sound design guesses, marked in its `_note`. The twitter ending and phrase length are still `[TO VERIFY]` in `birds.md`.
+- Knob ranges in `prd.md` are unchanged. Record final values there when Eirik approves the blackbird.
 - Tools present on Eirik's Mac (checked 2026-11-26): cmake, Xcode, emcc, node, ffmpeg, lame.
 - Open decisions: recognition engine (parked, see `prd.md`). The phone export format for the desktop Collection.
 
@@ -77,27 +79,31 @@ Data layout, shared by all three builds:
 
 ## Build and test
 
-Checked in M0:
+Checked in M0 and M1:
 
 - Core and render tool: `cmake -B build -G Xcode && cmake --build build --config Release`
-- Render check: `build/Release/tipp-render --tone 440 --seconds 5 --out out/tone.wav`
+- Render a bird: `build/Release/tipp-render --bird svarttrost --type song --seconds 30 --out out/svarttrost-song.wav` (also `--type call`). Run from the repo root, or pass `--data <dir>`.
+- Options: `--seed <n>`, and `--set <id>=<value>` (repeatable). A knob set this way is held by hand for the whole render. Choices take their option id, for example `--set sc_time=dusk`.
 - List parameter IDs: `build/Release/tipp-render --list-params`
-- MP3 for listening: `ffmpeg -v error -y -i out/tone.wav -b:a 192k out/tone.mp3`
+- MP3 for listening: `ffmpeg -v error -y -i out/svarttrost-song.wav -b:a 192k out/svarttrost-song.mp3`
+- Spectrogram to check shapes without listening: `ffmpeg -v error -y -t 10 -i out/svarttrost-song.wav -lavfi "showspectrumpic=s=1600x500:mode=combined:scale=log:stop=10000" out/song.png`
 - Standalone (fetches JUCE, own build folder): `cmake -B build-standalone -G Xcode -DTIPP_BUILD_STANDALONE=ON && cmake --build build-standalone --config Release --target Tipp`. The app lands in `build-standalone/standalone/Tipp_artefacts/Release/Tipp.app`.
-- Core to WASM, compile check only: `emcc -std=c++17 -O2 -c core/Engine.cpp -o /tmp/Engine.o`
+- Core to WASM, compile check only: `for f in Engine BirdData Json Surroundings; do emcc -std=c++17 -O2 -c core/$f.cpp -o /tmp/$f.o; done`
 
 Planned, not yet working:
 
-- Render a bird (M1): `build/Release/tipp-render --bird svarttrost --type song --seconds 30 --out out/svarttrost.wav`
 - Web (M8): `cd web && npm run dev`
 - Phone (M9): `cd phone && npx cap run ios`
 
-There is no unit test suite. The render check is the test. `tipp-render` exits 0 when every check passes, 1 when one fails, 2 on bad arguments or I/O. The limits are constants at the top of `tools/render/main.cpp`. It writes 32-bit float WAV so non-finite samples stay visible.
+There is no unit test suite. The render check is the test. `tipp-render` exits 0 when every check passes, 1 when one fails, 2 on bad arguments or I/O. Besides the limits below it checks that the bird sang (at least one phrase, rms at least 0.003). The render stops `pb_play` 100 ms before the end and the engine fades out in 30 ms, which is how the file ends at zero. The limits are constants at the top of `tools/render/main.cpp`. It writes 32-bit float WAV so non-finite samples stay visible.
 
 Layout of the build:
 
 - `tipp_warnings` in the root `CMakeLists.txt` holds the strict warning flags. Link it to every project target that is not JUCE.
 - `core/` is the static library `tipp_core`. `Engine` reads its setters through atomics once per 32-sample sub-block.
+- Engine API: `setParam(index, value)` with the index in `params::all` (`params::indexOf(id)` is constexpr). On a knob that sets the hand value; wrap drags in `handDown(k)` and `handUp(k)`. `trigger(index)` for the three triggers. `setBird(const BirdData*)`: the host owns it and keeps it alive until `birdInUse()` stops returning it. Read back with `knobValue`, `knobOverridden`, `birdLevel`, `seed`, `phrasesStarted`.
+- The host reads the JSON files and hands their text to `tipp::parseBird()`. Parsing in C++ keeps the result identical native and in WASM.
+- Musical choices use only `Rng` (integer `below()` and 24-bit `unit()`). Audio noise uses `Noise`, which never touches phrase choice.
 - `core/Params.h` holds every ID as a constant plus one table `tipp::params::all` with kind, range, default, unit and choice option ids.
 
 ## Rules
@@ -165,6 +171,9 @@ Add to this list as they are found.
 - The desktop has 6 tabs. `design-handover.md` lists 5 in the shared layout and adds COLLECTION F6 under "Later additions". `Main.dc.html` shows all 6.
 - The bird names and Latin names in `birds.md` are not checked against Artsdatabanken. Set `verified: false` on them in `bird.json`. Show the `[TO VERIFY]` marker on the name rows of the Field facts table only. The bird list, header readout, quiz answers and chorus lanes show the name without the marker, so the lists stay readable.
 
+- zsh does not split a variable into words. In a loop over render options use `${=args}`, or `tipp-render` sees one argument and prints usage.
+- `songs.json` amp contours must start and end at 0, or `parseBird` refuses the syllable. The engine relies on it for click-free notes.
+- `ph_length` cannot make a phrase longer than its sections' `count` maximum allows. At 8 s a blackbird phrase still stops at about 13 syllables.
 - `AudioProcessorEditor` already has a member called `processor`. Name the reference `proc`.
 - `String (v, 0)` does not mean zero decimals. Use `String (roundToInt (v))`.
 - Static `StringArray` objects trigger leak-detector noise at shutdown. Return a fresh one from a function.

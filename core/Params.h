@@ -119,6 +119,26 @@ inline constexpr std::array<Info, 32> all {{
     { pb_draw,       Kind::Toggle,   0.0,   1.0,         0.0,   "",    nullptr },
 }};
 
+// Index of an id in all, or -1. constexpr so engine code can name
+// parameters by id without a lookup at run time.
+constexpr bool sameId(const char* a, const char* b) noexcept
+{
+    while (*a != '\0' && *a == *b)
+    {
+        ++a;
+        ++b;
+    }
+    return *a == *b;
+}
+
+constexpr int indexOf(const char* id) noexcept
+{
+    for (std::size_t i = 0; i < all.size(); ++i)
+        if (sameId(all[i].id, id))
+            return static_cast<int>(i);
+    return -1;
+}
+
 // Returns nullptr for an unknown id. Not for the audio thread: compare ids
 // once at setup and keep the index.
 inline const Info* find(const char* id) noexcept

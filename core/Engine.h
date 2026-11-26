@@ -6,10 +6,20 @@
 // Threading: setters may be called from any thread. They write atomics
 // that process() reads once per 32-sample sub-block. Values for the
 // interface are published through atomics as well.
+//
+// Knobs: setParam() on a knob sets the hand value. Wrap a drag in
+// handDown() and handUp(). The override sequence (hold, 300 ms return,
+// latch, return all) runs here, not in the interfaces.
 
-#include "TestVoice.h"
+#include "BirdData.h"
+#include "Params.h"
+#include "Random.h"
+#include "Surroundings.h"
+#include "Syrinx.h"
 
+#include <array>
 #include <atomic>
+#include <cstdint>
 
 namespace tipp
 {
@@ -17,29 +27,120 @@ class Engine
 {
 public:
     static constexpr int kSubBlock = 32;
+    static constexpr int kMaxNotes = 64;
+    static constexpr int kNumParams = static_cast<int>(params::all.size());
 
-    // Call before audio starts, not on the audio thread.
-    void prepare(double sampleRate) noexcept;
+    Engine();
 
-    // M0 test tone controls. Replaced by parameter setting in M1.
-    void setToneFrequency(float hz) noexcept { toneHz.store(hz, std::memory_order_relaxed); }
-    void setLevel(float gain) noexcept       { level.store(gain, std::memory_order_relaxed); }
-    void setGate(bool on) noexcept           { gate.store(on, std::memory_order_relaxed); }
+    // Call before audio starts, not on the audio thread. Allocates.
+    void prepare(double sampleRate);
+
+    // The host owns the bird and keeps it alive until birdInUse() no
+    // longer returns it. nullptr silences the bird.
+    void setBird(const BirdData* newBird) noexcept { birdIn.store(newBird, std::memory_order_release); }
+    const BirdData* birdInUse() const noexcept { return birdActive.load(std::memory_order_acquire); }
+
+    // index is the position in params::all. Text and trigger ids are ignored
+    // here: use setBird() and trigger().
+    void setParam(int index, float value) noexcept;
+    void setSeed(std::uint32_t newSeed) noexcept { seedIn.store(newSeed, std::memory_order_relaxed); }
+    void handDown(int knob) noexcept;
+    void handUp(int knob) noexcept;
+    void trigger(int index) noexcept; // ap_return_all, ap_sing_once, ap_reroll
 
     // Writes numSamples to both channels. right may equal left.
     void process(float* left, float* right, int numSamples) noexcept;
 
-    // For the interface. Peak of the last processed block, 0 to 1.
+    // For the interface.
+    float knobValue(int knob) const noexcept;    // effective value, knob units
+    bool knobOverridden(int knob) const noexcept; // hand value in use or returning
+    float birdLevel() const noexcept { return levelOut.load(std::memory_order_relaxed); }
     float outputPeak() const noexcept { return peak.load(std::memory_order_relaxed); }
+    std::uint32_t seed() const noexcept { return seedOut.load(std::memory_order_relaxed); }
+    std::uint32_t phrasesStarted() const noexcept { return phraseCount.load(std::memory_order_relaxed); }
 
 private:
-    TestVoice voice;
+    struct Note
+    {
+        int syl = 0;
+        float startMs = 0.0f; // in data time; tempo scales playback
+        float durMs = 0.0f;
+        float pitchMul = 1.0f;
+        float gain = 1.0f;
+    };
 
-    std::atomic<float> toneHz { 440.0f };
-    std::atomic<float> level { 0.5f };
-    std::atomic<bool> gate { false };
+    struct Phrase
+    {
+        std::array<Note, kMaxNotes> notes {};
+        int count = 0;
+        float lengthMs = 0.0f;
+        std::uint32_t signature = 0u;
+    };
+
+    enum class Mode : std::uint8_t { Auto, Held, Hold, Return };
+
+    struct KnobState
+    {
+        Mode mode = Mode::Auto;
+        float timer = 0.0f;
+        float from = 0.0f;
+    };
+
+    void resetBird() noexcept;
+    void readControls() noexcept;
+    void updateKnobs(float dt) noexcept;
+    void runAutoplay(float dt, VoiceControls& vc) noexcept;
+    void startPhrase() noexcept;
+    void generatePhrase(const SongType& type) noexcept;
+    void pickPhraseEndValues(const SceneRules& rules) noexcept;
+    float pick(Range r) noexcept;
+    int choice(int paramIndex) const noexcept;
+
+    // Host side.
+    std::array<std::atomic<float>, params::all.size()> values;
+    std::array<std::atomic<bool>, kNumKnobs> handHeld;
+    std::array<std::atomic<std::uint32_t>, kNumKnobs> handTouches;
+    std::atomic<std::uint32_t> seedIn { 1u };
+    std::atomic<std::uint32_t> trigReturnAll { 0u }, trigSingOnce { 0u }, trigReroll { 0u };
+    std::atomic<const BirdData*> birdIn { nullptr };
+
+    // Published.
+    std::atomic<const BirdData*> birdActive { nullptr };
+    std::array<std::atomic<float>, kNumKnobs> effOut;
+    std::array<std::atomic<bool>, kNumKnobs> overOut;
+    std::atomic<float> levelOut { 0.0f };
     std::atomic<float> peak { 0.0f };
+    std::atomic<std::uint32_t> seedOut { 1u };
+    std::atomic<std::uint32_t> phraseCount { 0u };
 
-    float currentLevel = 0.0f; // audio thread only
+    // Audio thread only.
+    float sr = 48000.0f;
+    const BirdData* bird = nullptr;
+    Rng rng;
+    Syrinx voice;
+    Surroundings surroundings;
+
+    std::uint32_t seenSeed = 1u, seenReturnAll = 0u, seenSingOnce = 0u, seenReroll = 0u;
+    std::array<std::uint32_t, kNumKnobs> seenTouches {};
+    std::array<KnobState, kNumKnobs> knobs {};
+    std::array<float, kNumKnobs> autoFrom {}, autoTo {}, autoVal {}, eff {};
+
+    bool apOn = true, latch = false, play = false;
+    float apHold = 3.0f;
+    int season = 0, timeOfDay = 0, sex = 0, age = 0, typeIdx = 0, place = 0;
+    int lastType = -1;
+
+    Phrase cur;
+    bool hasPhrase = false;
+    bool playing = false;
+    bool singOncePending = false;
+    float phraseMs = 0.0f;
+    int cursor = 0;
+    float pauseElapsed = 0.0f;
+    float firstWait = 0.4f; // s, before the first phrase after a change
+    float lastFreq = 2000.0f;
+
+    float master = 0.0f;
+    std::array<float, kSubBlock> birdBuf {};
 };
 } // namespace tipp
