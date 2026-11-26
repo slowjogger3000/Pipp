@@ -1,0 +1,253 @@
+{
+ "_note": "Golden plover ink plate in a 280x240 box, M11 batch 6, built from the curlew plate: summer plumage, back densely spotted golden-yellow (hatching with shadow spots), black chin, breast and belly (ink; the female's duller, drawn in shadow), short black bill, blackish-brown legs (birds.md, SNL). The white border is in the callout only. The juvenile is not described and is drawn like the female, [TO VERIFY].",
+ "box": [
+  280,
+  240
+ ],
+ "clips": {
+  "body": "M178 74 C178 62 168 56 158 58 C148 60 144 68 144 78 C120 86 96 98 76 114 C100 128 124 138 146 140 C166 142 176 130 176 114 C176 100 178 88 178 74 Z",
+  "wing": "M150 92 C126 94 100 104 76 114 C60 120 48 124 40 128 C60 130 90 128 116 122 C138 116 150 106 150 92 Z"
+ },
+ "hatch": {
+  "body": {
+   "rect": [
+    74,
+    54,
+    180,
+    144
+   ],
+   "up": true,
+   "clip": "body"
+  },
+  "wing": {
+   "rect": [
+    38,
+    88,
+    152,
+    132
+   ],
+   "up": false,
+   "clip": "wing"
+  }
+ },
+ "pivots": {
+  "upper": {
+   "at": [
+    176,
+    72
+   ],
+   "deg": -6
+  },
+  "lower": {
+   "at": [
+    176,
+    76
+   ],
+   "deg": 4
+  },
+  "tail": {
+   "at": [
+    78,
+    116
+   ],
+   "deg": -3
+  }
+ },
+ "layers": [
+  {
+   "path": "M14 214 C70 206 150 204 268 208",
+   "stroke": 2.5
+  },
+  {
+   "path": "M40 214 q8 -5 16 0 M210 210 q8 -4 16 0",
+   "stroke": 1
+  },
+  {
+   "path": "M124 138 L118 206 M140 140 L144 206 M108 207 L118 206 L128 208 M134 207 L144 206 L154 208",
+   "stroke": 1.5
+  },
+  {
+   "path": "M78 112 L52 118 L56 126 L82 122 Z",
+   "fill": "face",
+   "stroke": 1.5,
+   "part": "tail"
+  },
+  {
+   "clip": "body",
+   "fill": "face",
+   "stroke": 1.5
+  },
+  {
+   "hatch": "body"
+  },
+  {
+   "variant": "belly",
+   "fill": "black",
+   "within": "body"
+  },
+  {
+   "variant": "spots",
+   "fill": "shadow",
+   "within": "body"
+  },
+  {
+   "clip": "wing",
+   "fill": "face"
+  },
+  {
+   "hatch": "wing"
+  },
+  {
+   "clip": "wing",
+   "stroke": 1.5
+  },
+  {
+   "clip": "body",
+   "stroke": 1.5
+  },
+  {
+   "eye": [
+    164,
+    68
+   ],
+   "pupil": 2.2
+  },
+  {
+   "path": "M176 70 L198 73 L176 75 Z",
+   "fill": "bill",
+   "stroke": 1.4,
+   "part": "upper"
+  },
+  {
+   "path": "M176 75 L196 74 L176 78 Z",
+   "fill": "bill",
+   "stroke": 1.4,
+   "part": "lower"
+  },
+  {
+   "path": "M120 40 A14 14 0 0 0 120 66 M113 32 A24 24 0 0 0 113 74",
+   "stroke": 1.5,
+   "part": "arcs"
+  }
+ ],
+ "variants": {
+  "male": {
+   "body_pitch": 7,
+   "wing_pitch": 6,
+   "eye_ring": 0,
+   "bill": "ink",
+   "spots": "M150 66 a2 2 0 1 0 4 0 a2 2 0 1 0 -4 0 Z M160 62 a2 2 0 1 0 4 0 a2 2 0 1 0 -4 0 Z M156 74 a2 2 0 1 0 4 0 a2 2 0 1 0 -4 0 Z M120 96 a2 2 0 1 0 4 0 a2 2 0 1 0 -4 0 Z M132 92 a2 2 0 1 0 4 0 a2 2 0 1 0 -4 0 Z M106 104 a2 2 0 1 0 4 0 a2 2 0 1 0 -4 0 Z M118 106 a2 2 0 1 0 4 0 a2 2 0 1 0 -4 0 Z M94 110 a2 2 0 1 0 4 0 a2 2 0 1 0 -4 0 Z M140 100 a2 2 0 1 0 4 0 a2 2 0 1 0 -4 0 Z M128 104 a2 2 0 1 0 4 0 a2 2 0 1 0 -4 0 Z",
+   "belly": "M178 76 C176 92 176 106 176 114 C176 130 166 142 146 140 C124 138 100 128 80 116 C108 122 138 120 158 106 C168 98 172 88 174 76 Z",
+   "black": "ink"
+  },
+  "female": {
+   "body_pitch": 7,
+   "wing_pitch": 6,
+   "eye_ring": 0,
+   "bill": "ink",
+   "spots": "M150 66 a2 2 0 1 0 4 0 a2 2 0 1 0 -4 0 Z M160 62 a2 2 0 1 0 4 0 a2 2 0 1 0 -4 0 Z M156 74 a2 2 0 1 0 4 0 a2 2 0 1 0 -4 0 Z M120 96 a2 2 0 1 0 4 0 a2 2 0 1 0 -4 0 Z M132 92 a2 2 0 1 0 4 0 a2 2 0 1 0 -4 0 Z M106 104 a2 2 0 1 0 4 0 a2 2 0 1 0 -4 0 Z M118 106 a2 2 0 1 0 4 0 a2 2 0 1 0 -4 0 Z M94 110 a2 2 0 1 0 4 0 a2 2 0 1 0 -4 0 Z M140 100 a2 2 0 1 0 4 0 a2 2 0 1 0 -4 0 Z M128 104 a2 2 0 1 0 4 0 a2 2 0 1 0 -4 0 Z",
+   "belly": "M178 76 C176 92 176 106 176 114 C176 130 166 142 146 140 C124 138 100 128 80 116 C108 122 138 120 158 106 C168 98 172 88 174 76 Z",
+   "black": "shadow"
+  },
+  "juvenile": {
+   "body_pitch": 7,
+   "wing_pitch": 6,
+   "eye_ring": 0,
+   "bill": "ink",
+   "spots": "M150 66 a2 2 0 1 0 4 0 a2 2 0 1 0 -4 0 Z M160 62 a2 2 0 1 0 4 0 a2 2 0 1 0 -4 0 Z M156 74 a2 2 0 1 0 4 0 a2 2 0 1 0 -4 0 Z M120 96 a2 2 0 1 0 4 0 a2 2 0 1 0 -4 0 Z M132 92 a2 2 0 1 0 4 0 a2 2 0 1 0 -4 0 Z M106 104 a2 2 0 1 0 4 0 a2 2 0 1 0 -4 0 Z M118 106 a2 2 0 1 0 4 0 a2 2 0 1 0 -4 0 Z M94 110 a2 2 0 1 0 4 0 a2 2 0 1 0 -4 0 Z M140 100 a2 2 0 1 0 4 0 a2 2 0 1 0 -4 0 Z M128 104 a2 2 0 1 0 4 0 a2 2 0 1 0 -4 0 Z",
+   "belly": "M178 76 C176 92 176 106 176 114 C176 130 166 142 146 140 C124 138 100 128 80 116 C108 122 138 120 158 106 C168 98 172 88 174 76 Z",
+   "black": "shadow"
+  }
+ },
+ "callouts": [
+  {
+   "id": "bill",
+   "leader": "M190 72 L226 50",
+   "at": [
+    230,
+    37
+   ],
+   "align": "centre",
+   "male": {
+    "en": "BLACK",
+    "no": "SVART",
+    "verified": true
+   },
+   "female": {
+    "en": "BLACK",
+    "no": "SVART",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  },
+  {
+   "id": "plumage",
+   "leader": "M112 118 L80 160",
+   "at": [
+    76,
+    172
+   ],
+   "align": "centre",
+   "male": {
+    "en": "GOLD-SPOTTED BACK",
+    "no": "GULFLEKKET RYGG",
+    "verified": true
+   },
+   "female": {
+    "en": "GOLD-SPOTTED BACK",
+    "no": "GULFLEKKET RYGG",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  },
+  {
+   "id": "breast",
+   "leader": "M170 116 L222 160",
+   "at": [
+    226,
+    172
+   ],
+   "align": "centre",
+   "male": {
+    "en": "BLACK, WHITE EDGE",
+    "no": "SVART, HVIT KANT",
+    "verified": true
+   },
+   "female": {
+    "en": "DULLER BLACK",
+    "no": "MATTERE SVART",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  }
+ ],
+ "captions": {
+  "male": {
+   "en": "Male in summer. Beak and tail follow the sound.",
+   "no": "Hann om sommeren. Nebb og hale følger lyden.",
+   "verified": true
+  },
+  "female": {
+   "en": "Female. Duller black.",
+   "no": "Hunn. Mattere svart.",
+   "verified": true
+  },
+  "juvenile": {
+   "en": "Young bird. Drawn like the female.",
+   "no": "Ungfugl. Tegnet som hunnen.",
+   "verified": false
+  }
+ }
+}

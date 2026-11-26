@@ -58,7 +58,7 @@ The aim: the birds a Norwegian beginner is most likely to hear in a year, spread
 | 37 | Wetland and lake | Sangsvane | Whooper swan | Cygnus cygnus | `sangsvane` | trumpeting |
 | 38 | Wetland and lake | Storlom | Black-throated diver | Gavia arctica | `storlom` | wailing |
 | 39 | Wetland and lake | Enkeltbekkasin | Common snipe | Gallinago gallinago | `enkeltbekkasin` | lookalike of the woodcock; its display sound is made by tail feathers, may need a new source |
-| 40 | Mountain | Heipiper | Meadow pipit | Anthus pratensis | `heipiper` | |
+| 40 | Mountain | Heipiplerke | Meadow pipit | Anthus pratensis | `heipiplerke` | name corrected from "heipiper" 2026-11-26 (SNL) |
 | 41 | Mountain | Lirype | Willow ptarmigan | Lagopus lagopus | `lirype` | |
 | 42 | Mountain | Heilo | Golden plover | Pluvialis apricaria | `heilo` | |
 | 43 | Mountain | Ravn | Raven | Corvus corax | `ravn` | |
@@ -543,6 +543,94 @@ Source: Store norske leksikon (snl.no), one page per bird, read in full on 2026-
 - Whooper swan: the shape of the trumpet call; length.
 - Black-throated diver: every sound (placeholder wail); bill, head, winter and juvenile plumage.
 - Common snipe: the bleat's pitch, pulse rate and length; which months it bleats; length.
+
+## M11 batch 6, mountain, checked 2026-11-26
+
+Source: Store norske leksikon (snl.no), one page per bird, read in full on 2026-11-26. Transcriptions are SNL's own spelling. The meadow pipit's Norwegian name is heipiplerke (SNL; also engpiplerke), not "heipiper" as first drafted; the folder is `heipiplerke`.
+
+### Heipiplerke (folder `heipiplerke`), snl.no/heipiplerke, Morten Helberg, updated 2026-08-03
+
+| Field | Value |
+|---|---|
+| Size | A little smaller than the white wagtail; length and weight not given |
+| Plumage | Grey-brown and mottled, grey-white belly, the two outer tail feathers white |
+| Bill, legs, hind claw, juvenile, sexes | Not described |
+| Song | Song flight like the tree pipit's, with a trill that speeds up; no drawn-out ending |
+| Flight call | When it flies up, a characteristic «tsip-tsip-tsip» |
+| Habitat | Open landscape, coast to high mountains; one of the commonest mountain birds |
+| Food | Mainly insects and other invertebrates, now and then seeds |
+| Nest | On the ground, often under a tussock; one of the cuckoo's commonest hosts |
+| Eggs | Usually 5 to 6, 11 to 15 days; young leave after 10 to 14 days |
+| Migration | Partial migrant: most mountain birds leave (Netherlands to Iberia, some to Morocco); some coastal birds stay, Trondheimsfjorden to Oslofjorden |
+| Population | 7 to 8 million birds (BirdLife Norge); the widest range of any bird in Norway |
+| Status | LC |
+| Versus tree pipit | The tree pipit's trill is stronger and darker and ends in a drawn-out «seee-er, seee-er, seee-er» |
+
+### Lirype (folder `lirype`), snl.no/lirype, Edvard Kaurin Barth and Fridtjof Mehlum, updated 2026-08-04
+
+| Field | Value |
+|---|---|
+| Size | A little larger than the rock ptarmigan; length and weight not given |
+| Plumage | Winter all white with a black tail, sexes alike; summer more mottled brown than grey; the wings white in every plumage. The hen has three plumages a year, the cock four |
+| Male | Somewhat redder brown and a little larger than the hen |
+| Bill | Over 1 cm deep at the base |
+| Comb, feet, juvenile | Not described |
+| Voice | Not described |
+| Habitat | Mountain birch forest and bare mountain; also large bogs in lower conifer forest; in the north to the coast and islands |
+| Food | Mostly on the ground; in late winter also in birch and willow |
+| Nest | A shallow scrape, well hidden in low shrubs |
+| Eggs | 6 to 12, May to June; the hen sits about 21 days |
+| Movement | Normally resident; icing can send it to the lowlands and to islands in the south and east |
+| Status | LC; no population figure |
+| Versus rock ptarmigan | Rock ptarmigan a little smaller, bill under 1 cm deep, sexes differ in winter |
+
+### Heilo (folder `heilo`), snl.no/heilo, Jan Eivind Østnes, updated 2026-08-03
+
+| Field | Value |
+|---|---|
+| Length | 25 to 28 cm (the intro says 32 cm), about a lapwing's size |
+| Summer | Back densely spotted golden-yellow; chin, breast and belly coal-black, framed in white |
+| Female | The black underside usually clearly duller |
+| Winter | Back unchanged, no black; throat and breast spotted yellow-brown, belly pale |
+| Bill, legs | Black bill, blackish-brown legs |
+| Juvenile | Not described |
+| Voice | In the breeding season very mournful whistling tones that can last for hours, easy to tell from other mountain sounds, carrying far. No transcription |
+| Habitat | Open ground with short vegetation, bogs and heaths; farmland outside the breeding season |
+| Food | Insects, snails, worms, crustaceans, spiders; berries and seeds in summer |
+| Nest | A simple scrape lined with a little dry plant material |
+| Eggs | Usually 4, mostly first half of June; both sit 27 to 31 days |
+| Migration | Arrives April to May, leaves late July to October; winters in western Europe and the Mediterranean |
+| Population | 150 000 to 300 000 pairs |
+| Status | NT |
+| Lookalikes | None named |
+
+### Ravn (folder `ravn`), snl.no/ravn, Olav Hogstad and Magne Husby, updated 2026-10-12
+
+| Field | Value |
+|---|---|
+| Size | 65 to 70 cm, about 1,5 kg, wingspan up to 1,3 m; the world's largest passerine |
+| Plumage | All black with green or blue-violet gloss; heavy head and bill, long throat feathers, wedge-shaped tail |
+| Sexes | Alike, the male considerably larger |
+| Juvenile | Black, often without gloss; a narrow yellow patch at the bill base turns black over the first year |
+| Calls | A deep «prruk» or «korp»; a hoarse, grating «rrå»; a coarse «ærr ærr ærr» |
+| Alarm | A persistent «arrk-arrk-arrk» |
+| Display | A hollow «klong», like two wooden blocks struck together, carrying several km; often in the pair's display flights and territory defence |
+| Repertoire | 79 sounds mapped, just over 20 with a known function; no song described |
+| Habitat | Forest, mountains, coastal mountains |
+| Food | Omnivore, mainly animal food and carrion; caches food |
+| Nest | Large stick nest on a cliff ledge, reused and built up for years |
+| Eggs | 1 to 8, usually 4 to 6; usually March to April, from February on the coast |
+| Movement | Resident, now and then wandering |
+| Population | 20 000 to 80 000 pairs |
+| Status | LC |
+| Lookalikes | No field marks against crows given; can look like a bird of prey when soaring (long narrow fingered wings, long neck, wedge tail) |
+
+### Batch 6, to verify
+
+- Meadow pipit: the song's pitch and notes; bill, legs, juvenile.
+- Willow ptarmigan: every sound (placeholder); the red comb; juvenile.
+- Golden plover: the whistle's shape and pitch; which months it calls; juvenile.
+- Raven: pitch and timing of every call.
 
 ## Svarttrost, checked 2026-11-26
 

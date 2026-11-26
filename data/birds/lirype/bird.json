@@ -1,0 +1,107 @@
+{
+ "_note": "Field guide text for the willow ptarmigan, both languages. SNL describes no sounds, so every sound text is [TO VERIFY]. Facts from birds.md (SNL, checked 2026-11-26). Norwegian wording is mine, Eirik to check. calendar: one letter per month from January, y yes, n no, ? not known.",
+ "xeno_canto": "https://xeno-canto.org/species/lagopus-lagopus",
+ "facts": {
+  "length": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "broods": {
+   "en": "6 to 12 eggs, May to June; the hen sits about 21 days",
+   "no": "6 til 12 egg, mai til juni; høna ruger i rundt 21 dager",
+   "verified": true
+  },
+  "range": {
+   "en": "Mountain forest and bare mountain; in the north out to the coast and islands",
+   "no": "Fjellskog og snaufjell; i nord helt ut til kysten og på øyer",
+   "verified": true
+  },
+  "habitat": {
+   "en": "Mountain birch forest and bare mountain, also large bogs in lower conifer forest",
+   "no": "Fjellbjørkeskog og snaufjell, også store myrer i lavereliggende barskog",
+   "verified": true
+  },
+  "food": {
+   "en": "Mostly on the ground; in late winter also in birch and willow",
+   "no": "Mest på bakken; på senvinteren også i bjørk og selje",
+   "verified": true
+  },
+  "status": {
+   "en": "LC, least concern, Norwegian red list",
+   "no": "LC, livskraftig, norsk rødliste",
+   "verified": true
+  },
+  "nest": {
+   "en": "A shallow scrape on the ground, well hidden in low shrubs",
+   "no": "En grunn grop på bakken, godt skjult i lav kratt",
+   "verified": true
+  }
+ },
+ "sings": {
+  "male": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "female": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "song_notes": {
+  "en": "[TO VERIFY] SNL describes no sounds of the willow ptarmigan. Tipp plays a low cackling series here as a stand-in. Winter plumage all white with a black tail; summer plumage mottled brown; the wings are white in every plumage.",
+  "no": "[TO VERIFY] SNL beskriver ingen lyder fra liryper. Tipp spiller en lav, kaklende serie her som stedfortreder. Vinterdrakten er helt hvit med svart stjert; sommerdrakten brunspraglete; vingene er hvite i alle drakter.",
+  "verified": true
+ },
+ "mnemonic": {
+  "en": "",
+  "no": "",
+  "verified": false
+ },
+ "types": {
+  "song": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "call": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "alarm": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "flight": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "calendar": {
+  "present": "yyyyyyyyyyyy",
+  "sings": "????????????",
+  "note": {
+   "en": "Normally resident; icing over its food can send it down to the lowlands and in flocks to islands in the south and east. Eggs May to June.",
+   "no": "Vanligvis standfugl; nedising av maten kan få den til å trekke ned i lavlandet og i flokker til øyer i sør og øst. Egg mai til juni.",
+   "verified": true
+  }
+ },
+ "lookalikes": [
+  {
+   "name": {
+    "en": "Rock ptarmigan",
+    "no": "Fjellrype"
+   },
+   "text": {
+    "en": "A little smaller, with a bill under 1 cm deep at the base (the willow ptarmigan's is over 1 cm); its sexes differ in winter plumage.",
+    "no": "Litt mindre, med nebb under 1 cm høyt ved roten (lirypas er over 1 cm); kjønnene er ulike i vinterdrakt.",
+    "verified": true
+   }
+  }
+ ]
+}

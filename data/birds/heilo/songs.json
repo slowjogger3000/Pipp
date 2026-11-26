@@ -1,0 +1,235 @@
+{
+ "_note": "Golden plover, M11 batch 6. SNL: in the breeding season very mournful whistling tones that can go on for hours, easy to tell from other mountain birds. No transcription, so the shape is a sound design guess: one soft, slightly falling whistle about 2,0 to 2,4 kHz, repeated every 2 to 4 s; sometimes a two-part variant. Off in autumn and winter.",
+ "syllables": {
+  "tluu": {
+   "dur_ms": 520,
+   "pitch": [
+    [
+     0,
+     2350
+    ],
+    [
+     0.2,
+     2420
+    ],
+    [
+     1,
+     2050
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.12,
+     0.9
+    ],
+    [
+     0.4,
+     1
+    ],
+    [
+     0.85,
+     0.7
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.75,
+   "tension": 20,
+   "breath": -5
+  },
+  "tluu2": {
+   "dur_ms": 460,
+   "pitch": [
+    [
+     0,
+     2300
+    ],
+    [
+     0.25,
+     2380
+    ],
+    [
+     1,
+     2000
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.12,
+     0.9
+    ],
+    [
+     0.4,
+     1
+    ],
+    [
+     0.85,
+     0.7
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.7,
+   "tension": 20,
+   "breath": -5
+  },
+  "plyy": {
+   "dur_ms": 620,
+   "pitch": [
+    [
+     0,
+     2050
+    ],
+    [
+     0.3,
+     2300
+    ],
+    [
+     0.55,
+     2350
+    ],
+    [
+     1,
+     2000
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.1,
+     0.8
+    ],
+    [
+     0.35,
+     0.9
+    ],
+    [
+     0.45,
+     0.25
+    ],
+    [
+     0.55,
+     0.9
+    ],
+    [
+     0.85,
+     0.6
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.7,
+   "tension": 20,
+   "breath": -5
+  }
+ },
+ "types": {
+  "song": {
+   "pause_s": [
+    1.8,
+    4.0
+   ],
+   "length_s": [
+    0.4,
+    0.8
+   ],
+   "transpose_st": 0.5,
+   "avoid_repeat": false,
+   "auto": {
+    "vo_pitch": [
+     0.98,
+     1.02
+    ],
+    "vo_breath": [
+     16,
+     26
+    ],
+    "vo_tension": [
+     84,
+     94
+    ],
+    "vo_rough": [
+     0,
+     4
+    ],
+    "ph_tempo": [
+     96,
+     104
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 3,
+     "sections": [
+      {
+       "pool": [
+        "tluu",
+        "tluu2"
+       ],
+       "count": [
+        1,
+        1
+       ],
+       "share": 1.0,
+       "gap_ms": [
+        100,
+        100
+       ]
+      }
+     ]
+    },
+    {
+     "weight": 1,
+     "sections": [
+      {
+       "pool": [
+        "plyy"
+       ],
+       "count": [
+        1,
+        1
+       ],
+       "share": 1.0,
+       "gap_ms": [
+        100,
+        100
+       ]
+      }
+     ]
+    }
+   ],
+   "overrides": [
+    {
+     "_note": "In the breeding season (SNL).",
+     "when": {
+      "season": "autumn"
+     },
+     "active": false
+    },
+    {
+     "when": {
+      "season": "winter"
+     },
+     "active": false
+    }
+   ]
+  }
+ }
+}

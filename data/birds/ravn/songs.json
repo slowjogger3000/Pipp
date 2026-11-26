@@ -1,0 +1,481 @@
+{
+ "_note": "Raven, M11 batch 6. Verified by SNL: a deep «prruk» or «korp», a hoarse grating «rrå», a coarse «ærr ærr ærr», a persistent alarm «arrk-arrk-arrk», and a hollow «klong» like two wooden blocks struck together, often in display flight over the territory. No song is described, so the song slot plays the deep calls. Pitches, lengths and spacing are sound design guesses. The «klong» uses the drum source (one stroke per note), since SNL compares it to wooden blocks.",
+ "syllables": {
+  "korp": {
+   "dur_ms": 300,
+   "pitch": [
+    [
+     0,
+     380
+    ],
+    [
+     0.3,
+     450
+    ],
+    [
+     1,
+     350
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.08,
+     1
+    ],
+    [
+     0.7,
+     0.85
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.85,
+   "rough": 30,
+   "tension": -10,
+   "trill": {
+    "hz": 30,
+    "depth_st": 0.4,
+    "am": 0.25
+   }
+  },
+  "prruk": {
+   "dur_ms": 280,
+   "pitch": [
+    [
+     0,
+     400
+    ],
+    [
+     0.4,
+     470
+    ],
+    [
+     1,
+     360
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.06,
+     0.9
+    ],
+    [
+     0.4,
+     1
+    ],
+    [
+     0.8,
+     0.8
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.85,
+   "rough": 30,
+   "tension": -10,
+   "trill": {
+    "hz": 34,
+    "depth_st": 0.6,
+    "am": 0.8
+   }
+  },
+  "rraa": {
+   "dur_ms": 420,
+   "pitch": [
+    [
+     0,
+     480
+    ],
+    [
+     0.3,
+     560
+    ],
+    [
+     1,
+     440
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.08,
+     1
+    ],
+    [
+     0.7,
+     0.85
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.75,
+   "rough": 70,
+   "tension": -10
+  },
+  "aerr": {
+   "dur_ms": 200,
+   "pitch": [
+    [
+     0,
+     600
+    ],
+    [
+     0.3,
+     660
+    ],
+    [
+     1,
+     540
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.08,
+     1
+    ],
+    [
+     0.7,
+     0.8
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.7,
+   "rough": 60,
+   "tension": -5
+  },
+  "arrk": {
+   "dur_ms": 180,
+   "pitch": [
+    [
+     0,
+     650
+    ],
+    [
+     0.3,
+     700
+    ],
+    [
+     1,
+     560
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.08,
+     1
+    ],
+    [
+     0.7,
+     0.8
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.7,
+   "rough": 55
+  },
+  "klong": {
+   "dur_ms": 90,
+   "pitch": [
+    [
+     0,
+     1150
+    ],
+    [
+     1,
+     1100
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.02,
+     1
+    ],
+    [
+     0.5,
+     0.8
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.9,
+   "drum": {
+    "rate": [
+     12.0,
+     12.0
+    ]
+   }
+  }
+ },
+ "types": {
+  "song": {
+   "pause_s": [
+    3.0,
+    10.0
+   ],
+   "length_s": [
+    0.8,
+    3.0
+   ],
+   "transpose_st": 1.0,
+   "avoid_repeat": false,
+   "auto": {
+    "vo_pitch": [
+     0.97,
+     1.03
+    ],
+    "vo_breath": [
+     16,
+     26
+    ],
+    "vo_tension": [
+     20,
+     32
+    ],
+    "vo_rough": [
+     28,
+     40
+    ],
+    "ph_tempo": [
+     96,
+     104
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 1,
+     "sections": [
+      {
+       "pool": [
+        "korp",
+        "prruk"
+       ],
+       "count": [
+        1,
+        4
+       ],
+       "share": 1.0,
+       "gap_ms": [
+        350,
+        750
+       ]
+      }
+     ]
+    }
+   ],
+   "overrides": []
+  },
+  "call": {
+   "pause_s": [
+    3.0,
+    9.0
+   ],
+   "length_s": [
+    0.4,
+    1.6
+   ],
+   "avoid_repeat": false,
+   "auto": {
+    "vo_pitch": [
+     0.97,
+     1.03
+    ],
+    "vo_breath": [
+     16,
+     26
+    ],
+    "vo_tension": [
+     20,
+     32
+    ],
+    "vo_rough": [
+     50,
+     66
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 1,
+     "sections": [
+      {
+       "pool": [
+        "rraa"
+       ],
+       "count": [
+        1,
+        2
+       ],
+       "share": 1.0,
+       "gap_ms": [
+        400,
+        700
+       ],
+       "no_adjacent_repeat": false
+      }
+     ]
+    },
+    {
+     "weight": 1,
+     "sections": [
+      {
+       "pool": [
+        "aerr"
+       ],
+       "count": [
+        3,
+        3
+       ],
+       "share": 1.0,
+       "gap_ms": [
+        140,
+        220
+       ],
+       "no_adjacent_repeat": false
+      }
+     ]
+    }
+   ],
+   "overrides": []
+  },
+  "alarm": {
+   "pause_s": [
+    1.0,
+    3.0
+   ],
+   "length_s": [
+    1.5,
+    3.5
+   ],
+   "avoid_repeat": false,
+   "auto": {
+    "vo_pitch": [
+     0.97,
+     1.03
+    ],
+    "vo_breath": [
+     16,
+     26
+    ],
+    "vo_tension": [
+     20,
+     32
+    ],
+    "vo_rough": [
+     46,
+     60
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 1,
+     "sections": [
+      {
+       "pool": [
+        "arrk"
+       ],
+       "count": [
+        6,
+        14
+       ],
+       "share": 1.0,
+       "gap_ms": [
+        110,
+        190
+       ],
+       "no_adjacent_repeat": false
+      }
+     ]
+    }
+   ],
+   "overrides": []
+  },
+  "flight": {
+   "pause_s": [
+    2.0,
+    7.0
+   ],
+   "length_s": [
+    0.1,
+    1.0
+   ],
+   "avoid_repeat": false,
+   "auto": {
+    "vo_pitch": [
+     0.97,
+     1.03
+    ],
+    "vo_breath": [
+     16,
+     26
+    ],
+    "vo_tension": [
+     20,
+     32
+    ],
+    "vo_rough": [
+     28,
+     40
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 1,
+     "sections": [
+      {
+       "pool": [
+        "klong"
+       ],
+       "count": [
+        1,
+        3
+       ],
+       "share": 1.0,
+       "gap_ms": [
+        350,
+        600
+       ],
+       "no_adjacent_repeat": false
+      }
+     ]
+    }
+   ],
+   "overrides": []
+  }
+ }
+}

@@ -1,0 +1,208 @@
+{
+ "_note": "Willow ptarmigan, M11 batch 6. Placeholder: SNL describes no sounds. The song slot holds a rough, low cackling series that speeds up; every shape is a sound design guess. Rework once a source is found.",
+ "syllables": {
+  "kok": {
+   "dur_ms": 110,
+   "pitch": [
+    [
+     0,
+     720
+    ],
+    [
+     0.3,
+     800
+    ],
+    [
+     1,
+     640
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.12,
+     1
+    ],
+    [
+     0.6,
+     0.7
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.8,
+   "rough": 55,
+   "tension": -15
+  },
+  "kok2": {
+   "dur_ms": 95,
+   "pitch": [
+    [
+     0,
+     680
+    ],
+    [
+     0.3,
+     760
+    ],
+    [
+     1,
+     610
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.12,
+     1
+    ],
+    [
+     0.6,
+     0.7
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.75,
+   "rough": 55,
+   "tension": -15
+  },
+  "kaaw": {
+   "dur_ms": 320,
+   "pitch": [
+    [
+     0,
+     600
+    ],
+    [
+     0.3,
+     760
+    ],
+    [
+     1,
+     560
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.1,
+     1
+    ],
+    [
+     0.7,
+     0.8
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.85,
+   "rough": 50,
+   "tension": -15
+  }
+ },
+ "types": {
+  "song": {
+   "pause_s": [
+    6.0,
+    16.0
+   ],
+   "length_s": [
+    1.5,
+    3.5
+   ],
+   "transpose_st": 0.8,
+   "avoid_repeat": false,
+   "auto": {
+    "vo_pitch": [
+     0.98,
+     1.02
+    ],
+    "vo_breath": [
+     18,
+     28
+    ],
+    "vo_tension": [
+     16,
+     28
+    ],
+    "vo_rough": [
+     44,
+     56
+    ],
+    "ph_tempo": [
+     96,
+     104
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 1,
+     "sections": [
+      {
+       "pool": [
+        "kaaw"
+       ],
+       "count": [
+        1,
+        2
+       ],
+       "share": 0.3,
+       "gap_ms": [
+        200,
+        300
+       ],
+       "no_adjacent_repeat": false
+      },
+      {
+       "pool": [
+        "kok",
+        "kok2"
+       ],
+       "count": [
+        4,
+        8
+       ],
+       "share": 0.35,
+       "gap_ms": [
+        120,
+        180
+       ]
+      },
+      {
+       "pool": [
+        "kok",
+        "kok2"
+       ],
+       "count": [
+        6,
+        12
+       ],
+       "share": 0.35,
+       "gap_ms": [
+        40,
+        70
+       ]
+      }
+     ]
+    }
+   ],
+   "overrides": []
+  }
+ }
+}

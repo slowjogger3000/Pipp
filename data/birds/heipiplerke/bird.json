@@ -1,0 +1,107 @@
+{
+ "_note": "Field guide text for the meadow pipit, both languages. Facts from birds.md (SNL, checked 2026-11-26). Norwegian wording is mine, Eirik to check. calendar: one letter per month from January, y yes, n no, ? not known.",
+ "xeno_canto": "https://xeno-canto.org/species/anthus-pratensis",
+ "facts": {
+  "length": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "broods": {
+   "en": "Usually 5 to 6 eggs, 11 to 15 days",
+   "no": "Vanligvis 5 til 6 egg, 11 til 15 dager",
+   "verified": true
+  },
+  "range": {
+   "en": "The whole country, coast to high mountains; 7 to 8 million birds",
+   "no": "Hele landet, fra kysten til høyt på snaufjellet; 7 til 8 millioner fugler",
+   "verified": true
+  },
+  "habitat": {
+   "en": "Open landscape; one of the commonest mountain birds",
+   "no": "Åpent landskap; en av de vanligste fjellfuglene",
+   "verified": true
+  },
+  "food": {
+   "en": "Mainly insects and other small animals, now and then seeds",
+   "no": "Mest insekter og andre smådyr, av og til frø",
+   "verified": true
+  },
+  "status": {
+   "en": "LC, least concern, Norwegian red list",
+   "no": "LC, livskraftig, norsk rødliste",
+   "verified": true
+  },
+  "nest": {
+   "en": "On the ground, often under a tussock; often used by the cuckoo",
+   "no": "På bakken, ofte under en tue; ofte brukt av gjøken",
+   "verified": true
+  }
+ },
+ "sings": {
+  "male": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "female": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "song_notes": {
+  "en": "A song flight like the tree pipit's, with a trill that speeds up. When it flies up, a characteristic “tsip-tsip-tsip”. [TO VERIFY] the song's pitch and notes.",
+  "no": "Sangflukt som trepiplerkas, med en trille som øker i tempo. Når den flyr opp, et karakteristisk «tsip-tsip-tsip». [TO VERIFY] tonehøyde og toner i sangen.",
+  "verified": true
+ },
+ "mnemonic": {
+  "en": "",
+  "no": "",
+  "verified": false
+ },
+ "types": {
+  "song": {
+   "en": "Song flight with a trill that speeds up.",
+   "no": "Sangflukt med en trille som øker i tempo.",
+   "verified": true
+  },
+  "call": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "alarm": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "flight": {
+   "en": "Flying up: “tsip-tsip-tsip”.",
+   "no": "Når den flyr opp: «tsip-tsip-tsip».",
+   "verified": true
+  }
+ },
+ "calendar": {
+  "present": "yyyyyyyyyyyy",
+  "sings": "????????????",
+  "note": {
+   "en": "Partial migrant: most mountain birds leave, wintering from the Netherlands to Iberia; some coastal birds stay, from Trondheimsfjorden to Oslofjorden.",
+   "no": "Delvis trekkfugl: de fleste fjellfuglene drar og overvintrer fra Nederland til Den iberiske halvøy; noen kystfugler blir, fra Trondheimsfjorden til Oslofjorden.",
+   "verified": true
+  }
+ },
+ "lookalikes": [
+  {
+   "name": {
+    "en": "Tree pipit",
+    "no": "Trepiplerke"
+   },
+   "text": {
+    "en": "Its song-flight trill is stronger and darker and ends in a drawn-out “seee-er, seee-er, seee-er”, which the meadow pipit lacks.",
+    "no": "Trillen i sangflukten er kraftigere og mørkere og ender i et utdratt «seee-er, seee-er, seee-er», som heipiplerka mangler.",
+    "verified": true
+   }
+  }
+ ]
+}

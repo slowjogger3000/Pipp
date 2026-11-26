@@ -94,10 +94,7 @@
  },
  "lookalikes": [
   {
-   "name": {
-    "en": "Raven",
-    "no": "Ravn"
-   },
+   "id": "ravn",
    "text": {
     "en": "The raven has a wedge-shaped tail and often glides; the crow's tail is square-cut, its wingbeats slow and calm.",
     "no": "Ravnen har kileformet hale og glir ofte; kråkas hale er tverrskåret, vingeslagene rolige.",

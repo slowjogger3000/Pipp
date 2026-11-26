@@ -1,0 +1,95 @@
+{
+ "_note": "Field guide text for the golden plover, both languages. SNL gives no transcription, so the shape of the whistle is [TO VERIFY]. Facts from birds.md (SNL, checked 2026-11-26). Norwegian wording is mine, Eirik to check. calendar: one letter per month from January, y yes, n no, ? not known.",
+ "xeno_canto": "https://xeno-canto.org/species/pluvialis-apricaria",
+ "facts": {
+  "length": {
+   "en": "25 to 28 cm, about the size of a lapwing",
+   "no": "25 til 28 cm, omtrent som ei vipe",
+   "verified": true
+  },
+  "broods": {
+   "en": "Usually 4 eggs, mostly the first half of June; both sit 27 to 31 days",
+   "no": "Vanligvis 4 egg, mest første halvdel av juni; begge ruger i 27 til 31 dager",
+   "verified": true
+  },
+  "range": {
+   "en": "Mountains over much of the country, the coast from Møre northwards; 150 000 to 300 000 pairs",
+   "no": "Fjellet i store deler av landet, kysten fra Møre og nordover; 150 000 til 300 000 par",
+   "verified": true
+  },
+  "habitat": {
+   "en": "Open ground with short vegetation: bogs and heaths",
+   "no": "Åpne vidder med lav vegetasjon: myrer og lyngheier",
+   "verified": true
+  },
+  "food": {
+   "en": "Insects, snails, worms, crustaceans and spiders; berries and seeds in summer",
+   "no": "Insekter, snegler, børstemark, krepsdyr og edderkopper; bær og frø om sommeren",
+   "verified": true
+  },
+  "status": {
+   "en": "NT, near threatened, Norwegian red list",
+   "no": "NT, nær truet, norsk rødliste",
+   "verified": true
+  },
+  "nest": {
+   "en": "A simple scrape, lined with a little dry plant material",
+   "no": "En enkel grop, fôret med litt tørt plantemateriale",
+   "verified": true
+  }
+ },
+ "sings": {
+  "male": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "female": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "song_notes": {
+  "en": "In the breeding season very mournful whistling tones that can go on for hours, easy to tell from other sounds in the mountains, and carrying far. [TO VERIFY] SNL gives no transcription, so the whistle Tipp plays is a stand-in. Summer plumage: golden-spotted back, black chin, breast and belly framed in white.",
+  "no": "I hekketiden svært sørgmodige, fløytende toner som kan vare i timevis, lette å skille fra andre lyder på fjellet, og som bærer langt. [TO VERIFY] SNL gir ingen gjengivelse, så fløyten Tipp spiller er en stedfortreder. Sommerdrakt: gulflekket rygg, svart hake, bryst og buk med hvit kant.",
+  "verified": true
+ },
+ "mnemonic": {
+  "en": "",
+  "no": "",
+  "verified": false
+ },
+ "types": {
+  "song": {
+   "en": "Very mournful whistling tones in the breeding season, for hours.",
+   "no": "Svært sørgmodige, fløytende toner i hekketiden, i timevis.",
+   "verified": true
+  },
+  "call": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "alarm": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "flight": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "calendar": {
+  "present": "nnnyyyyyyynn",
+  "sings": "????????????",
+  "note": {
+   "en": "Migrant: arrives April and May, leaves late July to October; winters in western Europe and around the Mediterranean. Eggs mostly in the first half of June.",
+   "no": "Trekkfugl: kommer i april og mai, drar fra slutten av juli til oktober; overvintrer i Vest-Europa og rundt Middelhavet. Egg mest i første halvdel av juni.",
+   "verified": true
+  }
+ },
+ "lookalikes": []
+}

@@ -1,0 +1,288 @@
+{
+ "_note": "Meadow pipit, M11 batch 6. Verified by SNL: a song flight with a trill that speeds up (no drawn-out ending, unlike the tree pipit), and «tsip-tsip-tsip» when it flies up. Pitches and timing are sound design guesses: thin notes about 4 to 5,5 kHz, slow at first, then faster, then a fast trill.",
+ "syllables": {
+  "tsi": {
+   "dur_ms": 70,
+   "pitch": [
+    [
+     0,
+     4300
+    ],
+    [
+     0.4,
+     4700
+    ],
+    [
+     1,
+     4200
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.12,
+     1
+    ],
+    [
+     0.6,
+     0.7
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.75,
+   "tension": 10
+  },
+  "tsi2": {
+   "dur_ms": 60,
+   "pitch": [
+    [
+     0,
+     4600
+    ],
+    [
+     0.4,
+     5000
+    ],
+    [
+     1,
+     4500
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.12,
+     1
+    ],
+    [
+     0.6,
+     0.7
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.75,
+   "tension": 10
+  },
+  "ti": {
+   "dur_ms": 40,
+   "pitch": [
+    [
+     0,
+     4900
+    ],
+    [
+     1,
+     4600
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.2,
+     1
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.7,
+   "tension": 10
+  },
+  "tsip": {
+   "dur_ms": 55,
+   "pitch": [
+    [
+     0,
+     5400
+    ],
+    [
+     0.3,
+     6000
+    ],
+    [
+     1,
+     5200
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.12,
+     1
+    ],
+    [
+     0.6,
+     0.7
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.7,
+   "tension": 10
+  }
+ },
+ "types": {
+  "song": {
+   "pause_s": [
+    5.0,
+    14.0
+   ],
+   "length_s": [
+    2.0,
+    4.0
+   ],
+   "transpose_st": 0.8,
+   "avoid_repeat": false,
+   "auto": {
+    "vo_pitch": [
+     0.98,
+     1.02
+    ],
+    "vo_breath": [
+     12,
+     22
+    ],
+    "vo_tension": [
+     76,
+     88
+    ],
+    "vo_rough": [
+     0,
+     6
+    ],
+    "ph_tempo": [
+     96,
+     104
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 1,
+     "sections": [
+      {
+       "pool": [
+        "tsi",
+        "tsi2"
+       ],
+       "count": [
+        4,
+        7
+       ],
+       "share": 0.35,
+       "gap_ms": [
+        150,
+        220
+       ],
+       "no_adjacent_repeat": false
+      },
+      {
+       "pool": [
+        "tsi",
+        "tsi2"
+       ],
+       "count": [
+        5,
+        9
+       ],
+       "share": 0.3,
+       "gap_ms": [
+        70,
+        110
+       ],
+       "no_adjacent_repeat": false
+      },
+      {
+       "pool": [
+        "ti"
+       ],
+       "count": [
+        10,
+        22
+       ],
+       "share": 0.35,
+       "gap_ms": [
+        22,
+        40
+       ],
+       "no_adjacent_repeat": false
+      }
+     ]
+    }
+   ],
+   "overrides": []
+  },
+  "flight": {
+   "pause_s": [
+    3.0,
+    9.0
+   ],
+   "length_s": [
+    0.2,
+    0.8
+   ],
+   "avoid_repeat": false,
+   "auto": {
+    "vo_pitch": [
+     0.98,
+     1.02
+    ],
+    "vo_breath": [
+     12,
+     22
+    ],
+    "vo_tension": [
+     76,
+     88
+    ],
+    "vo_rough": [
+     0,
+     6
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 1,
+     "sections": [
+      {
+       "pool": [
+        "tsip"
+       ],
+       "count": [
+        2,
+        4
+       ],
+       "share": 1.0,
+       "gap_ms": [
+        80,
+        130
+       ],
+       "no_adjacent_repeat": false
+      }
+     ]
+    }
+   ],
+   "overrides": []
+  }
+ }
+}

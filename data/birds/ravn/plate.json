@@ -1,0 +1,296 @@
+{
+ "_note": "Raven ink plate in a 280x240 box, M11 batch 6, built from the hooded crow plate: all black with gloss (shadow tone under dense hatching), heavy head and bill, long throat feathers (strokes), wedge-shaped tail (birds.md, SNL). The juvenile has no gloss drawn and a small pale patch at the bill base (yellow, turning black in the first year).",
+ "box": [
+  280,
+  240
+ ],
+ "clips": {
+  "body": "M190 60 C184 44 158 42 150 62 C134 80 104 106 90 136 C92 146 98 154 106 158 C128 180 162 178 178 152 C192 130 198 104 192 80 C194 74 194 66 190 60 Z",
+  "wing": "M152 90 C156 118 136 146 98 152 C106 136 118 110 152 90 Z",
+  "hood": "M190 60 C184 44 158 42 150 62 C144 72 146 84 156 92 C168 102 178 118 184 136 C192 118 196 100 192 80 C194 74 194 66 190 60 Z"
+ },
+ "layers": [
+  {
+   "path": "M14 211 C80 205 150 201 268 193",
+   "stroke": 4
+  },
+  {
+   "path": "M214 196 l20 -20 M224 186 l16 3",
+   "stroke": 1.5
+  },
+  {
+   "path": "M234 176 q10 -10 18 -2 q-9 8 -18 2 Z M240 189 q11 -5 16 3 q-10 4 -16 -3 Z",
+   "fill": "face",
+   "stroke": 1
+  },
+  {
+   "path": "M90 136 L48 184 L44 206 L64 204 L106 158 Z",
+   "fill": "ink",
+   "stroke": 1.5,
+   "part": "tail"
+  },
+  {
+   "path": "M94 142 L52 192 M98 147 L56 200 M102 153 L62 202",
+   "stroke": 1,
+   "part": "tail"
+  },
+  {
+   "path": "M136 172 L139 199 M152 173 L157 198 M131 201 L139 199 L148 202 M149 200 L157 198 L166 201",
+   "stroke": 1.5
+  },
+  {
+   "clip": "body",
+   "fill": "shadow",
+   "stroke": 1.5
+  },
+  {
+   "hatch": "body"
+  },
+  {
+   "path": "M150 62 C144 72 146 84 156 92 C168 102 178 118 184 136",
+   "stroke": 1,
+   "within": "body"
+  },
+  {
+   "hatch": "wing"
+  },
+  {
+   "path": "M184 82 l4 7 M180 88 l4 7 M176 94 l4 6 M188 88 l3 7 M184 96 l3 6",
+   "stroke": 1.3,
+   "within": "body"
+  },
+  {
+   "clip": "wing",
+   "stroke": 1.5
+  },
+  {
+   "eye": [
+    177,
+    65
+   ],
+   "pupil": 2.4
+  },
+  {
+   "path": "M177.6 64.4 m-1.2 0 a1.2 1.2 0 1 0 2.4 0 a1.2 1.2 0 1 0 -2.4 0",
+   "fill": "face"
+  },
+  {
+   "path": "M186 54 C204 54 222 60 230 66 L192 72 Z",
+   "fill": "bill",
+   "stroke": 1.5,
+   "part": "upper"
+  },
+  {
+   "path": "M192 72 L226 69 C214 76 200 80 189 81 Z",
+   "fill": "bill",
+   "stroke": 1.5,
+   "part": "lower"
+  },
+  {
+   "variant": "gape",
+   "fill": "face",
+   "stroke": 1
+  },
+  {
+   "path": "M230 52 A16 16 0 0 1 230 76 M237 44 A26 26 0 0 1 237 84 M243 36 A36 36 0 0 1 243 92",
+   "stroke": 1.5,
+   "part": "arcs"
+  }
+ ],
+ "hatch": {
+  "body": {
+   "rect": [
+    86,
+    42,
+    200,
+    182
+   ],
+   "up": true,
+   "clip": "body"
+  },
+  "wing": {
+   "rect": [
+    96,
+    88,
+    158,
+    154
+   ],
+   "up": false,
+   "clip": "wing"
+  },
+  "hood": {
+   "rect": [
+    140,
+    40,
+    200,
+    140
+   ],
+   "up": false,
+   "clip": "hood"
+  }
+ },
+ "pivots": {
+  "upper": {
+   "at": [
+    192,
+    67
+   ],
+   "deg": -16
+  },
+  "lower": {
+   "at": [
+    192,
+    72
+   ],
+   "deg": 10
+  },
+  "tail": {
+   "at": [
+    98,
+    147
+   ],
+   "deg": -5
+  }
+ },
+ "variants": {
+  "male": {
+   "body_pitch": 2.5,
+   "wing_pitch": 2.5,
+   "hood_pitch": 0,
+   "eye_ring": 0,
+   "bill": "ink",
+   "gape": ""
+  },
+  "female": {
+   "body_pitch": 2.5,
+   "wing_pitch": 2.5,
+   "hood_pitch": 0,
+   "eye_ring": 0,
+   "bill": "ink",
+   "gape": ""
+  },
+  "juvenile": {
+   "body_pitch": 3.5,
+   "wing_pitch": 2.5,
+   "hood_pitch": 0,
+   "eye_ring": 0,
+   "bill": "ink",
+   "gape": "M187 70 L195 69 L195 75 L188 76 Z"
+  }
+ },
+ "callouts": [
+  {
+   "id": "bill",
+   "leader": "M210 62 L214 30",
+   "at": [
+    214,
+    17
+   ],
+   "align": "centre",
+   "male": {
+    "en": "HEAVY",
+    "no": "KRAFTIG",
+    "verified": true
+   },
+   "female": {
+    "en": "HEAVY",
+    "no": "KRAFTIG",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "YELLOW AT THE BASE",
+    "no": "GULT VED ROTEN",
+    "verified": true
+   }
+  },
+  {
+   "id": "throat",
+   "leader": "M184 92 L236 126",
+   "at": [
+    240,
+    138
+   ],
+   "align": "centre",
+   "male": {
+    "en": "LONG FEATHERS",
+    "no": "LANGE FJÆR",
+    "verified": true
+   },
+   "female": {
+    "en": "LONG FEATHERS",
+    "no": "LANGE FJÆR",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "LONG FEATHERS",
+    "no": "LANGE FJÆR",
+    "verified": false
+   }
+  },
+  {
+   "id": "plumage",
+   "leader": "M136 100 L96 44",
+   "at": [
+    92,
+    32
+   ],
+   "align": "centre",
+   "male": {
+    "en": "GLOSSY BLACK",
+    "no": "GLANSENDE SVART",
+    "verified": true
+   },
+   "female": {
+    "en": "GLOSSY BLACK",
+    "no": "GLANSENDE SVART",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "OFTEN NO GLOSS",
+    "no": "OFTE UTEN GLANS",
+    "verified": true
+   }
+  },
+  {
+   "id": "tail",
+   "leader": "M62 196 L104 214",
+   "at": [
+    140,
+    222
+   ],
+   "align": "centre",
+   "male": {
+    "en": "WEDGE-SHAPED",
+    "no": "KILEFORMET",
+    "verified": true
+   },
+   "female": {
+    "en": "WEDGE-SHAPED",
+    "no": "KILEFORMET",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "WEDGE-SHAPED",
+    "no": "KILEFORMET",
+    "verified": true
+   }
+  }
+ ],
+ "captions": {
+  "male": {
+   "en": "Adult. The male is considerably larger.",
+   "no": "Voksen. Hannen er en god del større.",
+   "verified": true
+  },
+  "female": {
+   "en": "Female. Like the male, smaller.",
+   "no": "Hunn. Som hannen, mindre.",
+   "verified": true
+  },
+  "juvenile": {
+   "en": "Young bird. Yellow bill base.",
+   "no": "Ungfugl. Gul nebbrot.",
+   "verified": true
+  }
+ }
+}
