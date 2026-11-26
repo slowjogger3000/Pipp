@@ -11,7 +11,8 @@
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
-    "check-seed": "node scripts/check-seed.ts"
+    "check-seed": "node scripts/check-seed.ts",
+    "deploy": "sh scripts/deploy-pages.sh"
   },
   "devDependencies": {
     "typescript": "^5.9.0",
