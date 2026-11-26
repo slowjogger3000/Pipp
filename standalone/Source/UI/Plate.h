@@ -132,7 +132,8 @@ public:
             }
             if (l.hatch.isNotEmpty())
             {
-                paintHatch(g, l.hatch, static_cast<float>(vdata[l.hatch == "body" ? "body_pitch" : "wing_pitch"]), toScreen, s);
+                // Each hatch takes its pitch from "<id>_pitch" in the variant. Missing or 0 draws nothing.
+                paintHatch(g, l.hatch, static_cast<float>(vdata[juce::Identifier(l.hatch + "_pitch")]), toScreen, s);
                 continue;
             }
             if (l.isEye)

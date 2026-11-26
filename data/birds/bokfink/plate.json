@@ -1,0 +1,75 @@
+{
+ "_note": "Chaffinch ink plate in a 280x240 box, drawn in M3 (not from the design). Same composition as the other plates: perched, facing right. The male's blue-grey hood is drawn as hatching over shadow, the reddish-brown underside in shadow, the chestnut back as hatching. The wing callout drops nearly black to fit; the wing is drawn dark. Nearly black wings with two white bars on all three. Callout values are from birds.md (SNL); bill colour is not verified. The green rump is not drawn.",
+ "box": [280, 240],
+ "clips": {
+  "body": "M198 72 C196 58 182 52 168 56 C152 60 140 74 132 92 C120 112 114 132 116 150 C120 166 132 176 148 178 C166 180 182 170 190 152 C198 134 200 108 199 92 C200 86 201 82 200 80 Z",
+  "wing": "M158 94 C164 120 150 148 120 160 C124 138 134 112 158 94 Z",
+  "hood": "M200 64 C194 66 190 66 186 66 C180 68 176 76 172 84 C166 94 156 100 146 104 C148 84 156 64 168 56 C182 50 196 52 200 64 Z"
+ },
+ "layers": [
+  { "path": "M14 206 C80 202 150 199 268 194", "stroke": 4 },
+  { "path": "M214 197 l20 -20 M224 187 l16 3", "stroke": 1.5 },
+  { "path": "M234 177 q10 -10 18 -2 q-9 8 -18 2 Z M240 190 q11 -5 16 3 q-10 4 -16 -3 Z", "fill": "face", "stroke": 1 },
+  { "path": "M120 150 L80 200 L92 208 L132 166 Z", "fill": "face", "stroke": 1.5, "part": "tail" },
+  { "path": "M124 156 L84 203 M128 162 L88 206", "stroke": 1, "part": "tail" },
+  { "path": "M148 178 L148 199 M162 176 L163 198 M140 201 L148 199 L156 201 M155 199 L163 198 L171 200", "stroke": 1.5 },
+  { "clip": "body", "fill": "face", "stroke": 1.5 },
+  { "hatch": "body" },
+  { "path": "M200 80 C194 84 188 84 182 80 C174 84 168 92 164 104 C160 120 162 138 172 154 C178 162 184 168 188 170 L216 170 L216 78 Z", "fill": "breast", "within": "body" },
+  { "path": "M200 64 C194 66 190 66 186 66 C180 68 176 76 172 84 C166 94 156 100 146 104 C148 84 156 64 168 56 C182 50 196 52 200 64 Z", "fill": "cap", "within": "body" },
+  { "hatch": "hood" },
+  { "path": "M200 64 C194 66 190 66 186 66 C180 68 176 76 172 84 C166 94 156 100 146 104", "stroke": 1, "within": "body" },
+  { "hatch": "wing" },
+  { "clip": "wing", "stroke": 1.5 },
+  { "path": "M134 106 L168 114 L167 120 L132 112 Z", "fill": "face", "stroke": 1, "within": "wing" },
+  { "path": "M126 124 L166 132 L164 138 L124 130 Z", "fill": "face", "stroke": 1, "within": "wing" },
+  { "clip": "body", "stroke": 1.5 },
+  { "eye": [184, 72], "pupil": 2.4 },
+  { "path": "M184.6 71.4 m-1.2 0 a1.2 1.2 0 1 0 2.4 0 a1.2 1.2 0 1 0 -2.4 0", "fill": "face" },
+  { "path": "M197 68 L214 76 L200 78 Z", "fill": "bill", "stroke": 1.5, "part": "upper" },
+  { "path": "M200 78 L212 77 L199 83 Z", "fill": "bill", "stroke": 1.5, "part": "lower" },
+  { "path": "M226 66 A14 14 0 0 1 226 90 M233 58 A24 24 0 0 1 233 98 M240 50 A34 34 0 0 1 240 106", "stroke": 1.5, "part": "arcs" }
+ ],
+ "hatch": {
+  "body": { "rect": [112, 50, 204, 182], "up": true, "clip": "body" },
+  "wing": { "rect": [118, 90, 166, 164], "up": false, "clip": "wing" },
+  "hood": { "rect": [140, 48, 204, 108], "up": false, "clip": "hood" }
+ },
+ "pivots": {
+  "upper": { "at": [200, 74], "deg": -14 },
+  "lower": { "at": [200, 79], "deg": 10 },
+  "tail": { "at": [126, 158], "deg": -6 }
+ },
+ "variants": {
+  "male": { "body_pitch": 6, "wing_pitch": 3, "eye_ring": 0, "bill": "shadow", "breast": "shadow", "cap": "shadow", "hood_pitch": 5 },
+  "female": { "body_pitch": 9, "wing_pitch": 3, "eye_ring": 0, "bill": "shadow", "breast": "face", "cap": "face" },
+  "juvenile": { "body_pitch": 9, "wing_pitch": 3, "eye_ring": 0, "bill": "shadow", "breast": "face", "cap": "face" }
+ },
+ "callouts": [
+  { "id": "bill", "leader": "M206 74 L206 23", "at": [206, 10], "align": "centre",
+    "male": { "en": "", "no": "", "verified": false },
+    "female": { "en": "", "no": "", "verified": false },
+    "juvenile": { "en": "", "no": "", "verified": false } },
+  { "id": "head", "leader": "M172 60 L122 36", "at": [120, 30], "align": "right",
+    "male": { "en": "BLUE-GREY HOOD", "no": "BLÅGRÅ HETTE", "verified": true },
+    "female": { "en": "GREY-BROWN", "no": "GRÅBRUN", "verified": true },
+    "juvenile": { "en": "GREY-BROWN", "no": "GRÅBRUN", "verified": true } },
+  { "id": "plumage", "leader": "M146 96 L112 104", "at": [108, 98], "align": "right",
+    "male": { "en": "CHESTNUT BACK", "no": "KASTANJEBRUN RYGG", "verified": true },
+    "female": { "en": "FAIRLY PLAIN", "no": "NOKSÅ ENSFARGET", "verified": true },
+    "juvenile": { "en": "LIKE THE FEMALE", "no": "SOM HUNNEN", "verified": true } },
+  { "id": "wing", "leader": "M136 128 L104 144", "at": [100, 140], "align": "right",
+    "male": { "en": "2 WHITE BARS", "no": "2 HVITE BÅND", "verified": true },
+    "female": { "en": "2 WHITE BARS", "no": "2 HVITE BÅND", "verified": true },
+    "juvenile": { "en": "2 WHITE BARS", "no": "2 HVITE BÅND", "verified": true } },
+  { "id": "breast", "leader": "M178 136 L232 212", "at": [276, 224], "align": "right",
+    "male": { "en": "REDDISH-BROWN", "no": "RØDBRUN", "verified": true },
+    "female": { "en": "GREY-BROWN", "no": "GRÅBRUN", "verified": true },
+    "juvenile": { "en": "GREY-BROWN", "no": "GRÅBRUN", "verified": true } }
+ ],
+ "captions": {
+  "male": { "en": "Male, singing. Hood browner in autumn and winter.", "no": "Hann som synger. Brunere hette høst og vinter.", "verified": true },
+  "female": { "en": "Female. Plainer, same white wing bars.", "no": "Hunn. Mer ensfarget, samme hvite vingebånd.", "verified": true },
+  "juvenile": { "en": "Juvenile. Grey-brown, like the female.", "no": "Ungfugl. Gråbrun, som hunnen.", "verified": true }
+ }
+}

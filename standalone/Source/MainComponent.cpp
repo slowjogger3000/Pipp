@@ -304,7 +304,7 @@ void MainComponent::applyStrings()
     }
     plate.language = strings.language();
     plate.toVerify = strings("to_verify");
-    for (const char* id : { "bill", "eye_ring", "plumage", "throat", "head", "cheek", "breast", "eye_stripe" })
+    for (const char* id : { "bill", "eye_ring", "plumage", "throat", "head", "cheek", "breast", "eye_stripe", "wing" })
         plate.calloutLabels[id] = strings("plate." + juce::String(id));
     sono.nowText = strings("song.now");
     list.repaint();
