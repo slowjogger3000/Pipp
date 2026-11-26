@@ -16,6 +16,7 @@
 #include "Params.h"
 #include "Random.h"
 #include "Surroundings.h"
+#include "Drum.h"
 #include "Syrinx.h"
 
 #include <array>
@@ -219,6 +220,7 @@ private:
     const BirdData* bird = nullptr;
     Rng rng;
     Syrinx voice;
+    Drum drum;
     Surroundings surroundings;
 
     std::uint32_t seenSeed = 1u, seenReturnAll = 0u, seenSingOnce = 0u, seenReroll = 0u;

@@ -50,6 +50,12 @@ struct Syllable
     float trillHz = 0.0f;
     float trillDepthSt = 0.0f;
     float trillAm = 0.0f;
+    // A drum stroke train instead of the syrinx (the woodpecker): strokes per
+    // second at the start and the end of the syllable. Pitch is the knock's
+    // resonance.
+    bool drum = false;
+    float drumRateStart = 0.0f;
+    float drumRateEnd = 0.0f;
 };
 
 struct Section

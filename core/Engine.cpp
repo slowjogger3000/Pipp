@@ -89,6 +89,7 @@ void Engine::prepare(double sampleRate)
     sr = static_cast<float>(sampleRate);
     srOut.store(sampleRate, std::memory_order_relaxed);
     voice.prepare(sampleRate);
+    drum.prepare(sampleRate);
     surroundings.prepare(sampleRate);
     seenSeed = seedIn.load(std::memory_order_relaxed);
     seedOut.store(seenSeed, std::memory_order_relaxed);
@@ -764,6 +765,12 @@ void Engine::runAutoplay(float dt, VoiceControls& vc) noexcept
     vc.amp = contourAt(s.amp, u) * n.gain * kVoiceLevel;
     lastFreq = vc.freqHz;
 
+    if (s.drum)
+    {
+        vc.drum = true;
+        vc.drumRateHz = (s.drumRateStart + (s.drumRateEnd - s.drumRateStart) * u) * tempo;
+    }
+
     if (s.trillHz > 0.0f)
     {
         vc.trillHz = s.trillHz * tempo;
@@ -806,6 +813,7 @@ void Engine::process(float* left, float* right, int numSamples) noexcept
         VoiceControls vc;
         runAutoplay(dt * speed, vc);
         vc.trillHz *= speed;
+        vc.drumRateHz *= speed;
         singingOut.store(playing, std::memory_order_relaxed);
         posOut.store(phraseMs, std::memory_order_relaxed);
         const float tempo = drawnPhrase ? drawnTempo() : std::max(0.25f, eff[kTempo] / 100.0f);
@@ -823,7 +831,16 @@ void Engine::process(float* left, float* right, int numSamples) noexcept
         vc.freqHz *= shiftMul;
 
         std::fill(birdBuf.begin(), birdBuf.begin() + n, 0.0f);
-        voice.render(birdBuf.data(), n, vc);
+        if (vc.drum)
+        {
+            VoiceControls rest = vc;
+            rest.amp = 0.0f; // the syrinx is silent while the bill drums
+            voice.render(birdBuf.data(), n, rest);
+        }
+        else
+            voice.render(birdBuf.data(), n, vc);
+        if (vc.drum || drum.ringing())
+            drum.render(birdBuf.data(), n, vc.freqHz, vc.amp, vc.drumRateHz, vc.drum);
 
         surroundings.set(eff[kDistance], eff[kWind], eff[kSpace] / 100.0f, place);
         float tmpR[kSubBlock];
@@ -849,6 +866,6 @@ void Engine::process(float* left, float* right, int numSamples) noexcept
          && ! peakL.compare_exchange_weak(old, blockL, std::memory_order_relaxed);) {}
     for (float old = peakR.load(std::memory_order_relaxed); blockR > old
          && ! peakR.compare_exchange_weak(old, blockR, std::memory_order_relaxed);) {}
-    levelOut.store(voice.envelope(), std::memory_order_relaxed);
+    levelOut.store(std::max(voice.envelope(), drum.envelope()), std::memory_order_relaxed);
 }
 } // namespace tipp

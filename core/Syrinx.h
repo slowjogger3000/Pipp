@@ -27,6 +27,8 @@ struct VoiceControls
     float trillHz = 0.0f;
     float trillDepthSt = 0.0f;
     float trillAm = 0.0f;  // 0 to 1
+    bool drum = false;     // a drum syllable: Drum sounds, the syrinx rests
+    float drumRateHz = 0.0f;
 };
 
 class Syrinx

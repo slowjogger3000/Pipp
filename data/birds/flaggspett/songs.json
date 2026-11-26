@@ -1,0 +1,312 @@
+{
+ "_note": "Great spotted woodpecker, M10. Its song type is drumming, from the drum source in core (core/Drum.h), not the syrinx. Verified (birds.md, SNL): 10 to 15 strokes a second, a roll just over half a second with an abrupt end, carries far; both sexes drum in spring, the male most; the call is a loud, short, sharp 'kikk', often in series at a calm pace. Sound design choices: four rolls (the resonance stands for different trees), the pauses between rolls, the knock's pitch and ring, the 'kikk' shape and its 0,5 to 0,9 s spacing.",
+ "syllables": {
+  "roll_a": {
+   "dur_ms": 560,
+   "pitch": [
+    [
+     0,
+     1150
+    ],
+    [
+     1,
+     1100
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.02,
+     1
+    ],
+    [
+     0.75,
+     0.9
+    ],
+    [
+     0.96,
+     0.85
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 1.0,
+   "drum": {
+    "rate": [
+     13,
+     14
+    ]
+   }
+  },
+  "roll_b": {
+   "dur_ms": 620,
+   "pitch": [
+    [
+     0,
+     950
+    ],
+    [
+     1,
+     900
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.02,
+     1
+    ],
+    [
+     0.75,
+     0.9
+    ],
+    [
+     0.96,
+     0.85
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 1.0,
+   "drum": {
+    "rate": [
+     12,
+     13
+    ]
+   }
+  },
+  "roll_c": {
+   "dur_ms": 540,
+   "pitch": [
+    [
+     0,
+     1450
+    ],
+    [
+     1,
+     1400
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.02,
+     1
+    ],
+    [
+     0.75,
+     0.9
+    ],
+    [
+     0.96,
+     0.85
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.9,
+   "drum": {
+    "rate": [
+     14,
+     15
+    ]
+   }
+  },
+  "roll_d": {
+   "dur_ms": 600,
+   "pitch": [
+    [
+     0,
+     1250
+    ],
+    [
+     1,
+     1180
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.02,
+     1
+    ],
+    [
+     0.75,
+     0.9
+    ],
+    [
+     0.96,
+     0.85
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 1.0,
+   "drum": {
+    "rate": [
+     11,
+     13
+    ]
+   }
+  },
+  "kikk": {
+   "dur_ms": 45,
+   "pitch": [
+    [
+     0,
+     5600
+    ],
+    [
+     0.3,
+     5900
+    ],
+    [
+     1,
+     4800
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.08,
+     1
+    ],
+    [
+     0.4,
+     0.7
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.8,
+   "tension": 20,
+   "rough": 10
+  }
+ },
+ "types": {
+  "song": {
+   "pause_s": [
+    4.0,
+    12.0
+   ],
+   "length_s": [
+    0.5,
+    0.7
+   ],
+   "transpose_st": 0.5,
+   "avoid_repeat": false,
+   "auto": {
+    "vo_pitch": [
+     0.97,
+     1.03
+    ],
+    "ph_tempo": [
+     97,
+     103
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 1,
+     "sections": [
+      {
+       "pool": [
+        "roll_a",
+        "roll_b",
+        "roll_c",
+        "roll_d"
+       ],
+       "count": [
+        1,
+        1
+       ],
+       "share": 1.0,
+       "gap_ms": [
+        50,
+        50
+       ]
+      }
+     ]
+    }
+   ],
+   "overrides": []
+  },
+  "call": {
+   "pause_s": [
+    2.0,
+    6.0
+   ],
+   "length_s": [
+    1.0,
+    6.0
+   ],
+   "avoid_repeat": false,
+   "auto": {
+    "vo_pitch": [
+     0.98,
+     1.02
+    ],
+    "vo_breath": [
+     6,
+     14
+    ],
+    "vo_tension": [
+     55,
+     70
+    ],
+    "vo_rough": [
+     8,
+     16
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 1,
+     "sections": [
+      {
+       "pool": [
+        "kikk"
+       ],
+       "count": [
+        2,
+        8
+       ],
+       "share": 1.0,
+       "gap_ms": [
+        500,
+        900
+       ],
+       "no_adjacent_repeat": false
+      }
+     ]
+    }
+   ],
+   "overrides": []
+  }
+ }
+}

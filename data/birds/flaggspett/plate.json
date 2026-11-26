@@ -1,0 +1,285 @@
+{
+ "_note": "Great spotted woodpecker ink plate in a 280x240 box, drawn in M10, not from a design: clinging to a trunk, black back (dense hatching) with a white shoulder patch, white bars on the wing, white front and cheek, red under the tail. Red is drawn as shadow tone, as the plate has no red. Male red nape, female none, juvenile whole crown red (birds.md, SNL).",
+ "box": [
+  280,
+  240
+ ],
+ "clips": {
+  "body": "M178 52 C164 52 154 66 152 86 C148 116 150 150 160 172 C168 186 186 186 194 170 C202 150 204 118 202 90 C200 68 192 52 178 52 Z",
+  "wing": "M158 92 C150 118 150 150 162 176 C170 150 172 118 168 94 Z"
+ },
+ "hatch": {
+  "body": {
+   "rect": [
+    148,
+    50,
+    206,
+    188
+   ],
+   "up": true,
+   "clip": "body"
+  },
+  "wing": {
+   "rect": [
+    148,
+    90,
+    174,
+    180
+   ],
+   "up": false,
+   "clip": "wing"
+  }
+ },
+ "pivots": {
+  "upper": {
+   "at": [
+    197,
+    67
+   ],
+   "deg": -10
+  },
+  "lower": {
+   "at": [
+    197,
+    71
+   ],
+   "deg": 8
+  },
+  "tail": {
+   "at": [
+    184,
+    176
+   ],
+   "deg": 4
+  }
+ },
+ "layers": [
+  {
+   "path": "M206 0 L246 0 L246 240 L206 240 Z",
+   "fill": "face",
+   "stroke": 1.5
+  },
+  {
+   "path": "M214 20 l4 30 M232 50 l-3 40 M218 110 l3 36 M236 150 l-4 40 M212 192 l3 30 M238 6 l-2 22",
+   "stroke": 1
+  },
+  {
+   "path": "M176 174 L198 226 L208 222 L190 170 Z",
+   "fill": "face",
+   "stroke": 1.5,
+   "part": "tail"
+  },
+  {
+   "path": "M186 186 l10 26 M192 182 l10 28",
+   "stroke": 1,
+   "part": "tail"
+  },
+  {
+   "path": "M196 122 l10 -4 M196 128 l10 2 M194 152 l12 -2 M194 158 l12 4",
+   "stroke": 1.5
+  },
+  {
+   "clip": "body",
+   "fill": "face",
+   "stroke": 1.5
+  },
+  {
+   "hatch": "body"
+  },
+  {
+   "path": "M196 84 C202 110 202 146 194 168 C188 176 182 176 178 170 C186 146 188 112 186 86 Z",
+   "fill": "face",
+   "within": "body"
+  },
+  {
+   "path": "M184 62 C192 62 198 68 198 76 C192 80 184 80 180 74 Z",
+   "fill": "face",
+   "stroke": 1,
+   "within": "body"
+  },
+  {
+   "path": "M176 168 C182 176 190 178 196 168 C194 182 184 188 174 182 Z",
+   "fill": "shadow",
+   "stroke": 1,
+   "within": "body"
+  },
+  {
+   "variant": "nape",
+   "fill": "shadow",
+   "stroke": 1,
+   "within": "body"
+  },
+  {
+   "variant": "crown",
+   "fill": "shadow",
+   "stroke": 1,
+   "within": "body"
+  },
+  {
+   "clip": "wing",
+   "fill": "face"
+  },
+  {
+   "hatch": "wing"
+  },
+  {
+   "path": "M152 130 h20 v3 h-20 Z M152 142 h20 v3 h-20 Z M154 154 h18 v3 h-18 Z",
+   "fill": "face",
+   "within": "wing"
+  },
+  {
+   "clip": "wing",
+   "stroke": 1.5
+  },
+  {
+   "path": "M159 96 C166 94 170 104 168 116 C164 124 158 120 157 110 Z",
+   "fill": "face",
+   "stroke": 1
+  },
+  {
+   "clip": "body",
+   "stroke": 1.5
+  },
+  {
+   "eye": [
+    188,
+    66
+   ],
+   "pupil": 2.2
+  },
+  {
+   "path": "M196 64 L215 63 L198 69 Z",
+   "fill": "bill",
+   "stroke": 1.5,
+   "part": "upper"
+  },
+  {
+   "path": "M198 69 L214 66 L197 72 Z",
+   "fill": "bill",
+   "stroke": 1.5,
+   "part": "lower"
+  },
+  {
+   "path": "M146 50 A16 16 0 0 0 146 80 M139 42 A26 26 0 0 0 139 88 M132 34 A36 36 0 0 0 132 96",
+   "stroke": 1.5,
+   "part": "arcs"
+  }
+ ],
+ "variants": {
+  "male": {
+   "body_pitch": 3,
+   "wing_pitch": 3,
+   "eye_ring": 0,
+   "bill": "shadow",
+   "nape": "M160 62 C163 56 170 54 174 56 C172 64 166 68 160 68 Z",
+   "crown": ""
+  },
+  "female": {
+   "body_pitch": 3,
+   "wing_pitch": 3,
+   "eye_ring": 0,
+   "bill": "shadow",
+   "nape": "",
+   "crown": ""
+  },
+  "juvenile": {
+   "body_pitch": 3,
+   "wing_pitch": 3,
+   "eye_ring": 0,
+   "bill": "shadow",
+   "nape": "",
+   "crown": "M166 54 C176 48 188 52 194 60 C186 62 176 60 166 58 Z"
+  }
+ },
+ "callouts": [
+  {
+   "id": "head",
+   "leader": "M164 60 L118 30",
+   "at": [
+    116,
+    24
+   ],
+   "align": "right",
+   "male": {
+    "en": "RED NAPE PATCH",
+    "no": "RØD NAKKEFLEKK",
+    "verified": true
+   },
+   "female": {
+    "en": "BLACK, NO RED",
+    "no": "SVART, UTEN RØDT",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "WHOLE CROWN RED",
+    "no": "HELE ISSEN RØD",
+    "verified": true
+   }
+  },
+  {
+   "id": "plumage",
+   "leader": "M158 108 L96 116",
+   "at": [
+    92,
+    110
+   ],
+   "align": "right",
+   "male": {
+    "en": "BLACK, WHITE, RED",
+    "no": "SVART, HVIT, RØD",
+    "verified": true
+   },
+   "female": {
+    "en": "BLACK, WHITE, RED",
+    "no": "SVART, HVIT, RØD",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "BLACK, WHITE, RED",
+    "no": "SVART, HVIT, RØD",
+    "verified": true
+   }
+  },
+  {
+   "id": "bill",
+   "leader": "M200 62 L180 26",
+   "at": [
+    180,
+    13
+   ],
+   "align": "centre",
+   "male": {
+    "en": "",
+    "no": "",
+    "verified": false
+   },
+   "female": {
+    "en": "",
+    "no": "",
+    "verified": false
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  }
+ ],
+ "captions": {
+  "male": {
+   "en": "Male drumming. Small red nape patch.",
+   "no": "Hann som trommer. Liten rød nakkeflekk.",
+   "verified": true
+  },
+  "female": {
+   "en": "Female. Black crown, no red.",
+   "no": "Hunn. Svart isse uten rødt.",
+   "verified": true
+  },
+  "juvenile": {
+   "en": "Juvenile. Whole crown red.",
+   "no": "Ungfugl. Hele issen rød.",
+   "verified": true
+  }
+ }
+}

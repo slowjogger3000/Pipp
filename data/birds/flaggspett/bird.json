@@ -1,0 +1,95 @@
+{
+ "_note": "Field guide text for the great spotted woodpecker, both languages. Facts from birds.md (SNL, checked 2026-11-26). Norwegian wording is mine, Eirik to check. calendar: one letter per month from January, y yes, n no, ? not known; the sings row is drumming.",
+ "xeno_canto": "https://xeno-canto.org/species/dendrocopos-major",
+ "facts": {
+  "length": {
+   "en": "About 25 cm, 70 to 90 g",
+   "no": "Omtrent 25 cm, 70 til 90 g",
+   "verified": true
+  },
+  "broods": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "range": {
+   "en": "Common in the south, sparser north; 10 000 to 35 000 pairs",
+   "no": "Vanlig i sør, færre i nord; 10 000 til 35 000 par",
+   "verified": true
+  },
+  "habitat": {
+   "en": "Deciduous, conifer and mixed forest with old trees",
+   "no": "Løv-, bar- og blandingsskog med gamle trær",
+   "verified": true
+  },
+  "food": {
+   "en": "Insects in summer; conifer seeds in winter",
+   "no": "Insekter om sommeren; bartrefrø om vinteren",
+   "verified": true
+  },
+  "status": {
+   "en": "LC, viable, Norwegian red list",
+   "no": "LC, livskraftig, norsk rødliste",
+   "verified": true
+  },
+  "nest": {
+   "en": "New hole in aspen most years, 4 to 8 eggs",
+   "no": "Nytt hull i osp de fleste år, 4 til 8 egg",
+   "verified": true
+  }
+ },
+ "sings": {
+  "male": {
+   "en": "Drums, most",
+   "no": "Trommer, mest",
+   "verified": true
+  },
+  "female": {
+   "en": "Drums",
+   "no": "Trommer",
+   "verified": true
+  }
+ },
+ "song_notes": {
+  "en": "Drums with the bill on a hard surface: about 10 to 15 strokes a second, the fastest of all woodpeckers. A roll lasts just over half a second and ends abruptly, and carries far. Both sexes drum in spring, the male most; sometimes outside the breeding season too, often on posts and metal sheets. The call is a loud, short, sharp “kikk”, often in series at a calm pace.",
+  "no": "Trommer med nebbet mot et hardt underlag: rundt 10 til 15 slag i sekundet, raskest av alle spettene. En virvel varer i litt over et halvt sekund og slutter brått, og lyden rekker langt. Begge kjønn trommer om våren, hannen mest; av og til også utenom hekketida, gjerne på stolper og blikkplater. Lokkelyden er et høyt, kort og skarpt «kikk», ofte i serier i rolig tempo.",
+  "verified": true
+ },
+ "mnemonic": {
+  "en": "",
+  "no": "",
+  "verified": false
+ },
+ "types": {
+  "song": {
+   "en": "Drumming: 10 to 15 strokes a second, just over half a second.",
+   "no": "Tromming: 10 til 15 slag i sekundet, litt over et halvt sekund.",
+   "verified": true
+  },
+  "call": {
+   "en": "A loud, short, sharp “kikk”, often in series.",
+   "no": "Et høyt, kort og skarpt «kikk», ofte i serier.",
+   "verified": true
+  },
+  "alarm": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "flight": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "calendar": {
+  "present": "yyyyyyyyyyyy",
+  "sings": "??yyy???????",
+  "note": {
+   "en": "Mainly resident; in some years long irruptions, away for one or two years. Drums in spring, sometimes outside the breeding season too. [TO VERIFY] which months count as spring here.",
+   "no": "For det meste standfugl; noen år lange streif, borte i ett eller to år. Trommer om våren, av og til også utenom hekketida. [TO VERIFY] hvilke måneder våren er her.",
+   "verified": true
+  }
+ },
+ "lookalikes": []
+}

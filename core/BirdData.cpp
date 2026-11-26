@@ -114,6 +114,15 @@ bool parseSyllables(const Value& root, BirdData& bird, std::string& error)
             s.trillDepthSt = num(t->get("depth_st"), 0.0f);
             s.trillAm = num(t->get("am"), 0.0f);
         }
+        if (const Value* d = v.get("drum"))
+        {
+            Range rate;
+            if (! readRange(d->get("rate"), rate) || rate.lo <= 0.0f || rate.hi > 60.0f)
+                return fail(error, where + "drum rate must be two numbers, 0 to 60");
+            s.drum = true;
+            s.drumRateStart = rate.lo;
+            s.drumRateEnd = rate.hi;
+        }
         bird.syllables.push_back(std::move(s));
     }
     return true;

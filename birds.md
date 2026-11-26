@@ -276,9 +276,31 @@ To verify: calls other than the alarm, how long the song is and how it is built,
 
 To verify: the size of the falling third, how fast and how many times «ko-ko» is repeated, time of day and months of the song, what the male's hoarse sounds and the female's bubbling sound like in detail, bill, eye and leg colour, the juvenile, wingspan.
 
+### Flaggspett (folder `flaggspett`), snl.no/flaggspett, Olav Hogstad, Magne Husby and Jørgen Skavdal Søraker, updated 2026-11-04
+
+| Field | Value |
+|---|---|
+| Length, weight | About 25 cm, thrush-sized, 70 to 90 g |
+| Appearance | Pied black, white and red. Two large white oval shoulder patches on the black back, black wings with fine white bars, white underparts, a blood-red patch under the tail base |
+| Male | A small red nape patch |
+| Female | Black crown with no red |
+| Juvenile | Both sexes have the whole crown red, brightest in the male |
+| Drumming | With the bill on a hard surface. About 10 to 15 strokes a second, the fastest of all woodpeckers; a roll lasts just over half a second and ends abruptly. Carries far. Both sexes drum in spring, the male most; sometimes outside the breeding season too, often on posts and metal sheets |
+| Call | A loud, short, sharp «kikk», often in series at a calm pace |
+| Habitat | Fairly common in deciduous, conifer and mixed forest in Sør-Norge, sparser in Nord-Norge. Needs old trees big enough for nest holes |
+| Range in Norway | 10 000 to 35 000 pairs (BirdLife Norge). Our most common woodpecker; numbers follow the spruce and pine seed crop |
+| Food | Insects and larvae on and under bark in summer, also fruit and berries; not rarely eggs and nestlings of small birds. In autumn and winter mainly seeds from spruce and pine cones, wedged in an anvil it cuts itself. Suet at feeders. The only Norwegian woodpecker that lives mostly on conifer seeds in winter |
+| Nest | A new hole most years, cut by both sexes in a living aspen or other deciduous tree, 2 to 3 weeks' work; entrance about 5 cm, 20 to 30 cm deep. Also cuts roost holes |
+| Eggs | 4 to 8, glossy white, in May. Both incubate 10 to 12 days; the male always takes the night |
+| Young | Leave the hole at three weeks, then fed 14 more days |
+| Movements | Mainly resident; in some years long irruptions, away from an area for one or two years |
+| Status | LC on the Norwegian red list, and globally |
+
+To verify: bill, eye and leg colour, number of beats per roll, months of drumming beyond "spring", what the drumming is for, broods, wingspan, lookalikes.
+
 ## All other birds
 
-Nothing is verified for the 8 other birds outside the garden group. Collect facts per bird with the same fields as the blackbird table before writing `bird.json`.
+Nothing is verified for the 7 other birds outside the garden group. Collect facts per bird with the same fields as the blackbird table before writing `bird.json`.
 
 ## Dawn chorus
 
