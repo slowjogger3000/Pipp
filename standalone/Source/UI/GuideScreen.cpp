@@ -69,8 +69,8 @@ juce::String sentenceCase(const juce::String& caps)
 {
     if (caps.isEmpty())
         return caps;
-    const auto lower = caps.toLowerCase();
-    return lower.substring(0, 1).toUpperCase() + lower.substring(1);
+    const auto lower = Strings::lower(caps);
+    return Strings::upper(lower.substring(0, 1)) + lower.substring(1);
 }
 
 // A row of the calendar: y filled ink, n hatched, ? left plain.
@@ -196,14 +196,7 @@ bool GuideScreen::lookalikePlayable(const juce::var& l) const
 
 juce::String GuideScreen::field(const juce::var& f) const
 {
-    const auto marker = strings("to_verify");
-    auto text = f[juce::Identifier(strings.language())].toString();
-    const bool verified = static_cast<bool>(f["verified"]);
-    if (verified)
-        return text;
-    if (text.isEmpty())
-        return marker;
-    return text.contains(marker) ? text : text + " " + marker;
+    return strings.field(f);
 }
 
 juce::String GuideScreen::calloutValue(const juce::var& c, const char* variant) const

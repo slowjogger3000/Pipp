@@ -11,6 +11,8 @@ add_library(tipp_core STATIC
     Json.cpp
     Json.h
     Params.h
+    Quiz.cpp
+    Quiz.h
     Random.h
     Surroundings.cpp
     Surroundings.h

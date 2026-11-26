@@ -4,6 +4,7 @@
 //   Tipp --snapshot <file.png> [--seconds <s>] [--hand <knob id>] [--lang no]
 //        [--bird <id>] [--sex female] [--age juvenile] [--tab guide]
 //        [--compare <id>] [--speed 0.5|0.25] [--shift] [--draw]
+//        [--tab quiz] [--quiz-seed <n>] [--quiz-skip <n>] [--answer right|wrong] [--leave-quiz]
 // plays for the given time, drags the knob 3 s before the end if asked,
 // saves a picture of the window and quits.
 
@@ -37,6 +38,13 @@ public:
         {
             if (const auto bird = value("--bird"); bird.isNotEmpty())
                 content->chooseScene(bird, value("--sex") == "female", value("--age") == "juvenile");
+            if (value("--tab") == "quiz")
+            {
+                const auto answer = value("--answer");
+                content->snapshotQuiz(static_cast<std::uint32_t>(value("--quiz-seed").getLargeIntValue()), value("--quiz-skip").getIntValue(),
+                                      answer == "right" ? 1 : answer == "wrong" ? -1 : 0, args.contains("--leave-quiz"));
+                content->setTab(2);
+            }
             if (value("--tab") == "guide")
                 content->setTab(1);
             if (const auto speed = value("--speed"); speed.isNotEmpty())

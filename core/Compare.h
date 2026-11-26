@@ -28,7 +28,10 @@ public:
     static constexpr double kGapSeconds = 0.8;
     static constexpr double kStepTimeout = 20.0; // give up on a phrase that never ends
 
-    void start(Engine& engine, const BirdData* first, const BirdData* second, Restore restore, double now) noexcept;
+    // type is what both birds sing, song unless given (the quiz may ask for
+    // a call).
+    void start(Engine& engine, const BirdData* first, const BirdData* second, Restore restore, double now,
+               int type = kSong) noexcept;
     void tick(Engine& engine, double now) noexcept;
     // Stops at once and restores the first bird and the scene.
     void cancel(Engine& engine) noexcept;

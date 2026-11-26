@@ -9,7 +9,7 @@ namespace
 namespace P = params;
 }
 
-void Compare::start(Engine& engine, const BirdData* a, const BirdData* b, Restore restore, double now) noexcept
+void Compare::start(Engine& engine, const BirdData* a, const BirdData* b, Restore restore, double now, int type) noexcept
 {
     if (running())
         cancel(engine);
@@ -19,7 +19,7 @@ void Compare::start(Engine& engine, const BirdData* a, const BirdData* b, Restor
     second = b;
     saved = restore;
     engine.setParam(P::indexOf(P::ap_on), 0.0f);
-    engine.setParam(P::indexOf(P::sc_type), static_cast<float>(kSong));
+    engine.setParam(P::indexOf(P::sc_type), static_cast<float>(type));
     engine.setParam(P::indexOf(P::pb_play), 1.0f);
     engine.setBird(first);
     singOnce(engine, now);

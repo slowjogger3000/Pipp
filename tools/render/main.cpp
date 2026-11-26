@@ -7,11 +7,16 @@
 //   tipp-render --bird blameis --compare kjottmeis --out out/compare.wav
 //   tipp-render --bird svarttrost --check-draw
 //   tipp-render --bird svarttrost --draw --out out/draw.wav
+//   tipp-render --bird svarttrost --check-quiz
 //
 // --draw sings a fixed drawn line in draw mode, again each time it ends.
 // --keep keeps that line as a phrase: autoplay sings it after each phrase
 // of the bird's own. --check-draw tests the drawn line and draw mode
 // without writing audio.
+//
+// --check-quiz tests the quiz: the birds each set asks about, the answers,
+// missed birds coming back sooner, the same seed giving the same quiz, and
+// QuizVoice singing one phrase of --bird at half speed. No audio file.
 //
 // --compare runs the field guide's COMPARE: one phrase of --bird, a gap,
 // one phrase of the other bird, then stop. The file ends when it is done.
@@ -25,6 +30,7 @@
 #include "Compare.h"
 #include "Engine.h"
 #include "Params.h"
+#include "Quiz.h"
 #include "WavWriter.h"
 
 #include <algorithm>
@@ -81,6 +87,7 @@ void usage()
         "       tipp-render --bird <id> --check-override\n"
         "       tipp-render --bird <id> --compare <other id> [--seconds <max s>] --out <file.wav>\n"
         "       tipp-render --bird <id> --check-draw\n"
+        "       tipp-render --bird <id> --check-quiz\n"
         "       tipp-render --bird <id> (--draw | --keep) [--seconds <s>] [--set ...] --out <file.wav>\n");
 }
 
@@ -408,13 +415,196 @@ int checkOverride(const tipp::BirdData& bird)
 }
 } // namespace
 
+// The quiz: who it asks, the answers, missed birds back sooner, and
+// QuizVoice on the engine with a real bird.
+int checkQuiz(const tipp::BirdData& bird)
+{
+    namespace P = tipp::params;
+    using tipp::Quiz;
+    int failures = 0;
+    auto check = [&failures](bool pass, const char* what) {
+        std::printf("%-4s %s\n", pass ? "ok" : "FAIL", what);
+        if (! pass)
+            ++failures;
+    };
+
+    // Six garden birds like the data: 0 and 1 are lookalikes, 0 and 4 too
+    // (named from one side only). 5 has no call.
+    std::vector<tipp::QuizBird> birds(6);
+    for (auto& b : birds)
+        b.hasCall = true;
+    birds[0].lookalikes = { 1, 4 };
+    birds[1].lookalikes = { 0 };
+    birds[5].hasCall = false;
+
+    check(Quiz::poolFor(birds, Quiz::kPairs) == std::vector<int>({ 0, 1, 4 }), "pairs: every bird with a lookalike, either way round");
+    check(Quiz::poolFor(birds, Quiz::kGarden).size() == 6 && Quiz::poolFor(birds, Quiz::kAll).size() == 6, "garden and all");
+    {
+        Quiz q;
+        check(Quiz::poolFor(birds, Quiz::kForest).empty() && ! q.start(birds, Quiz::kForest, Quiz::kAskSong, 1), "a set without birds does not start");
+    }
+
+    {
+        // Always right: 10 questions, 4 different answers, never the same
+        // bird twice in a row, lookalikes among the answers.
+        Quiz q;
+        bool ok = q.start(birds, Quiz::kPairs, Quiz::kAskSong, 3);
+        bool answersOk = true, noRepeat = true, inPool = true, lookFirst = true, allRight = true;
+        int prev = -1, n = 0;
+        const auto pool = Quiz::poolFor(birds, Quiz::kPairs);
+        while (ok)
+        {
+            const auto& qq = q.question();
+            ++n;
+            answersOk = answersOk && qq.count == Quiz::kAnswers && qq.correctSlot >= 0
+                     && qq.answers[static_cast<std::size_t>(qq.correctSlot)] == qq.bird;
+            for (int i = 0; i < qq.count; ++i)
+                for (int j = i + 1; j < qq.count; ++j)
+                    answersOk = answersOk && qq.answers[static_cast<std::size_t>(i)] != qq.answers[static_cast<std::size_t>(j)];
+            noRepeat = noRepeat && qq.bird != prev;
+            inPool = inPool && std::find(pool.begin(), pool.end(), qq.bird) != pool.end();
+            for (int other : { 0, 1, 4 })
+            {
+                const bool alike = (qq.bird == 0 && other != 0) || (qq.bird != 0 && other == 0);
+                if (alike && std::find(qq.answers.begin(), qq.answers.begin() + qq.count, other) == qq.answers.begin() + qq.count)
+                    lookFirst = false;
+            }
+            prev = qq.bird;
+            allRight = q.answer(qq.correctSlot) && allRight;
+            ok = q.next();
+        }
+        check(allRight, "a right answer counts as right");
+        check(n == Quiz::kQuestions && q.finished() && q.correct() == 10 && q.missed() == 0 && q.left() == 0, "10 questions, all right, none left");
+        check(answersOk, "4 different answers, one of them right");
+        check(noRepeat, "never the same bird twice in a row");
+        check(inPool, "every question from the set");
+        check(lookFirst, "lookalikes are among the wrong answers");
+    }
+
+    {
+        // A miss: that bird is asked again after 2 other questions, and the
+        // bird it was taken for right after it.
+        Quiz q;
+        q.start(birds, Quiz::kGarden, Quiz::kAskSong, 11);
+        const int missedBird = q.question().bird;
+        const int wrongSlot = (q.question().correctSlot + 1) % Quiz::kAnswers;
+        const int takenFor = q.question().answers[static_cast<std::size_t>(wrongSlot)];
+        check(! q.answer(wrongSlot) && q.missed() == 1 && q.left() == 9, "a wrong answer counts as missed");
+        check(q.practise() == std::vector<int>({ missedBird, takenFor }), "practise names the missed bird and the one it was taken for");
+        std::vector<int> asked { missedBird };
+        while (q.next())
+        {
+            asked.push_back(q.question().bird);
+            q.answer(q.question().correctSlot);
+        }
+        std::printf("     asked:");
+        for (int b : asked)
+            std::printf(" %d", b);
+        std::printf("  (missed %d, taken for %d)\n", missedBird, takenFor);
+        check(asked.size() == 10 && asked[3] == missedBird, "the missed bird comes back at question 4");
+        check(asked[4] == takenFor, "the bird it was taken for comes at question 5");
+        check(q.practise().empty(), "practise empties once both came back");
+    }
+
+    {
+        // Same seed, same quiz. Ask for call and both.
+        Quiz a, b;
+        a.start(birds, Quiz::kAll, Quiz::kAskBoth, 42);
+        b.start(birds, Quiz::kAll, Quiz::kAskBoth, 42);
+        bool same = true, songs = false, calls = false, callOk = true;
+        do
+        {
+            const auto& x = a.question();
+            const auto& y = b.question();
+            same = same && x.bird == y.bird && x.type == y.type && x.answers == y.answers;
+            songs = songs || x.type == tipp::kSong;
+            calls = calls || x.type == tipp::kCall;
+            callOk = callOk && (x.type != tipp::kCall || birds[static_cast<std::size_t>(x.bird)].hasCall);
+            a.answer(0);
+            b.answer(0);
+        } while (a.next() && b.next());
+        check(same, "the same seed gives the same quiz");
+        check(songs && calls && callOk, "BOTH asks songs and calls, calls only of birds that have one");
+        Quiz c;
+        c.start(birds, Quiz::kAll, Quiz::kAskCall, 5);
+        bool callAsked = true;
+        do
+        {
+            const auto& x = c.question();
+            callAsked = callAsked && x.type == (birds[static_cast<std::size_t>(x.bird)].hasCall ? tipp::kCall : tipp::kSong);
+            c.answer(0);
+        } while (c.next());
+        check(callAsked, "CALL asks the call, the song of a bird without one");
+    }
+
+    {
+        // QuizVoice: a hand value from before is gone, one phrase only, and
+        // half speed doubles its length.
+        tipp::Engine engine;
+        engine.prepare(kSampleRate);
+        tipp::BirdData before = bird; // a different pointer, as in the app
+        engine.setBird(&before);
+        engine.setParam(P::indexOf(P::pb_play), 1.0f);
+        std::vector<float> buf(32);
+        auto run = [&](double s, tipp::QuizVoice* v, float* peak, bool* finite, double* singing) {
+            const auto blocks = static_cast<long>(s * kSampleRate / 32.0 + 0.5);
+            for (long i = 0; i < blocks; ++i)
+            {
+                if (v != nullptr && i % 50 == 0) // about 30 Hz, like the host timer
+                    v->tick(engine);
+                engine.process(buf.data(), buf.data(), 32);
+                for (float x : buf)
+                {
+                    if (peak != nullptr) *peak = std::max(*peak, std::fabs(x));
+                    if (finite != nullptr) *finite = *finite && std::isfinite(x);
+                }
+                if (singing != nullptr && engine.singing())
+                    *singing += 32.0 / kSampleRate;
+            }
+        };
+        engine.setParam(tipp::kPitch, bird.knobRange[tipp::kPitch].hi);
+        engine.handDown(tipp::kPitch);
+        run(0.5, nullptr, nullptr, nullptr, nullptr);
+        engine.handUp(tipp::kPitch);
+        engine.setParam(P::indexOf(P::ap_latch), 1.0f);
+        run(0.1, nullptr, nullptr, nullptr, nullptr);
+
+        int season = -1, time = -1;
+        check(tipp::QuizVoice::sceneFor(bird, tipp::kSong, season, time), "the song sounds in some scene");
+        std::printf("     scene: season %d, time %d\n", season, time);
+
+        tipp::QuizVoice voice;
+        const auto startCount = engine.phrasesStarted();
+        voice.start(engine, &bird, tipp::kSong, false);
+        float peak = 0.0f;
+        bool finite = true;
+        double sang1 = 0.0;
+        run(15.0, &voice, &peak, &finite, &sang1);
+        check(voice.started() && engine.birdInUse() == &bird, "the quiz bird is in the engine");
+        check(engine.knobMode(tipp::kPitch) == tipp::Engine::KnobMode::Auto && ! engine.knobOverridden(tipp::kPitch), "a hand value from before does not carry into the quiz");
+        check(engine.phrasesStarted() - startCount == 1u, "one phrase, then quiet (autoplay off)");
+        check(finite && peak < kMaxPeak, "output finite and below the peak limit");
+
+        voice.setHalfSpeed(engine, true);
+        voice.playAgain(engine);
+        double sang2 = 0.0;
+        run(25.0, &voice, nullptr, nullptr, &sang2);
+        std::printf("     phrase %.2f s at 1x, %.2f s at half speed\n", sang1, sang2);
+        check(engine.phrasesStarted() - startCount == 2u, "PLAY AGAIN sings one more phrase");
+        check(sang2 > sang1 * 1.4, "half speed makes the phrase longer");
+    }
+
+    std::printf("%s\n", failures == 0 ? "quiz check passed" : "quiz check FAILED");
+    return failures == 0 ? 0 : 1;
+}
+
 int main(int argc, char** argv)
 {
     double seconds = 30.0;
     std::string outPath, birdId, type = "song", dataDir, compareId;
     std::uint32_t seed = 1u;
     std::vector<std::pair<std::string, std::string>> sets;
-    bool overrideCheck = false, drawCheck = false, drawSing = false, keep = false;
+    bool overrideCheck = false, drawCheck = false, quizCheck = false, drawSing = false, keep = false;
 
     for (int i = 1; i < argc; ++i)
     {
@@ -430,6 +620,7 @@ int main(int argc, char** argv)
         else if (a == "--out" && hasValue)     outPath = argv[++i];
         else if (a == "--check-override")      overrideCheck = true;
         else if (a == "--check-draw")          drawCheck = true;
+        else if (a == "--check-quiz")          quizCheck = true;
         else if (a == "--draw")                drawSing = true;
         else if (a == "--keep")                keep = true;
         else if (a == "--compare" && hasValue) compareId = argv[++i];
@@ -443,7 +634,7 @@ int main(int argc, char** argv)
         else { usage(); return 2; }
     }
 
-    if ((outPath.empty() && ! overrideCheck && ! drawCheck) || birdId.empty() || seconds <= 0.5)
+    if ((outPath.empty() && ! overrideCheck && ! drawCheck && ! quizCheck) || birdId.empty() || seconds <= 0.5)
     {
         usage();
         return 2;
@@ -485,6 +676,8 @@ int main(int argc, char** argv)
         return checkOverride(bird);
     if (drawCheck)
         return checkDraw(bird);
+    if (quizCheck)
+        return checkQuiz(bird);
 
     tipp::BirdData other;
     if (! compareId.empty())

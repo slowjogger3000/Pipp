@@ -2,6 +2,7 @@
 
 #include "Params.h"
 
+#include <algorithm>
 #include <cmath>
 
 namespace tipp::ui
@@ -41,8 +42,23 @@ MainComponent::MainComponent(const juce::File& dataDirectory)
     stopBtn.glyph = Btn::Glyph::Stop;
     prevBtn.glyph = Btn::Glyph::Prev;
     nextBtn.glyph = Btn::Glyph::Next;
-    playBtn.onClick = [this] { setPlaying(true); };
-    stopBtn.onClick = [this] { setPlaying(false); };
+    playBtn.onClick = [this] {
+        if (activeTab == 2)
+            quizPlayAgain();
+        else
+            setPlaying(true);
+    };
+    stopBtn.onClick = [this] {
+        if (activeTab != 2)
+        {
+            setPlaying(false);
+            return;
+        }
+        stopCompare();
+        quizPlaying = false;
+        engine.setParam(P::indexOf(P::pb_play), 0.0f);
+        refreshControls();
+    };
     prevBtn.onClick = [this] { stepBird(-1); };
     nextBtn.onClick = [this] { stepBird(1); };
     enBtn.onClick = [this] { setLanguage("en"); };
@@ -158,6 +174,23 @@ MainComponent::MainComponent(const juce::File& dataDirectory)
     guide.onSeason = [this](int v) { setSeason(v); };
     guide.onPlayType = [this](int t) { playType(t); };
     guide.onCompare = [this](const juce::String& id) { startCompare(id); };
+
+    // Quiz.
+    addChildComponent(quizScreen);
+    quizScreen.onAnswer = [this](int slot) { quizAnswer(slot); };
+    quizScreen.onPlayAgain = [this] { quizPlayAgain(); };
+    quizScreen.onHalf = [this] {
+        quizHalf = ! quizHalf;
+        quizVoice.setHalfSpeed(engine, quizHalf);
+        updateQuizView();
+    };
+    quizScreen.onHint = [this] { hintShown = true; updateQuizView(); };
+    quizScreen.onCompare = [this] { quizCompare(); };
+    quizScreen.onOpenGuide = [this] { quizOpenGuide(); };
+    quizScreen.onNext = [this] { quizNext(); };
+    quizScreen.onSet = [this](int v) { quizSet = v; startQuiz(); };
+    quizScreen.onAsk = [this](int v) { quizAsk = v; startQuiz(); };
+    quizScreen.onHints = [this](int v) { quizHints = v; updateQuizView(); };
 
     engine.setParam(P::indexOf(P::ap_hold), hold);
     loadIndex();
@@ -414,7 +447,10 @@ void MainComponent::stopCompare()
 
 void MainComponent::setTab(int index)
 {
-    activeTab = juce::jlimit(0, 1, index);
+    const int was = activeTab;
+    activeTab = juce::jlimit(0, 2, index);
+    if (was == 2 && activeTab != 2)
+        leaveQuiz();
     const bool play = activeTab == 0;
     for (juce::Component* c : std::initializer_list<juce::Component*> {
              &plate, &maleBtn, &femaleBtn, &adultBtn, &juvBtn, &sono, &drawBtn, &shiftOffBtn, &shiftOctBtn,
@@ -427,13 +463,19 @@ void MainComponent::setTab(int index)
     for (auto& k : knobs)
         k->setVisible(play);
     updateSongTools();
-    guide.setVisible(! play);
-    repaint();
+    guide.setVisible(activeTab == 1);
+    list.setVisible(activeTab != 2);
+    prevBtn.setVisible(activeTab != 2);
+    nextBtn.setVisible(activeTab != 2);
+    quizScreen.setVisible(activeTab == 2);
+    if (was != 2 && activeTab == 2)
+        enterQuiz();
+    refreshControls();
 }
 
 void MainComponent::mouseUp(const juce::MouseEvent& e)
 {
-    for (int i = 0; i < 2; ++i)
+    for (int i = 0; i < 3; ++i)
         if (tabRects[static_cast<std::size_t>(i)].contains(e.getPosition()))
             setTab(i);
 }
@@ -468,9 +510,9 @@ juce::String MainComponent::sceneSummary(bool caps) const
     for (int row = 0; row < 4; ++row)
         parts.add(strings(juce::String(kSceneKeys[row]) + "." + optionIds(kSceneIds[row])[values[row]]));
     if (const auto* e = currentEntry())
-        parts.insert(0, e->name(strings.norwegian()).toUpperCase());
+        parts.insert(0, Strings::upper(e->name(strings.norwegian())));
     auto s = parts.joinIntoString(", ");
-    return caps ? s : s.toLowerCase();
+    return caps ? s : Strings::lower(s);
 }
 
 void MainComponent::applyStrings()
@@ -515,6 +557,9 @@ void MainComponent::applyStrings()
     configurePlate(plate);
     configurePlate(guide.plate);
     guide.applyStrings();
+    quizScreen.applyStrings();
+    if (activeTab == 2)
+        updateQuizView();
     sono.nowText = strings("song.now");
     list.repaint();
     resized();
@@ -525,8 +570,9 @@ void MainComponent::refreshControls()
 {
     prevBtn.setDisabled(neighbour(-1) < 0);
     nextBtn.setDisabled(neighbour(1) < 0);
-    playBtn.setOn(playing);
-    stopBtn.setOn(! playing);
+    const bool on = activeTab == 2 ? quizPlaying : playing;
+    playBtn.setOn(on);
+    stopBtn.setOn(! on);
     maleBtn.setOn(sex == 0);
     femaleBtn.setOn(sex == 1);
     adultBtn.setOn(age == 0);
@@ -561,7 +607,322 @@ void MainComponent::refreshControls()
     apOnBtn.setOn(apOn);
     apOnBtn.setText(strings(apOn ? "ap.on" : "ap.off"));
     latchBtn.setOn(latch);
+    if (activeTab == 2)
+        updateQuizView();
     repaint();
+}
+
+const BirdEntry* MainComponent::headerEntry() const
+{
+    if (activeTab != 2)
+        return currentEntry();
+    if (! quiz.active() || ! quiz.answered())
+        return nullptr;
+    return &list.birds[static_cast<std::size_t>(quizEntries[static_cast<std::size_t>(quiz.question().bird)])];
+}
+
+void MainComponent::sendScene()
+{
+    engine.setBird(bird.get());
+    sendChoice(P::sc_season, season);
+    sendChoice(P::sc_time, timeOfDay);
+    sendChoice(P::sc_type, songType);
+    sendChoice(P::sc_place, place);
+    sendChoice(P::sc_sex, sex);
+    sendChoice(P::sc_age, age);
+    sendChoice(P::ap_on, apOn ? 1 : 0);
+    sendChoice(P::ap_latch, latch ? 1 : 0);
+    engine.setParam(P::indexOf(P::ap_hold), hold);
+    sendChoice(P::pb_speed, speedIndex);
+    sendChoice(P::pb_shift, shiftDown ? 1 : 0);
+    sendChoice(P::pb_draw, drawMode ? 1 : 0);
+    engine.keepDrawn(kept);
+    sendChoice(P::pb_play, playing ? 1 : 0);
+}
+
+// Quiz -----------------------------------------------------------------------
+
+// Every bird with data, parsed once and kept for the run.
+void MainComponent::buildQuizBirds()
+{
+    if (! quizData.empty())
+        return;
+    const auto birdsDir = dataDir.getChildFile("birds");
+    for (int i = 0; i < static_cast<int>(list.birds.size()); ++i)
+    {
+        const auto& e = list.birds[static_cast<std::size_t>(i)];
+        if (! e.available)
+            continue;
+        const auto dir = birdsDir.getChildFile(e.id);
+        auto data = std::make_unique<tipp::BirdData>();
+        std::string error;
+        if (! tipp::parseBird(e.id.toStdString(), readText(dir.getChildFile("voice.json")).toStdString(),
+                              readText(dir.getChildFile("songs.json")).toStdString(), *data, error))
+        {
+            loadError = strings.format("error.load", { { "bird", e.id.toUpperCase() }, { "error", juce::String(error) } });
+            continue;
+        }
+        tipp::QuizBird qb;
+        qb.group = list.groups.indexOf(e.group);
+        qb.hasCall = data->types[tipp::kCall].present;
+        quizBirds.push_back(qb);
+        quizData.push_back(std::move(data));
+        quizEntries.push_back(i);
+        quizInfo.push_back(juce::JSON::parse(dir.getChildFile("bird.json")));
+    }
+    // Lookalikes with data, by id.
+    for (std::size_t k = 0; k < quizBirds.size(); ++k)
+        if (auto* arr = quizInfo[k]["lookalikes"].getArray())
+            for (const auto& l : *arr)
+                for (std::size_t j = 0; j < quizEntries.size(); ++j)
+                    if (j != k && l["id"].toString() == list.birds[static_cast<std::size_t>(quizEntries[j])].id)
+                        quizBirds[k].lookalikes.push_back(static_cast<int>(j));
+}
+
+void MainComponent::enterQuiz()
+{
+    stopCompare();
+    if (! quiz.active())
+        startQuiz();
+    else
+        stageQuestion();
+}
+
+void MainComponent::leaveQuiz()
+{
+    stopCompare();
+    quizVoice.stop();
+    quizPlaying = false;
+    sendScene();
+}
+
+void MainComponent::startQuiz()
+{
+    stopCompare();
+    buildQuizBirds();
+    const auto seed = quizSeed != 0u ? quizSeed : static_cast<std::uint32_t>(juce::Random::getSystemRandom().nextInt());
+    if (quiz.start(quizBirds, quizSet, quizAsk, seed))
+    {
+        // Snapshot hook: answer some questions first.
+        for (int i = 0; i < quizSkip && ! quiz.finished(); ++i)
+        {
+            const auto& q = quiz.question();
+            quiz.answer(i % 2 == 0 ? (q.correctSlot + 1) % q.count : q.correctSlot);
+            quiz.next();
+        }
+        quizSkip = 0;
+        stageQuestion();
+    }
+    else
+    {
+        quizVoice.stop();
+        quizPlaying = false;
+        engine.setParam(P::indexOf(P::pb_play), 0.0f);
+        quizScreen.sono.clear();
+        updateQuizView();
+    }
+}
+
+void MainComponent::stageQuestion()
+{
+    const auto& q = quiz.question();
+    hintShown = false;
+    quizScreen.sono.clear();
+    quizVoice.start(engine, quizData[static_cast<std::size_t>(q.bird)].get(), q.type, quizHalf);
+    quizPlaying = true;
+    refreshControls();
+}
+
+void MainComponent::quizAnswer(int slot)
+{
+    if (! quiz.active() || quiz.answered() || slot >= quiz.question().count)
+        return;
+    quiz.answer(slot);
+    refreshControls();
+}
+
+void MainComponent::quizNext()
+{
+    if (! quiz.active() || ! quiz.answered())
+        return;
+    stopCompare();
+    if (quiz.finished())
+        startQuiz();
+    else if (quiz.next())
+        stageQuestion();
+}
+
+void MainComponent::quizPlayAgain()
+{
+    if (! quiz.active())
+        return;
+    stopCompare();
+    quizPlaying = true;
+    quizVoice.playAgain(engine);
+    refreshControls();
+}
+
+// COMPARE BOTH: the bird asked about, then the one picked if it was wrong,
+// else a lookalike among the answers, else the next answer.
+void MainComponent::quizCompare()
+{
+    if (compare.running())
+    {
+        stopCompare();
+        return;
+    }
+    if (! quiz.active() || ! quiz.answered())
+        return;
+    const auto& q = quiz.question();
+    int other = -1;
+    if (q.picked != q.correctSlot)
+        other = q.answers[static_cast<std::size_t>(q.picked)];
+    for (int i = 0; i < q.count && other < 0; ++i)
+    {
+        const int a = q.answers[static_cast<std::size_t>(i)];
+        const auto& look = quizBirds[static_cast<std::size_t>(q.bird)].lookalikes;
+        const auto& back = quizBirds[static_cast<std::size_t>(a)].lookalikes;
+        if (a != q.bird && (std::find(look.begin(), look.end(), a) != look.end() || std::find(back.begin(), back.end(), q.bird) != back.end()))
+            other = a;
+    }
+    if (other < 0)
+        other = q.answers[static_cast<std::size_t>((q.correctSlot + 1) % q.count)];
+
+    const auto* first = quizData[static_cast<std::size_t>(q.bird)].get();
+    const auto* second = quizData[static_cast<std::size_t>(other)].get();
+    const int type = second->types[static_cast<std::size_t>(q.type)].present ? q.type : tipp::kSong;
+    comparingId = list.birds[static_cast<std::size_t>(quizEntries[static_cast<std::size_t>(other)])].id;
+    quizPlaying = true;
+    compare.start(engine, first, second, { false, true, q.type }, juce::Time::getMillisecondCounterHiRes() / 1000.0, type);
+    quizScreen.sono.restart(engine.sonoWritten());
+    refreshControls();
+}
+
+void MainComponent::quizOpenGuide()
+{
+    if (! quiz.active() || ! quiz.answered())
+        return;
+    const int index = quizEntries[static_cast<std::size_t>(quiz.question().bird)];
+    setTab(1);
+    selectBird(index);
+}
+
+juce::String MainComponent::quizName(int k) const
+{
+    return list.birds[static_cast<std::size_t>(quizEntries[static_cast<std::size_t>(k)])].name(strings.norwegian());
+}
+
+// The bird's own text for the type asked, then how the picked bird
+// differs if the data says so. Nothing beyond bird.json.
+juce::String MainComponent::quizExplain() const
+{
+    const auto& q = quiz.question();
+    const auto& info = quizInfo[static_cast<std::size_t>(q.bird)];
+    const auto text = strings.field(info["types"][q.type == tipp::kCall ? "call" : "song"]);
+    const auto name = quizName(q.bird);
+    if (q.picked == q.correctSlot)
+        return strings.format("quiz.explain_right", { { "bird", name }, { "text", text } });
+
+    const int pick = q.answers[static_cast<std::size_t>(q.picked)];
+    auto out = strings.format("quiz.explain_wrong", { { "bird", name }, { "pick", quizName(pick) }, { "text", text } });
+    auto differs = [this](const juce::var& from, int about, const juce::String& describedName) -> juce::String {
+        if (auto* arr = from["lookalikes"].getArray())
+            for (const auto& l : *arr)
+                if (l["id"].toString() == list.birds[static_cast<std::size_t>(quizEntries[static_cast<std::size_t>(about)])].id)
+                    return strings.format("quiz.differs", { { "bird", describedName }, { "text", strings.field(l["text"]) } });
+        return {};
+    };
+    auto d = differs(info, pick, quizName(pick));
+    if (d.isEmpty())
+        d = differs(quizInfo[static_cast<std::size_t>(pick)], q.bird, name);
+    return d.isEmpty() ? out : out + " " + d;
+}
+
+juce::String MainComponent::quizHint() const
+{
+    const auto& info = quizInfo[static_cast<std::size_t>(quiz.question().bird)];
+    if (quizHints == 0)
+        return strings.format("quiz.hint_mnemonic", { { "text", strings.field(info["mnemonic"]) } });
+
+    // Season: the months the calendar says it sings.
+    const auto sings = info["calendar"]["sings"].toString();
+    const auto months = juce::StringArray::fromTokens(strings("cal.month_names"), "|", "");
+    juce::StringArray yes;
+    bool unknown = sings.length() != 12;
+    for (int m = 0; m < sings.length() && m < 12; ++m)
+    {
+        if (sings[m] == 'y')
+            yes.add(months[m]);
+        unknown = unknown || sings[m] == '?';
+    }
+    auto text = yes.joinIntoString(", ");
+    if (unknown)
+        text = text.isEmpty() ? strings("to_verify") : text + " " + strings("to_verify");
+    return strings.format("quiz.hint_season", { { "months", text } });
+}
+
+void MainComponent::updateQuizView()
+{
+    QuizScreen::View v;
+    v.set = quizSet;
+    v.ask = quizAsk;
+    v.hints = quizHints;
+    v.half = quizHalf;
+    v.hintUsed = hintShown;
+    v.total = tipp::Quiz::kQuestions;
+    v.comparing = compare.running();
+    for (int s = 0; s < tipp::Quiz::kNumSets; ++s)
+        v.setHasBirds[static_cast<std::size_t>(s)] = ! tipp::Quiz::poolFor(quizBirds, s).empty();
+    v.active = quiz.active();
+    if (! v.active)
+    {
+        v.band = strings("quiz.no_birds");
+        v.practise = strings("quiz.practise_none");
+        quizScreen.setView(v);
+        return;
+    }
+
+    const auto& q = quiz.question();
+    v.number = quiz.questionNumber();
+    v.answered = quiz.answered();
+    v.finished = quiz.finished();
+    v.count = q.count;
+    for (int i = 0; i < q.count; ++i)
+        v.names[static_cast<std::size_t>(i)] = quizName(q.answers[static_cast<std::size_t>(i)]);
+    v.correctSlot = q.correctSlot;
+    v.picked = q.picked;
+    v.correct = quiz.correct();
+    v.missed = quiz.missed();
+    v.left = quiz.left();
+
+    juce::StringArray names;
+    for (int b : quiz.practise())
+        names.add(Strings::lower(quizName(b)));
+    if (names.isEmpty())
+        v.practise = strings("quiz.practise_none");
+    else
+    {
+        const auto joined = names.size() > 1 ? names.joinIntoString(", ", 0, names.size() - 1) + strings("quiz.and") + names[names.size() - 1] : names[0];
+        v.practise = strings.format("quiz.practise", { { "birds", joined } });
+    }
+
+    const auto type = Strings::lower(strings("type." + optionIds(P::sc_type)[q.type]));
+    const auto seasonText = Strings::lower(strings("season." + optionIds(P::sc_season)[quizVoice.season()]));
+    const auto timeText = Strings::lower(strings("time." + optionIds(P::sc_time)[quizVoice.timeOfDay()]));
+    v.caption = v.answered ? strings.format("quiz.fig_answered", { { "bird", quizName(q.bird) }, { "type", type }, { "season", seasonText }, { "time", timeText } })
+                           : strings.format("quiz.fig", { { "type", type }, { "season", seasonText }, { "time", timeText } });
+
+    if (v.answered)
+    {
+        v.band = quizExplain();
+        if (v.finished)
+            v.band += " " + strings.format("quiz.done", { { "correct", juce::String(quiz.correct()) }, { "total", juce::String(tipp::Quiz::kQuestions) } });
+    }
+    else
+        v.band = hintShown && quizHints != 2 ? quizHint() : strings("quiz.prompt");
+    quizScreen.setView(v);
+    repaint(headerArea);
+    repaint(statusArea);
 }
 
 // Timer ----------------------------------------------------------------------
@@ -590,6 +951,17 @@ void MainComponent::timerCallback()
     }
 
     sono.poll();
+
+    if (activeTab == 2)
+    {
+        quizVoice.tick(engine);
+        if (quizVoice.sungCount() != quizAsks)
+        {
+            quizAsks = quizVoice.sungCount();
+            quizScreen.sono.restart(quizVoice.startFrame());
+        }
+        quizScreen.sono.poll();
+    }
 
     if (compare.running())
     {
@@ -645,7 +1017,17 @@ void MainComponent::timerCallback()
         // Without a drag, wait for the middle of a phrase so the grey
         // "next" strokes are on screen.
         const bool midPhrase = engine.singing() && engine.phrasePosMs() > 500.0f;
-        const bool ready = snapshotDrawMode ? drawReady : (snapshotKnob >= 0 || midPhrase);
+        if (snapshotLeaveQuiz && activeTab == 2 && elapsed >= snapshotSeconds - 4.0)
+            setTab(0);
+        if (activeTab == 2 && snapshotAnswer != 0 && elapsed >= snapshotSeconds - 1.0 && quiz.active() && ! quiz.answered())
+        {
+            const auto& q = quiz.question();
+            quizAnswer(snapshotAnswer > 0 ? q.correctSlot : (q.correctSlot + 1) % q.count);
+        }
+        // Quiz: once the mystery phrase has been sung in full.
+        const bool quizReady = activeTab == 2 && quizAsks > 0u && ! engine.singing()
+                            && (snapshotAnswer == 0 || quiz.answered());
+        const bool ready = snapshotDrawMode ? drawReady : activeTab == 2 ? quizReady : (snapshotKnob >= 0 || midPhrase);
         if (elapsed >= snapshotSeconds && (ready || elapsed > snapshotSeconds + 15.0))
         {
             const auto image = createComponentSnapshot(getLocalBounds(), true, 1.0f);
@@ -687,14 +1069,35 @@ void MainComponent::stepBird(int dir)
 
 bool MainComponent::keyPressed(const juce::KeyPress& key)
 {
+    if (key == juce::KeyPress::F1Key || key == juce::KeyPress::F2Key || key == juce::KeyPress::F3Key)
+    {
+        setTab(key == juce::KeyPress::F1Key ? 0 : key == juce::KeyPress::F2Key ? 1 : 2);
+        return true;
+    }
+    if (activeTab == 2)
+    {
+        // Quiz: 1 to 4 answer, Space plays again, Enter goes on.
+        const auto c = key.getTextCharacter();
+        if (c >= '1' && c <= '4')
+        {
+            quizAnswer(static_cast<int>(c - '1'));
+            return true;
+        }
+        if (key == juce::KeyPress::spaceKey)
+        {
+            quizPlayAgain();
+            return true;
+        }
+        if (key == juce::KeyPress::returnKey)
+        {
+            quizNext();
+            return true;
+        }
+        return false;
+    }
     if (key == juce::KeyPress::spaceKey)
     {
         setPlaying(! playing);
-        return true;
-    }
-    if (key == juce::KeyPress::F1Key || key == juce::KeyPress::F2Key)
-    {
-        setTab(key == juce::KeyPress::F1Key ? 0 : 1);
         return true;
     }
     if (key == juce::KeyPress::upKey || key == juce::KeyPress::downKey)
@@ -748,6 +1151,7 @@ void MainComponent::resized()
     list.setBounds(asideArea.withTrimmedRight(1).reduced(8).withTrimmedTop(20));
     mainArea = bodyArea.reduced(8);
     guide.setBounds(bodyArea);
+    quizScreen.setBounds(bodyArea.withX(headerArea.getX()).withWidth(headerArea.getWidth()));
 
     // Tabs: widths follow their labels.
     {
@@ -927,12 +1331,15 @@ void MainComponent::paint(juce::Graphics& g)
     paintHeader(g);
     paintTabs(g);
 
-    // Bird list aside.
-    g.setColour(colour::panel);
-    g.fillRect(asideArea);
-    g.setColour(colour::ink);
-    g.fillRect(asideArea.getRight() - 1, asideArea.getY(), 1, asideArea.getHeight());
-    draw::sectionLabel(g, asideArea.withTrimmedRight(1).reduced(8).withHeight(14), strings("list.birds"));
+    // Bird list aside. The quiz has none.
+    if (activeTab != 2)
+    {
+        g.setColour(colour::panel);
+        g.fillRect(asideArea);
+        g.setColour(colour::ink);
+        g.fillRect(asideArea.getRight() - 1, asideArea.getY(), 1, asideArea.getHeight());
+        draw::sectionLabel(g, asideArea.withTrimmedRight(1).reduced(8).withHeight(14), strings("list.birds"));
+    }
 
     if (activeTab == 0)
     {
@@ -965,9 +1372,11 @@ void MainComponent::paintHeader(juce::Graphics& g)
         g.fillRect(x0, inner.getY(), x1 - x0, inner.getHeight());
     }
 
-    // Bird readout.
-    draw::inset(g, readoutArea);
-    if (const auto* e = currentEntry())
+    // Bird readout. In the quiz it waits for the answer.
+    const auto* e = headerEntry();
+    if (activeTab != 2 || e != nullptr)
+        draw::inset(g, readoutArea);
+    if (e != nullptr)
     {
         auto r = readoutArea.reduced(10, 0);
         g.setFont(mono(12.0f, 400));
@@ -1023,8 +1432,8 @@ void MainComponent::paintTabs(juce::Graphics& g)
         const juce::Rectangle<int> tab(x, tabsArea.getBottom() - 1 - h + (active ? 1 : 0), w, h);
         g.setColour(active ? colour::ground : colour::panel);
         g.fillRect(tab);
-        if (i > 1)
-            draw::hatch(g, tab); // Play and Field guide are built
+        if (i > 2)
+            draw::hatch(g, tab); // Play, Field guide and Quiz are built
         g.setColour(colour::ink);
         g.fillRect(tab.getX(), tab.getY(), tab.getWidth(), 1);
         g.fillRect(tab.getX(), tab.getY(), 1, tab.getHeight() - (active ? 1 : 0));
@@ -1137,7 +1546,7 @@ void MainComponent::paintPanels(juce::Graphics& g)
         const char* ids[3] = { P::sc_type, P::sc_season, P::sc_time };
         juce::String parts[3];
         for (int i = 0; i < 3; ++i)
-            parts[i] = strings(juce::String(rows[i]) + "." + optionIds(ids[i])[values[i]]).toLowerCase();
+            parts[i] = Strings::lower(strings(juce::String(rows[i]) + "." + optionIds(ids[i])[values[i]]));
         const auto text = loadError.isNotEmpty() ? loadError
                         : drawMode ? strings("song.draw_caption")
                         : strings.format("song.caption", { { "bird", currentEntry() != nullptr ? currentEntry()->name(no) : juce::String() },
@@ -1223,6 +1632,24 @@ void MainComponent::paintStatus(juce::Graphics& g)
     const auto f = mono(10.0f, 500, 0.06f);
     g.setFont(f);
     auto r = statusArea.withTrimmedTop(1).reduced(12, 0);
+    if (activeTab == 2)
+    {
+        const auto state = strings("tab.quiz");
+        g.drawText(state, r.removeFromLeft(textW(f, state) + 2), juce::Justification::centredLeft, false);
+        r.removeFromLeft(16);
+        g.setColour(colour::inkSoft);
+        for (const char* k : { "quiz.status_keys_next", "quiz.status_keys_again", "quiz.status_keys_answer" })
+        {
+            const auto t = strings(k);
+            g.drawText(t, r.removeFromRight(textW(f, t) + 2), juce::Justification::centredRight, false);
+            r.removeFromRight(16);
+        }
+        const char* sets[6] = { "pairs", "garden", "forest", "coast", "night", "all" };
+        const char* asks[3] = { "type.song", "type.call", "quiz.ask_both" };
+        g.drawText(loadError.isNotEmpty() ? loadError : strings("quiz.set." + juce::String(sets[quizSet])) + ", " + strings(asks[quizAsk]),
+                   r, juce::Justification::centredLeft, false);
+        return;
+    }
     const auto state = strings(playing ? "status.playing" : "status.stopped");
     g.drawText(state, r.removeFromLeft(textW(f, state) + 2), juce::Justification::centredLeft, false);
     r.removeFromLeft(14);
@@ -1237,8 +1664,8 @@ void MainComponent::paintStatus(juce::Graphics& g)
     if (compare.running() && currentEntry() != nullptr)
         for (const auto& b : list.birds)
             if (b.id == comparingId)
-                summary = strings.format("status.comparing", { { "a", currentEntry()->name(strings.norwegian()).toUpperCase() },
-                                                                { "b", b.name(strings.norwegian()).toUpperCase() } });
+                summary = strings.format("status.comparing", { { "a", Strings::upper(currentEntry()->name(strings.norwegian())) },
+                                                                { "b", Strings::upper(b.name(strings.norwegian())) } });
     g.drawText(loadError.isNotEmpty() ? loadError : summary, r, juce::Justification::centredLeft, false);
 }
 } // namespace tipp::ui

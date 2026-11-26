@@ -25,6 +25,7 @@ public:
     Glyph glyph = Glyph::None;
     float fontPx = 10.0f;
     float tracking = 0.06f;
+    bool alignLeft = false; // text from the left with 10px padding, as in the quiz set list
     std::function<void()> onClick;
 
     void paint(juce::Graphics& g) override
@@ -66,7 +67,10 @@ public:
             return;
         }
         g.setFont(mono(fontPx, 500, tracking));
-        g.drawFittedText(text, r.reduced(2, 0), juce::Justification::centred, 1, 0.75f);
+        if (alignLeft)
+            g.drawFittedText(text, r.reduced(10, 0), juce::Justification::centredLeft, 1, 0.75f);
+        else
+            g.drawFittedText(text, r.reduced(2, 0), juce::Justification::centred, 1, 0.75f);
     }
 
     void mouseUp(const juce::MouseEvent& e) override

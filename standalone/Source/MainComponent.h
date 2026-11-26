@@ -9,6 +9,7 @@
 #include "UI/GuideScreen.h"
 #include "UI/Knob.h"
 #include "UI/Plate.h"
+#include "UI/QuizScreen.h"
 #include "UI/Sonogram.h"
 #include "UI/Strings.h"
 #include "UI/Widgets.h"
@@ -16,6 +17,7 @@
 #include "BirdData.h"
 #include "Compare.h"
 #include "Engine.h"
+#include "Quiz.h"
 
 #include <juce_audio_utils/juce_audio_utils.h>
 
@@ -42,7 +44,7 @@ public:
     // Test hook: play for `seconds`, optionally drag a knob near the end,
     // save a snapshot and quit.
     void runSnapshot(const juce::File& png, double seconds, int handKnob);
-    // 0 Play, 1 Field guide. The other tabs are not built yet.
+    // 0 Play, 1 Field guide, 2 Quiz. The other tabs are not built yet.
     void setTab(int index);
     // Test hook: COMPARE with a lookalike, as its button does.
     void compareWith(const juce::String& id) { startCompare(id); }
@@ -55,6 +57,16 @@ public:
     void setSpeed(int index);
     void setShift(bool down);
     void snapshotDraw() { snapshotDrawMode = true; }
+    // Test hooks for the quiz: a fixed seed, questions answered before the
+    // snapshot (wrong, right, wrong, ...), and the answer to give a second
+    // before it: 1 right, -1 wrong.
+    void snapshotQuiz(std::uint32_t seed, int skip, int answer, bool leave)
+    {
+        snapshotLeaveQuiz = leave;
+        quizSeed = seed;
+        quizSkip = skip;
+        snapshotAnswer = answer;
+    }
 
 private:
     void timerCallback() override;
@@ -82,6 +94,24 @@ private:
     juce::String variant() const;
     juce::String sceneSummary(bool caps) const;
     const BirdEntry* currentEntry() const;
+    const BirdEntry* headerEntry() const; // hidden in the quiz until answered
+    void sendScene(); // every value the interface owns, to the engine
+
+    // Quiz.
+    void buildQuizBirds();
+    void enterQuiz();
+    void leaveQuiz();
+    void startQuiz();
+    void stageQuestion();
+    void quizAnswer(int slot);
+    void quizNext();
+    void quizPlayAgain();
+    void quizCompare();
+    void quizOpenGuide();
+    void updateQuizView();
+    juce::String quizName(int k) const;
+    juce::String quizExplain() const;
+    juce::String quizHint() const;
 
     void paintHeader(juce::Graphics& g);
     void paintTabs(juce::Graphics& g);
@@ -153,6 +183,22 @@ private:
     tipp::Compare compare;
     std::unique_ptr<tipp::BirdData> compareBird; // alive while compare runs
     juce::String comparingId;
+
+    // Quiz (F3). quizData holds every bird with data for the whole run, so
+    // the engine never holds a quiz bird that was freed.
+    QuizScreen quizScreen { strings, engine };
+    tipp::Quiz quiz;
+    tipp::QuizVoice quizVoice;
+    std::vector<tipp::QuizBird> quizBirds;
+    std::vector<std::unique_ptr<tipp::BirdData>> quizData;
+    std::vector<int> quizEntries; // list.birds index per quiz bird
+    std::vector<juce::var> quizInfo; // bird.json per quiz bird
+    int quizSet = 0, quizAsk = 0, quizHints = 0;
+    bool quizHalf = false, hintShown = false, quizPlaying = false;
+    std::uint32_t quizAsks = 0u;
+    std::uint32_t quizSeed = 0u; // 0: from the clock
+    int quizSkip = 0, snapshotAnswer = 0;
+    bool snapshotLeaveQuiz = false; // back to PLAY 4 s before the snapshot
 
     // Snapshot test.
     juce::File snapshotFile;
