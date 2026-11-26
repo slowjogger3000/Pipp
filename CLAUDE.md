@@ -40,16 +40,18 @@ If a reply only answers a question and changes nothing, still end with the block
 
 Update this at the end of every work session.
 
-- Current milestone: M2 (Play screen, Mac standalone), round 1 built and committed 2026-11-26 (b96c84f). Waiting for Eirik to launch the app, drag knobs by hand and listen.
+- Current milestone: M3 started 2026-11-26 (M2 done in b96c84f, Eirik ran the app and said it works).
+- M3 so far, not committed: facts for the 5 garden birds checked against SNL and written to `birds.md` with a to-verify list. Bird ids switched to plain letters in `data/birds/index.json`. The bird stepper and Up/Down step to the next bird that has data; with only svarttrost they stay hatched. Not tested with a second bird yet.
+- M3 next, in this order, one commit per bird: kjottmeis, blameis, rodstrupe, bokfink, graspurv. Per bird: `voice.json` and `songs.json` (Opus, sound design from the SNL song descriptions, marked as guesses in `_note`), `plate.json` with callouts from `birds.md` only, a render check, an MP3 for Eirik. The plate drawings are new; only the blackbird's came from the design.
 - M1 done 2026-11-26: blackbird approved as recognisable. Final knob ranges are in `prd.md`.
 - Built in M2 round 1: `standalone/Source/MainComponent.*` (window, layout, timer), `UI/Theme.h` (tokens, bevels, hatch, graph paper, fonts), `UI/Widgets.h` (`Btn`), `UI/Knob.h`, `UI/Sonogram.h`, `UI/Plate.h`, `UI/BirdList.h`, `UI/Strings.h`. Engine now publishes knob mode and hold countdown, stereo peaks, a sonogram feed (375 frames/s) and the current phrase (seqlock). Contour helpers moved to `BirdData.h` so the sonogram draws grey with the engine's own maths. Data: `data/birds/index.json` (18 birds, names unverified), `data/birds/svarttrost/plate.json`, `data/strings/en.json` and `no.json` (Play screen only; Norwegian wording is mine, Eirik to check).
 - Verified: zero warnings in core, render tool and standalone. Engine audio is byte-identical to M1 for song and call (seed 1, 30 s). `tipp-render --check-override` passes 18 checks (hold, 3 s wait, 300 ms return, latch, return all, autoplay off, sing once, sonogram hand mark, phrase publish). Snapshots in `out/m2-play-*.png` match `Main.dc.html` in layout, sizes, colours and labels, in English and Norwegian. Core still compiles with `emcc`.
-- Not verified: Eirik has not launched the app or dragged a knob with a real mouse.
+- Not verified: the standalone has only been tried on Eirik's Mac. State (seed, knobs) is not saved between launches.
 - Fonts: IBM Plex Mono 400/500/600 and Instrument Serif 400 are in `standalone/Resources/fonts/` with their OFL texts, fetched from github.com/google/fonts on 2026-11-26, and embedded through `BinaryData`. Without them CMake warns and the app falls back to Menlo and Georgia.
 - Choices made in M2 round 1, open to Eirik: grey shows the rest of the phrase being sung, not the phrase after the pause (it is not generated until it starts, so a Length or Variation drag in the pause still applies). Tabs other than PLAY, DRAW, ½×, ¼×, −1 OCT, Dialect, Mimics, the bird stepper and the 17 birds without data are hatched as disabled. Plate callouts not in `birds.md` (juvenile bill, female and juvenile eye-ring, juvenile throat) show `[TO VERIFY]`; the juvenile caption no longer claims a practice song. App starts stopped. State (seed, knobs) is not saved between launches yet.
 - Song shapes, timings and pitches in `songs.json` are sound design guesses, marked in its `_note`. The twitter ending and phrase length are still `[TO VERIFY]` in `birds.md`.
 - Tools present on Eirik's Mac (checked 2026-11-26): cmake, Xcode, emcc, node, ffmpeg, lame.
-- Open decisions: recognition engine (parked, see `prd.md`). The phone export format for the desktop Collection. How bird ids with æ, ø, å are written as folder names (M3).
+- Open decisions: recognition engine (parked, see `prd.md`). The phone export format for the desktop Collection.
 
 ## Stack
 
@@ -77,7 +79,7 @@ Data layout, shared by all three builds:
 
 - `data/birds/<id>/`: `bird.json` (names, facts, a `verified` flag per field), `voice.json` (base voice and knob ranges), `songs.json` (syllables, phrases, rules keyed by song type with overrides for season, time, sex and age), `plate.json` (paths, pivots, callouts).
 - `data/strings/`: every interface string in both languages.
-- `<id>` is the Norwegian name in lower case, as in `svarttrost`.
+- `<id>` is the Norwegian name in lower case with æ, ø, å written ae, o, a, as in `svarttrost` and `kjottmeis`. Decided 2026-11-26: macOS stores non-ASCII file names decomposed (NFD), which breaks matching on the web. The real name lives in the data.
 
 ## Build and test
 
@@ -183,4 +185,3 @@ Add to this list as they are found.
 - Static `StringArray` objects trigger leak-detector noise at shutdown. Return a fresh one from a function.
 - `setSize()` in a component constructor calls `resized()` at once. Call it after every child exists, or `resized()` touches null children (M2 crashed this way).
 - A timer that counts its own ticks runs slow under load. Time tests with `Time::getMillisecondCounterHiRes()`.
-- macOS stores non-ASCII file names decomposed (NFD). Bird ids like `kjøttmeis` need a decision before they become folders.

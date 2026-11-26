@@ -1,5 +1,5 @@
 {
- "_note": "The 18 birds in list order, from birds.md. Names and Latin names are not checked against Artsdatabanken, so verified is false. Ids with æ, ø, å get no folder until M3 settles how they are written on disk.",
+ "_note": "The 18 birds in list order, from birds.md. Names and Latin names are not checked against Artsdatabanken, so verified_names is false. An id is the Norwegian name in lower case with æ, ø, å written ae, o, a.",
  "verified_names": false,
  "groups": [
   "garden",
@@ -9,7 +9,7 @@
  ],
  "birds": [
   {
-   "id": "kjøttmeis",
+   "id": "kjottmeis",
    "number": "01",
    "group": "garden",
    "name": {
@@ -19,7 +19,7 @@
    "latin": "Parus major"
   },
   {
-   "id": "blåmeis",
+   "id": "blameis",
    "number": "02",
    "group": "garden",
    "name": {
@@ -39,7 +39,7 @@
    "latin": "Turdus merula"
   },
   {
-   "id": "rødstrupe",
+   "id": "rodstrupe",
    "number": "04",
    "group": "garden",
    "name": {
@@ -59,7 +59,7 @@
    "latin": "Fringilla coelebs"
   },
   {
-   "id": "gråspurv",
+   "id": "graspurv",
    "number": "06",
    "group": "garden",
    "name": {
@@ -69,7 +69,7 @@
    "latin": "Passer domesticus"
   },
   {
-   "id": "løvsanger",
+   "id": "lovsanger",
    "number": "07",
    "group": "forest",
    "name": {
@@ -79,7 +79,7 @@
    "latin": "Phylloscopus trochilus"
   },
   {
-   "id": "måltrost",
+   "id": "maltrost",
    "number": "08",
    "group": "forest",
    "name": {
@@ -89,7 +89,7 @@
    "latin": "Turdus philomelos"
   },
   {
-   "id": "gjøk",
+   "id": "gjok",
    "number": "09",
    "group": "forest",
    "name": {
@@ -119,7 +119,7 @@
    "latin": "Troglodytes troglodytes"
   },
   {
-   "id": "gråmåke",
+   "id": "gramake",
    "number": "12",
    "group": "coast",
    "name": {
@@ -139,7 +139,7 @@
    "latin": "Haematopus ostralegus"
   },
   {
-   "id": "ærfugl",
+   "id": "aerfugl",
    "number": "14",
    "group": "coast",
    "name": {

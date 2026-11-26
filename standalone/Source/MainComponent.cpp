@@ -43,8 +43,8 @@ MainComponent::MainComponent(const juce::File& dataDirectory)
     nextBtn.glyph = Btn::Glyph::Next;
     playBtn.onClick = [this] { setPlaying(true); };
     stopBtn.onClick = [this] { setPlaying(false); };
-    prevBtn.setDisabled(true); // one bird in this build
-    nextBtn.setDisabled(true);
+    prevBtn.onClick = [this] { stepBird(-1); };
+    nextBtn.onClick = [this] { stepBird(1); };
     enBtn.setText("EN");
     noBtn.setText("NO");
     enBtn.onClick = [this] { setLanguage("en"); };
@@ -305,6 +305,8 @@ void MainComponent::applyStrings()
 
 void MainComponent::refreshControls()
 {
+    prevBtn.setDisabled(neighbour(-1) < 0);
+    nextBtn.setDisabled(neighbour(1) < 0);
     playBtn.setOn(playing);
     stopBtn.setOn(! playing);
     maleBtn.setOn(sex == 0);
@@ -416,6 +418,21 @@ void MainComponent::runSnapshot(const juce::File& png, double seconds, int handK
     setPlaying(true);
 }
 
+int MainComponent::neighbour(int dir) const
+{
+    const int n = static_cast<int>(list.birds.size());
+    for (int i = list.selected + dir; i >= 0 && i < n; i += dir)
+        if (list.birds[static_cast<std::size_t>(i)].available)
+            return i;
+    return -1;
+}
+
+void MainComponent::stepBird(int dir)
+{
+    if (const int i = neighbour(dir); i >= 0)
+        selectBird(i);
+}
+
 bool MainComponent::keyPressed(const juce::KeyPress& key)
 {
     if (key == juce::KeyPress::spaceKey)
@@ -425,14 +442,7 @@ bool MainComponent::keyPressed(const juce::KeyPress& key)
     }
     if (key == juce::KeyPress::upKey || key == juce::KeyPress::downKey)
     {
-        const int dir = key == juce::KeyPress::upKey ? -1 : 1;
-        const int n = static_cast<int>(list.birds.size());
-        for (int i = list.selected + dir; i >= 0 && i < n; i += dir)
-            if (list.birds[static_cast<std::size_t>(i)].available)
-            {
-                selectBird(i);
-                break;
-            }
+        stepBird(key == juce::KeyPress::upKey ? -1 : 1);
         return true;
     }
     return false;

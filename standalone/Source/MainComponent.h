@@ -47,6 +47,8 @@ private:
 
     void loadIndex();
     void selectBird(int index);
+    void stepBird(int dir);
+    int neighbour(int dir) const; // next bird with data, -1 if none
     void applyStrings();
     void sendChoice(const char* id, int value);
     void setPlaying(bool on);
