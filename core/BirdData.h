@@ -88,6 +88,8 @@ struct SongType
     Range lengthS { 1.5f, 3.0f };
     float transposeSt = 0.0f; // per-phrase transpose at full variation
     bool avoidRepeat = false;
+    // Phrases in a row that use the same template. 1 and 1 picks afresh each time.
+    int boutMin = 1, boutMax = 1;
     std::array<bool, kNumKnobs> hasAuto {};
     std::array<Range, kNumKnobs> autoRange {};
     std::vector<Override> overrides;

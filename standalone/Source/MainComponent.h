@@ -41,6 +41,8 @@ public:
     // save a snapshot and quit.
     void runSnapshot(const juce::File& png, double seconds, int handKnob);
     void setLanguage(const juce::String& lang);
+    // Test hook: pick a bird by id and a plate variant before a snapshot.
+    void chooseScene(const juce::String& birdId, bool female, bool juvenile);
 
 private:
     void timerCallback() override;

@@ -244,6 +244,15 @@ bool MainComponent::typeAvailable(int type) const
     return t.present && tipp::rulesFor(t, season, timeOfDay, sex, age).active;
 }
 
+void MainComponent::chooseScene(const juce::String& birdId, bool female, bool juvenile)
+{
+    for (int i = 0; i < static_cast<int>(list.birds.size()); ++i)
+        if (list.birds[static_cast<std::size_t>(i)].id == birdId)
+            selectBird(i);
+    (female ? femaleBtn : maleBtn).onClick();
+    (juvenile ? juvBtn : adultBtn).onClick();
+}
+
 juce::String MainComponent::variant() const
 {
     return age == 1 ? "juvenile" : sex == 1 ? "female" : "male";
@@ -295,7 +304,7 @@ void MainComponent::applyStrings()
     }
     plate.language = strings.language();
     plate.toVerify = strings("to_verify");
-    for (const char* id : { "bill", "eye_ring", "plumage", "throat" })
+    for (const char* id : { "bill", "eye_ring", "plumage", "throat", "head", "cheek", "breast" })
         plate.calloutLabels[id] = strings("plate." + juce::String(id));
     sono.nowText = strings("song.now");
     list.repaint();

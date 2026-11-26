@@ -267,6 +267,7 @@ void Engine::resetBird() noexcept
 {
     playing = false;
     hasPhrase = false;
+    boutLeft = 0;
     singOncePending = false;
     pauseElapsed = 0.0f;
     firstWait = 0.4f;
@@ -415,13 +416,30 @@ void Engine::generatePhrase(const SongType& type) noexcept
 
     for (int attempt = 0; attempt < 4; ++attempt)
     {
-        // Template by integer weight.
-        std::uint32_t r = rng.below(std::max(1u, type.totalWeight));
+        // Template by integer weight, or the bout's template while the bout lasts.
         const PhraseTemplate* tp = &type.templates.front();
-        for (const auto& t : type.templates)
+        if (attempt == 0 && boutLeft > 0 && boutTemplate >= 0
+            && boutTemplate < static_cast<int>(type.templates.size()))
         {
-            if (r < t.weight) { tp = &t; break; }
-            r -= t.weight;
+            tp = &type.templates[static_cast<std::size_t>(boutTemplate)];
+            --boutLeft;
+        }
+        else
+        {
+            std::uint32_t r = rng.below(std::max(1u, type.totalWeight));
+            int ti = 0;
+            for (const auto& t : type.templates)
+            {
+                if (r < t.weight) { tp = &t; break; }
+                r -= t.weight;
+                ++ti;
+            }
+            if (type.boutMax > 1)
+            {
+                boutTemplate = ti;
+                const auto span = static_cast<std::uint32_t>(type.boutMax - type.boutMin + 1);
+                boutLeft = type.boutMin - 1 + static_cast<int>(rng.below(span));
+            }
         }
 
         const float transpose = rng.bipolar() * type.transposeSt * var;
@@ -523,6 +541,7 @@ void Engine::runAutoplay(float dt, VoiceControls& vc) noexcept
         pauseElapsed = 0.0f;
         firstWait = 0.4f;
         hasPhrase = false;
+        boutLeft = 0;
         if (rules.active)
             pickPhraseEndValues(rules);
     }

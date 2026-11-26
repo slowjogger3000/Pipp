@@ -1,0 +1,32 @@
+{
+  "_note": "Sound design starting values for the great tit, M3 round 1. Not tuned by ear yet. Not bird facts.",
+  "pitch_ref_hz": 4000,
+  "base": {
+    "vo_pitch": 1.0,
+    "vo_breath": 6,
+    "vo_tension": 40,
+    "vo_trill": 0,
+    "vo_rough": 4,
+    "ph_tempo": 100,
+    "ph_pause": 4.0,
+    "ph_length": 2.0,
+    "ph_variation": 50,
+    "su_distance": 15,
+    "su_wind": 1.5,
+    "su_space": 35
+  },
+  "ranges": {
+    "vo_pitch": [0.5, 2.0],
+    "vo_breath": [0, 100],
+    "vo_tension": [0, 100],
+    "vo_trill": [0, 40],
+    "vo_rough": [0, 100],
+    "ph_tempo": [50, 200],
+    "ph_pause": [0.2, 20],
+    "ph_length": [0.2, 8],
+    "ph_variation": [0, 100],
+    "su_distance": [1, 200],
+    "su_wind": [0, 15],
+    "su_space": [0, 100]
+  }
+}

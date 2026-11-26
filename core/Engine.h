@@ -194,6 +194,7 @@ private:
 
     Phrase cur;
     bool hasPhrase = false;
+    int boutTemplate = -1, boutLeft = 0;
     bool playing = false;
     bool singOncePending = false;
     float phraseMs = 0.0f;

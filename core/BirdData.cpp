@@ -137,6 +137,11 @@ bool parseType(const Value& v, const BirdData& bird, SongType& t, const std::str
     t.transposeSt = num(v.get("transpose_st"), 0.0f);
     if (const Value* a = v.get("avoid_repeat"); a != nullptr && a->isBool())
         t.avoidRepeat = a->boolean;
+    Range bout { 1.0f, 1.0f };
+    if (! readRange(v.get("bout"), bout) || bout.lo < 1.0f || bout.hi > 64.0f)
+        return fail(error, where + "bad bout");
+    t.boutMin = static_cast<int>(std::lround(bout.lo));
+    t.boutMax = std::max(t.boutMin, static_cast<int>(std::lround(bout.hi)));
 
     const Value* phrases = v.get("phrases");
     if (phrases == nullptr || ! phrases->isArray() || phrases->items.empty())

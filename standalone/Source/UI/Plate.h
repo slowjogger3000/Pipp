@@ -212,7 +212,8 @@ private:
 
     static juce::Colour fillColour(const juce::String& name, const juce::var& vdata)
     {
-        const auto n = name == "bill" ? vdata["bill"].toString() : name;
+        // A fill named after a variant key takes that variant's colour, as "bill" does.
+        const auto n = vdata.hasProperty(juce::Identifier(name)) ? vdata[juce::Identifier(name)].toString() : name;
         if (n == "shadow") return colour::shadow;
         if (n == "ink")    return colour::ink;
         return colour::face;
