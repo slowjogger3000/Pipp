@@ -1,0 +1,247 @@
+{
+ "_note": "Whooper swan ink plate in a 280x240 box, drawn in M11 batch 5, not from a design: swimming with the neck held straight, all white, lemon-yellow bill (face) with a black tip (ink) (birds.md, SNL). Juvenile grey-brown (hatching); its bill is not described.",
+ "box": [
+  280,
+  240
+ ],
+ "clips": {
+  "body": "M202 120 C206 134 198 150 180 157 C140 165 92 163 66 150 C54 144 52 132 60 124 C80 110 120 106 160 110 C168 111 174 112 180 112 L180 64 C180 50 186 40 196 40 C206 40 212 46 212 52 L210 60 C204 62 198 68 198 78 L198 112 C200 114 201 117 202 120 Z",
+  "wing": "M188 122 C150 112 110 114 74 128 C106 142 150 144 190 134 Z"
+ },
+ "hatch": {
+  "body": {
+   "rect": [
+    50,
+    36,
+    214,
+    166
+   ],
+   "up": true,
+   "clip": "body"
+  },
+  "wing": {
+   "rect": [
+    72,
+    110,
+    192,
+    146
+   ],
+   "up": false,
+   "clip": "wing"
+  }
+ },
+ "pivots": {
+  "upper": {
+   "at": [
+    210,
+    50
+   ],
+   "deg": -8
+  },
+  "lower": {
+   "at": [
+    210,
+    58
+   ],
+   "deg": 6
+  },
+  "tail": {
+   "at": [
+    60,
+    126
+   ],
+   "deg": -4
+  }
+ },
+ "layers": [
+  {
+   "path": "M62 124 L44 118 L48 132 Z",
+   "fill": "face",
+   "stroke": 1.5,
+   "part": "tail"
+  },
+  {
+   "clip": "body",
+   "fill": "face",
+   "stroke": 1.5
+  },
+  {
+   "hatch": "body"
+  },
+  {
+   "clip": "wing",
+   "fill": "face"
+  },
+  {
+   "hatch": "wing"
+  },
+  {
+   "clip": "wing",
+   "stroke": 1.2
+  },
+  {
+   "clip": "body",
+   "stroke": 1.5
+  },
+  {
+   "eye": [
+    200,
+    50
+   ],
+   "pupil": 2.2
+  },
+  {
+   "path": "M210 46 L238 54 C241 56 240 59 236 59 L210 57 Z",
+   "fill": "bill",
+   "stroke": 1.5,
+   "part": "upper"
+  },
+  {
+   "variant": "tip_u",
+   "fill": "ink",
+   "part": "upper"
+  },
+  {
+   "path": "M210 57 L235 59 L232 62 L210 61 Z",
+   "fill": "bill",
+   "stroke": 1.5,
+   "part": "lower"
+  },
+  {
+   "variant": "tip_l",
+   "fill": "ink",
+   "part": "lower"
+  },
+  {
+   "path": "M12 160 C60 154 110 162 160 158 C200 155 236 160 270 156",
+   "fill": "none",
+   "stroke": 2
+  },
+  {
+   "path": "M30 172 q12 -4 24 0 M90 176 q12 -4 24 0 M170 172 q12 -4 24 0 M230 176 q10 -3 20 0",
+   "stroke": 1
+  },
+  {
+   "path": "M250 40 A16 16 0 0 1 250 68 M257 32 A26 26 0 0 1 257 76",
+   "stroke": 1.5,
+   "part": "arcs"
+  }
+ ],
+ "variants": {
+  "male": {
+   "body_pitch": 0,
+   "wing_pitch": 0,
+   "eye_ring": 0,
+   "bill": "face",
+   "tip_u": "M230 56 L238 54 C241 56 240 59 236 59 L230 58.5 Z",
+   "tip_l": "M228 59.3 L235 59 L232 62 L228 61.8 Z"
+  },
+  "female": {
+   "body_pitch": 0,
+   "wing_pitch": 0,
+   "eye_ring": 0,
+   "bill": "face",
+   "tip_u": "M230 56 L238 54 C241 56 240 59 236 59 L230 58.5 Z",
+   "tip_l": "M228 59.3 L235 59 L232 62 L228 61.8 Z"
+  },
+  "juvenile": {
+   "body_pitch": 7,
+   "wing_pitch": 6,
+   "eye_ring": 0,
+   "bill": "shadow",
+   "tip_u": "",
+   "tip_l": ""
+  }
+ },
+ "callouts": [
+  {
+   "id": "bill",
+   "leader": "M226 54 L226 30",
+   "at": [
+    226,
+    17
+   ],
+   "align": "centre",
+   "male": {
+    "en": "LEMON YELLOW, BLACK TIP",
+    "no": "SITRONGULT, SVART SPISS",
+    "verified": true
+   },
+   "female": {
+    "en": "LEMON YELLOW, BLACK TIP",
+    "no": "SITRONGULT, SVART SPISS",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  },
+  {
+   "id": "neck",
+   "leader": "M182 90 L140 70",
+   "at": [
+    136,
+    64
+   ],
+   "align": "right",
+   "male": {
+    "en": "HELD STRAIGHT",
+    "no": "HOLDES RETT",
+    "verified": true
+   },
+   "female": {
+    "en": "HELD STRAIGHT",
+    "no": "HOLDES RETT",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "HELD STRAIGHT",
+    "no": "HOLDES RETT",
+    "verified": true
+   }
+  },
+  {
+   "id": "plumage",
+   "leader": "M110 140 L76 198",
+   "at": [
+    72,
+    210
+   ],
+   "align": "centre",
+   "male": {
+    "en": "ALL WHITE",
+    "no": "HELT HVIT",
+    "verified": true
+   },
+   "female": {
+    "en": "ALL WHITE",
+    "no": "HELT HVIT",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "GREY-BROWN",
+    "no": "GRÅBRUN",
+    "verified": true
+   }
+  }
+ ],
+ "captions": {
+  "male": {
+   "en": "Adult. The male is a little larger.",
+   "no": "Voksen. Hannen er litt større.",
+   "verified": true
+  },
+  "female": {
+   "en": "Female. Plumage as the male's.",
+   "no": "Hunn. Drakt som hannens.",
+   "verified": true
+  },
+  "juvenile": {
+   "en": "Young bird, grey-brown into its second autumn.",
+   "no": "Ungfugl, gråbrun til andre høst.",
+   "verified": true
+  }
+ }
+}

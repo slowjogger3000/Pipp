@@ -461,6 +461,89 @@ Source: Store norske leksikon (snl.no), one page per bird, read in full on 2026-
 - Common tern: the shape and pitch of every sound; winter and juvenile plumage.
 - All three: length; female and juvenile plate values beyond what is listed.
 
+## M11 batch 5, wetland and lake, checked 2026-11-26
+
+Source: Store norske leksikon (snl.no), one page per bird, read in full on 2026-11-26. Transcriptions are SNL's own spelling.
+
+### Stokkand (folder `stokkand`), snl.no/stokkand, Rolf Terje Kroglund, updated 2026-11-08
+
+| Field | Value |
+|---|---|
+| Length, weight | 50 to 60 cm, 800 to 1400 g; one of Norway's largest and heaviest ducks |
+| Male | Light body, green-glossed head, yellow bill, white neck ring, rust-brown breast, black rear; keeps the yellow bill all year |
+| Female | Brown-mottled all over (camouflage on the nest), orange and black bill |
+| Both | Orange feet; blue speculum with broad white edges, the same in both sexes |
+| Eclipse | The male looks very like the female in summer moult |
+| Juvenile | Not described |
+| Voice | Often noisy, clear difference between the sexes. Male: a nasal chatter and a repeated «væph, væph, væph». Female: usually louder, stressed at the start, «kvæh-kvæh-kvah-kvah-kvah» |
+| Habitat | Gardens, parks, farmland, wetlands up to the tree line; breeds near water |
+| Food | Mainly plants, seeds and berries; at times many invertebrates; bread in parks in winter |
+| Nest | On the ground, well hidden; lined with moss, straw, leaves, then feathers and down |
+| Eggs | 7 to 13; the female alone sits 28 to 29 days; young fly at 50 to 60 days |
+| Migration | Resident over much of Europe; many Norwegian birds winter in Central Europe, many stay on the coast and in fjords |
+| Population | More than 50 000 pairs (2015) |
+| Status | LC |
+| Lookalikes | Other dabbling ducks (none named); the speculum sets it apart |
+
+### Sangsvane (folder `sangsvane`), snl.no/sangsvane, Rolf Terje Kroglund, updated 2026-11-07
+
+| Field | Value |
+|---|---|
+| Size | Somewhat smaller and lighter than the mute swan; the male a little larger and heavier than the female. Length and weight not given |
+| Adult | All white, lemon-yellow bill with a black tip; swims with the neck held straight |
+| Juvenile | Grey-brown, usually until the autumn of its second year |
+| Voice | Usually very vocal in flight and on the ground; a loud call often compared to a trumpet blast. No transcription |
+| Habitat | Breeds near water, often on an islet or a large bog with open water; winters on shallow nutrient-rich lakes, open rivers, brackish water |
+| Food | Mainly water plants (eelgrass, pondweed); stubble fields with geese in winter |
+| Nest | Moss, water plants and soil, lined with straw and down; reused and enlarged year after year |
+| Eggs | Usually 4 to 6, dirty white; the female sits about 35 days, the male guards; young fly at about 2 months |
+| Migration | Wintering birds come mainly from northern Scandinavia and Kola |
+| Population | 350 to 600 pairs, rising; most in the two northernmost counties |
+| Status | LC |
+| Versus mute swan | Mute swan: red-orange bill with a big black knob, larger, S-curved neck when swimming |
+
+### Storlom (folder `storlom`), snl.no/storlom, consultant Per Ole Syvertsen, updated 2026-11-08
+
+| Field | Value |
+|---|---|
+| Length, weight | Up to 68 cm, 2,5 to 3,5 kg |
+| Summer plumage | Grey-black above with white cross stripes and spots, black throat patch |
+| Winter, juvenile, bill, eyes, sexes | Not described |
+| Voice | Not described |
+| Habitat, food | Fresh water; eats fish |
+| Nest | At the water's edge, often on a small islet |
+| Eggs | 2; both sit 28 to 30 days; young fly after about 60 days |
+| Migration | Partial migrant: some winter on the south coast, others go to Biscay |
+| Range | Most of Norway; no population figure |
+| Status | LC |
+| Versus red-throated diver | Told by the black throat patch |
+
+### Enkeltbekkasin (folder `enkeltbekkasin`), snl.no/enkeltbekkasin, Jan Eivind Østnes and Fridtjof Mehlum, updated 2026-11-04
+
+| Field | Value |
+|---|---|
+| Size | Medium-sized snipe; length and weight not given |
+| Plumage | Heavily mottled brown and black with clear yellowish-white lengthwise stripes; underparts almost all white; very long straight bill; large eyes |
+| Head stripes, legs, juvenile, sexes | Not described |
+| Display | In spring and early summer, mostly at dusk and at night, a display flight with an unmistakable bleating sound («mekrende»), made by the outer tail feathers vibrating in a steep dive. Duration and pitch not given. Local names: mekregauk, rossegauk, myrbukk, skoddeføll, tåkehest, himmelhest |
+| From the ground | A high, sharp «tikk-a, tikk-a, tikk-a» |
+| Flushed | A hoarse, powerful «tsjæt», then a high zigzag flight |
+| Habitat | Bogs and other wetlands, coast to mountains |
+| Food | Insects, spiders, earthworms, crustaceans, probed from the ground |
+| Nest | In a grass tussock near water |
+| Eggs | Usually 4, laid in May; mainly the female sits about 20 days; young fly at about 3 weeks |
+| Migration | Returns April to May, leaves August to October; winters in western Europe, some on the south coast |
+| Population | 50 000 to 75 000 pairs (2015), moderate decline |
+| Status | LC |
+| Versus great snipe | Hard to tell by plumage, very different in sound and behaviour when breeding |
+
+### Batch 5, to verify
+
+- Mallard: pitch and timing of both sexes' calls; juvenile.
+- Whooper swan: the shape of the trumpet call; length.
+- Black-throated diver: every sound (placeholder wail); bill, head, winter and juvenile plumage.
+- Common snipe: the bleat's pitch, pulse rate and length; which months it bleats; length.
+
 ## Svarttrost, checked 2026-11-26
 
 Sources used: Store norske leksikon (snl.no/svarttrost), which follows Artsdatabanken's classification and cites BirdLife Norge for its population figure. A search excerpt from Fuglevennen (fuglevennen.no). A BirdLife Norge press release from 2021. Artsdatabanken's own species page and the full Fuglevennen page could not be opened, so check those two when possible.

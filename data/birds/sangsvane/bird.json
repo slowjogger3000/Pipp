@@ -1,0 +1,107 @@
+{
+ "_note": "Field guide text for the whooper swan, both languages. SNL gives no transcription, so the shape of the call is [TO VERIFY]. Facts from birds.md (SNL, checked 2026-11-26). Norwegian wording is mine, Eirik to check. calendar: one letter per month from January, y yes, n no, ? not known.",
+ "xeno_canto": "https://xeno-canto.org/species/cygnus-cygnus",
+ "facts": {
+  "length": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "broods": {
+   "en": "Usually 4 to 6 dirty white eggs; the female sits about 35 days",
+   "no": "Vanligvis 4 til 6 skittenhvite egg; hunnen ruger i rundt 35 dager",
+   "verified": true
+  },
+  "range": {
+   "en": "Most in the two northernmost counties, now also in the south; 350 to 600 pairs, rising",
+   "no": "Flest i de to nordligste fylkene, nå også i sør; 350 til 600 par, økende",
+   "verified": true
+  },
+  "habitat": {
+   "en": "Near water, often an islet or a large bog with open water; winters on shallow lakes",
+   "no": "Ved vann, ofte en holme eller ei stor myr med åpent vann; overvintrer på grunne innsjøer",
+   "verified": true
+  },
+  "food": {
+   "en": "Mainly water plants such as eelgrass and pondweed; stubble fields in winter",
+   "no": "Mest vannplanter som ålegras og tjønnaks; stubbåkrer om vinteren",
+   "verified": true
+  },
+  "status": {
+   "en": "LC, least concern, Norwegian red list",
+   "no": "LC, livskraftig, norsk rødliste",
+   "verified": true
+  },
+  "nest": {
+   "en": "Moss, water plants and soil, lined with straw and down; used year after year",
+   "no": "Mose, vannplanter og jord, fôret med strå og dun; brukes år etter år",
+   "verified": true
+  }
+ },
+ "sings": {
+  "male": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "female": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "song_notes": {
+  "en": "Usually very vocal, both in flight and on the ground. The call is loud and often compared to a trumpet blast. [TO VERIFY] SNL gives no transcription, so the notes Tipp plays are a stand-in. All white, with a lemon-yellow bill with a black tip; swims with its neck straight.",
+  "no": "Som regel svært lydelig, både i lufta og på bakken. Lydene er kraftige og sammenlignes ofte med trompetstøt. [TO VERIFY] SNL gir ingen gjengivelse, så tonene Tipp spiller er en stedfortreder. Helt hvit, med sitrongult nebb med svart spiss; svømmer med rett hals.",
+  "verified": true
+ },
+ "mnemonic": {
+  "en": "",
+  "no": "",
+  "verified": false
+ },
+ "types": {
+  "song": {
+   "en": "A loud call, often compared to a trumpet blast.",
+   "no": "Kraftige lyder, ofte sammenlignet med trompetstøt.",
+   "verified": true
+  },
+  "call": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "alarm": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "flight": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "calendar": {
+  "present": "yyyyyyyyyyyy",
+  "sings": "????????????",
+  "note": {
+   "en": "Breeds mainly in the north; birds wintering here come mostly from northern Scandinavia and the Kola Peninsula. Tame in winter, very shy when breeding.",
+   "no": "Hekker mest i nord; fuglene som overvintrer her kommer mest fra Nord-Skandinavia og Kola. Tam om vinteren, svært sky i hekketiden.",
+   "verified": true
+  }
+ },
+ "lookalikes": [
+  {
+   "name": {
+    "en": "Mute swan",
+    "no": "Knoppsvane"
+   },
+   "text": {
+    "en": "The mute swan is larger, with a red-orange bill and a big black knob, and usually swims with an S-curved neck.",
+    "no": "Knoppsvanen er større, har rødoransje nebb med stor svart knopp og svømmer oftest med S-formet hals.",
+    "verified": true
+   }
+  }
+ ]
+}

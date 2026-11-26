@@ -1,0 +1,107 @@
+{
+ "_note": "Field guide text for the mallard, both languages. Facts from birds.md (SNL, checked 2026-11-26). Norwegian wording is mine, Eirik to check. calendar: one letter per month from January, y yes, n no, ? not known.",
+ "xeno_canto": "https://xeno-canto.org/species/anas-platyrhynchos",
+ "facts": {
+  "length": {
+   "en": "50 to 60 cm, 800 to 1400 g",
+   "no": "50 til 60 cm, 800 til 1400 g",
+   "verified": true
+  },
+  "broods": {
+   "en": "7 to 13 eggs, the female alone sits 28 to 29 days",
+   "no": "7 til 13 egg, hunnen ruger alene i 28 til 29 dager",
+   "verified": true
+  },
+  "range": {
+   "en": "Very common in the whole country; more than 50 000 pairs (2015)",
+   "no": "Svært vanlig i hele landet; mer enn 50 000 par (2015)",
+   "verified": true
+  },
+  "habitat": {
+   "en": "Gardens, parks, farmland and wetlands up to the tree line",
+   "no": "Hager, parker, kulturlandskap og våtmark opp til tregrensen",
+   "verified": true
+  },
+  "food": {
+   "en": "Mainly plants, seeds and berries; at times many small animals",
+   "no": "Mest planter, frø og bær; i perioder mange smådyr",
+   "verified": true
+  },
+  "status": {
+   "en": "LC, least concern, Norwegian red list",
+   "no": "LC, livskraftig, norsk rødliste",
+   "verified": true
+  },
+  "nest": {
+   "en": "On the ground, well hidden, lined with feathers and down",
+   "no": "På bakken, godt skjult, fôret med fjær og dun",
+   "verified": true
+  }
+ },
+ "sings": {
+  "male": {
+   "en": "«væph, væph, væph»",
+   "no": "«væph, væph, væph»",
+   "verified": true
+  },
+  "female": {
+   "en": "«kvæh-kvæh-kvah-kvah-kvah»",
+   "no": "«kvæh-kvæh-kvah-kvah-kvah»",
+   "verified": true
+  }
+ },
+ "song_notes": {
+  "en": "Often noisy, and the sexes sound clearly different. The male has a nasal chatter and a repeated “væph, væph, væph”; the female is usually louder, stressed at the start: “kvæh-kvæh-kvah-kvah-kvah”. [TO VERIFY] pitch and timing.",
+  "no": "Ofte lydelig, og kjønnene låter tydelig ulikt. Hannen har en nasal, småpratende lyd og et gjentatt «væph, væph, væph»; hunnen er som regel kraftigere, med trykk i starten: «kvæh-kvæh-kvah-kvah-kvah». [TO VERIFY] tonehøyde og tempo.",
+  "verified": true
+ },
+ "mnemonic": {
+  "en": "",
+  "no": "",
+  "verified": false
+ },
+ "types": {
+  "song": {
+   "en": "Male: nasal chatter and “væph, væph, væph”. Female: “kvæh-kvæh-kvah-kvah-kvah”.",
+   "no": "Hann: nasal småprat og «væph, væph, væph». Hunn: «kvæh-kvæh-kvah-kvah-kvah».",
+   "verified": true
+  },
+  "call": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "alarm": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "flight": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "calendar": {
+  "present": "yyyyyyyyyyyy",
+  "sings": "????????????",
+  "note": {
+   "en": "Resident over much of Europe and hardy; many Norwegian birds winter in Central Europe, many stay on the coast and in fjords.",
+   "no": "Standfugl i store deler av Europa og hardfør; mange norske fugler overvintrer i Mellom-Europa, mange blir langs kysten og i fjordene.",
+   "verified": true
+  }
+ },
+ "lookalikes": [
+  {
+   "name": {
+    "en": "Other dabbling ducks",
+    "no": "Andre gressender"
+   },
+   "text": {
+    "en": "The blue speculum with white edges, the same in both sexes, sets the mallard apart.",
+    "no": "Det blå vingespeilet med hvite kanter, likt hos begge kjønn, skiller stokkanda fra dem.",
+    "verified": true
+   }
+  }
+ ]
+}

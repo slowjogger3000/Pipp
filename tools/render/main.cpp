@@ -724,9 +724,36 @@ int checkQuiz(const tipp::BirdData& bird)
         voice.playAgain(engine);
         double sang2 = 0.0;
         run(25.0, &voice, nullptr, nullptr, &sang2);
+        check(engine.phrasesStarted() - startCount == 2u && sang2 > 0.0, "PLAY AGAIN sings one more phrase");
+    }
+
+    {
+        // Half speed: the same phrase (fresh engines, same seed) sung at 1x
+        // and at half speed. PLAY AGAIN draws a new phrase, so comparing it
+        // with the first one fails for birds whose phrases differ in length.
+        auto firstPhrase = [&](bool half) {
+            tipp::Engine engine;
+            engine.prepare(kSampleRate);
+            std::vector<float> buf(32);
+            tipp::QuizVoice voice;
+            voice.start(engine, &bird, tipp::kSong, false);
+            voice.setHalfSpeed(engine, half);
+            double singing = 0.0;
+            const auto blocks = static_cast<long>(25.0 * kSampleRate / 32.0 + 0.5);
+            for (long i = 0; i < blocks; ++i)
+            {
+                if (i % 50 == 0)
+                    voice.tick(engine);
+                engine.process(buf.data(), buf.data(), 32);
+                if (engine.singing())
+                    singing += 32.0 / kSampleRate;
+            }
+            return singing;
+        };
+        const double sang1 = firstPhrase(false);
+        const double sang2 = firstPhrase(true);
         std::printf("     phrase %.2f s at 1x, %.2f s at half speed\n", sang1, sang2);
-        check(engine.phrasesStarted() - startCount == 2u, "PLAY AGAIN sings one more phrase");
-        check(sang2 > sang1 * 1.4, "half speed makes the phrase longer");
+        check(sang1 > 0.0 && sang2 > sang1 * 1.4, "half speed makes the phrase longer");
     }
 
     std::printf("%s\n", failures == 0 ? "quiz check passed" : "quiz check FAILED");

@@ -1,0 +1,236 @@
+{
+ "_note": "Black-throated diver ink plate in a 280x240 box, M11 batch 5, built from the eider plate: swimming low. Grey-black above (dense hatching) with white cross stripes and spots (face), black throat patch (ink) (birds.md, SNL). Bill shape, head, winter plumage and juvenile are not described; the bill is drawn as a pointed dagger, [TO VERIFY].",
+ "box": [
+  280,
+  240
+ ],
+ "clips": {
+  "body": "M210 92 C210 76 198 66 184 66 C170 66 162 76 162 88 L160 106 C130 108 92 114 66 126 C60 132 64 140 76 146 C100 158 150 162 190 156 C206 150 214 138 210 122 C208 112 206 102 210 92 Z",
+  "wing": "M184 112 C150 108 110 112 80 124 C110 132 152 134 186 126 Z"
+ },
+ "hatch": {
+  "body": {
+   "rect": [
+    58,
+    62,
+    216,
+    166
+   ],
+   "up": true,
+   "clip": "body"
+  },
+  "wing": {
+   "rect": [
+    78,
+    104,
+    188,
+    136
+   ],
+   "up": false,
+   "clip": "wing"
+  }
+ },
+ "pivots": {
+  "upper": {
+   "at": [
+    208,
+    90
+   ],
+   "deg": -8
+  },
+  "lower": {
+   "at": [
+    208,
+    96
+   ],
+   "deg": 6
+  },
+  "tail": {
+   "at": [
+    66,
+    126
+   ],
+   "deg": -4
+  }
+ },
+ "layers": [
+  {
+   "path": "M66 126 L50 124 L54 132 Z",
+   "fill": "face",
+   "stroke": 1.5,
+   "part": "tail"
+  },
+  {
+   "clip": "body",
+   "fill": "face",
+   "stroke": 1.5
+  },
+  {
+   "hatch": "body"
+  },
+  {
+   "variant": "spots",
+   "fill": "face",
+   "within": "body"
+  },
+  {
+   "variant": "throat",
+   "fill": "ink",
+   "within": "body"
+  },
+  {
+   "clip": "body",
+   "stroke": 1.5
+  },
+  {
+   "eye": [
+    190,
+    80
+   ],
+   "pupil": 2.4
+  },
+  {
+   "path": "M208 84 L244 92 L208 94 Z",
+   "fill": "bill",
+   "stroke": 1.5,
+   "part": "upper"
+  },
+  {
+   "path": "M208 94 L240 93 L208 99 Z",
+   "fill": "bill",
+   "stroke": 1.5,
+   "part": "lower"
+  },
+  {
+   "path": "M12 160 C60 154 110 162 160 158 C200 155 236 160 270 156",
+   "fill": "none",
+   "stroke": 2
+  },
+  {
+   "path": "M30 172 q12 -4 24 0 M90 176 q12 -4 24 0 M170 172 q12 -4 24 0 M230 176 q10 -3 20 0",
+   "stroke": 1
+  },
+  {
+   "path": "M252 80 A16 16 0 0 1 252 108 M259 72 A26 26 0 0 1 259 116",
+   "stroke": 1.5,
+   "part": "arcs"
+  }
+ ],
+ "variants": {
+  "male": {
+   "body_pitch": 4,
+   "wing_pitch": 0,
+   "eye_ring": 0,
+   "bill": "face",
+   "spots": "M80 124 h7 v3 h-7 Z M92 120 h7 v3 h-7 Z M104 117 h7 v3 h-7 Z M116 114 h7 v3 h-7 Z M128 112 h7 v3 h-7 Z M140 111 h7 v3 h-7 Z M152 110 h7 v3 h-7 Z M86 131 h7 v3 h-7 Z M98 127 h7 v3 h-7 Z M110 124 h7 v3 h-7 Z M122 121 h7 v3 h-7 Z M134 119 h7 v3 h-7 Z M146 118 h7 v3 h-7 Z M158 117 h7 v3 h-7 Z",
+   "throat": "M200 98 C206 106 208 118 206 128 C200 122 196 110 196 100 Z"
+  },
+  "female": {
+   "body_pitch": 4,
+   "wing_pitch": 0,
+   "eye_ring": 0,
+   "bill": "face",
+   "spots": "M80 124 h7 v3 h-7 Z M92 120 h7 v3 h-7 Z M104 117 h7 v3 h-7 Z M116 114 h7 v3 h-7 Z M128 112 h7 v3 h-7 Z M140 111 h7 v3 h-7 Z M152 110 h7 v3 h-7 Z M86 131 h7 v3 h-7 Z M98 127 h7 v3 h-7 Z M110 124 h7 v3 h-7 Z M122 121 h7 v3 h-7 Z M134 119 h7 v3 h-7 Z M146 118 h7 v3 h-7 Z M158 117 h7 v3 h-7 Z",
+   "throat": "M200 98 C206 106 208 118 206 128 C200 122 196 110 196 100 Z"
+  },
+  "juvenile": {
+   "body_pitch": 4,
+   "wing_pitch": 0,
+   "eye_ring": 0,
+   "bill": "face",
+   "spots": "M80 124 h7 v3 h-7 Z M92 120 h7 v3 h-7 Z M104 117 h7 v3 h-7 Z M116 114 h7 v3 h-7 Z M128 112 h7 v3 h-7 Z M140 111 h7 v3 h-7 Z M152 110 h7 v3 h-7 Z M86 131 h7 v3 h-7 Z M98 127 h7 v3 h-7 Z M110 124 h7 v3 h-7 Z M122 121 h7 v3 h-7 Z M134 119 h7 v3 h-7 Z M146 118 h7 v3 h-7 Z M158 117 h7 v3 h-7 Z",
+   "throat": "M200 98 C206 106 208 118 206 128 C200 122 196 110 196 100 Z"
+  }
+ },
+ "callouts": [
+  {
+   "id": "throat",
+   "leader": "M204 116 L238 184",
+   "at": [
+    240,
+    198
+   ],
+   "align": "centre",
+   "male": {
+    "en": "BLACK PATCH",
+    "no": "SVART FLEKK",
+    "verified": true
+   },
+   "female": {
+    "en": "BLACK PATCH",
+    "no": "SVART FLEKK",
+    "verified": false
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  },
+  {
+   "id": "bill",
+   "leader": "M226 90 L226 44",
+   "at": [
+    226,
+    31
+   ],
+   "align": "centre",
+   "male": {
+    "en": "",
+    "no": "",
+    "verified": false
+   },
+   "female": {
+    "en": "",
+    "no": "",
+    "verified": false
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  },
+  {
+   "id": "plumage",
+   "leader": "M120 120 L76 198",
+   "at": [
+    72,
+    210
+   ],
+   "align": "centre",
+   "male": {
+    "en": "GREY-BLACK, WHITE STRIPES",
+    "no": "GRÅSVART, HVITE STRIPER",
+    "verified": true
+   },
+   "female": {
+    "en": "GREY-BLACK, WHITE STRIPES",
+    "no": "GRÅSVART, HVITE STRIPER",
+    "verified": false
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  }
+ ],
+ "captions": {
+  "male": {
+   "en": "Adult in summer. Beak and tail follow the sound.",
+   "no": "Voksen om sommeren. Nebb og hale følger lyden.",
+   "verified": true
+  },
+  "female": {
+   "en": "Female. No difference from the male is known.",
+   "no": "Hunn. Ingen kjent forskjell fra hannen.",
+   "verified": false
+  },
+  "juvenile": {
+   "en": "Young bird. Drawn like the adults.",
+   "no": "Ungfugl. Tegnet som de voksne.",
+   "verified": false
+  }
+ }
+}

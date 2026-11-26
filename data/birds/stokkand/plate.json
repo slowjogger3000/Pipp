@@ -1,0 +1,294 @@
+{
+ "_note": "Mallard ink plate in a 280x240 box, M11 batch 5, built from the eider plate: swimming. Drake: green head (shadow), white neck ring, rust-brown breast (shadow), light body, black rear (ink), yellow bill. Female: brown-mottled (dense hatching), orange and black bill (shadow). Both: blue speculum with white edges (shadow patch on the wing). Eclipse and juvenile are not drawn; the juvenile is drawn like the female, [TO VERIFY] (birds.md, SNL).",
+ "box": [
+  280,
+  240
+ ],
+ "clips": {
+  "body": "M210 92 C210 76 198 66 184 66 C170 66 162 76 162 88 L160 104 C130 104 90 110 66 124 C60 130 64 140 76 146 C100 160 150 166 190 158 C206 152 214 138 210 120 C208 110 206 100 210 92 Z",
+  "wing": "M184 112 C150 108 110 112 80 124 C110 132 152 134 186 126 Z"
+ },
+ "hatch": {
+  "body": {
+   "rect": [
+    58,
+    62,
+    216,
+    166
+   ],
+   "up": true,
+   "clip": "body"
+  },
+  "wing": {
+   "rect": [
+    78,
+    104,
+    188,
+    136
+   ],
+   "up": false,
+   "clip": "wing"
+  }
+ },
+ "pivots": {
+  "upper": {
+   "at": [
+    208,
+    90
+   ],
+   "deg": -8
+  },
+  "lower": {
+   "at": [
+    208,
+    96
+   ],
+   "deg": 6
+  },
+  "tail": {
+   "at": [
+    66,
+    126
+   ],
+   "deg": -4
+  }
+ },
+ "layers": [
+  {
+   "path": "M66 124 L46 118 L48 130 Z",
+   "fill": "face",
+   "stroke": 1.5,
+   "part": "tail"
+  },
+  {
+   "clip": "body",
+   "fill": "face",
+   "stroke": 1.5
+  },
+  {
+   "hatch": "body"
+  },
+  {
+   "variant": "rear",
+   "fill": "ink",
+   "within": "body"
+  },
+  {
+   "variant": "breast",
+   "fill": "shadow",
+   "within": "body"
+  },
+  {
+   "variant": "hood",
+   "fill": "shadow",
+   "within": "body"
+  },
+  {
+   "variant": "ring",
+   "fill": "face",
+   "stroke": 1,
+   "within": "body"
+  },
+  {
+   "clip": "wing",
+   "fill": "face"
+  },
+  {
+   "hatch": "wing"
+  },
+  {
+   "path": "M146 117 L176 114 L178 122 L148 125 Z",
+   "fill": "shadow",
+   "stroke": 1,
+   "within": "wing"
+  },
+  {
+   "clip": "wing",
+   "stroke": 1.2
+  },
+  {
+   "clip": "body",
+   "stroke": 1.5
+  },
+  {
+   "eye": [
+    190,
+    80
+   ],
+   "pupil": 2.4
+  },
+  {
+   "path": "M208 86 L234 92 C238 94 236 98 232 98 L208 95 Z",
+   "fill": "bill",
+   "stroke": 1.5,
+   "part": "upper"
+  },
+  {
+   "path": "M208 95 L231 98 L229 101 L207 99 Z",
+   "fill": "bill",
+   "stroke": 1.5,
+   "part": "lower"
+  },
+  {
+   "path": "M12 160 C60 154 110 162 160 158 C200 155 236 160 270 156",
+   "fill": "none",
+   "stroke": 2
+  },
+  {
+   "path": "M30 172 q12 -4 24 0 M90 176 q12 -4 24 0 M170 172 q12 -4 24 0 M230 176 q10 -3 20 0",
+   "stroke": 1
+  },
+  {
+   "path": "M246 84 A16 16 0 0 1 246 112 M253 76 A26 26 0 0 1 253 120",
+   "stroke": 1.5,
+   "part": "arcs"
+  }
+ ],
+ "variants": {
+  "male": {
+   "body_pitch": 0,
+   "wing_pitch": 9,
+   "eye_ring": 0,
+   "bill": "face",
+   "hood": "M160 104 L162 88 C162 76 170 66 184 66 C198 66 210 76 210 92 C208 98 206 102 206 106 C190 103 174 103 160 104 Z",
+   "ring": "M160 104 C174 103 190 103 206 106 L206 111 C190 108 174 108 160 109 Z",
+   "breast": "M206 111 C212 124 210 142 196 152 C186 140 186 124 192 109 Z",
+   "rear": "M60 122 C58 132 64 140 76 146 C82 138 82 128 78 120 Z"
+  },
+  "female": {
+   "body_pitch": 4,
+   "wing_pitch": 4,
+   "eye_ring": 0,
+   "bill": "shadow",
+   "hood": "",
+   "ring": "",
+   "breast": "",
+   "rear": ""
+  },
+  "juvenile": {
+   "body_pitch": 4,
+   "wing_pitch": 4,
+   "eye_ring": 0,
+   "bill": "shadow",
+   "hood": "",
+   "ring": "",
+   "breast": "",
+   "rear": ""
+  }
+ },
+ "callouts": [
+  {
+   "id": "head",
+   "leader": "M176 70 L130 34",
+   "at": [
+    128,
+    28
+   ],
+   "align": "right",
+   "male": {
+    "en": "GREEN, WHITE NECK RING",
+    "no": "GRØNT, HVIT HALSRING",
+    "verified": true
+   },
+   "female": {
+    "en": "BROWN-MOTTLED",
+    "no": "BRUNSPRAGLETE",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  },
+  {
+   "id": "bill",
+   "leader": "M226 96 L226 44",
+   "at": [
+    226,
+    31
+   ],
+   "align": "centre",
+   "male": {
+    "en": "YELLOW",
+    "no": "GULT",
+    "verified": true
+   },
+   "female": {
+    "en": "ORANGE AND BLACK",
+    "no": "ORANSJE OG SVART",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  },
+  {
+   "id": "breast",
+   "leader": "M206 132 L240 184",
+   "at": [
+    242,
+    198
+   ],
+   "align": "centre",
+   "male": {
+    "en": "RUST-BROWN",
+    "no": "RUSTBRUNT",
+    "verified": true
+   },
+   "female": {
+    "en": "",
+    "no": "",
+    "verified": false
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  },
+  {
+   "id": "wing",
+   "leader": "M160 120 L110 198",
+   "at": [
+    100,
+    210
+   ],
+   "align": "centre",
+   "male": {
+    "en": "BLUE SPECULUM, WHITE EDGES",
+    "no": "BLÅTT SPEIL, HVITE KANTER",
+    "verified": true
+   },
+   "female": {
+    "en": "BLUE SPECULUM, WHITE EDGES",
+    "no": "BLÅTT SPEIL, HVITE KANTER",
+    "verified": true
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  }
+ ],
+ "captions": {
+  "male": {
+   "en": "Drake in breeding plumage. Orange feet.",
+   "no": "Hann i prakt. Oransje føtter.",
+   "verified": true
+  },
+  "female": {
+   "en": "Female. Brown-mottled, good camouflage.",
+   "no": "Hunn. Brunspraglete, godt kamuflert.",
+   "verified": true
+  },
+  "juvenile": {
+   "en": "Young bird. Drawn like the female.",
+   "no": "Ungfugl. Tegnet som hunnen.",
+   "verified": false
+  }
+ }
+}

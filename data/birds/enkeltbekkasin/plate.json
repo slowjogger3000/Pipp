@@ -1,0 +1,256 @@
+{
+ "_note": "Common snipe ink plate in a 280x240 box, M11 batch 5, built from the woodcock plate: heavily mottled brown and black (dense hatching) with pale lengthwise stripes (face), almost white underparts, very long straight bill, large eye (birds.md, SNL). Head stripes, legs, sexes and juvenile are not described; the head bars of the woodcock are left out.",
+ "box": [
+  280,
+  240
+ ],
+ "clips": {
+  "body": "M190 96 C190 80 178 70 164 72 C150 74 142 86 140 98 C116 102 92 112 76 126 C70 132 74 140 84 146 C108 160 140 166 164 160 C182 154 192 140 192 124 C192 114 190 104 190 96 Z",
+  "wing": "M154 106 C130 108 104 116 82 128 C104 138 132 142 158 134 C164 124 162 112 154 106 Z"
+ },
+ "hatch": {
+  "body": {
+   "rect": [
+    70,
+    68,
+    194,
+    168
+   ],
+   "up": true,
+   "clip": "body"
+  },
+  "wing": {
+   "rect": [
+    80,
+    104,
+    164,
+    144
+   ],
+   "up": false,
+   "clip": "wing"
+  }
+ },
+ "pivots": {
+  "upper": {
+   "at": [
+    188,
+    94
+   ],
+   "deg": -5
+  },
+  "lower": {
+   "at": [
+    188,
+    98
+   ],
+   "deg": 4
+  },
+  "tail": {
+   "at": [
+    80,
+    130
+   ],
+   "deg": -3
+  }
+ },
+ "layers": [
+  {
+   "path": "M14 196 C70 186 150 184 268 190",
+   "stroke": 2.5
+  },
+  {
+   "path": "M40 190 q10 -12 22 -2 q-12 6 -22 2 Z M210 186 q12 -10 22 0 q-12 6 -22 0 Z M120 192 q8 -8 16 0",
+   "fill": "face",
+   "stroke": 1
+  },
+  {
+   "path": "M138 160 L136 186 M154 162 L156 186 M128 187 L136 186 L144 188 M148 187 L156 186 L164 188",
+   "stroke": 1.5
+  },
+  {
+   "path": "M80 126 L58 128 L62 138 L84 136 Z",
+   "fill": "face",
+   "stroke": 1.5,
+   "part": "tail"
+  },
+  {
+   "clip": "body",
+   "fill": "face",
+   "stroke": 1.5
+  },
+  {
+   "hatch": "body"
+  },
+  {
+   "variant": "belly",
+   "fill": "face",
+   "within": "body"
+  },
+  {
+   "variant": "stripes",
+   "fill": "face",
+   "within": "body"
+  },
+  {
+   "clip": "wing",
+   "fill": "face"
+  },
+  {
+   "hatch": "wing"
+  },
+  {
+   "path": "M96 126 l10 -6 M112 130 l10 -6 M128 132 l10 -6 M144 130 l8 -5",
+   "stroke": 1.2,
+   "within": "wing"
+  },
+  {
+   "clip": "wing",
+   "stroke": 1.5
+  },
+  {
+   "clip": "body",
+   "stroke": 1.5
+  },
+  {
+   "eye": [
+    170,
+    92
+   ],
+   "pupil": 3.2
+  },
+  {
+   "path": "M188 92 L250 100 L250 102 L189 98 Z",
+   "fill": "bill",
+   "stroke": 1.3,
+   "part": "upper"
+  },
+  {
+   "path": "M189 98 L250 102 L248 104 L188 102 Z",
+   "fill": "bill",
+   "stroke": 1.3,
+   "part": "lower"
+  },
+  {
+   "path": "M130 62 A16 16 0 0 0 130 90 M123 54 A26 26 0 0 0 123 98",
+   "stroke": 1.5,
+   "part": "arcs"
+  }
+ ],
+ "variants": {
+  "male": {
+   "body_pitch": 4,
+   "wing_pitch": 4,
+   "eye_ring": 3.6,
+   "bill": "shadow",
+   "belly": "M80 144 C104 158 140 166 164 160 C180 154 190 142 192 128 C160 146 120 150 80 144 Z",
+   "stripes": "M100 118 L150 102 L151 105 L101 121 Z M106 124 L158 110 L159 113 L107 127 Z M150 86 L178 78 L179 81 L151 89 Z"
+  },
+  "female": {
+   "body_pitch": 4,
+   "wing_pitch": 4,
+   "eye_ring": 3.6,
+   "bill": "shadow",
+   "belly": "M80 144 C104 158 140 166 164 160 C180 154 190 142 192 128 C160 146 120 150 80 144 Z",
+   "stripes": "M100 118 L150 102 L151 105 L101 121 Z M106 124 L158 110 L159 113 L107 127 Z M150 86 L178 78 L179 81 L151 89 Z"
+  },
+  "juvenile": {
+   "body_pitch": 4,
+   "wing_pitch": 4,
+   "eye_ring": 3.6,
+   "bill": "shadow",
+   "belly": "M80 144 C104 158 140 166 164 160 C180 154 190 142 192 128 C160 146 120 150 80 144 Z",
+   "stripes": "M100 118 L150 102 L151 105 L101 121 Z M106 124 L158 110 L159 113 L107 127 Z M150 86 L178 78 L179 81 L151 89 Z"
+  }
+ },
+ "callouts": [
+  {
+   "id": "bill",
+   "leader": "M226 100 L226 44",
+   "at": [
+    226,
+    31
+   ],
+   "align": "centre",
+   "male": {
+    "en": "VERY LONG, STRAIGHT",
+    "no": "SVÆRT LANGT, RETT",
+    "verified": true
+   },
+   "female": {
+    "en": "VERY LONG, STRAIGHT",
+    "no": "SVÆRT LANGT, RETT",
+    "verified": false
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  },
+  {
+   "id": "plumage",
+   "leader": "M110 140 L96 202",
+   "at": [
+    92,
+    214
+   ],
+   "align": "centre",
+   "male": {
+    "en": "MOTTLED, PALE STRIPES",
+    "no": "SPRAGLETE, LYSE STRIPER",
+    "verified": true
+   },
+   "female": {
+    "en": "MOTTLED, PALE STRIPES",
+    "no": "SPRAGLETE, LYSE STRIPER",
+    "verified": false
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  },
+  {
+   "id": "breast",
+   "leader": "M176 152 L222 202",
+   "at": [
+    224,
+    214
+   ],
+   "align": "centre",
+   "male": {
+    "en": "NEARLY WHITE",
+    "no": "NESTEN HVITT",
+    "verified": true
+   },
+   "female": {
+    "en": "NEARLY WHITE",
+    "no": "NESTEN HVITT",
+    "verified": false
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  }
+ ],
+ "captions": {
+  "male": {
+   "en": "On the ground. Beak and tail follow the sound.",
+   "no": "På bakken. Nebb og hale følger lyden.",
+   "verified": true
+  },
+  "female": {
+   "en": "Female. No difference is described.",
+   "no": "Hunn. Ingen forskjell er beskrevet.",
+   "verified": false
+  },
+  "juvenile": {
+   "en": "Juvenile. Drawn like the adults.",
+   "no": "Ungfugl. Tegnet som de voksne.",
+   "verified": false
+  }
+ }
+}

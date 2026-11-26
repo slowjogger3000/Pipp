@@ -1,0 +1,348 @@
+{
+ "_note": "Mallard, M11 batch 5. Verified by SNL: the male's nasal chatter and repeated «væph, væph, væph»; the female's louder «kvæh-kvæh-kvah-kvah-kvah», stressed at the start. Pitches, lengths and timing are sound design guesses. The quack is the syrinx with high roughness and low tension, no new source.",
+ "syllables": {
+  "vaeph": {
+   "dur_ms": 190,
+   "pitch": [
+    [
+     0,
+     500
+    ],
+    [
+     0.3,
+     590
+    ],
+    [
+     1,
+     470
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.08,
+     1
+    ],
+    [
+     0.6,
+     0.75
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.8,
+   "rough": 50,
+   "tension": -10
+  },
+  "vaeph2": {
+   "dur_ms": 170,
+   "pitch": [
+    [
+     0,
+     520
+    ],
+    [
+     0.3,
+     600
+    ],
+    [
+     1,
+     480
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.08,
+     1
+    ],
+    [
+     0.6,
+     0.75
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.75,
+   "rough": 50,
+   "tension": -10
+  },
+  "rab": {
+   "dur_ms": 60,
+   "pitch": [
+    [
+     0,
+     470
+    ],
+    [
+     1,
+     430
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.15,
+     1
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.65,
+   "rough": 55,
+   "tension": -10
+  },
+  "kvaeh": {
+   "dur_ms": 260,
+   "pitch": [
+    [
+     0,
+     680
+    ],
+    [
+     0.25,
+     780
+    ],
+    [
+     0.6,
+     720
+    ],
+    [
+     1,
+     600
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.08,
+     1
+    ],
+    [
+     0.6,
+     0.75
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 1.0,
+   "rough": 60,
+   "tension": -8
+  },
+  "kvah": {
+   "dur_ms": 180,
+   "pitch": [
+    [
+     0,
+     640
+    ],
+    [
+     0.3,
+     690
+    ],
+    [
+     1,
+     540
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.08,
+     1
+    ],
+    [
+     0.6,
+     0.75
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.8,
+   "rough": 60,
+   "tension": -8
+  },
+  "kvah2": {
+   "dur_ms": 170,
+   "pitch": [
+    [
+     0,
+     600
+    ],
+    [
+     0.3,
+     650
+    ],
+    [
+     1,
+     510
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.08,
+     1
+    ],
+    [
+     0.6,
+     0.75
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.7,
+   "rough": 60,
+   "tension": -8
+  }
+ },
+ "types": {
+  "song": {
+   "pause_s": [
+    2.5,
+    8.0
+   ],
+   "length_s": [
+    0.8,
+    2.4
+   ],
+   "transpose_st": 0.6,
+   "avoid_repeat": false,
+   "auto": {
+    "vo_pitch": [
+     0.98,
+     1.02
+    ],
+    "vo_breath": [
+     24,
+     36
+    ],
+    "vo_tension": [
+     10,
+     20
+    ],
+    "vo_rough": [
+     40,
+     52
+    ],
+    "ph_tempo": [
+     96,
+     104
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 2,
+     "sex": "male",
+     "sections": [
+      {
+       "pool": [
+        "vaeph",
+        "vaeph2"
+       ],
+       "count": [
+        2,
+        5
+       ],
+       "share": 1.0,
+       "gap_ms": [
+        260,
+        460
+       ],
+       "no_adjacent_repeat": false
+      }
+     ]
+    },
+    {
+     "weight": 1,
+     "sex": "male",
+     "sections": [
+      {
+       "pool": [
+        "rab"
+       ],
+       "count": [
+        4,
+        10
+       ],
+       "share": 1.0,
+       "gap_ms": [
+        40,
+        90
+       ],
+       "no_adjacent_repeat": false
+      }
+     ]
+    },
+    {
+     "weight": 1,
+     "sex": "female",
+     "sections": [
+      {
+       "pool": [
+        "kvaeh"
+       ],
+       "count": [
+        1,
+        2
+       ],
+       "share": 0.35,
+       "gap_ms": [
+        90,
+        140
+       ],
+       "no_adjacent_repeat": false
+      },
+      {
+       "pool": [
+        "kvah",
+        "kvah2"
+       ],
+       "count": [
+        3,
+        6
+       ],
+       "share": 0.65,
+       "gap_ms": [
+        90,
+        150
+       ],
+       "no_adjacent_repeat": false
+      }
+     ]
+    }
+   ],
+   "overrides": []
+  }
+ }
+}

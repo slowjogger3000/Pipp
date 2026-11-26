@@ -1,0 +1,127 @@
+{
+ "_note": "Field guide text for the common snipe, both languages. Facts from birds.md (SNL, checked 2026-11-26). Norwegian wording is mine, Eirik to check. calendar: one letter per month from January, y yes, n no, ? not known.",
+ "xeno_canto": "https://xeno-canto.org/species/gallinago-gallinago",
+ "facts": {
+  "length": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "broods": {
+   "en": "Usually 4 eggs, laid in May; the female sits about 20 days",
+   "no": "Vanligvis 4 egg, lagt i mai; hunnen ruger i rundt 20 dager",
+   "verified": true
+  },
+  "range": {
+   "en": "The whole country, coast to mountains; 50 000 to 75 000 pairs (2015)",
+   "no": "Hele landet, fra kysten til fjellet; 50 000 til 75 000 par (2015)",
+   "verified": true
+  },
+  "habitat": {
+   "en": "Bogs and other wetlands",
+   "no": "Myr og annen våtmark",
+   "verified": true
+  },
+  "food": {
+   "en": "Insects, spiders, earthworms and crustaceans, probed from the ground",
+   "no": "Insekter, edderkopper, meitemark og krepsdyr, som den sonderer etter i bakken",
+   "verified": true
+  },
+  "status": {
+   "en": "LC, least concern, Norwegian red list",
+   "no": "LC, livskraftig, norsk rødliste",
+   "verified": true
+  },
+  "nest": {
+   "en": "In a grass tussock near water",
+   "no": "I en gresstue nær vann",
+   "verified": true
+  }
+ },
+ "sings": {
+  "male": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "female": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "song_notes": {
+  "en": "In spring and early summer it makes a display flight with an unmistakable bleating sound, mostly at dusk and at night. The sound comes from the outer tail feathers vibrating as the bird dives steeply. From the ground a high, sharp “tikk-a, tikk-a, tikk-a”; flushed close, a hoarse, powerful “tsjæt”, then a high zigzag flight. Old names for the bleating include «mekregauk» and «himmelhest».",
+  "no": "Om våren og forsommeren har den et fluktspill med en umiskjennelig mekrende lyd, mest i skumringen og om natta. Lyden kommer fra de ytterste stjertfjærene, som vibrerer når fuglen stuper bratt. Fra bakken et høyt, skarpt «tikk-a, tikk-a, tikk-a»; skremt opp på kort hold et hest og kraftig «tsjæt», så en høy sikksakkflukt. Gamle navn på mekringen er blant annet «mekregauk» og «himmelhest».",
+  "verified": true
+ },
+ "mnemonic": {
+  "en": "",
+  "no": "",
+  "verified": false
+ },
+ "types": {
+  "song": {
+   "en": "Bleating from the tail feathers in a steep dive, dusk and night; from the ground “tikk-a, tikk-a”.",
+   "no": "Mekring fra stjertfjærene i bratt stup, skumring og natt; fra bakken «tikk-a, tikk-a».",
+   "verified": true
+  },
+  "call": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "alarm": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "flight": {
+   "en": "Flushed close: a hoarse, powerful “tsjæt”.",
+   "no": "Skremt opp på kort hold: et hest, kraftig «tsjæt».",
+   "verified": true
+  }
+ },
+ "parts": {
+  "bleat": {
+   "en": "BLEATING",
+   "no": "MEKRING",
+   "verified": true
+  },
+  "tikka": {
+   "en": "TIKK-A",
+   "no": "TIKK-A",
+   "verified": true
+  }
+ },
+ "calendar": {
+  "present": "???yyyyyyy??",
+  "sings": "???yyy??????",
+  "note": {
+   "en": "Returns April to May, leaves August to October; some winter on the south coast. Bleating in spring and early summer. [TO VERIFY] which months.",
+   "no": "Kommer april til mai, drar august til oktober; noen overvintrer på sørlandskysten. Mekring om våren og forsommeren. [TO VERIFY] hvilke måneder.",
+   "verified": true
+  }
+ },
+ "lookalikes": [
+  {
+   "name": {
+    "en": "Great snipe",
+    "no": "Dobbeltbekkasin"
+   },
+   "text": {
+    "en": "Hard to tell apart by plumage, but very different in sound and behaviour in the breeding season.",
+    "no": "Vanskelig å skille på utseendet, men svært ulik i lyd og atferd i hekketiden.",
+    "verified": true
+   }
+  },
+  {
+   "id": "rugde",
+   "text": {
+    "en": "The woodcock also has a very long, straight bill.",
+    "no": "Rugda har også svært langt, rett nebb.",
+    "verified": true
+   }
+  }
+ ]
+}

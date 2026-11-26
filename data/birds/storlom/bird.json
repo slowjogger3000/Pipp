@@ -1,0 +1,107 @@
+{
+ "_note": "Field guide text for the black-throated diver, both languages. SNL describes no sounds, so every sound text is [TO VERIFY]. Facts from birds.md (SNL, checked 2026-11-26). Norwegian wording is mine, Eirik to check. calendar: one letter per month from January, y yes, n no, ? not known.",
+ "xeno_canto": "https://xeno-canto.org/species/gavia-arctica",
+ "facts": {
+  "length": {
+   "en": "Up to 68 cm, 2,5 to 3,5 kg",
+   "no": "Opptil 68 cm, 2,5 til 3,5 kg",
+   "verified": true
+  },
+  "broods": {
+   "en": "2 eggs, both sit 28 to 30 days",
+   "no": "2 egg, begge ruger i 28 til 30 dager",
+   "verified": true
+  },
+  "range": {
+   "en": "Most of the country",
+   "no": "Det meste av landet",
+   "verified": true
+  },
+  "habitat": {
+   "en": "Fresh water",
+   "no": "Ferskvann",
+   "verified": true
+  },
+  "food": {
+   "en": "Fish",
+   "no": "Fisk",
+   "verified": true
+  },
+  "status": {
+   "en": "LC, least concern, Norwegian red list",
+   "no": "LC, livskraftig, norsk rødliste",
+   "verified": true
+  },
+  "nest": {
+   "en": "At the water's edge, often on a small islet",
+   "no": "Ved vannkanten, ofte på en liten holme",
+   "verified": true
+  }
+ },
+ "sings": {
+  "male": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "female": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "song_notes": {
+  "en": "[TO VERIFY] SNL describes no sounds of the black-throated diver. Tipp plays a long wail here as a stand-in. Grey-black above with white cross stripes and spots, and a black throat patch.",
+  "no": "[TO VERIFY] SNL beskriver ingen lyder fra storlommen. Tipp spiller et langt hyl her som stedfortreder. Gråsvart overside med hvite tverrstriper og flekker, og svart strupeflekk.",
+  "verified": true
+ },
+ "mnemonic": {
+  "en": "",
+  "no": "",
+  "verified": false
+ },
+ "types": {
+  "song": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "call": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "alarm": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "flight": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "calendar": {
+  "present": "yyyyyyyyyyyy",
+  "sings": "????????????",
+  "note": {
+   "en": "Partial migrant: some winter on the coast of southern Norway, others go south to Biscay.",
+   "no": "Delvis trekkfugl: noen overvintrer langs kysten av Sør-Norge, andre trekker sør til Biscaya.",
+   "verified": true
+  }
+ },
+ "lookalikes": [
+  {
+   "name": {
+    "en": "Red-throated diver",
+    "no": "Smålom"
+   },
+   "text": {
+    "en": "The black-throated diver is told by its black throat patch.",
+    "no": "Storlommen kjennes på den svarte strupeflekken.",
+    "verified": true
+   }
+  }
+ ]
+}

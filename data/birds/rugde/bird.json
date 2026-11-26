@@ -105,13 +105,10 @@
  },
  "lookalikes": [
   {
-   "name": {
-    "en": "Snipes",
-    "no": "Bekkasiner"
-   },
+   "id": "enkeltbekkasin",
    "text": {
-    "en": "Also have a very long, straight bill.",
-    "no": "Har også svært langt, rett nebb.",
+    "en": "Snipes also have a very long, straight bill.",
+    "no": "Bekkasiner har også svært langt, rett nebb.",
     "verified": true
    }
   }
