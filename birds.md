@@ -324,9 +324,29 @@ Sounds: none of SNL, Norwegian Wikipedia, BirdID or the Fuglevennen and BirdLife
 
 To verify: all calls, length, wingspan, weight, head pattern of adults in winter, eye colour.
 
+### Tjeld (folder `tjeld`), snl.no/tjeld, Jan Eivind Østnes, updated 2026-11-08
+
+| Field | Value |
+|---|---|
+| Length, weight | 40 to 45 cm, 450 to 650 g. One of our very largest waders |
+| Appearance | Back, head and neck black, sharp against a chalk-white underside. Winter plumage much the same, with a narrow white collar. Broad white wing bars in flight |
+| Bill, eye, legs | Orange-red bill, strong, straight, 7 to 9 cm, wedge-shaped for opening shells. Red eyes. Reddish-pink, fairly short legs |
+| Sex, young | No difference stated; no juvenile description |
+| Sound | A lively bird that calls often. The flight call is loud, penetrating and easy to recognise. Very vocal when mating |
+| Habitat | Shores with soft bottom outside the breeding season. Breeds along the whole coast; in Trøndelag and parts of Østlandet also inland by rivers, lakes and farmland |
+| Population | 50 000 to 100 000 pairs (Norsk ornitologisk forening) |
+| Food | Mussels (blue mussel, cockle, sand gaper), snails, bristle worms, crustaceans; inland mostly earthworms and insects |
+| Nest | A shallow scrape on sand or gravel, often lined with small stones or shell; sometimes in odd places such as flower beds |
+| Eggs | Usually three, hen's-egg sized, yellow-brown with dark spots, laid in the second half of May. Both parents raise the young, which fly after about four weeks |
+| Pairs, age | Usually monogamous, often back at the same nest site year after year. Oldest ringed bird 46 years |
+| Migration | Short-distance migrant, wintering mainly from Denmark to France and in eastern England, the Wadden Sea most of all; some on the coast north to Lofoten; 150 to 200 every winter in the inner Trondheimsfjord. Back in late February in the south, March to mid-April further north; leaves mainly in August and September |
+| Status | NT, near threatened, in Norway and globally |
+
+To verify: how the flight call and other calls sound, transcriptions, piping display, alarm, wingspan, the juvenile, incubation time.
+
 ## All other birds
 
-Nothing is verified for the 6 other birds outside the garden group. Collect facts per bird with the same fields as the blackbird table before writing `bird.json`.
+Nothing is verified for the 5 other birds outside the garden group. Collect facts per bird with the same fields as the blackbird table before writing `bird.json`.
 
 ## Dawn chorus
 

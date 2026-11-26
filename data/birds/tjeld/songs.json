@@ -1,0 +1,274 @@
+{
+ "_note": "Oystercatcher, M10. Verified (birds.md, SNL): a lively bird that calls often; the flight call is loud, penetrating and easy to recognise; very vocal when mating. No source gives a transcription or how any call is built, so the shapes are sound design guesses: the flight call as loud, piercing two-part 'kliip' notes in series; the song slot (needed by the quiz and Play) as a placeholder piping series that runs from separate notes into a fast trill.",
+ "syllables": {
+  "kliip": {
+   "dur_ms": 230,
+   "pitch": [
+    [
+     0,
+     2700
+    ],
+    [
+     0.25,
+     3500
+    ],
+    [
+     0.7,
+     3300
+    ],
+    [
+     1,
+     2900
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.06,
+     1
+    ],
+    [
+     0.6,
+     0.85
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.95
+  },
+  "kliip2": {
+   "dur_ms": 210,
+   "pitch": [
+    [
+     0,
+     2800
+    ],
+    [
+     0.3,
+     3600
+    ],
+    [
+     1,
+     3100
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.06,
+     1
+    ],
+    [
+     0.6,
+     0.85
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.95
+  },
+  "kip": {
+   "dur_ms": 80,
+   "pitch": [
+    [
+     0,
+     3200
+    ],
+    [
+     0.4,
+     3500
+    ],
+    [
+     1,
+     3000
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.06,
+     1
+    ],
+    [
+     0.6,
+     0.85
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.95
+  },
+  "pi": {
+   "dur_ms": 70,
+   "pitch": [
+    [
+     0,
+     3300
+    ],
+    [
+     1,
+     3000
+    ]
+   ],
+   "amp": [
+    [
+     0,
+     0
+    ],
+    [
+     0.06,
+     1
+    ],
+    [
+     0.6,
+     0.85
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "gain": 0.9
+  }
+ },
+ "types": {
+  "song": {
+   "pause_s": [
+    3.0,
+    8.0
+   ],
+   "length_s": [
+    2.5,
+    5.0
+   ],
+   "transpose_st": 0.8,
+   "avoid_repeat": false,
+   "auto": {
+    "vo_pitch": [
+     0.98,
+     1.02
+    ],
+    "vo_breath": [
+     5,
+     12
+    ],
+    "vo_tension": [
+     34,
+     48
+    ],
+    "vo_rough": [
+     3,
+     9
+    ],
+    "ph_tempo": [
+     96,
+     104
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 1,
+     "sections": [
+      {
+       "pool": [
+        "kip"
+       ],
+       "count": [
+        3,
+        6
+       ],
+       "share": 0.3,
+       "gap_ms": [
+        120,
+        200
+       ]
+      },
+      {
+       "pool": [
+        "pi"
+       ],
+       "count": [
+        10,
+        24
+       ],
+       "share": 0.7,
+       "gap_ms": [
+        20,
+        40
+       ]
+      }
+     ]
+    }
+   ],
+   "overrides": []
+  },
+  "flight": {
+   "pause_s": [
+    1.0,
+    4.0
+   ],
+   "length_s": [
+    0.4,
+    2.5
+   ],
+   "avoid_repeat": false,
+   "auto": {
+    "vo_pitch": [
+     0.98,
+     1.02
+    ],
+    "vo_breath": [
+     5,
+     12
+    ],
+    "vo_tension": [
+     38,
+     52
+    ],
+    "vo_rough": [
+     3,
+     9
+    ]
+   },
+   "phrases": [
+    {
+     "weight": 1,
+     "sections": [
+      {
+       "pool": [
+        "kliip",
+        "kliip2"
+       ],
+       "count": [
+        1,
+        5
+       ],
+       "share": 1.0,
+       "gap_ms": [
+        180,
+        320
+       ],
+       "no_adjacent_repeat": false
+      }
+     ]
+    }
+   ],
+   "overrides": []
+  }
+ }
+}

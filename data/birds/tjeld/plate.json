@@ -1,0 +1,233 @@
+{
+ "_note": "Oystercatcher ink plate in a 280x240 box, drawn in M10, not from a design: standing on the shore, black head, neck and back (ink), white underside, long straight orange-red bill, red eye, fairly short pink legs (birds.md, SNL). No sex difference or juvenile is described, so female and juvenile are drawn the same and not verified.",
+ "box": [
+  280,
+  240
+ ],
+ "clips": {
+  "body": "M192 78 C192 64 180 56 168 58 C156 60 150 70 150 80 C124 86 96 98 74 114 C100 130 126 144 150 148 C172 152 186 140 188 122 C190 106 192 92 192 78 Z",
+  "wing": "M160 96 C134 98 104 108 74 114 C54 120 40 124 30 128 C52 132 86 130 114 124 C140 118 156 108 160 96 Z"
+ },
+ "hatch": {
+  "body": {
+   "rect": [
+    72,
+    54,
+    194,
+    154
+   ],
+   "up": true,
+   "clip": "body"
+  },
+  "wing": {
+   "rect": [
+    28,
+    94,
+    162,
+    134
+   ],
+   "up": false,
+   "clip": "wing"
+  }
+ },
+ "pivots": {
+  "upper": {
+   "at": [
+    190,
+    74
+   ],
+   "deg": -8
+  },
+  "lower": {
+   "at": [
+    190,
+    78
+   ],
+   "deg": 6
+  },
+  "tail": {
+   "at": [
+    76,
+    116
+   ],
+   "deg": -3
+  }
+ },
+ "layers": [
+  {
+   "path": "M14 214 C70 204 150 200 268 206",
+   "stroke": 2.5
+  },
+  {
+   "path": "M40 212 q8 -4 16 0 M180 206 q8 -4 16 0 M220 208 q6 -3 12 0",
+   "stroke": 1
+  },
+  {
+   "path": "M138 146 L136 202 M156 146 L158 202 M126 203 L136 202 L146 204 M148 203 L158 202 L168 204",
+   "stroke": 2
+  },
+  {
+   "path": "M76 110 L48 116 L52 124 L80 122 Z",
+   "fill": "ink",
+   "stroke": 1.5,
+   "part": "tail"
+  },
+  {
+   "clip": "body",
+   "fill": "face",
+   "stroke": 1.5
+  },
+  {
+   "path": "M192 78 C192 64 180 56 168 58 C156 60 150 70 150 80 C124 86 96 98 74 114 C96 112 128 106 156 104 C176 104 190 100 192 92 Z",
+   "fill": "ink",
+   "within": "body"
+  },
+  {
+   "clip": "wing",
+   "fill": "ink"
+  },
+  {
+   "path": "M60 120 C80 118 104 116 124 112",
+   "stroke": 1.5
+  },
+  {
+   "clip": "body",
+   "stroke": 1.5
+  },
+  {
+   "eye": [
+    178,
+    70
+   ],
+   "pupil": 2.4
+  },
+  {
+   "path": "M190 72 L240 76 L240 79 L191 78 Z",
+   "fill": "bill",
+   "stroke": 1.5,
+   "part": "upper"
+  },
+  {
+   "path": "M191 78 L240 79 L238 82 L190 83 Z",
+   "fill": "bill",
+   "stroke": 1.5,
+   "part": "lower"
+  },
+  {
+   "path": "M248 60 A16 16 0 0 1 248 92 M255 52 A26 26 0 0 1 255 100",
+   "stroke": 1.5,
+   "part": "arcs"
+  }
+ ],
+ "variants": {
+  "male": {
+   "body_pitch": 0,
+   "wing_pitch": 0,
+   "eye_ring": 3.6,
+   "bill": "face"
+  },
+  "female": {
+   "body_pitch": 0,
+   "wing_pitch": 0,
+   "eye_ring": 3.6,
+   "bill": "face"
+  },
+  "juvenile": {
+   "body_pitch": 0,
+   "wing_pitch": 0,
+   "eye_ring": 3.6,
+   "bill": "face"
+  }
+ },
+ "callouts": [
+  {
+   "id": "bill",
+   "leader": "M222 76 L222 34",
+   "at": [
+    222,
+    21
+   ],
+   "align": "centre",
+   "male": {
+    "en": "ORANGE-RED, 7 TO 9 CM",
+    "no": "ORANSJERØDT, 7 TIL 9 CM",
+    "verified": true
+   },
+   "female": {
+    "en": "ORANGE-RED, 7 TO 9 CM",
+    "no": "ORANSJERØDT, 7 TIL 9 CM",
+    "verified": false
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  },
+  {
+   "id": "plumage",
+   "leader": "M120 100 L84 70",
+   "at": [
+    80,
+    64
+   ],
+   "align": "right",
+   "male": {
+    "en": "BLACK ABOVE",
+    "no": "SVART OVERSIDE",
+    "verified": true
+   },
+   "female": {
+    "en": "BLACK ABOVE",
+    "no": "SVART OVERSIDE",
+    "verified": false
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  },
+  {
+   "id": "breast",
+   "leader": "M170 130 L232 152",
+   "at": [
+    276,
+    160
+   ],
+   "align": "right",
+   "male": {
+    "en": "CHALK-WHITE",
+    "no": "KRITHVIT",
+    "verified": true
+   },
+   "female": {
+    "en": "CHALK-WHITE",
+    "no": "KRITHVIT",
+    "verified": false
+   },
+   "juvenile": {
+    "en": "",
+    "no": "",
+    "verified": false
+   }
+  }
+ ],
+ "captions": {
+  "male": {
+   "en": "Adult on the shore. Beak and tail follow the sound.",
+   "no": "Voksen i fjæra. Nebb og hale følger lyden.",
+   "verified": true
+  },
+  "female": {
+   "en": "Female. No difference from the male is described.",
+   "no": "Hunn. Ingen forskjell fra hannen er beskrevet.",
+   "verified": false
+  },
+  "juvenile": {
+   "en": "Juvenile. Drawn like the adults.",
+   "no": "Ungfugl. Tegnet som de voksne.",
+   "verified": false
+  }
+ }
+}

@@ -1,0 +1,95 @@
+{
+ "_note": "Field guide text for the oystercatcher, both languages. Facts from birds.md (SNL, checked 2026-11-26). Norwegian wording is mine, Eirik to check. calendar: one letter per month from January, y yes, n no, ? not known.",
+ "xeno_canto": "https://xeno-canto.org/species/haematopus-ostralegus",
+ "facts": {
+  "length": {
+   "en": "40 to 45 cm, 450 to 650 g",
+   "no": "40 til 45 cm, 450 til 650 g",
+   "verified": true
+  },
+  "broods": {
+   "en": "Usually 3 eggs, second half of May",
+   "no": "Vanligvis 3 egg, siste halvdel av mai",
+   "verified": true
+  },
+  "range": {
+   "en": "The whole coast, inland in Trøndelag and Østlandet",
+   "no": "Hele kysten, i innlandet i Trøndelag og Østlandet",
+   "verified": true
+  },
+  "habitat": {
+   "en": "Soft shores; rivers, lakes and farmland inland",
+   "no": "Bløtbunnsfjærer; elver, innsjøer og kulturlandskap",
+   "verified": true
+  },
+  "food": {
+   "en": "Mussels, snails, worms, crustaceans; inland earthworms",
+   "no": "Skjell, snegler, mark, krepsdyr; meitemark i innlandet",
+   "verified": true
+  },
+  "status": {
+   "en": "NT, near threatened, Norwegian red list",
+   "no": "NT, nær truet, norsk rødliste",
+   "verified": true
+  },
+  "nest": {
+   "en": "Scrape on sand or gravel, lined with stones or shell",
+   "no": "Grop i sand eller grus, foret med stein eller skjell",
+   "verified": true
+  }
+ },
+ "sings": {
+  "male": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "female": {
+   "en": "",
+   "no": "",
+   "verified": false
+  }
+ },
+ "song_notes": {
+  "en": "A lively bird that calls often, and very vocal when mating. The flight call is loud, penetrating and easy to recognise. [TO VERIFY] how the calls sound; Tipp's shapes are guesses.",
+  "no": "En livlig fugl som lager mye lyd, og svært lydytrende under parring. Fluktlyden er høylytt, gjennomtrengende og lett å kjenne igjen. [TO VERIFY] hvordan lydene låter; Tipps former er gjetninger.",
+  "verified": true
+ },
+ "mnemonic": {
+  "en": "",
+  "no": "",
+  "verified": false
+ },
+ "types": {
+  "song": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "call": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "alarm": {
+   "en": "",
+   "no": "",
+   "verified": false
+  },
+  "flight": {
+   "en": "Loud, penetrating and easy to recognise.",
+   "no": "Høylytt, gjennomtrengende og lett å kjenne igjen.",
+   "verified": true
+  }
+ },
+ "calendar": {
+  "present": "?yyyyyyyyy??",
+  "sings": "????????????",
+  "note": {
+   "en": "Short-distance migrant. Back in late February in the south, March to mid-April further north; leaves mainly in August and September. Some winter on the coast north to Lofoten, and 150 to 200 every winter in the inner Trondheimsfjord.",
+   "no": "Kortdistansetrekker. Tilbake i slutten av februar i sør, mars til midten av april lenger nord; drar mest i august og september. Noen overvintrer langs kysten nord til Lofoten, og 150 til 200 hver vinter i indre Trondheimsfjord.",
+   "verified": true
+  }
+ },
+ "lookalikes": []
+}
