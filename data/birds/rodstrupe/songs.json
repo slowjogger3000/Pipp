@@ -1,0 +1,77 @@
+{
+  "_note": "Robin, M3. Shapes, pitches, timings and the call are sound design guesses, not verified, not tuned against recordings. Verified (birds.md, SNL): the song is very beautiful and compared to a trickling brook; sings early at dawn and in the evening. Design: each phrase opens with 1 or 2 thin high notes, then a quick run of varied notes jumping between high and low, sometimes ending in a short rattle or a sizzling note. birds.md has no call description or transcription for the robin, so the call type (short 'tick' notes, a thin high drawn-out note) is a pure placeholder to check.",
+
+  "syllables": {
+    "h1": { "dur_ms": 220, "pitch": [[0, 7200], [1, 7000]], "amp": [[0, 0], [0.2, 0.9], [0.7, 1], [1, 0]], "gain": 0.45 },
+    "h2": { "dur_ms": 180, "pitch": [[0, 6000], [0.8, 7500], [1, 7600]], "amp": [[0, 0], [0.25, 0.8], [0.7, 1], [1, 0]], "gain": 0.45 },
+    "h3": { "dur_ms": 260, "pitch": [[0, 7900], [1, 7300]], "amp": [[0, 0], [0.15, 1], [0.6, 0.8], [1, 0]], "gain": 0.42 },
+    "h4": { "dur_ms": 200, "pitch": [[0, 5400], [1, 5300]], "amp": [[0, 0], [0.2, 0.9], [0.7, 1], [1, 0]], "gain": 0.5, "trill": { "hz": 9, "depth_st": 0.4, "am": 0.1 } },
+
+    "m1": { "dur_ms": 60, "pitch": [[0, 5200], [1, 3200]], "amp": [[0, 0], [0.15, 1], [0.6, 0.8], [1, 0]], "gain": 0.6 },
+    "m2": { "dur_ms": 50, "pitch": [[0, 3000], [1, 5800]], "amp": [[0, 0], [0.3, 1], [1, 0]], "gain": 0.6 },
+    "m3": { "dur_ms": 80, "pitch": [[0, 4400], [0.5, 6200], [1, 3800]], "amp": [[0, 0], [0.2, 1], [0.7, 0.8], [1, 0]], "gain": 0.6 },
+    "m4": { "dur_ms": 90, "pitch": [[0, 3500], [1, 3300]], "amp": [[0, 0], [0.15, 1], [0.8, 0.7], [1, 0]], "gain": 0.6, "trill": { "hz": 40, "depth_st": 2, "am": 0.3 } },
+    "m5": { "dur_ms": 45, "pitch": [[0, 6800], [1, 4800]], "amp": [[0, 0], [0.1, 1], [1, 0]], "gain": 0.5 },
+    "m6": { "dur_ms": 70, "pitch": [[0, 2600], [0.6, 3200], [1, 3100]], "amp": [[0, 0], [0.2, 1], [0.7, 0.9], [1, 0]], "gain": 0.65 },
+    "m7": { "dur_ms": 110, "pitch": [[0, 5600], [1, 5700]], "amp": [[0, 0], [0.15, 0.9], [0.7, 1], [1, 0]], "gain": 0.5, "trill": { "hz": 25, "depth_st": 1, "am": 0.2 } },
+    "m8": { "dur_ms": 65, "pitch": [[0, 4000], [0.3, 4800], [1, 2900]], "amp": [[0, 0], [0.2, 1], [0.6, 0.7], [1, 0]], "gain": 0.6 },
+
+    "e1": { "dur_ms": 25, "pitch": [[0, 4800], [1, 3800]], "amp": [[0, 0], [0.2, 1], [1, 0]], "gain": 0.55 },
+    "e2": { "dur_ms": 140, "pitch": [[0, 7600], [1, 6600]], "amp": [[0, 0], [0.15, 1], [0.6, 0.7], [1, 0]], "gain": 0.4, "breath": 10, "trill": { "hz": 60, "depth_st": 3, "am": 0.5 } },
+
+    "tick": { "dur_ms": 18, "pitch": [[0, 6500], [1, 4800]], "amp": [[0, 0], [0.15, 1], [1, 0]], "gain": 0.55, "breath": 20, "rough": 15 },
+    "tsii": { "dur_ms": 320, "pitch": [[0, 8000], [1, 7700]], "amp": [[0, 0], [0.3, 1], [0.7, 0.9], [1, 0]], "gain": 0.3, "breath": 15 }
+  },
+
+  "types": {
+    "song": {
+      "pause_s": [2.5, 6.0],
+      "length_s": [1.6, 3.0],
+      "transpose_st": 2.0,
+      "avoid_repeat": true,
+      "auto": {
+        "vo_pitch": [0.97, 1.03],
+        "vo_breath": [4, 10],
+        "vo_tension": [24, 36],
+        "vo_rough": [2, 6],
+        "ph_tempo": [92, 108]
+      },
+      "phrases": [
+        { "weight": 3, "sections": [
+          { "pool": ["h1", "h2", "h3", "h4"], "count": [1, 2], "share": 0.25, "gap_ms": [60, 140] },
+          { "pool": ["m1", "m2", "m3", "m4", "m5", "m6", "m7", "m8"], "count": [4, 14], "share": 0.6, "gap_ms": [12, 45], "lead_gap_ms": [60, 120] },
+          { "pool": ["e1"], "count": [3, 8], "share": 0.15, "chance": 0.5, "gap_ms": [10, 16], "lead_gap_ms": [30, 60], "no_adjacent_repeat": false }
+        ] },
+        { "weight": 2, "sections": [
+          { "pool": ["h1", "h2", "h3", "h4"], "count": [1, 1], "share": 0.15, "gap_ms": [60, 140] },
+          { "pool": ["m1", "m2", "m3", "m4", "m5", "m6", "m7", "m8"], "count": [6, 16], "share": 0.75, "gap_ms": [12, 45], "lead_gap_ms": [50, 110] },
+          { "pool": ["e2"], "count": [1, 1], "share": 0.1, "chance": 0.6, "gap_ms": [0, 0], "lead_gap_ms": [30, 70] }
+        ] },
+        { "weight": 1, "sections": [
+          { "pool": ["m1", "m2", "m3", "m4", "m5", "m6", "m7", "m8"], "count": [3, 9], "share": 0.7, "gap_ms": [12, 45] },
+          { "pool": ["h1", "h2", "h3"], "count": [1, 2], "share": 0.3, "gap_ms": [60, 140], "lead_gap_ms": [60, 120] }
+        ] }
+      ],
+      "overrides": [
+        { "_note": "Sings early at dawn and in the evening (birds.md). Longer pauses by day are a design choice.", "when": { "time": "day" }, "pause_s": [5.0, 11.0] }
+      ]
+    },
+
+    "call": {
+      "pause_s": [1.5, 5.0],
+      "length_s": [0.3, 1.5],
+      "avoid_repeat": false,
+      "auto": {
+        "vo_pitch": [0.98, 1.02],
+        "vo_breath": [10, 18],
+        "vo_tension": [36, 50],
+        "vo_rough": [4, 10]
+      },
+      "phrases": [
+        { "weight": 3, "sections": [ { "pool": ["tick"], "count": [2, 6], "share": 1.0, "gap_ms": [70, 160], "no_adjacent_repeat": false } ] },
+        { "weight": 1, "sections": [ { "pool": ["tsii"], "count": [1, 1], "share": 1.0, "gap_ms": [0, 0] } ] }
+      ],
+      "overrides": []
+    }
+  }
+}
