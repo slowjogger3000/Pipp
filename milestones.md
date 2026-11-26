@@ -149,6 +149,8 @@ Checks: every existing check still passes with 50 birds (render limits, override
 
 Commit after the groundwork and after each approved batch.
 
+Done 2026-11-26: all 8 batches approved by ear by Eirik; all 50 birds have sound and data.
+
 ## Parked
 
 - **Recognition engine.** Eirik will come back to this. Do not choose one, and do not add a model file to the repo.
