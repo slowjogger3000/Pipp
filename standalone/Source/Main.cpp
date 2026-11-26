@@ -6,6 +6,8 @@
 //        [--compare <id>] [--speed 0.5|0.25] [--shift] [--draw]
 //        [--tab quiz] [--quiz-seed <n>] [--quiz-skip <n>] [--answer right|wrong] [--leave-quiz]
 //        [--tab chorus] [--chorus-start <min>] [--chorus-speed real|10x|60x|loop] [--mute-lane 1-4]
+//        [--tab collection] [--collection-dir <dir>] [--import <zip>] [--add <file,file>]
+//        [--coll-bird <id>] [--choose-row <n>] [--open-picture <n>] [--export <zip>] [--coll-compare]
 // plays for the given time, drags the knob 3 s before the end if asked,
 // saves a picture of the window and quits.
 
@@ -45,6 +47,29 @@ public:
                 content->snapshotQuiz(static_cast<std::uint32_t>(value("--quiz-seed").getLargeIntValue()), value("--quiz-skip").getIntValue(),
                                       answer == "right" ? 1 : answer == "wrong" ? -1 : 0, args.contains("--leave-quiz"));
                 content->setTab(2);
+            }
+            if (value("--tab") == "collection")
+            {
+                auto& coll = content->collectionScreen();
+                const auto cwd = juce::File::getCurrentWorkingDirectory();
+                if (const auto dir = value("--collection-dir"); dir.isNotEmpty())
+                    content->setCollectionFolder(cwd.getChildFile(dir));
+                content->setTab(5);
+                if (const auto zip = value("--import"); zip.isNotEmpty())
+                    coll.importFile(cwd.getChildFile(zip));
+                for (const auto& f : juce::StringArray::fromTokens(value("--add"), ",", ""))
+                    if (f.isNotEmpty())
+                        coll.addFile(cwd.getChildFile(f));
+                if (const auto b = value("--coll-bird"); b.isNotEmpty())
+                    coll.chooseBird(b == "all" ? juce::String() : b);
+                if (const auto row = value("--choose-row"); row.isNotEmpty())
+                    coll.chooseRow(row.getIntValue());
+                if (const auto zip = value("--export"); zip.isNotEmpty())
+                    coll.exportFile(cwd.getChildFile(zip));
+                if (args.contains("--coll-compare"))
+                    coll.compareChosen();
+                if (const auto pic = value("--open-picture"); pic.isNotEmpty())
+                    coll.openPicture(pic.getIntValue());
             }
             if (value("--tab") == "guide")
                 content->setTab(1);

@@ -106,7 +106,7 @@
  "status.stopped": "STOPPET",
  "status.keys_play": "MELLOMROM SPILL",
  "status.keys_bird": "OPP NED FUGL",
- "status.keys_screen": "F1 TIL F4 SKJERM",
+ "status.keys_screen": "F1 TIL F4, F6 SKJERM",
  "status.not_yet": "IKKE I DENNE VERSJONEN ENNÅ",
  "error.load": "KAN IKKE LASTE {bird}: {error}",
  "ap.legend_hand_any": "HOLDT FOR HÅND",
@@ -349,5 +349,8 @@
  "coll.err_read": "FILA KUNNE IKKE LESES",
  "coll.err_manifest": "INGEN MANIFEST.JSON I ZIP-FILA",
  "coll.err_format": "IKKE EN TIPP-EKSPORT",
- "coll.col_bird": "FUGL"
+ "coll.col_bird": "FUGL",
+ "coll.cannot_play_mac": "OPPTAKET KAN IKKE SPILLES",
+ "coll.cannot_show": "BILDET KAN IKKE VISES HER",
+ "coll.export_failed": "EKSPORTEN KUNNE IKKE LAGRES"
 }

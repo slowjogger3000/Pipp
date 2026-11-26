@@ -64,7 +64,7 @@ export async function importExport(file: Blob): Promise<ImportResult> {
       type: Math.max(0, kTypeIds.indexOf(str(r.type))),
       seconds: Math.max(0, Math.round(num(r.seconds, 0))),
       date: str(r.date),
-      confidence: Math.min(1, Math.max(0, num(r.confidence, 0))),
+      confidence: num(r.confidence, 0) < 0 ? -1 : Math.min(1, num(r.confidence, 0)), // -1: a file, no match
       mime: str(r.mime) || 'audio/mp4',
       audio: new Blob([audio], { type: str(r.mime) || 'audio/mp4' }),
       thumb: thumb ? pngUrl(thumb) : '',

@@ -19,7 +19,7 @@ juce_add_gui_app(Tipp
     BUNDLE_ID com.skisse.tipp
     VERSION ${PROJECT_VERSION})
 
-target_sources(Tipp PRIVATE Source/Main.cpp Source/MainComponent.cpp Source/UI/ChorusScreen.cpp Source/UI/GuideScreen.cpp Source/UI/QuizScreen.cpp)
+target_sources(Tipp PRIVATE Source/Main.cpp Source/MainComponent.cpp Source/Collection.cpp Source/UI/ChorusScreen.cpp Source/UI/CollectionScreen.cpp Source/UI/GuideScreen.cpp Source/UI/QuizScreen.cpp)
 target_include_directories(Tipp PRIVATE Source)
 
 # IBM Plex Mono and Instrument Serif (both SIL OFL), embedded when present.

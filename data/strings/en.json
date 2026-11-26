@@ -106,7 +106,7 @@
  "status.stopped": "STOPPED",
  "status.keys_play": "SPACE PLAY",
  "status.keys_bird": "UP DOWN BIRD",
- "status.keys_screen": "F1 TO F4 SCREEN",
+ "status.keys_screen": "F1 TO F4, F6 SCREEN",
  "status.not_yet": "NOT IN THIS BUILD YET",
  "error.load": "CANNOT LOAD {bird}: {error}",
  "ap.legend_hand_any": "HELD BY HAND",
@@ -349,5 +349,8 @@
  "coll.err_read": "THE FILE COULD NOT BE READ",
  "coll.err_manifest": "NO MANIFEST.JSON IN THE ZIP",
  "coll.err_format": "NOT A TIPP EXPORT",
- "coll.col_bird": "BIRD"
+ "coll.col_bird": "BIRD",
+ "coll.cannot_play_mac": "THE RECORDING CANNOT BE PLAYED",
+ "coll.cannot_show": "THIS PICTURE CANNOT BE SHOWN HERE",
+ "coll.export_failed": "THE EXPORT COULD NOT BE SAVED"
 }

@@ -224,4 +224,4 @@ The Log and Collection screens carry a short field manners note: playing song ou
 | Does the female or juvenile sound differ | Not verified for any bird |
 | Dawn chorus entry order and times | Not verified |
 | Mnemonics | None collected yet |
-| Desktop collection | Designed. Filled by importing the phone app's export (format under Storage and privacy, decided 2026-11-26). Built in the web app 2026-11-26; not built in the Mac standalone |
+| Desktop collection | Designed. Filled by importing the phone app's export (format under Storage and privacy, decided 2026-11-26). Built in the web app and the Mac standalone 2026-11-26 (the standalone keeps it in ~/Library/Application Support/Tipp/collection) |

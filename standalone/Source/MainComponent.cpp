@@ -216,8 +216,24 @@ MainComponent::MainComponent(const juce::File& dataDirectory)
     };
     chorusScreen.onChange = [this](int i) { changeLaneBird(i); };
 
+    // Collection.
+    addChildComponent(collScreen);
+    collScreen.playBird = [this] { return currentEntry() != nullptr ? currentEntry()->id : juce::String(); };
+    collScreen.onOpenPlay = [this](const juce::String& id) {
+        for (int i = 0; i < static_cast<int>(list.birds.size()); ++i)
+            if (list.birds[static_cast<std::size_t>(i)].id == id && list.birds[static_cast<std::size_t>(i)].available)
+            {
+                selectBird(i);
+                setTab(0);
+            }
+    };
+    collScreen.onSing = [this](const juce::String& id, int type) { singOnce(id, type); };
+    collScreen.onStatus = [this] { repaint(statusArea); };
+
     engine.setParam(P::indexOf(P::ap_hold), hold);
     loadIndex();
+    setCollectionFolder(juce::File::getSpecialLocation(juce::File::userApplicationDataDirectory)
+                            .getChildFile("Application Support").getChildFile("Tipp").getChildFile("collection"));
     for (int i = 0; i < static_cast<int>(list.birds.size()); ++i)
         if (list.birds[static_cast<std::size_t>(i)].id == "svarttrost")
             selectBird(i);
@@ -239,6 +255,7 @@ void MainComponent::prepareToPlay(int, double sampleRate)
 {
     engine.prepare(sampleRate);
     chorus.prepare(sampleRate);
+    filePlayer.prepare(sampleRate);
     engine.setBird(bird.get());
 }
 
@@ -249,6 +266,7 @@ void MainComponent::getNextAudioBlock(const juce::AudioSourceChannelInfo& info)
     float* right = buffer->getNumChannels() > 1 ? buffer->getWritePointer(1, info.startSample) : left;
     engine.process(left, right, info.numSamples);
     chorus.processAdd(left, right, info.numSamples); // silent unless the chorus plays
+    filePlayer.processAdd(left, right, info.numSamples); // a collection recording
 }
 
 // Data -----------------------------------------------------------------------
@@ -475,9 +493,14 @@ void MainComponent::stopCompare()
 void MainComponent::setTab(int index)
 {
     const int was = activeTab;
-    activeTab = juce::jlimit(0, 3, index);
+    activeTab = index == 4 ? was : juce::jlimit(0, 5, index); // LOG is not built
     if (was == activeTab)
         return;
+    if (was == 5)
+    {
+        collScreen.show(false);
+        oneShot.on = false;
+    }
     if (was == 2)
         leaveQuiz();
     if (was == 3)
@@ -501,6 +524,14 @@ void MainComponent::setTab(int index)
     nextBtn.setVisible(ownBird);
     quizScreen.setVisible(activeTab == 2);
     chorusScreen.setVisible(activeTab == 3);
+    collScreen.setVisible(activeTab == 5);
+    playBtn.setVisible(activeTab != 5);
+    stopBtn.setVisible(activeTab != 5);
+    if (activeTab == 5)
+    {
+        setPlaying(false); // the header has no transport here
+        collScreen.show(true);
+    }
     if (activeTab == 2)
         enterQuiz();
     if (activeTab == 3)
@@ -510,8 +541,8 @@ void MainComponent::setTab(int index)
 
 void MainComponent::mouseUp(const juce::MouseEvent& e)
 {
-    for (int i = 0; i < 4; ++i)
-        if (tabRects[static_cast<std::size_t>(i)].contains(e.getPosition()))
+    for (int i = 0; i < 6; ++i)
+        if (i != 4 && tabRects[static_cast<std::size_t>(i)].contains(e.getPosition()))
             setTab(i);
 }
 
@@ -594,6 +625,7 @@ void MainComponent::applyStrings()
     guide.applyStrings();
     quizScreen.applyStrings();
     chorusScreen.applyStrings();
+    collScreen.applyStrings();
     if (activeTab == 2)
         updateQuizView();
     sono.nowText = strings("song.now");
@@ -652,7 +684,7 @@ void MainComponent::refreshControls()
 
 const BirdEntry* MainComponent::headerEntry() const
 {
-    if (activeTab == 3)
+    if (activeTab >= 3)
         return nullptr; // several birds, no readout
     if (activeTab != 2)
         return currentEntry();
@@ -1149,6 +1181,26 @@ void MainComponent::timerCallback()
         quizScreen.sono.poll();
     }
 
+    if (activeTab == 5)
+        collScreen.poll();
+    else
+        filePlayer.poll();
+    if (oneShot.on)
+    {
+        // COMPARE WITH TIPP: stop once the phrase has been sung, or after 3 s without one.
+        const double t = juce::Time::getMillisecondCounterHiRes();
+        if (engine.phrasesStarted() != oneShot.base)
+            oneShot.seen = true;
+        if ((oneShot.seen && ! engine.singing()) || (! oneShot.seen && t > oneShot.at + 3000.0))
+        {
+            oneShot.on = false;
+            setPlaying(false);
+            apOn = oneShot.apWas;
+            sendChoice(P::ap_on, apOn ? 1 : 0);
+            refreshControls();
+        }
+    }
+
     if (compare.running())
     {
         compare.tick(engine, juce::Time::getMillisecondCounterHiRes() / 1000.0);
@@ -1216,7 +1268,7 @@ void MainComponent::timerCallback()
         // Quiz: once the mystery phrase has been sung in full.
         const bool quizReady = activeTab == 2 && quizAsks > 0u && ! engine.singing()
                             && (snapshotAnswer == 0 || quiz.answered());
-        const bool ready = snapshotDrawMode ? drawReady : activeTab == 2 ? quizReady : activeTab == 3 ? true : (snapshotKnob >= 0 || midPhrase);
+        const bool ready = snapshotDrawMode ? drawReady : activeTab == 2 ? quizReady : activeTab >= 3 ? true : (snapshotKnob >= 0 || midPhrase);
         if (elapsed >= snapshotSeconds && (ready || elapsed > snapshotSeconds + 15.0))
         {
             const auto image = createComponentSnapshot(getLocalBounds(), true, 1.0f);
@@ -1232,6 +1284,15 @@ void MainComponent::timerCallback()
 
 void MainComponent::runSnapshot(const juce::File& png, double seconds, int handKnob)
 {
+    if (activeTab == 5)
+    {
+        snapshotFile = png;
+        snapshotSeconds = seconds;
+        snapshotKnob = -1;
+        elapsed = 0.0;
+        snapshotStartMs = juce::Time::getMillisecondCounterHiRes();
+        return;
+    }
     if (activeTab == 3)
     {
         // Chorus: from the given minute, playing, a lane muted if asked.
@@ -1278,10 +1339,21 @@ bool MainComponent::keyPressed(const juce::KeyPress& key)
         setTab(key == juce::KeyPress::F1Key ? 0 : key == juce::KeyPress::F2Key ? 1 : 2);
         return true;
     }
-    if (key == juce::KeyPress::F4Key)
+    if (key == juce::KeyPress::F4Key || key == juce::KeyPress::F6Key)
     {
-        setTab(3);
+        setTab(key == juce::KeyPress::F4Key ? 3 : 5);
         return true;
+    }
+    if (activeTab == 5)
+    {
+        if (collScreen.viewerKey(key))
+            return true;
+        if (key == juce::KeyPress::upKey || key == juce::KeyPress::downKey)
+        {
+            collScreen.step(key == juce::KeyPress::upKey ? -1 : 1);
+            return true;
+        }
+        return false;
     }
     if (activeTab == 3)
     {
@@ -1378,6 +1450,7 @@ void MainComponent::resized()
     guide.setBounds(bodyArea);
     quizScreen.setBounds(bodyArea.withX(headerArea.getX()).withWidth(headerArea.getWidth()));
     chorusScreen.setBounds(quizScreen.getBounds());
+    collScreen.setBounds(quizScreen.getBounds());
 
     // Tabs: widths follow their labels.
     {
@@ -1621,6 +1694,8 @@ void MainComponent::paintHeader(juce::Graphics& g)
     }
 
     draw::fieldLabel(g, langLabelArea, strings("header.language"));
+    if (activeTab == 5)
+        return; // the collection's header has no OUT (DeskCollection.dc.html)
     draw::fieldLabel(g, outLabelArea, strings("header.out"));
 
     // Output level and meter.
@@ -1662,8 +1737,8 @@ void MainComponent::paintTabs(juce::Graphics& g)
         const juce::Rectangle<int> tab(x, tabsArea.getBottom() - 1 - h + (active ? 1 : 0), w, h);
         g.setColour(active ? colour::ground : colour::panel);
         g.fillRect(tab);
-        if (i > 3)
-            draw::hatch(g, tab); // Play, Field guide, Quiz and Chorus are built
+        if (i == 4)
+            draw::hatch(g, tab); // LOG is not built in the standalone
         g.setColour(colour::ink);
         g.fillRect(tab.getX(), tab.getY(), tab.getWidth(), 1);
         g.fillRect(tab.getX(), tab.getY(), 1, tab.getHeight() - (active ? 1 : 0));
@@ -1862,6 +1937,21 @@ void MainComponent::paintStatus(juce::Graphics& g)
     const auto f = mono(10.0f, 500, 0.06f);
     g.setFont(f);
     auto r = statusArea.withTrimmedTop(1).reduced(12, 0);
+    if (activeTab == 5)
+    {
+        const auto state = strings("tab.collection");
+        g.drawText(state, r.removeFromLeft(textW(f, state) + 2), juce::Justification::centredLeft, false);
+        r.removeFromLeft(16);
+        g.setColour(colour::inkSoft);
+        for (const char* k : { "status.keys_screen", "status.keys_bird" })
+        {
+            const auto t = strings(k);
+            g.drawText(t, r.removeFromRight(textW(f, t) + 2), juce::Justification::centredRight, false);
+            r.removeFromRight(16);
+        }
+        g.drawText(loadError.isNotEmpty() ? loadError : collScreen.statusText(), r, juce::Justification::centredLeft, false);
+        return;
+    }
     if (activeTab == 3)
     {
         const auto state = strings(chorusPlaying ? "status.playing" : "status.stopped");
@@ -1917,5 +2007,39 @@ void MainComponent::paintStatus(juce::Graphics& g)
                 summary = strings.format("status.comparing", { { "a", Strings::upper(currentEntry()->name(strings.norwegian())) },
                                                                 { "b", Strings::upper(b.name(strings.norwegian())) } });
     g.drawText(loadError.isNotEmpty() ? loadError : summary, r, juce::Justification::centredLeft, false);
+}
+
+// Collection -----------------------------------------------------------------
+
+void MainComponent::setCollectionFolder(const juce::File& folder)
+{
+    collScreen.setCollection(nullptr);
+    collection = std::make_unique<Collection>(folder, [this](const juce::String& id) {
+        return std::any_of(list.birds.begin(), list.birds.end(), [&id](const BirdEntry& b) { return b.id == id; });
+    });
+    collScreen.setCollection(collection.get());
+}
+
+// The bird sings one phrase of the type with autoplay held off, then stops
+// (COMPARE WITH TIPP). The timer ends it.
+void MainComponent::singOnce(const juce::String& id, int type)
+{
+    for (int i = 0; i < static_cast<int>(list.birds.size()); ++i)
+        if (list.birds[static_cast<std::size_t>(i)].id == id && list.birds[static_cast<std::size_t>(i)].available)
+        {
+            if (currentEntry() == nullptr || currentEntry()->id != id)
+                selectBird(i);
+            if (typeAvailable(type))
+                setSongType(type);
+            oneShot = {};
+            oneShot.apWas = apOn;
+            oneShot.on = true;
+            oneShot.base = engine.phrasesStarted();
+            oneShot.at = juce::Time::getMillisecondCounterHiRes();
+            sendChoice(P::ap_on, 0);
+            setPlaying(true);
+            engine.trigger(P::indexOf(P::ap_sing_once));
+            return;
+        }
 }
 } // namespace tipp::ui

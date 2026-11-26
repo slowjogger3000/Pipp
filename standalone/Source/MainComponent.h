@@ -7,6 +7,7 @@
 
 #include "UI/BirdList.h"
 #include "UI/ChorusScreen.h"
+#include "UI/CollectionScreen.h"
 #include "UI/GuideScreen.h"
 #include "UI/Knob.h"
 #include "UI/Plate.h"
@@ -14,6 +15,9 @@
 #include "UI/Sonogram.h"
 #include "UI/Strings.h"
 #include "UI/Widgets.h"
+
+#include "Collection.h"
+#include "FilePlayer.h"
 
 #include "BirdData.h"
 #include "Chorus.h"
@@ -46,7 +50,7 @@ public:
     // Test hook: play for `seconds`, optionally drag a knob near the end,
     // save a snapshot and quit.
     void runSnapshot(const juce::File& png, double seconds, int handKnob);
-    // 0 Play, 1 Field guide, 2 Quiz, 3 Chorus. Log and Collection are not built yet.
+    // 0 Play, 1 Field guide, 2 Quiz, 3 Chorus, 5 Collection. Log (4) is not built yet.
     void setTab(int index);
     // Test hook: COMPARE with a lookalike, as its button does.
     void compareWith(const juce::String& id) { startCompare(id); }
@@ -69,6 +73,9 @@ public:
         chorusSpeed = speed;
         chorusSnapMute = muteLane;
     }
+    // Test hooks for the collection: its folder, and the screen to act on.
+    void setCollectionFolder(const juce::File& folder);
+    CollectionScreen& collectionScreen() noexcept { return collScreen; }
     void snapshotQuiz(std::uint32_t seed, int skip, int answer, bool leave)
     {
         snapshotLeaveQuiz = leave;
@@ -230,6 +237,18 @@ private:
     bool chorusPlaying = false;
     float chorusSnapStart = tipp::Chorus::kStartMin;
     int chorusSnapMute = -1;
+
+    // Collection (F6): recordings from the phone export or added files.
+    FilePlayer filePlayer;
+    std::unique_ptr<Collection> collection;
+    CollectionScreen collScreen { strings, filePlayer, list.birds, list.groups };
+    void singOnce(const juce::String& id, int type);
+    struct
+    {
+        bool on = false, seen = false, apWas = true;
+        std::uint32_t base = 0;
+        double at = 0.0;
+    } oneShot; // COMPARE WITH TIPP: one phrase, then stop
 
     // Snapshot test.
     juce::File snapshotFile;
