@@ -1,0 +1,71 @@
+{
+ "_note": "Blue tit ink plate in a 280x240 box, drawn in M3 (not from the design). Same composition as the other plates: perched, facing right. Blue parts are drawn in shadow. Callout values are from birds.md (SNL); bill colour is not verified.",
+ "box": [280, 240],
+ "clips": {
+  "body": "M198 72 C196 58 182 52 168 56 C152 60 140 74 132 92 C120 112 114 132 116 150 C120 164 132 174 146 176 C164 178 180 168 188 150 C196 132 199 108 199 92 C200 86 201 82 200 80 Z",
+  "wing": "M158 94 C164 120 150 148 120 160 C124 138 134 112 158 94 Z"
+ },
+ "layers": [
+  { "path": "M14 206 C80 202 150 199 268 194", "stroke": 4 },
+  { "path": "M214 197 l20 -20 M224 187 l16 3", "stroke": 1.5 },
+  { "path": "M234 177 q10 -10 18 -2 q-9 8 -18 2 Z M240 190 q11 -5 16 3 q-10 4 -16 -3 Z", "fill": "face", "stroke": 1 },
+  { "path": "M120 150 L78 198 L90 206 L132 166 Z", "fill": "cap", "stroke": 1.5, "part": "tail" },
+  { "path": "M124 156 L82 202 M128 162 L86 205", "stroke": 1, "part": "tail" },
+  { "path": "M146 176 L147 199 M158 174 L160 198 M139 201 L147 199 L155 201 M152 199 L160 198 L168 200", "stroke": 1.5 },
+  { "clip": "body", "fill": "face", "stroke": 1.5 },
+  { "hatch": "body" },
+  { "clip": "wing", "fill": "cap" },
+  { "hatch": "wing" },
+  { "clip": "wing", "stroke": 1.5 },
+  { "path": "M130 106 L164 124 L162 129 L128 111 Z", "fill": "face", "stroke": 1, "within": "wing" },
+  { "path": "M200 68 C196 66 190 64 186 64 C170 64 156 70 144 74 L142 82 C146 96 158 106 172 108 C184 108 194 100 198 92 Z", "fill": "face", "within": "body" },
+  { "path": "M200 64 C196 54 182 50 168 54 C156 58 148 66 144 74 C156 70 170 64 186 64 C192 64 197 66 200 68 Z", "fill": "cap", "stroke": 1, "within": "body" },
+  { "path": "M199 70 C190 67 180 66 170 68 C160 70 150 75 141 81 L144 88 C154 82 164 79 172 79 C182 78 192 79 199 79 Z", "fill": "ink", "within": "body" },
+  { "path": "M142 82 C146 96 158 106 172 108 C182 108 190 104 196 98 L198 102 C190 110 180 114 170 114 C154 112 142 100 138 86 Z", "fill": "ink", "within": "body" },
+  { "path": "M196 98 C194 104 190 110 186 114 L190 116 C195 110 198 104 199 98 Z", "fill": "ink", "within": "body" },
+  { "path": "M188 118 C184 132 178 146 170 160 L167 160 C174 146 180 132 184 118 Z", "fill": "shadow", "within": "body" },
+  { "clip": "body", "stroke": 1.5 },
+  { "eye": [182, 72], "pupil": 2.2 },
+  { "path": "M182.6 71.4 m-1.2 0 a1.2 1.2 0 1 0 2.4 0 a1.2 1.2 0 1 0 -2.4 0", "fill": "face" },
+  { "path": "M198 72 L212 77 L200 79 Z", "fill": "bill", "stroke": 1.5, "part": "upper" },
+  { "path": "M200 79 L211 79 L200 82 Z", "fill": "bill", "stroke": 1.5, "part": "lower" },
+  { "path": "M224 66 A14 14 0 0 1 224 90 M231 58 A24 24 0 0 1 231 98 M238 50 A34 34 0 0 1 238 106", "stroke": 1.5, "part": "arcs" }
+ ],
+ "hatch": {
+  "body": { "rect": [112, 50, 204, 180], "up": true, "clip": "body" },
+  "wing": { "rect": [118, 90, 166, 164], "up": false, "clip": "wing" }
+ },
+ "pivots": {
+  "upper": { "at": [200, 76], "deg": -14 },
+  "lower": { "at": [200, 80], "deg": 10 },
+  "tail": { "at": [126, 158], "deg": -5 }
+ },
+ "variants": {
+  "male": { "body_pitch": 9, "wing_pitch": 5, "eye_ring": 0, "bill": "shadow", "cap": "shadow" },
+  "female": { "body_pitch": 11, "wing_pitch": 7, "eye_ring": 0, "bill": "shadow", "cap": "shadow" },
+  "juvenile": { "body_pitch": 9, "wing_pitch": 5, "eye_ring": 0, "bill": "shadow", "cap": "shadow" }
+ },
+ "callouts": [
+  { "id": "bill", "leader": "M206 72 L206 23", "at": [206, 10], "align": "centre",
+    "male": { "en": "", "no": "", "verified": false },
+    "female": { "en": "", "no": "", "verified": false },
+    "juvenile": { "en": "", "no": "", "verified": false } },
+  { "id": "head", "leader": "M170 58 L122 36", "at": [120, 30], "align": "right",
+    "male": { "en": "LIGHT BLUE CROWN", "no": "LYSEBLÅ ISSE", "verified": true },
+    "female": { "en": "OFTEN A LITTLE PALER", "no": "OFTE LITT BLEKERE", "verified": true },
+    "juvenile": { "en": "LIKE THE ADULTS", "no": "SOM DE VOKSNE", "verified": true } },
+  { "id": "eye_stripe", "leader": "M152 80 L74 86", "at": [70, 80], "align": "right",
+    "male": { "en": "BLUE-BLACK", "no": "BLÅSVART", "verified": true },
+    "female": { "en": "BLUE-BLACK", "no": "BLÅSVART", "verified": true },
+    "juvenile": { "en": "BLUE-BLACK", "no": "BLÅSVART", "verified": true } },
+  { "id": "breast", "leader": "M186 140 L232 212", "at": [276, 224], "align": "right",
+    "male": { "en": "YELLOW, FAINT STRIPE", "no": "GULT, SVAK STRIPE", "verified": true },
+    "female": { "en": "YELLOW, FAINT STRIPE", "no": "GULT, SVAK STRIPE", "verified": true },
+    "juvenile": { "en": "YELLOW, FAINT STRIPE", "no": "GULT, SVAK STRIPE", "verified": true } }
+ ],
+ "captions": {
+  "male": { "en": "Male, singing. The sexes look alike.", "no": "Hann som synger. Kjønnene er like.", "verified": true },
+  "female": { "en": "Female. Like the male, often a little paler.", "no": "Hunn. Som hannen, ofte litt blekere.", "verified": true },
+  "juvenile": { "en": "Juvenile. Like the adults.", "no": "Ungfugl. Som de voksne.", "verified": true }
+ }
+}

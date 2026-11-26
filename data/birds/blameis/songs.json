@@ -1,0 +1,72 @@
+{
+  "_note": "Blue tit, M3. Shapes, pitches, timings and bout lengths are sound design guesses, not verified, not tuned against recordings. Verified (birds.md, SNL): song is a trill-like series 'sit-sitt-sirrrrrrr', and also a chattering series that opens with a couple of whistles; calls are short sharp 'sits' single or in series, a slightly rasping 'sits it pæ-pæ-pæ', and a sharp 'spitt spitt'. The trill is a section of short repeated notes, so ph_length sets how long it runs.",
+
+  "syllables": {
+    "si1": { "dur_ms": 70, "pitch": [[0, 7600], [1, 7200]], "amp": [[0, 0], [0.2, 1], [0.7, 0.8], [1, 0]], "gain": 0.6 },
+    "si2": { "dur_ms": 90, "pitch": [[0, 7000], [0.6, 7300], [1, 7200]], "amp": [[0, 0], [0.2, 0.9], [0.7, 1], [1, 0]], "gain": 0.6 },
+    "r1":  { "dur_ms": 28, "pitch": [[0, 6200], [1, 5200]], "amp": [[0, 0], [0.2, 1], [1, 0]], "gain": 0.75 },
+    "r2":  { "dur_ms": 32, "pitch": [[0, 5000], [1, 4200]], "amp": [[0, 0], [0.2, 1], [1, 0]], "gain": 0.8 },
+    "w1":  { "dur_ms": 140, "pitch": [[0, 4800], [0.4, 5200], [1, 4600]], "amp": [[0, 0], [0.15, 0.9], [0.6, 1], [1, 0]], "gain": 0.7 },
+    "ch1": { "dur_ms": 45, "pitch": [[0, 4200], [1, 3400]], "amp": [[0, 0], [0.15, 1], [0.6, 0.7], [1, 0]], "gain": 0.6, "breath": 25, "rough": 35, "tension": -10 },
+    "ch2": { "dur_ms": 40, "pitch": [[0, 3600], [1, 4400]], "amp": [[0, 0], [0.2, 1], [0.6, 0.7], [1, 0]], "gain": 0.6, "breath": 25, "rough": 35, "tension": -10 },
+
+    "sits":  { "dur_ms": 40, "pitch": [[0, 7500], [1, 6500]], "amp": [[0, 0], [0.1, 1], [0.5, 0.6], [1, 0]], "gain": 0.6, "breath": 15 },
+    "it":    { "dur_ms": 30, "pitch": [[0, 6600], [1, 6200]], "amp": [[0, 0], [0.2, 1], [1, 0]], "gain": 0.5, "breath": 15 },
+    "pae":   { "dur_ms": 70, "pitch": [[0, 4000], [1, 3600]], "amp": [[0, 0], [0.1, 1], [0.7, 0.8], [1, 0]], "gain": 0.6, "breath": 30, "rough": 40, "tension": -10 },
+    "spitt": { "dur_ms": 35, "pitch": [[0, 7000], [1, 5500]], "amp": [[0, 0], [0.08, 1], [0.4, 0.6], [1, 0]], "gain": 0.65, "breath": 12, "rough": 10 }
+  },
+
+  "types": {
+    "song": {
+      "pause_s": [3.0, 7.0],
+      "length_s": [1.0, 2.0],
+      "transpose_st": 0.8,
+      "avoid_repeat": false,
+      "bout": [2, 5],
+      "auto": {
+        "vo_pitch": [0.98, 1.02],
+        "vo_breath": [5, 12],
+        "vo_tension": [28, 40],
+        "vo_rough": [2, 6],
+        "ph_tempo": [94, 106]
+      },
+      "phrases": [
+        { "weight": 3, "sections": [
+          { "pool": ["si1", "si2"], "count": [2, 3], "share": 0.25, "gap_ms": [60, 110] },
+          { "pool": ["r1"], "count": [6, 30], "share": 0.75, "gap_ms": [14, 22], "lead_gap_ms": [50, 90], "no_adjacent_repeat": false }
+        ] },
+        { "weight": 2, "sections": [
+          { "pool": ["si1", "si2"], "count": [1, 2], "share": 0.2, "gap_ms": [60, 110] },
+          { "pool": ["r2"], "count": [6, 28], "share": 0.8, "gap_ms": [16, 24], "lead_gap_ms": [50, 90], "no_adjacent_repeat": false }
+        ] },
+        { "weight": 1, "sections": [
+          { "pool": ["w1"], "count": [2, 2], "share": 0.3, "gap_ms": [80, 120], "no_adjacent_repeat": false },
+          { "pool": ["ch1", "ch2"], "count": [4, 14], "share": 0.7, "gap_ms": [25, 45], "lead_gap_ms": [60, 100] }
+        ] }
+      ],
+      "overrides": []
+    },
+
+    "call": {
+      "pause_s": [1.0, 4.0],
+      "length_s": [0.3, 1.5],
+      "avoid_repeat": false,
+      "auto": {
+        "vo_pitch": [0.98, 1.02],
+        "vo_breath": [8, 16],
+        "vo_tension": [40, 55],
+        "vo_rough": [4, 10]
+      },
+      "phrases": [
+        { "weight": 3, "sections": [ { "pool": ["sits"], "count": [1, 5], "share": 1.0, "gap_ms": [120, 300], "no_adjacent_repeat": false } ] },
+        { "weight": 2, "sections": [
+          { "pool": ["sits"], "count": [1, 1], "share": 0.2, "gap_ms": [0, 0] },
+          { "pool": ["it"], "count": [1, 1], "share": 0.1, "gap_ms": [0, 0], "lead_gap_ms": [40, 70] },
+          { "pool": ["pae"], "count": [2, 4], "share": 0.7, "gap_ms": [50, 80], "lead_gap_ms": [50, 90], "no_adjacent_repeat": false }
+        ] },
+        { "weight": 2, "sections": [ { "pool": ["spitt"], "count": [2, 3], "share": 1.0, "gap_ms": [150, 250], "no_adjacent_repeat": false } ] }
+      ],
+      "overrides": []
+    }
+  }
+}
