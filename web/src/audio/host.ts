@@ -127,8 +127,9 @@ export class AudioHost {
     this.qvoice = m.qvoice;
     this.chorus = m.chorus;
     if (m.chorusSang) this.chorusSang = m.chorusSang;
-    this.peakL = Math.max(this.peakL, m.status[1]);
-    this.peakR = Math.max(this.peakR, m.status[2]);
+    // The meter shows the engine and the chorus together.
+    this.peakL = Math.max(this.peakL, m.status[1], m.chorus[2]);
+    this.peakR = Math.max(this.peakR, m.status[2], m.chorus[2]);
     this.onState?.(m);
   }
 

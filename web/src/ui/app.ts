@@ -1,16 +1,21 @@
 // The desktop shell, 1280x800 scaled to the window: header, tabs, body and
-// status bar, as in design-handover.md "Shared layout, desktop". This round
-// builds PLAY; the other tabs are hatched until their screens exist.
+// status bar, as in design-handover.md "Shared layout, desktop". PLAY, FIELD
+// GUIDE, QUIZ and CHORUS are built; LOG and COLLECTION are hatched until
+// their screens exist. Same tab rules as MainComponent::setTab().
 
 import type { AudioHost } from '../audio/host.ts';
 import { index, hasSound, type IndexBird } from '../data.ts';
 import { Btn, box, canvases, el, number, MINUS } from './dom.ts';
+import { ChorusScreen } from './chorus.ts';
+import { GuideScreen } from './guide.ts';
 import { PlayScreen, kSceneKeys, kSceneOptions } from './play.ts';
+import { QuizScreen } from './quiz.ts';
 import { initialState, type State } from './state.ts';
 import { Strings, upper, type Lang } from './strings.ts';
 
 const kTabKeys = ['play', 'guide', 'quiz', 'chorus', 'log', 'collection'] as const;
 const kLangKey = 'tipp.lang';
+const kBuiltTabs = 4;
 
 export class App {
   readonly s = new Strings();
@@ -32,7 +37,16 @@ export class App {
   private listLabel: HTMLDivElement;
   private list: HTMLDivElement;
   private play: PlayScreen;
+  private guide: GuideScreen;
+  private quiz: QuizScreen;
+  private chorus: ChorusScreen;
+  private aside: HTMLDivElement;
   private status: HTMLDivElement;
+  private tab = 0;
+  // COMPARE from the field guide: the lookalike being compared.
+  private comparing = '';
+  private compareSeen = false;
+  private compareAt = 0;
   private meter = { l: 0, r: 0, peak: 0 };
   private scale = 1;
 
@@ -49,8 +63,8 @@ export class App {
     const bar = el('i', '', mark);
     for (const c of ['clay', 'khaki', 'sage', 'plum']) el('b', '', bar).style.background = `var(--${c})`;
     const transport = el('div', 'joined', header);
-    this.playBtn = new Btn(transport, '', () => this.setPlaying(true), { width: '44px', height: '32px' }).glyph('play', 'Play');
-    this.stopBtn = new Btn(transport, '', () => this.setPlaying(false), { width: '44px', height: '32px' }).glyph('stop', 'Stop');
+    this.playBtn = new Btn(transport, '', () => this.transport(true), { width: '44px', height: '32px' }).glyph('play', 'Play');
+    this.stopBtn = new Btn(transport, '', () => this.transport(false), { width: '44px', height: '32px' }).glyph('stop', 'Stop');
     const stepper = box(header, { display: 'flex', alignItems: 'center' });
     this.prevBtn = new Btn(stepper, '', () => this.stepBird(-1), { width: '32px', height: '32px' }).glyph('prev', 'Previous bird');
     this.readout = el('div', 'readout well', stepper);
@@ -74,14 +88,16 @@ export class App {
     // ---------------------------------------------------------- tabs
     const tabs = el('div', 'tabs', stage);
     kTabKeys.forEach((_, i) => {
-      const t = el('div', i === 0 ? 'tab active' : 'tab disabled', tabs);
+      const t = el('div', i === 0 ? 'tab active' : i < kBuiltTabs ? 'tab' : 'tab disabled', tabs);
       t.addEventListener('click', () => this.setTab(i));
       this.tabs.push(t);
     });
 
     // ---------------------------------------------------------- body
     const body = el('div', 'body', stage);
+    body.style.position = 'relative';
     const aside = el('div', 'aside', body);
+    this.aside = aside;
     this.listLabel = el('div', 'section', aside);
     this.list = el('div', 'birdlist sheet', aside);
     const main = box(body, { position: 'relative', flex: '1' });
@@ -90,6 +106,24 @@ export class App {
       setPlaying: (on) => this.setPlaying(on),
       sendScene: () => this.sendScene(),
     });
+    this.guide = new GuideScreen(main, host, this.s, {
+      sex: (v) => this.setScene('sc_sex', 'sex', v),
+      age: (v) => this.setScene('sc_age', 'age', v),
+      season: (v) => this.setScene('sc_season', 'season', v),
+      playType: (t) => this.playType(t),
+      compare: (id) => this.startCompare(id),
+    });
+    // Quiz and chorus take the whole body: no bird list.
+    const full = box(body, { position: 'absolute', left: '0', top: '0', width: '1280px', height: '100%', pointerEvents: 'none' });
+    this.quiz = new QuizScreen(full, host, this.s, {
+      refresh: () => this.refresh(),
+      openGuide: (id) => { this.setTab(1); this.selectBird(id); },
+    });
+    this.chorus = new ChorusScreen(full, host, this.s, this.quiz.ids, this.quiz.ids.map((id) => host.birds.get(id)!), {
+      refresh: () => this.refresh(),
+      playBird: () => this.st.bird,
+    });
+    for (const r of [this.quiz.root, this.chorus.root]) r.style.pointerEvents = 'auto';
     this.status = el('div', 'status', stage);
 
     window.addEventListener('resize', () => this.fit());
@@ -111,6 +145,9 @@ export class App {
     this.stage.style.transform = `translate(${x}px, ${y}px) scale(${s})`;
     for (const c of [...canvases]) c.resize(s);
     for (const k of this.play.knobs) { k.cv.resize(s); k.invalidate(); }
+    this.guide.resize(s);
+    this.quiz.resize(s);
+    this.chorus.resize(s);
     this.play.sono.cv.resize(s);
     this.play.plate.cv.resize(s);
     this.play.plate.paint(true);
@@ -123,9 +160,11 @@ export class App {
   private selectBird(id: string) {
     const ptr = this.host.birds.get(id);
     if (!ptr) return;
+    this.stopCompare();
     this.st.bird = id;
     this.host.post({ t: 'bird', id });
     this.play.setBird(ptr, id);
+    this.guide.setBird(id);
     this.refresh();
   }
 
@@ -161,6 +200,7 @@ export class App {
   }
 
   setPlaying(on: boolean) {
+    this.stopCompare();
     this.st.playing = on;
     // Audio starts on the first press: browsers need a user gesture.
     if (on) void this.host.start();
@@ -174,15 +214,87 @@ export class App {
     this.applyStrings();
   }
 
-  private setTab(i: number) {
-    // Only PLAY is built in this round; the other tabs are hatched.
-    void i;
+  // Play and Stop in the header act on the screen shown.
+  private transport(on: boolean) {
+    if (this.tab === 2) { if (on) this.quiz.playAgain(); else this.quiz.stop(); }
+    else if (this.tab === 3) this.chorus.setPlaying(on);
+    else this.setPlaying(on);
+  }
+
+  // Sex, age and season are shared by PLAY and the field guide.
+  private setScene(id: 'sc_sex' | 'sc_age' | 'sc_season', key: 'sex' | 'age' | 'season', v: number) {
+    this.st[key] = v;
+    this.host.param(id, v);
+    this.refresh();
+  }
+
+  // A song type's play button in the field guide: that type, playing, one
+  // phrase now. Autoplay goes on as it was set.
+  private playType(type: number) {
+    this.st.type = type;
+    this.host.param('sc_type', type);
+    this.setPlaying(true);
+    this.host.trigger('ap_sing_once');
+  }
+
+  private startCompare(otherId: string) {
+    const again = this.comparing === otherId;
+    this.stopCompare();
+    if (this.st.draw) this.play.setDraw(false); // COMPARE needs autoplay's sing once
+    if (again) return; // a second click on the same COMPARE stops it
+    void this.host.start();
+    this.comparing = otherId;
+    this.compareSeen = false;
+    this.compareAt = performance.now();
+    const st = this.st;
+    this.host.post({ t: 'compare', first: st.bird, second: otherId, restore: { autoplay: st.apOn, play: st.playing, type: st.type }, type: 0 });
+    this.refresh();
+  }
+
+  private stopCompare() {
+    if (!this.comparing) return;
+    this.host.post({ t: 'compareCancel' });
+    this.comparing = '';
+    this.refresh();
+  }
+
+  setTab(i: number) {
+    if (i < 0 || i >= kBuiltTabs || i === this.tab) return;
+    const was = this.tab;
+    this.tab = i;
+    this.stopCompare();
+    if (was === 2) { this.quiz.leave(); this.sendScene(); }
+    if (was === 3) { this.chorus.leave(); this.sendScene(); }
+    this.tabs.forEach((t, k) => t.classList.toggle('active', k === i));
+    this.play.root.style.display = i === 0 ? '' : 'none';
+    this.guide.show(i === 1);
+    this.quiz.show(i === 2);
+    this.chorus.show(i === 3);
+    this.aside.style.visibility = i < 2 ? '' : 'hidden';
+    if (i === 2) this.quiz.enter();
+    if (i === 3) this.chorus.enter();
+    this.refresh();
   }
 
   private key(e: KeyboardEvent) {
+    const fn = ['F1', 'F2', 'F3', 'F4'].indexOf(e.key);
+    if (fn >= 0) { this.setTab(fn); e.preventDefault(); return; }
+    const digit = e.key >= '1' && e.key <= '4' && !e.metaKey && !e.ctrlKey ? Number(e.key) - 1 : -1;
+    if (this.tab === 3) {
+      // Chorus: 1 to 4 mute a lane, Space plays and stops.
+      if (digit >= 0) { this.chorus.toggleMute(digit); e.preventDefault(); }
+      else if (e.key === ' ') { this.chorus.setPlaying(!this.chorus.playing); e.preventDefault(); }
+      return;
+    }
+    if (this.tab === 2) {
+      // Quiz: 1 to 4 answer, Space plays again, Enter goes on.
+      if (digit >= 0) { this.quiz.answer(digit); e.preventDefault(); }
+      else if (e.key === ' ') { this.quiz.playAgain(); e.preventDefault(); }
+      else if (e.key === 'Enter') { this.quiz.next_(); e.preventDefault(); }
+      return;
+    }
     if (e.key === ' ') { this.setPlaying(!this.st.playing); e.preventDefault(); }
     else if (e.key === 'ArrowUp' || e.key === 'ArrowDown') { this.stepBird(e.key === 'ArrowUp' ? -1 : 1); e.preventDefault(); }
-    else if (e.key === 'F1') { this.setTab(0); e.preventDefault(); }
   }
 
   applyStrings() {
@@ -199,33 +311,60 @@ export class App {
     });
     this.listLabel.textContent = s.t('list.birds');
     this.play.applyStrings();
+    this.guide.applyStrings();
+    this.quiz.applyStrings();
+    this.chorus.applyStrings();
     this.refresh();
   }
 
   refresh() {
-    const st = this.st, s = this.s;
-    this.playBtn.on(st.playing);
-    this.stopBtn.on(!st.playing);
-    this.prevBtn.disabled(this.neighbour(-1) === null);
-    this.nextBtn.disabled(this.neighbour(1) === null);
+    const st = this.st, s = this.s, tab = this.tab;
+    const on = tab === 2 ? this.quiz.playing : tab === 3 ? this.chorus.playing : st.playing;
+    this.playBtn.on(on);
+    this.stopBtn.on(!on);
+    // Play and the field guide have the list and stepper.
+    const ownBird = tab < 2;
+    this.prevBtn.show(ownBird).disabled(this.neighbour(-1) === null);
+    this.nextBtn.show(ownBird).disabled(this.neighbour(1) === null);
     const b = this.birdEntry(st.bird);
+    // The header readout: none in the chorus, in the quiz only once answered.
+    const shown = tab === 3 ? undefined : tab === 2 ? this.birdEntry(this.quiz.headerBird() ?? '') : b;
     this.readout.replaceChildren();
+    this.readout.classList.toggle('empty', !shown);
+    if (shown) {
+      el('span', 'num', this.readout, shown.number);
+      el('span', 'name', this.readout, this.name(shown));
+      el('span', 'latin', this.readout, shown.latin);
+    }
     if (b) {
-      el('span', 'num', this.readout, b.number);
-      el('span', 'name', this.readout, this.name(b));
-      el('span', 'latin', this.readout, b.latin);
       this.play.setName(this.name(b));
       this.play.birdName = this.name(b);
     }
     this.renderList();
     this.play.refresh();
+    this.guide.setState({ sex: st.sex, age: st.age, season: st.season, type: st.type, comparing: this.comparing });
 
-    // Status bar: state, scene, keys.
+    // Status bar: state, summary, keys.
     this.status.replaceChildren();
+    const audio = this.host.error ? `AUDIO: ${this.host.error}` : '';
+    if (tab === 3) {
+      el('span', '', this.status, s.t(this.chorus.playing ? 'status.playing' : 'status.stopped'));
+      el('span', 'summary', this.status, audio || this.chorus.statusText());
+      for (const k of ['status.keys_play', 'chorus.keys_mute']) el('span', 'keys', this.status, s.t(k));
+      return;
+    }
+    if (tab === 2) {
+      el('span', '', this.status, s.t('tab.quiz'));
+      el('span', 'summary', this.status, audio || this.quiz.statusText());
+      for (const k of ['quiz.status_keys_answer', 'quiz.status_keys_again', 'quiz.status_keys_next']) el('span', 'keys', this.status, s.t(k));
+      return;
+    }
     el('span', '', this.status, s.t(st.playing ? 'status.playing' : 'status.stopped'));
     const parts = [st.season, st.time, st.type, st.place].map((v, r) => s.t(`${kSceneKeys[r]}.${kSceneOptions[r][v]}`));
     if (b) parts.unshift(upper(this.name(b)));
-    const summary = this.play.error || (this.host.error ? `AUDIO: ${this.host.error}` : parts.join(', '));
+    const other = this.birdEntry(this.comparing);
+    let summary = this.play.error || audio || parts.join(', ');
+    if (other && b && !this.play.error && !audio) summary = s.t('status.comparing', { a: upper(this.name(b)), b: upper(this.name(other)) });
     el('span', 'summary', this.status, summary);
     for (const k of ['status.keys_play', 'status.keys_bird', 'status.keys_screen']) el('span', 'keys', this.status, s.t(k));
   }
@@ -247,6 +386,14 @@ export class App {
 
   private frame() {
     this.play.poll();
+    if (this.tab === 1) this.guide.poll(this.play.plate.open);
+    if (this.tab === 2) this.quiz.poll();
+    if (this.tab === 3) this.chorus.poll();
+    // COMPARE ends on its own; clear the button once the worklet says so.
+    if (this.comparing) {
+      if (this.host.compare.running) this.compareSeen = true;
+      else if (this.compareSeen || performance.now() - this.compareAt > 1500) { this.comparing = ''; this.refresh(); }
+    }
     const [l, r] = this.host.takePeaks();
     const m = this.meter;
     m.l = Math.max(l, m.l * 0.85);

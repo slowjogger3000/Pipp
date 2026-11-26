@@ -66,6 +66,7 @@ export class Canvas {
   w: number;
   h: number;
   private ratio = 1;
+  stageScale = 1;
   constructor(parent: HTMLElement, w: number, h: number) {
     this.c = el('canvas', '', parent);
     this.g = this.c.getContext('2d')!;
@@ -75,7 +76,15 @@ export class Canvas {
     this.c.style.height = `${h}px`;
     this.resize(1);
   }
+  setSize(w: number, h: number, stageScale: number) {
+    this.w = w;
+    this.h = h;
+    this.c.style.width = `${w}px`;
+    this.c.style.height = `${h}px`;
+    this.resize(stageScale);
+  }
   resize(stageScale: number) {
+    this.stageScale = stageScale;
     this.ratio = Math.max(1, Math.min(4, (window.devicePixelRatio || 1) * stageScale));
     this.c.width = Math.round(this.w * this.ratio);
     this.c.height = Math.round(this.h * this.ratio);
@@ -89,6 +98,37 @@ export class Canvas {
 }
 
 export const canvases: Canvas[] = [];
+
+// Absolute position in the parent, in stage pixels.
+export function place(e: HTMLElement, x: number, y: number, w: number, h: number) {
+  Object.assign(e.style, { position: 'absolute', left: `${x}px`, top: `${y}px`, width: `${w}px`, height: `${h}px` });
+}
+
+// Width of a text in a canvas font, for sizing buttons the way the standalone does.
+let probe: CanvasRenderingContext2D | null = null;
+export function textWidth(f: string, text: string, spacingPx = 0): number {
+  probe ??= document.createElement('canvas').getContext('2d')!;
+  probe.font = f;
+  return Math.ceil(probe.measureText(text).width + spacingPx * [...text].length);
+}
+
+// 135 degree lines, 1px, every pitch px, as draw::hatch.
+export function hatch(g: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, c: string = colour.hatch, pitch = 7) {
+  g.save();
+  g.beginPath();
+  g.rect(x, y, w, h);
+  g.clip();
+  g.strokeStyle = c;
+  g.lineWidth = 1;
+  g.beginPath();
+  const step = pitch * Math.SQRT2;
+  for (let c0 = 0; c0 < w + h; c0 += step) {
+    g.moveTo(x + c0, y);
+    g.lineTo(x + c0 - h, y + h);
+  }
+  g.stroke();
+  g.restore();
+}
 
 export function font(px: number, weight = 400, serif = false): string {
   return serif ? `400 ${px}px 'Instrument Serif', Georgia, serif` : `${weight} ${px}px 'Plex Mono', Menlo, monospace`;
