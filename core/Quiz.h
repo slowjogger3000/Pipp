@@ -40,7 +40,8 @@ public:
     enum Set : int { kPairs, kGarden, kForest, kCoast, kWetland, kMountain, kFarmland, kNight, kAll, kNumSets };
     enum Ask : int { kAskSong, kAskCall, kAskBoth, kNumAsks };
 
-    static constexpr int kQuestions = 10;
+    static constexpr int kQuestions = 10;               // default length
+    static constexpr int kLengths[3] = { 10, 20, 50 };   // lengths the setup offers
     static constexpr int kAnswers = 4;
     static constexpr int kMissGap = 2; // other questions before a missed bird returns
 
@@ -58,14 +59,24 @@ public:
     // data, either way round.
     static std::vector<int> poolFor(const std::vector<QuizBird>& birds, int set);
 
-    // Starts a quiz of kQuestions. False if the set has no bird.
-    bool start(const std::vector<QuizBird>& birds, int set, int ask, std::uint32_t seed);
+    // A bird missed during this quiz, for the result: what it was taken for
+    // the last time and how often it was missed. First miss first.
+    struct Miss
+    {
+        int bird = -1;
+        int taken = -1;
+        int times = 0;
+    };
+
+    // Starts a quiz of `questions` (at least 1). False if the set has no bird.
+    bool start(const std::vector<QuizBird>& birds, int set, int ask, std::uint32_t seed, int questions = kQuestions);
 
     bool active() const noexcept { return number > 0; }
     const Question& question() const noexcept { return q; }
     int questionNumber() const noexcept { return number; } // 1-based, 0 before start
     bool answered() const noexcept { return q.picked >= 0; }
-    bool finished() const noexcept { return number >= kQuestions && answered(); }
+    bool finished() const noexcept { return number >= total && answered(); }
+    int length() const noexcept { return total; }
 
     // Returns true if right. Ignored once answered.
     bool answer(int slot);
@@ -74,10 +85,11 @@ public:
 
     int correct() const noexcept { return right; }
     int missed() const noexcept { return wrong; }
-    int left() const noexcept { return kQuestions - number + (answered() ? 0 : 1); }
+    int left() const noexcept { return total - number + (answered() ? 0 : 1); }
 
     // Birds that come back sooner, earliest first.
     std::vector<int> practise() const;
+    const std::vector<Miss>& misses() const noexcept { return missList; }
 
 private:
     struct Due
@@ -93,10 +105,11 @@ private:
     std::vector<QuizBird> all;
     std::vector<int> pool, deck;
     std::vector<Due> due;
+    std::vector<Miss> missList;
     int ask = kAskSong;
     Rng rng;
     Question q;
-    int number = 0, right = 0, wrong = 0, last = -1;
+    int number = 0, right = 0, wrong = 0, last = -1, total = kQuestions;
 };
 
 class QuizVoice

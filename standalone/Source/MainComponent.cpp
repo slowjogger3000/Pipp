@@ -198,6 +198,15 @@ MainComponent::MainComponent(const juce::File& dataDirectory)
     quizScreen.onSet = [this](int v) { quizSet = v; startQuiz(); };
     quizScreen.onAsk = [this](int v) { quizAsk = v; startQuiz(); };
     quizScreen.onHints = [this](int v) { quizHints = v; updateQuizView(); };
+    quizScreen.onLength = [this](int v) { quizLength = v; startQuiz(); };
+    quizScreen.onOpenMiss = [this](int row) {
+        const auto& m = quiz.misses();
+        if (row < 0 || row >= static_cast<int>(m.size()))
+            return;
+        const int index = quizEntries[static_cast<std::size_t>(m[static_cast<std::size_t>(row)].bird)];
+        setTab(1);
+        selectBird(index);
+    };
 
     // Dawn chorus.
     addChildComponent(chorusScreen);
@@ -797,7 +806,8 @@ void MainComponent::startQuiz()
     stopCompare();
     buildQuizBirds();
     const auto seed = quizSeed != 0u ? quizSeed : static_cast<std::uint32_t>(juce::Random::getSystemRandom().nextInt());
-    if (quiz.start(quizBirds, quizSet, quizAsk, seed))
+    quizShowResult = false;
+    if (quiz.start(quizBirds, quizSet, quizAsk, seed, tipp::Quiz::kLengths[quizLength]))
     {
         // Snapshot hook: answer some questions first.
         for (int i = 0; i < quizSkip && ! quiz.finished(); ++i)
@@ -807,6 +817,12 @@ void MainComponent::startQuiz()
             quiz.next();
         }
         quizSkip = 0;
+        if (snapshotQuizResult && quiz.finished())
+        {
+            snapshotQuizResult = false;
+            showQuizResult();
+            return;
+        }
         stageQuestion();
     }
     else
@@ -842,15 +858,26 @@ void MainComponent::quizNext()
     if (! quiz.active() || ! quiz.answered())
         return;
     stopCompare();
-    if (quiz.finished())
+    if (quizShowResult)
         startQuiz();
+    else if (quiz.finished())
+        showQuizResult();
     else if (quiz.next())
         stageQuestion();
 }
 
+void MainComponent::showQuizResult()
+{
+    quizShowResult = true;
+    quizVoice.stop();
+    quizPlaying = false;
+    engine.setParam(P::indexOf(P::pb_play), 0.0f);
+    refreshControls();
+}
+
 void MainComponent::quizPlayAgain()
 {
-    if (! quiz.active())
+    if (! quiz.active() || quizShowResult)
         return;
     stopCompare();
     quizPlaying = true;
@@ -963,9 +990,11 @@ void MainComponent::updateQuizView()
     v.set = quizSet;
     v.ask = quizAsk;
     v.hints = quizHints;
+    v.length = quizLength;
+    v.showResult = quizShowResult;
     v.half = quizHalf;
     v.hintUsed = hintShown;
-    v.total = tipp::Quiz::kQuestions;
+    v.total = quiz.length();
     v.comparing = compare.running();
     for (int s = 0; s < tipp::Quiz::kNumSets; ++s)
         v.setHasBirds[static_cast<std::size_t>(s)] = ! tipp::Quiz::poolFor(quizBirds, s).empty();
@@ -990,6 +1019,13 @@ void MainComponent::updateQuizView()
     v.correct = quiz.correct();
     v.missed = quiz.missed();
     v.left = quiz.left();
+    for (const auto& m : quiz.misses())
+    {
+        auto note = strings.format("quiz.result_taken", { { "bird", Strings::lower(quizName(m.taken)) } });
+        if (m.times > 1)
+            note += ", " + strings.format("quiz.result_times", { { "n", number(m.times, 0, strings.norwegian()) } });
+        v.misses.push_back({ quizName(m.bird), note });
+    }
 
     juce::StringArray names;
     for (int b : quiz.practise())
@@ -1012,7 +1048,7 @@ void MainComponent::updateQuizView()
     {
         v.band = quizExplain();
         if (v.finished)
-            v.band += " " + strings.format("quiz.done", { { "correct", juce::String(quiz.correct()) }, { "total", juce::String(tipp::Quiz::kQuestions) } });
+            v.band += " " + strings.format("quiz.done", { { "correct", juce::String(quiz.correct()) }, { "total", juce::String(quiz.length()) } });
     }
     else
         v.band = hintShown && quizHints != 2 ? quizHint() : strings("quiz.prompt");

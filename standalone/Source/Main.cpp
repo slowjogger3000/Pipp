@@ -4,7 +4,7 @@
 //   Tipp --snapshot <file.png> [--seconds <s>] [--hand <knob id>] [--lang no]
 //        [--bird <id>] [--sex female] [--age juvenile] [--tab guide]
 //        [--compare <id>] [--speed 0.5|0.25] [--shift] [--draw]
-//        [--tab quiz] [--quiz-seed <n>] [--quiz-skip <n>] [--answer right|wrong] [--leave-quiz]
+//        [--tab quiz] [--quiz-seed <n>] [--quiz-skip <n>] [--answer right|wrong] [--leave-quiz] [--quiz-length 10|20|50] [--quiz-result]
 //        [--tab chorus] [--chorus-start <min>] [--chorus-speed real|10x|60x|loop] [--mute-lane 1-4]
 //        [--tab collection] [--collection-dir <dir>] [--import <zip>] [--add <file,file>]
 //        [--tab log] [--log-file <json>] [--log-fill "bird|date|time|place|heard 0-3|saw 0-3|note"] [--log-add]
@@ -47,7 +47,8 @@ public:
             {
                 const auto answer = value("--answer");
                 content->snapshotQuiz(static_cast<std::uint32_t>(value("--quiz-seed").getLargeIntValue()), value("--quiz-skip").getIntValue(),
-                                      answer == "right" ? 1 : answer == "wrong" ? -1 : 0, args.contains("--leave-quiz"));
+                                      answer == "right" ? 1 : answer == "wrong" ? -1 : 0, args.contains("--leave-quiz"),
+                                      value("--quiz-length") == "50" ? 2 : value("--quiz-length") == "20" ? 1 : 0, args.contains("--quiz-result"));
                 content->setTab(2);
             }
             if (value("--tab") == "collection")

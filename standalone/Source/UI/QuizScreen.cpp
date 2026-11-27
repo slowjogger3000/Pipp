@@ -141,7 +141,11 @@ QuizScreen::QuizScreen(const Strings& s, tipp::Engine& e) : sono(e), strings(s)
         hintBtns[static_cast<std::size_t>(i)].onClick = [this, i] { if (onHints) onHints(i); };
         addAndMakeVisible(askBtns[static_cast<std::size_t>(i)]);
         addAndMakeVisible(hintBtns[static_cast<std::size_t>(i)]);
+        lengthBtns[static_cast<std::size_t>(i)].onClick = [this, i] { if (onLength) onLength(i); };
+        addAndMakeVisible(lengthBtns[static_cast<std::size_t>(i)]);
     }
+    againResultBtn.onClick = [this] { if (onNext) onNext(); };
+    addChildComponent(againResultBtn);
 }
 
 void QuizScreen::applyStrings()
@@ -159,7 +163,9 @@ void QuizScreen::applyStrings()
     {
         askBtns[static_cast<std::size_t>(i)].setText(strings(ask[i]));
         hintBtns[static_cast<std::size_t>(i)].setText(strings(hints[i]));
+        lengthBtns[static_cast<std::size_t>(i)].setText(number(tipp::Quiz::kLengths[i], 0, strings.norwegian()));
     }
+    againResultBtn.setText(strings("quiz.again"));
     refresh();
     resized();
 }
@@ -172,7 +178,14 @@ void QuizScreen::setView(const View& v)
 
 void QuizScreen::refresh()
 {
-    nextBtn.setText(strings(view.finished ? "quiz.again" : "quiz.next"));
+    nextBtn.setText(strings(view.finished ? "quiz.see_result" : "quiz.next"));
+    const bool result = view.showResult && view.finished;
+    for (juce::Component* c : { static_cast<juce::Component*>(&sono), static_cast<juce::Component*>(&againBtn), static_cast<juce::Component*>(&halfBtn),
+                                static_cast<juce::Component*>(&hintBtn), static_cast<juce::Component*>(&compareBtn), static_cast<juce::Component*>(&guideBtn),
+                                static_cast<juce::Component*>(&nextBtn) })
+        c->setVisible(! result);
+    againResultBtn.setVisible(result);
+    againResultBtn.setText(strings("quiz.again"));
     halfBtn.setOn(view.half);
     againBtn.setDisabled(! view.active);
     halfBtn.setDisabled(! view.active);
@@ -186,7 +199,7 @@ void QuizScreen::refresh()
     for (int i = 0; i < 4; ++i)
     {
         auto& a = answers[static_cast<std::size_t>(i)];
-        a.setVisible(view.active && i < view.count);
+        a.setVisible(view.active && i < view.count && ! result);
         a.name = view.names[static_cast<std::size_t>(i)];
         a.look = Answer::Look::Raised;
         a.tag = {};
@@ -213,8 +226,38 @@ void QuizScreen::refresh()
     {
         askBtns[static_cast<std::size_t>(i)].setOn(view.ask == i);
         hintBtns[static_cast<std::size_t>(i)].setOn(view.hints == i);
+        lengthBtns[static_cast<std::size_t>(i)].setOn(view.length == i);
     }
+    layoutResult();
     repaint();
+}
+
+// One OPEN IN FIELD GUIDE per missed bird that fits; the rest are counted
+// under the list.
+void QuizScreen::layoutResult()
+{
+    const bool result = view.showResult && view.finished;
+    const int fit = std::max(0, (resList.getHeight() - 2) / kMissRowH);
+    const int total = static_cast<int>(view.misses.size());
+    missRowsShown = result ? std::min(total, total > fit ? fit - 1 : fit) : 0;
+    while (static_cast<int>(missBtns.size()) < missRowsShown)
+    {
+        const int i = static_cast<int>(missBtns.size());
+        auto b = std::make_unique<Btn>();
+        b->onClick = [this, i] { if (onOpenMiss) onOpenMiss(i); };
+        addChildComponent(*b);
+        missBtns.push_back(std::move(b));
+    }
+    const auto f = mono(10.0f, 500, 0.06f);
+    const auto text = strings("quiz.open_guide");
+    const int w = textW(f, text) + 20;
+    for (int i = 0; i < static_cast<int>(missBtns.size()); ++i)
+    {
+        auto& b = *missBtns[static_cast<std::size_t>(i)];
+        b.setVisible(i < missRowsShown);
+        b.setText(text);
+        b.setBounds(resList.getRight() - 1 - 6 - w, resList.getY() + 1 + i * kMissRowH + (kMissRowH - 24) / 2, w, 24);
+    }
 }
 
 void QuizScreen::resized()
@@ -299,19 +342,100 @@ void QuizScreen::resized()
     rr.removeFromTop(6);
     layoutJoined(rr.removeFromTop(24), { &hintBtns[0], &hintBtns[1], &hintBtns[2] });
     rr.removeFromTop(12);
+    lengthLabel = rr.removeFromTop(14);
+    rr.removeFromTop(6);
+    layoutJoined(rr.removeFromTop(24), { &lengthBtns[0], &lengthBtns[1], &lengthBtns[2] });
+    rr.removeFromTop(12);
     scoreLabel = rr.removeFromTop(14);
     rr.removeFromTop(6);
     scoreTable = rr.removeFromTop(3 * 22 + 2);
     rr.removeFromTop(6);
     practiseText = rr.removeFromTop(64);
+
+    // Result panel over the figure, answers and band.
+    resultArea = figure.getUnion(band);
+    {
+        auto a = resultArea.reduced(20, 16);
+        resLabel = a.removeFromTop(14);
+        a.removeFromTop(8);
+        resScore = a.removeFromTop(68);
+        resPct = a.removeFromTop(18);
+        a.removeFromTop(16);
+        resMissLabel = a.removeFromTop(14);
+        a.removeFromTop(6);
+        auto foot = a.removeFromBottom(24);
+        const int againW = textW(mono(10.0f, 500, 0.06f), strings("quiz.again")) + 28;
+        againResultBtn.setBounds(foot.getRight() - againW, foot.getY(), againW, 24);
+        a.removeFromBottom(10);
+        resList = a;
+    }
+    layoutResult();
 }
 
 void QuizScreen::paint(juce::Graphics& g)
 {
     const bool no = strings.norwegian();
+    const bool result = view.showResult && view.finished;
     draw::sectionLabel(g, counter, view.active ? strings.format("quiz.question", { { "n", juce::String(view.number) }, { "total", juce::String(view.total) } })
                                                : strings("quiz.question_none"));
 
+    draw::sectionLabel(g, lengthLabel, strings("quiz.length"));
+    if (result)
+    {
+        g.setColour(colour::panel);
+        g.fillRect(resultArea);
+        draw::border(g, resultArea);
+        draw::sectionLabel(g, resLabel, strings("quiz.result"));
+        g.setColour(colour::ink);
+        g.setFont(serif(64.0f));
+        g.drawText(strings.format("quiz.result_score", { { "correct", number(view.correct, 0, no) }, { "total", number(view.total, 0, no) } }),
+                   resScore, juce::Justification::centredLeft, false);
+        g.setFont(mono(12.0f, 500, 0.06f));
+        const int pct = juce::roundToInt(100.0 * view.correct / std::max(1, view.total));
+        g.drawText(strings.format("quiz.result_pct", { { "pct", number(pct, 0, no) } }), resPct, juce::Justification::centredLeft, false);
+        draw::sectionLabel(g, resMissLabel, strings("quiz.result_missed"));
+        draw::inset(g, resList);
+        auto t = resList.reduced(1);
+        const int total = static_cast<int>(view.misses.size());
+        if (total == 0)
+        {
+            g.setColour(colour::inkSoft);
+            g.setFont(mono(9.0f, 600, 0.14f));
+            g.drawText(strings("quiz.result_none"), t.removeFromTop(28).reduced(8, 0), juce::Justification::centredLeft, false);
+        }
+        const int btnX = missBtns.empty() ? t.getRight() : missBtns.front()->getX();
+        for (int i = 0; i < missRowsShown; ++i)
+        {
+            auto row = t.removeFromTop(kMissRowH);
+            if (i < total - 1)
+            {
+                g.setColour(colour::divider);
+                g.fillRect(row.getX(), row.getBottom() - 1, row.getWidth(), 1);
+            }
+            auto words = row.withRight(btnX - 8).reduced(8, 0);
+            const auto& m = view.misses[static_cast<std::size_t>(i)];
+            const auto nameF = serif(20.0f);
+            g.setColour(colour::ink);
+            g.setFont(nameF);
+            const int nameW = std::min(words.getWidth() / 2, textW(nameF, m.name) + 4);
+            g.drawText(m.name, words.removeFromLeft(nameW), juce::Justification::centredLeft, true);
+            words.removeFromLeft(12);
+            g.setColour(colour::inkSoft);
+            g.setFont(mono(11.0f, 400));
+            g.drawText(m.note, words, juce::Justification::centredLeft, true);
+        }
+        if (missRowsShown < total)
+        {
+            g.setColour(colour::inkSoft);
+            g.setFont(mono(11.0f, 400));
+            juce::StringArray rest;
+            for (int i = missRowsShown; i < total; ++i)
+                rest.add(view.misses[static_cast<std::size_t>(i)].name);
+            g.drawFittedText(rest.joinIntoString(", "), t.removeFromTop(kMissRowH).reduced(8, 0), juce::Justification::centredLeft, 1, 0.8f);
+        }
+    }
+    else
+    {
     // Figure: head, kHz axis, well, caption.
     draw::border(g, figure);
     g.setColour(colour::panel);
@@ -348,6 +472,7 @@ void QuizScreen::paint(juce::Graphics& g)
     g.setColour(colour::ink);
     g.setFont(mono(11.0f, 400));
     g.drawFittedText(view.band, bandText, juce::Justification::centredLeft, 3, 0.9f);
+    }
 
     // Right column.
     draw::sectionLabel(g, setLabel, strings("quiz.birds"));

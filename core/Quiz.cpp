@@ -52,8 +52,10 @@ std::vector<int> Quiz::poolFor(const std::vector<QuizBird>& birds, int set)
     return out;
 }
 
-bool Quiz::start(const std::vector<QuizBird>& birds, int set, int askFor, std::uint32_t seed)
+bool Quiz::start(const std::vector<QuizBird>& birds, int set, int askFor, std::uint32_t seed, int questions)
 {
+    total = std::max(1, questions);
+    missList.clear();
     all = birds;
     pool = poolFor(all, set);
     deck.clear();
@@ -157,6 +159,17 @@ bool Quiz::answer(int slot)
     }
     ++wrong;
     const int qi = number - 1;
+    const int takenFor = q.answers[static_cast<std::size_t>(slot)];
+    bool seen = false;
+    for (auto& m : missList)
+        if (m.bird == q.bird)
+        {
+            m.taken = takenFor;
+            ++m.times;
+            seen = true;
+        }
+    if (! seen)
+        missList.push_back({ q.bird, takenFor, 1 });
     addDue(q.bird, qi + kMissGap + 1);
     const int taken = q.answers[static_cast<std::size_t>(slot)];
     if (contains(pool, taken))
@@ -166,7 +179,7 @@ bool Quiz::answer(int slot)
 
 bool Quiz::next()
 {
-    if (number >= kQuestions)
+    if (number >= total)
         return false;
     makeQuestion();
     ++number;

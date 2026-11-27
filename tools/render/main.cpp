@@ -619,6 +619,18 @@ int checkQuiz(const tipp::BirdData& bird)
         check(lookFirst, "lookalikes are among the wrong answers");
     }
 
+    for (int len : Quiz::kLengths)
+    {
+        // Each length the setup offers runs that many questions, then stops.
+        Quiz q;
+        q.start(birds, Quiz::kAll, Quiz::kAskSong, 5, len);
+        int n = 1;
+        while (q.answer(q.question().correctSlot), q.next())
+            ++n;
+        check(n == len && q.length() == len && q.finished() && q.left() == 0 && q.correct() == len && q.misses().empty(),
+              "a quiz of the chosen length stops after it");
+    }
+
     {
         // A miss: that bird is asked again after 2 other questions, and the
         // bird it was taken for right after it.
@@ -629,6 +641,8 @@ int checkQuiz(const tipp::BirdData& bird)
         const int takenFor = q.question().answers[static_cast<std::size_t>(wrongSlot)];
         check(! q.answer(wrongSlot) && q.missed() == 1 && q.left() == 9, "a wrong answer counts as missed");
         check(q.practise() == std::vector<int>({ missedBird, takenFor }), "practise names the missed bird and the one it was taken for");
+        check(q.misses().size() == 1u && q.misses()[0].bird == missedBird && q.misses()[0].taken == takenFor && q.misses()[0].times == 1,
+              "the result lists the missed bird and what it was taken for");
         std::vector<int> asked { missedBird };
         while (q.next())
         {

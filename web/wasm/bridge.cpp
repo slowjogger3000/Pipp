@@ -307,7 +307,22 @@ TIPP_API int tipp_quiz_pool_size(QuizHost* q, int set)
     q->scratch = Quiz::poolFor(q->birds, set);
     return static_cast<int>(q->scratch.size());
 }
-TIPP_API int tipp_quiz_start(QuizHost* q, int set, int ask, std::uint32_t seed) { return q->quiz.start(q->birds, set, ask, seed) ? 1 : 0; }
+TIPP_API int tipp_quiz_start(QuizHost* q, int set, int ask, std::uint32_t seed, int questions) { return q->quiz.start(q->birds, set, ask, seed, questions) ? 1 : 0; }
+TIPP_API int tipp_quiz_length(const QuizHost* q) { return q->quiz.length(); }
+// Writes up to max misses as (bird, taken, times), returns how many.
+TIPP_API int tipp_quiz_misses(const QuizHost* q, int* out, int max)
+{
+    int n = 0;
+    for (const auto& m : q->quiz.misses())
+        if (n < max)
+        {
+            out[3 * n] = m.bird;
+            out[3 * n + 1] = m.taken;
+            out[3 * n + 2] = m.times;
+            ++n;
+        }
+    return n;
+}
 // 13 ints: bird, type, count, answers[4], correct slot, picked, number,
 // correct, missed, left.
 TIPP_API void tipp_quiz_state(const QuizHost* q, int* out)

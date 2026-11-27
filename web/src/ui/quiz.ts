@@ -3,7 +3,10 @@
 // question counter, the mystery sonogram with PLAY AGAIN, HALF SPEED and
 // HINT, four answers in a 2x2 grid, then a band with the hint or
 // explanation, COMPARE BOTH, OPEN IN FIELD GUIDE and NEXT. Right: birds in
-// the quiz, what to ask for, hints and the score.
+// the quiz, what to ask for, hints, how many questions and the score.
+// After the last answer NEXT reads SEE RESULT, and the result panel takes
+// the place of the question: the score, the share right and the birds
+// missed (agreed with Eirik 2026-11-27; not in design/).
 //
 // Which bird is asked, the answers and the score come from tipp::Quiz in
 // core (on this thread's wasm instance); the quiz voice and COMPARE run in
@@ -25,7 +28,7 @@ const kHintKeys = ['guide.mnemonic', 'scene.season', 'quiz.hints_none'] as const
 const kTypeIds = ['song', 'call', 'alarm', 'flight'] as const;
 const kSeasonIds = ['spring', 'summer', 'autumn', 'winter'] as const;
 const kTimeIds = ['dawn', 'day', 'dusk', 'night'] as const;
-const kQuestions = 10;
+const kLengths = [10, 20, 50]; // tipp::Quiz::kLengths
 const kNumSets = kSetKeys.length;
 const kSetRows = Math.ceil(kNumSets / 2);
 const kLeftW = 950, kRightX = 962, kRightW = 1264 - kRightX;
@@ -55,6 +58,8 @@ export class QuizScreen {
   set = 0;
   ask = 0;
   hints = 0;
+  length = 0; // index in kLengths
+  showResult = false;
   half = false;
   hintShown = false;
   playing = false;
@@ -91,6 +96,18 @@ export class QuizScreen {
   private hintBtns!: Btn[];
   private scoreRows: { key: HTMLSpanElement; val: HTMLSpanElement }[] = [];
   private practise!: HTMLDivElement;
+  private lengthLabel!: HTMLDivElement;
+  private lengthBtns!: Btn[];
+  private missBuf: Ptr = 0;
+  // What the result panel replaces, and the panel itself.
+  private questionEls: HTMLElement[] = [];
+  private result!: HTMLDivElement;
+  private resLabel!: HTMLDivElement;
+  private resScore!: HTMLDivElement;
+  private resPct!: HTMLDivElement;
+  private resMissLabel!: HTMLDivElement;
+  private resList!: HTMLDivElement;
+  private resAgain!: Btn;
 
   // The mystery sonogram: 920x240 on the desktop, 320x160 on the phone.
   private wellW = 920;
@@ -148,6 +165,9 @@ export class QuizScreen {
     this.compareBtn = new Btn(this.band, '', () => this.compare(), { height: '24px', padding: '0 10px' });
     this.guideBtn = new Btn(this.band, '', () => this.openGuide(), { height: '24px', padding: '0 10px' });
     this.nextBtn = new Btn(this.band, '', () => this.next_(), { height: '24px', padding: '0 14px' });
+    this.questionEls = [fig, ...this.answers.map((a) => a.e), this.band];
+    this.result = this.buildResult(root);
+    place(this.result, 0, 22, kLeftW, 468);
 
     // ---------------------------------------------------------- right column
     let y = 0;
@@ -177,6 +197,12 @@ export class QuizScreen {
     const hintRow = box(root, {});
     place(hintRow, kRightX, y + 20, kRightW, 24);
     this.hintBtns = joined(hintRow, [0, 1, 2].map((i) => ({ text: '', onClick: () => { this.hints = i; this.update(); } })), 24);
+    y += 20 + 24 + 12;
+    this.lengthLabel = el('div', 'section', root);
+    place(this.lengthLabel, kRightX, y, kRightW, 14);
+    const lengthRow = box(root, {});
+    place(lengthRow, kRightX, y + 20, kRightW, 24);
+    this.lengthBtns = joined(lengthRow, kLengths.map((_, i) => ({ text: '', onClick: () => this.setLength(i) })), 24);
     y += 20 + 24 + 12;
     this.scoreLabel = el('div', 'section', root);
     place(this.scoreLabel, kRightX, y, kRightW, 14);
@@ -220,6 +246,7 @@ export class QuizScreen {
     this.halfBtn = tool(() => this.toggleHalf());
     this.hintBtn = tool(() => { this.hintShown = true; this.update(); });
 
+    this.result = this.buildResult(root);
     const answers = sec();
     for (let i = 0; i < 4; i++) {
       const e = box(answers, { height: '44px' }, 'answer');
@@ -254,7 +281,66 @@ export class QuizScreen {
     this.askBtns = joined(box(grid, {}), [0, 1, 2].map((i) => ({ text: '', onClick: () => { this.ask = i; this.start(); } })), 44);
     this.hintsLabel = el('div', 'field', grid);
     this.hintBtns = joined(box(grid, {}), [0, 1, 2].map((i) => ({ text: '', onClick: () => { this.hints = i; this.update(); } })), 44);
+    this.lengthLabel = el('div', 'field', grid);
+    this.lengthBtns = joined(box(grid, {}), kLengths.map((_, i) => ({ text: '', onClick: () => this.setLength(i) })), 44);
+    this.questionEls = [fig, answers, this.band];
     this.practise = box(root, { font: '400 11px/16px var(--mono)', color: 'var(--inkSoft)' });
+  }
+
+  // The result panel: RESULT, the score in serif, the share right, then the
+  // birds missed, each with what it was taken for and OPEN IN GUIDE, and
+  // START AGAIN. Hidden until SEE RESULT.
+  private buildResult(parent: HTMLElement): HTMLDivElement {
+    const phone = this.phone;
+    const r = box(parent, { display: 'none', flexDirection: 'column', gap: '8px', border: '1px solid var(--ink)', background: 'var(--panel)', padding: phone ? '12px' : '16px 20px', boxSizing: 'border-box' });
+    this.resLabel = el('div', 'section', r);
+    this.resScore = el('div', 'serif', r);
+    this.resScore.style.font = `400 ${phone ? 44 : 64}px/${phone ? 48 : 68}px var(--serif)`;
+    this.resPct = box(r, { font: '500 12px var(--mono)', letterSpacing: '0.06em' });
+    this.resMissLabel = el('div', 'section', r);
+    this.resMissLabel.style.marginTop = '8px';
+    this.resList = box(r, phone ? { display: 'flex', flexDirection: 'column' } : { display: 'flex', flexDirection: 'column', flex: '1', minHeight: '0', overflowY: 'auto' }, 'gtable well');
+    const foot = box(r, { display: 'flex', justifyContent: phone ? 'stretch' : 'flex-end', marginTop: '4px' });
+    this.resAgain = new Btn(foot, '', () => this.start(), phone ? { height: '44px', flex: '1' } : { height: '24px', padding: '0 14px' });
+    return r;
+  }
+
+  private fillResult(q: Question) {
+    const s = this.s, t = this.host.tipp, x = t.x;
+    const total = x.tipp_quiz_length(this.q);
+    this.resLabel.textContent = s.t('quiz.result');
+    this.resScore.textContent = s.t('quiz.result_score', { correct: number(q.correct, 0, s.no), total: number(total, 0, s.no) });
+    this.resPct.textContent = s.t('quiz.result_pct', { pct: number(Math.round((100 * q.correct) / Math.max(1, total)), 0, s.no) });
+    this.resMissLabel.textContent = s.t('quiz.result_missed');
+    this.resAgain.text(s.t('quiz.again'));
+    const n = x.tipp_quiz_misses(this.q, this.missBuf, 64);
+    const v = t.i32(this.missBuf, 3 * n);
+    this.resList.replaceChildren();
+    if (n === 0) {
+      const row = box(this.resList, { height: this.phone ? '44px' : '28px' }, 'grow');
+      const e = el('span', 'tkey', row, s.t('quiz.result_none'));
+      e.style.flex = '1';
+      return;
+    }
+    for (let i = 0; i < n; i++) {
+      const bird = v[3 * i], taken = v[3 * i + 1], times = v[3 * i + 2];
+      const row = box(this.resList, { minHeight: this.phone ? '56px' : '34px', flex: 'none', gap: '8px', padding: '0 0 0 8px' }, `grow${i < n - 1 ? ' rule' : ''}`);
+      const words = box(row, { flex: '1', minWidth: '0', display: 'flex', flexDirection: this.phone ? 'column' : 'row', alignItems: this.phone ? 'flex-start' : 'baseline', gap: this.phone ? '0' : '12px' });
+      const nm = el('span', '', words, this.name(bird));
+      Object.assign(nm.style, { font: '400 20px/24px var(--serif)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '100%' });
+      let note = s.t('quiz.result_taken', { bird: lower(this.name(taken)) });
+      if (times > 1) note += `, ${s.t('quiz.result_times', { n: number(times, 0, s.no) })}`;
+      const tk = el('span', '', words, note);
+      Object.assign(tk.style, { font: '400 11px/15px var(--mono)', color: 'var(--inkSoft)' });
+      const id = this.ids[bird];
+      new Btn(row, s.t(this.phone ? 'phone.quiz.open_guide' : 'quiz.open_guide'), () => this.on.openGuide(id),
+        this.phone ? { height: '44px', padding: '0 10px', flex: 'none', margin: '4px 4px 4px 0' } : { height: '24px', padding: '0 10px', flex: 'none', marginRight: '6px' });
+    }
+  }
+
+  private setLength(i: number) {
+    this.length = i;
+    this.start();
   }
 
   // Every bird with data, with its group and lookalikes, into tipp::Quiz.
@@ -281,6 +367,7 @@ export class QuizScreen {
     this.stateBuf = t.alloc(13 * 4);
     this.practiseBuf = t.alloc(64 * 4);
     this.sceneBuf = t.alloc(2 * 4);
+    this.missBuf = t.alloc(3 * 64 * 4);
     const lk = t.alloc(64 * 4);
     for (let k = 0; k < this.ids.length; k++) {
       const entry = index.birds.find((b) => b.id === this.ids[k])!;
@@ -343,7 +430,8 @@ export class QuizScreen {
   start() {
     this.stopCompare();
     const seed = (Math.random() * 0x100000000) >>> 0;
-    if (this.host.tipp.x.tipp_quiz_start(this.q, this.set, this.ask, seed)) this.stage();
+    this.showResult = false;
+    if (this.host.tipp.x.tipp_quiz_start(this.q, this.set, this.ask, seed, kLengths[this.length])) this.stage();
     else {
       this.host.post({ t: 'qvoice', op: 'stop' });
       this.playing = false;
@@ -372,12 +460,18 @@ export class QuizScreen {
   next_() {
     if (!this.active || !this.answered) return;
     this.stopCompare();
-    if (this.finished) this.start();
-    else if (this.host.tipp.x.tipp_quiz_next(this.q)) this.stage();
+    if (this.showResult) this.start();
+    else if (this.finished) {
+      this.showResult = true;
+      this.host.post({ t: 'qvoice', op: 'stop' });
+      this.playing = false;
+      this.host.param('pb_play', 0);
+      this.update();
+    } else if (this.host.tipp.x.tipp_quiz_next(this.q)) this.stage();
   }
 
   playAgain() {
-    if (!this.active) return;
+    if (!this.active || this.showResult) return;
     void this.host.start();
     this.stopCompare();
     this.playing = true;
@@ -480,7 +574,9 @@ export class QuizScreen {
     this.compareBtn.text(s.t('quiz.compare'));
     this.guideBtn.text(s.t(this.phone ? 'phone.quiz.open_guide' : 'quiz.open_guide'));
     const f = font(10, 500);
-    if (!this.phone) this.nextBtn.e.style.width = `${Math.max(textWidth(f, s.t('quiz.next'), 0.6), textWidth(f, s.t('quiz.again'), 0.6)) + 28}px`;
+    if (!this.phone) this.nextBtn.e.style.width = `${Math.max(textWidth(f, s.t('quiz.next'), 0.6), textWidth(f, s.t('quiz.see_result'), 0.6)) + 28}px`;
+    this.lengthBtns.forEach((b, i) => b.text(number(kLengths[i], 0, s.no)));
+    this.lengthLabel.textContent = s.t('quiz.length');
     this.setBtns.forEach((b, i) => b.text(this.setName(i)));
     this.askBtns.forEach((b, i) => b.text(s.t(kAskKeys[i])));
     this.hintBtns.forEach((b, i) => b.text(s.t(kHintKeys[i])));
@@ -508,8 +604,15 @@ export class QuizScreen {
     const q = this.question();
     const active = q.number > 0, answered = active && q.picked >= 0, finished = answered && this.finished;
 
-    this.counter.textContent = active ? s.t('quiz.question', { n: String(q.number), total: String(kQuestions) }) : s.t('quiz.question_none');
-    this.nextBtn.text(s.t(finished ? 'quiz.again' : 'quiz.next'));
+    const total = x.tipp_quiz_length(this.q);
+    this.counter.textContent = active ? s.t('quiz.question', { n: String(q.number), total: String(total) }) : s.t('quiz.question_none');
+    this.nextBtn.text(s.t(finished ? 'quiz.see_result' : 'quiz.next'));
+    const result = this.showResult && finished;
+    // The answers set their own display below; the figure and band keep the one they were built with.
+    this.questionEls.forEach((e) => { if (!e.classList.contains('answer')) e.style.visibility = result ? 'hidden' : ''; });
+    if (this.phone) this.questionEls.forEach((e) => (e.style.display = result ? 'none' : 'flex'));
+    this.result.style.display = result ? 'flex' : 'none';
+    if (result) this.fillResult(q);
     this.halfBtn.on(this.half).disabled(!active);
     this.againBtn.disabled(!active);
     this.hintBtn.disabled(!active || this.hints === 2 || answered).on(this.hintShown && !answered && this.hints !== 2);
@@ -518,7 +621,7 @@ export class QuizScreen {
     this.nextBtn.disabled(!answered);
 
     this.answers.forEach((a, i) => {
-      a.e.style.display = active && i < q.count ? '' : 'none';
+      a.e.style.display = active && i < q.count && !result ? (this.phone ? 'flex' : '') : 'none';
       a.name.textContent = active && i < q.count ? this.name(q.answers[i]) : '';
       const correct = answered && i === q.correctSlot;
       const wrong = answered && !correct && i === q.picked;
@@ -531,6 +634,7 @@ export class QuizScreen {
     });
     this.askBtns.forEach((b, i) => b.on(this.ask === i));
     this.hintBtns.forEach((b, i) => b.on(this.hints === i));
+    this.lengthBtns.forEach((b, i) => b.on(this.length === i));
 
     const scores = active ? [q.correct, q.missed, q.left] : [0, 0, 0];
     if (this.scoreRight) this.scoreRight.textContent = s.t('phone.quiz.correct', { n: number(scores[0], 0, s.no) });
@@ -567,7 +671,7 @@ export class QuizScreen {
     let band: string;
     if (answered) {
       band = this.explain(q);
-      if (finished) band += ` ${s.t('quiz.done', { correct: String(q.correct), total: String(kQuestions) })}`;
+      if (finished) band += ` ${s.t('quiz.done', { correct: String(q.correct), total: String(total) })}`;
     } else band = this.hintShown && this.hints !== 2 ? this.hint(q) : s.t('quiz.prompt');
     this.bandText.textContent = band;
     this.on.refresh();

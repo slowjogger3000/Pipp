@@ -78,8 +78,10 @@ public:
     void setCollectionFolder(const juce::File& folder);
     CollectionScreen& collectionScreen() noexcept { return collScreen; }
     LogScreen& logScreenForTest() noexcept { return logScreen; }
-    void snapshotQuiz(std::uint32_t seed, int skip, int answer, bool leave)
+    void snapshotQuiz(std::uint32_t seed, int skip, int answer, bool leave, int lengthIndex = 0, bool result = false)
     {
+        quizLength = juce::jlimit(0, 2, lengthIndex);
+        snapshotQuizResult = result;
         snapshotLeaveQuiz = leave;
         quizSeed = seed;
         quizSkip = skip;
@@ -124,6 +126,7 @@ private:
     void quizAnswer(int slot);
     void quizNext();
     void quizPlayAgain();
+    void showQuizResult();
     void quizCompare();
     void quizOpenGuide();
     void updateQuizView();
@@ -221,7 +224,8 @@ private:
     std::vector<std::unique_ptr<tipp::BirdData>> quizData;
     std::vector<int> quizEntries; // list.birds index per quiz bird
     std::vector<juce::var> quizInfo; // bird.json per quiz bird
-    int quizSet = 0, quizAsk = 0, quizHints = 0;
+    int quizSet = 0, quizAsk = 0, quizHints = 0, quizLength = 0; // quizLength: index in Quiz::kLengths
+    bool quizShowResult = false, snapshotQuizResult = false;
     bool quizHalf = false, hintShown = false, quizPlaying = false;
     std::uint32_t quizAsks = 0u;
     std::uint32_t quizSeed = 0u; // 0: from the clock

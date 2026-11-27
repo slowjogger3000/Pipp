@@ -4,7 +4,10 @@
 // Left, 950px: question counter, the mystery sonogram with PLAY AGAIN,
 // HALF SPEED and HINT, four answers in a 2x2 grid, then a band with the
 // hint or explanation, COMPARE BOTH, OPEN IN FIELD GUIDE and NEXT. Right:
-// birds in the quiz, what to ask for, hints and the score.
+// birds in the quiz, what to ask for, hints, how many questions and the
+// score. After the last answer NEXT reads SEE RESULT, and the result panel
+// takes the place of the figure, answers and band: the score, the share
+// right and the birds missed (agreed with Eirik 2026-11-27; not in design/).
 //
 // The screen only draws and reports clicks. Which bird is asked, the
 // answers and the score come from tipp::Quiz in core; the host fills View.
@@ -77,14 +80,17 @@ public:
         int correctSlot = -1, picked = -1;
         juce::String band;    // prompt, hint or explanation
         juce::String caption; // FIG. 1 text
-        int set = 0, ask = 0, hints = 0;
+        int set = 0, ask = 0, hints = 0, length = 0; // length: index in Quiz::kLengths
+        bool showResult = false;
+        struct Miss { juce::String name, note; };
+        std::vector<Miss> misses;
         std::array<bool, tipp::Quiz::kNumSets> setHasBirds {};
         int correct = 0, missed = 0, left = 0;
         juce::String practise;
         bool half = false, hintUsed = false, comparing = false;
     };
 
-    std::function<void(int)> onAnswer, onSet, onAsk, onHints;
+    std::function<void(int)> onAnswer, onSet, onAsk, onHints, onLength, onOpenMiss;
     std::function<void()> onPlayAgain, onHalf, onHint, onCompare, onOpenGuide, onNext;
 
     QuizSonogram sono;
@@ -113,6 +119,8 @@ private:
     };
 
     void refresh();
+    void layoutResult();
+    static constexpr int kMissRowH = 34;
 
     const Strings& strings;
     View view;
@@ -120,10 +128,14 @@ private:
     Btn againBtn, halfBtn, hintBtn, compareBtn, guideBtn, nextBtn;
     std::array<Answer, 4> answers;
     std::array<Btn, tipp::Quiz::kNumSets> setBtns;
-    std::array<Btn, 3> askBtns, hintBtns;
+    std::array<Btn, 3> askBtns, hintBtns, lengthBtns;
+    Btn againResultBtn;
+    std::vector<std::unique_ptr<Btn>> missBtns;
+    int missRowsShown = 0;
 
     // Set in resized().
     juce::Rectangle<int> left, right, counter, figure, figHead, figAxis, figWell, figCaption, band, bandText;
-    juce::Rectangle<int> setLabel, askLabel, hintsLabel, scoreLabel, scoreTable, practiseText;
+    juce::Rectangle<int> setLabel, askLabel, hintsLabel, lengthLabel, scoreLabel, scoreTable, practiseText;
+    juce::Rectangle<int> resultArea, resLabel, resScore, resPct, resMissLabel, resList;
 };
 } // namespace tipp::ui
