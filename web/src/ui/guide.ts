@@ -6,7 +6,8 @@
 // the year in Norway, lookalikes with COMPARE.
 //
 // Text comes from data/birds/<id>/bird.json and the plate callouts in
-// plate.json. A field that is not verified carries [TO VERIFY]. The screen
+// plate.json. An empty field reads "Not described"; a guessed plate value
+// does too. The screen
 // only draws and reports clicks; the app sends everything to the engine.
 
 import type { AudioHost } from '../audio/host.ts';
@@ -293,10 +294,9 @@ export class GuideScreen {
 
   private calloutValue(c: Record<string, unknown>, variant: string): string {
     const v = (c[variant] ?? {}) as Text;
+    // A guessed plate value is not a fact: the table reads "Not described".
     const text = sentenceCase(v[this.s.lang] ?? '');
-    if (v.verified) return text;
-    const m = this.s.t('to_verify');
-    return text ? `${text} ${m}` : m;
+    return v.verified && text ? text : this.s.t('not_described');
   }
 
   private otherName(l: { id?: string; name?: Text }, no: boolean): string {
@@ -348,13 +348,12 @@ export class GuideScreen {
       this.row(mf, s.t(`plate.${c.id}`), [this.calloutValue(c, 'male'), this.calloutValue(c, 'female')], false);
     this.row(mf, s.t('guide.song_row'), [this.field(info.sings?.male), this.field(info.sings?.female)], true);
 
-    // Field facts. The names are not checked against Artsdatabanken yet.
+    // Field facts. The names were checked against GBIF on 2026-11-27.
     const ft = this.factsTable;
     ft.replaceChildren();
-    const mark = index.verified_names ? '' : ` ${s.t('to_verify')}`;
-    this.row(ft, s.t('fact.norwegian'), [this.entry.name.no + mark], false);
-    this.row(ft, s.t('fact.english'), [this.entry.name.en + mark], false);
-    this.row(ft, s.t('fact.latin'), [this.entry.latin + mark], false);
+    this.row(ft, s.t('fact.norwegian'), [this.entry.name.no], false);
+    this.row(ft, s.t('fact.english'), [this.entry.name.en], false);
+    this.row(ft, s.t('fact.latin'), [this.entry.latin], false);
     kFactIds.forEach((id, i) => this.row(ft, s.t(`fact.${id}`), [this.field(info.facts?.[id])], i === 6));
 
     // Figure caption and the link to real recordings.
@@ -370,9 +369,14 @@ export class GuideScreen {
 
     // Description and mnemonic.
     this.notesText.replaceChildren();
-    this.notesText.append(this.field(info.song_notes), '\n\n');
-    el('span', 'tkey', this.notesText, s.t('guide.mnemonic')).style.display = 'block';
-    this.notesText.append(this.field(info.mnemonic));
+    // No mnemonic is collected yet for most birds: then the block is left out.
+    this.notesText.append(this.field(info.song_notes));
+    const mnemonic = info.mnemonic?.[s.lang] ?? '';
+    if (mnemonic) {
+      this.notesText.append('\n\n');
+      el('span', 'tkey', this.notesText, s.t('guide.mnemonic')).style.display = 'block';
+      this.notesText.append(mnemonic);
+    }
 
     // The four song types.
     [...this.typesTable.children].forEach((r, i) => {
@@ -398,7 +402,7 @@ export class GuideScreen {
     const looks: { id?: string; name?: Text; text?: Text }[] = info.lookalikes ?? [];
     if (looks.length === 0) {
       this.lookArea.replaceChildren();
-      box(this.lookArea, { font: `400 11px/${kLine}px var(--mono)` }).textContent = s.t('to_verify');
+      box(this.lookArea, { font: `400 11px/${kLine}px var(--mono)` }).textContent = s.t('guide.no_lookalikes');
     }
     [...this.lookArea.querySelectorAll('.look')].forEach((r, i) => {
       const l = looks[i];

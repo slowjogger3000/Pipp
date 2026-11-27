@@ -22,14 +22,13 @@ export class Strings {
     return s;
   }
 
-  // A {en, no, verified} text from bird.json. Not verified: [TO VERIFY]
-  // after it, or alone when the text is empty.
+  // A {en, no, verified} text from bird.json. An empty text means no source
+  // describes it and reads "Not described". A filled text is shown as written:
+  // where the sources leave something out, the text itself says so (Eirik,
+  // 2026-11-27: no [TO VERIFY] markers in the app).
   field(f: { en?: string; no?: string; verified?: boolean } | undefined): string {
-    const marker = this.t('to_verify');
     const text = f?.[this.lang] ?? '';
-    if (f?.verified) return text;
-    if (!text) return marker;
-    return text.includes(marker) ? text : `${text} ${marker}`;
+    return text || this.t('not_described');
   }
 }
 

@@ -1,5 +1,5 @@
 {
- "_note": "Field guide text for this bird, both languages. Facts come from birds.md. A field with verified false shows [TO VERIFY]; a text may also carry the marker inline for the part that is not checked. Norwegian wording is mine, Eirik to check. calendar rows: one letter per month from January, y yes, n no, ? not known.",
+ "_note": "Field guide text for this bird, both languages. Facts come from birds.md. A field with verified false is not shown as a fact: empty means not described, and the text says what the sources leave out. Norwegian wording is mine, Eirik to check. calendar rows: one letter per month from January, y yes, n no, ? not known.",
  "xeno_canto": "https://xeno-canto.org/species/cyanistes-caeruleus",
  "facts": {
   "length": {
@@ -108,8 +108,8 @@
   "present": "yyyyyyyyyyyy",
   "sings": "????????????",
   "note": {
-   "en": "Mostly resident. In some years many move south in September and October, mostly young females. [TO VERIFY] singing months.",
-   "no": "For det meste standfugl. Noen år trekker mange sørover i september og oktober, mest unge hunner. [TO VERIFY] månedene med sang.",
+   "en": "Mostly resident. In some years many move south in September and October, mostly young females. The sources do not give its singing months.",
+   "no": "For det meste standfugl. Noen år trekker mange sørover i september og oktober, mest unge hunner. Kildene oppgir ikke månedene med sang.",
    "verified": true
   }
  },

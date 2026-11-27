@@ -1,5 +1,5 @@
 {
- "_note": "Field guide text for this bird, both languages. Facts come from birds.md (M11, SNL). A field with verified false shows [TO VERIFY]. Norwegian wording is mine, Eirik to check. calendar rows: one letter per month from January, y yes, n no, ? not known.",
+ "_note": "Field guide text for this bird, both languages. Facts come from birds.md (M11, SNL). A field with verified false is not shown as a fact: empty means not described, and the text says what the sources leave out. Norwegian wording is mine, Eirik to check. calendar rows: one letter per month from January, y yes, n no, ? not known.",
  "xeno_canto": "https://xeno-canto.org/species/fringilla-montifringilla",
  "facts": {
   "length": {
@@ -87,8 +87,8 @@
   "present": "yyyyyyyyyyyy",
   "sings": "????????????",
   "note": {
-   "en": "Migrant and wanderer: most winter in southern Scandinavia and Europe, often in huge flocks with chaffinches; some stay and visit feeders. Returns in April and May. [TO VERIFY] singing months.",
-   "no": "Trekk- og streiffugl: de fleste overvintrer i Sør-Skandinavia og Europa, ofte i enorme flokker med bokfink; noen blir og besøker fuglebrett. Kommer i april og mai. [TO VERIFY] månedene med sang.",
+   "en": "Migrant and wanderer: most winter in southern Scandinavia and Europe, often in huge flocks with chaffinches; some stay and visit feeders. Returns in April and May. The sources do not give its singing months.",
+   "no": "Trekk- og streiffugl: de fleste overvintrer i Sør-Skandinavia og Europa, ofte i enorme flokker med bokfink; noen blir og besøker fuglebrett. Kommer i april og mai. Kildene oppgir ikke månedene med sang.",
    "verified": true
   }
  },

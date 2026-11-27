@@ -67,8 +67,8 @@
    "verified": true
   },
   "call": {
-   "en": "Powerful and easy to recognise. [TO VERIFY] how it sounds.",
-   "no": "Kraftig og lett å kjenne igjen. [TO VERIFY] hvordan den låter.",
+   "en": "Powerful and easy to recognise. The sources do not describe how it sounds.",
+   "no": "Kraftig og lett å kjenne igjen. Kildene beskriver ikke hvordan den låter.",
    "verified": true
   },
   "alarm": {
@@ -103,8 +103,8 @@
   "present": "??yyyyyyy???",
   "sings": "??y?????????",
   "note": {
-   "en": "Arrives in March to May. Females leave from late June, males in July and August, the young in August and September. Winters mostly on the coasts of the British Isles. [TO VERIFY] song months.",
-   "no": "Kommer i mars til mai. Hunnene drar fra slutten av juni, hannene i juli og august, ungene i august og september. Overvintrer mest langs kysten av De britiske øyer. [TO VERIFY] sangmånedene.",
+   "en": "Arrives in March to May. Females leave from late June, males in July and August, the young in August and September. Winters mostly on the coasts of the British Isles. The sources do not give its singing months.",
+   "no": "Kommer i mars til mai. Hunnene drar fra slutten av juni, hannene i juli og august, ungene i august og september. Overvintrer mest langs kysten av De britiske øyer. Kildene oppgir ikke sangmånedene.",
    "verified": true
   }
  },

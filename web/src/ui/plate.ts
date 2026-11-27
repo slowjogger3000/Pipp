@@ -51,8 +51,8 @@ export class Plate {
   caption(): string {
     const c = this.doc.captions?.[this.variant];
     if (!c) return '';
-    const s = c[this.strings.lang] ?? '';
-    return c.verified ? s : `${s} ${this.strings.t('to_verify')}`;
+    // Captions say themselves where the sources describe nothing.
+    return c[this.strings.lang] ?? '';
   }
 
   // Draws when the variant, opening or language changed.
@@ -162,6 +162,10 @@ export class Plate {
   private paintCallouts(g: CanvasRenderingContext2D, ox: number, oy: number, s: number) {
     const r = this.cv.c.width / this.cv.w;
     for (const c of this.doc.callouts ?? []) {
+      // A value no source gives is a guess: the callout is left out, leader
+      // and all (Eirik, 2026-11-27).
+      const cv = (c[this.variant] ?? {}) as Text;
+      if (!cv.verified || !cv[this.strings.lang]) continue;
       g.save();
       this.base(g, ox, oy, s);
       g.strokeStyle = colour.inkSoft;
@@ -185,11 +189,7 @@ export class Plate {
       g.font = font(8, 500);
       g.fillStyle = colour.ink;
       let line = 1;
-      if (value) g.fillText(value, px, rowY(line++));
-      if (!v.verified) {
-        g.fillStyle = colour.inkSoft;
-        g.fillText(this.strings.t('to_verify'), px, rowY(line));
-      }
+      g.fillText(value, px, rowY(line));
       g.letterSpacing = '0px';
     }
   }

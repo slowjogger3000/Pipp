@@ -1,5 +1,5 @@
 {
- "_note": "Field guide text for this bird, both languages. Facts come from birds.md (M11, SNL). A field with verified false shows [TO VERIFY]. Norwegian wording is mine, Eirik to check. calendar rows: one letter per month from January, y yes, n no, ? not known.",
+ "_note": "Field guide text for this bird, both languages. Facts come from birds.md (M11, SNL). A field with verified false is not shown as a fact: empty means not described, and the text says what the sources leave out. Norwegian wording is mine, Eirik to check. calendar rows: one letter per month from January, y yes, n no, ? not known.",
  "xeno_canto": "https://xeno-canto.org/species/poecile-montanus",
  "facts": {
   "length": {
@@ -87,8 +87,8 @@
   "present": "yyyyyyyyyyyy",
   "sings": "????yy?y????",
   "note": {
-   "en": "Resident; some young birds wander south-west in autumn. Sings mostly in the breeding season (eggs in May to June), also in late summer and now and then in winter. [TO VERIFY] the other months.",
-   "no": "Standfugl; noen unge fugler streifer mot sørvest om høsten. Synger mest i hekketiden (egg i mai til juni), også på sensommeren og av og til om vinteren. [TO VERIFY] de andre månedene.",
+   "en": "Resident; some young birds wander south-west in autumn. Sings mostly in the breeding season (eggs in May to June), also in late summer and now and then in winter. The sources say nothing about the other months.",
+   "no": "Standfugl; noen unge fugler streifer mot sørvest om høsten. Synger mest i hekketiden (egg i mai til juni), også på sensommeren og av og til om vinteren. Kildene sier ikke noe om de andre månedene.",
    "verified": true
   }
  },

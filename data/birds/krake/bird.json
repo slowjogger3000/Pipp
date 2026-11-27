@@ -1,5 +1,5 @@
 {
- "_note": "Field guide text for this bird, both languages. Facts come from birds.md (M11 batch 1, SNL). A field with verified false shows [TO VERIFY]. Norwegian wording is mine, Eirik to check. calendar rows: one letter per month from January, y yes, n no, ? not known.",
+ "_note": "Field guide text for this bird, both languages. Facts come from birds.md (M11 batch 1, SNL). A field with verified false is not shown as a fact: empty means not described, and the text says what the sources leave out. Norwegian wording is mine, Eirik to check. calendar rows: one letter per month from January, y yes, n no, ? not known.",
  "xeno_canto": "https://xeno-canto.org/species/corvus-cornix",
  "facts": {
   "length": {
@@ -87,8 +87,8 @@
   "present": "yyyyyyyyyyyy",
   "sings": "????????????",
   "note": {
-   "en": "Resident and migrant: many winter on the coast, others abroad and back in March to April. [TO VERIFY] calling months.",
-   "no": "Stand- og trekkfugl: mange overvintrer langs kysten, andre i utlandet og kommer tilbake i mars til april. [TO VERIFY] månedene med rop.",
+   "en": "Resident and migrant: many winter on the coast, others abroad and back in March to April. The sources do not give its calling months.",
+   "no": "Stand- og trekkfugl: mange overvintrer langs kysten, andre i utlandet og kommer tilbake i mars til april. Kildene oppgir ikke månedene med rop.",
    "verified": true
   }
  },

@@ -51,8 +51,8 @@
   }
  },
  "song_notes": {
-  "en": "A melodic, slightly melancholy row of notes, different from the chiffchaff's. One of the smallest birds in Norway, and counted as the most common. [TO VERIFY] how the row is built.",
-  "no": "En melodisk, litt vemodig tonerekke, ulik gransangerens. En av de minste fuglene i Norge, og regnet som den vanligste. [TO VERIFY] hvordan rekken er bygd.",
+  "en": "A melodic, slightly melancholy row of notes, different from the chiffchaff's. One of the smallest birds in Norway, and counted as the most common. The sources do not say how the row is built, so Pipp's version is a stand-in.",
+  "no": "En melodisk, litt vemodig tonerekke, ulik gransangerens. En av de minste fuglene i Norge, og regnet som den vanligste. Kildene sier ikke hvordan rekken er bygd, så Pipps versjon er en stedfortreder.",
   "verified": true
  },
  "mnemonic": {
@@ -86,8 +86,8 @@
   "present": "???yyyyy????",
   "sings": "????????????",
   "note": {
-   "en": "Arrives at the turn of April and May, leaves mainly in August. Northern birds winter in East Africa, southern birds in West Africa. [TO VERIFY] singing months.",
-   "no": "Kommer i overgangen april–mai og drar hovedsakelig i august. Fugler fra nord overvintrer i Øst-Afrika, fra sør i Vest-Afrika. [TO VERIFY] sangmånedene.",
+   "en": "Arrives at the turn of April and May, leaves mainly in August. Northern birds winter in East Africa, southern birds in West Africa. The sources do not give its singing months.",
+   "no": "Kommer i overgangen april–mai og drar hovedsakelig i august. Fugler fra nord overvintrer i Øst-Afrika, fra sør i Vest-Afrika. Kildene oppgir ikke månedene med sang.",
    "verified": true
   }
  },

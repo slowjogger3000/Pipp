@@ -1,5 +1,5 @@
 {
- "_note": "Field guide text for this bird, both languages. Facts come from birds.md. A field with verified false shows [TO VERIFY]; a text may also carry the marker inline for the part that is not checked. Norwegian wording is mine, Eirik to check. calendar rows: one letter per month from January, y yes, n no, ? not known.",
+ "_note": "Field guide text for this bird, both languages. Facts come from birds.md. A field with verified false is not shown as a fact: empty means not described, and the text says what the sources leave out. Norwegian wording is mine, Eirik to check. calendar rows: one letter per month from January, y yes, n no, ? not known.",
  "xeno_canto": "https://xeno-canto.org/species/parus-major",
  "facts": {
   "length": {
@@ -93,8 +93,8 @@
   "present": "yyyyyyyyyyyy",
   "sings": "yyy?????????",
   "note": {
-   "en": "Mostly resident. Some move in September and October, mostly within Scandinavia. [TO VERIFY] singing months after March.",
-   "no": "For det meste standfugl. Noen trekker i september og oktober, mest innen Skandinavia. [TO VERIFY] månedene med sang etter mars.",
+   "en": "Mostly resident. Some move in September and October, mostly within Scandinavia. The sources do not give its singing months after March.",
+   "no": "For det meste standfugl. Noen trekker i september og oktober, mest innen Skandinavia. Kildene oppgir ikke månedene med sang etter mars.",
    "verified": true
   }
  },

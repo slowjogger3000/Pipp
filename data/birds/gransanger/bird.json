@@ -1,5 +1,5 @@
 {
- "_note": "Field guide text for this bird, both languages. Facts come from birds.md (M11, SNL). A field with verified false shows [TO VERIFY]. Norwegian wording is mine, Eirik to check. calendar rows: one letter per month from January, y yes, n no, ? not known.",
+ "_note": "Field guide text for this bird, both languages. Facts come from birds.md (M11, SNL). A field with verified false is not shown as a fact: empty means not described, and the text says what the sources leave out. Norwegian wording is mine, Eirik to check. calendar rows: one letter per month from January, y yes, n no, ? not known.",
  "xeno_canto": "https://xeno-canto.org/species/phylloscopus-collybita",
  "facts": {
   "length": {
@@ -87,8 +87,8 @@
   "present": "???yyy??????",
   "sings": "????????????",
   "note": {
-   "en": "Migrant, winters around the western Mediterranean; returns from April, up to Nordland. [TO VERIFY] departure and singing months.",
-   "no": "Trekkfugl, overvintrer rundt det vestlige Middelhavet; kommer fra april, opp til Nordland. [TO VERIFY] avreise og månedene med sang.",
+   "en": "Migrant, winters around the western Mediterranean; returns from April, up to Nordland. The sources do not say when it leaves, or give its singing months.",
+   "no": "Trekkfugl, overvintrer rundt det vestlige Middelhavet; kommer fra april, opp til Nordland. Kildene sier ikke når den drar, og oppgir ikke månedene med sang.",
    "verified": true
   }
  },

@@ -1,5 +1,5 @@
 {
- "_note": "Field guide text for this bird, both languages. Facts come from birds.md. A field with verified false shows [TO VERIFY]; a text may also carry the marker inline for the part that is not checked. Norwegian wording is mine, Eirik to check. calendar rows: one letter per month from January, y yes, n no, ? not known.",
+ "_note": "Field guide text for this bird, both languages. Facts come from birds.md. A field with verified false is not shown as a fact: empty means not described, and the text says what the sources leave out. Norwegian wording is mine, Eirik to check. calendar rows: one letter per month from January, y yes, n no, ? not known.",
  "xeno_canto": "https://xeno-canto.org/species/turdus-merula",
  "facts": {
   "length": {
@@ -51,8 +51,8 @@
   }
  },
  "song_notes": {
-  "en": "Mellow, melodious song of fluting tones, often at a slow pace. Unlike the song thrush, the blackbird does not repeat its phrases, and the song varies a lot from bird to bird. [TO VERIFY] phrase length and the twitter ending.",
-  "no": "Myk, melodiøs sang med fløytende toner, ofte i rolig tempo. I motsetning til måltrosten gjentar ikke svarttrosten frasene sine, og sangen varierer mye fra fugl til fugl. [TO VERIFY] fraselengde og kvitringen på slutten.",
+  "en": "Mellow, melodious song of fluting tones, often at a slow pace. Unlike the song thrush, the blackbird does not repeat its phrases, and the song varies a lot from bird to bird. The sources give no phrase length and do not describe the twitter at the end.",
+  "no": "Myk, melodiøs sang med fløytende toner, ofte i rolig tempo. I motsetning til måltrosten gjentar ikke svarttrosten frasene sine, og sangen varierer mye fra fugl til fugl. Kildene oppgir ikke fraselengden og beskriver ikke kvitringen på slutten.",
   "verified": true
  },
  "mnemonic": {
@@ -72,14 +72,14 @@
    "verified": true
   },
   "alarm": {
-   "en": "A loud alarm call. [TO VERIFY] how it sounds.",
-   "no": "Et høyt varselrop. [TO VERIFY] hvordan det låter.",
+   "en": "A loud alarm call. The sources do not describe how it sounds.",
+   "no": "Et høyt varselrop. Kildene beskriver ikke hvordan den låter.",
    "verified": true
   },
   "flight": {
    "en": "Migrates alone at night. No flight call in the sources checked.",
    "no": "Trekker alene om natten. Ingen fluktlyd i kildene som er lest.",
-   "verified": false
+   "verified": true
   }
  },
  "parts": {
@@ -98,8 +98,8 @@
   "present": "yyyyyyyyyyyy",
   "sings": "ny??????????",
   "note": {
-   "en": "Most leave in autumn and return in late March. Many males winter in the lowlands on berries and fruit. [TO VERIFY] last singing month.",
-   "no": "De fleste drar om høsten og kommer tilbake i slutten av mars. Mange hanner overvintrer i lavlandet på bær og frukt. [TO VERIFY] siste måned med sang.",
+   "en": "Most leave in autumn and return in late March. Many males winter in the lowlands on berries and fruit. The sources do not give its last singing month.",
+   "no": "De fleste drar om høsten og kommer tilbake i slutten av mars. Mange hanner overvintrer i lavlandet på bær og frukt. Kildene oppgir ikke siste måned med sang.",
    "verified": true
   }
  },
@@ -118,9 +118,9 @@
     "no": "Duetrost"
    },
    "text": {
-    "en": "Shorter, faster phrases with short pauses and less variation.",
-    "no": "Kortere, raskere fraser med korte pauser og mindre variasjon.",
-    "verified": false
+    "en": "The sources do not compare their songs.",
+    "no": "Kildene sammenligner ikke sangen deres.",
+    "verified": true
    }
   },
   {
@@ -129,9 +129,9 @@
     "no": "Stær"
    },
    "text": {
-    "en": "Song is a run of whistles, clicks and mimicry.",
-    "no": "Sangen er en strøm av plystring, klikk og hermelyder.",
-    "verified": false
+    "en": "A good mimic: its song holds sounds of other birds and man-made signals.",
+    "no": "En god hermer: sangen har lyder fra andre fugler og menneskeskapte signaler.",
+    "verified": true
    }
   }
  ]

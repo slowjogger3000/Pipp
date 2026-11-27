@@ -72,6 +72,6 @@
  "captions": {
   "male": { "en": "Male, singing. Grey crown, black throat patch.", "no": "Hann som synger. Grå isse, svart strupeflekk.", "verified": true },
   "female": { "en": "Female. Brown crown.", "no": "Hunn. Brun isse.", "verified": true },
-  "juvenile": { "en": "Juvenile.", "no": "Ungfugl.", "verified": false }
+  "juvenile": { "en": "Juvenile. Not described in the sources.", "no": "Ungfugl. Ikke beskrevet i kildene.", "verified": false }
  }
 }

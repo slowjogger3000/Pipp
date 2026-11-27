@@ -584,7 +584,6 @@ void MainComponent::mouseUp(const juce::MouseEvent& e)
 void MainComponent::configurePlate(Plate& p)
 {
     p.language = strings.language();
-    p.toVerify = strings("to_verify");
     for (const char* id : { "bill", "eye_ring", "plumage", "throat", "head", "cheek", "breast", "eye_stripe", "wing", "tail", "neck" })
         p.calloutLabels[id] = strings("plate." + juce::String(id));
     p.repaint();
@@ -967,23 +966,19 @@ juce::String MainComponent::quizExplain() const
 juce::String MainComponent::quizHint() const
 {
     const auto& info = quizInfo[static_cast<std::size_t>(quiz.question().bird)];
-    if (quizHints == 0)
-        return strings.format("quiz.hint_mnemonic", { { "text", strings.field(info["mnemonic"]) } });
+    // Without a mnemonic the season hint stands in for it.
+    const auto mnemonic = info["mnemonic"][juce::Identifier(strings.language())].toString();
+    if (quizHints == 0 && mnemonic.isNotEmpty())
+        return strings.format("quiz.hint_mnemonic", { { "text", mnemonic } });
 
-    // Season: the months the calendar says it sings.
+    // Season: the months the calendar says it sings. Unknown months are left out.
     const auto sings = info["calendar"]["sings"].toString();
     const auto months = juce::StringArray::fromTokens(strings("cal.month_names"), "|", "");
     juce::StringArray yes;
-    bool unknown = sings.length() != 12;
     for (int m = 0; m < sings.length() && m < 12; ++m)
-    {
         if (sings[m] == 'y')
             yes.add(months[m]);
-        unknown = unknown || sings[m] == '?';
-    }
-    auto text = yes.joinIntoString(", ");
-    if (unknown)
-        text = text.isEmpty() ? strings("to_verify") : text + " " + strings("to_verify");
+    const auto text = yes.isEmpty() ? strings("quiz.months_unknown") : yes.joinIntoString(", ");
     return strings.format("quiz.hint_season", { { "months", text } });
 }
 

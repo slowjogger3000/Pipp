@@ -51,8 +51,8 @@
   }
  },
  "song_notes": {
-  "en": "The song flight is well known: whirring, the bird climbs higher and higher while pouring out a continuous stream of trills and whistles. After a long display it glides slowly down and drops to the ground like a stone. [TO VERIFY] SNL gives no transcription, so the notes Pipp plays are a stand-in.",
-  "no": "Sangflukten er velkjent: svirrende stiger fuglen høyere og høyere mens den lar en uavbrutt strøm av triller og fløytetoner strømme ut. Etter lang tids oppvisning glir den langsomt ned og faller mot bakken som en stein. [TO VERIFY] SNL gir ingen gjengivelse, så tonene Pipp spiller er en stedfortreder.",
+  "en": "The song flight is well known: whirring, the bird climbs higher and higher while pouring out a continuous stream of trills and whistles. After a long display it glides slowly down and drops to the ground like a stone. SNL gives no transcription, so the notes Pipp plays are a stand-in.",
+  "no": "Sangflukten er velkjent: svirrende stiger fuglen høyere og høyere mens den lar en uavbrutt strøm av triller og fløytetoner strømme ut. Etter lang tids oppvisning glir den langsomt ned og faller mot bakken som en stein. SNL gir ingen gjengivelse, så tonene Pipp spiller er en stedfortreder.",
   "verified": true
  },
  "mnemonic": {
@@ -86,8 +86,8 @@
   "present": "??yyyyy?????",
   "sings": "????????????",
   "note": {
-   "en": "One of the first migrants back: February to March in the south, April in the far north. Most winter on the west coast of the continent to Iberia. [TO VERIFY] when it leaves.",
-   "no": "En av de første trekkfuglene tilbake: februar til mars i sør, april i nord. De fleste overvintrer langs kontinentets vestkyst til Den iberiske halvøy. [TO VERIFY] når den drar.",
+   "en": "One of the first migrants back: February to March in the south, April in the far north. Most winter on the west coast of the continent to Iberia. The sources do not say when it leaves.",
+   "no": "En av de første trekkfuglene tilbake: februar til mars i sør, april i nord. De fleste overvintrer langs kontinentets vestkyst til Den iberiske halvøy. Kildene sier ikke når den drar.",
    "verified": true
   }
  },

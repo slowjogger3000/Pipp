@@ -1,5 +1,5 @@
 {
- "_note": "Field guide text for this bird, both languages. Facts come from birds.md (M11 batch 1, SNL). A field with verified false shows [TO VERIFY]. Norwegian wording is mine, Eirik to check. calendar rows: one letter per month from January, y yes, n no, ? not known.",
+ "_note": "Field guide text for this bird, both languages. Facts come from birds.md (M11 batch 1, SNL). A field with verified false is not shown as a fact: empty means not described, and the text says what the sources leave out. Norwegian wording is mine, Eirik to check. calendar rows: one letter per month from January, y yes, n no, ? not known.",
  "xeno_canto": "https://xeno-canto.org/species/sturnus-vulgaris",
  "facts": {
   "length": {
@@ -51,8 +51,8 @@
   }
  },
  "song_notes": {
-  "en": "A very good mimic: the song often holds songs and sounds of many other birds, and whistles, sirens and other man-made signal sounds. [TO VERIFY] how the song is built.",
-  "no": "En svært god hermer: sangen inneholder ofte sang og lyder fra mange andre fugler, og plystring, sirener og andre menneskeskapte signallyder. [TO VERIFY] hvordan sangen er bygd opp.",
+  "en": "A very good mimic: the song often holds songs and sounds of many other birds, and whistles, sirens and other man-made signal sounds. The sources do not say how the song is built.",
+  "no": "En svært god hermer: sangen inneholder ofte sang og lyder fra mange andre fugler, og plystring, sirener og andre menneskeskapte signallyder. Kildene sier ikke hvordan sangen er bygd opp.",
   "verified": true
  },
  "mnemonic": {
@@ -64,7 +64,7 @@
   "song": {
    "en": "Whistles, clicks and rattles. A stand-in: Pipp does not mimic other birds.",
    "no": "Plystring, klikk og skrall. En stedfortreder: Pipp hermer ikke andre fugler.",
-   "verified": false
+   "verified": true
   },
   "call": {
    "en": "",
@@ -87,8 +87,8 @@
   "present": "????????????",
   "sings": "????????????",
   "note": {
-   "en": "Mostly a migrant; most Norwegian birds winter in Britain, some stay. [TO VERIFY] arrival, departure and singing months.",
-   "no": "For det meste trekkfugl; de fleste norske overvintrer på De britiske øyer, noen blir. [TO VERIFY] ankomst, avreise og månedene med sang.",
+   "en": "Mostly a migrant; most Norwegian birds winter in Britain, some stay. The sources do not say when it comes and leaves, or give its singing months.",
+   "no": "For det meste trekkfugl; de fleste norske overvintrer på De britiske øyer, noen blir. Kildene sier ikke når den kommer og drar, og oppgir ikke månedene med sang.",
    "verified": true
   }
  },

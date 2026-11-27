@@ -1,5 +1,5 @@
 {
- "_note": "Field guide text for this bird, both languages. Facts come from birds.md (M11, SNL). A field with verified false shows [TO VERIFY]. Norwegian wording is mine, Eirik to check. calendar rows: one letter per month from January, y yes, n no, ? not known.",
+ "_note": "Field guide text for this bird, both languages. Facts come from birds.md (M11, SNL). A field with verified false is not shown as a fact: empty means not described, and the text says what the sources leave out. Norwegian wording is mine, Eirik to check. calendar rows: one letter per month from January, y yes, n no, ? not known.",
  "xeno_canto": "https://xeno-canto.org/species/turdus-pilaris",
  "facts": {
   "length": {
@@ -87,8 +87,8 @@
   "present": "yyyyyyyyyyyy",
   "sings": "????????????",
   "note": {
-   "en": "Migrant and wanderer; many winter on the coast north to Troms, most in rowan-berry years. [TO VERIFY] singing months.",
-   "no": "Trekk- og streiffugl; mange overvintrer langs kysten nord til Troms, flest i år med mye rognebær. [TO VERIFY] månedene med sang.",
+   "en": "Migrant and wanderer; many winter on the coast north to Troms, most in rowan-berry years. The sources do not give its singing months.",
+   "no": "Trekk- og streiffugl; mange overvintrer langs kysten nord til Troms, flest i år med mye rognebær. Kildene oppgir ikke månedene med sang.",
    "verified": true
   }
  },

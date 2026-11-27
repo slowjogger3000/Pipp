@@ -1,5 +1,5 @@
 {
- "_note": "Field guide text for this bird, both languages. Facts come from birds.md (M11, SNL). A field with verified false shows [TO VERIFY]. Norwegian wording is mine, Eirik to check. calendar rows: one letter per month from January, y yes, n no, ? not known.",
+ "_note": "Field guide text for this bird, both languages. Facts come from birds.md (M11, SNL). A field with verified false is not shown as a fact: empty means not described, and the text says what the sources leave out. Norwegian wording is mine, Eirik to check. calendar rows: one letter per month from January, y yes, n no, ? not known.",
  "xeno_canto": "https://xeno-canto.org/species/turdus-iliacus",
  "facts": {
   "length": {
@@ -98,8 +98,8 @@
   "present": "???yyyyyy???",
   "sings": "????????????",
   "note": {
-   "en": "Migrant, winters in south-west Europe; returns in March to April, leaves in September to November. [TO VERIFY] singing months.",
-   "no": "Trekkfugl, overvintrer i Sørvest-Europa; kommer i mars til april, drar i september til november. [TO VERIFY] månedene med sang.",
+   "en": "Migrant, winters in south-west Europe; returns in March to April, leaves in September to November. The sources do not give its singing months.",
+   "no": "Trekkfugl, overvintrer i Sørvest-Europa; kommer i mars til april, drar i september til november. Kildene oppgir ikke månedene med sang.",
    "verified": true
   }
  },

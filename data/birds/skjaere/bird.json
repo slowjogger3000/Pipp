@@ -1,5 +1,5 @@
 {
- "_note": "Field guide text for this bird, both languages. Facts come from birds.md (M11 batch 1, SNL). A field with verified false shows [TO VERIFY]. Norwegian wording is mine, Eirik to check. calendar rows: one letter per month from January, y yes, n no, ? not known.",
+ "_note": "Field guide text for this bird, both languages. Facts come from birds.md (M11 batch 1, SNL). A field with verified false is not shown as a fact: empty means not described, and the text says what the sources leave out. Norwegian wording is mine, Eirik to check. calendar rows: one letter per month from January, y yes, n no, ? not known.",
  "xeno_canto": "https://xeno-canto.org/species/pica-pica",
  "facts": {
   "length": {
@@ -87,8 +87,8 @@
   "present": "yyyyyyyyyyyy",
   "sings": "????????????",
   "note": {
-   "en": "Resident and very sedentary. The song is heard even on cold winter days. [TO VERIFY] singing months.",
-   "no": "Standfugl, svært stedbunden. Sangen høres selv på kalde vinterdager. [TO VERIFY] månedene med sang.",
+   "en": "Resident and very sedentary. The song is heard even on cold winter days. The sources do not give its singing months.",
+   "no": "Standfugl, svært stedbunden. Sangen høres selv på kalde vinterdager. Kildene oppgir ikke månedene med sang.",
    "verified": true
   }
  },

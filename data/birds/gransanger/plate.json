@@ -245,13 +245,13 @@
    "verified": true
   },
   "female": {
-   "en": "Female.",
-   "no": "Hunn.",
+   "en": "Female. Not described in the sources.",
+   "no": "Hunn. Ikke beskrevet i kildene.",
    "verified": false
   },
   "juvenile": {
-   "en": "Juvenile.",
-   "no": "Ungfugl.",
+   "en": "Juvenile. Not described in the sources.",
+   "no": "Ungfugl. Ikke beskrevet i kildene.",
    "verified": false
   }
  }

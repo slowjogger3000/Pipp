@@ -1,6 +1,6 @@
 {
- "_note": "The birds in list order (18, plus 32 added in M11 and hatched until built), from birds.md. Names and Latin names are not checked against Artsdatabanken, so verified_names is false. An id is the Norwegian name in lower case with æ, ø, å written ae, o, a.",
- "verified_names": false,
+ "_note": "The birds in list order (18, plus 32 added in M11 and hatched until built), from birds.md. All 50 Norwegian, English and Latin names were checked on 2026-11-27 against GBIF (accepted Latin name, and the Norwegian and English vernacular names from its checklists, such as Catalogue of Life and Dyntaxa), so verified_names is true. An id is the Norwegian name in lower case with æ, ø, å written ae, o, a.",
+ "verified_names": true,
  "groups": [
   "garden",
   "forest",

@@ -1,5 +1,5 @@
 {
- "_note": "Field guide text for the song thrush, both languages. Facts from birds.md (SNL, checked 2026-11-26). verified false shows [TO VERIFY]. Norwegian wording is mine, Eirik to check. calendar: one letter per month from January, y yes, n no, ? not known.",
+ "_note": "Field guide text for the song thrush, both languages. Facts from birds.md (SNL, checked 2026-11-26). A field with verified false is not shown as a fact: empty means not described, and the text says what the sources leave out. Norwegian wording is mine, Eirik to check. calendar: one letter per month from January, y yes, n no, ? not known.",
  "xeno_canto": "https://xeno-canto.org/species/turdus-philomelos",
  "facts": {
   "length": {
@@ -93,8 +93,8 @@
   "present": "??yyyyyyyy??",
   "sings": "??yyy???????",
   "note": {
-   "en": "Migrant. Most winter in Iberia and north-west Africa, some on the coast north to Nordland. Returns in March to April. [TO VERIFY] departure month and singing months after spring.",
-   "no": "Trekkfugl. De fleste overvintrer på Den iberiske halvøy og i Nordvest-Afrika, noen langs kysten nord til Nordland. Kommer tilbake i mars til april. [TO VERIFY] når den drar, og sangmånedene etter våren.",
+   "en": "Migrant. Most winter in Iberia and north-west Africa, some on the coast north to Nordland. Returns in March to April. The sources do not say when it leaves, or give its singing months after spring.",
+   "no": "Trekkfugl. De fleste overvintrer på Den iberiske halvøy og i Nordvest-Afrika, noen langs kysten nord til Nordland. Kommer tilbake i mars til april. Kildene sier ikke når den drar, og oppgir ikke sangmånedene etter våren.",
    "verified": true
   }
  },

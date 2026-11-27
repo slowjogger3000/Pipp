@@ -4,11 +4,15 @@
 // then LAGRE OPPTAK, TA BILDE, SAMMENLIGN, ÅPNE I BOK and ÅPNE SAMLING.
 //
 // Red is used here and nowhere else: it means recording. Recognition is the
-// stub in listen/recognise.ts until the engine is chosen.
+// stub in listen/recognise.ts until the engine is chosen. While it is a stub
+// (Eirik, 2026-11-27: version 1 records only) the result panel is replaced by
+// a bird chooser: you say which bird it was, and the recording, the picture,
+// COMPARE and OPEN IN GUIDE use that bird. A recording saved this way has no
+// match (confidence -1, shown as –).
 
 import { birdFile, hasSound, index, type IndexBird } from '../data.ts';
 import { Mic, kSonoH, kSonoW } from '../listen/mic.ts';
-import { recognise, type Match } from '../listen/recognise.ts';
+import { isStub, recognise, type Match } from '../listen/recognise.ts';
 import { newId, now, savePicture, saveRecording } from '../listen/store.ts';
 import { Btn, Canvas, box, colour, el, graphPaper, number } from './dom.ts';
 import { upper, type Strings } from './strings.ts';
@@ -62,6 +66,12 @@ export class ListenScreen {
   private actions: Btn[] = [];
   private note: HTMLParagraphElement;
   private fileIn: HTMLInputElement;
+  private chosen = '';               // the bird the user says it was (record-only mode)
+  private chooseSec: HTMLDivElement;
+  private chooseTitle: HTMLDivElement;
+  private chooseNote: HTMLSpanElement;
+  private chooseName: HTMLDivElement;
+  private chooseLatin: HTMLDivElement;
 
   constructor(parent: HTMLElement, private s: Strings, private on: ListenHandlers) {
     const root = box(parent, { display: 'none', flexDirection: 'column', gap: '12px' });
@@ -115,6 +125,18 @@ export class ListenScreen {
     this.resultCount = el('span', 'label', rh);
     this.resultBody = box(this.resultSec, { display: 'flex', flexDirection: 'column' });
 
+    // ---------------------------------------------------------- bird chooser (no recognition)
+    this.chooseSec = box(root, { display: 'none', flexDirection: 'column', border: '1px solid var(--ink)' });
+    const ch = box(this.chooseSec, { justifyContent: 'space-between' }, 'panelhead');
+    this.chooseTitle = el('div', 'title', ch);
+    this.chooseNote = el('span', 'label', ch);
+    const crow = box(this.chooseSec, { display: 'flex', alignItems: 'center', gap: '8px', padding: '10px 8px', background: 'var(--face)' });
+    new Btn(crow, '', () => this.step(-1), { width: '44px', height: '44px', padding: '0', flex: 'none' }).glyph('prev', 'Previous bird');
+    const cname = box(crow, { flex: '1', minWidth: '0', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' });
+    this.chooseName = box(cname, { font: '400 28px/1.05 var(--serif)', textAlign: 'center' });
+    this.chooseLatin = box(cname, { color: 'var(--inkSoft)', fontStyle: 'italic' });
+    new Btn(crow, '', () => this.step(1), { width: '44px', height: '44px', padding: '0', flex: 'none' }).glyph('next', 'Next bird');
+
     // ---------------------------------------------------------- actions
     const grid = box(root, { display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '6px' });
     const act = (f: () => void) => new Btn(grid, '', f, { height: '44px', padding: '0', minWidth: '0' });
@@ -143,7 +165,15 @@ export class ListenScreen {
 
   private name(b: IndexBird | undefined): string { return b ? (this.s.no ? b.name.no : b.name.en) : ''; }
   private entry(id: string | undefined) { return index.birds.find((b) => b.id === id); }
-  private bestId(): string { return this.matches[0]?.birdId ?? ''; }
+  private bestId(): string { return isStub ? this.chosenId() : this.matches[0]?.birdId ?? ''; }
+  private chosenId(): string { return this.chosen || this.on.playBird(); }
+
+  private step(d: number) {
+    const ids = index.birds.map((b) => b.id);
+    const i = ids.indexOf(this.chosenId());
+    this.chosen = ids[(i + d + ids.length) % ids.length];
+    this.update();
+  }
 
   private async toggle() {
     if (this.mic.state === 'listening') await this.stop();
@@ -167,7 +197,7 @@ export class ListenScreen {
   private async save() {
     const audio = await this.mic.recording();
     if (!audio) return;
-    const m = this.matches[0];
+    const m: Match | undefined = isStub ? { birdId: this.chosenId(), confidence: -1 } : this.matches[0];
     const thumb = document.createElement('canvas');
     thumb.width = 120;
     thumb.height = 40;
@@ -247,7 +277,13 @@ export class ListenScreen {
     // Only the app can open its own settings page.
     const native = !!(window as unknown as { Capacitor?: { isNativePlatform?: () => boolean } }).Capacitor?.isNativePlatform?.();
     this.settingsBtn.show(st === 'denied' && native);
-    this.note.textContent = s.t(blocked ? 'listen.denied_note' : 'listen.note');
+    this.note.textContent = s.t(blocked ? 'listen.denied_note' : isStub ? 'listen.note_record' : 'listen.note');
+    this.chooseSec.style.display = isStub && !blocked ? 'flex' : 'none';
+    const c = this.entry(this.chosenId());
+    this.chooseTitle.textContent = s.t('listen.which');
+    this.chooseNote.textContent = s.t('listen.file_under');
+    this.chooseName.textContent = this.name(c);
+    this.chooseLatin.textContent = c?.latin ?? '';
 
     this.renderResult();
     const best = this.bestId();
@@ -303,7 +339,7 @@ export class ListenScreen {
     const t = mic.startedAt ? `${Math.floor(secs / 60)}:${String(Math.floor(secs % 60)).padStart(2, '0')}` : '';
     if (this.timer.textContent !== t) this.timer.textContent = t;
     this.levelBar.style.width = `${Math.round(mic.level * 100)}%`;
-    if (mic.state === 'listening' && secs >= this.nextGuess) {
+    if (!isStub && mic.state === 'listening' && secs >= this.nextGuess) {
       this.nextGuess = secs + kGuessEveryS;
       void recognise(mic.window()).then((m) => { this.matches = m; this.update(); });
     }

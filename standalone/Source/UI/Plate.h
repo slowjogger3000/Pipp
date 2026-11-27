@@ -2,7 +2,7 @@
 
 // The ink plate from data/birds/<id>/plate.json, in a 280x240 box scaled to
 // the well. Beak, tail and sound arcs follow the engine's voice level.
-// Callout values are bird facts: an unverified one carries [TO VERIFY].
+// Callout values are bird facts: an unverified one is not drawn at all.
 
 #include "Theme.h"
 
@@ -16,7 +16,6 @@ class Plate final : public juce::Component
 public:
     Plate() { setInterceptsMouseClicks(false, false); }
 
-    juce::String toVerify { "[TO VERIFY]" };
     juce::String language { "en" };
     std::map<juce::String, juce::String> calloutLabels; // id to caps label
 
@@ -92,10 +91,8 @@ public:
     juce::String caption() const
     {
         const auto& c = doc["captions"][juce::Identifier(variant)];
-        auto s = c[juce::Identifier(language)].toString();
-        if (! static_cast<bool>(c["verified"]))
-            s << " " << toVerify;
-        return s;
+        // Captions say themselves where the sources describe nothing.
+        return c[juce::Identifier(language)].toString();
     }
 
     // 0 to 1, from the engine's voice level.
@@ -248,12 +245,16 @@ private:
         const auto val = mono(8.0f, 500, 0.06f);
         for (const auto& c : *arr)
         {
+            // A value no source gives is a guess: the callout is left out,
+            // leader and all (Eirik, 2026-11-27).
+            const auto& cv = c[juce::Identifier(variant)];
+            if (! static_cast<bool>(cv["verified"]) || cv[juce::Identifier(language)].toString().isEmpty())
+                continue;
             g.setColour(colour::inkSoft);
             g.strokePath(juce::Drawable::parseSVGPath(c["leader"].toString()), juce::PathStrokeType(s), toScreen);
 
             const auto& v = c[juce::Identifier(variant)];
-            juce::String value = v[juce::Identifier(language)].toString();
-            const bool verified = static_cast<bool>(v["verified"]);
+            const juce::String value = v[juce::Identifier(language)].toString();
 
             const juce::String align = c["align"].toString();
             const auto just = align == "centre" ? juce::Justification::centred
@@ -271,14 +272,7 @@ private:
             g.drawText(calloutLabels[c["id"].toString()], row(0), just, false);
             g.setFont(val);
             g.setColour(colour::ink);
-            int line = 1;
-            if (value.isNotEmpty())
-                g.drawText(value, row(line++), just, false);
-            if (! verified)
-            {
-                g.setColour(colour::inkSoft);
-                g.drawText(toVerify, row(line), just, false);
-            }
+            g.drawText(value, row(1), just, false);
         }
     }
 

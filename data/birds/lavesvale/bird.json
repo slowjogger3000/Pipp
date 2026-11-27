@@ -51,8 +51,8 @@
   }
  },
  "song_notes": {
-  "en": "The song is a quick twittering. [TO VERIFY] SNL gives nothing more, so the notes Pipp plays are a stand-in. Blue-black above, white below, a rust-red forehead and throat with a blue-black breast band; long tail streamers, longest in the male.",
-  "no": "Sangen er en rask kvitring. [TO VERIFY] SNL sier ikke mer, så tonene Pipp spiller er en stedfortreder. Svartblå over, hvit under, rustrød panne og strupe med svartblått brystbånd; lange stjertspyd, lengst hos hannen.",
+  "en": "The song is a quick twittering. SNL gives nothing more, so the notes Pipp plays are a stand-in. Blue-black above, white below, a rust-red forehead and throat with a blue-black breast band; long tail streamers, longest in the male.",
+  "no": "Sangen er en rask kvitring. SNL sier ikke mer, så tonene Pipp spiller er en stedfortreder. Svartblå over, hvit under, rustrød panne og strupe med svartblått brystbånd; lange stjertspyd, lengst hos hannen.",
   "verified": true
  },
  "mnemonic": {
@@ -86,8 +86,8 @@
   "present": "???yyyyy????",
   "sings": "????????????",
   "note": {
-   "en": "Arrives April to May; long-distance migrant, winters in Africa south of the Sahara. Eggs May to June, often a second brood in July. [TO VERIFY] when it leaves.",
-   "no": "Kommer april til mai; langtrekker, overvintrer i Afrika sør for Sahara. Egg mai til juni, ofte et andrekull i juli. [TO VERIFY] når den drar.",
+   "en": "Arrives April to May; long-distance migrant, winters in Africa south of the Sahara. Eggs May to June, often a second brood in July. The sources do not say when it leaves.",
+   "no": "Kommer april til mai; langtrekker, overvintrer i Afrika sør for Sahara. Egg mai til juni, ofte et andrekull i juli. Kildene sier ikke når den drar.",
    "verified": true
   }
  },

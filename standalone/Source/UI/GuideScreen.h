@@ -7,7 +7,7 @@
 // COMPARE.
 //
 // Text comes from data/birds/<id>/bird.json and the plate callouts in
-// plate.json. A field that is not verified carries [TO VERIFY]. The screen
+// plate.json. An empty field or a guessed plate value reads "Not described". The screen
 // only draws and reports clicks; the host sends everything to the engine.
 
 #include "BirdList.h"
@@ -58,7 +58,7 @@ public:
     void mouseUp(const juce::MouseEvent& e) override;
 
 private:
-    juce::String field(const juce::var& f) const; // value in the current language, with [TO VERIFY] if needed
+    juce::String field(const juce::var& f) const; // value in the current language, or "Not described"
     juce::String calloutValue(const juce::var& callout, const char* variant) const;
     juce::String otherName(const juce::var& lookalike, bool norwegian) const;
     bool lookalikePlayable(const juce::var& lookalike) const;

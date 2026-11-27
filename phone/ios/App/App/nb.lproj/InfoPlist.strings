@@ -1,0 +1,3 @@
+"NSMicrophoneUsageDescription" = "Pipp tar opp fuglene rundt deg når du trykker START LYTTING. Lyden behandles på telefonen, og ingenting lagres før du ber om det.";
+"NSCameraUsageDescription" = "Pipp tar bilde av fuglen til samlingen din. Bildet blir på telefonen.";
+"NSPhotoLibraryUsageDescription" = "Pipp kan legge et bilde fra biblioteket ditt i samlingen. Det blir på telefonen.";

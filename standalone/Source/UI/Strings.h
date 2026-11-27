@@ -56,17 +56,14 @@ public:
             .replace(juce::CharPointer_UTF8("\xc3\xa5"), juce::CharPointer_UTF8("\xc3\x85"));
     }
 
-    // A {en, no, verified} text from bird.json in the current language. Not
-    // verified: [TO VERIFY] after it, or alone when the text is empty.
+    // A {en, no, verified} text from bird.json in the current language. An
+    // empty text means no source describes it and reads "Not described". A
+    // filled text is shown as written: where the sources leave something out,
+    // the text itself says so (Eirik, 2026-11-27: no [TO VERIFY] in the app).
     juce::String field(const juce::var& f) const
     {
-        const auto marker = (*this)("to_verify");
-        auto text = f[juce::Identifier(lang)].toString();
-        if (static_cast<bool>(f["verified"]))
-            return text;
-        if (text.isEmpty())
-            return marker;
-        return text.contains(marker) ? text : text + " " + marker;
+        const auto text = f[juce::Identifier(lang)].toString();
+        return text.isNotEmpty() ? text : (*this)("not_described");
     }
 
 private:

@@ -1,0 +1,3 @@
+"NSMicrophoneUsageDescription" = "Pipp records the birds around you when you press START LISTENING. The sound is handled on the phone and nothing is saved until you ask.";
+"NSCameraUsageDescription" = "Pipp takes a picture of the bird for your collection. It stays on the phone.";
+"NSPhotoLibraryUsageDescription" = "Pipp can add a picture from your library to your collection. It stays on the phone.";

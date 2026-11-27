@@ -203,9 +203,8 @@ juce::String GuideScreen::calloutValue(const juce::var& c, const char* variant) 
 {
     const auto& v = c[variant];
     const auto text = sentenceCase(v[juce::Identifier(strings.language())].toString());
-    if (static_cast<bool>(v["verified"]))
-        return text;
-    return text.isEmpty() ? strings("to_verify") : text + " " + strings("to_verify");
+    // A guessed plate value is not a fact: the table reads "Not described".
+    return static_cast<bool>(v["verified"]) && text.isNotEmpty() ? text : strings("not_described");
 }
 
 juce::String GuideScreen::otherName(const juce::var& l, bool norwegian) const
@@ -447,15 +446,14 @@ void GuideScreen::paintTables(juce::Graphics& g)
                 { field(info["sings"]["male"]), field(info["sings"]["female"]) }, true);
     }
 
-    // Field facts. The names are not checked against Artsdatabanken yet.
+    // Field facts. The names were checked against GBIF on 2026-11-27.
     draw::sectionLabel(g, factsLabel, strings("guide.facts"));
     draw::inset(g, factsTable);
     {
         auto t = factsTable.reduced(1);
-        const auto mark = namesVerified ? juce::String() : " " + strings("to_verify");
-        drawRow(t.removeFromTop(kRowH), strings("fact.norwegian"), { entry->nameNo + mark }, false);
-        drawRow(t.removeFromTop(kRowH), strings("fact.english"), { entry->nameEn + mark }, false);
-        drawRow(t.removeFromTop(kRowH), strings("fact.latin"), { entry->latin + mark }, false);
+        drawRow(t.removeFromTop(kRowH), strings("fact.norwegian"), { entry->nameNo }, false);
+        drawRow(t.removeFromTop(kRowH), strings("fact.english"), { entry->nameEn }, false);
+        drawRow(t.removeFromTop(kRowH), strings("fact.latin"), { entry->latin }, false);
         for (int i = 0; i < 7; ++i)
             drawRow(t.removeFromTop(kRowH), strings("fact." + juce::String(kFactIds[i])),
                     { field(info["facts"][kFactIds[i]]) }, i == 6);
@@ -589,13 +587,15 @@ void GuideScreen::paintSongNotes(juce::Graphics& g)
     g.setColour(colour::ink);
     auto t = notesText;
     t.removeFromTop(drawWrapped(g, body(), field(info["song_notes"]), t) + kLine);
-    if (t.getHeight() >= 2 * kLine)
+    // No mnemonic is collected yet for most birds: then the block is left out.
+    const auto mnemonic = info["mnemonic"][juce::Identifier(strings.language())].toString();
+    if (mnemonic.isNotEmpty() && t.getHeight() >= 2 * kLine)
     {
         g.setColour(colour::inkSoft);
         g.setFont(mono(9.0f, 600, 0.14f));
         g.drawText(strings("guide.mnemonic"), t.removeFromTop(kLine), juce::Justification::centredLeft, false);
         g.setColour(colour::ink);
-        drawWrapped(g, body(), field(info["mnemonic"]), t);
+        drawWrapped(g, body(), mnemonic, t);
     }
 
     // The four song types.
@@ -658,7 +658,7 @@ void GuideScreen::paintLookalikes(juce::Graphics& g)
     {
         g.setColour(colour::ink);
         g.setFont(body());
-        g.drawText(strings("to_verify"), lookArea.withHeight(kLine), juce::Justification::centredLeft, false);
+        g.drawText(strings("guide.no_lookalikes"), lookArea.withHeight(kLine), juce::Justification::centredLeft, false);
         return;
     }
     for (int i = 0; i < arr->size(); ++i)

@@ -144,7 +144,7 @@ One folder per bird in `data/birds/<id>/`:
 - `songs.json`: syllables, phrases and rules, keyed by song type with overrides for season, time, sex and age.
 - `plate.json`: vector paths for the ink plate, animation pivots for beak and tail, and the callout points for sex and age differences.
 
-A field with `verified: false` renders with the `[TO VERIFY]` marker.
+No `[TO VERIFY]` marker is shown in the app (Eirik, 2026-11-27). A field with `verified: false` and no text reads "Not described" / "Ikke beskrevet"; an empty mnemonic is left out; a plate callout with `verified: false` is not drawn, leader and all, and reads "Not described" in the field guide table. A text that is only partly known says so in plain words ("The sources do not give its singing months."). `verified` stays in the data so the unknowns can be found and checked later.
 
 ## Recognition (phone)
 

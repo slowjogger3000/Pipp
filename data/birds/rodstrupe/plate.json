@@ -60,6 +60,6 @@
  "captions": {
   "male": { "en": "Male, singing. The sexes look alike.", "no": "Hann som synger. Kjønnene er like.", "verified": true },
   "female": { "en": "Female. Like the male.", "no": "Hunn. Som hannen.", "verified": true },
-  "juvenile": { "en": "Juvenile.", "no": "Ungfugl.", "verified": false }
+  "juvenile": { "en": "Juvenile. Not described in the sources.", "no": "Ungfugl. Ikke beskrevet i kildene.", "verified": false }
  }
 }

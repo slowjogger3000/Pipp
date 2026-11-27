@@ -1,5 +1,5 @@
 {
- "_note": "Field guide text for this bird, both languages. Facts come from birds.md (M11, SNL). A field with verified false shows [TO VERIFY]. Norwegian wording is mine, Eirik to check. calendar rows: one letter per month from January, y yes, n no, ? not known.",
+ "_note": "Field guide text for this bird, both languages. Facts come from birds.md (M11, SNL). A field with verified false is not shown as a fact: empty means not described, and the text says what the sources leave out. Norwegian wording is mine, Eirik to check. calendar rows: one letter per month from January, y yes, n no, ? not known.",
  "xeno_canto": "https://xeno-canto.org/species/regulus-regulus",
  "facts": {
   "length": {
@@ -98,8 +98,8 @@
   "present": "yyyyyyyyyyyy",
   "sings": "??yy????????",
   "note": {
-   "en": "Partial migrant: some leave in autumn, many for Britain, the rest stay; migrants return in April. Males sing from late winter, song duels in March and April. [TO VERIFY] the other months.",
-   "no": "Delvis trekkfugl: noen drar om høsten, mange til Storbritannia, resten blir; trekkfuglene kommer i april. Hannene synger fra senvinteren, sangdueller i mars og april. [TO VERIFY] de andre månedene.",
+   "en": "Partial migrant: some leave in autumn, many for Britain, the rest stay; migrants return in April. Males sing from late winter, song duels in March and April. The sources say nothing about the other months.",
+   "no": "Delvis trekkfugl: noen drar om høsten, mange til Storbritannia, resten blir; trekkfuglene kommer i april. Hannene synger fra senvinteren, sangdueller i mars og april. Kildene sier ikke noe om de andre månedene.",
    "verified": true
   }
  },

@@ -352,7 +352,7 @@ export class QuizScreen {
       this.ids.push(b.id);
       this.ptrs.push(p);
       let info: Info = {};
-      try { info = JSON.parse(birdFile(b.id, 'bird') ?? '{}'); } catch { /* shown as [TO VERIFY] */ }
+      try { info = JSON.parse(birdFile(b.id, 'bird') ?? '{}'); } catch { /* shown as not described */ }
       this.infos.push(info);
     }
     for (let k = 0; k < this.ids.length; k++) {
@@ -550,19 +550,15 @@ export class QuizScreen {
 
   private hint(q: Question): string {
     const s = this.s, info = this.infos[q.bird];
-    if (this.hints === 0) return s.t('quiz.hint_mnemonic', { text: s.field(info.mnemonic) });
-    // Season: the months the calendar says it sings.
+    // Without a mnemonic the season hint stands in for it.
+    const mnemonic = info.mnemonic?.[s.lang] ?? '';
+    if (this.hints === 0 && mnemonic) return s.t('quiz.hint_mnemonic', { text: mnemonic });
+    // Season: the months the calendar says it sings. Unknown months are left out.
     const sings: string = info.calendar?.sings ?? '';
     const months = s.t('cal.month_names').split('|');
     const yes: string[] = [];
-    let unknown = sings.length !== 12;
-    for (let m = 0; m < sings.length && m < 12; m++) {
-      if (sings[m] === 'y') yes.push(months[m]);
-      unknown ||= sings[m] === '?';
-    }
-    let text = yes.join(', ');
-    if (unknown) text = text ? `${text} ${s.t('to_verify')}` : s.t('to_verify');
-    return s.t('quiz.hint_season', { months: text });
+    for (let m = 0; m < sings.length && m < 12; m++) if (sings[m] === 'y') yes.push(months[m]);
+    return s.t('quiz.hint_season', { months: yes.join(', ') || s.t('quiz.months_unknown') });
   }
 
   applyStrings() {

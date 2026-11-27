@@ -23,6 +23,8 @@ The `design/` folder holds the source of each screen. Each `.dc.html` file is pl
 | `PhoneBirds.dc.html` | Phone, bird picker | 390 wide | Norwegian |
 | `Draw.dc.html` | Song panel in draw mode | 710×384 | English |
 | `DeskCollection.dc.html` | Collection (F6), desktop | 1280×800 | English |
+| `Icon.dc.html` | iPhone app icon sheet | 1280×800 | English |
+| `icon/*.svg` | The icon as SVG: default, mono, and 3 layers | 64-unit grid | |
 | `tokens.json` | Skisse design tokens | | |
 
 None of these were rendered and checked by eye when they were made. If a measurement in a file looks wrong on screen, trust the rules below over the file.
@@ -58,7 +60,7 @@ These come from the Skisse design system and apply to every screen.
 | Quiz, correct answer | Ink fill, label CORRECT |
 | Quiz, wrong pick | Hatched, label YOUR ANSWER |
 | Recognised bird not in Pipp | Hatched row with a "not in Pipp" tag |
-| Unverified content | The literal marker `[TO VERIFY]` |
+| Unverified content | No marker (Eirik, 2026-11-27). An empty field reads "Not described" / "Ikke beskrevet"; an empty mnemonic is left out; a plate callout no source gives is not drawn; a text says in plain words what the sources leave out |
 
 ## Shared layout, desktop
 
@@ -148,6 +150,19 @@ Right: the log list on `sheet` with columns date, time, bird, heard, saw, place 
 **Listen.** A 56px LYTTER button in ink with the red dot and a timer, beside a microphone level well. A sonogram of the last 4 s with a 1px ink frame around the recognised phrase. The result panel: best match in serif 32px with a confidence bar, then runners-up as 44px rows. Actions: LAGRE OPPTAK, TA BILDE, SAMMENLIGN, ÅPNE I BOK, ÅPNE SAMLING.
 
 **Collection.** A filter between all birds and one bird. Recordings as 56px rows: play button, a 120×40 sonogram, type and length, date, confidence. Pictures in a 3-column grid of 112px tiles with a NYTT BILDE tile last. Actions: VELG, DEL, EKSPORTER.
+
+## iPhone app icon
+
+Chosen by Eirik from 6 options (option E, "Night"). Sheet: `Icon.dc.html`. Sources: `design/icon/`.
+
+- 64-unit grid. `ink` tile, full bleed. No well, no graph paper, no bar of 4 track colours.
+- Waveform: 14 bars in `ground`, 2.4 wide, pitch 4, first bar at x 6, centred on y 51. Half-heights 1.5, 3, 2, 4.5, 3, 5.5, 7, 7, 5, 6, 3.5, 4.5, 2.5, 1.5.
+- Bird: the blackbird plate outline (body, tail, legs, open bill) in `ground`, at scale 0.2, offset (3.6, 4.2). It stands on the 2 tallest bars. Eye-ring `ink`, pupil `ground`.
+- `pipp-icon-default.svg`: the default appearance. The dark appearance uses the same art.
+- `pipp-icon-mono.svg`: black tile, grey marks, for the tinted and clear appearances.
+- `pipp-icon-layer-1-background.svg`, `-2-waveform.svg`, `-3-bird.svg`: layers for Icon Composer, back to front.
+- Export each at 1024 × 1024, square, no alpha, no rounded corners. iOS masks the corners.
+- Not checked on a device or in Icon Composer. Look at 58 px and 40 px there first.
 
 ## Later additions
 

@@ -51,8 +51,8 @@
   }
  },
  "song_notes": {
-  "en": "Hard to see, but the sound is very distinctive: a single-toned creaking or rattling that can go on for hours, mostly in the evening and at night. [TO VERIFY] SNL gives no transcription, so the notes Pipp plays are a stand-in. Brown and mottled above, yellow-brown and barred below, a grey neck; short bill and tail.",
-  "no": "Vanskelig å se, men lyden er svært særpreget: en enstonig knirking eller klapring som kan vare i timevis, mest om kvelden og natten. [TO VERIFY] SNL gir ingen gjengivelse, så tonene Pipp spiller er en stedfortreder. Brunspraglet ovenpå, gulbrun og tverrstripet under, grå halsregion; kort nebb og hale.",
+  "en": "Hard to see, but the sound is very distinctive: a single-toned creaking or rattling that can go on for hours, mostly in the evening and at night. SNL gives no transcription, so the notes Pipp plays are a stand-in. Brown and mottled above, yellow-brown and barred below, a grey neck; short bill and tail.",
+  "no": "Vanskelig å se, men lyden er svært særpreget: en enstonig knirking eller klapring som kan vare i timevis, mest om kvelden og natten. SNL gir ingen gjengivelse, så tonene Pipp spiller er en stedfortreder. Brunspraglet ovenpå, gulbrun og tverrstripet under, grå halsregion; kort nebb og hale.",
   "verified": true
  },
  "mnemonic": {
@@ -86,8 +86,8 @@
   "present": "nn?????????n",
   "sings": "nn?????????n",
   "note": {
-   "en": "Migrant; probably winters mainly in southern Africa. [TO VERIFY] when it comes and goes.",
-   "no": "Trekkfugl; overvintrer trolig mest i det sørlige Afrika. [TO VERIFY] når den kommer og drar.",
+   "en": "Migrant; probably winters mainly in southern Africa. The sources do not say when it comes and goes.",
+   "no": "Trekkfugl; overvintrer trolig mest i det sørlige Afrika. Kildene sier ikke når den kommer og drar.",
    "verified": true
   }
  },

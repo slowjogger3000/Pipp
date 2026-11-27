@@ -1,5 +1,5 @@
 {
- "_note": "Field guide text for this bird, both languages. Facts come from birds.md. A field with verified false shows [TO VERIFY]; a text may also carry the marker inline for the part that is not checked. Norwegian wording is mine, Eirik to check. calendar rows: one letter per month from January, y yes, n no, ? not known.",
+ "_note": "Field guide text for this bird, both languages. Facts come from birds.md. A field with verified false is not shown as a fact: empty means not described, and the text says what the sources leave out. Norwegian wording is mine, Eirik to check. calendar rows: one letter per month from January, y yes, n no, ? not known.",
  "xeno_canto": "https://xeno-canto.org/species/fringilla-coelebs",
  "facts": {
   "length": {
@@ -51,8 +51,8 @@
   }
  },
  "song_notes": {
-  "en": "The male has a strong, characteristic song and sings in dialects. [TO VERIFY] what the song sounds like.",
-  "no": "Hannen har en kraftig, karakteristisk sang og synger på dialekter. [TO VERIFY] hvordan sangen låter.",
+  "en": "The male has a strong, characteristic song and sings in dialects. The sources do not describe how the song sounds, so Pipp's version is a stand-in.",
+  "no": "Hannen har en kraftig, karakteristisk sang og synger på dialekter. Kildene beskriver ikke hvordan sangen låter, så Pipps versjon er en stedfortreder.",
   "verified": true
  },
  "mnemonic": {
@@ -87,8 +87,8 @@
   "present": "yyyyyyyyyyyy",
   "sings": "????????????",
   "note": {
-   "en": "Mostly migrants wintering in western Europe, some along the Norwegian coast. The first reach south Norway in early March, males about a week before females. [TO VERIFY] singing months.",
-   "no": "For det meste trekkfugl som overvintrer i Vest-Europa, noen langs norskekysten. De første når Sør-Norge tidlig i mars, hannene omtrent en uke før hunnene. [TO VERIFY] månedene med sang.",
+   "en": "Mostly migrants wintering in western Europe, some along the Norwegian coast. The first reach south Norway in early March, males about a week before females. The sources do not give its singing months.",
+   "no": "For det meste trekkfugl som overvintrer i Vest-Europa, noen langs norskekysten. De første når Sør-Norge tidlig i mars, hannene omtrent en uke før hunnene. Kildene oppgir ikke månedene med sang.",
    "verified": true
   }
  },
