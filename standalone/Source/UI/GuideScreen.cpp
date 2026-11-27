@@ -4,11 +4,11 @@
 
 #include <cmath>
 
-namespace tipp::ui
+namespace pipp::ui
 {
 namespace
 {
-namespace P = tipp::params;
+namespace P = pipp::params;
 
 constexpr const char* kTypeIds[4] = { "song", "call", "alarm", "flight" };
 constexpr const char* kFactIds[7] = { "length", "broods", "range", "habitat", "food", "status", "nest" };
@@ -131,16 +131,16 @@ GuideScreen::GuideScreen(const Strings& s) : strings(s)
 
 // Data -----------------------------------------------------------------------
 
-tipp::Engine::PhraseView GuideScreen::examplePhrase(const tipp::BirdData& b)
+pipp::Engine::PhraseView GuideScreen::examplePhrase(const pipp::BirdData& b)
 {
-    auto engine = std::make_unique<tipp::Engine>();
+    auto engine = std::make_unique<pipp::Engine>();
     engine->prepare(48000.0);
     engine->setSeed(1u);
     engine->setBird(&b);
-    engine->setParam(P::indexOf(P::sc_type), static_cast<float>(tipp::kSong));
+    engine->setParam(P::indexOf(P::sc_type), static_cast<float>(pipp::kSong));
     engine->setParam(P::indexOf(P::pb_play), 1.0f);
 
-    tipp::Engine::PhraseView view;
+    pipp::Engine::PhraseView view;
     std::array<float, 512> buf {};
     for (int block = 0; block < 400; ++block) // about 4 s
     {
@@ -151,7 +151,7 @@ tipp::Engine::PhraseView GuideScreen::examplePhrase(const tipp::BirdData& b)
     return {};
 }
 
-void GuideScreen::setBird(const BirdEntry& e, const tipp::BirdData* data, const juce::var& birdJson,
+void GuideScreen::setBird(const BirdEntry& e, const pipp::BirdData* data, const juce::var& birdJson,
                           const juce::File& plateFile, const std::vector<BirdEntry>& all, bool verified)
 {
     entry = &e;
@@ -161,7 +161,7 @@ void GuideScreen::setBird(const BirdEntry& e, const tipp::BirdData* data, const 
     namesVerified = verified;
     plate.load(plateFile);
     plateDoc = juce::JSON::parse(plateFile);
-    example = bird != nullptr ? examplePhrase(*bird) : tipp::Engine::PhraseView {};
+    example = bird != nullptr ? examplePhrase(*bird) : pipp::Engine::PhraseView {};
 
     compareBtns.clear();
     if (auto* arr = info["lookalikes"].getArray())
@@ -473,7 +473,7 @@ void GuideScreen::paintFigure(juce::Graphics& g, juce::Rectangle<int> well)
 
     const float pad = 8.0f;
     const float pxPerMs = (static_cast<float>(well.getWidth()) - 2.0f * pad) / example.lengthMs;
-    const float pitchKnob = bird->base[tipp::kPitch];
+    const float pitchKnob = bird->base[pipp::kPitch];
     auto xFor = [&](float ms) { return static_cast<float>(well.getX()) + pad + ms * pxPerMs; };
     auto yFor = [&](float hz) {
         return static_cast<float>(well.getBottom()) - juce::jlimit(0.0f, 1.0f, hz / 8000.0f) * static_cast<float>(well.getHeight());
@@ -495,8 +495,8 @@ void GuideScreen::paintFigure(juce::Graphics& g, juce::Rectangle<int> well)
         {
             const float u = static_cast<float>(j) / static_cast<float>(steps);
             const float x = xFor(n.startMs + u * n.durMs);
-            const float y = yFor(tipp::contourPitchAt(s.pitch, u) * n.pitchMul * pitchKnob);
-            const float a = tipp::contourAt(s.amp, u) * s.gain;
+            const float y = yFor(pipp::contourPitchAt(s.pitch, u) * n.pitchMul * pitchKnob);
+            const float a = pipp::contourAt(s.amp, u) * s.gain;
             const bool on = a > 0.08f;
             if (on && prevOn)
                 g.drawLine(px, py, x, y, 1.0f + 1.0f * std::min(1.0f, a));
@@ -572,7 +572,7 @@ void GuideScreen::paintSongNotes(juce::Graphics& g)
         g.setFont(fig);
         auto c = figCaption;
         g.drawText(figText, c.removeFromLeft(textW(fig, figText) + 8), juce::Justification::centredLeft, false);
-        const float tempo = bird != nullptr ? std::max(0.25f, bird->base[tipp::kTempo] / 100.0f) : 1.0f;
+        const float tempo = bird != nullptr ? std::max(0.25f, bird->base[pipp::kTempo] / 100.0f) : 1.0f;
         const auto caption = example.count > 0
                                  ? strings.format("guide.fig_phrase", { { "s", number(example.lengthMs / tempo / 1000.0f, 1, no) } })
                                  : juce::String();
@@ -689,4 +689,4 @@ void GuideScreen::paintLookalikes(juce::Graphics& g)
             g.drawText(lines[k], text.getX(), ty + k * kLine, text.getWidth(), kLine, juce::Justification::centredLeft, false);
     }
 }
-} // namespace tipp::ui
+} // namespace pipp::ui

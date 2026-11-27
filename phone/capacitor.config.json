@@ -1,6 +1,6 @@
 {
-  "appId": "no.skisse.tipp",
-  "appName": "Tipp",
+  "appId": "no.skisse.pipp",
+  "appName": "Pipp",
   "webDir": "../web/dist",
   "ios": {
     "contentInset": "always",

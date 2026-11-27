@@ -6,7 +6,7 @@
 
 import type { AudioHost, SonoFrame } from '../audio/host.ts';
 import { kSonoFrames } from '../audio/host.ts';
-import type { PhraseView } from '../core/tipp.ts';
+import type { PhraseView } from '../core/pipp.ts';
 import { Canvas, colour, font, graphPaper } from './dom.ts';
 
 export const kPxPerSecond = 80;
@@ -52,8 +52,8 @@ export class Sonogram {
     this.px = geo.playheadX;
     this.phz = geo.pxPerKHz / 1000;
     this.cv = new Canvas(parent, this.W, this.H);
-    this.line = host.tipp.x.tipp_line_new();
-    this.at = host.tipp.alloc(8);
+    this.line = host.pipp.x.pipp_line_new();
+    this.at = host.pipp.alloc(8);
     const c = this.cv.c;
     c.style.touchAction = 'none';
     const pos = (e: PointerEvent) => {
@@ -83,11 +83,11 @@ export class Sonogram {
     });
     c.addEventListener('pointerup', () => {
       if (!this.drawMode || this.erasing || !this.stroke.length) return;
-      const t = this.host.tipp;
+      const t = this.host.pipp;
       const n = this.stroke.length / 3;
       const p = t.buf(this.stroke.length * 4);
       t.f32(p, this.stroke.length).set(this.stroke);
-      t.x.tipp_line_add_stroke(this.line, p, n, kPxPerMs, this.phz, kStrokeTolPx);
+      t.x.pipp_line_add_stroke(this.line, p, n, kPxPerMs, this.phz, kStrokeTolPx);
       this.stroke = [];
       this.onLineChanged();
     });
@@ -110,19 +110,19 @@ export class Sonogram {
 
   // The line's points, 3 floats each, to send to the worklet.
   linePoints(): Float32Array {
-    const t = this.host.tipp, n = t.x.tipp_line_count(this.line);
+    const t = this.host.pipp, n = t.x.pipp_line_count(this.line);
     const p = t.buf(Math.max(1, n) * 12);
-    t.x.tipp_line_points(this.line, p);
+    t.x.pipp_line_points(this.line, p);
     return t.f32(p, n * 3).slice();
   }
-  lineCount(): number { return this.host.tipp.x.tipp_line_count(this.line); }
-  clearLine() { this.host.tipp.x.tipp_line_clear(this.line); this.onLineChanged(); }
+  lineCount(): number { return this.host.pipp.x.pipp_line_count(this.line); }
+  clearLine() { this.host.pipp.x.pipp_line_clear(this.line); this.onLineChanged(); }
 
   addStroke(raw: [number, number][]) {
     const flat = raw.flatMap(([t, hz]) => [t, hz, 0]);
-    const tp = this.host.tipp, p = tp.buf(flat.length * 4);
+    const tp = this.host.pipp, p = tp.buf(flat.length * 4);
     tp.f32(p, flat.length).set(flat);
-    tp.x.tipp_line_add_stroke(this.line, p, raw.length, kPxPerMs, this.phz, kStrokeTolPx);
+    tp.x.pipp_line_add_stroke(this.line, p, raw.length, kPxPerMs, this.phz, kStrokeTolPx);
     this.onLineChanged();
   }
   hoverAt(x: number, y: number) { this.hover = true; this.pointer = { x, y }; }
@@ -133,12 +133,12 @@ export class Sonogram {
 
   private eraseAt(p: { x: number; y: number }) {
     const [t, hz] = this.pointFor(p);
-    if (this.host.tipp.x.tipp_line_erase(this.line, t, hz, kPxPerMs, this.phz, kEraseRadiusPx)) this.onLineChanged();
+    if (this.host.pipp.x.pipp_line_erase(this.line, t, hz, kPxPerMs, this.phz, kEraseRadiusPx)) this.onLineChanged();
   }
 
   private drawnAt(t: number): [number, number] {
-    const tp = this.host.tipp;
-    tp.x.tipp_line_at(this.line, t, this.at);
+    const tp = this.host.pipp;
+    tp.x.pipp_line_at(this.line, t, this.at);
     const v = tp.f32(this.at, 2);
     return [v[0], v[1]];
   }
@@ -228,11 +228,11 @@ export class Sonogram {
   }
 
   private paintLine(g: CanvasRenderingContext2D) {
-    const tp = this.host.tipp, x = tp.x;
-    const n = x.tipp_line_count(this.line);
+    const tp = this.host.pipp, x = tp.x;
+    const n = x.pipp_line_count(this.line);
     const pts = this.linePoints();
     if (n > 0) {
-      const sx = Math.floor(x.tipp_line_start(this.line) * kPxPerMs) + 0.5;
+      const sx = Math.floor(x.pipp_line_start(this.line) * kPxPerMs) + 0.5;
       g.strokeStyle = colour.ink;
       g.lineWidth = 1;
       g.setLineDash([2, 4]);
@@ -368,15 +368,15 @@ export class Sonogram {
   private paintNext(g: CanvasRenderingContext2D) {
     const h = this.host, ph = this.phrase;
     if (!this.bird || !h.singing || !ph) return;
-    const x = h.tipp.x;
+    const x = h.pipp.x;
     const pos = h.phrasePosMs;
     const tempo = Math.max(0.01, h.phraseTempo);
     g.strokeStyle = colour.shadow;
 
     if (ph.drawn) {
-      const pitchRatio = h.knobValue(0) / Math.max(0.01, x.tipp_bird_base(this.bird, 0));
+      const pitchRatio = h.knobValue(0) / Math.max(0.01, x.pipp_bird_base(this.bird, 0));
       const from = ph.drawnStartMs + pos;
-      const end = x.tipp_line_end(this.line);
+      const end = x.pipp_line_end(this.line);
       let px = 0, py = 0, prevOn = false;
       for (let t = from; t <= end; t += (3 / kPxPerSecond) * 1000 * tempo) {
         const [hz, amp] = this.drawnAt(t);
@@ -388,8 +388,8 @@ export class Sonogram {
       return;
     }
     const pitchKnob = h.knobValue(0);
-    const nSyl = x.tipp_bird_syllable_count(this.bird);
-    const tp = h.tipp;
+    const nSyl = x.pipp_bird_syllable_count(this.bird);
+    const tp = h.pipp;
     for (const n of ph.notes) {
       if (n.syl < 0 || n.syl >= nSyl || n.durMs <= 0) continue;
       if (n.startMs + n.durMs <= pos) continue;
@@ -401,7 +401,7 @@ export class Sonogram {
       for (let j = 0; j <= steps; j++) {
         const u = u0 + ((1 - u0) * j) / steps;
         const t = n.startMs + u * n.durMs;
-        x.tipp_bird_syllable_at(this.bird, n.syl, u, this.at);
+        x.pipp_bird_syllable_at(this.bird, n.syl, u, this.at);
         const v = tp.f32(this.at, 2);
         const xx = this.px + ((t - pos) / tempo / 1000) * kPxPerSecond;
         const yy = this.y(v[0] * n.pitchMul * pitchKnob);

@@ -3,8 +3,8 @@
 
 export interface Recording {
   id: string;
-  bird: string;        // index.json id, or '' for a bird outside Tipp
-  latin: string;       // for a bird outside Tipp
+  bird: string;        // index.json id, or '' for a bird outside Pipp
+  latin: string;       // for a bird outside Pipp
   type: number;        // 0 song, 1 call, 2 alarm, 3 flight
   seconds: number;
   date: string;        // YYYY-MM-DD HH:MM
@@ -23,18 +23,47 @@ export interface Picture {
   from?: 'phone' | 'file';
 }
 
-const kDb = 'tipp';
+const kDb = 'pipp';
+const kOldDb = 'tipp'; // the app was called Tipp until 2026-11-27
 let dbp: Promise<IDBDatabase> | null = null;
 
-function db(): Promise<IDBDatabase> {
-  dbp ??= new Promise((resolve, reject) => {
-    const r = indexedDB.open(kDb, 1);
+const done = (r: IDBRequest) => new Promise<unknown>((res, rej) => { r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); });
+
+function open(name: string, create: boolean): Promise<IDBDatabase> {
+  return new Promise((resolve, reject) => {
+    const r = indexedDB.open(name, 1);
     r.onupgradeneeded = () => {
+      if (!create) return;
       r.result.createObjectStore('recordings', { keyPath: 'id' });
       r.result.createObjectStore('pictures', { keyPath: 'id' });
     };
     r.onsuccess = () => resolve(r.result);
     r.onerror = () => reject(r.error);
+  });
+}
+
+// Copies the old store into the new one once, then deletes the old one.
+// Only when the browser can list its databases, so nothing is created by
+// asking for a store that is not there.
+async function migrate(to: IDBDatabase): Promise<void> {
+  const list = await indexedDB.databases?.().catch(() => []);
+  if (!list?.some((d) => d.name === kOldDb)) return;
+  const from = await open(kOldDb, false);
+  const names = ['recordings', 'pictures'].filter((n) => from.objectStoreNames.contains(n));
+  for (const n of names) {
+    const items = (await done(from.transaction(n, 'readonly').objectStore(n).getAll())) as unknown[];
+    const tx = to.transaction(n, 'readwrite');
+    for (const it of items) tx.objectStore(n).put(it);
+    await new Promise<void>((res, rej) => { tx.oncomplete = () => res(); tx.onerror = () => rej(tx.error); });
+  }
+  from.close();
+  indexedDB.deleteDatabase(kOldDb);
+}
+
+function db(): Promise<IDBDatabase> {
+  dbp ??= open(kDb, true).then(async (d) => {
+    await migrate(d).catch((e) => console.warn('Could not move the old Tipp store:', e));
+    return d;
   });
   // Ask the browser not to clear the store under storage pressure.
   void navigator.storage?.persist?.();

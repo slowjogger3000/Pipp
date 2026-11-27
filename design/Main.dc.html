@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Tipp, play screen</title>
+<title>Pipp, play screen</title>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -13,18 +13,18 @@
 body{margin:0}
 button{font:inherit;color:inherit;margin:0;cursor:pointer}
 a{color:#221c14;text-decoration:none}a:hover{color:#4f4634}
-@keyframes tipp-up{0%,46%,100%{transform:rotate(0deg)}4%{transform:rotate(-14deg)}9%{transform:rotate(-4deg)}14%{transform:rotate(-16deg)}19%{transform:rotate(-3deg)}24%{transform:rotate(-13deg)}29%{transform:rotate(-5deg)}34%{transform:rotate(-16deg)}40%{transform:rotate(-9deg)}}
-@keyframes tipp-low{0%,46%,100%{transform:rotate(0deg)}4%{transform:rotate(8deg)}9%{transform:rotate(2deg)}14%{transform:rotate(10deg)}19%{transform:rotate(2deg)}24%{transform:rotate(8deg)}29%{transform:rotate(3deg)}34%{transform:rotate(10deg)}40%{transform:rotate(5deg)}}
-@keyframes tipp-tail{0%,46%,100%{transform:rotate(0deg)}14%{transform:rotate(-4deg)}24%{transform:rotate(-1deg)}34%{transform:rotate(-5deg)}}
-@keyframes tipp-arc{0%,46%,100%{opacity:0}4%,40%{opacity:1}}
-@media (prefers-reduced-motion:reduce){.tipp-anim{animation:none!important}}
+@keyframes pipp-up{0%,46%,100%{transform:rotate(0deg)}4%{transform:rotate(-14deg)}9%{transform:rotate(-4deg)}14%{transform:rotate(-16deg)}19%{transform:rotate(-3deg)}24%{transform:rotate(-13deg)}29%{transform:rotate(-5deg)}34%{transform:rotate(-16deg)}40%{transform:rotate(-9deg)}}
+@keyframes pipp-low{0%,46%,100%{transform:rotate(0deg)}4%{transform:rotate(8deg)}9%{transform:rotate(2deg)}14%{transform:rotate(10deg)}19%{transform:rotate(2deg)}24%{transform:rotate(8deg)}29%{transform:rotate(3deg)}34%{transform:rotate(10deg)}40%{transform:rotate(5deg)}}
+@keyframes pipp-tail{0%,46%,100%{transform:rotate(0deg)}14%{transform:rotate(-4deg)}24%{transform:rotate(-1deg)}34%{transform:rotate(-5deg)}}
+@keyframes pipp-arc{0%,46%,100%{opacity:0}4%,40%{opacity:1}}
+@media (prefers-reduced-motion:reduce){.pipp-anim{animation:none!important}}
 </style>
 </helmet>
 <div style="width: 1280px; height: 800px; box-sizing: border-box; border: 1px solid #221c14; display: flex; flex-direction: column; overflow: hidden; background: #ddd3bd; color: #221c14; font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: 11px; line-height: 16px">
 
 <header style="height: 56px; flex: none; box-sizing: border-box; display: flex; align-items: center; gap: 12px; padding: 0 12px; border-bottom: 1px solid #221c14">
 <div style="display: flex; flex-direction: column; gap: 3px">
-<span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 32px; line-height: 1; letter-spacing: 0.02em">Tipp</span>
+<span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 32px; line-height: 1; letter-spacing: 0.02em">Pipp</span>
 <span style="display: flex; gap: 1px; width: 56px; height: 5px; background: #221c14; border: 1px solid #221c14">
 <span style="flex: 1; background: #936255"></span><span style="flex: 1; background: #b5a37a"></span><span style="flex: 1; background: #809a8c"></span><span style="flex: 1; background: #5e4458"></span>
 </span>
@@ -128,28 +128,28 @@ a{color:#221c14;text-decoration:none}a:hover{color:#4f4634}
 <div style="flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; background-color: #efe8d6; background-image: linear-gradient(#c4b796 1px, transparent 1px), linear-gradient(90deg, #c4b796 1px, transparent 1px), linear-gradient(#d8ccb0 1px, transparent 1px), linear-gradient(90deg, #d8ccb0 1px, transparent 1px); background-size: 40px 40px, 40px 40px, 8px 8px, 8px 8px; box-shadow: inset 1px 1px 0 #a3967a">
 <svg viewBox="0 0 280 240" width="100%" role="img" aria-label="Ink drawing of a male blackbird singing on a branch">
 <defs>
-<clipPath id="tipp-main-body"><path d="M190 60 C184 44 158 42 150 62 C134 80 104 106 90 136 C92 146 98 154 106 158 C128 180 162 178 178 152 C192 130 198 104 192 80 C194 74 194 66 190 60 Z"></path></clipPath>
-<clipPath id="tipp-main-wing"><path d="M152 90 C156 118 136 146 98 152 C106 136 118 110 152 90 Z"></path></clipPath>
+<clipPath id="pipp-main-body"><path d="M190 60 C184 44 158 42 150 62 C134 80 104 106 90 136 C92 146 98 154 106 158 C128 180 162 178 178 152 C192 130 198 104 192 80 C194 74 194 66 190 60 Z"></path></clipPath>
+<clipPath id="pipp-main-wing"><path d="M152 90 C156 118 136 146 98 152 C106 136 118 110 152 90 Z"></path></clipPath>
 </defs>
 <path d="M14 211 C80 205 150 201 268 193" fill="none" stroke="#221c14" stroke-width="4"></path>
 <path d="M214 196 l20 -20 M224 186 l16 3" fill="none" stroke="#221c14" stroke-width="1.5"></path>
 <path d="M234 176 q10 -10 18 -2 q-9 8 -18 2 Z M240 189 q11 -5 16 3 q-10 4 -16 -3 Z" fill="#efe8d6" stroke="#221c14" stroke-width="1"></path>
-<g class="tipp-anim" style="transform-origin: 98px 147px; animation: tipp-tail 6s ease-in-out infinite">
+<g class="pipp-anim" style="transform-origin: 98px 147px; animation: pipp-tail 6s ease-in-out infinite">
 <path d="M90 136 L42 194 L54 206 L106 158 Z" fill="#efe8d6" stroke="#221c14" stroke-width="1.5"></path>
 <path d="M94 142 L46 198 M98 147 L49 202 M102 153 L52 205" fill="none" stroke="#221c14" stroke-width="1"></path>
 </g>
 <path d="M136 172 L139 199 M152 173 L157 198 M131 201 L139 199 L148 202 M149 200 L157 198 L166 201" fill="none" stroke="#221c14" stroke-width="1.5"></path>
 <path d="M190 60 C184 44 158 42 150 62 C134 80 104 106 90 136 C92 146 98 154 106 158 C128 180 162 178 178 152 C192 130 198 104 192 80 C194 74 194 66 190 60 Z" fill="#efe8d6" stroke="#221c14" stroke-width="1.5"></path>
-<path d="{{ hatchBody }}" fill="none" stroke="#221c14" stroke-width="1" clip-path="url(#tipp-main-body)"></path>
-<path d="{{ hatchWing }}" fill="none" stroke="#221c14" stroke-width="1" clip-path="url(#tipp-main-wing)"></path>
+<path d="{{ hatchBody }}" fill="none" stroke="#221c14" stroke-width="1" clip-path="url(#pipp-main-body)"></path>
+<path d="{{ hatchWing }}" fill="none" stroke="#221c14" stroke-width="1" clip-path="url(#pipp-main-wing)"></path>
 <path d="M152 90 C156 118 136 146 98 152 C106 136 118 110 152 90 Z" fill="none" stroke="#221c14" stroke-width="1.5"></path>
-<path d="{{ throat }}" fill="#efe8d6" clip-path="url(#tipp-main-body)"></path>
-<path d="{{ spots }}" fill="none" stroke="#221c14" stroke-width="1.5" clip-path="url(#tipp-main-body)"></path>
+<path d="{{ throat }}" fill="#efe8d6" clip-path="url(#pipp-main-body)"></path>
+<path d="{{ spots }}" fill="none" stroke="#221c14" stroke-width="1.5" clip-path="url(#pipp-main-body)"></path>
 <circle cx="177" cy="65" r="{{ ringR }}" fill="#efe8d6" stroke="#221c14" stroke-width="1"></circle>
 <circle cx="177" cy="65" r="2.4" fill="#221c14"></circle>
-<g class="tipp-anim" style="transform-origin: 192px 67px; animation: tipp-up 6s linear infinite"><path d="M190 60 L220 66 L193 70 Z" fill="{{ bill }}" stroke="#221c14" stroke-width="1.5" stroke-linejoin="round"></path></g>
-<g class="tipp-anim" style="transform-origin: 192px 72px; animation: tipp-low 6s linear infinite"><path d="M193 70 L216 69 L191 79 Z" fill="{{ bill }}" stroke="#221c14" stroke-width="1.5" stroke-linejoin="round"></path></g>
-<g class="tipp-anim" style="animation: tipp-arc 6s linear infinite"><path d="M230 52 A16 16 0 0 1 230 76 M237 44 A26 26 0 0 1 237 84 M243 36 A36 36 0 0 1 243 92" fill="none" stroke="#221c14" stroke-width="1.5"></path></g>
+<g class="pipp-anim" style="transform-origin: 192px 67px; animation: pipp-up 6s linear infinite"><path d="M190 60 L220 66 L193 70 Z" fill="{{ bill }}" stroke="#221c14" stroke-width="1.5" stroke-linejoin="round"></path></g>
+<g class="pipp-anim" style="transform-origin: 192px 72px; animation: pipp-low 6s linear infinite"><path d="M193 70 L216 69 L191 79 Z" fill="{{ bill }}" stroke="#221c14" stroke-width="1.5" stroke-linejoin="round"></path></g>
+<g class="pipp-anim" style="animation: pipp-arc 6s linear infinite"><path d="M230 52 A16 16 0 0 1 230 76 M237 44 A26 26 0 0 1 237 84 M243 36 A36 36 0 0 1 243 92" fill="none" stroke="#221c14" stroke-width="1.5"></path></g>
 <path d="M200 58 L200 23 M172 62 L122 36 M120 112 L72 86 M192 116 L236 142" fill="none" stroke="#4f4634" stroke-width="1"></path>
 <g font-size="8" letter-spacing="0.5">
 <text x="200" y="10" text-anchor="middle" font-weight="600" fill="#4f4634">BILL</text><text x="200" y="20" text-anchor="middle" font-weight="500" fill="#221c14">{{ dBill }}</text>

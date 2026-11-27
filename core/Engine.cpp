@@ -4,7 +4,7 @@
 #include <algorithm>
 #include <cmath>
 
-namespace tipp
+namespace pipp
 {
 namespace
 {
@@ -868,4 +868,4 @@ void Engine::process(float* left, float* right, int numSamples) noexcept
          && ! peakR.compare_exchange_weak(old, blockR, std::memory_order_relaxed);) {}
     levelOut.store(std::max(voice.envelope(), drum.envelope()), std::memory_order_relaxed);
 }
-} // namespace tipp
+} // namespace pipp

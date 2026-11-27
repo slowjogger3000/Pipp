@@ -1,8 +1,8 @@
 {
-  "name": "tipp-phone",
+  "name": "pipp-phone",
   "private": true,
   "version": "0.9.0",
-  "description": "Tipp as an iOS app: Capacitor around the web build in ../web/dist.",
+  "description": "Pipp as an iOS app: Capacitor around the web build in ../web/dist.",
   "scripts": {
     "build": "npm --prefix ../web run build && cap sync ios",
     "open": "cap open ios"

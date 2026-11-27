@@ -1,10 +1,10 @@
 // Main-thread side of the audio: starts the AudioContext and the worklet,
 // sends values and events, and keeps the latest state the worklet posted.
-// Also holds a second tipp.wasm instance on this thread for bird data the
+// Also holds a second pipp.wasm instance on this thread for bird data the
 // interface draws with (ranges, contours) and for the drawn line.
 
 import workletUrl from './worklet.ts?worker&url';
-import { Tipp, kNumKnobs, type Ptr, type PhraseView } from '../core/tipp.ts';
+import { Pipp, kNumKnobs, type Ptr, type PhraseView } from '../core/pipp.ts';
 import type { ToWorklet, FromWorklet, WorkletState } from './protocol.ts';
 import { index, birdFile, hasSound } from '../data.ts';
 
@@ -17,7 +17,7 @@ export interface SonoFrame {
 }
 
 export class AudioHost {
-  readonly tipp: Tipp;
+  readonly pipp: Pipp;
   readonly birds = new Map<string, Ptr>(); // parsed on this thread
   private ctx: AudioContext | null = null;
   private node: AudioWorkletNode | null = null;
@@ -47,19 +47,19 @@ export class AudioHost {
   onState: ((s: WorkletState) => void) | null = null;
 
   static async create(): Promise<AudioHost> {
-    const res = await fetch(`${import.meta.env.BASE_URL}tipp.wasm`);
-    if (!res.ok) throw new Error(`tipp.wasm: ${res.status}`);
+    const res = await fetch(`${import.meta.env.BASE_URL}pipp.wasm`);
+    if (!res.ok) throw new Error(`pipp.wasm: ${res.status}`);
     const bytes = await res.arrayBuffer();
-    const tipp = await Tipp.load(bytes);
-    return new AudioHost(tipp, bytes);
+    const pipp = await Pipp.load(bytes);
+    return new AudioHost(pipp, bytes);
   }
 
-  private constructor(tipp: Tipp, wasm: ArrayBuffer) {
-    this.tipp = tipp;
+  private constructor(pipp: Pipp, wasm: ArrayBuffer) {
+    this.pipp = pipp;
     this.wasm = wasm;
     for (const b of index.birds) {
       if (!hasSound(b.id)) continue;
-      this.birds.set(b.id, tipp.parseBird(b.id, birdFile(b.id, 'voice')!, birdFile(b.id, 'songs')!));
+      this.birds.set(b.id, pipp.parseBird(b.id, birdFile(b.id, 'voice')!, birdFile(b.id, 'songs')!));
     }
   }
 
@@ -80,7 +80,7 @@ export class AudioHost {
     this.ctx = ctx;
     const resumed = ctx.resume(); // inside the gesture, before any await
     await ctx.audioWorklet.addModule(workletUrl);
-    const node = new AudioWorkletNode(ctx, 'tipp', { numberOfInputs: 0, numberOfOutputs: 1, outputChannelCount: [2] });
+    const node = new AudioWorkletNode(ctx, 'pipp', { numberOfInputs: 0, numberOfOutputs: 1, outputChannelCount: [2] });
     node.port.onmessage = (e: MessageEvent<FromWorklet>) => this.receive(e.data);
     node.connect(ctx.destination);
     this.node = node;

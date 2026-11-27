@@ -12,7 +12,7 @@
 #include <memory>
 #include <vector>
 
-namespace tipp::ui
+namespace pipp::ui
 {
 class FilePlayer
 {
@@ -121,4 +121,4 @@ private:
     std::unique_ptr<Clip> owned;
     std::vector<std::pair<std::unique_ptr<Clip>, double>> retired;
 };
-} // namespace tipp::ui
+} // namespace pipp::ui

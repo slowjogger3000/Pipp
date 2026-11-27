@@ -7,7 +7,7 @@
 #include <cmath>
 #include <cstring>
 
-namespace tipp
+namespace pipp
 {
 namespace
 {
@@ -360,4 +360,4 @@ float contourPitchAt(const std::vector<ContourPoint>& c, float t) noexcept
     return c.back().v;
 }
 
-} // namespace tipp
+} // namespace pipp

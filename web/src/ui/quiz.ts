@@ -8,27 +8,27 @@
 // the place of the question: the score, the share right and the birds
 // missed (agreed with Eirik 2026-11-27; not in design/).
 //
-// Which bird is asked, the answers and the score come from tipp::Quiz in
+// Which bird is asked, the answers and the score come from pipp::Quiz in
 // core (on this thread's wasm instance); the quiz voice and COMPARE run in
 // the worklet. This class holds what MainComponent holds for the quiz.
 
 import type { AudioHost } from '../audio/host.ts';
 import { kSonoFrames } from '../audio/host.ts';
-import type { Ptr } from '../core/tipp.ts';
+import type { Ptr } from '../core/pipp.ts';
 import { birdFile, hasSound, index } from '../data.ts';
 import { Btn, Canvas, box, colour, el, font, graphPaper, joined, number, place, textWidth } from './dom.ts';
 import { lower, type Strings } from './strings.ts';
 
 type Info = Record<string, any>; // bird.json
 
-// tipp::Quiz::Set: pairs, the groups in index.json's order, all.
+// pipp::Quiz::Set: pairs, the groups in index.json's order, all.
 const kSetKeys = ['pairs', 'garden', 'forest', 'coast', 'wetland', 'mountain', 'farmland', 'night', 'all'] as const;
 const kAskKeys = ['type.song', 'type.call', 'quiz.ask_both'] as const;
 const kHintKeys = ['guide.mnemonic', 'scene.season', 'quiz.hints_none'] as const;
 const kTypeIds = ['song', 'call', 'alarm', 'flight'] as const;
 const kSeasonIds = ['spring', 'summer', 'autumn', 'winter'] as const;
 const kTimeIds = ['dawn', 'day', 'dusk', 'night'] as const;
-const kLengths = [10, 20, 50]; // tipp::Quiz::kLengths
+const kLengths = [10, 20, 50]; // pipp::Quiz::kLengths
 const kNumSets = kSetKeys.length;
 const kSetRows = Math.ceil(kNumSets / 2);
 const kLeftW = 950, kRightX = 962, kRightW = 1264 - kRightX;
@@ -270,10 +270,10 @@ export class QuizScreen {
     this.setLabel = el('div', 'field', grid);
     // One button steps through the sets that have birds.
     this.setCycle = new Btn(grid, '', () => {
-      const x = this.host.tipp.x;
+      const x = this.host.pipp.x;
       for (let k = 1; k <= kNumSets; k++) {
         const i = (this.set + k) % kNumSets;
-        if (x.tipp_quiz_pool_size(this.q, i) > 0) { this.set = i; break; }
+        if (x.pipp_quiz_pool_size(this.q, i) > 0) { this.set = i; break; }
       }
       this.start();
     }, { height: '44px', padding: '0 10px', justifyContent: 'flex-start', minWidth: '0' });
@@ -306,14 +306,14 @@ export class QuizScreen {
   }
 
   private fillResult(q: Question) {
-    const s = this.s, t = this.host.tipp, x = t.x;
-    const total = x.tipp_quiz_length(this.q);
+    const s = this.s, t = this.host.pipp, x = t.x;
+    const total = x.pipp_quiz_length(this.q);
     this.resLabel.textContent = s.t('quiz.result');
     this.resScore.textContent = s.t('quiz.result_score', { correct: number(q.correct, 0, s.no), total: number(total, 0, s.no) });
     this.resPct.textContent = s.t('quiz.result_pct', { pct: number(Math.round((100 * q.correct) / Math.max(1, total)), 0, s.no) });
     this.resMissLabel.textContent = s.t('quiz.result_missed');
     this.resAgain.text(s.t('quiz.again'));
-    const n = x.tipp_quiz_misses(this.q, this.missBuf, 64);
+    const n = x.pipp_quiz_misses(this.q, this.missBuf, 64);
     const v = t.i32(this.missBuf, 3 * n);
     this.resList.replaceChildren();
     if (n === 0) {
@@ -343,9 +343,9 @@ export class QuizScreen {
     this.start();
   }
 
-  // Every bird with data, with its group and lookalikes, into tipp::Quiz.
+  // Every bird with data, with its group and lookalikes, into pipp::Quiz.
   private buildBirds() {
-    const t = this.host.tipp, x = t.x;
+    const t = this.host.pipp, x = t.x;
     for (const b of index.birds) {
       const p = this.host.birds.get(b.id);
       if (!p || !hasSound(b.id)) continue;
@@ -363,7 +363,7 @@ export class QuizScreen {
       }
       this.lookalikes.push(looks);
     }
-    this.q = x.tipp_quiz_new();
+    this.q = x.pipp_quiz_new();
     this.stateBuf = t.alloc(13 * 4);
     this.practiseBuf = t.alloc(64 * 4);
     this.sceneBuf = t.alloc(2 * 4);
@@ -372,14 +372,14 @@ export class QuizScreen {
     for (let k = 0; k < this.ids.length; k++) {
       const entry = index.birds.find((b) => b.id === this.ids[k])!;
       t.i32(lk, this.lookalikes[k].length).set(this.lookalikes[k]);
-      x.tipp_quiz_add_bird(this.q, index.groups.indexOf(entry.group), x.tipp_bird_type_present(this.ptrs[k], 1), lk, this.lookalikes[k].length);
+      x.pipp_quiz_add_bird(this.q, index.groups.indexOf(entry.group), x.pipp_bird_type_present(this.ptrs[k], 1), lk, this.lookalikes[k].length);
     }
     t.free(lk);
   }
 
   private question(): Question {
-    const t = this.host.tipp;
-    t.x.tipp_quiz_state(this.q, this.stateBuf);
+    const t = this.host.pipp;
+    t.x.pipp_quiz_state(this.q, this.stateBuf);
     const v = t.i32(this.stateBuf, 13);
     return {
       bird: v[0], type: v[1], count: v[2], answers: [v[3], v[4], v[5], v[6]], correctSlot: v[7], picked: v[8],
@@ -389,7 +389,7 @@ export class QuizScreen {
 
   get active(): boolean { return this.question().number > 0; }
   private get answered(): boolean { return this.question().picked >= 0; }
-  private get finished(): boolean { return this.host.tipp.x.tipp_quiz_finished(this.q) !== 0; }
+  private get finished(): boolean { return this.host.pipp.x.pipp_quiz_finished(this.q) !== 0; }
 
   private name(k: number): string {
     const e = index.birds.find((b) => b.id === this.ids[k]);
@@ -431,7 +431,7 @@ export class QuizScreen {
     this.stopCompare();
     const seed = (Math.random() * 0x100000000) >>> 0;
     this.showResult = false;
-    if (this.host.tipp.x.tipp_quiz_start(this.q, this.set, this.ask, seed, kLengths[this.length])) this.stage();
+    if (this.host.pipp.x.pipp_quiz_start(this.q, this.set, this.ask, seed, kLengths[this.length])) this.stage();
     else {
       this.host.post({ t: 'qvoice', op: 'stop' });
       this.playing = false;
@@ -453,7 +453,7 @@ export class QuizScreen {
   answer(slot: number) {
     const q = this.question();
     if (q.number <= 0 || q.picked >= 0 || slot >= q.count) return;
-    this.host.tipp.x.tipp_quiz_answer(this.q, slot);
+    this.host.pipp.x.pipp_quiz_answer(this.q, slot);
     this.update();
   }
 
@@ -467,7 +467,7 @@ export class QuizScreen {
       this.playing = false;
       this.host.param('pb_play', 0);
       this.update();
-    } else if (this.host.tipp.x.tipp_quiz_next(this.q)) this.stage();
+    } else if (this.host.pipp.x.pipp_quiz_next(this.q)) this.stage();
   }
 
   playAgain() {
@@ -505,8 +505,8 @@ export class QuizScreen {
       if (a !== q.bird && (this.lookalikes[q.bird].includes(a) || this.lookalikes[a].includes(q.bird))) other = a;
     }
     if (other < 0) other = q.answers[(q.correctSlot + 1) % q.count];
-    const x = this.host.tipp.x;
-    const type = x.tipp_bird_type_present(this.ptrs[other], q.type) ? q.type : 0;
+    const x = this.host.pipp.x;
+    const type = x.pipp_bird_type_present(this.ptrs[other], q.type) ? q.type : 0;
     this.comparing = this.ids[other];
     this.compareSeen = false;
     this.compareAt = performance.now();
@@ -600,11 +600,11 @@ export class QuizScreen {
 
   // Everything that depends on the quiz state, as updateQuizView().
   update() {
-    const s = this.s, x = this.host.tipp.x;
+    const s = this.s, x = this.host.pipp.x;
     const q = this.question();
     const active = q.number > 0, answered = active && q.picked >= 0, finished = answered && this.finished;
 
-    const total = x.tipp_quiz_length(this.q);
+    const total = x.pipp_quiz_length(this.q);
     this.counter.textContent = active ? s.t('quiz.question', { n: String(q.number), total: String(total) }) : s.t('quiz.question_none');
     this.nextBtn.text(s.t(finished ? 'quiz.see_result' : 'quiz.next'));
     const result = this.showResult && finished;
@@ -629,8 +629,8 @@ export class QuizScreen {
       a.tag.textContent = correct ? s.t('quiz.correct') : wrong ? s.t('quiz.your_answer') : '';
     });
     this.setBtns.forEach((b, i) => {
-      // A set has birds when tipp::Quiz::poolFor finds any.
-      b.on(this.set === i).disabled(x.tipp_quiz_pool_size(this.q, i) === 0);
+      // A set has birds when pipp::Quiz::poolFor finds any.
+      b.on(this.set === i).disabled(x.pipp_quiz_pool_size(this.q, i) === 0);
     });
     this.askBtns.forEach((b, i) => b.on(this.ask === i));
     this.hintBtns.forEach((b, i) => b.on(this.hints === i));
@@ -650,16 +650,16 @@ export class QuizScreen {
       return;
     }
 
-    const n = x.tipp_quiz_practise(this.q, this.practiseBuf, 64);
-    const names = [...this.host.tipp.i32(this.practiseBuf, n)].map((b) => lower(this.name(b)));
+    const n = x.pipp_quiz_practise(this.q, this.practiseBuf, 64);
+    const names = [...this.host.pipp.i32(this.practiseBuf, n)].map((b) => lower(this.name(b)));
     this.practise.textContent = names.length === 0 ? s.t('quiz.practise_none')
       : s.t('quiz.practise', { birds: names.length > 1 ? names.slice(0, -1).join(', ') + s.t('quiz.and') + names[names.length - 1] : names[0] });
 
     // The scene the quiz voice uses for this bird and type.
-    const sc = this.host.tipp.i32(this.sceneBuf, 2);
+    const sc = this.host.pipp.i32(this.sceneBuf, 2);
     sc[0] = 0; sc[1] = 0;
-    x.tipp_quiz_scene_for(this.ptrs[q.bird], q.type, this.sceneBuf);
-    const [season, time] = this.host.tipp.i32(this.sceneBuf, 2);
+    x.pipp_quiz_scene_for(this.ptrs[q.bird], q.type, this.sceneBuf);
+    const [season, time] = this.host.pipp.i32(this.sceneBuf, 2);
     const type = lower(s.t(`type.${kTypeIds[q.type]}`));
     const seasonText = lower(s.t(`season.${kSeasonIds[season] ?? 'spring'}`));
     const timeText = lower(s.t(`time.${kTimeIds[time] ?? 'dawn'}`));

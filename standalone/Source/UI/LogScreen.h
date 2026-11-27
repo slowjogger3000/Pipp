@@ -6,7 +6,7 @@
 // the field manners note. Right: the log on sheet, OPEN BIRD, DELETE ENTRY,
 // EXPORT CSV.
 //
-// Entries live in ~/Library/Application Support/Tipp/log.json, newest
+// Entries live in ~/Library/Application Support/Pipp/log.json, newest
 // first, in the web app's entry format. Heard and saw are stored as ids, so
 // the language can change after an entry is made. Choices as in the web
 // app: the form starts on the Play bird, now, and the Play scene's song
@@ -22,7 +22,7 @@
 #include <memory>
 #include <vector>
 
-namespace tipp::ui
+namespace pipp::ui
 {
 struct LogEntry
 {
@@ -104,4 +104,4 @@ private:
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(LogScreen)
 };
-} // namespace tipp::ui
+} // namespace pipp::ui

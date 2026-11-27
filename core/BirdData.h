@@ -9,7 +9,7 @@
 #include <string>
 #include <vector>
 
-namespace tipp
+namespace pipp
 {
 // The 12 knobs, in the order of params::all.
 enum Knob : int
@@ -133,4 +133,4 @@ SceneRules rulesFor(const SongType& t, int season, int time, int sex, int age) n
 // Fills out from the two files' text. Returns false and sets error on bad data.
 bool parseBird(const std::string& id, const std::string& voiceJson, const std::string& songsJson,
                BirdData& out, std::string& error);
-} // namespace tipp
+} // namespace pipp

@@ -1,6 +1,6 @@
 #pragma once
 
-// Every parameter ID in Tipp. The same strings are used by JUCE, the
+// Every parameter ID in Pipp. The same strings are used by JUCE, the
 // worklet messages and saved state. Source: prd.md, "Knobs" and
 // "IDs for the other controls". Add an ID to prd.md first, then here.
 //
@@ -11,7 +11,7 @@
 #include <cstddef>
 #include <cstring>
 
-namespace tipp::params
+namespace pipp::params
 {
 // Voice
 inline constexpr const char* vo_pitch   = "vo_pitch";
@@ -149,4 +149,4 @@ inline const Info* find(const char* id) noexcept
     return nullptr;
 }
 
-} // namespace tipp::params
+} // namespace pipp::params

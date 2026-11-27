@@ -23,7 +23,7 @@
 #include <cstdint>
 #include <vector>
 
-namespace tipp
+namespace pipp
 {
 struct QuizBird
 {
@@ -142,4 +142,4 @@ private:
     int seasonIdx = 0, timeIdx = 0;
     std::uint32_t frame = 0u, asks = 0u;
 };
-} // namespace tipp
+} // namespace pipp

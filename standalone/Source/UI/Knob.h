@@ -15,12 +15,12 @@
 
 #include <cmath>
 
-namespace tipp::ui
+namespace pipp::ui
 {
 class Knob final : public juce::Component
 {
 public:
-    Knob(tipp::Engine& e, int knobIndex) : engine(e), k(knobIndex)
+    Knob(pipp::Engine& e, int knobIndex) : engine(e), k(knobIndex)
     {
         setMouseCursor(juce::MouseCursor::UpDownResizeCursor);
     }
@@ -28,7 +28,7 @@ public:
     juce::String label, handTag;
     bool comma = false;
 
-    void setBird(const tipp::BirdData* b)
+    void setBird(const pipp::BirdData* b)
     {
         bird = b;
         repaint();
@@ -52,16 +52,16 @@ public:
         const int d = exact ? 2 : 0;
         switch (k)
         {
-            case tipp::kPitch:
+            case pipp::kPitch:
             {
                 const float ref = bird != nullptr ? bird->pitchRefHz : 2000.0f;
                 return number(v * ref / 1000.0f, exact ? 3 : 1, comma) + " kHz";
             }
-            case tipp::kTrill:    return number(v, exact ? 1 : 0, comma) + " Hz";
-            case tipp::kPause:
-            case tipp::kLength:   return number(v, exact ? 2 : 1, comma) + " s";
-            case tipp::kDistance: return number(v, exact ? 1 : 0, comma) + " m";
-            case tipp::kWind:     return number(v, 1, comma) + " m/s";
+            case pipp::kTrill:    return number(v, exact ? 1 : 0, comma) + " Hz";
+            case pipp::kPause:
+            case pipp::kLength:   return number(v, exact ? 2 : 1, comma) + " s";
+            case pipp::kDistance: return number(v, exact ? 1 : 0, comma) + " m";
+            case pipp::kWind:     return number(v, 1, comma) + " m/s";
             default:              return number(v, d == 0 ? 0 : 1, comma) + " %";
         }
     }
@@ -180,18 +180,18 @@ public:
     }
 
 private:
-    tipp::Range range() const noexcept
+    pipp::Range range() const noexcept
     {
         if (bird != nullptr)
             return bird->knobRange[static_cast<std::size_t>(k)];
-        const auto& info = tipp::params::all[static_cast<std::size_t>(k)];
+        const auto& info = pipp::params::all[static_cast<std::size_t>(k)];
         return { static_cast<float>(info.min), static_cast<float>(info.max) };
     }
 
     // Pitch, pause, length and distance turn in equal ratios.
     bool logScale() const noexcept
     {
-        return k == tipp::kPitch || k == tipp::kPause || k == tipp::kLength || k == tipp::kDistance;
+        return k == pipp::kPitch || k == pipp::kPause || k == pipp::kLength || k == pipp::kDistance;
     }
 
     float toNorm(float v) const noexcept
@@ -223,12 +223,12 @@ private:
         repaint();
     }
 
-    tipp::Engine& engine;
+    pipp::Engine& engine;
     const int k;
-    const tipp::BirdData* bird = nullptr;
+    const pipp::BirdData* bird = nullptr;
     float shownValue = 0.0f;
     bool shownHand = false;
     bool hover = false, dragging = false;
     float startNorm = 0.0f, startY = 0.0f;
 };
-} // namespace tipp::ui
+} // namespace pipp::ui

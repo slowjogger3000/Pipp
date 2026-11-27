@@ -10,7 +10,7 @@
 // right and the birds missed (agreed with Eirik 2026-11-27; not in design/).
 //
 // The screen only draws and reports clicks. Which bird is asked, the
-// answers and the score come from tipp::Quiz in core; the host fills View.
+// answers and the score come from pipp::Quiz in core; the host fills View.
 
 #include "Strings.h"
 #include "Widgets.h"
@@ -22,7 +22,7 @@
 #include <functional>
 #include <vector>
 
-namespace tipp::ui
+namespace pipp::ui
 {
 // The mystery song as it is sung, left to right from the moment it was
 // asked for. 30px per kHz from 0 to 8 kHz, 80px per second. Frames are
@@ -35,7 +35,7 @@ public:
     static constexpr float kPxPerSecond = 80.0f;
     static constexpr float kLeftPx = 20.0f;
 
-    explicit QuizSonogram(tipp::Engine& e) : engine(e) { setInterceptsMouseClicks(false, false); }
+    explicit QuizSonogram(pipp::Engine& e) : engine(e) { setInterceptsMouseClicks(false, false); }
 
     // Start a new trace at this engine frame.
     void restart(std::uint32_t frame)
@@ -55,8 +55,8 @@ public:
     void paint(juce::Graphics& g) override;
 
 private:
-    tipp::Engine& engine;
-    std::vector<tipp::Engine::SonoFrame> frames;
+    pipp::Engine& engine;
+    std::vector<pipp::Engine::SonoFrame> frames;
     std::uint32_t start = 0u, next = 0u;
 };
 
@@ -66,7 +66,7 @@ juce::String quizSetName(const Strings& s, int set, int birdCount);
 class QuizScreen final : public juce::Component
 {
 public:
-    QuizScreen(const Strings& s, tipp::Engine& e);
+    QuizScreen(const Strings& s, pipp::Engine& e);
 
     int birdCount = 0; // birds in index.json, for ALL n BIRDS
 
@@ -84,7 +84,7 @@ public:
         bool showResult = false;
         struct Miss { juce::String name, note; };
         std::vector<Miss> misses;
-        std::array<bool, tipp::Quiz::kNumSets> setHasBirds {};
+        std::array<bool, pipp::Quiz::kNumSets> setHasBirds {};
         int correct = 0, missed = 0, left = 0;
         juce::String practise;
         bool half = false, hintUsed = false, comparing = false;
@@ -127,7 +127,7 @@ private:
 
     Btn againBtn, halfBtn, hintBtn, compareBtn, guideBtn, nextBtn;
     std::array<Answer, 4> answers;
-    std::array<Btn, tipp::Quiz::kNumSets> setBtns;
+    std::array<Btn, pipp::Quiz::kNumSets> setBtns;
     std::array<Btn, 3> askBtns, hintBtns, lengthBtns;
     Btn againResultBtn;
     std::vector<std::unique_ptr<Btn>> missBtns;
@@ -138,4 +138,4 @@ private:
     juce::Rectangle<int> setLabel, askLabel, hintsLabel, lengthLabel, scoreLabel, scoreTable, practiseText;
     juce::Rectangle<int> resultArea, resLabel, resScore, resPct, resMissLabel, resList;
 };
-} // namespace tipp::ui
+} // namespace pipp::ui

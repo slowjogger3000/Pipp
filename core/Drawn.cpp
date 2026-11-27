@@ -5,7 +5,7 @@
 #include <utility>
 #include <vector>
 
-namespace tipp
+namespace pipp
 {
 namespace
 {
@@ -262,4 +262,4 @@ bool eraseNear(DrawnLine& line, float tMs, float hz, float pxPerMs, float pxPerH
         line.pts[0].joinPrev = false;
     return any;
 }
-} // namespace tipp
+} // namespace pipp

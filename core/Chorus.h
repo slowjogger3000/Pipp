@@ -18,7 +18,7 @@
 #include <atomic>
 #include <cstdint>
 
-namespace tipp
+namespace pipp
 {
 class Chorus
 {
@@ -108,4 +108,4 @@ private:
     std::uint32_t seenSeek = 0u;
     bool done = false;
 };
-} // namespace tipp
+} // namespace pipp

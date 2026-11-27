@@ -2,7 +2,7 @@
 
 // The Mac's collection: recordings and pictures that came from the phone
 // export (prd.md, Phone export) or from files added by hand. Kept in
-// ~/Library/Application Support/Tipp/collection: collection.json lists them,
+// ~/Library/Application Support/Pipp/collection: collection.json lists them,
 // recordings/<id>.<ext> with <id>.png thumbnails and pictures/<id>.<ext> hold
 // the files, the same layout as the export. Message thread only.
 
@@ -12,7 +12,7 @@
 #include <functional>
 #include <vector>
 
-namespace tipp::ui
+namespace pipp::ui
 {
 struct CollRecording
 {
@@ -40,7 +40,7 @@ public:
         int added = 0, skipped = 0;
     };
 
-    // knownBird: whether an id is one of Tipp's birds.
+    // knownBird: whether an id is one of Pipp's birds.
     Collection(const juce::File& folder, std::function<bool(const juce::String&)> knownBird);
 
     const juce::File& folder() const noexcept { return dir; }
@@ -75,4 +75,4 @@ private:
     std::vector<CollPicture> pics;
     juce::AudioFormatManager formatManager;
 };
-} // namespace tipp::ui
+} // namespace pipp::ui

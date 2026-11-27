@@ -5,7 +5,7 @@
 import { now, type Picture, type Recording } from './store.ts';
 import { zip, type ZipEntry } from './zip.ts';
 
-export const kExportFormat = 'tipp-export';
+export const kExportFormat = 'pipp-export';
 export const kExportVersion = 1;
 const kTypeIds = ['song', 'call', 'alarm', 'flight'] as const;
 
@@ -53,5 +53,5 @@ export async function buildExport(recs: Recording[], pics: Picture[]): Promise<F
   const stamp = now();
   const manifest = { format: kExportFormat, version: kExportVersion, exported: stamp, recordings, pictures };
   entries.unshift({ name: 'manifest.json', data: new Uint8Array(new TextEncoder().encode(JSON.stringify(manifest, null, 2))) });
-  return new File([zip(entries)], `tipp-export-${stamp.slice(0, 10)}.zip`, { type: 'application/zip' });
+  return new File([zip(entries)], `pipp-export-${stamp.slice(0, 10)}.zip`, { type: 'application/zip' });
 }

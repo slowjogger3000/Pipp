@@ -8,7 +8,7 @@
 // a lane's band starts at its entry minute and fills where the bird sang.
 //
 // The screen only draws and reports clicks. The clock, entries and mix are
-// tipp::Chorus in core; the host fills View.
+// pipp::Chorus in core; the host fills View.
 
 #include "Strings.h"
 #include "Widgets.h"
@@ -18,12 +18,12 @@
 #include <array>
 #include <functional>
 
-namespace tipp::ui
+namespace pipp::ui
 {
 class ChorusScreen final : public juce::Component
 {
 public:
-    ChorusScreen(const Strings& s, const tipp::Chorus& c);
+    ChorusScreen(const Strings& s, const pipp::Chorus& c);
 
     struct Lane
     {
@@ -36,7 +36,7 @@ public:
     struct View
     {
         int season = 0, place = 0, speed = 1;
-        std::array<Lane, tipp::Chorus::kLanes> lanes;
+        std::array<Lane, pipp::Chorus::kLanes> lanes;
         bool canChange = true;
     };
 
@@ -58,7 +58,7 @@ private:
     void paintTimeline(juce::Graphics& g);
 
     const Strings& strings;
-    const tipp::Chorus& chorus;
+    const pipp::Chorus& chorus;
     View view;
 
     std::array<Btn, 4> seasonBtns, placeBtns, speedBtns;
@@ -68,4 +68,4 @@ private:
     juce::Rectangle<int> morningLabel, panel, head, heads, timeline, axis, caption, note;
     std::array<juce::Rectangle<int>, 3> fieldLabels;
 };
-} // namespace tipp::ui
+} // namespace pipp::ui

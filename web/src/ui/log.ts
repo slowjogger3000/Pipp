@@ -6,14 +6,14 @@
 // On the phone the log lives in SAMLING (design/CollectionLog.dc.html): a
 // list of two-line rows, I HEARD IT: NEW LINE opens the same form above it.
 //
-// Entries live in localStorage under tipp.log, newest first. Heard and saw
+// Entries live in localStorage under pipp.log, newest first. Heard and saw
 // are stored as ids, so the language can change after an entry is made.
 
 import { hasSound, index, type IndexBird } from '../data.ts';
 import { Btn, box, el, joined, place } from './dom.ts';
 import type { Strings } from './strings.ts';
 
-const kStoreKey = 'tipp.log';
+const kStoreKey = 'pipp.log';
 const kHeard = ['song', 'call', 'alarm', 'flight'] as const;
 const kSaw = ['male', 'female', 'juvenile', 'none'] as const;
 const kReportUrl = 'https://www.artsobservasjoner.no';
@@ -390,7 +390,7 @@ export class LogScreen {
     const now = new Date();
     const a = el('a');
     a.href = URL.createObjectURL(blob);
-    a.download = `tipp-log-${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}.csv`;
+    a.download = `pipp-log-${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}.csv`;
     a.click();
     setTimeout(() => URL.revokeObjectURL(a.href), 1000);
   }

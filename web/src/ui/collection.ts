@@ -225,13 +225,13 @@ export class CollectionScreen {
     return mime.includes('mp4') ? 'm4a' : mime.includes('webm') ? 'webm' : mime.includes('png') ? 'png' : 'jpg';
   }
   private pictureFile(p: Picture): File {
-    return new File([p.image], `tipp-${p.bird}-${p.date.replace(/[: ]/g, '-')}.${CollectionScreen.ext(p.image.type)}`, { type: p.image.type });
+    return new File([p.image], `pipp-${p.bird}-${p.date.replace(/[: ]/g, '-')}.${CollectionScreen.ext(p.image.type)}`, { type: p.image.type });
   }
 
   // DEL: the system share sheet with the chosen files.
   private async share() {
     const files: File[] = [];
-    for (const r of this.recs) if (this.selected.has(r.id)) files.push(new File([r.audio], `tipp-${r.bird || 'bird'}-${r.date.replace(/[: ]/g, '-')}.${CollectionScreen.ext(r.mime)}`, { type: r.mime }));
+    for (const r of this.recs) if (this.selected.has(r.id)) files.push(new File([r.audio], `pipp-${r.bird || 'bird'}-${r.date.replace(/[: ]/g, '-')}.${CollectionScreen.ext(r.mime)}`, { type: r.mime }));
     for (const p of this.pics) if (this.selected.has(p.id)) files.push(this.pictureFile(p));
     await this.shareFiles(files);
   }

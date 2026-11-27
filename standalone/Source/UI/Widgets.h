@@ -7,7 +7,7 @@
 
 #include <functional>
 
-namespace tipp::ui
+namespace pipp::ui
 {
 class Btn final : public juce::Component
 {
@@ -108,4 +108,4 @@ inline void layoutJoined(juce::Rectangle<int> r, std::initializer_list<Btn*> but
         ++i;
     }
 }
-} // namespace tipp::ui
+} // namespace pipp::ui

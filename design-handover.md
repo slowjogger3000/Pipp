@@ -1,4 +1,4 @@
-# Tipp: design handover
+# Pipp: design handover
 
 The design lives on a canvas: https://claude.ai/code/artifact/c24a91fc-53bd-4c36-bc48-d48d083210e7
 
@@ -32,7 +32,7 @@ None of these were rendered and checked by eye when they were made. If a measure
 These come from the Skisse design system and apply to every screen.
 
 - **State is ink.** On is filled `ink` (#221c14) with `onInk` (#ddd3bd) text. Off is a raised face.
-- **Colour is the track.** `clay`, `khaki`, `sage` and `plum` name channels 1 to 4. In Tipp they appear in the wordmark bar and the 4 chorus lanes. Text on clay and plum is `paper`, on khaki and sage it is `ink`.
+- **Colour is the track.** `clay`, `khaki`, `sage` and `plum` name channels 1 to 4. In Pipp they appear in the wordmark bar and the 4 chorus lanes. Text on clay and plum is `paper`, on khaki and sage it is `ink`.
 - **Red is only Rec.** `rec` (#c2331a) appears on the Listen dot and nowhere else.
 - **Sections are labelled.** Caps label in `inkSoft`, then a 1px ink hairline to the edge.
 - **Wells hold data.** Anything you read a value from sits in a `face` well with an inset bevel. Lists sit on `sheet`.
@@ -44,7 +44,7 @@ These come from the Skisse design system and apply to every screen.
 - **Type.** IBM Plex Mono 400, 500, 600 for labels, values, buttons. Instrument Serif 400 for the wordmark, bird names and panel titles. No sans.
 - **Writing.** Control labels in caps. Names in sentence case in the serif. Values carry units with a real minus sign. Displays get a `FIG. n` caption.
 
-## Tipp's own conventions
+## Pipp's own conventions
 
 | Thing | Rule |
 |---|---|
@@ -57,14 +57,14 @@ These come from the Skisse design system and apply to every screen.
 | Unavailable song type | Hatched and disabled |
 | Quiz, correct answer | Ink fill, label CORRECT |
 | Quiz, wrong pick | Hatched, label YOUR ANSWER |
-| Recognised bird not in Tipp | Hatched row with a "not in Tipp" tag |
+| Recognised bird not in Pipp | Hatched row with a "not in Pipp" tag |
 | Unverified content | The literal marker `[TO VERIFY]` |
 
 ## Shared layout, desktop
 
 Window 1280×800, 1px ink border. Stacked bands:
 
-1. **Header, 56px.** Wordmark "Tipp" in Instrument Serif 32px with the 5px four-colour bar under it. Play and Stop (44×32). Bird stepper with a 280px readout well. Language EN/NO. Output readout and meter.
+1. **Header, 56px.** Wordmark "Pipp" in Instrument Serif 32px with the 5px four-colour bar under it. Play and Stop (44×32). Bird stepper with a 280px readout well. Language EN/NO. Output readout and meter.
 2. **Tabs, 36px** on `panel`. PLAY F1, FIELD GUIDE F2, QUIZ F3, CHORUS F4, LOG F5. The active tab is on `ground` and 4px taller.
 3. **Body, 680px.**
 4. **Status bar, 28px** on `panel`. State on the left, key hints on the right.

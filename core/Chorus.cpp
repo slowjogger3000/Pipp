@@ -5,7 +5,7 @@
 #include <algorithm>
 #include <cmath>
 
-namespace tipp
+namespace pipp
 {
 namespace
 {
@@ -286,4 +286,4 @@ void Chorus::takePeaks(float& left, float& right) noexcept
     left = peakL.exchange(0.0f, std::memory_order_relaxed);
     right = peakR.exchange(0.0f, std::memory_order_relaxed);
 }
-} // namespace tipp
+} // namespace pipp

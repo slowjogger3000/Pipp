@@ -71,13 +71,13 @@ export class Knob {
     if (this.dragging) return this.shown;
     if (this.host.ready) return this.host.knobValue(this.k);
     if (!Number.isNaN(this.shown)) return this.shown;
-    return this.bird ? this.host.tipp.x.tipp_bird_base(this.bird, this.k) : this.host.tipp.params[this.k].def;
+    return this.bird ? this.host.pipp.x.pipp_bird_base(this.bird, this.k) : this.host.pipp.params[this.k].def;
   }
 
   private range(): [number, number] {
-    const x = this.host.tipp.x;
-    if (this.bird) return [x.tipp_bird_range_lo(this.bird, this.k), x.tipp_bird_range_hi(this.bird, this.k)];
-    const p = this.host.tipp.params[this.k];
+    const x = this.host.pipp.x;
+    if (this.bird) return [x.pipp_bird_range_lo(this.bird, this.k), x.pipp_bird_range_hi(this.bird, this.k)];
+    const p = this.host.pipp.params[this.k];
     return [p.min, p.max];
   }
 
@@ -109,7 +109,7 @@ export class Knob {
     const c = this.strings.no;
     switch (this.k) {
       case kPitch: {
-        const ref = this.bird ? this.host.tipp.x.tipp_bird_pitch_ref(this.bird) : 2000;
+        const ref = this.bird ? this.host.pipp.x.pipp_bird_pitch_ref(this.bird) : 2000;
         return `${number((v * ref) / 1000, exact ? 3 : 1, c)} kHz`;
       }
       case kTrill: return `${number(v, exact ? 1 : 0, c)} Hz`;

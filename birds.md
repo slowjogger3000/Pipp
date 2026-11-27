@@ -1,4 +1,4 @@
-# Tipp: birds and facts
+# Pipp: birds and facts
 
 Rule: a fact goes into the app as verified only if this file says so. Everything else shows `[TO VERIFY]`.
 
@@ -202,7 +202,7 @@ Source: Store norske leksikon (snl.no), one page per bird, read in full on 2026-
 
 ### Batch 1, to verify
 
-- Linerle: no source in hand describes its song or calls, so every linerle sound is a placeholder. Starling: no call is described, and the song's structure is not; the starling's sound is a design guess around mimicry, which Tipp does not do (MIMICS dropped for version 1).
+- Linerle: no source in hand describes its song or calls, so every linerle sound is a placeholder. Starling: no call is described, and the song's structure is not; the starling's sound is a design guess around mimicry, which Pipp does not do (MIMICS dropped for version 1).
 - Crow and wood pigeon calls, magpie song shape, greenfinch calls: not described beyond the lines above.
 - Every juvenile and most female plate values.
 
@@ -1058,7 +1058,7 @@ Source: Store norske leksikon (snl.no), one article per bird, read in full.
 | Status | VU, vulnerable, on the Norwegian red list (2021 to 2028); LC globally |
 | Versus lesser black-backed gull | Young herring gulls are sturdier, with shorter wings and a heavier bill. A broad black band on the sixth outer primary is rare in the herring gull |
 
-Sounds: none of SNL, Norwegian Wikipedia, BirdID or the Fuglevennen and BirdLife Norge pages (not found) describe the herring gull's calls. Every sound in Tipp is a placeholder until a source is found.
+Sounds: none of SNL, Norwegian Wikipedia, BirdID or the Fuglevennen and BirdLife Norge pages (not found) describe the herring gull's calls. Every sound in Pipp is a placeholder until a source is found.
 
 To verify: all calls, length, wingspan, weight, head pattern of adults in winter, eye colour.
 

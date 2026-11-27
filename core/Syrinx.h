@@ -15,7 +15,7 @@
 #include <algorithm>
 #include <cmath>
 
-namespace tipp
+namespace pipp
 {
 struct VoiceControls
 {
@@ -170,4 +170,4 @@ private:
     float lastFreq = 2000.0f;
     float ic1 = 0.0f, ic2 = 0.0f;
 };
-} // namespace tipp
+} // namespace pipp

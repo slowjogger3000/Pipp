@@ -2,7 +2,7 @@
 // whole body: a bird list on the left with recording and picture counts,
 // then the bird's name, IMPORT FROM PHONE EXPORT, ADD FILES and EXPORT; the
 // recordings as a list on sheet (play, sonogram, heard, length, date, match,
-// from) with COMPARE WITH TIPP, OPEN IN PLAY, SHOW IN FINDER and DELETE under
+// from) with COMPARE WITH PIPP, OPEN IN PLAY, SHOW IN FINDER and DELETE under
 // it; the pictures in a 3-column grid with ADD PICTURE last.
 //
 // The Mac has no recognition, so everything here comes from the phone export
@@ -12,8 +12,8 @@
 // My choices, not in the design: ALL BIRDS shows every bird, and the last
 // column (FROM) then reads BIRD and names it. A row is chosen by a click; the buttons under the list
 // act on it. DELETE asks once more (DELETE 1?) as on the phone. SHOW IN
-// FINDER is hatched in a browser. COMPARE WITH TIPP plays the recording, then
-// Tipp's bird sings one phrase of the same type. A picture opens the viewer
+// FINDER is hatched in a browser. COMPARE WITH PIPP plays the recording, then
+// Pipp's bird sings one phrase of the same type. A picture opens the viewer
 // from the phone. ADD FILES and ADD PICTURE file what they add under the
 // bird shown, or the Play bird under ALL BIRDS.
 
@@ -147,7 +147,7 @@ export class DeskCollectionScreen {
 
     this.viewer = new PictureViewer(root, s, {
       name: (bird) => this.name(bird),
-      share: (p) => this.download(new File([p.image], `tipp-${p.bird || 'bird'}-${p.date.replace(/[: ]/g, '-')}.${p.image.type.includes('png') ? 'png' : 'jpg'}`, { type: p.image.type })),
+      share: (p) => this.download(new File([p.image], `pipp-${p.bird || 'bird'}-${p.date.replace(/[: ]/g, '-')}.${p.image.type.includes('png') ? 'png' : 'jpg'}`, { type: p.image.type })),
       remove: async (p) => { await deletePicture(p.id); await this.load(); },
     });
   }
@@ -219,7 +219,7 @@ export class DeskCollectionScreen {
     this.render();
   }
 
-  // COMPARE WITH TIPP: the recording, then Tipp's bird, one phrase.
+  // COMPARE WITH PIPP: the recording, then Pipp's bird, one phrase.
   private compare() {
     const r = this.chosenRec();
     if (!r || !hasSound(r.bird)) return;
@@ -324,7 +324,7 @@ export class DeskCollectionScreen {
     this.picLabel.textContent = s.t('coll.pictures');
     this.recHead.replaceChildren();
     for (const k of ['', 'coll.col_sonogram', 'coll.col_heard', 'coll.col_length', 'coll.col_date', 'coll.col_match', 'coll.col_from']) el('span', '', this.recHead, k ? s.t(k) : '');
-    this.compareBtn.text(s.t('coll.compare_tipp'));
+    this.compareBtn.text(s.t('coll.compare_pipp'));
     this.openBtn.text(s.t('coll.open_play'));
     this.finderBtn.text(s.t('coll.show_finder'));
     this.finderBtn.e.title = s.t('coll.finder_web');

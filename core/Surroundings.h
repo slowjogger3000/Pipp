@@ -9,7 +9,7 @@
 
 #include <vector>
 
-namespace tipp
+namespace pipp
 {
 class Surroundings
 {
@@ -72,4 +72,4 @@ private:
     float fbTarget[kLines] {};
     float dampCoef = 0.3f, dampTarget = 0.3f;
 };
-} // namespace tipp
+} // namespace pipp

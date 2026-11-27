@@ -4,7 +4,7 @@
 
 #include <algorithm>
 
-namespace tipp
+namespace pipp
 {
 namespace
 {
@@ -259,4 +259,4 @@ void QuizVoice::setHalfSpeed(Engine& engine, bool half) noexcept
 {
     engine.setParam(P::indexOf(P::pb_speed), half ? 1.0f : 0.0f);
 }
-} // namespace tipp
+} // namespace pipp

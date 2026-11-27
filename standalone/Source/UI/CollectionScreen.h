@@ -4,13 +4,13 @@
 // screen as the web app's (web/src/ui/deskcollection.ts). The whole body: a
 // bird list with recording and picture counts, then the bird's name, IMPORT
 // FROM PHONE EXPORT, ADD FILES and EXPORT; the recordings on sheet (play,
-// sonogram, heard, length, date, match, from) with COMPARE WITH TIPP, OPEN IN
+// sonogram, heard, length, date, match, from) with COMPARE WITH PIPP, OPEN IN
 // PLAY, SHOW IN FINDER and DELETE under them; the pictures in 3 columns with
 // ADD PICTURE last, and the note.
 //
 // Choices as in the web app: ALL BIRDS first, where the last column names
 // the bird; a row is chosen by a click; DELETE asks once more (DELETE 1?);
-// COMPARE WITH TIPP plays the recording, then the bird sings one phrase of
+// COMPARE WITH PIPP plays the recording, then the bird sings one phrase of
 // the same type; ADD FILES and ADD PICTURE file under the bird shown, or the
 // Play bird under ALL BIRDS. A picture opens a viewer over the main area
 // with the phone viewer's buttons, SHOW IN FINDER in place of SHARE.
@@ -28,7 +28,7 @@
 #include <memory>
 #include <vector>
 
-namespace tipp::ui
+namespace pipp::ui
 {
 class CollectionScreen final : public juce::Component
 {
@@ -121,4 +121,4 @@ private:
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CollectionScreen)
 };
-} // namespace tipp::ui
+} // namespace pipp::ui

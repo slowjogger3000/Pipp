@@ -1,10 +1,10 @@
-# Tipp: product requirements
+# Pipp: product requirements
 
 Version 1, 2026-11-26. Owner: Eirik (Skisse).
 
 ## What it is
 
-A birdsong emulator. Tipp synthesises the songs and calls of common Norwegian birds. A bird sings by itself (autoplay), and you can grab any knob to bend the song for a moment. Around that instrument sit a field guide, ear training, a dawn chorus and, on the phone, recognition from the microphone with a personal collection.
+A birdsong emulator. Pipp synthesises the songs and calls of common Norwegian birds. A bird sings by itself (autoplay), and you can grab any knob to bend the song for a moment. Around that instrument sit a field guide, ear training, a dawn chorus and, on the phone, recognition from the microphone with a personal collection.
 
 ## Who it is for
 
@@ -132,7 +132,7 @@ Full detail is in `design-handover.md`.
 3. **Quiz.** A mystery song with four answers, an explanation, and settings for which birds and hints.
 4. **Dawn chorus.** Up to 4 birds on a timeline in minutes from sunrise, one per track colour.
 5. **Log.** Heard-it entries with date, time, bird, type, sex or age seen, place and note. Export as CSV. Link out to Artsobservasjoner.
-6. **Listen** (phone). Microphone sonogram, recognised bird with confidence, runners-up, save recording, take picture, compare with Tipp's emulation.
+6. **Listen** (phone). Microphone sonogram, recognised bird with confidence, runners-up, save recording, take picture, compare with Pipp's emulation.
 7. **Collection** (phone). The user's own recordings and pictures, sorted per bird. On the phone the log lives here as a third list.
 
 ## Bird data
@@ -162,18 +162,18 @@ Ship M9 with a stub that returns fixed results, so the screen, saving and collec
 | BirdNET+ V3.0 preview | CC BY-SA 4.0 on the weights, plus extra terms | About 152 MB, about 9,800 species, still a preview. Read the full terms first |
 | Own model for the 18 birds | Own | Small. Needs training recordings |
 
-A recognised bird that is not one of the 18 is shown hatched with "not in Tipp".
+A recognised bird that is not one of the 18 is shown hatched with "not in Pipp".
 
 ## Storage and privacy
 
 - Settings, log, recordings and pictures are stored on the device.
-- Each build keeps its own log: the web app and the phone in the browser's storage, the Mac standalone in ~/Library/Application Support/Tipp/log.json (the same entry format). Logs are not merged.
+- Each build keeps its own log: the web app and the phone in the browser's storage, the Mac standalone in ~/Library/Application Support/Pipp/log.json (the same entry format). Logs are not merged.
 - Nothing from the microphone is saved until the user presses save.
 - No account, no upload, no analytics in version 1.
 
 ### Phone export (decided by Eirik 2026-11-26)
 
-EKSPORTER in the phone's SAMLING makes one file, `tipp-export-YYYY-MM-DD.zip`, and hands it to the system share sheet (AirDrop, Files). Under VELG it takes what is chosen; otherwise everything the bird filter shows. The desktop's IMPORT FROM PHONE EXPORT reads the same file.
+EKSPORTER in the phone's SAMLING makes one file, `pipp-export-YYYY-MM-DD.zip`, and hands it to the system share sheet (AirDrop, Files). Under VELG it takes what is chosen; otherwise everything the bird filter shows. The desktop's IMPORT FROM PHONE EXPORT reads the same file.
 
 The zip is stored without compression (audio and pictures are already compressed) and holds:
 
@@ -185,7 +185,7 @@ The zip is stored without compression (audio and pictures are already compressed
 
 ```json
 {
-  "format": "tipp-export",
+  "format": "pipp-export",
   "version": 1,
   "exported": "2026-11-26 14:30",
   "recordings": [
@@ -200,7 +200,7 @@ The zip is stored without compression (audio and pictures are already compressed
 }
 ```
 
-`bird` is the `index.json` id, or empty for a bird outside Tipp (then `latin` names it). `type` is `song`, `call`, `alarm` or `flight`. Dates are local time. An importer skips an id it already has, and ignores fields it does not know, so later versions can add fields without breaking version 1 readers.
+`bird` is the `index.json` id, or empty for a bird outside Pipp (then `latin` names it). `type` is `song`, `call`, `alarm` or `flight`. Dates are local time. An importer skips an id it already has, and ignores fields it does not know, so later versions can add fields without breaking version 1 readers.
 
 ## Language
 
@@ -225,4 +225,4 @@ The Log and Collection screens carry a short field manners note: playing song ou
 | Does the female or juvenile sound differ | Not verified for any bird |
 | Dawn chorus entry order and times | Not verified |
 | Mnemonics | None collected yet |
-| Desktop collection | Designed. Filled by importing the phone app's export (format under Storage and privacy, decided 2026-11-26). Built in the web app and the Mac standalone 2026-11-26 (the standalone keeps it in ~/Library/Application Support/Tipp/collection) |
+| Desktop collection | Designed. Filled by importing the phone app's export (format under Storage and privacy, decided 2026-11-26). Built in the web app and the Mac standalone 2026-11-26 (the standalone keeps it in ~/Library/Application Support/Pipp/collection) |

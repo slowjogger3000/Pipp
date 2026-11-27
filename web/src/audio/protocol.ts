@@ -34,16 +34,16 @@ export type ToWorklet =
 export interface WorkletState {
   t: 'state';
   knobs: Float32Array;  // 4 per knob: value, mode, hold left, overridden
-  status: Float32Array; // see tipp_engine_status
+  status: Float32Array; // see pipp_engine_status
   seed: number;
   birdInUse: string;
-  phrase: import('../core/tipp.ts').PhraseView | null;
+  phrase: import('../core/pipp.ts').PhraseView | null;
   sonoRate: number;
   sonoFrom: number;      // index of the first frame in sono
   sono: Float32Array;    // 3 per frame: Hz, amp, hand mask
   compare: { running: boolean; stage: number };
   qvoice: { started: boolean; startFrame: number; sung: number };
-  chorus: Float32Array;  // see tipp_chorus_status
+  chorus: Float32Array;  // see pipp_chorus_status
   chorusSang: Uint8Array | null; // 4 x 960, about 4 times a second
 }
 

@@ -15,7 +15,7 @@ import { initialState, type State } from './state.ts';
 import { Strings, upper, type Lang } from './strings.ts';
 
 const kTabKeys = ['play', 'guide', 'quiz', 'chorus', 'log', 'collection'] as const;
-const kLangKey = 'tipp.lang';
+const kLangKey = 'pipp.lang';
 const kBuiltTabs = 6;
 
 export class App {
@@ -43,7 +43,7 @@ export class App {
   private chorus: ChorusScreen;
   private log: LogScreen;
   private collection: DeskCollectionScreen;
-  // COMPARE WITH TIPP in the collection: one phrase, then the Play bird stops.
+  // COMPARE WITH PIPP in the collection: one phrase, then the Play bird stops.
   private oneShot: { base: number; seen: boolean; at: number } | null = null;
   private transportRow: HTMLDivElement;
   private outGroup: HTMLDivElement;
@@ -66,7 +66,7 @@ export class App {
     // ---------------------------------------------------------- header
     const header = el('div', 'header', stage);
     const mark = el('div', 'wordmark', header);
-    el('span', '', mark, 'Tipp');
+    el('span', '', mark, 'Pipp');
     const bar = el('i', '', mark);
     for (const c of ['clay', 'khaki', 'sage', 'plum']) el('b', '', bar).style.background = `var(--${c})`;
     const transport = el('div', 'joined', header);
@@ -260,7 +260,7 @@ export class App {
   }
 
   // One phrase of a bird with autoplay held off, for the collection's
-  // COMPARE WITH TIPP. frame() stops the bird when the phrase is done and
+  // COMPARE WITH PIPP. frame() stops the bird when the phrase is done and
   // gives autoplay back as it was set.
   private singOnce(id: string, type: number) {
     this.selectBird(id);
@@ -475,7 +475,7 @@ export class App {
     if (this.tab === 1) this.guide.poll(this.play.plate.open);
     if (this.tab === 2) this.quiz.poll();
     if (this.tab === 3) this.chorus.poll();
-    // COMPARE WITH TIPP: stop once the one phrase has been sung.
+    // COMPARE WITH PIPP: stop once the one phrase has been sung.
     const one = this.oneShot;
     if (one) {
       if (this.host.phrasesStarted > one.base) one.seen = true;

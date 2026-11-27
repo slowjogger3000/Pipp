@@ -1,7 +1,7 @@
-// Tipp standalone. The window holds MainComponent at 1280x800.
+// Pipp standalone. The window holds MainComponent at 1280x800.
 //
 // Test hook, used by the M2 checks:
-//   Tipp --snapshot <file.png> [--seconds <s>] [--hand <knob id>] [--lang no]
+//   Pipp --snapshot <file.png> [--seconds <s>] [--hand <knob id>] [--lang no]
 //        [--bird <id>] [--sex female] [--age juvenile] [--tab guide]
 //        [--compare <id>] [--speed 0.5|0.25] [--shift] [--draw]
 //        [--tab quiz] [--quiz-seed <n>] [--quiz-skip <n>] [--answer right|wrong] [--leave-quiz] [--quiz-length 10|20|50] [--quiz-result]
@@ -19,7 +19,7 @@
 
 namespace
 {
-class TippApplication final : public juce::JUCEApplication
+class PippApplication final : public juce::JUCEApplication
 {
 public:
     const juce::String getApplicationName() override { return JUCE_APPLICATION_NAME_STRING; }
@@ -29,7 +29,7 @@ public:
     void initialise(const juce::String& commandLine) override
     {
         // Dev only: data comes from the source tree until packaging.
-        auto* content = new tipp::ui::MainComponent(juce::File(TIPP_DATA_DIR));
+        auto* content = new pipp::ui::MainComponent(juce::File(PIPP_DATA_DIR));
         window = std::make_unique<Window>(content);
 
         const auto args = juce::StringArray::fromTokens(commandLine, true);
@@ -115,9 +115,9 @@ public:
             if (args.contains("--draw"))
                 content->snapshotDraw();
             const auto secs = value("--seconds");
-            const int knob = tipp::params::indexOf(value("--hand").toRawUTF8());
+            const int knob = pipp::params::indexOf(value("--hand").toRawUTF8());
             content->runSnapshot(juce::File::getCurrentWorkingDirectory().getChildFile(png),
-                                 secs.isNotEmpty() ? secs.getDoubleValue() : 8.0, knob >= 0 && knob < tipp::kNumKnobs ? knob : -1);
+                                 secs.isNotEmpty() ? secs.getDoubleValue() : 8.0, knob >= 0 && knob < pipp::kNumKnobs ? knob : -1);
             // After runSnapshot: its Play would stop a comparison.
             if (const auto other = value("--compare"); other.isNotEmpty())
                 content->compareWith(other);
@@ -131,7 +131,7 @@ private:
     {
     public:
         explicit Window(juce::Component* content)
-            : DocumentWindow("Tipp", juce::Colour(0xffddd3bd), DocumentWindow::closeButton | DocumentWindow::minimiseButton)
+            : DocumentWindow("Pipp", juce::Colour(0xffddd3bd), DocumentWindow::closeButton | DocumentWindow::minimiseButton)
         {
             setUsingNativeTitleBar(true);
             setContentOwned(content, true);
@@ -147,4 +147,4 @@ private:
 };
 } // namespace
 
-START_JUCE_APPLICATION(TippApplication)
+START_JUCE_APPLICATION(PippApplication)

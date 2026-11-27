@@ -13,7 +13,7 @@
 #include <functional>
 #include <vector>
 
-namespace tipp::ui
+namespace pipp::ui
 {
 struct BirdEntry
 {
@@ -170,4 +170,4 @@ private:
     int shownSelected = -2;
     std::vector<std::pair<juce::Rectangle<int>, int>> rows;
 };
-} // namespace tipp::ui
+} // namespace pipp::ui

@@ -1,6 +1,6 @@
 #pragma once
 
-// The Tipp sound engine. Shared by the standalone, the web worklet and the
+// The Pipp sound engine. Shared by the standalone, the web worklet and the
 // render tool. No allocation, locks or I/O in process().
 //
 // Threading: setters may be called from any thread. They write atomics
@@ -24,7 +24,7 @@
 #include <cmath>
 #include <cstdint>
 
-namespace tipp
+namespace pipp
 {
 // Linear to 0.5, then bends smoothly towards 0.68. The engine's output
 // limiter, also used on the chorus mix.
@@ -253,4 +253,4 @@ private:
     std::uint16_t sonoBestMask = 0;
     std::array<float, kSubBlock> birdBuf {};
 };
-} // namespace tipp
+} // namespace pipp

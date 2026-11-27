@@ -5,11 +5,11 @@
 #include <algorithm>
 #include <cmath>
 
-namespace tipp::ui
+namespace pipp::ui
 {
 namespace
 {
-namespace P = tipp::params;
+namespace P = pipp::params;
 
 constexpr const char* kSceneIds[4] = { P::sc_season, P::sc_time, P::sc_type, P::sc_place };
 constexpr const char* kSceneKeys[4] = { "season", "time", "type", "place" };
@@ -31,7 +31,7 @@ MainComponent::MainComponent(const juce::File& dataDirectory)
     setWantsKeyboardFocus(true);
     strings.load(dataDir, "en");
 
-    for (int k = 0; k < tipp::kNumKnobs; ++k)
+    for (int k = 0; k < pipp::kNumKnobs; ++k)
     {
         knobs.push_back(std::make_unique<Knob>(engine, k));
         addAndMakeVisible(*knobs.back());
@@ -256,10 +256,13 @@ MainComponent::MainComponent(const juce::File& dataDirectory)
 
     engine.setParam(P::indexOf(P::ap_hold), hold);
     loadIndex();
-    setCollectionFolder(juce::File::getSpecialLocation(juce::File::userApplicationDataDirectory)
-                            .getChildFile("Application Support").getChildFile("Tipp").getChildFile("collection"));
-    logScreen.setFile(juce::File::getSpecialLocation(juce::File::userApplicationDataDirectory)
-                          .getChildFile("Application Support").getChildFile("Tipp").getChildFile("log.json"));
+    const auto support = juce::File::getSpecialLocation(juce::File::userApplicationDataDirectory)
+                             .getChildFile("Application Support");
+    // The app was called Tipp until 2026-11-27: move its folder once.
+    if (const auto old = support.getChildFile("Tipp"); old.isDirectory() && !support.getChildFile("Pipp").exists())
+        old.moveFileTo(support.getChildFile("Pipp"));
+    setCollectionFolder(support.getChildFile("Pipp").getChildFile("collection"));
+    logScreen.setFile(support.getChildFile("Pipp").getChildFile("log.json"));
     for (int i = 0; i < static_cast<int>(list.birds.size()); ++i)
         if (list.birds[static_cast<std::size_t>(i)].id == "svarttrost")
             selectBird(i);
@@ -329,9 +332,9 @@ void MainComponent::selectBird(int index)
     stopCompare();
     const auto& e = list.birds[static_cast<std::size_t>(index)];
     const auto dir = dataDir.getChildFile("birds").getChildFile(e.id);
-    auto data = std::make_unique<tipp::BirdData>();
+    auto data = std::make_unique<pipp::BirdData>();
     std::string error;
-    if (! tipp::parseBird(e.id.toStdString(), readText(dir.getChildFile("voice.json")).toStdString(),
+    if (! pipp::parseBird(e.id.toStdString(), readText(dir.getChildFile("voice.json")).toStdString(),
                           readText(dir.getChildFile("songs.json")).toStdString(), *data, error))
     {
         loadError = strings.format("error.load", { { "bird", e.id.toUpperCase() }, { "error", juce::String(error) } });
@@ -389,7 +392,7 @@ bool MainComponent::typeAvailable(int type) const
     if (bird == nullptr)
         return false;
     const auto& t = bird->types[static_cast<std::size_t>(type)];
-    return t.present && tipp::rulesFor(t, season, timeOfDay, sex, age).active;
+    return t.present && pipp::rulesFor(t, season, timeOfDay, sex, age).active;
 }
 
 void MainComponent::setSex(int v)
@@ -462,10 +465,10 @@ void MainComponent::updateSongTools()
 // 6.6 s, where the crosshair sits.
 void MainComponent::drawSampleLine()
 {
-    const tipp::DrawnPoint raw[5] = { { 4000.0f, 1900.0f, false }, { 4650.0f, 3000.0f, false }, { 5275.0f, 2400.0f, false },
+    const pipp::DrawnPoint raw[5] = { { 4000.0f, 1900.0f, false }, { 4650.0f, 3000.0f, false }, { 5275.0f, 2400.0f, false },
                                       { 5950.0f, 3800.0f, false }, { 6550.0f, 3400.0f, false } };
     sono.line.count = 0;
-    tipp::addStroke(sono.line, raw, 5, Sonogram::kPxPerMs, Sonogram::kPxPerHz, Sonogram::kStrokeTolPx);
+    pipp::addStroke(sono.line, raw, 5, Sonogram::kPxPerMs, Sonogram::kPxPerHz, Sonogram::kStrokeTolPx);
     sono.onLineChanged();
     sono.hoverAt({ 524.0f, 184.0f });
 }
@@ -489,9 +492,9 @@ void MainComponent::startCompare(const juce::String& otherId)
         return; // a second click on the same COMPARE stops it
 
     const auto dir = dataDir.getChildFile("birds").getChildFile(otherId);
-    auto other = std::make_unique<tipp::BirdData>();
+    auto other = std::make_unique<pipp::BirdData>();
     std::string error;
-    if (! tipp::parseBird(otherId.toStdString(), readText(dir.getChildFile("voice.json")).toStdString(),
+    if (! pipp::parseBird(otherId.toStdString(), readText(dir.getChildFile("voice.json")).toStdString(),
                           readText(dir.getChildFile("songs.json")).toStdString(), *other, error))
     {
         loadError = strings.format("error.load", { { "bird", otherId.toUpperCase() }, { "error", juce::String(error) } });
@@ -644,7 +647,7 @@ void MainComponent::applyStrings()
     returnAllBtn.setText(strings("ap.return_all"));
     singOnceBtn.setText(strings("ap.sing_once"));
     rerollBtn.setText(strings("ap.reroll"));
-    for (int k = 0; k < tipp::kNumKnobs; ++k)
+    for (int k = 0; k < pipp::kNumKnobs; ++k)
     {
         auto& knob = *knobs[static_cast<std::size_t>(k)];
         knob.label = strings("knob." + juce::String(P::all[static_cast<std::size_t>(k)].id));
@@ -759,17 +762,17 @@ void MainComponent::buildQuizBirds()
         if (! e.available)
             continue;
         const auto dir = birdsDir.getChildFile(e.id);
-        auto data = std::make_unique<tipp::BirdData>();
+        auto data = std::make_unique<pipp::BirdData>();
         std::string error;
-        if (! tipp::parseBird(e.id.toStdString(), readText(dir.getChildFile("voice.json")).toStdString(),
+        if (! pipp::parseBird(e.id.toStdString(), readText(dir.getChildFile("voice.json")).toStdString(),
                               readText(dir.getChildFile("songs.json")).toStdString(), *data, error))
         {
             loadError = strings.format("error.load", { { "bird", e.id.toUpperCase() }, { "error", juce::String(error) } });
             continue;
         }
-        tipp::QuizBird qb;
+        pipp::QuizBird qb;
         qb.group = list.groups.indexOf(e.group);
-        qb.hasCall = data->types[tipp::kCall].present;
+        qb.hasCall = data->types[pipp::kCall].present;
         quizBirds.push_back(qb);
         quizData.push_back(std::move(data));
         quizEntries.push_back(i);
@@ -807,7 +810,7 @@ void MainComponent::startQuiz()
     buildQuizBirds();
     const auto seed = quizSeed != 0u ? quizSeed : static_cast<std::uint32_t>(juce::Random::getSystemRandom().nextInt());
     quizShowResult = false;
-    if (quiz.start(quizBirds, quizSet, quizAsk, seed, tipp::Quiz::kLengths[quizLength]))
+    if (quiz.start(quizBirds, quizSet, quizAsk, seed, pipp::Quiz::kLengths[quizLength]))
     {
         // Snapshot hook: answer some questions first.
         for (int i = 0; i < quizSkip && ! quiz.finished(); ++i)
@@ -913,7 +916,7 @@ void MainComponent::quizCompare()
 
     const auto* first = quizData[static_cast<std::size_t>(q.bird)].get();
     const auto* second = quizData[static_cast<std::size_t>(other)].get();
-    const int type = second->types[static_cast<std::size_t>(q.type)].present ? q.type : tipp::kSong;
+    const int type = second->types[static_cast<std::size_t>(q.type)].present ? q.type : pipp::kSong;
     comparingId = list.birds[static_cast<std::size_t>(quizEntries[static_cast<std::size_t>(other)])].id;
     quizPlaying = true;
     compare.start(engine, first, second, { false, true, q.type }, juce::Time::getMillisecondCounterHiRes() / 1000.0, type);
@@ -941,7 +944,7 @@ juce::String MainComponent::quizExplain() const
 {
     const auto& q = quiz.question();
     const auto& info = quizInfo[static_cast<std::size_t>(q.bird)];
-    const auto text = strings.field(info["types"][q.type == tipp::kCall ? "call" : "song"]);
+    const auto text = strings.field(info["types"][q.type == pipp::kCall ? "call" : "song"]);
     const auto name = quizName(q.bird);
     if (q.picked == q.correctSlot)
         return strings.format("quiz.explain_right", { { "bird", name }, { "text", text } });
@@ -996,8 +999,8 @@ void MainComponent::updateQuizView()
     v.hintUsed = hintShown;
     v.total = quiz.length();
     v.comparing = compare.running();
-    for (int s = 0; s < tipp::Quiz::kNumSets; ++s)
-        v.setHasBirds[static_cast<std::size_t>(s)] = ! tipp::Quiz::poolFor(quizBirds, s).empty();
+    for (int s = 0; s < pipp::Quiz::kNumSets; ++s)
+        v.setHasBirds[static_cast<std::size_t>(s)] = ! pipp::Quiz::poolFor(quizBirds, s).empty();
     v.active = quiz.active();
     if (! v.active)
     {
@@ -1077,7 +1080,7 @@ void MainComponent::loadChorus()
     if (chorusDoc.isVoid())
         loadError = strings.format("error.load", { { "bird", "CHORUS" }, { "error", "chorus.json" } });
     const auto* lanes = chorusDoc["lanes"].getArray();
-    for (int i = 0; i < tipp::Chorus::kLanes; ++i)
+    for (int i = 0; i < pipp::Chorus::kLanes; ++i)
     {
         const auto u = static_cast<std::size_t>(i);
         juce::var lane = lanes != nullptr && i < lanes->size() ? (*lanes)[i] : juce::var();
@@ -1115,10 +1118,10 @@ void MainComponent::setLaneBird(int lane, int k)
     // The Play bird keeps the voice and phrasing knobs latched there.
     const auto* e = currentEntry();
     const bool playBird = e != nullptr && e->id == id;
-    for (int knob = 0; knob < tipp::kDistance; ++knob)
+    for (int knob = 0; knob < pipp::kDistance; ++knob)
     {
         const bool latched = playBird && engine.knobOverridden(knob) && engine.holdLeft(knob) < 0.0f
-                          && engine.knobMode(knob) == tipp::Engine::KnobMode::Hold;
+                          && engine.knobMode(knob) == pipp::Engine::KnobMode::Hold;
         if (latched)
             chorus.holdKnob(lane, knob, engine.knobValue(knob));
         else
@@ -1148,7 +1151,7 @@ void MainComponent::enterChorus()
     stopCompare();
     loadChorus();
     engine.setParam(P::indexOf(P::pb_play), 0.0f); // the Play bird rests
-    for (int i = 0; i < tipp::Chorus::kLanes; ++i)
+    for (int i = 0; i < pipp::Chorus::kLanes; ++i)
         setLaneBird(i, laneBird[static_cast<std::size_t>(i)]); // picks up latched knobs
     updateChorusView();
 }
@@ -1162,7 +1165,7 @@ void MainComponent::leaveChorus()
 void MainComponent::setChorusPlaying(bool on)
 {
     if (on && chorus.finished())
-        chorus.seek(tipp::Chorus::kStartMin);
+        chorus.seek(pipp::Chorus::kStartMin);
     chorusPlaying = on;
     chorus.setPlaying(on);
     refreshControls();
@@ -1174,8 +1177,8 @@ void MainComponent::updateChorusView()
     v.season = chorusSeason;
     v.place = chorusPlace;
     v.speed = chorusSpeed;
-    v.canChange = quizData.size() > static_cast<std::size_t>(tipp::Chorus::kLanes);
-    for (int i = 0; i < tipp::Chorus::kLanes; ++i)
+    v.canChange = quizData.size() > static_cast<std::size_t>(pipp::Chorus::kLanes);
+    for (int i = 0; i < pipp::Chorus::kLanes; ++i)
     {
         const auto u = static_cast<std::size_t>(i);
         auto& lane = v.lanes[u];
@@ -1185,7 +1188,7 @@ void MainComponent::updateChorusView()
         lane.distance = juce::roundToInt(laneDistance[u]);
         lane.mute = laneMute[u];
         lane.solo = laneSolo[u];
-        lane.inSeason = k >= 0 && tipp::rulesFor(quizData[static_cast<std::size_t>(k)]->types[tipp::kSong], chorusSeason, 0, 0, 0).active;
+        lane.inSeason = k >= 0 && pipp::rulesFor(quizData[static_cast<std::size_t>(k)]->types[pipp::kSong], chorusSeason, 0, 0, 0).active;
     }
     chorusScreen.setView(v);
     repaint(statusArea);
@@ -1200,19 +1203,19 @@ void MainComponent::timerCallback()
                                  [this](const auto& b) { return b.get() != engine.birdInUse(); }),
                   retired.end());
 
-    for (int k = 0; k < tipp::kNumKnobs; ++k)
+    for (int k = 0; k < pipp::kNumKnobs; ++k)
     {
         knobs[static_cast<std::size_t>(k)]->poll();
         const auto m = engine.knobMode(k);
-        if (m == tipp::Engine::KnobMode::Held && lastModes[static_cast<std::size_t>(k)] != m)
+        if (m == pipp::Engine::KnobMode::Held && lastModes[static_cast<std::size_t>(k)] != m)
             legendKnob = k;
         lastModes[static_cast<std::size_t>(k)] = m;
     }
-    if (legendKnob >= 0 && engine.knobMode(legendKnob) == tipp::Engine::KnobMode::Auto)
+    if (legendKnob >= 0 && engine.knobMode(legendKnob) == pipp::Engine::KnobMode::Auto)
     {
         legendKnob = -1;
-        for (int k = 0; k < tipp::kNumKnobs; ++k)
-            if (engine.knobMode(k) == tipp::Engine::KnobMode::Held || engine.knobMode(k) == tipp::Engine::KnobMode::Hold)
+        for (int k = 0; k < pipp::kNumKnobs; ++k)
+            if (engine.knobMode(k) == pipp::Engine::KnobMode::Held || engine.knobMode(k) == pipp::Engine::KnobMode::Hold)
                 legendKnob = k;
     }
 
@@ -1247,7 +1250,7 @@ void MainComponent::timerCallback()
         filePlayer.poll();
     if (oneShot.on)
     {
-        // COMPARE WITH TIPP: stop once the phrase has been sung, or after 3 s without one.
+        // COMPARE WITH PIPP: stop once the phrase has been sung, or after 3 s without one.
         const double t = juce::Time::getMillisecondCounterHiRes();
         if (engine.phrasesStarted() != oneShot.base)
             oneShot.seen = true;
@@ -1484,7 +1487,7 @@ bool MainComponent::keyPressed(const juce::KeyPress& key)
 
 void MainComponent::resized()
 {
-    if (knobs.size() != static_cast<std::size_t>(tipp::kNumKnobs))
+    if (knobs.size() != static_cast<std::size_t>(pipp::kNumKnobs))
         return;
     auto r = getLocalBounds().reduced(1);
     headerArea = r.removeFromTop(56);
@@ -1496,7 +1499,7 @@ void MainComponent::resized()
     {
         auto h = headerArea.withTrimmedBottom(1).reduced(12, 0);
         const int cy = h.getCentreY();
-        const int markW = std::max(56, textW(serif(32.0f).withExtraKerningFactor(0.02f), "Tipp") + 2);
+        const int markW = std::max(56, textW(serif(32.0f).withExtraKerningFactor(0.02f), "Pipp") + 2);
         wordmarkArea = h.removeFromLeft(markW).withSizeKeepingCentre(markW, 40);
         h.removeFromLeft(24);
         playBtn.setBounds(h.getX(), cy - 16, 44, 32);
@@ -1734,7 +1737,7 @@ void MainComponent::paintHeader(juce::Graphics& g)
 
     // Wordmark and its four-colour bar.
     g.setFont(serif(32.0f).withExtraKerningFactor(0.02f));
-    g.drawText("Tipp", wordmarkArea.withHeight(32), juce::Justification::centredLeft, false);
+    g.drawText("Pipp", wordmarkArea.withHeight(32), juce::Justification::centredLeft, false);
     const juce::Rectangle<int> bar(wordmarkArea.getX(), wordmarkArea.getY() + 35, 56, 5);
     g.fillRect(bar);
     const juce::Colour tracks[4] = { colour::clay, colour::khaki, colour::sage, colour::plum };
@@ -2075,7 +2078,7 @@ void MainComponent::paintStatus(juce::Graphics& g)
             r.removeFromRight(16);
         }
         const char* asks[3] = { "type.song", "type.call", "quiz.ask_both" };
-        g.drawText(loadError.isNotEmpty() ? loadError : tipp::ui::quizSetName(strings, quizSet, static_cast<int> (list.birds.size())) + ", " + strings(asks[quizAsk]),
+        g.drawText(loadError.isNotEmpty() ? loadError : pipp::ui::quizSetName(strings, quizSet, static_cast<int> (list.birds.size())) + ", " + strings(asks[quizAsk]),
                    r, juce::Justification::centredLeft, false);
         return;
     }
@@ -2110,7 +2113,7 @@ void MainComponent::setCollectionFolder(const juce::File& folder)
 }
 
 // The bird sings one phrase of the type with autoplay held off, then stops
-// (COMPARE WITH TIPP). The timer ends it.
+// (COMPARE WITH PIPP). The timer ends it.
 void MainComponent::singOnce(const juce::String& id, int type)
 {
     for (int i = 0; i < static_cast<int>(list.birds.size()); ++i)
@@ -2131,4 +2134,4 @@ void MainComponent::singOnce(const juce::String& id, int type)
             return;
         }
 }
-} // namespace tipp::ui
+} // namespace pipp::ui

@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <cmath>
 
-namespace tipp
+namespace pipp
 {
 namespace
 {
@@ -192,4 +192,4 @@ void Surroundings::process(const float* bird, float* left, float* right, int n) 
     rustle = rustleTarget;
     surfLevel = surfTarget;
 }
-} // namespace tipp
+} // namespace pipp

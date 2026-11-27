@@ -23,7 +23,7 @@
 #include <memory>
 #include <vector>
 
-namespace tipp::ui
+namespace pipp::ui
 {
 class GuideScreen final : public juce::Component
 {
@@ -44,14 +44,14 @@ public:
 
     // birdJson is the parsed bird.json, plateFile the bird's plate.json.
     // all is the full bird list, for lookalike names and which have data.
-    void setBird(const BirdEntry& entry, const tipp::BirdData* data, const juce::var& birdJson,
+    void setBird(const BirdEntry& entry, const pipp::BirdData* data, const juce::var& birdJson,
                  const juce::File& plateFile, const std::vector<BirdEntry>& all, bool namesVerified);
     void setState(const State& s);
     void applyStrings();
 
     // An example phrase of the song for the figure, from a throwaway engine
     // with seed 1 at the bird's own knob values. Not on the audio thread.
-    static tipp::Engine::PhraseView examplePhrase(const tipp::BirdData& bird);
+    static pipp::Engine::PhraseView examplePhrase(const pipp::BirdData& bird);
 
     void paint(juce::Graphics& g) override;
     void resized() override;
@@ -73,12 +73,12 @@ private:
 
     const Strings& strings;
     const BirdEntry* entry = nullptr;
-    const tipp::BirdData* bird = nullptr;
+    const pipp::BirdData* bird = nullptr;
     const std::vector<BirdEntry>* birds = nullptr;
     bool namesVerified = false;
     juce::var info;      // bird.json
     juce::var plateDoc;  // plate.json, for the callout values
-    tipp::Engine::PhraseView example;
+    pipp::Engine::PhraseView example;
     State state;
 
     Btn maleBtn, femaleBtn, adultBtn, juvBtn;
@@ -96,4 +96,4 @@ private:
     int monthX0 = 0;
     float monthW = 0.0f;
 };
-} // namespace tipp::ui
+} // namespace pipp::ui

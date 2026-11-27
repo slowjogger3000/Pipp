@@ -2,7 +2,7 @@
 
 // The desktop window: header, tabs, bird list, the Play screen and the
 // status bar. Layout follows design/Main.dc.html at 1280x800. The
-// interface sends values and hand events to tipp::Engine and draws what it
+// interface sends values and hand events to pipp::Engine and draws what it
 // publishes. No song or override logic lives here.
 
 #include "UI/BirdList.h"
@@ -32,7 +32,7 @@
 #include <memory>
 #include <vector>
 
-namespace tipp::ui
+namespace pipp::ui
 {
 class MainComponent final : public juce::AudioAppComponent, private juce::Timer
 {
@@ -151,9 +151,9 @@ private:
     void paintAutoplay(juce::Graphics& g);
 
     const juce::File dataDir;
-    tipp::Engine engine;
-    std::unique_ptr<tipp::BirdData> bird;
-    std::vector<std::unique_ptr<tipp::BirdData>> retired; // until the engine lets go
+    pipp::Engine engine;
+    std::unique_ptr<pipp::BirdData> bird;
+    std::vector<std::unique_ptr<pipp::BirdData>> retired; // until the engine lets go
     Strings strings;
     juce::String loadError;
 
@@ -188,7 +188,7 @@ private:
     // Knobs.
     std::vector<std::unique_ptr<Knob>> knobs;
     int legendKnob = -1;
-    std::array<tipp::Engine::KnobMode, tipp::kNumKnobs> lastModes {};
+    std::array<pipp::Engine::KnobMode, pipp::kNumKnobs> lastModes {};
 
     // Autoplay band.
     Btn apOnBtn, holdMinusBtn, holdPlusBtn, latchBtn, returnAllBtn, singOnceBtn, rerollBtn;
@@ -211,17 +211,17 @@ private:
     std::array<juce::Rectangle<int>, 6> tabRects;
     GuideScreen guide { strings };
     bool namesVerified = false;
-    tipp::Compare compare;
-    std::unique_ptr<tipp::BirdData> compareBird; // alive while compare runs
+    pipp::Compare compare;
+    std::unique_ptr<pipp::BirdData> compareBird; // alive while compare runs
     juce::String comparingId;
 
     // Quiz (F3). quizData holds every bird with data for the whole run, so
     // the engine never holds a quiz bird that was freed.
     QuizScreen quizScreen { strings, engine };
-    tipp::Quiz quiz;
-    tipp::QuizVoice quizVoice;
-    std::vector<tipp::QuizBird> quizBirds;
-    std::vector<std::unique_ptr<tipp::BirdData>> quizData;
+    pipp::Quiz quiz;
+    pipp::QuizVoice quizVoice;
+    std::vector<pipp::QuizBird> quizBirds;
+    std::vector<std::unique_ptr<pipp::BirdData>> quizData;
     std::vector<int> quizEntries; // list.birds index per quiz bird
     std::vector<juce::var> quizInfo; // bird.json per quiz bird
     int quizSet = 0, quizAsk = 0, quizHints = 0, quizLength = 0; // quizLength: index in Quiz::kLengths
@@ -233,18 +233,18 @@ private:
     bool snapshotLeaveQuiz = false; // back to PLAY 4 s before the snapshot
 
     // Dawn chorus (F4). Lane birds come from quizData, alive for the run.
-    tipp::Chorus chorus;
+    pipp::Chorus chorus;
     ChorusScreen chorusScreen { strings, chorus };
     juce::var chorusDoc; // data/chorus.json
-    std::array<int, tipp::Chorus::kLanes> laneBird { { -1, -1, -1, -1 } }; // quizData index
-    std::array<float, tipp::Chorus::kLanes> laneEntry {}, laneDistance {};
-    std::array<bool, tipp::Chorus::kLanes> laneMute {}, laneSolo {};
-    int chorusSeason = 0, chorusPlace = 0, chorusSpeed = tipp::Chorus::k10x;
+    std::array<int, pipp::Chorus::kLanes> laneBird { { -1, -1, -1, -1 } }; // quizData index
+    std::array<float, pipp::Chorus::kLanes> laneEntry {}, laneDistance {};
+    std::array<bool, pipp::Chorus::kLanes> laneMute {}, laneSolo {};
+    int chorusSeason = 0, chorusPlace = 0, chorusSpeed = pipp::Chorus::k10x;
     bool chorusPlaying = false;
-    float chorusSnapStart = tipp::Chorus::kStartMin;
+    float chorusSnapStart = pipp::Chorus::kStartMin;
     int chorusSnapMute = -1;
 
-    // Log (F5): heard-it entries in ~/Library/Application Support/Tipp/log.json.
+    // Log (F5): heard-it entries in ~/Library/Application Support/Pipp/log.json.
     LogScreen logScreen { strings, list.birds, list.groups };
 
     // Collection (F6): recordings from the phone export or added files.
@@ -257,7 +257,7 @@ private:
         bool on = false, seen = false, apWas = true;
         std::uint32_t base = 0;
         double at = 0.0;
-    } oneShot; // COMPARE WITH TIPP: one phrase, then stop
+    } oneShot; // COMPARE WITH PIPP: one phrase, then stop
 
     // Snapshot test.
     juce::File snapshotFile;
@@ -268,4 +268,4 @@ private:
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(MainComponent)
 };
-} // namespace tipp::ui
+} // namespace pipp::ui

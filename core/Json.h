@@ -6,7 +6,7 @@
 #include <string>
 #include <vector>
 
-namespace tipp::json
+namespace pipp::json
 {
 struct Value
 {
@@ -31,4 +31,4 @@ struct Value
 
 // Returns false and fills error (with a byte offset) on bad input.
 bool parse(const std::string& source, Value& out, std::string& error);
-} // namespace tipp::json
+} // namespace pipp::json

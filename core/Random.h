@@ -1,6 +1,6 @@
 #pragma once
 
-// Tipp's own random generators. No std:: distributions and no rand(), so a
+// Pipp's own random generators. No std:: distributions and no rand(), so a
 // seed gives the same phrase order native and in WebAssembly.
 //
 // Rng (PCG32) drives every musical choice. Noise (xorshift32) drives audio
@@ -8,7 +8,7 @@
 
 #include <cstdint>
 
-namespace tipp
+namespace pipp
 {
 class Rng
 {
@@ -70,4 +70,4 @@ public:
 private:
     std::uint32_t state = 0x9e3779b9u;
 };
-} // namespace tipp
+} // namespace pipp

@@ -6,7 +6,7 @@
 
 export interface Match {
   birdId?: string;    // one of the 18 in data/birds/index.json
-  latinName?: string; // a bird outside Tipp
+  latinName?: string; // a bird outside Pipp
   confidence: number; // 0 to 1
 }
 

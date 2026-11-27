@@ -1,16 +1,16 @@
-// tipp-render: offline render and checks on core/.
+// pipp-render: offline render and checks on core/.
 //
-//   tipp-render --bird svarttrost --type song --seconds 30 --out out/svarttrost.wav
-//   tipp-render --bird svarttrost --type call --seed 7 --set su_distance=60 --out out/x.wav
-//   tipp-render --list-params
-//   tipp-render --bird svarttrost --check-override
-//   tipp-render --bird blameis --compare kjottmeis --out out/compare.wav
-//   tipp-render --bird svarttrost --check-draw
-//   tipp-render --bird svarttrost --draw --out out/draw.wav
-//   tipp-render --bird svarttrost --check-quiz
-//   tipp-render --chorus --chorus-start -75 --chorus-speed 60x --seconds 40 --out out/chorus.wav
-//   tipp-render --check-chorus
-//   tipp-render --bird svarttrost --seconds 120 --phrase-log out/log.txt --out out/x.wav
+//   pipp-render --bird svarttrost --type song --seconds 30 --out out/svarttrost.wav
+//   pipp-render --bird svarttrost --type call --seed 7 --set su_distance=60 --out out/x.wav
+//   pipp-render --list-params
+//   pipp-render --bird svarttrost --check-override
+//   pipp-render --bird blameis --compare kjottmeis --out out/compare.wav
+//   pipp-render --bird svarttrost --check-draw
+//   pipp-render --bird svarttrost --draw --out out/draw.wav
+//   pipp-render --bird svarttrost --check-quiz
+//   pipp-render --chorus --chorus-start -75 --chorus-speed 60x --seconds 40 --out out/chorus.wav
+//   pipp-render --check-chorus
+//   pipp-render --bird svarttrost --seconds 120 --phrase-log out/log.txt --out out/x.wav
 //
 // --phrase-log writes one line per phrase (number, length, syllable indices
 // with start times and pitch factors, floats as hex bits). web/scripts/check-seed.mjs
@@ -70,9 +70,9 @@ constexpr float kMaxStep = 0.5f;
 constexpr float kEdgeLimit = 0.001f;
 constexpr float kMinRms = 0.003f; // below this the bird did not really sing
 
-const char* kindName(tipp::params::Kind k)
+const char* kindName(pipp::params::Kind k)
 {
-    using tipp::params::Kind;
+    using pipp::params::Kind;
     switch (k)
     {
         case Kind::Knob:    return "knob";
@@ -87,25 +87,25 @@ const char* kindName(tipp::params::Kind k)
 
 void listParams()
 {
-    for (const auto& p : tipp::params::all)
+    for (const auto& p : pipp::params::all)
         std::printf("%-14s %-8s %10g %12g %8g %-4s %s\n", p.id, kindName(p.kind),
                     p.min, p.max, p.def, p.unit, p.options != nullptr ? p.options : "");
-    std::printf("%zu parameters\n", tipp::params::all.size());
+    std::printf("%zu parameters\n", pipp::params::all.size());
 }
 
 void usage()
 {
     std::fprintf(stderr,
-        "usage: tipp-render --bird <id> [--type song|call|alarm|flight] [--seconds <s>]\n"
+        "usage: pipp-render --bird <id> [--type song|call|alarm|flight] [--seconds <s>]\n"
         "                   [--seed <n>] [--set <id>=<value>]... [--data <dir>] --out <file.wav>\n"
-        "       tipp-render --list-params\n"
-        "       tipp-render --bird <id> --check-override\n"
-        "       tipp-render --bird <id> --compare <other id> [--seconds <max s>] --out <file.wav>\n"
-        "       tipp-render --bird <id> --check-draw\n"
-        "       tipp-render --bird <id> --check-quiz\n"
-        "       tipp-render --chorus [--lanes a,b,c,d] [--chorus-start <min>] [--chorus-speed real|10x|60x|loop] [--seconds <s>] --out <file.wav>\n"
-        "       tipp-render --check-chorus\n"
-        "       tipp-render --bird <id> (--draw | --keep) [--seconds <s>] [--set ...] --out <file.wav>\n");
+        "       pipp-render --list-params\n"
+        "       pipp-render --bird <id> --check-override\n"
+        "       pipp-render --bird <id> --compare <other id> [--seconds <max s>] --out <file.wav>\n"
+        "       pipp-render --bird <id> --check-draw\n"
+        "       pipp-render --bird <id> --check-quiz\n"
+        "       pipp-render --chorus [--lanes a,b,c,d] [--chorus-start <min>] [--chorus-speed real|10x|60x|loop] [--seconds <s>] --out <file.wav>\n"
+        "       pipp-render --check-chorus\n"
+        "       pipp-render --bird <id> (--draw | --keep) [--seconds <s>] [--set ...] --out <file.wav>\n");
 }
 
 bool readFile(const std::string& path, std::string& out)
@@ -120,7 +120,7 @@ bool readFile(const std::string& path, std::string& out)
 }
 
 // Option id to index for a choice parameter, or a plain number.
-bool parseValue(const tipp::params::Info& info, const std::string& text, float& out)
+bool parseValue(const pipp::params::Info& info, const std::string& text, float& out)
 {
     if (info.options != nullptr)
     {
@@ -153,18 +153,18 @@ constexpr float kTolPx = 2.5f;
 
 // A stroke as the pointer would give it: one sample every 10 ms.
 template <typename HzAt>
-void stroke(tipp::DrawnLine& line, float fromMs, float toMs, HzAt hzAt)
+void stroke(pipp::DrawnLine& line, float fromMs, float toMs, HzAt hzAt)
 {
-    std::vector<tipp::DrawnPoint> raw;
+    std::vector<pipp::DrawnPoint> raw;
     for (float t = fromMs; t <= toMs + 0.01f; t += 10.0f)
         raw.push_back({ t, hzAt((t - fromMs) / std::max(1.0f, toMs - fromMs)), false });
-    tipp::addStroke(line, raw.data(), static_cast<int>(raw.size()), kPxPerMs, kPxPerHz, kTolPx);
+    pipp::addStroke(line, raw.data(), static_cast<int>(raw.size()), kPxPerMs, kPxPerHz, kTolPx);
 }
 
 // A rising slur with a dip, a dot, and a long fall.
-tipp::DrawnLine demoLine()
+pipp::DrawnLine demoLine()
 {
-    tipp::DrawnLine line;
+    pipp::DrawnLine line;
     stroke(line, 300.0f, 700.0f, [](float u) { return 2000.0f + 1400.0f * u - 500.0f * std::sin(3.14159f * u); });
     stroke(line, 900.0f, 900.0f, [](float) { return 4000.0f; });
     stroke(line, 1100.0f, 1700.0f, [](float u) { return 5000.0f - 2500.0f * u * u; });
@@ -206,14 +206,14 @@ struct ChorusSetup
 {
     std::vector<std::string> ids;
     std::vector<float> entry, distance;
-    std::vector<std::unique_ptr<tipp::BirdData>> birds;
+    std::vector<std::unique_ptr<pipp::BirdData>> birds;
 };
 
 bool loadChorus(const std::string& dataDir, const std::string& lanesCsv, ChorusSetup& out)
 {
     std::string text, error;
-    tipp::json::Value doc;
-    if (! readFile(dataDir + "/chorus.json", text) || ! tipp::json::parse(text, doc, error))
+    pipp::json::Value doc;
+    if (! readFile(dataDir + "/chorus.json", text) || ! pipp::json::parse(text, doc, error))
     {
         std::fprintf(stderr, "cannot read %s/chorus.json %s\n", dataDir.c_str(), error.c_str());
         return false;
@@ -221,7 +221,7 @@ bool loadChorus(const std::string& dataDir, const std::string& lanesCsv, ChorusS
     const auto* def = doc.get("default_entry_min");
     const auto* entries = doc.get("entry_min");
     const auto* lanes = doc.get("lanes");
-    if (lanes == nullptr || ! lanes->isArray() || lanes->items.size() != static_cast<std::size_t>(tipp::Chorus::kLanes))
+    if (lanes == nullptr || ! lanes->isArray() || lanes->items.size() != static_cast<std::size_t>(pipp::Chorus::kLanes))
     {
         std::fprintf(stderr, "chorus.json needs 4 lanes\n");
         return false;
@@ -244,8 +244,8 @@ bool loadChorus(const std::string& dataDir, const std::string& lanesCsv, ChorusS
         out.entry.push_back(static_cast<float>(e != nullptr ? e->number : def != nullptr ? def->number : -40.0));
         std::string v, s;
         const std::string dir = dataDir + "/birds/" + id + "/";
-        auto b = std::make_unique<tipp::BirdData>();
-        if (! readFile(dir + "voice.json", v) || ! readFile(dir + "songs.json", s) || ! tipp::parseBird(id, v, s, *b, error))
+        auto b = std::make_unique<pipp::BirdData>();
+        if (! readFile(dir + "voice.json", v) || ! readFile(dir + "songs.json", s) || ! pipp::parseBird(id, v, s, *b, error))
         {
             std::fprintf(stderr, "cannot load bird %s %s\n", id.c_str(), error.c_str());
             return false;
@@ -255,11 +255,11 @@ bool loadChorus(const std::string& dataDir, const std::string& lanesCsv, ChorusS
     return true;
 }
 
-void setUpChorus(tipp::Chorus& chorus, const ChorusSetup& setup, std::uint32_t seed)
+void setUpChorus(pipp::Chorus& chorus, const ChorusSetup& setup, std::uint32_t seed)
 {
     chorus.prepare(kSampleRate);
     chorus.setSeed(seed);
-    for (int i = 0; i < tipp::Chorus::kLanes; ++i)
+    for (int i = 0; i < pipp::Chorus::kLanes; ++i)
     {
         const auto u = static_cast<std::size_t>(i);
         chorus.setLaneBird(i, setup.birds[u].get());
@@ -269,7 +269,7 @@ void setUpChorus(tipp::Chorus& chorus, const ChorusSetup& setup, std::uint32_t s
 }
 
 // Runs the chorus for s seconds in 512-sample blocks. Adds to the buffers if given.
-void runChorus(tipp::Chorus& chorus, double s, std::vector<float>* left = nullptr, std::vector<float>* right = nullptr)
+void runChorus(pipp::Chorus& chorus, double s, std::vector<float>* left = nullptr, std::vector<float>* right = nullptr)
 {
     std::vector<float> l(kBlock), r(kBlock);
     const auto total = static_cast<std::size_t>(s * kSampleRate);
@@ -287,7 +287,7 @@ void runChorus(tipp::Chorus& chorus, double s, std::vector<float>* left = nullpt
     }
 }
 
-int notesIn(const tipp::DrawnLine& line)
+int notesIn(const pipp::DrawnLine& line)
 {
     int n = 0;
     for (int i = 0; i < line.count; ++i)
@@ -297,9 +297,9 @@ int notesIn(const tipp::DrawnLine& line)
 }
 
 // The drawn line's editing and how the engine sings it.
-int checkDraw(const tipp::BirdData& bird)
+int checkDraw(const pipp::BirdData& bird)
 {
-    namespace P = tipp::params;
+    namespace P = pipp::params;
     int failures = 0;
     auto check = [&failures](bool pass, const char* what) {
         std::printf("%-4s %s\n", pass ? "ok" : "FAIL", what);
@@ -308,12 +308,12 @@ int checkDraw(const tipp::BirdData& bird)
     };
 
     {
-        tipp::DrawnLine line;
+        pipp::DrawnLine line;
         stroke(line, 0.0f, 500.0f, [](float u) { return 2000.0f + 2000.0f * u; });
         check(line.count == 2, "a straight stroke keeps its 2 ends");
     }
 
-    const tipp::DrawnLine demo = demoLine();
+    const pipp::DrawnLine demo = demoLine();
     check(notesIn(demo) == 3, "demo line has 3 notes");
     check(demo.count > 4 && demo.count < 20, "curved strokes keep a few corners, not every sample");
 
@@ -326,7 +326,7 @@ int checkDraw(const tipp::BirdData& bird)
             const float u = (t - 300.0f) / 400.0f;
             const float want = 2000.0f + 1400.0f * u - 500.0f * std::sin(3.14159f * u);
             float hz = 0.0f, amp = 0.0f;
-            tipp::drawnAt(demo, t, hz, amp);
+            pipp::drawnAt(demo, t, hz, amp);
             worst = std::max(worst, std::fabs(hz - want) * kPxPerHz);
         }
         for (int k = 0; k + 1 < demo.count; ++k)
@@ -338,7 +338,7 @@ int checkDraw(const tipp::BirdData& bird)
             for (int j = 1; j < 10; ++j)
             {
                 float hz = 0.0f, amp = 0.0f;
-                tipp::drawnAt(demo, a.tMs + (b.tMs - a.tMs) * static_cast<float>(j) / 10.0f, hz, amp);
+                pipp::drawnAt(demo, a.tMs + (b.tMs - a.tMs) * static_cast<float>(j) / 10.0f, hz, amp);
                 monotone = monotone && hz >= std::min(a.hz, b.hz) * 0.999f && hz <= std::max(a.hz, b.hz) * 1.001f;
             }
         }
@@ -349,52 +349,52 @@ int checkDraw(const tipp::BirdData& bird)
 
     {
         float hz = 0.0f, a0 = 1.0f, a1 = 0.0f, a2 = 1.0f, aGap = 1.0f;
-        tipp::drawnAt(demo, 300.0f, hz, a0);
-        tipp::drawnAt(demo, 500.0f, hz, a1);
-        tipp::drawnAt(demo, 700.0f, hz, a2);
-        tipp::drawnAt(demo, 800.0f, hz, aGap);
+        pipp::drawnAt(demo, 300.0f, hz, a0);
+        pipp::drawnAt(demo, 500.0f, hz, a1);
+        pipp::drawnAt(demo, 700.0f, hz, a2);
+        pipp::drawnAt(demo, 800.0f, hz, aGap);
         check(a0 == 0.0f && a2 == 0.0f && a1 == 1.0f && aGap == 0.0f, "notes start and end silent, full in the middle");
         check(std::fabs(hz - 4000.0f) < 1.0f, "in a gap the pitch waits at the next note");
-        check(std::fabs(tipp::drawnEnd(demo) - 1700.0f) < 0.5f && std::fabs(tipp::drawnStart(demo) - 300.0f) < 0.5f, "start and end");
+        check(std::fabs(pipp::drawnEnd(demo) - 1700.0f) < 0.5f && std::fabs(pipp::drawnStart(demo) - 300.0f) < 0.5f, "start and end");
     }
 
     {
         // A stroke across the middle of a note cuts it into 3.
-        tipp::DrawnLine line;
+        pipp::DrawnLine line;
         stroke(line, 0.0f, 1000.0f, [](float u) { return 2000.0f + 1000.0f * u; });
         stroke(line, 400.0f, 600.0f, [](float) { return 5000.0f; });
         float hz = 0.0f, amp = 0.0f;
-        tipp::drawnAt(line, 200.0f, hz, amp);
+        pipp::drawnAt(line, 200.0f, hz, amp);
         check(notesIn(line) == 3 && std::fabs(hz - 2200.0f) < 30.0f, "a new stroke replaces only its own span");
     }
 
     {
-        tipp::DrawnLine line = demo;
+        pipp::DrawnLine line = demo;
         const int before = line.count;
         const auto p = line.pts[1];
-        tipp::eraseNear(line, p.tMs, p.hz, kPxPerMs, kPxPerHz, 6.0f);
+        pipp::eraseNear(line, p.tMs, p.hz, kPxPerMs, kPxPerHz, 6.0f);
         check(line.count == before - 1, "erase removes the point under the pointer");
         line = demo;
         float hz = 0.0f, amp = 0.0f;
-        tipp::drawnAt(line, 1400.0f, hz, amp);
-        tipp::eraseNear(line, 1400.0f, hz, kPxPerMs, kPxPerHz, 6.0f);
+        pipp::drawnAt(line, 1400.0f, hz, amp);
+        pipp::eraseNear(line, 1400.0f, hz, kPxPerMs, kPxPerHz, 6.0f);
         check(notesIn(line) > notesIn(demo), "erase on the curve between points cuts the note");
     }
 
     {
-        tipp::DrawnLine line;
+        pipp::DrawnLine line;
         bool lastFit = true;
         for (int i = 0; i < 70; ++i)
         {
-            const tipp::DrawnPoint dot { 100.0f * static_cast<float>(i), 3000.0f, false };
-            lastFit = tipp::addStroke(line, &dot, 1, kPxPerMs, kPxPerHz, kTolPx);
+            const pipp::DrawnPoint dot { 100.0f * static_cast<float>(i), 3000.0f, false };
+            lastFit = pipp::addStroke(line, &dot, 1, kPxPerMs, kPxPerHz, kTolPx);
         }
-        check(line.count == tipp::DrawnLine::kMax && ! lastFit, "a full line refuses more points");
+        check(line.count == pipp::DrawnLine::kMax && ! lastFit, "a full line refuses more points");
     }
 
     // The engine: draw mode waits, sing once sings the line, kept takes turns.
     {
-        tipp::Engine e;
+        pipp::Engine e;
         e.prepare(kSampleRate);
         e.setBird(&bird);
         e.setDrawn(demo);
@@ -409,13 +409,13 @@ int checkDraw(const tipp::BirdData& bird)
         check(e.phrasesStarted() == 0u, "draw mode: autoplay waits");
         e.trigger(P::indexOf(P::ap_sing_once));
         run(0.2); // into the first note
-        tipp::Engine::PhraseView v;
+        pipp::Engine::PhraseView v;
         const bool read = e.readPhrase(v);
         check(read && v.drawn && v.count == 0 && std::fabs(v.lengthMs - 1400.0f) < 1.0f && e.drawnSung() == 1u,
               "sing once sings the drawn line");
         const auto f = e.sonoFrame(e.sonoWritten() - 1u);
         float hz = 0.0f, amp = 0.0f;
-        tipp::drawnAt(demo, 300.0f + e.phrasePosMs(), hz, amp);
+        pipp::drawnAt(demo, 300.0f + e.phrasePosMs(), hz, amp);
         std::printf("     sonogram %.0f Hz, line %.0f Hz\n", static_cast<double>(f.freqHz), static_cast<double>(hz));
         check(f.amp > 0.1f && std::fabs(std::log2(f.freqHz / hz)) < 0.05f, "the sonogram shows the line's pitch");
         run(6.0);
@@ -450,11 +450,11 @@ int checkDraw(const tipp::BirdData& bird)
 // Drives a knob the way the interface does and checks the override
 // sequence from prd.md: hold, 3 s wait, 300 ms return, latch, return all,
 // autoplay off. Also checks the sonogram feed and the published phrase.
-int checkOverride(const tipp::BirdData& bird)
+int checkOverride(const pipp::BirdData& bird)
 {
-    namespace P = tipp::params;
-    using Mode = tipp::Engine::KnobMode;
-    tipp::Engine engine;
+    namespace P = pipp::params;
+    using Mode = pipp::Engine::KnobMode;
+    pipp::Engine engine;
     engine.prepare(kSampleRate);
     engine.setBird(&bird);
     engine.setParam(P::indexOf(P::pb_play), 1.0f);
@@ -474,8 +474,8 @@ int checkOverride(const tipp::BirdData& bird)
         if (! ok)
             ++failures;
     };
-    const int k = tipp::kPitch;
-    const tipp::Range autoRange = bird.types[tipp::kSong].autoRange[static_cast<std::size_t>(k)];
+    const int k = pipp::kPitch;
+    const pipp::Range autoRange = bird.types[pipp::kSong].autoRange[static_cast<std::size_t>(k)];
     auto inAuto = [&] { const float v = engine.knobValue(k); return v >= autoRange.lo - 1e-4f && v <= autoRange.hi + 1e-4f; };
     auto touch = [&](float v) { engine.setParam(k, v); engine.handDown(k); };
 
@@ -540,7 +540,7 @@ int checkOverride(const tipp::BirdData& bird)
     engine.trigger(P::indexOf(P::ap_sing_once));
     run(0.1);
     expect(engine.phrasesStarted() == before + 1u, "autoplay off: sing once starts one phrase");
-    tipp::Engine::PhraseView view;
+    pipp::Engine::PhraseView view;
     bool read = false;
     for (int i = 0; i < 4 && ! read; ++i)
         read = engine.readPhrase(view);
@@ -555,10 +555,10 @@ int checkOverride(const tipp::BirdData& bird)
 
 // The quiz: who it asks, the answers, missed birds back sooner, and
 // QuizVoice on the engine with a real bird.
-int checkQuiz(const tipp::BirdData& bird)
+int checkQuiz(const pipp::BirdData& bird)
 {
-    namespace P = tipp::params;
-    using tipp::Quiz;
+    namespace P = pipp::params;
+    using pipp::Quiz;
     int failures = 0;
     auto check = [&failures](bool pass, const char* what) {
         std::printf("%-4s %s\n", pass ? "ok" : "FAIL", what);
@@ -568,7 +568,7 @@ int checkQuiz(const tipp::BirdData& bird)
 
     // Six garden birds like the data: 0 and 1 are lookalikes, 0 and 4 too
     // (named from one side only). 5 has no call.
-    std::vector<tipp::QuizBird> birds(6);
+    std::vector<pipp::QuizBird> birds(6);
     for (auto& b : birds)
         b.hasCall = true;
     birds[0].lookalikes = { 1, 4 };
@@ -669,9 +669,9 @@ int checkQuiz(const tipp::BirdData& bird)
             const auto& x = a.question();
             const auto& y = b.question();
             same = same && x.bird == y.bird && x.type == y.type && x.answers == y.answers;
-            songs = songs || x.type == tipp::kSong;
-            calls = calls || x.type == tipp::kCall;
-            callOk = callOk && (x.type != tipp::kCall || birds[static_cast<std::size_t>(x.bird)].hasCall);
+            songs = songs || x.type == pipp::kSong;
+            calls = calls || x.type == pipp::kCall;
+            callOk = callOk && (x.type != pipp::kCall || birds[static_cast<std::size_t>(x.bird)].hasCall);
             a.answer(0);
             b.answer(0);
         } while (a.next() && b.next());
@@ -683,7 +683,7 @@ int checkQuiz(const tipp::BirdData& bird)
         do
         {
             const auto& x = c.question();
-            callAsked = callAsked && x.type == (birds[static_cast<std::size_t>(x.bird)].hasCall ? tipp::kCall : tipp::kSong);
+            callAsked = callAsked && x.type == (birds[static_cast<std::size_t>(x.bird)].hasCall ? pipp::kCall : pipp::kSong);
             c.answer(0);
         } while (c.next());
         check(callAsked, "CALL asks the call, the song of a bird without one");
@@ -692,13 +692,13 @@ int checkQuiz(const tipp::BirdData& bird)
     {
         // QuizVoice: a hand value from before is gone, one phrase only, and
         // half speed doubles its length.
-        tipp::Engine engine;
+        pipp::Engine engine;
         engine.prepare(kSampleRate);
-        tipp::BirdData before = bird; // a different pointer, as in the app
+        pipp::BirdData before = bird; // a different pointer, as in the app
         engine.setBird(&before);
         engine.setParam(P::indexOf(P::pb_play), 1.0f);
         std::vector<float> buf(32);
-        auto run = [&](double s, tipp::QuizVoice* v, float* peak, bool* finite, double* singing) {
+        auto run = [&](double s, pipp::QuizVoice* v, float* peak, bool* finite, double* singing) {
             const auto blocks = static_cast<long>(s * kSampleRate / 32.0 + 0.5);
             for (long i = 0; i < blocks; ++i)
             {
@@ -714,26 +714,26 @@ int checkQuiz(const tipp::BirdData& bird)
                     *singing += 32.0 / kSampleRate;
             }
         };
-        engine.setParam(tipp::kPitch, bird.knobRange[tipp::kPitch].hi);
-        engine.handDown(tipp::kPitch);
+        engine.setParam(pipp::kPitch, bird.knobRange[pipp::kPitch].hi);
+        engine.handDown(pipp::kPitch);
         run(0.5, nullptr, nullptr, nullptr, nullptr);
-        engine.handUp(tipp::kPitch);
+        engine.handUp(pipp::kPitch);
         engine.setParam(P::indexOf(P::ap_latch), 1.0f);
         run(0.1, nullptr, nullptr, nullptr, nullptr);
 
         int season = -1, time = -1;
-        check(tipp::QuizVoice::sceneFor(bird, tipp::kSong, season, time), "the song sounds in some scene");
+        check(pipp::QuizVoice::sceneFor(bird, pipp::kSong, season, time), "the song sounds in some scene");
         std::printf("     scene: season %d, time %d\n", season, time);
 
-        tipp::QuizVoice voice;
+        pipp::QuizVoice voice;
         const auto startCount = engine.phrasesStarted();
-        voice.start(engine, &bird, tipp::kSong, false);
+        voice.start(engine, &bird, pipp::kSong, false);
         float peak = 0.0f;
         bool finite = true;
         double sang1 = 0.0;
         run(15.0, &voice, &peak, &finite, &sang1);
         check(voice.started() && engine.birdInUse() == &bird, "the quiz bird is in the engine");
-        check(engine.knobMode(tipp::kPitch) == tipp::Engine::KnobMode::Auto && ! engine.knobOverridden(tipp::kPitch), "a hand value from before does not carry into the quiz");
+        check(engine.knobMode(pipp::kPitch) == pipp::Engine::KnobMode::Auto && ! engine.knobOverridden(pipp::kPitch), "a hand value from before does not carry into the quiz");
         check(engine.phrasesStarted() - startCount == 1u, "one phrase, then quiet (autoplay off)");
         check(finite && peak < kMaxPeak, "output finite and below the peak limit");
 
@@ -749,11 +749,11 @@ int checkQuiz(const tipp::BirdData& bird)
         // and at half speed. PLAY AGAIN draws a new phrase, so comparing it
         // with the first one fails for birds whose phrases differ in length.
         auto firstPhrase = [&](bool half) {
-            tipp::Engine engine;
+            pipp::Engine engine;
             engine.prepare(kSampleRate);
             std::vector<float> buf(32);
-            tipp::QuizVoice voice;
-            voice.start(engine, &bird, tipp::kSong, false);
+            pipp::QuizVoice voice;
+            voice.start(engine, &bird, pipp::kSong, false);
             voice.setHalfSpeed(engine, half);
             double singing = 0.0;
             const auto blocks = static_cast<long>(150.0 * kSampleRate / 32.0 + 0.5); // room for a long song at half speed
@@ -779,7 +779,7 @@ int checkQuiz(const tipp::BirdData& bird)
 
 int checkChorus(const std::string& dataDir)
 {
-    using tipp::Chorus;
+    using pipp::Chorus;
     int failures = 0;
     auto check = [&failures](bool pass, const char* what) {
         std::printf("%-4s %s\n", pass ? "ok" : "FAIL", what);
@@ -894,12 +894,12 @@ int checkChorus(const std::string& dataDir)
 
     {
         // Out of season: a song switched off in winter keeps that lane quiet.
-        tipp::BirdData winterless = *setup.birds[0];
-        tipp::Override o;
+        pipp::BirdData winterless = *setup.birds[0];
+        pipp::Override o;
         o.season = 3;
         o.hasActive = true;
         o.active = false;
-        winterless.types[tipp::kSong].overrides.push_back(o);
+        winterless.types[pipp::kSong].overrides.push_back(o);
         Chorus c;
         setUpChorus(c, setup, 1u);
         c.setLaneBird(0, &winterless);
@@ -930,9 +930,9 @@ int checkChorus(const std::string& dataDir)
 }
 
 // One line per new phrase, the same format as web/scripts/check-seed.mjs.
-void logPhrase(const tipp::Engine& engine, std::string& out)
+void logPhrase(const pipp::Engine& engine, std::string& out)
 {
-    static tipp::Engine::PhraseView view;
+    static pipp::Engine::PhraseView view;
     static std::uint32_t last = 0u;
     if (out.empty())
         last = 0u;
@@ -957,7 +957,7 @@ int main(int argc, char** argv)
 {
     double seconds = 30.0;
     std::string outPath, birdId, type = "song", dataDir, compareId, lanesCsv, chorusSpeed = "10x", phraseLogPath;
-    float chorusStart = tipp::Chorus::kStartMin;
+    float chorusStart = pipp::Chorus::kStartMin;
     std::uint32_t seed = 1u;
     std::vector<std::pair<std::string, std::string>> sets;
     bool overrideCheck = false, drawCheck = false, quizCheck = false, chorusCheck = false, chorusRender = false, drawSing = false, keep = false;
@@ -1024,12 +1024,12 @@ int main(int argc, char** argv)
         return checkChorus(dataDir);
     if (chorusRender)
     {
-        const int speed = chorusSpeed == "real" ? tipp::Chorus::kRealTime : chorusSpeed == "60x" ? tipp::Chorus::k60x
-                        : chorusSpeed == "loop" ? tipp::Chorus::kLoop : tipp::Chorus::k10x;
+        const int speed = chorusSpeed == "real" ? pipp::Chorus::kRealTime : chorusSpeed == "60x" ? pipp::Chorus::k60x
+                        : chorusSpeed == "loop" ? pipp::Chorus::kLoop : pipp::Chorus::k10x;
         ChorusSetup setup;
         if (! loadChorus(dataDir, lanesCsv, setup))
             return 2;
-        tipp::Chorus chorus;
+        pipp::Chorus chorus;
         setUpChorus(chorus, setup, seed);
         chorus.seek(chorusStart);
         chorus.setSpeed(speed);
@@ -1046,7 +1046,7 @@ int main(int argc, char** argv)
             interleaved[2 * i] = left[i];
             interleaved[2 * i + 1] = right[i];
         }
-        if (! tipp::render::writeWavFloat(outPath.c_str(), interleaved, 2, kSampleRate))
+        if (! pipp::render::writeWavFloat(outPath.c_str(), interleaved, 2, kSampleRate))
         {
             std::fprintf(stderr, "could not write %s\n", outPath.c_str());
             return 2;
@@ -1060,7 +1060,7 @@ int main(int argc, char** argv)
             ok = ok && pass;
         };
         int started = 0;
-        for (int i = 0; i < tipp::Chorus::kLanes; ++i)
+        for (int i = 0; i < pipp::Chorus::kLanes; ++i)
             started += chorus.laneStarted(i) ? 1 : 0;
         std::printf("%s: chorus %s, %+.1f to %+.1f min, seed %u, %d lanes started, rms %.4f\n", outPath.c_str(), chorusSpeed.c_str(),
                     static_cast<double>(chorusStart), static_cast<double>(endMin), seed, started, static_cast<double>(st.rms));
@@ -1081,8 +1081,8 @@ int main(int argc, char** argv)
         return 2;
     }
 
-    tipp::BirdData bird;
-    if (! tipp::parseBird(birdId, voiceText, songsText, bird, error))
+    pipp::BirdData bird;
+    if (! pipp::parseBird(birdId, voiceText, songsText, bird, error))
     {
         std::fprintf(stderr, "%s: %s\n", birdId.c_str(), error.c_str());
         return 2;
@@ -1095,7 +1095,7 @@ int main(int argc, char** argv)
     if (quizCheck)
         return checkQuiz(bird);
 
-    tipp::BirdData other;
+    pipp::BirdData other;
     if (! compareId.empty())
     {
         const std::string otherDir = dataDir + "/birds/" + compareId + "/";
@@ -1105,15 +1105,15 @@ int main(int argc, char** argv)
             std::fprintf(stderr, "cannot read %svoice.json or songs.json\n", otherDir.c_str());
             return 2;
         }
-        if (! tipp::parseBird(compareId, v2, s2, other, error))
+        if (! pipp::parseBird(compareId, v2, s2, other, error))
         {
             std::fprintf(stderr, "%s: %s\n", compareId.c_str(), error.c_str());
             return 2;
         }
     }
 
-    namespace P = tipp::params;
-    tipp::Engine engine;
+    namespace P = pipp::params;
+    pipp::Engine engine;
     engine.setSeed(seed);
 
     float typeValue = 0.0f;
@@ -1139,7 +1139,7 @@ int main(int argc, char** argv)
             return 2;
         }
         const int index = P::indexOf(info->id);
-        if (info->kind == P::Kind::Knob && index < tipp::kNumKnobs)
+        if (info->kind == P::Kind::Knob && index < pipp::kNumKnobs)
             engine.handDown(index); // held for the whole render
         engine.setParam(index, v);
     }
@@ -1162,12 +1162,12 @@ int main(int argc, char** argv)
     std::string phraseLog;
 
     // COMPARE is ticked once per block, as an interface timer would.
-    tipp::Compare compare;
+    pipp::Compare compare;
     const bool comparing = ! compareId.empty();
     bool sawFirst = false, sawSecond = false;
     std::size_t doneAt = 0;
     if (comparing)
-        compare.start(engine, &bird, &other, { true, false, tipp::kSong }, 0.0);
+        compare.start(engine, &bird, &other, { true, false, pipp::kSong }, 0.0);
 
     for (std::size_t pos = 0; pos < frames; pos += kBlock)
     {
@@ -1240,7 +1240,7 @@ int main(int argc, char** argv)
         interleaved[2 * i + 1] = right[i];
     }
 
-    if (! tipp::render::writeWavFloat(outPath.c_str(), interleaved, 2, kSampleRate))
+    if (! pipp::render::writeWavFloat(outPath.c_str(), interleaved, 2, kSampleRate))
     {
         std::fprintf(stderr, "could not write %s\n", outPath.c_str());
         return 2;

@@ -195,7 +195,7 @@ export class PlayScreen {
     const b = this.sono.bird;
     if (!b) return false;
     const st = this.st;
-    return this.host.tipp.x.tipp_bird_type_active(b, type, st.season, st.time, st.sex, st.age) !== 0;
+    return this.host.pipp.x.pipp_bird_type_active(b, type, st.season, st.time, st.sex, st.age) !== 0;
   }
 
   private setChoice(id: 'sc_sex' | 'sc_age', key: 'sex' | 'age', v: number) {

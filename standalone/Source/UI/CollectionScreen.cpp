@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <cmath>
 
-namespace tipp::ui
+namespace pipp::ui
 {
 namespace
 {
@@ -125,7 +125,7 @@ void CollectionScreen::applyStrings()
     importBtn.setText(strings("coll.import"));
     addBtn.setText(strings("coll.add_files"));
     exportBtn.setText(strings("coll.export"));
-    compareBtn.setText(strings("coll.compare_tipp"));
+    compareBtn.setText(strings("coll.compare_pipp"));
     openBtn.setText(strings("coll.open_play"));
     finderBtn.setText(strings("coll.show_finder"));
     closeBtn.setText(strings("coll.close"));
@@ -166,7 +166,7 @@ void CollectionScreen::poll()
     }
     if (player.poll() || (playingId.isNotEmpty() && ! player.playing()))
     {
-        // The recording ended. COMPARE WITH TIPP goes on with the bird.
+        // The recording ended. COMPARE WITH PIPP goes on with the bird.
         const bool sing = comparing;
         juce::String birdId;
         int type = 0;
@@ -447,7 +447,7 @@ void CollectionScreen::chooseAdd(bool picturesOnly)
 
 void CollectionScreen::chooseExport()
 {
-    const auto name = "tipp-export-" + Collection::now().substring(0, 10) + ".zip";
+    const auto name = "pipp-export-" + Collection::now().substring(0, 10) + ".zip";
     chooser = std::make_unique<juce::FileChooser>(strings("coll.export"), juce::File::getSpecialLocation(juce::File::userHomeDirectory).getChildFile("Downloads").getChildFile(name), "*.zip");
     chooser->launchAsync(juce::FileBrowserComponent::saveMode | juce::FileBrowserComponent::canSelectFiles | juce::FileBrowserComponent::warnAboutOverwriting,
                          [this](const juce::FileChooser& fc) {
@@ -558,7 +558,7 @@ void CollectionScreen::resized()
         const auto f = mono(10.0f, 500, 0.06f);
         for (auto* b : { &compareBtn, &openBtn, &finderBtn })
         {
-            const int w = textW(f, b == &compareBtn ? strings("coll.compare_tipp") : b == &openBtn ? strings("coll.open_play") : strings("coll.show_finder")) + 22;
+            const int w = textW(f, b == &compareBtn ? strings("coll.compare_pipp") : b == &openBtn ? strings("coll.open_play") : strings("coll.show_finder")) + 22;
             b->setBounds(acts.removeFromLeft(w));
             acts.removeFromLeft(6);
         }
@@ -986,4 +986,4 @@ void CollectionScreen::mouseWheelMove(const juce::MouseEvent& e, const juce::Mou
         return;
     repaint();
 }
-} // namespace tipp::ui
+} // namespace pipp::ui

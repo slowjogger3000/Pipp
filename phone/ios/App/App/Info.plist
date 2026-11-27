@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-        <string>Tipp</string>
+        <string>Pipp</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -23,11 +23,11 @@
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Tipp listens to the birds around you to recognise them. The sound is handled on the phone and nothing is saved until you ask.</string>
+	<string>Pipp listens to the birds around you to recognise them. The sound is handled on the phone and nothing is saved until you ask.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Tipp takes a picture of the bird for your collection. It stays on the phone.</string>
+	<string>Pipp takes a picture of the bird for your collection. It stays on the phone.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Tipp can add a picture from your library to your collection. It stays on the phone.</string>
+	<string>Pipp can add a picture from your library to your collection. It stays on the phone.</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIApplicationSceneManifest</key>

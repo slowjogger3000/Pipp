@@ -4,11 +4,11 @@
 
 #include <cmath>
 
-namespace tipp::ui
+namespace pipp::ui
 {
 namespace
 {
-namespace P = tipp::params;
+namespace P = pipp::params;
 
 int textW(const juce::Font& f, const juce::String& s) { return draw::textWidth(f, s); }
 
@@ -27,7 +27,7 @@ juce::StringArray optionIds(const char* paramId)
 }
 } // namespace
 
-ChorusScreen::ChorusScreen(const Strings& s, const tipp::Chorus& c) : strings(s), chorus(c)
+ChorusScreen::ChorusScreen(const Strings& s, const pipp::Chorus& c) : strings(s), chorus(c)
 {
     for (int i = 0; i < 4; ++i)
     {
@@ -159,9 +159,9 @@ void ChorusScreen::paint(juce::Graphics& g)
         const auto nowText = mins == 0 ? strings("chorus.at")
                            : strings.format(m < 0.0f ? "chorus.before" : "chorus.after", { { "n", juce::String(mins) } });
         int singing = 0;
-        for (int i = 0; i < tipp::Chorus::kLanes; ++i)
+        for (int i = 0; i < pipp::Chorus::kLanes; ++i)
             singing += chorus.laneStarted(i) && chorus.laneAudible(i) ? 1 : 0;
-        const auto singText = strings.format("chorus.of", { { "n", juce::String(singing) }, { "total", juce::String(tipp::Chorus::kLanes) } });
+        const auto singText = strings.format("chorus.of", { { "n", juce::String(singing) }, { "total", juce::String(pipp::Chorus::kLanes) } });
         const auto f = mono(10.0f, 500, 0.06f);
         g.setFont(f);
         auto h = head.reduced(8, 0);
@@ -255,7 +255,7 @@ void ChorusScreen::paintTimeline(juce::Graphics& g)
     g.fillRect(t.getX(), t.getY(), t.getWidth(), 1);
     g.fillRect(t.getX(), t.getY(), 1, t.getHeight());
 
-    auto xFor = [&t](float minute) { return static_cast<float>(t.getX()) + (minute - tipp::Chorus::kStartMin) * kPxPerMin; };
+    auto xFor = [&t](float minute) { return static_cast<float>(t.getX()) + (minute - pipp::Chorus::kStartMin) * kPxPerMin; };
     g.saveState();
     g.reduceClipRegion(t);
 
@@ -270,7 +270,7 @@ void ChorusScreen::paintTimeline(juce::Graphics& g)
             const int bx = juce::roundToInt(xFor(lane.entry));
             const juce::Rectangle<int> band(bx, top + 34, t.getRight() + 1 - bx, 28);
             g.setColour(track(i));
-            for (int col = std::max(0, bx - t.getX()); col < tipp::Chorus::kColumns && t.getX() + col < t.getRight(); ++col)
+            for (int col = std::max(0, bx - t.getX()); col < pipp::Chorus::kColumns && t.getX() + col < t.getRight(); ++col)
                 if (chorus.sang(i, col))
                     g.fillRect(t.getX() + col, band.getY() + 1, 1, band.getHeight() - 2);
             g.setColour(colour::ink);
@@ -316,4 +316,4 @@ void ChorusScreen::paintTimeline(juce::Graphics& g)
     }
     g.restoreState();
 }
-} // namespace tipp::ui
+} // namespace pipp::ui

@@ -12,7 +12,7 @@
 #include "BirdData.h"
 #include "Engine.h"
 
-namespace tipp
+namespace pipp
 {
 class Compare
 {
@@ -55,4 +55,4 @@ private:
     std::uint32_t countAtTrigger = 0u;
     double stepStart = 0.0;
 };
-} // namespace tipp
+} // namespace pipp

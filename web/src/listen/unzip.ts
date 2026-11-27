@@ -1,6 +1,6 @@
 // A minimal zip reader for the phone export (prd.md, Phone export). It reads
 // the central directory, so it does not depend on what the local headers say
-// about sizes. Stored entries are what Tipp writes; deflated entries (a zip
+// about sizes. Stored entries are what Pipp writes; deflated entries (a zip
 // made again by another tool) are inflated with DecompressionStream where the
 // browser has it. No dependency.
 

@@ -6,11 +6,11 @@
 // 90 minutes before sunrise to 30 after; a lane's band starts at its entry
 // minute and fills where the bird sang.
 //
-// The clock, entries and mix are tipp::Chorus in core, in the worklet. This
+// The clock, entries and mix are pipp::Chorus in core, in the worklet. This
 // class holds what MainComponent holds for the chorus and sends it there.
 
 import type { AudioHost } from '../audio/host.ts';
-import { kChorusColumns, kLanes, KnobMode, type Ptr } from '../core/tipp.ts';
+import { kChorusColumns, kLanes, KnobMode, type Ptr } from '../core/pipp.ts';
 import { chorusSetup, index } from '../data.ts';
 import { Btn, Canvas, box, colour, el, font, graphPaper, hatch, joined, number, place, MINUS, textWidth } from './dom.ts';
 import { upper, type Strings } from './strings.ts';
@@ -279,7 +279,7 @@ export class ChorusScreen {
 
   private inSeason(lane: number): boolean {
     const k = this.laneBird[lane];
-    return k >= 0 && this.host.tipp.x.tipp_bird_type_active(this.ptrs[k], 0, this.season, 0, 0, 0) !== 0;
+    return k >= 0 && this.host.pipp.x.pipp_bird_type_active(this.ptrs[k], 0, this.season, 0, 0, 0) !== 0;
   }
 
   private name(k: number): string {

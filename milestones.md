@@ -1,4 +1,4 @@
-# Tipp: build order
+# Pipp: build order
 
 Work on one milestone at a time, in this order. Each one ends with something Eirik can hear or see. Do not start the next until the checks pass and he has said go.
 

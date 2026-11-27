@@ -4,5 +4,5 @@ build-*/
 out/
 node_modules/
 web/dist/
-web/public/tipp.wasm
+web/public/pipp.wasm
 build-phone/

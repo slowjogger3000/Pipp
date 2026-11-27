@@ -22,7 +22,7 @@ export interface ListenHandlers {
   refresh(): void;
   openGuide(id: string): void;
   openCollection(): void;
-  singBird(id: string): void;          // Tipp's own bird, one phrase
+  singBird(id: string): void;          // Pipp's own bird, one phrase
   logHeard(id: string, type: number): void;
   playBird(): string;
 }
@@ -195,7 +195,7 @@ export class ListenScreen {
     this.update();
   }
 
-  // SAMMENLIGN: the recording, then Tipp's bird.
+  // SAMMENLIGN: the recording, then Pipp's bird.
   private async compare() {
     const id = this.bestId();
     await this.stop();
@@ -276,7 +276,7 @@ export class ListenScreen {
     if (best.confidence < kUnsure) sub.push(s.t('listen.unsure'));
     const l2 = box(top, { color: 'var(--inkSoft)' });
     l2.textContent = sub.filter((x) => x).join(' · ');
-    if (!best.birdId) el('span', 'notintipp', l2, s.t('listen.not_in_tipp'));
+    if (!best.birdId) el('span', 'notinpipp', l2, s.t('listen.not_in_pipp'));
     const bar = box(top, { height: '8px', display: 'flex', border: '1px solid var(--ink)', background: 'var(--sheet)' });
     box(bar, { width: `${Math.round(best.confidence * 100)}%`, background: 'var(--ink)' });
     ms.slice(1).forEach((m, i) => {
@@ -285,7 +285,7 @@ export class ListenScreen {
       if (!m.birdId) row.style.backgroundImage = 'var(--hatching)';
       const n = box(row, { flex: '1', minWidth: '0', fontSize: '13px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' });
       n.textContent = title(m);
-      if (!m.birdId) el('span', 'notintipp', n, s.t('listen.not_in_tipp'));
+      if (!m.birdId) el('span', 'notinpipp', n, s.t('listen.not_in_pipp'));
       const b = box(row, { width: '96px', height: '8px', display: 'flex', border: '1px solid var(--ink)', background: 'var(--face)', flex: 'none' });
       box(b, { width: `${Math.round(m.confidence * 100)}%`, background: 'var(--ink)' });
       box(row, { width: '36px', textAlign: 'right', font: '500 12px var(--mono)', flex: 'none' }).textContent = pct(m.confidence);

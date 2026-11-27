@@ -8,7 +8,7 @@
 // Draw mode (design/Draw.dc.html): the view stops once the phrase being
 // sung has ended, and that phrase turns grey. The axis then reads 0 to
 // 8.5 s from the left edge. Strokes add to the drawn line, which is drawn
-// with tipp::drawnAt(), the same function the engine sings.
+// with pipp::drawnAt(), the same function the engine sings.
 
 #include "Theme.h"
 
@@ -20,7 +20,7 @@
 #include <functional>
 #include <vector>
 
-namespace tipp::ui
+namespace pipp::ui
 {
 class Sonogram final : public juce::Component
 {
@@ -34,7 +34,7 @@ public:
     static constexpr float kStrokeTolPx = 2.5f;
     static constexpr float kEraseRadiusPx = 7.0f;
 
-    explicit Sonogram(tipp::Engine& e) : engine(e) { setInterceptsMouseClicks(false, false); }
+    explicit Sonogram(pipp::Engine& e) : engine(e) { setInterceptsMouseClicks(false, false); }
 
     juce::String nowText { "NOW" };
     juce::String yourPhraseText { "YOUR PHRASE STARTS" };
@@ -43,7 +43,7 @@ public:
 
     // Draw mode. The line belongs to the interface; onLineChanged hands it
     // to the engine after each stroke or erase.
-    tipp::DrawnLine line;
+    pipp::DrawnLine line;
     bool erasing = false;
     std::function<void()> onLineChanged;
 
@@ -68,12 +68,12 @@ public:
         repaint();
     }
 
-    void setBird(const tipp::BirdData* b) { bird = b; }
+    void setBird(const pipp::BirdData* b) { bird = b; }
 
     // From the interface timer at 30 Hz.
     void poll()
     {
-        tipp::Engine::PhraseView v;
+        pipp::Engine::PhraseView v;
         for (int attempt = 0; attempt < 4; ++attempt)
             if (engine.readPhrase(v))
             {
@@ -92,7 +92,7 @@ public:
         repaint();
     }
 
-    const tipp::Engine::PhraseView& lastPhrase() const noexcept { return phrase; }
+    const pipp::Engine::PhraseView& lastPhrase() const noexcept { return phrase; }
 
     void paint(juce::Graphics& g) override
     {
@@ -156,7 +156,7 @@ public:
     {
         if (! erasing && ! stroke.empty())
         {
-            tipp::addStroke(line, stroke.data(), static_cast<int>(stroke.size()), kPxPerMs, kPxPerHz, kStrokeTolPx);
+            pipp::addStroke(line, stroke.data(), static_cast<int>(stroke.size()), kPxPerMs, kPxPerHz, kStrokeTolPx);
             stroke.clear();
             if (onLineChanged)
                 onLineChanged();
@@ -178,16 +178,16 @@ public:
     }
 
 private:
-    tipp::DrawnPoint pointFor(juce::Point<float> p) const
+    pipp::DrawnPoint pointFor(juce::Point<float> p) const
     {
         const float h = static_cast<float>(getHeight());
-        return { std::max(0.0f, p.x) / kPxPerMs, std::clamp((h - p.y) / kPxPerHz, tipp::kDrawMinHz, tipp::kDrawMaxHz), false };
+        return { std::max(0.0f, p.x) / kPxPerMs, std::clamp((h - p.y) / kPxPerHz, pipp::kDrawMinHz, pipp::kDrawMaxHz), false };
     }
 
     void eraseAt(juce::Point<float> p)
     {
         const auto at = pointFor(p);
-        if (tipp::eraseNear(line, at.tMs, at.hz, kPxPerMs, kPxPerHz, kEraseRadiusPx) && onLineChanged)
+        if (pipp::eraseNear(line, at.tMs, at.hz, kPxPerMs, kPxPerHz, kEraseRadiusPx) && onLineChanged)
             onLineChanged();
     }
 
@@ -198,7 +198,7 @@ private:
         frozen.clear();
         frozenRate = engine.sonoFrameRate();
         const std::uint32_t written = engine.sonoWritten();
-        const std::uint32_t avail = std::min<std::uint32_t>(written, tipp::Engine::kSonoFrames - 64);
+        const std::uint32_t avail = std::min<std::uint32_t>(written, pipp::Engine::kSonoFrames - 64);
         const std::uint32_t oldest = written - avail;
         const auto lead = static_cast<std::uint32_t>(0.35 * frozenRate);
         if (startNumber > 0u && phraseStartFrame >= oldest + lead)
@@ -241,7 +241,7 @@ private:
         const float h = static_cast<float>(getHeight());
         if (line.count > 0)
         {
-            const float startX = std::floor(tipp::drawnStart(line) * kPxPerMs) + 0.5f;
+            const float startX = std::floor(pipp::drawnStart(line) * kPxPerMs) + 0.5f;
             juce::Path dash;
             dash.startNewSubPath(startX, 0.0f);
             dash.lineTo(startX, h);
@@ -293,13 +293,13 @@ private:
             while (b + 1 < line.count && line.pts[static_cast<std::size_t>(b + 1)].joinPrev)
                 ++b;
             const float t0 = line.pts[static_cast<std::size_t>(a)].tMs;
-            const float t1 = a == b ? t0 + tipp::kDotMs : line.pts[static_cast<std::size_t>(b)].tMs;
+            const float t1 = a == b ? t0 + pipp::kDotMs : line.pts[static_cast<std::size_t>(b)].tMs;
             const int steps = std::max(1, static_cast<int>((t1 - t0) * kPxPerMs / 2.0f));
             for (int j = 0; j <= steps; ++j)
             {
                 const float t = t0 + (t1 - t0) * static_cast<float>(j) / static_cast<float>(steps);
                 float hz = 0.0f, amp = 0.0f;
-                tipp::drawnAt(line, std::clamp(t, t0 + 0.01f, t1 - 0.01f), hz, amp);
+                pipp::drawnAt(line, std::clamp(t, t0 + 0.01f, t1 - 0.01f), hz, amp);
                 if (j == 0)
                     p.startNewSubPath(t * kPxPerMs, yFor(hz));
                 else
@@ -349,7 +349,7 @@ private:
             return;
 
         const auto visible = static_cast<std::uint32_t>(std::ceil(kPlayheadX / kPxPerSecond * rate)) + 2u;
-        const std::uint32_t avail = std::min<std::uint32_t>(written, tipp::Engine::kSonoFrames - 64);
+        const std::uint32_t avail = std::min<std::uint32_t>(written, pipp::Engine::kSonoFrames - 64);
         const std::uint32_t count = std::min(visible, avail);
         const std::uint32_t first = written - count;
         auto xFor = [&](std::uint32_t i) {
@@ -357,7 +357,7 @@ private:
         };
 
         constexpr float kGate = 0.03f;
-        tipp::Engine::SonoFrame prev = engine.sonoFrame(first);
+        pipp::Engine::SonoFrame prev = engine.sonoFrame(first);
         float prevX = xFor(first);
 
         int runKnob = -1;
@@ -420,16 +420,16 @@ private:
         // A kept line: the rest of it, from the interface's own copy.
         if (phrase.drawn)
         {
-            const float pitchRatio = engine.knobValue(tipp::kPitch) / std::max(0.01f, bird->base[tipp::kPitch]);
+            const float pitchRatio = engine.knobValue(pipp::kPitch) / std::max(0.01f, bird->base[pipp::kPitch]);
             const float from = phrase.drawnStartMs + pos;
-            const float end = tipp::drawnEnd(line);
+            const float end = pipp::drawnEnd(line);
             g.setColour(colour::shadow);
             float px = 0.0f, py = 0.0f;
             bool prevOn = false;
             for (float t = from; t <= end; t += 3.0f / kPxPerSecond * 1000.0f * tempo)
             {
                 float hz = 0.0f, amp = 0.0f;
-                tipp::drawnAt(line, t, hz, amp);
+                pipp::drawnAt(line, t, hz, amp);
                 const float x = kPlayheadX + (t - from) / tempo * kPxPerMs;
                 const float y = yFor(hz * pitchRatio);
                 const bool on = amp > 0.08f;
@@ -443,7 +443,7 @@ private:
         }
         if (phrase.count == 0)
             return;
-        const float pitchKnob = engine.knobValue(tipp::kPitch);
+        const float pitchKnob = engine.knobValue(pipp::kPitch);
         const float w = static_cast<float>(getWidth());
         g.setColour(colour::shadow);
 
@@ -469,8 +469,8 @@ private:
                 const float u = u0 + (1.0f - u0) * static_cast<float>(j) / static_cast<float>(steps);
                 const float t = n.startMs + u * n.durMs;
                 const float x = kPlayheadX + (t - pos) / tempo / 1000.0f * kPxPerSecond;
-                const float y = yFor(tipp::contourPitchAt(s.pitch, u) * n.pitchMul * pitchKnob);
-                const float a = tipp::contourAt(s.amp, u) * s.gain;
+                const float y = yFor(pipp::contourPitchAt(s.pitch, u) * n.pitchMul * pitchKnob);
+                const float a = pipp::contourAt(s.amp, u) * s.gain;
                 const bool on = a > 0.08f;
                 if (on && prevOn)
                     g.drawLine(px, py, x, y, 1.5f + 1.5f * std::min(1.0f, a));
@@ -489,15 +489,15 @@ private:
         return -1;
     }
 
-    tipp::Engine& engine;
-    const tipp::BirdData* bird = nullptr;
-    tipp::Engine::PhraseView phrase;
+    pipp::Engine& engine;
+    const pipp::BirdData* bird = nullptr;
+    pipp::Engine::PhraseView phrase;
 
     bool drawMode = false, frozenReady = false, hover = false;
-    std::vector<tipp::Engine::SonoFrame> frozen;
+    std::vector<pipp::Engine::SonoFrame> frozen;
     double frozenRate = 0.0;
     std::uint32_t startNumber = 0u, phraseStartFrame = 0u;
     juce::Point<float> pointer;
-    std::vector<tipp::DrawnPoint> stroke;
+    std::vector<pipp::DrawnPoint> stroke;
 };
-} // namespace tipp::ui
+} // namespace pipp::ui

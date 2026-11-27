@@ -2,7 +2,7 @@
 
 #include "Params.h"
 
-namespace tipp
+namespace pipp
 {
 namespace
 {
@@ -105,4 +105,4 @@ int Compare::stage() const noexcept
     }
     return 0;
 }
-} // namespace tipp
+} // namespace pipp

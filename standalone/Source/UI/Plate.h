@@ -9,7 +9,7 @@
 #include <map>
 #include <vector>
 
-namespace tipp::ui
+namespace pipp::ui
 {
 class Plate final : public juce::Component
 {
@@ -290,4 +290,4 @@ private:
     juce::String variant { "male" };
     float open = 0.0f;
 };
-} // namespace tipp::ui
+} // namespace pipp::ui

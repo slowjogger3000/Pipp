@@ -1,4 +1,4 @@
-// Typed access to tipp.wasm (core/ plus web/wasm/bridge.cpp). Used in the
+// Typed access to pipp.wasm (core/ plus web/wasm/bridge.cpp). Used in the
 // AudioWorklet, on the main thread and by the Node check scripts, so it
 // uses only erasable TypeScript and no DOM or Node API.
 //
@@ -74,14 +74,14 @@ export function utf8Decode(b: Uint8Array): string {
   return s;
 }
 
-export class Tipp {
+export class Pipp {
   readonly x: Exports;
   readonly params: ParamInfo[] = [];
   private readonly byId = new Map<string, number>();
   private scratch: Ptr = 0;
   private scratchBytes = 0;
 
-  static async load(bytes: ArrayBuffer | Uint8Array): Promise<Tipp> {
+  static async load(bytes: ArrayBuffer | Uint8Array): Promise<Pipp> {
     const imports = {
       env: { emscripten_notify_memory_growth: () => {} },
       wasi_snapshot_preview1: {
@@ -98,24 +98,24 @@ export class Tipp {
       },
     };
     const { instance } = (await WebAssembly.instantiate(bytes as BufferSource, imports)) as unknown as WebAssembly.WebAssemblyInstantiatedSource;
-    const t: Tipp = new Tipp(instance.exports as unknown as Exports);
+    const t: Pipp = new Pipp(instance.exports as unknown as Exports);
     return t;
   }
 
   private constructor(x: Exports) {
     this.x = x;
     x._initialize?.();
-    const n = x.tipp_param_count();
+    const n = x.pipp_param_count();
     for (let i = 0; i < n; i++) {
-      const opts = this.str(x.tipp_param_options(i));
+      const opts = this.str(x.pipp_param_options(i));
       const p: ParamInfo = {
         index: i,
-        id: this.str(x.tipp_param_id(i)),
-        kind: x.tipp_param_kind(i),
-        min: x.tipp_param_min(i),
-        max: x.tipp_param_max(i),
-        def: x.tipp_param_def(i),
-        unit: this.str(x.tipp_param_unit(i)),
+        id: this.str(x.pipp_param_id(i)),
+        kind: x.pipp_param_kind(i),
+        min: x.pipp_param_min(i),
+        max: x.pipp_param_max(i),
+        def: x.pipp_param_def(i),
+        unit: this.str(x.pipp_param_unit(i)),
         options: opts ? opts.split('|') : [],
       };
       this.params.push(p);
@@ -137,8 +137,8 @@ export class Tipp {
     return utf8Decode(mem.subarray(ptr, end));
   }
 
-  alloc(bytes: number): Ptr { return this.x.tipp_alloc(bytes); }
-  free(ptr: Ptr): void { this.x.tipp_free(ptr); }
+  alloc(bytes: number): Ptr { return this.x.pipp_alloc(bytes); }
+  free(ptr: Ptr): void { this.x.pipp_free(ptr); }
 
   // A reusable buffer for results. Valid until the next call that uses it.
   buf(bytes: number): Ptr {
@@ -172,9 +172,9 @@ export class Tipp {
 
   parseBird(id: string, voiceJson: string, songsJson: string): Ptr {
     const a = this.cstr(id), v = this.cstr(voiceJson), s = this.cstr(songsJson);
-    const b = this.x.tipp_bird_parse(a, v, s);
+    const b = this.x.pipp_bird_parse(a, v, s);
     this.free(a); this.free(v); this.free(s);
-    if (!b) throw new Error(`${id}: ${this.str(this.x.tipp_last_error())}`);
+    if (!b) throw new Error(`${id}: ${this.str(this.x.pipp_last_error())}`);
     return b;
   }
 
@@ -182,9 +182,9 @@ export class Tipp {
 
   // The phrase being sung, or null if it changed during the copy.
   phrase(engine: Ptr): PhraseView | null {
-    const max = this.x.tipp_engine_max_notes();
+    const max = this.x.pipp_engine_max_notes();
     const p = this.buf((5 + 5 * max) * 4);
-    if (!this.x.tipp_engine_phrase(engine, p)) return null;
+    if (!this.x.pipp_engine_phrase(engine, p)) return null;
     const h = this.f32(p, 5);
     const count = h[1];
     const v = this.f32(p + 20, 5 * count);

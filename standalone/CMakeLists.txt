@@ -13,45 +13,45 @@ else()
     FetchContent_MakeAvailable(JUCE)
 endif()
 
-juce_add_gui_app(Tipp
-    PRODUCT_NAME "Tipp"
+juce_add_gui_app(Pipp
+    PRODUCT_NAME "Pipp"
     COMPANY_NAME "Skisse"
-    BUNDLE_ID com.skisse.tipp
+    BUNDLE_ID com.skisse.pipp
     VERSION ${PROJECT_VERSION})
 
-target_sources(Tipp PRIVATE Source/Main.cpp Source/MainComponent.cpp Source/Collection.cpp Source/UI/ChorusScreen.cpp Source/UI/CollectionScreen.cpp Source/UI/GuideScreen.cpp Source/UI/LogScreen.cpp Source/UI/QuizScreen.cpp)
-target_include_directories(Tipp PRIVATE Source)
+target_sources(Pipp PRIVATE Source/Main.cpp Source/MainComponent.cpp Source/Collection.cpp Source/UI/ChorusScreen.cpp Source/UI/CollectionScreen.cpp Source/UI/GuideScreen.cpp Source/UI/LogScreen.cpp Source/UI/QuizScreen.cpp)
+target_include_directories(Pipp PRIVATE Source)
 
 # IBM Plex Mono and Instrument Serif (both SIL OFL), embedded when present.
-set(TIPP_FONTS
+set(PIPP_FONTS
     ${CMAKE_CURRENT_SOURCE_DIR}/Resources/fonts/IBMPlexMono-Regular.ttf
     ${CMAKE_CURRENT_SOURCE_DIR}/Resources/fonts/IBMPlexMono-Medium.ttf
     ${CMAKE_CURRENT_SOURCE_DIR}/Resources/fonts/IBMPlexMono-SemiBold.ttf
     ${CMAKE_CURRENT_SOURCE_DIR}/Resources/fonts/InstrumentSerif-Regular.ttf)
-set(TIPP_HAS_FONTS 1)
-foreach(f ${TIPP_FONTS})
+set(PIPP_HAS_FONTS 1)
+foreach(f ${PIPP_FONTS})
     if(NOT EXISTS ${f})
-        set(TIPP_HAS_FONTS 0)
+        set(PIPP_HAS_FONTS 0)
     endif()
 endforeach()
-if(TIPP_HAS_FONTS)
-    juce_add_binary_data(TippFonts SOURCES ${TIPP_FONTS})
-    target_link_libraries(Tipp PRIVATE TippFonts)
+if(PIPP_HAS_FONTS)
+    juce_add_binary_data(PippFonts SOURCES ${PIPP_FONTS})
+    target_link_libraries(Pipp PRIVATE PippFonts)
 else()
     message(WARNING "Fonts missing in standalone/Resources/fonts. Falling back to Menlo and Georgia.")
 endif()
 
-target_compile_definitions(Tipp PRIVATE
+target_compile_definitions(Pipp PRIVATE
     JUCE_WEB_BROWSER=0
     JUCE_USE_CURL=0
-    TIPP_DATA_DIR="${CMAKE_SOURCE_DIR}/data"
-    TIPP_HAS_FONTS=${TIPP_HAS_FONTS}
-    JUCE_APPLICATION_NAME_STRING="$<TARGET_PROPERTY:Tipp,JUCE_PRODUCT_NAME>"
-    JUCE_APPLICATION_VERSION_STRING="$<TARGET_PROPERTY:Tipp,JUCE_VERSION>")
+    PIPP_DATA_DIR="${CMAKE_SOURCE_DIR}/data"
+    PIPP_HAS_FONTS=${PIPP_HAS_FONTS}
+    JUCE_APPLICATION_NAME_STRING="$<TARGET_PROPERTY:Pipp,JUCE_PRODUCT_NAME>"
+    JUCE_APPLICATION_VERSION_STRING="$<TARGET_PROPERTY:Pipp,JUCE_VERSION>")
 
-target_link_libraries(Tipp
+target_link_libraries(Pipp
     PRIVATE
-        tipp_core
+        pipp_core
         juce::juce_audio_utils
     PUBLIC
         juce::juce_recommended_config_flags

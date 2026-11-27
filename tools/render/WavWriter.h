@@ -7,7 +7,7 @@
 #include <cstdio>
 #include <vector>
 
-namespace tipp::render
+namespace pipp::render
 {
 inline bool writeWavFloat(const char* path, const std::vector<float>& interleaved,
                           std::uint16_t channels, std::uint32_t sampleRate)
@@ -47,4 +47,4 @@ inline bool writeWavFloat(const char* path, const std::vector<float>& interleave
 
     return std::fclose(f) == 0;
 }
-} // namespace tipp::render
+} // namespace pipp::render

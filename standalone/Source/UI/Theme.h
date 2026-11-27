@@ -6,11 +6,11 @@
 
 #include <juce_gui_basics/juce_gui_basics.h>
 
-#if TIPP_HAS_FONTS
+#if PIPP_HAS_FONTS
  #include "BinaryData.h"
 #endif
 
-namespace tipp::ui
+namespace pipp::ui
 {
 namespace colour
 {
@@ -43,7 +43,7 @@ struct FontSet
 
     FontSet()
     {
-#if TIPP_HAS_FONTS
+#if PIPP_HAS_FONTS
         mono400 = juce::Typeface::createSystemTypefaceFor(BinaryData::IBMPlexMonoRegular_ttf, BinaryData::IBMPlexMonoRegular_ttfSize);
         mono500 = juce::Typeface::createSystemTypefaceFor(BinaryData::IBMPlexMonoMedium_ttf, BinaryData::IBMPlexMonoMedium_ttfSize);
         mono600 = juce::Typeface::createSystemTypefaceFor(BinaryData::IBMPlexMonoSemiBold_ttf, BinaryData::IBMPlexMonoSemiBold_ttfSize);
@@ -170,4 +170,4 @@ inline juce::String number(double v, int decimals, bool comma)
         s = juce::String(juce::CharPointer_UTF8("\xe2\x88\x92")) + s.substring(1);
     return s;
 }
-} // namespace tipp::ui
+} // namespace pipp::ui

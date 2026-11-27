@@ -9,7 +9,7 @@
 
 #include <cmath>
 
-namespace tipp
+namespace pipp
 {
 // 2^x, within about 1e-15 relative before the cast to float.
 inline float exactExp2(float x) noexcept
@@ -25,4 +25,4 @@ inline float exactExp2(float x) noexcept
     }
     return static_cast<float>(std::ldexp(sum, static_cast<int>(n)));
 }
-} // namespace tipp
+} // namespace pipp

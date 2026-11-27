@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include <cstring>
 
-namespace tipp::json
+namespace pipp::json
 {
 const Value* Value::get(const char* key) const noexcept
 {
@@ -243,4 +243,4 @@ bool parse(const std::string& source, Value& out, std::string& error)
     Parser p(source);
     return p.run(out, error);
 }
-} // namespace tipp::json
+} // namespace pipp::json

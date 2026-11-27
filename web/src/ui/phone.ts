@@ -28,7 +28,7 @@ import { Strings, lower, upper, type Lang } from './strings.ts';
 const kWidth = 390;
 const kInner = kWidth - 32;
 const kTabKeys = ['play', 'guide', 'listen', 'quiz', 'chorus', 'collection'] as const;
-const kLangKey = 'tipp.lang';
+const kLangKey = 'pipp.lang';
 const kKnobScale = 64 / 72; // the phone dial is 64px, the desktop's 72px
 const kSono = { w: 320, h: 160, pxPerKHz: 20, playheadX: 200 };
 
@@ -121,7 +121,7 @@ export class PhoneApp {
     // ---------------------------------------------------------- header
     const header = el('div', 'ph-header', col);
     const mark = el('div', 'wordmark', header);
-    el('span', '', mark, 'Tipp');
+    el('span', '', mark, 'Pipp');
     const bar = el('i', '', mark);
     for (const c of ['clay', 'khaki', 'sage', 'plum']) el('b', '', bar).style.background = `var(--${c})`;
     box(header, { flex: '1' });
@@ -533,7 +533,7 @@ export class PhoneApp {
 
   private typeAvailable(type: number): boolean {
     const b = this.sono.bird, st = this.st;
-    return !!b && this.host.tipp.x.tipp_bird_type_active(b, type, st.season, st.time, st.sex, st.age) !== 0;
+    return !!b && this.host.pipp.x.pipp_bird_type_active(b, type, st.season, st.time, st.sex, st.age) !== 0;
   }
 
   applyStrings() {

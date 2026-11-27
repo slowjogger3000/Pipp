@@ -229,11 +229,11 @@ a.btn { color: var(--ink); }
 
 /* LYTT and SAMLING (phone). Red is the recording dot and nothing else. */
 .listenbtn { flex: 1; height: 56px; padding: 0 16px !important; justify-content: flex-start; gap: 12px; font: 600 12px var(--mono); letter-spacing: 0.14em; }
-.listenbtn .recdot { width: 12px; height: 12px; flex: none; border-radius: 50%; animation: tipp-rec 1.2s linear infinite; }
+.listenbtn .recdot { width: 12px; height: 12px; flex: none; border-radius: 50%; animation: pipp-rec 1.2s linear infinite; }
 .listenbtn .mtimer { margin-left: auto; font-weight: 500; letter-spacing: 0.06em; }
-@keyframes tipp-rec { 0%, 60% { opacity: 1; } 61%, 100% { opacity: 0.25; } }
+@keyframes pipp-rec { 0%, 60% { opacity: 1; } 61%, 100% { opacity: 0.25; } }
 @media (prefers-reduced-motion: reduce) { .listenbtn .recdot { animation: none; } }
-.notintipp { margin-left: 8px; font: 600 9px var(--mono); letter-spacing: 0.14em; color: var(--inkSoft); }
+.notinpipp { margin-left: 8px; font: 600 9px var(--mono); letter-spacing: 0.14em; color: var(--inkSoft); }
 .recrow.sel { background: var(--ink); color: var(--onInk); }
 .recrow.sel > div > div { color: var(--onInk) !important; }
 .recrow.sel img { border-color: var(--onInk) !important; }

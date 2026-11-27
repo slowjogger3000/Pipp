@@ -15,7 +15,7 @@
 #include <algorithm>
 #include <cmath>
 
-namespace tipp
+namespace pipp
 {
 class Drum
 {
@@ -109,4 +109,4 @@ private:
     float y1a = 0.0f, y2a = 0.0f, y1b = 0.0f, y2b = 0.0f;
     float env = 0.0f;
 };
-} // namespace tipp
+} // namespace pipp

@@ -1,6 +1,6 @@
 #!/bin/sh
 # Builds the web app and publishes web/dist to the gh-pages branch of origin.
-# GitHub Pages serves that branch at https://<user>.github.io/Tipp/.
+# GitHub Pages serves that branch at https://<user>.github.io/Pipp/.
 set -e
 cd "$(dirname "$0")/.."
 npm run build

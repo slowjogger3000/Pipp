@@ -2,7 +2,7 @@
 
 #include <algorithm>
 
-namespace tipp::ui
+namespace pipp::ui
 {
 namespace
 {
@@ -376,7 +376,7 @@ bool LogScreen::exportCsv(const juce::File& f)
 
 void LogScreen::chooseExport()
 {
-    const auto name = "tipp-log-" + juce::Time::getCurrentTime().formatted("%Y-%m-%d") + ".csv";
+    const auto name = "pipp-log-" + juce::Time::getCurrentTime().formatted("%Y-%m-%d") + ".csv";
     chooser = std::make_unique<juce::FileChooser>(strings("log.export"),
                                                   juce::File::getSpecialLocation(juce::File::userHomeDirectory).getChildFile("Downloads").getChildFile(name), "*.csv");
     chooser->launchAsync(juce::FileBrowserComponent::saveMode | juce::FileBrowserComponent::canSelectFiles | juce::FileBrowserComponent::warnAboutOverwriting,
@@ -646,4 +646,4 @@ void LogScreen::mouseWheelMove(const juce::MouseEvent& e, const juce::MouseWheel
     rowScroll -= juce::roundToInt(w.deltaY * 24.0f * 8.0f);
     repaint();
 }
-} // namespace tipp::ui
+} // namespace pipp::ui

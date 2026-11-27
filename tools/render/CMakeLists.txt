@@ -1,2 +1,2 @@
-add_executable(tipp-render main.cpp WavWriter.h)
-target_link_libraries(tipp-render PRIVATE tipp_core tipp_warnings)
+add_executable(pipp-render main.cpp WavWriter.h)
+target_link_libraries(pipp-render PRIVATE pipp_core pipp_warnings)

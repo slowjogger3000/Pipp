@@ -4,12 +4,12 @@
 #include <cmath>
 #include <complex>
 
-namespace tipp::ui
+namespace pipp::ui
 {
 namespace
 {
 const char* const kTypeIds[4] = { "song", "call", "alarm", "flight" };
-const char* const kFormat = "tipp-export";
+const char* const kFormat = "pipp-export";
 
 juce::String str(const juce::var& v) { return v.isString() ? v.toString() : juce::String(); }
 
@@ -198,7 +198,7 @@ void Collection::save() const
         p.add(juce::var(o));
     }
     auto* doc = new juce::DynamicObject();
-    doc->setProperty("format", "tipp-collection");
+    doc->setProperty("format", "pipp-collection");
     doc->setProperty("version", 1);
     doc->setProperty("recordings", r);
     doc->setProperty("pictures", p);
@@ -502,4 +502,4 @@ void Collection::removePicture(const juce::String& id)
             return;
         }
 }
-} // namespace tipp::ui
+} // namespace pipp::ui

@@ -10,7 +10,7 @@
 // only draws and reports clicks; the app sends everything to the engine.
 
 import type { AudioHost } from '../audio/host.ts';
-import type { PhraseView, Ptr } from '../core/tipp.ts';
+import type { PhraseView, Ptr } from '../core/pipp.ts';
 import { birdFile, index, hasSound, type IndexBird } from '../data.ts';
 import { Btn, Canvas, box, colour, el, font, graphPaper, hatch, joined, number, place, textWidth } from './dom.ts';
 import { Plate } from './plate.ts';
@@ -239,21 +239,21 @@ export class GuideScreen {
   // with seed 1 at the bird's own knob values, as GuideScreen::examplePhrase.
   private examplePhrase(id: string, bird: Ptr): PhraseView | null {
     if (this.examples.has(id)) return this.examples.get(id)!;
-    const t = this.host.tipp, x = t.x;
-    const e = x.tipp_engine_new();
-    x.tipp_engine_prepare(e, 48000);
-    x.tipp_engine_set_seed(e, 1);
-    x.tipp_engine_set_bird(e, bird);
-    x.tipp_engine_set_param(e, t.index('sc_type'), 0);
-    x.tipp_engine_set_param(e, t.index('pb_play'), 1);
+    const t = this.host.pipp, x = t.x;
+    const e = x.pipp_engine_new();
+    x.pipp_engine_prepare(e, 48000);
+    x.pipp_engine_set_seed(e, 1);
+    x.pipp_engine_set_bird(e, bird);
+    x.pipp_engine_set_param(e, t.index('sc_type'), 0);
+    x.pipp_engine_set_param(e, t.index('pb_play'), 1);
     const buf = t.alloc(512 * 4);
     let view: PhraseView | null = null;
     for (let block = 0; block < 400 && !view; block++) { // about 4 s
-      x.tipp_engine_process(e, buf, buf, 512);
-      if (x.tipp_engine_phrases(e) > 0) view = t.phrase(e);
+      x.pipp_engine_process(e, buf, buf, 512);
+      if (x.pipp_engine_phrases(e) > 0) view = t.phrase(e);
     }
     t.free(buf);
-    x.tipp_engine_free(e);
+    x.pipp_engine_free(e);
     this.examples.set(id, view);
     return view;
   }
@@ -360,7 +360,7 @@ export class GuideScreen {
     // Figure caption and the link to real recordings.
     this.figCap.replaceChildren();
     el('b', '', this.figCap, `${s.t('fig')} 2`);
-    const tempo = this.bird ? Math.max(0.25, this.host.tipp.x.tipp_bird_base(this.bird, 5) / 100) : 1;
+    const tempo = this.bird ? Math.max(0.25, this.host.pipp.x.pipp_bird_base(this.bird, 5) / 100) : 1;
     const ex = this.example;
     const capText = el('span', '', this.figCap, ex && ex.notes.length ? s.t('guide.fig_phrase', { s: number(ex.lengthMs / tempo / 1000, 1, no) }) : '');
     capText.style.flex = '1';
@@ -425,9 +425,9 @@ export class GuideScreen {
     this.plateCap.replaceChildren();
     el('b', '', this.plateCap, `${s.t('fig')} 1`);
     this.plateCap.append(this.plate.caption());
-    const x = this.host.tipp.x;
+    const x = this.host.pipp.x;
     this.typeBtns.forEach((b, i) => {
-      const present = this.bird !== 0 && x.tipp_bird_type_present(this.bird, i) !== 0;
+      const present = this.bird !== 0 && x.pipp_bird_type_present(this.bird, i) !== 0;
       b.disabled(!present).on(present && st.type === i);
     });
     this.seasonBtns.forEach((b, i) => b.on(kSeasonValue[i] === st.season));
@@ -448,7 +448,7 @@ export class GuideScreen {
   // Figure: kHz axis, graph paper well with the example phrase, and
   // brackets under it for each run of notes from one named part.
   private paintFigure() {
-    const g = this.fig.begin(), t = this.host.tipp, x = t.x;
+    const g = this.fig.begin(), t = this.host.pipp, x = t.x;
     g.fillStyle = colour.ink;
     g.fillRect(0, 0, 350, 1); g.fillRect(0, 161, 350, 1); g.fillRect(0, 0, 1, 162); g.fillRect(349, 0, 1, 162);
     g.fillRect(27, 0, 1, 162);
@@ -473,7 +473,7 @@ export class GuideScreen {
     if (!b || !ex || ex.notes.length === 0 || ex.lengthMs <= 0) return;
     const pad = 8;
     const pxPerMs = (ww - 2 * pad) / ex.lengthMs;
-    const pitchKnob = x.tipp_bird_base(b, 0);
+    const pitchKnob = x.pipp_bird_base(b, 0);
     const xFor = (ms: number) => wx + pad + ms * pxPerMs;
     const yFor = (hz: number) => wy + wh - Math.min(1, Math.max(0, hz / 8000)) * wh;
     const out = t.alloc(8);
@@ -483,14 +483,14 @@ export class GuideScreen {
     g.clip();
     g.strokeStyle = colour.ink;
     g.lineCap = 'round';
-    const nSyl = x.tipp_bird_syllable_count(b);
+    const nSyl = x.pipp_bird_syllable_count(b);
     for (const n of ex.notes) {
       if (n.syl < 0 || n.syl >= nSyl || n.durMs <= 0) continue;
       const steps = Math.max(4, Math.floor((n.durMs * pxPerMs) / 1.5));
       let px = 0, py = 0, prevOn = false;
       for (let j = 0; j <= steps; j++) {
         const u = j / steps;
-        x.tipp_bird_syllable_at(b, n.syl, u, out);
+        x.pipp_bird_syllable_at(b, n.syl, u, out);
         const [hz, a] = t.f32(out, 2);
         const xx = xFor(n.startMs + u * n.durMs);
         const yy = yFor(hz * n.pitchMul * pitchKnob);
@@ -515,7 +515,7 @@ export class GuideScreen {
     g.textAlign = 'left';
     g.textBaseline = 'middle';
     const partsY = 166;
-    const nParts = x.tipp_bird_part_count(b);
+    const nParts = x.pipp_bird_part_count(b);
     let i = 0, prevTextEnd = wx;
     while (i < ex.notes.length) {
       const part = ex.notes[i].part;
@@ -525,7 +525,7 @@ export class GuideScreen {
         const a = ex.notes[i], z = ex.notes[j];
         const x0 = wx + 8 + Math.round(a.startMs * pxPerMs);
         const x1 = wx + 8 + Math.round((z.startMs + z.durMs) * pxPerMs);
-        const name = this.field(this.info.parts?.[t.str(x.tipp_bird_part(b, part))]);
+        const name = this.field(this.info.parts?.[t.str(x.pipp_bird_part(b, part))]);
         g.fillStyle = colour.ink;
         g.fillRect(x0, partsY, Math.max(2, x1 - x0), 1);
         // A short bracket may lend its label the room up to the next one;

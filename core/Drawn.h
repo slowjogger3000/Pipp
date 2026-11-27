@@ -15,7 +15,7 @@
 
 #include <array>
 
-namespace tipp
+namespace pipp
 {
 struct DrawnPoint
 {
@@ -52,4 +52,4 @@ bool addStroke(DrawnLine& line, const DrawnPoint* raw, int n, float pxPerMs, flo
 // Removes the points within radiusPx of (tMs, hz). A note erased in the
 // middle splits in two. Returns true if anything was removed.
 bool eraseNear(DrawnLine& line, float tMs, float hz, float pxPerMs, float pxPerHz, float radiusPx);
-} // namespace tipp
+} // namespace pipp

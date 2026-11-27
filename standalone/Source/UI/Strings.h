@@ -8,7 +8,7 @@
 #include <initializer_list>
 #include <utility>
 
-namespace tipp::ui
+namespace pipp::ui
 {
 class Strings
 {
@@ -73,4 +73,4 @@ private:
     juce::String lang { "en" };
     juce::var table;
 };
-} // namespace tipp::ui
+} // namespace pipp::ui
