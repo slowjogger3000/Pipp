@@ -795,11 +795,15 @@ int checkChorus(const std::string& dataDir)
         setUpChorus(c, setup, 1u);
         c.setSpeed(Chorus::k60x);
         c.setPlaying(true);
+        runChorus(c, 0.01);
+        const float first = *std::min_element(setup.entry.begin(), setup.entry.end());
+        check(std::fabs(c.minute() - (first - Chorus::kLeadMin)) < 0.02f, "Play at -90 skips the silence to just before the first entry");
+        c.seek(-65.0f);
         runChorus(c, 30.0);
-        check(std::fabs(c.minute() - (-60.0f)) < 0.05f, "60x: 30 s moves the clock from -90 to -60 min");
+        check(std::fabs(c.minute() - (-35.0f)) < 0.05f, "60x: 30 s moves the clock from -65 to -35 min");
         c.setPlaying(false);
         runChorus(c, 2.0);
-        check(std::fabs(c.minute() - (-60.0f)) < 0.05f, "stopped, the clock waits");
+        check(std::fabs(c.minute() - (-35.0f)) < 0.05f, "stopped, the clock waits");
     }
 
     {
@@ -809,9 +813,9 @@ int checkChorus(const std::string& dataDir)
         c.seek(-78.0f);
         c.setSpeed(Chorus::k60x);
         c.setPlaying(true);
-        runChorus(c, 7.0); // to -71
+        runChorus(c, 0.05); // skipped to -70.1, now about -70.05
         check(! c.laneStarted(0) && ! sangBetween(c, 0, -90.0f, 30.0f), "a lane is quiet before its entry minute");
-        runChorus(c, 20.0); // to -51
+        runChorus(c, 20.0); // to about -50
         check(c.laneStarted(0) && sangBetween(c, 0, setup.entry[0], 30.0f), "it starts singing after its entry minute");
         check(! sangBetween(c, 0, -90.0f, setup.entry[0]), "nothing recorded before the entry");
         check(c.laneStarted(1) && ! c.laneStarted(3), "lane 2 has started, lane 4 (-25) has not");
@@ -895,14 +899,15 @@ int checkChorus(const std::string& dataDir)
     }
 
     {
-        // Loop: past +30 it starts over at -90 and clears what was sung.
+        // Loop: past +30 it starts over (and skips to the first entry) and clears what was sung.
         Chorus c;
         setUpChorus(c, setup, 1u);
         c.seek(25.0f);
         c.setSpeed(Chorus::kLoop);
         c.setPlaying(true);
         runChorus(c, 33.0); // 5.5 dawn minutes at 10x
-        check(! c.finished() && c.minute() < -88.0f && c.minute() > -90.0f, "LOOP starts over at -90 min");
+        const float first = *std::min_element(setup.entry.begin(), setup.entry.end());
+        check(! c.finished() && c.minute() < first + 2.0f && c.minute() > first - 1.0f, "LOOP starts over at the first entry");
         check(! sangBetween(c, 1, 0.0f, 30.0f), "and clears the record");
     }
 

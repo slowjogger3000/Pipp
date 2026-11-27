@@ -30,6 +30,9 @@ public:
     static constexpr float kColumnsPerMin = 8.0f;
     static constexpr float kMix = 0.8f;  // per lane, before the soft limit
     static constexpr float kFadeS = 0.03f;
+    // While playing and before any lane has entered, the clock skips the
+    // silence to this many minutes before the first lane in season enters.
+    static constexpr float kLeadMin = 0.1f;
 
     // Dawn speed: real time, 10x, 60x, and loop (10x, starts again at the end).
     enum Speed : int { kRealTime, k10x, k60x, kLoop, kNumSpeeds };

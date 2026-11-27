@@ -167,6 +167,19 @@ void Chorus::processAdd(float* left, float* right, int numSamples) noexcept
                 }
             }
         }
+        if (play)
+        {
+            // Nothing to hear before the first lane enters: skip to just before it.
+            float first = kEndMin;
+            for (const auto& lane : lanes)
+            {
+                const BirdData* b = lane.engine.birdInUse();
+                if (b != nullptr && rulesFor(b->types[kSong], season, 0, 0, 0).active)
+                    first = std::min(first, lane.entry.load(std::memory_order_relaxed));
+            }
+            if (first < kEndMin && clock < first - kLeadMin)
+                clock = first - kLeadMin;
+        }
         minuteOut.store(clock, std::memory_order_relaxed);
         finishedOut.store(done, std::memory_order_relaxed);
 
